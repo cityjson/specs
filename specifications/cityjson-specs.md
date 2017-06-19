@@ -29,7 +29,7 @@ CityGML currently has 2 implementations:
 ## Which CityGML modules are supported?
 
 CityJSON, which can thus be considered as the third implementation of the CityGML data model, implements at this moment most of the data model.
-However, for the sake of simplicity and efficiency, some have been omitted.
+However, for the sake of simplicity and efficiency, some modukes and features have been omitted.
 
 The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these(more details below):
 
