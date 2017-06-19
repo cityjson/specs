@@ -1,0 +1,190 @@
+{
+  "type": "CityModel",
+  "metadata": {
+    "crs": { 
+      "epsg": 7415
+    },
+    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
+    "cityjson-version": "0.1",
+    "title": "what is this dataset?",
+    "abstract": "what is this dataset?",
+    "dataUrl": "what is this dataset?",
+    "metadataUrl": "https://3d.bk.tudelft.nl/blabla",
+    "dateOfCreation": "2011-02-28",
+    "dateOfLastRevision": "2016-06-26",
+    "dateOfPublication": "2016-11-26",
+    "copyright": "CC0"
+  },
+  "CityObjects": {
+  	"102636712": {
+      "type": "Building", 
+      "attributes": { 
+        "measuredHeight": 22.3,
+        "roofType": "gable",
+        "yearOfConstruction": 1904
+      },
+      "generic-attributes": {
+        "owner": "Elvis Presley",
+        "renovation": 1977
+      },
+      "Parts": ["2929"],
+      "geometry": [
+        {
+          "type": "Solid",
+          "lod": 1.1,
+          "boundaries": [
+            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+          ],
+          "semantics": [
+            ["RoofSurface", "GroundSurface", "WallSurface", "WallSurface", "WallSurface", "WallSurface"]
+          ],
+          "material": [
+            [0, 0, 1, 1, 1, 1]
+          ]
+        },
+        {
+          "type": "Solid",
+          "lod": 2.1,
+          "boundaries": [
+            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ],
+            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ]          
+          ],
+          "semantics": [
+            ["RoofSurface", "GroundSurface", "WallSurface", "WallSurface", "WallSurface", "WallSurface"],
+            ["Window", "Door", "WallSurface", "WallSurface"]
+          ],
+          "texture": [
+            [ [[0, 0, 3, 2, 1]], [[0, 4, 5, 6, 7]], [[0, 0, 1, 5, 4]], [[0, 1, 2, 6, 5]], [[0, 2, 3, 7, 6]], [[0, 3, 0, 4, 7]] ],
+            [ [[0, 0, 3, 2, 1]], [[0, 4, 5, 6, 7]], [[0, 0, 1, 5, 4]], [[0, 1, 2, 6, 5]] ]                      
+          ]
+        }        
+      ]
+    },
+    "2929": {
+      "type": "BuildingPart", 
+      "geometry": [{
+        "type": "Solid",
+        "lod": 2.1,
+          "boundaries": [
+            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+          ],
+        "semantics": [
+          ["RoofSurface"]
+        ]
+      }]
+    },
+    "itcanbeastringtoo": {
+      "type": "Building", 
+      "attributes": { 
+        "measuredHeight": 223
+      },
+      "Installations": ["801", "802"],
+      "geometry": [{
+        "type": "MultiSurface",
+        "lod": 2,
+        "boundaries": [ 
+           [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+        ],
+        "semantics": [
+          [ "RoofSurface", "GroundSurface", "WallSurface", "WallSurface", "WallSurface", "WallSurface" ]
+        ]
+      }]
+    },
+    "801": {
+      "type": "BuildingInstallation", 
+      "attributes": { 
+        "function": "balcony"
+      },
+      "geometry": [{
+        "type": "MultiSurface",
+        "lod" : 2.2, 
+        "boundaries": [
+          [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] 
+        ]
+      }]
+    },
+    "myterrain01": {
+      "type": "TINRelief", 
+      "geometry": [{
+        "type": "CompositeSurface",
+        "lod": 2,
+        "boundaries": [
+           [[0, 3, 2]], [[4, 5, 6]], [[0, 1, 5]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
+        ]
+      }]    
+    },
+    "mycanal": {
+      "type": "WaterBody", 
+      "geometry": [{
+        "type": "CompositeSurface",
+        "lod": 1,
+        "boundaries": [
+          [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+        ]
+      }]    
+    },
+    "mylake": {
+      "type": "WaterBody", 
+      "attributes": {
+        "usage": "leisure",
+        "function": "leisure"
+      },
+      "geometry": [{
+        "type": "Solid",
+        "lod": 2,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+        ],
+        "semantics": [ ["WaterSurface"], ["WaterGroundSurface"], ["WaterGroundSurface"],["WaterGroundSurface"],["WaterGroundSurface"],["WaterGroundSurface"] ]
+      }]    
+    }               
+  },
+  "vertices": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [1.0, 1.0, 0.0],
+    [0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0],
+    [1.0, 0.0, 1.0],
+    [1.0, 1.0, 1.0],
+    [0.0, 1.0, 1.0]
+  ],
+  "appearance": {
+    "vertices-texture": [
+      [0.0, 0.5],
+      [1.0, 0.0],
+      [1.0, 1.0],
+      [0.0, 1.0]
+    ],
+    "textures": [
+      {
+        "type": "PNG",
+        "image": "myfacade.png"
+      },
+      {
+        "type": "JPG",
+        "image": "myroof.jpg"
+      }      
+    ],
+    "materials": [
+      {
+        "name": "mymaterial1",
+        "ambient":  [0.9000, 0.1000, 0.7500],
+        "diffuse":  [0.9000, 0.1000, 0.7500],
+        "specular": [0.9000, 0.1000, 0.7500],
+        "specular-exponent": 10.0,
+        "illumination": 2,
+        "transparency": 1.0
+      },
+      {
+        "name": "mymaterial2",
+        "ambient":  [0.9000, 0.9000, 0.7500],
+        "diffuse":  [0.9000, 0.9000, 0.7500],
+        "specular": [0.9000, 0.9000, 0.7500],
+        "specular-exponent": 60.0,
+        "illumination": 1,
+        "transparency": 0.5
+      }            
+    ]
+  }
+}
