@@ -4,7 +4,7 @@
 # Introduction
 
 CityJSON is a format for encoding a subset of the [CityGML](https://www.citygml.org) data model using JavaScript Object Notation ([JSON](http://json.org)).
-A CityJSON represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, vegetation, and city furniture.
+A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, vegetation, and city furniture.
 
 The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex. 
 CityJSON aims at being easy-to-use, both for creating CityJSON datasets, and for reading/parsing them.
@@ -17,12 +17,12 @@ While this somewhat breaks the philosophy of CityGML, it considerably simplifies
 
 ## A JSON encoding of GML, huh?!?
 
-While its aim otherwise implies, CityGML is not only a GML encoding, but is actually an open standardised data model to store digital 3D models of cities and landscapes. 
+While its name otherwise implies, CityGML is not only a GML encoding, but is actually an open standardised data model to store digital 3D models of cities and landscapes. 
 It defines ways to describe most of the common 3D features and objects found in cities and the relationships between them. 
 It also defines different standard levels of detail (LODs) for the 3D objects, which allows us to represent objects for different applications and purposes.
 CityGML currently has 2 implementations:
 
-  1. the GML encoding is the standard one, and is defined in the [offical documentation](https://portal.opengeospatial.org/files/?artifact_id=47842)
+  1. the GML encoding is the "standard" one, and is defined in the [offical documentation](https://portal.opengeospatial.org/files/?artifact_id=47842)
   1. a [database schema called 3DCityDB](http://www.3dcitydb.org), which can be implemented both for [PostgreSQL](https://www.postgresql.org) and [Oracle Spatial](https://www.oracle.com/database/spatial/index.html).
 
 
