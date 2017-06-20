@@ -14,47 +14,71 @@
 #include <iostream>
 #include <fstream>
 #include "json.hpp"
+#include <set>
+#include <string>
 
 using json = nlohmann::json;
 
 int main(int argc, const char * argv[]) {
-  const char* filename = (argc > 1) ? argv[1] : "../../data/Munich/LOD2_4424_5482_solid.json";
+  const char* filename = (argc > 1) ? argv[1] : "../../../../example-datasets/Munich/LOD2_4424_5482_solid.json";
   std::ifstream input(filename);
   json j;
   input >> j;
- 
-  if (j["metadata"]["crs"]["epsg"].is_null())
-    std::cout << "CRS not specified" << std::endl;
-  else
-    std::cout << "CRS: " << j["metadata"]["crs"]["epsg"] << std::endl;
-  
-  //-- print the CRS
-  if (j.count("metadata"))
-    if (j["metadata"].count("crs"))
-      if (j["metadata"]["crs"].count("epsg"))
-        std::cout << "CRS: " << j["metadata"]["crs"]["epsg"]  << std::endl;
-    
-  for (json::iterator it = j.begin(); it != j.end(); ++it) {
-    std::cout << it.key() << "\n";
+
+  std::cout << "Printing (some) information about:" << std::endl;
+  std::cout << "  " << filename << std::endl;
+
+  //-- CityObjects
+  std::cout << "===== CityObjects =====" << std::endl;
+  std::cout << "Total : " << j["CityObjects"].size() << std::endl;
+  std::set<std::string> d;
+  for (auto& co : j["CityObjects"]) {
+    std::string tmp = co["type"];
+    d.insert(tmp);
+  }
+  std::cout << "Types:" << std::endl;
+  for (auto& each : d)
+    std::cout << "  " << each << std::endl; 
+  d.clear();
+  for (auto& co : j["CityObjects"]) {
+    for (auto& g : co["geometry"]) {
+      std::string tmp = g["type"];
+      d.insert(tmp);
+    }
+  }
+  std::cout << "Geometries present:" << std::endl;
+  for (auto& each : d)
+    std::cout << "  " << each << std::endl; 
+  d.clear();
+
+  //-- metadata
+  std::cout << "===== Metadata =====" << std::endl;
+  if (j.count("metadata") == 0)
+    std::cout << "  none" << std::endl;
+  else {
+    for (json::iterator it = j["metadata"].begin(); it != j["metadata"].end(); ++it) {
+      if (it.key() == "crs")
+        std::cout << "  crs: EPSG:" << j["metadata"]["crs"]["epsg"] << std::endl;
+      else  
+        std::cout << "  " << it.key() << std::endl;
+    }
+  }
+
+  //-- vertices
+  std::cout << "===== Vertices =====" << std::endl;
+  std::cout << "Total: " << j["vertices"].size() << std::endl;
+
+  //-- appearance
+  std::cout << "===== Appearance =====" << std::endl;
+  if (j.count("appearance") == 0)
+    std::cout << "  none" << std::endl;
+  else {
+    if (j["appearance"].count("textures") > 0)
+      std::cout << "  textures" << std::endl;
+    if (j["appearance"].count("materials") > 0)
+      std::cout << "  materials:" << j["appearance"]["materials"].size() << std::endl;    
   }
     
-  std::cout << "=====" << std::endl;
-  std::cout << j.is_object() << std::endl;
-  std::cout << "=====" << std::endl;
-    
-//    std::cout << j["metadata"] << std::endl;
-  for (auto& entry : j["metadata"])
-    std::cout << entry << " " << entry.is_array() << std::endl;
-    
-    // find an entry
-  if (j.find("vertices") != j.end()) {
-    std::cout << "size vertices:" << j["vertices"].size() << std::endl;
-  }
-  std::cout << j.count("vertices") << std::endl;
-  std::cout << j.count("verticess") << std::endl;
-    
-//    for (auto& each : j)
-//        std::cout << each.size() << std::endl;
     
 // write prettified JSON to another file
 //    std::ofstream o("/Users/hugo/projects/cityjson/pretty.json");
