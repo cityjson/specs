@@ -1,35 +1,37 @@
 
 
-
 # Introduction
 
 CityJSON is a format for encoding a subset of the [CityGML](https://www.citygml.org) data model using JavaScript Object Notation ([JSON](http://json.org)).
-A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, vegetation, and city furniture.
+A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, the vegetation, and the city furniture.
 
 The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex. 
-CityJSON aims at being easy-to-use, both for creating CityJSON datasets, and for reading/parsing them.
+CityJSON aims at being easy-to-use, both for creating datasets, and for reading/parsing them.
 It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
 It was also designed to be compact.
 
-A CityJSON object representing a city is as 'flat' as possible, thus the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
-While this somewhat breaks the philosophy of CityGML, it considerably simplifies the storage of a city model and does not mean that information is lost.
+A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
+This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
 
 
 ## A JSON encoding of GML, huh?!?
 
 While its name otherwise implies, CityGML is not only a GML encoding, but is actually an open standardised data model to store digital 3D models of cities and landscapes. 
-It defines ways to describe most of the common 3D features and objects found in cities and the relationships between them. 
+It defines ways to describe most of the common 3D features found in cities, and the relationships between them. 
 It also defines different standard levels of detail (LODs) for the 3D objects, which allows us to represent objects for different applications and purposes.
+
 CityGML currently has 2 implementations:
 
   1. the GML encoding is the "standard" one, and is defined in the [offical documentation](https://portal.opengeospatial.org/files/?artifact_id=47842)
   1. a [database schema called 3DCityDB](http://www.3dcitydb.org), which can be implemented both for [PostgreSQL](https://www.postgresql.org) and [Oracle Spatial](https://www.oracle.com/database/spatial/index.html).
 
+CityJSON can be considered as the third implementation of the CityGML data model.
+
 
 ## Which CityGML modules are supported?
 
-CityJSON, which can thus be considered as the third implementation of the CityGML data model, implements at this moment most of the data model.
-However, for the sake of simplicity and efficiency, some modukes and features have been omitted.
+At this moment, CityJSON implements most of the data model.
+However, for the sake of simplicity and efficiency, some modules and features have been omitted.
 
 The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these(more details below):
 
@@ -42,12 +44,23 @@ The types of objects stored in CityGML are grouped into different modules, and C
   1. __Generics__: everything is supported
   1. __Appearance__: textures and materials are supported, albeit only one per surface is allowed 
 
+
+## CityGML modules and characteristics not supported
+
 The following modules are __not__ supported (but we're working on it):
 
+  1. __Address__: to store addresses of buildings
   1. __Bridge__: bridge-related structures, possibly split into parts
   1. __Transportation__: roads, railways and squares
   1. __Tunnel__: tunnels, possibly split into parts
-  1. __Address__: to store addresses of buildings
+
+Furthermore, these characteristics are not supported:
+
+  1. no support for ImplicitGeometries
+  1. no support for ADEs (or other extension mechanism)
+  1. no support for the topological relationships that can be defined, eg  *relativeToTerrain* and *relativeToWater*
+  1. no support for arbitrary coordinate reference systems (CRSs). Only an [EPSG code](https://epsg.io) can be used. Furthermore, all geometries in a given CityJSON must be using the same CRS.
+
 
 
 # CityJSON Object
