@@ -513,11 +513,14 @@ We reuse the [scheme of TopoJSON (called quantization)](https://github.com/topoj
 
 To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the "vertices" member and:
 
-    v[0] = (vi[0] * ["transform"]["scale"][0]) + vi[0] * ["transform"]["translate"][0]
-    v[1] = (vi[1] * ["transform"]["scale"][1]) + vi[1] * ["transform"]["translate"][1]
-    v[2] = (vi[2] * ["transform"]["scale"][2]) + vi[2] * ["transform"]["translate"][2]
+    v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
+    v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
+    v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
 
 If the CityJSON file does not have a "transform" member, then the values of the vertices must be read as-is.
+
+There is a program [cityjson-compress](../software/cityjson-compress/) that will compress a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
+Both operation use a tolerance, which is given as number-of-digits-after-the-dot.
 
 
 ```json
