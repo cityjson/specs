@@ -1,11 +1,13 @@
 
-- Nothing needs to be installed, this [JSON header-only library](https://github.com/nlohmann/json) is used
-- C++11 is necessary
-
 To compile and run:
 
     $ mkdir build
     $ cd build
     $ cmake ..
     $ make
-    $ ./cityjson-info ../../../../example-datasets/Munich/LOD2_4424_5482_solid.json
+    $ ./cityjson-compress Chicoutimi.json 3
+
+The "3" given as input is the number of digits to keep after the dot, thus "mm" precision here (to merge duplicate vertices).
+
+It will create a file `Chicoutimi.compress.json`.
+
