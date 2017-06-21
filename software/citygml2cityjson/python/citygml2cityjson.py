@@ -23,9 +23,9 @@ def main():
     #-- the CityModel JSON object
     cm = {}
     cm["type"] = "CityModel"
+    cm["version"] = "http://www.cityjson.org/version/0.1"
     cm["metadata"] = {}
     cm["metadata"]["crs"] = {'epsg': 1234}
-    cm["metadata"]["cityjson-version"] = "0.1"
     cm["metadata"]["bbox"] = [4424648.79, 5482614.69, 310.19, 4424852.33, 5482813.83, 330.28] 
 
     cm["CityObjects"] = {}
