@@ -73,7 +73,8 @@ A CityJSON object represents one 3D city model of a given area, this model may c
     1. one member with the name "version", whose value must be a URL pointing to the CityJSON version;
     1. one member with the name "CityObjects". The value of this member is a collection of city objects, with their ID as the name.
     1. one member with the name "vertices", whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used to represent the Geometric Objects.
-  - A CityJSON may have one member with the name "metadata", whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.s.
+  - A CityJSON may have one member with the name "metadata", whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
+  - A CityJSON may have one member with the name "transform", whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
   - A CityJSON may have one member with name "appearance", the value may contain JSON objects representing the textures and/or materials of surfaces.
   - A CityJSON must not have other members.
 
@@ -95,6 +96,10 @@ An empty CityJSON will look like this:
   "type": "CityModel",
   "version": "http://www.cityjson.org/version/0.1",
   "metadata": {},
+  "transform": {
+    "scale": [],
+    "translate": []
+  },
   "CityObjects": {},
   "vertices": [],
   "appearance": {}
@@ -497,6 +502,30 @@ For WaterBody:
   - "WaterSurface",
   - "WaterGroundSurface",
   - "WaterClosureSurface".
+
+
+# Transform Object (to compress the CityJSON)
+
+To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles).
+To use compression, a CityJSON object may have one member "transform", whose values are 2 mandatory JSON objects ("scale" and "translate"), both arrays with 3 values.
+
+We reuse the [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) and simply add a third coordinate because our vertices are embedded in 3D space.
+
+To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the "vertices" member and:
+
+    v[0] = (vi[0] * ["transform"]["scale"][0]) + vi[0] * ["transform"]["translate"][0]
+    v[1] = (vi[1] * ["transform"]["scale"][1]) + vi[1] * ["transform"]["translate"][1]
+    v[2] = (vi[2] * ["transform"]["scale"][2]) + vi[2] * ["transform"]["translate"][2]
+
+If the CityJSON file does not have a "transform" member, then the values of the vertices must be read as-is.
+
+
+```json
+"transform": {
+    "scale": [0.01, 0.01, 0.01],
+    "translate": [4424648.79, 5482614.69, 310.19]
+}
+```
 
 
 # Appearance Object
