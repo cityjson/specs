@@ -131,13 +131,6 @@ It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
   }
 ```
 
-## "cityjson-version"
-
-The version of CityJSON used (a string).
-
-```json
-  "cityjson-version": "0.1"
-```
 
 ## "keywords"
 
@@ -360,8 +353,6 @@ A City Object:
 - The geometry of a City Object of type "CityFurniture" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", "CompositeSolid", or "MultiGeometry".
 
 
-
-
 # Geometry Objects
 
 CityJSON defines the following 3D geometric primitives, ie all of them are embedded in 3D space and thus have coordinates *(x, y, z)* for their vertices. 
@@ -369,13 +360,13 @@ As is the case in CityGML, only linear and planar primitives are allowed (no cur
 
 A Geometry object is a JSON object for which the type member’s value is one of the following:
 
-    1. MultiPoint
-    1. MultiLineString
-    1. MultiSurface
-    1. CompositeSurface
-    1. Solid
-    1. MultiSolid
-    1. CompositeSolid
+  1. MultiPoint
+  1. MultiLineString
+  1. MultiSurface
+  1. CompositeSurface
+  1. Solid
+  1. MultiSolid
+  1. CompositeSolid
 
 A Geometry object:
 
@@ -450,7 +441,7 @@ Their position in this array (0-based) is used to represent the Geometric Object
   "type": "Solid",
   "boundaries": [
     [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ], //exterior shell
-    [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [111, 246, 5]] ] //interior shell
+    [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ] //interior shell
   ]
 }
 ```
@@ -461,10 +452,10 @@ Their position in this array (0-based) is used to represent the Geometric Object
   "boundaries": [
     [ // 1st Solid
       [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ],
-      [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [111, 246, 5]] ]
+      [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ]
     ],
     [ // 2st Solid
-      [ [[666, 667, 668]], [[74, 75, 76]], [[880, 881, 885]], [[111, 122, 226]] ] ]
+      [ [[666, 667, 668]], [[74, 75, 76]], [[880, 881, 885]], [[111, 122, 226]] ] 
     ]    
   ]
 }
