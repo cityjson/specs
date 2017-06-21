@@ -65,12 +65,12 @@ Furthermore, these characteristics are not supported:
 
 # CityJSON Object
 
-A CityJSON object represents one 3D city model of a given area, this model may contain features of different types (as defined in the CityGML data model).
+A CityJSON object represents one 3D city model of a given area, this model may contain features of different types, as defined in the CityGML data model.
 
   - A CityJSON object is a JSON object.
-  - A CityJSON object must have 3 members: 
-
+  - A CityJSON object must have 4 members: 
     1. one member with the name "type", whose value must be "CityModel";
+    1. one member with the name "version", whose value must be a URL pointing to the CityJSON version;
     1. one member with the name "CityObjects". The value of this member is a collection of city objects, with their ID as the name.
     1. one member with the name "vertices", whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used to represent the Geometric Objects.
   - A CityJSON may have one member with the name "metadata", whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.s.
@@ -82,6 +82,7 @@ The minimal valid CityJSON object is thus:
 ```json
 {
   "type": "CityModel",
+  "version": "http://www.cityjson.org/version/0.1",
   "CityObjects": {},
   "vertices": []
 }
@@ -92,6 +93,7 @@ An empty CityJSON will look like this:
 ```json
 {
   "type": "CityModel",
+  "version": "http://www.cityjson.org/version/0.1",
   "metadata": {},
   "CityObjects": {},
   "vertices": [],

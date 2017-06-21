@@ -1,11 +1,11 @@
 {
   "type": "CityModel",
+  "version": "http://www.cityjson.org/version/0.1",
   "metadata": {
     "crs": { 
       "epsg": 7415
     },
     "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-    "cityjson-version": "0.1",
     "title": "what is this dataset?",
     "abstract": "what is this dataset?",
     "dataUrl": "what is this dataset?",

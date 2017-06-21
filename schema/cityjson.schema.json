@@ -581,6 +581,9 @@
       "description": "The type of JSON must be CityModel",
       "enum": ["CityModel"]
     },
+    "version": {
+      "type": "string"
+    },
     "metadata": {
       "type": "object",
       "properties": {
@@ -599,7 +602,6 @@
           "minItems": 6,    
           "maxItems": 6    
         },
-        "version": {"type": "string"},
         "cityjson-version": {"type": "string"},
         "keywords": {
           "type": "array",
@@ -665,7 +667,7 @@
       }
     }
   },
-  "required": [ "type", "CityObjects", "vertices"],
+  "required": ["type", "version", "CityObjects", "vertices"],
   "additionalProperties": false
 }
 
