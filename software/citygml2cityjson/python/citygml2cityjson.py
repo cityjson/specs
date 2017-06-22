@@ -194,7 +194,7 @@ def parse_arguments():
     (options, args) = parser.parse_args()
 
     if len(args) != 1:
-        parser.error("The input file (*.gml or *.xml) must be specified; and the folder for the POLYs.")
+        parser.error("The input file (*.gml or *.xml) must be specified.")
     fIn = args[0]
     if fIn[-3:] != "gml" and fIn[-3:] != "xml":
         parser.error("The input file must be a GML/XML file.")
