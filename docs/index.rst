@@ -17,22 +17,49 @@ It was also designed to be compact.
 A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
 This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
 
+.. code-block:: js
+
+  {
+    "type": "CityModel",
+    "version": "http://www.cityjson.org/version/0.1",
+    "metadata": {
+      "crs": { "epsg": 7415 }
+    },
+    "CityObjects": {
+      "id-1": {
+        "type": "Building",
+        "geometry": [...]
+        ...
+      }
+    },
+    "vertices": [
+      [23.1, 2321.2, 11.0],
+      ...
+    ],
+    "appearance": {...}
+  }
+
+A JSON encoding of GML, huh?!?
+------------------------------
+
+While its name otherwise implies, CityGML is not only a GML encoding, but is actually an open standardised data model to store digital 3D models of cities and landscapes. 
+It defines ways to describe most of the common 3D features found in cities, and the relationships between them. 
+It also defines different standard levels of detail (LODs) for the 3D objects, which allows us to represent objects for different applications and purposes.
+
+CityGML currently has 2 implementations:
+
+  1. the GML encoding is the "standard" one, and is defined in the `offical documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_
+  1. a database schema called `3DCityDB <http://www.3dcitydb.org>`_, which can be implemented both for `PostgreSQL <https://www.postgresql.org>`_ and `Oracle Spatial <https://www.oracle.com/database/spatial/index.html>`_.
+
+CityJSON can be considered as the third implementation of the CityGML data model.
+
+----
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
 
+   citygmlsupport
+   specifications
    software
+   example-datasets
 
-a JSON-based implementation of CityGML, easy-to-use and compact
----------------------------------------------------------------
-
-Bacon ipsum dolour sit amet porchetta beef turkey, bacon turducken boudin hamburger venison ball tip. Brisket pork loin bresaola short loin ground round leberkas pastrami tongue jerky cow turducken beef ribs. Pork ribeye landjaeger prosciutto pig venison tenderloin. Swine beef ribs kielbasa, porchetta tenderloin salami venison pork belly tail.
-
-
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

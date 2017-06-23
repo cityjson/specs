@@ -2,3 +2,4 @@
 /software/cityjson-compress/c++11/build
 /software/cityjson2obj/c++11/build
 *.pyc
+/docs/_build

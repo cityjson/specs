@@ -1,13 +1,10 @@
-=======
-License
-=======
+========
+Software
+========
 
-yo yo yo
 
-------
-Ledoux
-------
-
+* Online documentation: http://docs.writethedocs.org/
+* Conference: http://conf.writethedocs.org/
 
 .. code-block:: js
 
