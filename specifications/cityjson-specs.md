@@ -250,7 +250,8 @@ A City Object:
     "PostalCode": "string"
   },
 }
-},
+```
+
 
 
 ## TINRelief
@@ -666,11 +667,11 @@ A Texture Object:
 ```
 
 
-## Vertices-Texture Object
+## Vertices-texture Object
 
-  - the array may be empty.
-  - one vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates of the vertex. The value of *u* and *v* must be between 0.0 and 1.0
-  - vertices may be repeated
+- A Vertices-texture may have an empty array.
+- One vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates of the vertex. The value of *u* and *v* must be between 0.0 and 1.0
+- vertices may be repeated
 
 
 ```json
