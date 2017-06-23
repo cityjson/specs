@@ -27,6 +27,13 @@
         "owner": "Elvis Presley",
         "renovation": 1977
       },
+      "address": {
+        "CountryName": "Canada",
+        "LocalityName": "Chibougamau",
+        "ThoroughfareNumber": "666",
+        "ThoroughfareName": "rue du Diable",
+        "PostalCode": "H0H 0H0"
+      },
       "Parts": ["2929"],
       "geometry": [
         {
