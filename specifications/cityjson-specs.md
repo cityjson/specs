@@ -149,7 +149,6 @@ An array of keywords of type "string" may be listed:
 
 ## Other properties
 
-<!-- TODO: this should be made better (by Anna?)-->
 The following are all of type "string":
 
   - "title"

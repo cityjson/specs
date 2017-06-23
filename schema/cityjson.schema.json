@@ -35,6 +35,18 @@
           "type": "object",
           "properties": {}
         },
+        "address": {
+          "type": "object",
+          "properties": {
+            "CountryName": {"type": "string"},
+            "LocalityName": {"type": "string"},
+            "ThoroughfareNumber": {"type": "string"},
+            "ThoroughfareName": {"type": "string"},
+            "PostalCode": {"type": "string"},
+            "location": {"$ref": "#/definitions/MultiPoint"}
+          },
+          "additionalProperties": false
+        },
         "Parts": {
           "type": "array",
           "description": "the IDs of the BuildingPart of this Building",
@@ -88,6 +100,18 @@
           "type": "object",
           "properties": {}
         },
+        "address": {
+          "type": "object",
+          "properties": {
+            "CountryName": {"type": "string"},
+            "LocalityName": {"type": "string"},
+            "ThoroughfareNumber": {"type": "string"},
+            "ThoroughfareName": {"type": "string"},
+            "PostalCode": {"type": "string"},
+            "location": {"$ref": "#/definitions/MultiPoint"}
+          },
+          "additionalProperties": false
+        },              
         "Installations": {
           "type": "array",
             "items": {"type": "string"}
