@@ -223,7 +223,7 @@ A City Object:
         "roofType": "gable"
       },
       "Parts": ["id-56", "id-832"],
-      "Installations": ["bi-balcony"]
+      "Installations": ["mybalcony"]
     },
     "id-56": {
       "type": "BuildingPart", 
