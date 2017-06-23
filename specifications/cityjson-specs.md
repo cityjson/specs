@@ -42,6 +42,7 @@ The types of objects stored in CityGML are grouped into different modules, and C
   1. __Vegetation__: everything is supported
   1. __WaterBody__: everything is supported
   1. __Generics__: everything is supported
+  1. __Address__: everything is supported
   1. __Appearance__: textures and materials are supported, albeit only one per surface is allowed 
 
 
@@ -49,7 +50,6 @@ The types of objects stored in CityGML are grouped into different modules, and C
 
 The following modules are __not__ supported (but we're working on it):
 
-  1. __Address__: to store addresses of buildings
   1. __Bridge__: bridge-related structures, possibly split into parts
   1. __Transportation__: roads, railways and squares
   1. __Tunnel__: tunnels, possibly split into parts
@@ -212,7 +212,7 @@ A City Object:
 ## Building, BuildingPart, and BuildingInstallation
 
 - A City Object of type "Building" may have a member "Parts", whose value is an array of the IDs of the City Objects of type "BuildingPart" it contains.
-- A City Object of type "Building" may have a member "Installations", whose value is an array of the IDs of the City Objects of type "BuildingInstallation" it contains.
+- A City Object of type "Building" or "BuildingPart" may have a member "Installations", whose value is an array of the IDs of the City Objects of type "BuildingInstallation" it contains.
 
 ```json
 "CityObjects": {
@@ -237,6 +237,20 @@ A City Object:
 
 - The geometry of both "Building" and "BuildingPart" can only be represented with these Geometry Objects: (1) Solid, (2) CompositeSolid, (3) MultiSurface.
 - The geometry of a "BuildingInstallation" object can be represented with any of the Geometry Objects.
+- A City Object of type "Building" or "BuildingPart" may have a member "address", whose value is a JSON object describing the address. One location (a MultiPoint) can be given, to for instance locate the front door inside the building.
+
+```json
+{
+  "type": "Building", 
+  "address": {
+    "CountryName": "string",
+    "LocalityName": "string",
+    "ThoroughfareNumber": "string",
+    "ThoroughfareName": "string",
+    "PostalCode": "string"
+  },
+}
+},
 
 
 ## TINRelief
