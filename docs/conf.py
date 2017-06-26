@@ -98,6 +98,10 @@ html_theme_options = {
     'github_user': 'tudelft3d',
     'github_repo': 'cityjson',
     'show_powered_by': 'false',
+    'extra_nav_links': {
+        'CityGML homepage': 'https://www.citygml.org',
+    },
+    # 'font_family': 'Colibri/',
 }
 
 html_sidebars = {
