@@ -125,6 +125,8 @@ For instance, for the WGS84 latitude-longitude:
 
 Be aware that the EPSG code should be a 3D CRS, ie the elevation/height values should be with respect to a specific datum.
 
+It is not possible to give a WKT string with the parameters, or any other way.
+
 ## "bbox" (extent of the dataset)
 
 While this can be extracted from the dataset itself, it is useful to store it. 
@@ -213,6 +215,9 @@ A City Object:
 
 - A City Object of type "Building" may have a member "Parts", whose value is an array of the IDs of the City Objects of type "BuildingPart" it contains.
 - A City Object of type "Building" or "BuildingPart" may have a member "Installations", whose value is an array of the IDs of the City Objects of type "BuildingInstallation" it contains.
+- The geometry of both "Building" and "BuildingPart" can only be represented with these Geometry Objects: (1) Solid, (2) CompositeSolid, (3) MultiSurface.
+- The geometry of a "BuildingInstallation" object can be represented with any of the Geometry Objects.
+- A City Object of type "Building" or "BuildingPart" may have a member "address", whose value is a JSON object describing the address. One location (a MultiPoint) can be given, to for instance locate the front door inside the building.
 
 ```json
 "CityObjects": {
@@ -235,29 +240,26 @@ A City Object:
 }
 ```
 
-- The geometry of both "Building" and "BuildingPart" can only be represented with these Geometry Objects: (1) Solid, (2) CompositeSolid, (3) MultiSurface.
-- The geometry of a "BuildingInstallation" object can be represented with any of the Geometry Objects.
-- A City Object of type "Building" or "BuildingPart" may have a member "address", whose value is a JSON object describing the address. One location (a MultiPoint) can be given, to for instance locate the front door inside the building.
 
 ```json
 {
   "type": "Building", 
   "address": {
-    "CountryName": "string",
-    "LocalityName": "string",
-    "ThoroughfareNumber": "string",
-    "ThoroughfareName": "string",
-    "PostalCode": "string"
+    "CountryName": "Canada",
+    "LocalityName": "Chibougamau",
+    "ThoroughfareNumber": "4419",
+    "ThoroughfareName": "rue de la Patate",
+    "PostalCode": "H0H 0H0"
+
   },
 }
 ```
 
 
-
 ## TINRelief
 
 - The geometry of a City Object of type "TINRelief" can only be of type "CompositeSurface".
-- There is no specific Geometry Object for a TIN, it is simply a CompositeSurface for which every surface is a triangle (without interior rings).
+- CityJSON does not define a specific Geometry Object for a TIN (triangulated irregular network), it is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
 
 ```json
 "myterrain01": {
@@ -276,11 +278,10 @@ A City Object:
 
 ## WaterBody
 
-- The geometry of a City Object of type "WaterBody" can be of types: "MultiLineString", "MultiSurface"
-"CompositeSurface", "Solid", or "CompositeSolid".
+- The geometry of a City Object of type "WaterBody" can be of types: "MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
 
 ```json
-"mylake": {
+"mygreatlake": {
       "type": "WaterBody", 
       "attributes": {
         "usage": "leisure",
@@ -290,8 +291,7 @@ A City Object:
         "lod": 2,
         "boundaries": [
           [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]] ]
-        ],
-        "semantics": [ ["WaterSurface"], ["WaterGroundSurface"], ["WaterGroundSurface"] ]
+        ]
       }]    
     }               
   }
@@ -321,8 +321,8 @@ A City Object:
 - The geometry of a City Object of type "PlantCover" can be of type "MultiSurface" or "MultiSolid".
 
 ```json
-"myterrain01": {
-  "type": "LandUse", 
+"plants": {
+  "type": "PlantCover", 
   "attributes": { 
     "averageHeight": 11.05
   },
@@ -343,7 +343,7 @@ A City Object:
 
 ## SolitaryVegetationObject
 
-- The geometry of a City Object of type "SolitaryVegetationObject" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", "CompositeSolid", or "MultiGeometry".
+- The geometry of a City Object of type "SolitaryVegetationObject" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
 - The concept of Implicit Geometries, as defined in CityGML, is not supported. An implicit geometry is a template, eg of certain species of a tree, that can be reused with different parameters to define its appearance.
 
 ```json
@@ -364,17 +364,18 @@ A City Object:
 
 ## CityFurniture
 
-- The geometry of a City Object of type "CityFurniture" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", "CompositeSolid", or "MultiGeometry".
+- The geometry of a City Object of type "CityFurniture" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
 
 
 ## GenericCityObject
 
-- The geometry of a City Object of type "CityFurniture" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", "CompositeSolid", or "MultiGeometry".
+- The geometry of a City Object of type "CityFurniture" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
 
 
 # Geometry Objects
 
 CityJSON defines the following 3D geometric primitives, ie all of them are embedded in 3D space and thus have coordinates *(x, y, z)* for their vertices. 
+
 As is the case in CityGML, only linear and planar primitives are allowed (no curves or parametric surfaces for instance).
 
 A Geometry object is a JSON object for which the type member’s value is one of the following:
@@ -387,13 +388,15 @@ A Geometry object is a JSON object for which the type member’s value is one of
   1. MultiSolid
   1. CompositeSolid
 
+<!-- TODO : only Multi* but a Solid? Necessary for Buildings I'm afraid. Should I add Point and LineString? -->
+
 A Geometry object:
 
   - must have one member with the name "lod", whose value is a number identifying the level-of-detail (LoD) of the geometry. This can be either an integer (following the CityGML standards), or a number following the [improved LoDs by TU Delft](https://www.citygml.org/ongoingdev/tudelft-lods/)
   - must have one member with the name "boundaries", whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers. An integer refers to the index in the "vertices" array of the CityJSON object, and it is 0-based (ie the first element in the array has the index "0", the second one "1").
-  - may have one member "semantics", whose value is a hierachy of nested arrays (the depth depends on the Geometry object). The value of each entry is a string, and the values allowed are depended on the CityObject (see below).
-  - may have one member "material", whose value is a hierachy of nested arrays (the depth depends on the Geometry object). The value of each entry is an integer referring to the material used (see below).
-  - may have one member "texture", whose value is a hierachy of nested arrays (the depth depends on the Geometry object). The value of each entry is explained below.
+  - may have one member "semantics", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is a string, and the values allowed are depended on the CityObject (see below).
+  - may have one member "material", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is an integer referring to the material used (see below).
+  - may have one member "texture", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is explained below.
   - must not have other members.
 
 Observe that there is __no__ Geometry Object for MultiGeometry. 
@@ -414,9 +417,9 @@ Their position in this array (0-based) is used to represent the Geometric Object
 "vertices": [
   [0.0, 0.0, 0.0],
   [1.0, 0.0, 0.0],
-  [1.0, 0.0, 0.0],
+  [0.0, 0.0, 0.0],
   ...
-  [0.0, 1.0, 0.0],
+  [1.0, 0.0, 0.0],
   [8523.134, 487625.134, 2.03]
 ]
 ```
@@ -491,6 +494,7 @@ Since surfaces are assigned a semantics, and not rings, the depth of an array is
 ```json
 {
   "type": "MultiSurface",
+  "lod": 2,
   "boundaries": [
     [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
   ],
@@ -500,7 +504,7 @@ Since surfaces are assigned a semantics, and not rings, the depth of an array is
 }
 ```
 
-Building, BuildingPart, and BuildingInstallation can have the following semantics for (LoD0 to LoD3, LoD4 is omitted):
+Building, BuildingPart, and BuildingInstallation can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
 
   - "RoofSurface", 
   - "GroundSurface", 
@@ -523,9 +527,9 @@ For WaterBody:
 To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles).
 To use compression, a CityJSON object may have one member "transform", whose values are 2 mandatory JSON objects ("scale" and "translate"), both arrays with 3 values.
 
-We reuse the [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) and simply add a third coordinate because our vertices are embedded in 3D space.
+The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
 
-To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the "vertices" member and:
+If a CityJSON object has a member "transform", to obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the "vertices" member and:
 
     v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
     v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
@@ -533,8 +537,8 @@ To obtain the real position of a given vertex *v*, we must take the 3 values *vi
 
 If the CityJSON file does not have a "transform" member, then the values of the vertices must be read as-is.
 
-There is a program [cityjson-compress](../software/cityjson-compress/) that will compress a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
-Both operation use a tolerance, which is given as number-of-digits-after-the-dot.
+There is a software called [cityjson-compress](../software/cityjson-compress/) that will compress a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
+Both operation use a tolerance, which is given as "number-of-digits-after-the-dot-to-preserve".
 
 
 ```json
@@ -547,10 +551,10 @@ Both operation use a tolerance, which is given as number-of-digits-after-the-dot
 
 # Appearance Object
 
-A subset of the Appearance module of CityGML.
-Both textures and materials are supported, albeit only one texture and one material per surface is allowed, and only one side of a surface can have a texture.
+Only a subset of the Appearance module of CityGML is implemented, ie both textures and materials are supported, albeit only one texture and one material per surface is allowed, and only one side of a surface can have a texture.
 The CityGML concept of *themes* is thus not supported.
 Different LoDs can however have different textures/materials.
+
 The standard from the [Material Template Library format (MTL)](https://en.wikipedia.org/wiki/Wavefront_.obj_file#Material_template_library) is reused, which is used by the well-known [format Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
 
   - An Appearance Object may have one member with the name "materials", whose value is an array of Material Objects.
@@ -595,6 +599,7 @@ To store the textures of surfaces, a Geometry Object may have a member with valu
 
 For each ring of each surface, the first value refers to the the position (0-based) in the "textures" member of the "appearance" member of the CityJSON object; this is to allow geometries having more than one textures.
 The other indices, refer to the UV position of the corresponding vertices (as listed in the "boundaries" member of the geometry).
+Each array representing a ring therefore has one more value than that to store the vertices.
 
 ```json
 {
