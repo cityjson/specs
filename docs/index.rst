@@ -5,17 +5,6 @@
 
 CityJSON
 ========
- 
-CityJSON is a format for encoding a subset of the `CityGML <https://www.citygml.org>`_ data model using JavaScript Object Notation (`JSON <http://json.org>`_).
-A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, the vegetation, and the city furniture.
-
-The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex. 
-CityJSON aims at being easy-to-use, both for creating datasets, and for reading/parsing them.
-It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
-It was also designed to be compact.
-
-A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
-This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
 
 .. code-block:: js
 
@@ -38,6 +27,17 @@ This considerably simplifies the storage of a city model, and furthermore does n
     ],
     "appearance": {...}
   }
+   
+CityJSON is a format for encoding a subset of the `CityGML <https://www.citygml.org>`_ data model using JavaScript Object Notation (`JSON <http://json.org>`_).
+A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, the vegetation, and the city furniture.
+
+The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex. 
+CityJSON aims at being easy-to-use, both for creating datasets, and for reading/parsing them.
+It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
+It was also designed to be compact.
+
+A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
+This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
 
 A JSON encoding of GML, huh?!?
 ------------------------------
@@ -56,10 +56,11 @@ CityJSON can be considered as the third implementation of the CityGML data model
 ----
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    citygmlsupport
    specifications
    software
-   example-datasets
+   datasets
+   about
 

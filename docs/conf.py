@@ -90,11 +90,11 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
-    # 'logo': 'logo.png',
+    'logo': 'logo.png',
     # 'logo_text_align': 'left-align',
     # 'body_text_align': 'left-align',
     'description': 'a JSON-based implementation of CityGML, easy-to-use and compact',
-    'logo_name': 'true',
+    # 'logo_name': 'true',
     'github_user': 'tudelft3d',
     'github_repo': 'cityjson',
     'show_powered_by': 'false',
