@@ -100,6 +100,7 @@ html_theme_options = {
     'show_powered_by': 'false',
     'extra_nav_links': {
         'CityGML homepage': 'https://www.citygml.org',
+        'JSON homepage': 'http://json.org',
     },
     # 'font_family': 'Colibri/',
 }

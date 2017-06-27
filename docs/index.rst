@@ -27,7 +27,7 @@ CityJSON
     ],
     "appearance": {...}
   }
-   
+
 CityJSON is a format for encoding a subset of the `CityGML <https://www.citygml.org>`_ data model using JavaScript Object Notation (`JSON <http://json.org>`_).
 A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, the vegetation, and the city furniture.
 
@@ -53,7 +53,9 @@ CityGML currently has 2 implementations:
 
 CityJSON can be considered as the third implementation of the CityGML data model.
 
-----
+
+Content
+-------
 
 .. toctree::
    :maxdepth: 2
