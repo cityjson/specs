@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'CityJSON'
-copyright = u'2017, 3D geoinformation group, TU Delft'
+copyright = u'2017, 3D geoinformation group at TU Delft'
 author = u'Hugo Ledoux'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -90,7 +90,7 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
-    'logo': 'logo.png',
+    'logo': 'logo2.svg',
     # 'logo_text_align': 'left-align',
     # 'body_text_align': 'left-align',
     'description': 'a JSON-based implementation of CityGML, easy-to-use and compact',
