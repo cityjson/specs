@@ -3,14 +3,14 @@
 # Introduction
 
 CityJSON is a format for encoding a subset of the [CityGML](https://www.citygml.org) data model using JavaScript Object Notation ([JSON](http://json.org)).
-A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, the vegetation, and the city furniture.
+A CityJSON file represents both the geometry and the semantics of the city features of a given area, e.g. buildings, roads, rivers, the vegetation, and the city furniture.
 
 The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex. 
 CityJSON aims at being easy-to-use, both for creating datasets, and for reading/parsing them.
 It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
-It was also designed to be compact.
+It was also designed to be compact and friendly for web and mobile development.
 
-A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
+A CityJSON object, representing a city, is as 'flat' as possible, i.e. the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
 This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
 
 
@@ -33,7 +33,7 @@ CityJSON can be considered as the third implementation of the CityGML data model
 At this moment, CityJSON implements most of the data model.
 However, for the sake of simplicity and efficiency, some modules and features have been omitted.
 
-The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these(more details below):
+The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these (more details below):
 
   1. __Building__: everything is supported except LOD4 features (interior of buildings) and the concept of Terrain-Intersection-Curve (TIC)
   1. __CityFurniture__: benches, traffic lights, signs, etc. are all supported
@@ -63,19 +63,19 @@ Furthermore, these characteristics are not supported:
 
 
 
-# CityJSON Object
+# CityJSON Model
 
-A CityJSON object represents one 3D city model of a given area, this model may contain features of different types, as defined in the CityGML data model.
+A CityJSON model represents one 3D city model of a given area. This model may contain features of different types, as defined in the CityGML data model.
 
-  - A CityJSON object is a JSON object.
-  - A CityJSON object must have 4 members: 
-    1. one member with the name "type", whose value must be "CityModel";
-    1. one member with the name "version", whose value must be a URL pointing to the CityJSON version;
-    1. one member with the name "CityObjects". The value of this member is a collection of city objects, with their ID as the name.
-    1. one member with the name "vertices", whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used to represent the Geometric Objects.
-  - A CityJSON may have one member with the name "metadata", whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
-  - A CityJSON may have one member with the name "transform", whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
-  - A CityJSON may have one member with name "appearance", the value may contain JSON objects representing the textures and/or materials of surfaces.
+  - A CityJSON model is a JSON object.
+  - A CityJSON model must have 4 members: 
+    1. one member with the name `type`, whose value must be `CityModel`;
+    1. one member with the name `version`, whose value must be a URL pointing to the CityJSON version;
+    1. one member with the name `CityObjects`. The value of this member is a collection of key-value pairs, where key is the ID of the object and value is a city object.
+    1. one member with the name `vertices`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects.
+  - A CityJSON may have one member with the name `metadata`, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
+  - A CityJSON may have one member with the name `transform`, whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
+  - A CityJSON may have one member with name `appearance`, the value may contain JSON objects representing the textures and/or materials of surfaces.
   - A CityJSON must not have other members.
 
 The minimal valid CityJSON object is thus:
@@ -110,7 +110,7 @@ An empty CityJSON will look like this:
 
 The metadata related to the 3D city model may be stored.
 
-## "crs" (Coordinate reference system)
+## `crs` (Coordinate reference system)
 
 The CRS may be given with a JSON object that must contain one member "epsg" with as value the [EPSG code](https://epsg.io), as an integer.
 For instance, for the WGS84 latitude-longitude:
@@ -127,7 +127,7 @@ Be aware that the EPSG code should be a 3D CRS, ie the elevation/height values s
 
 It is not possible to give a WKT string with the parameters, or any other way.
 
-## "bbox" (extent of the dataset)
+## `bbox` (extent of the dataset)
 
 While this can be extracted from the dataset itself, it is useful to store it. 
 It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
@@ -139,9 +139,9 @@ It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
 ```
 
 
-## "keywords"
+## `keywords`
 
-An array of keywords of type "string" may be listed:
+An array of keywords of type `string` may be listed:
 
 ```json
   "metadata": {
@@ -151,16 +151,16 @@ An array of keywords of type "string" may be listed:
 
 ## Other properties
 
-The following are all of type "string":
+The following are all of type `string`:
 
-  - "title"
-  - "abstract"
-  - "dataUrl"
-  - "metadataUrl"
-  - "dateOfCreation"
-  - "dateOfLastRevision"
-  - "dateOfPublication"
-  - "copyright"
+  - `title`
+  - `abstract`
+  - `dataUrl`
+  - `metadataUrl`
+  - `dateOfCreation`
+  - `dateOfLastRevision`
+  - `dateOfPublication`
+  - `copyright`
 
 It should be noticed that JSON does not have a date type, thus for all dates in a CityJSON document the following should be used: YYYY-MM-DD (as a string).
 
@@ -182,9 +182,9 @@ A City Object is a JSON object for which the type member’s value is one of the
 
 A City Object:
 
-  - must have one member with the name "geometry", whose value is an array containing 0 or more Geometry Objects.
-  - may have one member with the name "attributes", whose value is an object with the different attributes allowed by CityGML (these differ per City Object). 
-  - may have one member with the name "generic-attributes", whose value is any JSON object, or a JSON null value. This is used to add attributes not defined in the CityGML data model, and is the same as the 'generics' module of CityGML.
+  - must have one member with the name `geometry`, whose value is an array containing 0 or more Geometry Objects.
+  - may have one member with the name `attributes`, whose value is an object with the different attributes allowed by CityGML (these differ per City Object). 
+  - may have one member with the name `generic-attributes`, whose value is any JSON object, or a JSON null value. This is used to add attributes not defined in the CityGML data model, and is the same as the 'generics' module of CityGML.
 
 ```json
 "CityObjects": {
@@ -213,11 +213,11 @@ A City Object:
 
 ## Building, BuildingPart, and BuildingInstallation
 
-- A City Object of type "Building" may have a member "Parts", whose value is an array of the IDs of the City Objects of type "BuildingPart" it contains.
-- A City Object of type "Building" or "BuildingPart" may have a member "Installations", whose value is an array of the IDs of the City Objects of type "BuildingInstallation" it contains.
-- The geometry of both "Building" and "BuildingPart" can only be represented with these Geometry Objects: (1) Solid, (2) CompositeSolid, (3) MultiSurface.
-- The geometry of a "BuildingInstallation" object can be represented with any of the Geometry Objects.
-- A City Object of type "Building" or "BuildingPart" may have a member "address", whose value is a JSON object describing the address. One location (a MultiPoint) can be given, to for instance locate the front door inside the building.
+- A City Object of type `Building` may have a member `Parts`, whose value is an array of the IDs of the City Objects of type `BuildingPart` it contains.
+- A City Object of type `Building` or `BuildingPart` may have a member `Installations`, whose value is an array of the IDs of the City Objects of type `BuildingInstallation` it contains.
+- The geometry of both `Building` and `BuildingPart` can only be represented with these Geometry Objects: (1) `Solid`, (2) `CompositeSolid`, (3) `MultiSurface`.
+- The geometry of a `BuildingInstallation` object can be represented with any of the Geometry Objects.
+- A City Object of type `Building` or `BuildingPart` may have a member `address`, whose value is a JSON object describing the address. One location (a `MultiPoint`) can be given, to for instance locate the front door inside the building.
 
 ```json
 "CityObjects": {
@@ -258,7 +258,7 @@ A City Object:
 
 ## TINRelief
 
-- The geometry of a City Object of type "TINRelief" can only be of type "CompositeSurface".
+- The geometry of a City Object of type `TINRelief` can only be of type `CompositeSurface`.
 - CityJSON does not define a specific Geometry Object for a TIN (triangulated irregular network), it is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
 
 ```json
@@ -278,7 +278,7 @@ A City Object:
 
 ## WaterBody
 
-- The geometry of a City Object of type "WaterBody" can be of types: "MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
+- The geometry of a City Object of type `WaterBody` can be of types: `MultiLineString`, `MultiSurface`, `CompositeSurface`, `Solid`, or `CompositeSolid`.
 
 ```json
 "mygreatlake": {
@@ -300,7 +300,7 @@ A City Object:
 
 ## LandUse
 
-- The geometry of a City Object of type "LandUse" can be of type "MultiSurface" or "CompositeSurface".
+- The geometry of a City Object of type `LandUse` can be of type `MultiSurface` or `CompositeSurface`.
 
 ```json
 "oneparcel": {
@@ -318,7 +318,7 @@ A City Object:
 
 ## PlantCover
 
-- The geometry of a City Object of type "PlantCover" can be of type "MultiSurface" or "MultiSolid".
+- The geometry of a City Object of type `PlantCover` can be of type `MultiSurface` or `MultiSolid`.
 
 ```json
 "plants": {
@@ -343,7 +343,7 @@ A City Object:
 
 ## SolitaryVegetationObject
 
-- The geometry of a City Object of type "SolitaryVegetationObject" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
+- The geometry of a City Object of type `SolitaryVegetationObject` can be any of the following: `MultiPoint`, `MultiLineString`, `MultiSurface`, `CompositeSurface`, `Solid`, or `CompositeSolid`.
 - The concept of Implicit Geometries, as defined in CityGML, is not supported. An implicit geometry is a template, eg of certain species of a tree, that can be reused with different parameters to define its appearance.
 
 ```json
@@ -364,12 +364,12 @@ A City Object:
 
 ## CityFurniture
 
-- The geometry of a City Object of type "CityFurniture" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
+- The geometry of a City Object of type `CityFurniture` can be any of the following: `MultiPoint`, `MultiLineString`, `MultiSurface`, `CompositeSurface`, `Solid`, or `CompositeSolid`.
 
 
 ## GenericCityObject
 
-- The geometry of a City Object of type "CityFurniture" can be any of the following: "MultiPoint", MultiLineString", "MultiSurface", "CompositeSurface", "Solid", or "CompositeSolid".
+- The geometry of a City Object of type `GenericCityObject` can be any of the following: `MultiPoint`, `MultiLineString`, `MultiSurface`, `CompositeSurface`, `Solid`, or `CompositeSolid`.
 
 
 # Geometry Objects
@@ -392,20 +392,20 @@ A Geometry object is a JSON object for which the type member’s value is one of
 
 A Geometry object:
 
-  - must have one member with the name "lod", whose value is a number identifying the level-of-detail (LoD) of the geometry. This can be either an integer (following the CityGML standards), or a number following the [improved LoDs by TU Delft](https://www.citygml.org/ongoingdev/tudelft-lods/)
-  - must have one member with the name "boundaries", whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers. An integer refers to the index in the "vertices" array of the CityJSON object, and it is 0-based (ie the first element in the array has the index "0", the second one "1").
-  - may have one member "semantics", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is a string, and the values allowed are depended on the CityObject (see below).
-  - may have one member "material", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is an integer referring to the material used (see below).
-  - may have one member "texture", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is explained below.
+  - must have one member with the name `lod`, whose value is a number identifying the level-of-detail (LoD) of the geometry. This can be either an integer (following the CityGML standards), or a number following the [improved LoDs by TU Delft](https://www.citygml.org/ongoingdev/tudelft-lods/)
+  - must have one member with the name `boundaries`, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers. An integer refers to the index in the `vertices` array of the CityJSON object, and it is 0-based (ie the first element in the array has the index `0`, the second one `1`).
+  - may have one member `semantics`, whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is a string, and the values allowed are depended on the CityObject (see below).
+  - may have one member `material`, whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is an integer referring to the material used (see below).
+  - may have one member `texture`, whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is explained below.
   - must not have other members.
 
 Observe that there is __no__ Geometry Object for MultiGeometry. 
-Instead, for the "geometry" member of a CityObject, the different geometries may be enumerated in the array (all with the same value for the member "lod").
+Instead, for the `geometry` member of a CityObject, the different geometries may be enumerated in the array (all with the same value for the member `lod`).
 
 
 ## The coordinates of the vertices
 
-A CityJSON must have one member named "vertices", whose value is an array of coordinates of each vertex of the city model. 
+A CityJSON must have one member named `vertices`, whose value is an array of coordinates of each vertex of the city model. 
 Their position in this array (0-based) is used to represent the Geometric Objects.
 
   - the array of vertices may be empty.
@@ -427,11 +427,11 @@ Their position in this array (0-based) is used to represent the Geometric Object
 
 ## Arrays to represent boundaries
 
-- A MultiPoint has an array with the indices of the vertices; this array can be empty.
-- A MultiLineString has an array of arrays, each containing the indices of a LineString
-- A MultiSurface, or a CompositeSurface, has an array containing surfaces, each surface is modelled by an array of array, the first array being the exterior boundary of the surface, and the others the interior boundaries.
-- A Solid has an array of shells, the first array being the exterior shell of the Solid, and the others the interior shells. Each shell has an array of surfaces, modelled in the exact same way as a MultiSurface/CompositeSurface.
-- A MultiSolid, or a CompositeSolid, has an array containing Solids, each Solid is modelled as above.
+- A `MultiPoint` has an array with the indices of the vertices; this array can be empty.
+- A `MultiLineString` has an array of arrays, each containing the indices of a LineString
+- A `MultiSurface`, or a `CompositeSurface`, has an array containing surfaces, each surface is modelled by an array of array, the first array being the exterior boundary of the surface, and the others the interior boundaries.
+- A `Solid` has an array of shells, the first array being the exterior shell of the solid, and the others the interior shells. Each shell has an array of surfaces, modelled in the exact same way as a MultiSurface/CompositeSurface.
+- A `MultiSolid`, or a `CompositeSolid`, has an array containing Solids, each Solid is modelled as above.
 
 ```json
 {
@@ -504,41 +504,41 @@ Since surfaces are assigned a semantics, and not rings, the depth of an array is
 }
 ```
 
-Building, BuildingPart, and BuildingInstallation can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
+`Building`, `BuildingPart`, and `BuildingInstallation` can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
 
-  - "RoofSurface", 
-  - "GroundSurface", 
-  - "WallSurface",
-  - "ClosureSurface",
-  - "OuterCeilingSurface",
-  - "OuterFloorSurface",
-  - "Window",
-  - "Door".
+  - `RoofSurface`, 
+  - `GroundSurface`, 
+  - `WallSurface`,
+  - `ClosureSurface`,
+  - `OuterCeilingSurface`,
+  - `OuterFloorSurface`,
+  - `Window`,
+  - `Door`.
 
 For WaterBody:
 
-  - "WaterSurface",
-  - "WaterGroundSurface",
-  - "WaterClosureSurface".
+  - `WaterSurface`,
+  - `WaterGroundSurface`,
+  - `WaterClosureSurface`.
 
 
 # Transform Object (to compress the CityJSON)
 
 To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles).
-To use compression, a CityJSON object may have one member "transform", whose values are 2 mandatory JSON objects ("scale" and "translate"), both arrays with 3 values.
+To use compression, a CityJSON object may have one member `transform`, whose values are 2 mandatory JSON objects (`scale` and `translate`), both arrays with 3 values.
 
 The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
 
-If a CityJSON object has a member "transform", to obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the "vertices" member and:
+If a CityJSON object has a member `transform`, to obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the `vertices` member and:
 
     v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
     v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
     v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
 
-If the CityJSON file does not have a "transform" member, then the values of the vertices must be read as-is.
+If the CityJSON file does not have a `transform` member, then the values of the vertices must be read as-is.
 
 There is a software called [cityjson-compress](../software/cityjson-compress/) that will compress a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
-Both operation use a tolerance, which is given as "number-of-digits-after-the-dot-to-preserve".
+Both operation use a tolerance, which is given as `number-of-digits-after-the-dot-to-preserve`.
 
 
 ```json
@@ -557,9 +557,9 @@ Different LoDs can however have different textures/materials.
 
 The standard from the [Material Template Library format (MTL)](https://en.wikipedia.org/wiki/Wavefront_.obj_file#Material_template_library) is reused, which is used by the well-known [format Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
 
-  - An Appearance Object may have one member with the name "materials", whose value is an array of Material Objects.
-  - An Appearance Object may have one member with the name "textures", whose value is an array of Texture Objects.
-  - An Appearance Object may have one member with the name "vertex-texture", whose value is an array of coordinates of each so-called UV vertex of the city model.
+  - An Appearance Object may have one member with the name `materials`, whose value is an array of Material Objects.
+  - An Appearance Object may have one member with the name `textures`, whose value is an array of Texture Objects.
+  - An Appearance Object may have one member with the name `vertex-texture`, whose value is an array of coordinates of each so-called UV vertex of the city model.
 
 ```json
 "appearance": {
@@ -571,8 +571,8 @@ The standard from the [Material Template Library format (MTL)](https://en.wikipe
 
 ## Geometry Object having a material
 
-To store the material, a Geometry Object may have a member with value "material", whose value is an is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
-Each integer refers to the position (0-based) in the "materials" member of the "appearance" member of the CityJSON object.
+To store the material, a Geometry Object may have a member with value `material`, whose value is an is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
+Each integer refers to the position (0-based) in the `materials` member of the `appearance` member of the CityJSON object.
 
 In the following, the 6 surfaces representing a building get different materials, the roof and ground surfaces get the first material listed in the appearance, and the others get the second.
 
@@ -595,10 +595,10 @@ In the following, the 6 surfaces representing a building get different materials
 
 ## Geometry Object having a texture
 
-To store the textures of surfaces, a Geometry Object may have a member with value "texture", whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
+To store the textures of surfaces, a Geometry Object may have a member with value `texture`, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
 
-For each ring of each surface, the first value refers to the the position (0-based) in the "textures" member of the "appearance" member of the CityJSON object; this is to allow geometries having more than one textures.
-The other indices, refer to the UV position of the corresponding vertices (as listed in the "boundaries" member of the geometry).
+For each ring of each surface, the first value refers to the the position (0-based) in the `textures` member of the `appearance` member of the CityJSON object; this is to allow geometries having more than one textures.
+The other indices, refer to the UV position of the corresponding vertices (as listed in the `boundaries` member of the geometry).
 Each array representing a ring therefore has one more value than that to store the vertices.
 
 ```json
@@ -618,14 +618,14 @@ Each array representing a ring therefore has one more value than that to store t
 
 A Material Object:
 
-  - must have one member with the name "name", whose value is a string identifying the material.
+  - must have one member with the name `name`, whose value is a string identifying the material.
   - may have the following members:
-    1. "ambient" (ambient colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    1. "diffuse" (diffuse colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    1. "specular" (specular colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    1. "specular-diffuse" (the weight of the specular colour), whose value is a number between 0 and 1000
-    1. "illumination", whose value is an integer between 0 and 10
-    1. "transparency", whose value is a number between 0.0 and 1.0 (1.0 being completely opaque)
+    1. `ambient` (ambient colour), whose value is an array with 3 numbers between 0.0 and 1.0
+    1. `diffuse` (diffuse colour), whose value is an array with 3 numbers between 0.0 and 1.0
+    1. `specular` (specular colour), whose value is an array with 3 numbers between 0.0 and 1.0
+    1. `specular-diffuse` (the weight of the specular colour), whose value is a number between 0 and 1000
+    1. `illumination`, whose value is an integer between 0 and 10
+    1. `transparency`, whose value is a number between 0.0 and 1.0 (1.0 being completely opaque)
 
 ```json
 "materials": [
@@ -655,8 +655,8 @@ A Material Object:
 
 A Texture Object:
 
-  - must have one member with the name "type", whose value is a string with either "PNG" or "JPG" as value.
-  - must have one member with the name "image", whose value is a string with the name of the file. This file must in a folder named "appearances" located in the same folder as the CityJSON file.
+  - must have one member with the name `type`, whose value is a string with either `PNG` or `JPG` as value.
+  - must have one member with the name `image`, whose value is a string with the name of the file. This file must in a folder named `appearances` located in the same folder as the CityJSON file.
   
 ```json
 "textures": [
