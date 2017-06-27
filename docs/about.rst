@@ -2,6 +2,12 @@
 About
 =====
 
+
+.. image:: _static/logo-url-black.png
+   :alt: 3D geoinformation at TU Delft
+   :align: right
+   :width: 50%
+
 The CityJSON specifications and the accompanying software are developed and maintained the `3D geoinformation group at TUDelft <https://3d.bk.tudelft.nl>`_.
 
 For any questions/issues/errors, please either:

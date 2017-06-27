@@ -62,6 +62,7 @@ Content
 
    citygmlsupport
    specifications
+   validation
    software
    datasets
    about
