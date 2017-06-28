@@ -9,7 +9,7 @@ Which CityGML modules are supported?
 At this moment, CityJSON implements most of the data model.
 However, for the sake of simplicity and efficiency, some modules and features have been omitted.
 
-The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these(more details below):
+The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these (more details below):
 
 #. **Building**: everything is supported except LOD4 features (interior of buildings) and the concept of Terrain-Intersection-Curve (TIC)
 #. **CityFurniture**: benches, traffic lights, signs, etc. are all supported
