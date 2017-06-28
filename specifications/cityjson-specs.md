@@ -63,15 +63,15 @@ Furthermore, these characteristics are not supported:
 
 
 
-# CityJSON Model
+# CityJSON Object
 
-A CityJSON model represents one 3D city model of a given area. This model may contain features of different types, as defined in the CityGML data model.
+A CityJSON object represents one 3D city model of a given area, this model may contain features of different types, as defined in the CityGML data model.
 
-  - A CityJSON model is a JSON object.
-  - A CityJSON model must have 4 members: 
+  - A CityJSON object is a JSON object.
+  - A CityJSON object must have 4 members: 
     1. one member with the name `type`, whose value must be `CityModel`;
     1. one member with the name `version`, whose value must be a URL pointing to the CityJSON version;
-    1. one member with the name `CityObjects`. The value of this member is a collection of key-value pairs, where key is the ID of the object and value is a city object.
+    1. one member with the name `CityObjects`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object.
     1. one member with the name `vertices`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects.
   - A CityJSON may have one member with the name `metadata`, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
   - A CityJSON may have one member with the name `transform`, whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
