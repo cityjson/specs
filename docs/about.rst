@@ -8,7 +8,7 @@ About
    :align: right
    :width: 50%
 
-The CityJSON specifications and the accompanying software are developed and maintained the `3D geoinformation group at TUDelft <https://3d.bk.tudelft.nl>`_.
+The CityJSON specification and the accompanying software are developed and maintained by the `3D geoinformation group at TU Delft <https://3d.bk.tudelft.nl>`_.
 
 For any questions/issues/errors, please either:
 
