@@ -147,8 +147,8 @@ A City Object is a JSON object for which the type member’s value is one of the
 A City Object:
 
 - must have one member with the name "geometry", whose value is an array containing 0 or more Geometry Objects.
-- may have one member with the name "attributes", whose value is an object with the different attributes allowed by CityGML (these differ per City Object). 
-- may have one member with the name "generic-attributes", whose value is any JSON object, or a JSON null value. This is used to add attributes not defined in the CityGML data model, and is the same as the *Generics* module of CityGML.
+- may have one member with the name "attributes", whose value is an object with the different attributes allowed by CityGML. The attributes differ per City Object, and can be seen either in the `offical CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ or in the schema of CityJSON (:doc:`validation`). Any other attributes can be added with a JSON key-value pair ("owner" in the following is one such attribute), although it is not guaranteed that a parser will read them.
+
 
 .. code-block:: js
 
@@ -157,11 +157,9 @@ A City Object:
         "type": "Building", 
         "attributes": { 
           "measuredHeight": 22.3,
-          "roofType": "gable"
-        },
-        "generic-attributes": {
+          "roofType": "gable",
           "owner": "Elvis Presley"
-        },      
+        },
         "geometry": [
           {
             ...
@@ -370,11 +368,11 @@ A Geometry object:
   - may have one member "semantics", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is a string, and the values allowed are depended on the CityObject (see below).
   - may have one member "material", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is an integer referring to the material used (see below).
   - may have one member "texture", whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is explained below.
-  - must not have other members.
+
 
 .. note::
 
-  There is __no__ Geometry Object for MultiGeometry. 
+  There is **no** Geometry Object for MultiGeometry. 
   Instead, for the "geometry" member of a CityObject, the different geometries may be enumerated in the array (all with the same value for the member "lod").
 
 
