@@ -6,7 +6,9 @@
 CityJSON
 ========
 
-(version |release|)
+.. highlights::
+  (version |release|)
+
 
 .. code-block:: js
 
@@ -63,8 +65,8 @@ Content
    :maxdepth: 2
 
    citygmlsupport
-   specifications
-   validation
+   specs
+   schema
    software
    datasets
    about
