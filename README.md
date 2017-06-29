@@ -5,6 +5,6 @@ to view the future website:
 
     $ pip install Sphinx
     $ cd docs
-    $ make html
+    $ make dirhtml
 
-Then open file `/docs/_build/html/index.html` in Internet Explorer.
+Then open file `/docs/_build/dirhtml/index.html` in Internet Explorer.
