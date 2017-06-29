@@ -8,6 +8,8 @@ The same idea can be applied with CityJSON by using `JSON Schema <https://json-s
 CityJSON schema
 ---------------
 
-version |version| : :download:`[download cityjson.schema.json] <../schema/cityjson.schema.json>`
+version |version|: 
+
+- :download:`cityjson.schema.json <../schema/cityjson.schema.json>`
 
 

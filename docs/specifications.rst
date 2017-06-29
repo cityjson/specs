@@ -56,6 +56,8 @@ An empty CityJSON will look like this:
     "appearance": {}
   }
 
+.. note::
+  While the order of the member values of a CityJSON should preferably be as above, not all JSON generators allow one to do this, thus the order is not prescribed.
 
 --------
 Metadata

@@ -2,6 +2,24 @@
 Example datasets
 ================
 
-Different datasets showcasing how to store a 3D city model are available on the `GitHub repository of the project <https://github.com/tudelft3d/cityjson/blob/0.1/datasets/>`_.
+Dummy file showcasing the different possibilities
+-------------------------------------------------
 
-:download:`example.json <../example-datasets/dummy-values/example.json>`
+- :download:`example.json <../example-datasets/dummy-values/example.json>`
+
+
+Rotterdam (the Netherlands)
+---------------------------
+
+One part of the `open dataset of Rotterdam <http://rotterdamopendata.nl/dataset/rotterdam-3d-bestanden>`_ was converted to CityJSON.
+
+Only the geometry:
+
+- :download:`3-20-DELFSHAVEN.json (CityJSON) <../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.json>`
+- :download:`3-20-DELFSHAVEN.xml (CityGML) <../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.xml>`
+
+Two buildings randomly chosen (without attributes):
+
+- :download:`with textures (twobuildings_t.json) <../example-datasets/Rotterdam/two-buildings-textures/twobuildings_t.json>`
+- :download:`with materials/colours (twobuildings_m.json) <../example-datasets/Rotterdam/two-buildings-materials/twobuildings_m.json>`
+
