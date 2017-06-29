@@ -6,8 +6,7 @@
 CityJSON
 ========
 
-.. highlights::
-  (version |release|)
+(version |release|)
 
 
 .. code-block:: js
@@ -38,7 +37,7 @@ A CityJSON file represents both the geometry and the semantics of the city featu
 The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex (and thus rather frustrating to work with). 
 CityJSON aims at being easy-to-use, both for reading datasets, and for creating them.
 It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
-It was also designed to be compact (we have noticed a factor at least 4X, often 10X+), and friendly for web and mobile development.
+It was also designed to be compact (we have noticed a compression factor of at least 4X, often 10X+), and friendly for web and mobile development.
 
 A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
 This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
@@ -52,8 +51,8 @@ It also defines different standard levels of detail (LODs) for the 3D objects, w
 
 CityGML currently has 2 implementations:
 
-  1. the GML encoding is the "standard" one, and is defined in the `offical documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_
-  1. a database schema called `3DCityDB <http://www.3dcitydb.org>`_, which can be implemented both for `PostgreSQL <https://www.postgresql.org>`_ and `Oracle Spatial <https://www.oracle.com/database/spatial/index.html>`_.
+  #. the GML encoding is the "standard" one, and is defined in the `offical documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_
+  #. a database schema called `3DCityDB <http://www.3dcitydb.org>`_, which can be implemented both for `PostgreSQL <https://www.postgresql.org>`_ and `Oracle Spatial <https://www.oracle.com/database/spatial/index.html>`_.
 
 CityJSON can be considered as the third implementation of the CityGML data model.
 
