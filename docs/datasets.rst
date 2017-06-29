@@ -2,19 +2,6 @@
 Example datasets
 ================
 
+Different datasets showcasing how to store a 3D city model are available on the `GitHub repository of the project <https://github.com/tudelft3d/cityjson/blob/0.1/datasets/>`_.
 
-A dummy example
----------------
-
-with dummy data, do not try to visualise!
-
-
-Rotterdam
----------
-
-
-Munich
--------
-
-
-Bacon ipsum dolour sit amet porchetta beef turkey, bacon turducken boudin hamburger venison ball tip. Brisket pork loin bresaola short loin ground round leberkas pastrami tongue jerky cow turducken beef ribs. Pork ribeye landjaeger prosciutto pig venison tenderloin. Swine beef ribs kielbasa, porchetta tenderloin salami venison pork belly tail.
+:download:`example.json <../example-datasets/dummy-values/example.json>`

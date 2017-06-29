@@ -2,6 +2,12 @@
 Schema validation
 =================
 
+The validation of a CityGML file is done by validating it against the XSD files of CityGML.
+The same idea can be applied with CityJSON by using `JSON Schema <https://json-schema.org>`_.
+
+CityJSON schema
+---------------
+
+version |version| : :download:`[download cityjson.schema.json] <../schema/cityjson.schema.json>`
 
 
-Bacon ipsum dolour sit amet porchetta beef turkey, bacon turducken boudin hamburger venison ball tip. Brisket pork loin bresaola short loin ground round leberkas pastrami tongue jerky cow turducken beef ribs. Pork ribeye landjaeger prosciutto pig venison tenderloin. Swine beef ribs kielbasa, porchetta tenderloin salami venison pork belly tail.

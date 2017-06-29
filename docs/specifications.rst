@@ -79,8 +79,10 @@ For instance, for the WGS84 latitude-longitude:
 
 
 Be aware that the EPSG code should be a 3D CRS, ie the elevation/height values should be with respect to a specific datum.
-
 It is not possible to give a WKT string with the parameters, or any other way.
+
+.. note::
+  Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
 
 
 "bbox" (extent of the dataset)
