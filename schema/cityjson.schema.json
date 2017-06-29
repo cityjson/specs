@@ -1,5 +1,4 @@
 {
-  "id": "http://www.cityjson.org/schemas/cityjson.schema.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "CityJSON",
   "description": "CityJSON specifications",
