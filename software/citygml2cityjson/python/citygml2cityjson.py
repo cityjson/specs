@@ -25,7 +25,7 @@ def main():
     cm["type"] = "CityModel"
     cm["version"] = "http://www.cityjson.org/version/0.1"
     cm["metadata"] = {}
-    cm["metadata"]["crs"] = {'epsg': 1234}
+    cm["metadata"]["crs"] = {'epsg': 7415}
     cm["metadata"]["bbox"] = [4424648.79, 5482614.69, 310.19, 4424852.33, 5482813.83, 330.28] 
 
     cm["CityObjects"] = {}
@@ -93,39 +93,14 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
     else:
         dxlinks = None
 
-    # buildings = root.findall(".//{%s}Building" % ns['cgmlb'])
-    # for building in buildings:
-    #     lrs = building.findall(".//{%s}LinearRing" % ns['gml'])
-    #     for lr in lrs:
-    #         print "oring", lr.get("{%s}id" % ns['gml'])
-
-    # return 1
-
-    # #-- APPEARANCE
-    # buildings = root.findall(".//{%s}Building" % ns['cgmlb'])
-    # for building in buildings:
-    #     print "Building", building.get("{%s}id" % ns['gml'])
-    #     stexture = building.findall(".//{%s}surfaceDataMember" % ns['app'])
-    #     for each in stexture:
-    #         r = each.findall(".//{%s}imageURI" % ns['app'])
-    #         print r[0].text
-    #         # coords = each.findall(".//{%s}textureCoordinates" % ns['app'])
-    #         # tl = coords[0].text.split()
-    #         # print tl[:-2]
-    #         # print "iring:clear", coords[0].get("ring")
-    #         # coords = posList.text.split()
-
-
-
     buildings = root.findall(".//{%s}Building" % ns['cgmlb'])
     print "# Buildings:", len(buildings)
     for building in buildings:
         b = {'type': 'Building'}
         b["attributes"] = {}
-        b["generic-attributes"] = {}
         for child in building:
             if child.tag.endswith("Attribute"):
-                b['generic-attributes'][child.get("name")] = child[0].text
+                b['attributes'][child.get("name")] = child[0].text
             elif child.tag == "{%s}function" % ns['cgmlb']:
                 b['attributes']['function'] = child.text
             elif child.tag == "{%s}roofType" % ns['cgmlb']:
