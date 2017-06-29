@@ -21,9 +21,7 @@
       "attributes": { 
         "measuredHeight": 22.3,
         "roofType": "gable",
-        "yearOfConstruction": 1904
-      },
-      "generic-attributes": {
+        "yearOfConstruction": 1904,
         "owner": "Elvis Presley",
         "renovation": 1977
       },
