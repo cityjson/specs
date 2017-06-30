@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-==============================================================
-CityJSON: an easy-to-use and compact format for 3D city models
-==============================================================
+========
+CityJSON
+========
 
 (version |release|)
 
