@@ -21,7 +21,8 @@ A CityJSON object represents one 3D city model of a given area, this model may c
   #. one member with the name "type", whose value must be "CityModel";
   #. one member with the name "version", whose value must be a URL pointing to the CityJSON version;
   #. one member with the name "CityObjects". The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object.
-  #. one member with the name "vertices", whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects.
+  #. one member with the name "vertices", whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is basically reused.
+
 
 - A CityJSON may have one member with the name "metadata", whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
 - A CityJSON may have one member with the name "transform", whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
@@ -151,7 +152,7 @@ A City Object is a JSON object for which the type member’s value is one of the
 
 A City Object:
 
-- must have one member with the name "geometry", whose value is an array containing 0 or more Geometry Objects.
+- must have one member with the name "geometry", whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to have several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
 - may have one member with the name "attributes", whose value is an object with the different attributes allowed by CityGML. The attributes differ per City Object, and can be seen either in the `offical CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ or in the schema of CityJSON (:doc:`specs`). Any other attributes can be added with a JSON key-value pair ("owner" in the following is one such attribute), although it is not guaranteed that a parser will read them.
 
 
@@ -352,6 +353,7 @@ Geometry Objects
 ----------------
 
 CityJSON defines the following 3D geometric primitives, ie all of them are embedded in 3D space and thus have coordinates *(x, y, z)* for their vertices. 
+The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is reused, ie a geometry does not store the locations of its vertices, but points to a vertex in a list (in the CityJSON member object "vertices").
 
 As is the case in CityGML, only linear and planar primitives are allowed (no curves or parametric surfaces for instance).
 

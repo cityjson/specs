@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-CityJSON
-========
+==============================================================
+CityJSON: an easy-to-use and compact format for 3D city models
+==============================================================
 
 (version |release|)
 
@@ -56,6 +57,12 @@ CityGML currently has 2 implementations:
 
 CityJSON can be considered as the third implementation of the CityGML data model.
 
+----
+
+.. Note::       
+   CityJSON is not an official standard, and it is not part of the OGC standards (unlike its parent standard CityGML).
+   It is developed by the `3D geoinformation group at TU Delft <https://3d.bk.tudelft.nl>`_.
+
 
 Content
 -------
@@ -68,5 +75,5 @@ Content
    schema
    software
    datasets
-   about
+   contact
 

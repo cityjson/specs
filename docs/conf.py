@@ -90,10 +90,10 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
-    'logo': 'logo2.svg',
+    'logo': 'logo.svg',
     # 'logo_text_align': 'left-align',
     # 'body_text_align': 'left-align',
-    'description': 'a JSON-based implementation of CityGML, easy-to-use and compact',
+    'description': 'JSON-based implementation of CityGML, easy-to-use and compact',
     # 'logo_name': 'true',
     'github_user': 'tudelft3d',
     'github_repo': 'cityjson',
