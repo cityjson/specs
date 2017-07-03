@@ -1,7 +1,7 @@
 
 # CityJSON
 
-![](docs/_static/logo.jpg)
+![](docs/_static/logo.jpg | width=250)
 
 CityJSON is a format for encoding a subset of the [CityGML](https://www.citygml.org) data model using [JavaScript Object Notation (JSON)](http://json.org).
 A CityJSON file represents both the geometry and the semantics of the city features of a given area, eg buildings, roads, rivers, the vegetation, and the city furniture.
