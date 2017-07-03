@@ -22,6 +22,9 @@ The types of objects stored in CityGML are grouped into different modules, and C
 #. **Address**: everything is supported
 #. **Appearance**: textures and materials are supported, albeit only one per surface is allowed 
 
+.. note::
+  CityJSON has built-in support for the metadata of a dataset, while, oddly, CityGML does not.
+
 
 CityGML modules and characteristics not supported
 -------------------------------------------------
