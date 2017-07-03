@@ -102,7 +102,8 @@ html_theme_options = {
         'CityGML homepage': 'https://www.citygml.org',
         'JSON homepage': 'http://json.org',
     },
-    # 'font_family': 'Colibri/',
+    'font_family': 'helvetica',
+    'head_font_family': 'helvetica',
 }
 
 html_sidebars = {
