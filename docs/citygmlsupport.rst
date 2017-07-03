@@ -35,9 +35,9 @@ The following modules are **not** supported (but we're working on it):
 #. **Transportation**: roads, railways and squares
 #. **Tunnel**: tunnels, possibly split into parts
 
-Furthermore, these characteristics are not supported:
+Furthermore, these are not supported:
 
 #. no support for ImplicitGeometries
 #. no support for ADEs (or other extension mechanism)
-#. no support for the topological relationships that can be defined, eg  *relativeToTerrain* andrelativeToWater*
+#. no support for the topological relationships that can be defined, eg  *relativeToTerrain* and *relativeToWater*
 #. no support for arbitrary coordinate reference systems (CRSs). Only an `EPSG code <https://epsg.io>`_ can be used. Furthermore, all geometries in a given CityJSON must be using the same CRS.
