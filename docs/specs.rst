@@ -513,17 +513,17 @@ Transform Object (to compress the CityJSON file)
 ------------------------------------------------
 
 To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles).
-To use compression, a CityJSON object may have one member "transform", whose values are 2 mandatory JSON objects ("scale" and "translate"), both arrays with 3 values.
+To use compression, a CityJSON object may have one member ``"transform"``, whose values are 2 mandatory JSON objects (``"scale"`` and ``"translate"``), both arrays with 3 values.
 
 The `scheme of TopoJSON (called quantization) <https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms>`_ is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
 
-If a CityJSON object has a member "transform", to obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the "vertices" member and::
+If a CityJSON object has a member ``"transform"``, to obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the "vertices" member and::
 
     v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
     v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
     v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
 
-If the CityJSON file does not have a "transform" member, then the values of the vertices must be read as-is.
+If the CityJSON file does not have a ``"transform"`` member, then the values of the vertices must be read as-is.
 
 There is a software called `cityjson-compress <../software/cityjson-compress/>`_ that will compress a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
 Both operation use a tolerance, which is given as number-of-digits-after-the-dot-to-preserve.
@@ -547,9 +547,9 @@ Different LoDs can however have different textures/materials.
 
 The standard from the `Material Template Library format (MTL) <https://en.wikipedia.org/wiki/Wavefront_.obj_file#Material_template_library>`_ is reused, which is used by the well-known `format Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_.
 
-  - An Appearance Object may have one member with the name "materials", whose value is an array of Material Objects.
-  - An Appearance Object may have one member with the name "textures", whose value is an array of Texture Objects.
-  - An Appearance Object may have one member with the name "vertex-texture", whose value is an array of coordinates of each so-called UV vertex of the city model.
+  - An Appearance Object may have one member with the name ``"materials"``, whose value is an array of Material Objects.
+  - An Appearance Object may have one member with the name ``"textures"``, whose value is an array of Texture Objects.
+  - An Appearance Object may have one member with the name ``"vertex-texture"``, whose value is an array of coordinates of each so-called UV vertex of the city model.
 
 .. code-block:: js
 
@@ -562,8 +562,8 @@ The standard from the `Material Template Library format (MTL) <https://en.wikipe
 Geometry Object having a material
 *********************************
 
-To store the material, a Geometry Object may have a member with value "material", whose value is an is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
-Each integer refers to the position (0-based) in the "materials" member of the "appearance" member of the CityJSON object.
+To store the material, a Geometry Object may have a member with value ``"material"``, whose value is an is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
+Each integer refers to the position (0-based) in the ``"materials"`` member of the ``"appearance"`` member of the CityJSON object.
 
 In the following, the 6 surfaces representing a building get different materials, the roof and ground surfaces get the first material listed in the appearance, and the others get the second.
 
@@ -587,10 +587,10 @@ In the following, the 6 surfaces representing a building get different materials
 Geometry Object having a texture
 ********************************
 
-To store the textures of surfaces, a Geometry Object may have a member with value "texture", whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
+To store the textures of surfaces, a Geometry Object may have a member with value ``"texture"``, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
 
-For each ring of each surface, the first value refers to the the position (0-based) in the "textures" member of the "appearance" member of the CityJSON object; this is to allow geometries having more than one textures.
-The other indices, refer to the UV position of the corresponding vertices (as listed in the "boundaries" member of the geometry).
+For each ring of each surface, the first value refers to the the position (0-based) in the ``"textures"`` member of the ``"appearance"`` member of the CityJSON object; this is to allow geometries having more than one textures.
+The other indices, refer to the UV position of the corresponding vertices (as listed in the ``"boundaries"`` member of the geometry).
 Each array representing a ring therefore has one more value than that to store the vertices.
 
 .. code-block:: js
@@ -611,14 +611,15 @@ Material Object
 
 A Material Object:
 
-  - must have one member with the name "name", whose value is a string identifying the material.
+  - must have one member with the name ``"name"``, whose value is a string identifying the material.
   - may have the following members:
-    1. "ambient" (ambient colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    1. "diffuse" (diffuse colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    1. "specular" (specular colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    1. "specular-diffuse" (the weight of the specular colour), whose value is a number between 0 and 1000
-    1. "illumination", whose value is an integer between 0 and 10
-    1. "transparency", whose value is a number between 0.0 and 1.0 (1.0 being completely opaque)
+  
+    #. ``"ambient"`` (ambient colour), whose value is an array with 3 numbers between 0.0 and 1.0
+    #. ``"diffuse"`` (diffuse colour), whose value is an array with 3 numbers between 0.0 and 1.0
+    #. ``"specular"`` (specular colour), whose value is an array with 3 numbers between 0.0 and 1.0
+    #. ``"specular-diffuse"`` (the weight of the specular colour), whose value is a number between 0 and 1000
+    #. ``"illumination"``, whose value is an integer between 0 and 10
+    #. ``"transparency"``, whose value is a number between 0.0 and 1.0 (1.0 being completely opaque)
 
 .. code-block:: js
 
@@ -649,8 +650,8 @@ Texture Object
 
 A Texture Object:
 
-  - must have one member with the name "type", whose value is a string with either "PNG" or "JPG" as value.
-  - must have one member with the name "image", whose value is a string with the name of the file. This file must in a folder named "appearances" located in the same folder as the CityJSON file.
+  - must have one member with the name ``"type"``, whose value is a string with either "PNG" or "JPG" as value
+  - must have one member with the name ``"image"``, whose value is a string with the name of the file. This file must in a folder named ``"appearances"`` located in the same folder as the CityJSON file
   
 .. code-block:: js
 
@@ -669,7 +670,7 @@ A Texture Object:
 Vertices-texture Object
 ***********************
 
-- A Vertices-texture may have an empty array.
+- A Vertices-texture may have an empty array
 - One vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates of the vertex. The value of *u* and *v* must be between 0.0 and 1.0
 - vertices may be repeated
 
