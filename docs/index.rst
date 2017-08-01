@@ -43,8 +43,7 @@ It was also designed to be compact (we have noticed a compression factor of at l
 A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
 This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
 
-A JSON encoding of GML, huh?!?
-------------------------------
+.. rubric:: A JSON encoding of GML, huh?!?
 
 While its name otherwise implies, CityGML is not only a GML encoding, but is actually an open standardised data model to store digital 3D models of cities and landscapes. 
 It defines ways to describe most of the common 3D features found in cities, and the relationships between them. 
@@ -57,15 +56,13 @@ CityGML currently has 2 implementations:
 
 CityJSON can be considered as the third implementation of the CityGML data model.
 
-----
 
-.. Note::       
+.. note::       
    CityJSON is not an official standard, and it is not part of the OGC standards (unlike its parent standard CityGML).
    It is developed by the `3D geoinformation group at TU Delft <https://3d.bk.tudelft.nl>`_.
 
 
-Content
--------
+.. rubric:: Content
 
 .. toctree::
    :maxdepth: 2
