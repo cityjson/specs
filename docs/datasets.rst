@@ -22,6 +22,6 @@ Only the geometry:
 
 Two buildings randomly chosen (without attributes):
 
-- :download:`with textures (twobuildings_t.zip) <../example-datasets/Rotterdam/two-buildings-textures/twobuildings_t.zip>`
+- :download:`with textures (twobuildings_t.zip) <../example-datasets/Rotterdam/twobuildings_t.zip>`
 - :download:`with materials/colours (twobuildings_m.json) <../example-datasets/Rotterdam/two-buildings-materials/twobuildings_m.json>`
 
