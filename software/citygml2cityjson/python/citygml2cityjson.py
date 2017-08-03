@@ -117,7 +117,7 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                 g['boundaries'] = [thes]
                 thesem = []
                 for s in thes:
-                    thesem.append("Wall")
+                    thesem.append("WallSurface")
                 g['semantics'] = [thesem]
                 for v in thepts:
                     cm['vertices'].append(v)
@@ -134,7 +134,7 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                 g['boundaries'] = thes
                 thesem = []
                 for s in thes:
-                    thesem.append("Wall")
+                    thesem.append("WallSurface")
                 g['semantics'] = [thesem]
                 for v in thepts:
                     cm['vertices'].append(v)
