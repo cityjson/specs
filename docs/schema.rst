@@ -2,14 +2,17 @@
 Schema validation
 =================
 
-The validation of a CityGML file is done by validating it against the XSD files of CityGML.
-The same idea can be applied with CityJSON by using `JSON Schema <https://json-schema.org>`_.
+ `JSON Schema <https://json-schema.org>`_ is used to validate.
 
-CityJSON schema
----------------
+ To validate a file, either `install a validator <https://json-schema.org/implementations.html>`_ or use the `online validator <https://jsonschemalint.com/#/version/draft-04/markup/json>`_ and copy the schema in the left window.
+
+ The simplest way is perhaps using Python, follow the instruction `there <https://github.com/tudelft3d/cityjson/tree/master/schema>`_
+
+CityJSON schema download
+------------------------
 
 version |version|: 
 
-- :download:`cityjson.schema.json <../schema/cityjson.schema.json>`
+- :download:`download cityjson.schema.json <../schema/cityjson.schema.json>`
 
 
