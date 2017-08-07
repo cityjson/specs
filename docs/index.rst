@@ -72,5 +72,6 @@ CityJSON can be considered as the third implementation of the CityGML data model
    schema
    software
    datasets
+   changelog
    contact
 
