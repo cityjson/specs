@@ -3,8 +3,8 @@ CityGML support
 ===============
 
 
-Which CityGML modules are supported?
-------------------------------------
+CityGML modules and characteristics supported
+---------------------------------------------
 
 At this moment, CityJSON implements most of the data model.
 However, for the sake of simplicity and efficiency, some modules and features have been omitted.

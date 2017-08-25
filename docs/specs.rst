@@ -9,6 +9,7 @@ CityJSON specifications
 
 .. contents:: :local:
 
+
 ---------------
 CityJSON Object
 ---------------
@@ -132,6 +133,8 @@ The following are all of type ``"string"``:
   
   It should be noticed that JSON does not have a date type, thus for all dates in a CityJSON document the following should be used: ``"YYYY-MM-DD"`` (as a string).
 
+
+.. _specs_cityobjects:
 
 -----------------
 City Object types
@@ -525,7 +528,7 @@ If a CityJSON object has a member ``"transform"``, to obtain the real position o
 
 If the CityJSON file does not have a ``"transform"`` member, then the values of the vertices must be read as-is.
 
-There is a software called `cityjson-compress <../software/cityjson-compress/>`_ that will compress a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
+The program `cityjson-compress <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson-compress/>`_ compresses a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
 Both operation use a tolerance, which is given as number-of-digits-after-the-dot-to-preserve.
 
 
