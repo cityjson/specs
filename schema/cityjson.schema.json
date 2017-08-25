@@ -501,37 +501,48 @@
       "type": "object",
       "properties": {
         "name" : {"type": "string"},
-        "ambient": {
-          "type": "array",
-          "items": {"type": "number"},
-          "minItems": 3,    
-          "maxItems": 3
-        },
-        "diffuse": {
+        "ambientIntensity": {"type": "number"},
+        "diffuseColor": {
           "type": "array",
           "items": {"type": "number"},
           "minItems": 3,    
           "maxItems": 3          
         },
-        "specular": {
+        "emissiveColor": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 3,    
+          "maxItems": 3          
+        },
+        "specularColor": {
           "type": "array",
           "items": {"type": "number"},
           "minItems": 3,    
           "maxItems": 3
         },
-        "specular-exponent": {"type": "number"},
-        "illumination": {"type": "integer"},
-        "transparency": {"type": "number"}
+        "shininess": {"type": "number"},
+        "transparency": {"type": "number"},
+        "isSmooth": {"type": "boolean"}
       },
-      "required": ["name"]
+      "required": ["name"],
+      "additionalProperties": false
     },
 
     "Texture": {
       "type": "object",
       "properties": {
         "type": { "enum": ["PNG", "JPG"] },
-        "image": {"type": "string"}
-      }
+        "image": {"type": "string"},
+        "wrapMode": { "enum": ["none", "wrap", "mirror", "clamp", "border"] },
+        "textureType": { "enum": ["unknown", "specific", "typical"] },
+        "borderColor": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 3,    
+          "maxItems": 4
+        }
+      },
+      "additionalProperties": false
     }
   },
 

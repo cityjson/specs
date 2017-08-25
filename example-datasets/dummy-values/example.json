@@ -174,21 +174,17 @@
     "materials": [
       {
         "name": "mymaterial1",
-        "ambient":  [0.9000, 0.1000, 0.7500],
-        "diffuse":  [0.9000, 0.1000, 0.7500],
-        "specular": [0.9000, 0.1000, 0.7500],
-        "specular-exponent": 10.0,
-        "illumination": 2,
+        "ambientIntensity": 0.7500,
+        "diffuseColor":  [0.9000, 0.1000, 0.7500],
+        "specularColor": [0.9000, 0.1000, 0.7500],
         "transparency": 1.0
       },
       {
         "name": "mymaterial2",
-        "ambient":  [0.9000, 0.9000, 0.7500],
-        "diffuse":  [0.9000, 0.9000, 0.7500],
-        "specular": [0.9000, 0.9000, 0.7500],
-        "specular-exponent": 60.0,
-        "illumination": 1,
-        "transparency": 0.5
+        "diffuseColor":  [0.9000, 0.1000, 0.7500],
+        "shininess": 0.0,
+        "transparency": 0.5,
+        "isSmooth": true      
       }            
     ]
   }
