@@ -624,6 +624,7 @@ A Material Object:
 
   - must have one member with the name ``"name"``, whose value is a string identifying the material.
   - may have the following members (their meaning is explained `there <http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material>`_):
+    
     #. ``"ambientIntensity"``, whose value is a number between 0.0 and 1.0  
     #. ``"diffuseColor"``, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
     #. ``"emissiveColor"``, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
@@ -664,7 +665,10 @@ Texture Object
 A Texture Object:
 
   - must have one member with the name ``"type"``, whose value is a string with either "PNG" or "JPG" as value
-  - must have one member with the name ``"image"``, whose value is a string with the name of the file. This file must in a folder named ``"appearances"`` located in the same folder as the CityJSON file
+  - must have one member with the name ``"image"``, whose value is a string with the name of the file. This file must be in a folder named ``"appearances"`` located in the same folder as the CityJSON file
+  - may have one member with the name ``"wrapMode"``, whose value can be any of the following: ``"none"``, ``"wrap"``, ``"mirror"``, ``"clamp"``, or ``"border"``.
+  - may have one member with the name ``"textureType"``, whose value can be any of the following: ``"unknown"``, ``"specific"``, or ``"typical"``.
+  - may have one member with the name ``"borderColor"``, whose value is an array with 4 numbers between 0.0 and 1.0 (RGBA colour)
   
 .. code-block:: js
 
@@ -675,7 +679,10 @@ A Texture Object:
     },
     {
       "type": "JPG",
-      "image": "myroof.jpg"
+      "image": "myroof.jpg",
+      "wrapMode": "wrap",
+      "textureType": "unknown",
+      "borderColor": [0.0, 0.1, 0.2, 1.0]
     }      
   ]
 
@@ -683,9 +690,13 @@ A Texture Object:
 Vertices-texture Object
 ***********************
 
-- A Vertices-texture may have an empty array
-- One vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates of the vertex. The value of *u* and *v* must be between 0.0 and 1.0
-- vertices may be repeated
+A Appearance Object may have one member named ``"vertices-texture"``, whose value is an array of the *(u,v)* coordinates of the vertices used for texturing surfaces.
+Their position in this array (0-based) is used by the ``"texture"`` member of the Geometry Objects.
+
+  - the array of vertices may be empty.
+  - one vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates. 
+  - The value of *u* and *v* must be between 0.0 and 1.0.
+  - vertices may be repeated
 
 
 .. code-block:: js
