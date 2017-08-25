@@ -497,6 +497,13 @@
       "required": ["type", "lod", "boundaries"]
     },
 
+    "Semantics": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["RoofSurface", "GroundSurface", "WallSurface", "ClosureSurface", "OuterCeilingSurface", "OuterFloorSurface", "Window", "Door", "WaterSurface", "WaterGroundSurface", "WaterClosureSurface"] }
+      }
+    },
+
     "Material": {
       "type": "object",
       "properties": {

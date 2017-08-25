@@ -156,7 +156,7 @@ A City Object is a JSON object for which the type member’s value is one of the
 A City Object:
 
 - must have one member with the name ``"geometry"``, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to have several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
-- may have one member with the name ``"attributes"``, whose value is an object with the different attributes allowed by CityGML. The attributes differ per City Object, and can be seen either in the `offical CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ or in the schema of CityJSON (:doc:`schema`). Any other attributes can be added with a JSON key-value pair ("owner" in the following is one such attribute), although it is not guaranteed that a parser will read them.
+- may have one member with the name ``"attributes"``, whose value is an object with the different attributes allowed by CityGML. The attributes differ per City Object, and can be seen either in the `official CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ or in the schema of CityJSON (:doc:`schema`). Any other attributes can be added with a JSON key-value pair ("owner" in the following is one such attribute), although it is not guaranteed that a parser will read them.
 
 
 .. code-block:: js
@@ -473,11 +473,16 @@ Arrays to represent boundaries
 
 
 
-Semantics
-*********
+Semantics Object
+****************
 
-Each surface of a Geometry Object can be assigned a semantics.
+A Semantics Object is a JSON representing the semantics of a surface, and may also represent other attributes of the surface (eg the slope of the roof, or the solar potential).
 Since surfaces are assigned a semantics, and not rings, the depth of an array is one less than the array for storing the boundaries, eg for the case above.
+
+A Semantic Object:
+  
+  - must have one member with the name ``"type"``, whose value is one of the allowed value. These depend on the City Object, see below.
+  - may have other attributes in the form of a JSON key-value pair 
 
 .. code-block:: js
 
@@ -485,11 +490,27 @@ Since surfaces are assigned a semantics, and not rings, the depth of an array is
     "type": "MultiSurface",
     "lod": 2,
     "boundaries": [
-      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4], [[0, 2, 3, 8]]
     ],
     "semantics": [
-      ["RoofSurface"], ["GroundSurface"], ["WallSurface"]
-    ],
+      {
+        "type": "RoofSurface",
+        "slope": 16.4,
+        "solar-potential": 5
+      },
+      {
+        "type": "WallSurface",
+        "type-paint": "gold paint"
+      },
+      {
+        "type": "RoofSurface",
+        "slope": 36.4,
+        "solar-potential": 2
+      },
+      {
+        "type": "GroundSurface"
+      }
+    ]
   }
 
 
@@ -504,7 +525,7 @@ Since surfaces are assigned a semantics, and not rings, the depth of an array is
 - ``"Window"``,
 - ``"Door"``.
 
-For WaterBody:
+For ``"WaterBody"``:
 
 - ``"WaterSurface"``,
 - ``"WaterGroundSurface"``,
@@ -582,9 +603,6 @@ In the following, the 6 surfaces representing a building get different materials
     "lod": 2,
     "boundaries": [
       [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
-    ],
-    "semantics": [
-      ["RoofSurface", "GroundSurface", "WallSurface", "WallSurface", "WallSurface", "WallSurface"]
     ],
     "material": [
       [0, 0, 1, 1, 1, 1]
