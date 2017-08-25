@@ -41,3 +41,4 @@ Furthermore, these are not supported:
 #. no support for ADEs (or other extension mechanism)
 #. no support for the topological relationships that can be defined, eg  *relativeToTerrain* and *relativeToWater*
 #. no support for arbitrary coordinate reference systems (CRSs). Only an `EPSG code <https://epsg.io>`_ can be used. Furthermore, all geometries in a given CityJSON must be using the same CRS.
+#. in CityGML most objects can have an ID (usually ``gml:id``), that is one Building can have an ID, but also each 3D primitive forming its geometry can have an ID. In CityJSON, only :ref:`specs_cityobjects` can have IDs, and each surface. 
