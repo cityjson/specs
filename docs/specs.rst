@@ -544,15 +544,20 @@ Both operation use a tolerance, which is given as number-of-digits-after-the-dot
 Appearance Object
 -----------------
 
-Only a subset of the Appearance module of CityGML is implemented, ie both textures and materials are supported, albeit only one texture and one material per surface is allowed, and only one side of a surface can have a texture.
-The CityGML concept of *themes* is thus not supported.
-Different LoDs can however have different textures/materials.
+Most of the Appearance module of CityGML is supported, and both textures and materials are supported. 
+The material is represented with the `X3D <http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material>`_ specifications, as is the case for CityGML.
+For the texture, the COLLADA is reused, as is the case for CityGML.
+However:
+  - the CityGML concept of *themes* is not supported, this means that only one texture and one material per surface is allowed, and only one side of a surface can have a texture. Different LoDs can however have different textures/materials.
+  - the CityGML class ``GeoreferencedTexture`` is not supported (this is used )
+  - the CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files.
+  - texture files have to be local and given in a relative position to the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
+  - the major difference is that in CityGML each Material/Texture object keeps a list of the primitives using it, while in CityJSON it is the opposite: if a primitive has a Material/Texture than it is stated with the primitive (with a link to it).
 
-The standard from the `Material Template Library format (MTL) <https://en.wikipedia.org/wiki/Wavefront_.obj_file#Material_template_library>`_ is reused, which is used by the well-known `format Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_.
-
-  - An Appearance Object may have one member with the name ``"materials"``, whose value is an array of Material Objects.
-  - An Appearance Object may have one member with the name ``"textures"``, whose value is an array of Texture Objects.
-  - An Appearance Object may have one member with the name ``"vertex-texture"``, whose value is an array of coordinates of each so-called UV vertex of the city model.
+An Appearance Object is a JSON object that
+  - may have one member with the name ``"materials"``, whose value is an array of Material Objects.
+  - may have one member with the name ``"textures"``, whose value is an array of Texture Objects.
+  - may have one member with the name ``"vertex-texture"``, whose value is an array of coordinates of each so-called UV vertex of the city model.
 
 .. code-block:: js
 
@@ -565,7 +570,7 @@ The standard from the `Material Template Library format (MTL) <https://en.wikipe
 Geometry Object having a material
 *********************************
 
-To store the material, a Geometry Object may have a member with value ``"material"``, whose value is an is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
+To store the material, a Geometry Object may have a member with the value ``"material"``, whose value is a hierarchy of arrays with integers (the depth depends on the Geometry object).
 Each integer refers to the position (0-based) in the ``"materials"`` member of the ``"appearance"`` member of the CityJSON object.
 
 In the following, the 6 surfaces representing a building get different materials, the roof and ground surfaces get the first material listed in the appearance, and the others get the second.
@@ -590,11 +595,14 @@ In the following, the 6 surfaces representing a building get different materials
 Geometry Object having a texture
 ********************************
 
-To store the textures of surfaces, a Geometry Object may have a member with value ``"texture"``, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers.
+To store the textures of surfaces, a Geometry Object may have a member with value ``"texture"``, whose value is a hierarchy of arrays with integers (the depth depends on the Geometry object).
 
-For each ring of each surface, the first value refers to the the position (0-based) in the ``"textures"`` member of the ``"appearance"`` member of the CityJSON object; this is to allow geometries having more than one textures.
-The other indices, refer to the UV position of the corresponding vertices (as listed in the ``"boundaries"`` member of the geometry).
-Each array representing a ring therefore has one more value than that to store the vertices.
+For each ring of each surface, the first value refers to the position (0-based) in the ``"textures"`` member of the ``"appearance"`` member of the CityJSON object.
+The other indices refer to the UV positions of the corresponding vertices (as listed in the ``"boundaries"`` member of the geometry).
+Each array representing a ring therefore has one more value than that to store its vertices.
+
+In the following, there are 6 surfaces representing a building and each get a texture.
+The first 5 refer to the first texture, and the last one to the second one.
 
 .. code-block:: js
 
@@ -605,7 +613,7 @@ Each array representing a ring therefore has one more value than that to store t
       [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
     ],
     "texture": [
-      [ [[0, 10, 23, 23, 11]], [[0, 124, 35, 56, 76]], [[0, 10, 11, 45, 54]], [[0, 13, 52, 66, 57]], [[0, 12, 23, 17, 46]], [[0, 453, 4540, 44, 57]] ]
+      [ [[0, 10, 23, 23, 11]], [[0, 124, 35, 56, 76]], [[0, 10, 11, 45, 54]], [[0, 13, 52, 66, 57]], [[0, 12, 23, 17, 46]], [[1, 453, 4540, 44, 57]] ]
     ]
   }        
 
@@ -615,35 +623,37 @@ Material Object
 A Material Object:
 
   - must have one member with the name ``"name"``, whose value is a string identifying the material.
-  - may have the following members:
-  
-    #. ``"ambient"`` (ambient colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    #. ``"diffuse"`` (diffuse colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    #. ``"specular"`` (specular colour), whose value is an array with 3 numbers between 0.0 and 1.0
-    #. ``"specular-diffuse"`` (the weight of the specular colour), whose value is a number between 0 and 1000
-    #. ``"illumination"``, whose value is an integer between 0 and 10
-    #. ``"transparency"``, whose value is a number between 0.0 and 1.0 (1.0 being completely opaque)
+  - may have the following members (their meaning is explained `there <http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material>`_):
+    #. ``"ambientIntensity"``, whose value is a number between 0.0 and 1.0  
+    #. ``"diffuseColor"``, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
+    #. ``"emissiveColor"``, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
+    #. ``"specularColor"``, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
+    #. ``"shininess"``, whose value is a number between 0.0 and 1.0
+    #. ``"transparency"``, whose value is a number between 0.0 and 1.0 (1.0 being completely transparent)
+    #. ``"isSmooth"``, whose value is a Boolean value, is defined in CityGML as "a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading)."
 
 .. code-block:: js
 
   "materials": [
     {
       "name": "roofandground",
-      "ambient":  [0.9000, 0.1000, 0.7500],
-      "diffuse":  [0.9000, 0.1000, 0.7500],
-      "specular": [0.9000, 0.1000, 0.7500],
-      "specular-exponent": 10.0,
-      "illumination": 2,
-      "transparency": 1.0
+      "ambientIntensity":  0.2000,
+      "diffuseColor":  [0.9000, 0.1000, 0.7500],
+      "emissiveColor": [0.9000, 0.1000, 0.7500],
+      "specularColor": [0.9000, 0.1000, 0.7500],
+      "shininess": 0.2,
+      "transparency": 0.5,
+      "isSmooth": false
     },
     {
       "name": "wall",
-      "ambient":  [0.9000, 0.9000, 0.7500],
-      "diffuse":  [0.9000, 0.9000, 0.7500],
-      "specular": [0.9000, 0.9000, 0.7500],
-      "specular-exponent": 60.0,
-      "illumination": 1,
-      "transparency": 0.5
+      "ambientIntensity":  0.4000,
+      "diffuseColor":  [0.1000, 0.1000, 0.9000],
+      "emissiveColor": [0.1000, 0.1000, 0.9000],
+      "specularColor": [0.9000, 0.1000, 0.7500],
+      "shininess": 0.0,
+      "transparency": 0.5,
+      "isSmooth": true
     }            
   ]
 
