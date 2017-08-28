@@ -20,7 +20,7 @@ The types of objects stored in CityGML are grouped into different modules, and C
 #. **WaterBody**: everything is supported
 #. **Generics**: everything is supported
 #. **Address**: everything is supported
-#. **Appearance**: textures and materials are supported, albeit only one per surface is allowed 
+#. **Appearance**: the CityGML concept of *themes* is not supported, this means that only one texture and one material per surface is allowed, and only one side of a surface can have a texture. Different LoDs can however have different textures/materials. The CityGML class ``GeoreferencedTexture`` is not supported. The CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files. Also, the texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
 
 .. note::
   CityJSON has built-in support for the metadata of a dataset, while, oddly, CityGML does not.

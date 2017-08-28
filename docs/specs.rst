@@ -36,7 +36,7 @@ The minimal valid CityJSON object is thus:
 
   {
     "type": "CityModel",
-    "version": "http://www.cityjson.org/version/0.1",
+    "version": "http://www.cityjson.org/version/0.2",
     "CityObjects": {},
     "vertices": []
   }
@@ -570,9 +570,9 @@ The material is represented with the `X3D <http://www.web3d.org/documents/specif
 For the texture, the COLLADA is reused, as is the case for CityGML.
 However:
   - the CityGML concept of *themes* is not supported, this means that only one texture and one material per surface is allowed, and only one side of a surface can have a texture. Different LoDs can however have different textures/materials.
-  - the CityGML class ``GeoreferencedTexture`` is not supported (this is used )
+  - the CityGML class ``GeoreferencedTexture`` is not supported. 
   - the CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files.
-  - texture files have to be local and given in a relative position to the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
+  - texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
   - the major difference is that in CityGML each Material/Texture object keeps a list of the primitives using it, while in CityJSON it is the opposite: if a primitive has a Material/Texture than it is stated with the primitive (with a link to it).
 
 An Appearance Object is a JSON object that
@@ -683,10 +683,10 @@ Texture Object
 A Texture Object:
 
   - must have one member with the name ``"type"``, whose value is a string with either "PNG" or "JPG" as value
-  - must have one member with the name ``"image"``, whose value is a string with the name of the file. This file must be in a folder named ``"appearances"`` located in the same folder as the CityJSON file
+  - must have one member with the name ``"image"``, whose value is a string with the name of the file. This file must be in a folder named ``"appearances"`` located in the same folder as the CityJSON file.
   - may have one member with the name ``"wrapMode"``, whose value can be any of the following: ``"none"``, ``"wrap"``, ``"mirror"``, ``"clamp"``, or ``"border"``.
   - may have one member with the name ``"textureType"``, whose value can be any of the following: ``"unknown"``, ``"specific"``, or ``"typical"``.
-  - may have one member with the name ``"borderColor"``, whose value is an array with 4 numbers between 0.0 and 1.0 (RGBA colour)
+  - may have one member with the name ``"borderColor"``, whose value is an array with 4 numbers between 0.0 and 1.0 (RGBA colour).
   
 .. code-block:: js
 

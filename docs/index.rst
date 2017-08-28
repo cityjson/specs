@@ -14,7 +14,7 @@ CityJSON
 
   {
     "type": "CityModel",
-    "version": "http://www.cityjson.org/version/0.1",
+    "version": "http://www.cityjson.org/version/0.2",
     "metadata": {
       "crs": { "epsg": 7415 }
     },
