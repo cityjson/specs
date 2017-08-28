@@ -55,11 +55,10 @@ def write_obj():
         if 'materials' in cm['appearance']:
             for each in cm['appearance']['materials']:
                 foutm.write('newmtl ' + each['name'] + '\n')
-                foutm.write('Ka ' + str(each['ambient'][0]) + ' ' + str(each['ambient'][1]) + ' ' + str(each['ambient'][2])  + '\n')            
-                foutm.write('Kd ' + str(each['diffuse'][0]) + ' ' + str(each['diffuse'][1]) + ' ' + str(each['diffuse'][2])  + '\n')            
-                foutm.write('Ks ' + str(each['specular'][0]) + ' ' + str(each['specular'][1]) + ' ' + str(each['specular'][2])  + '\n')            
-                foutm.write('illum ' + str(each['illumination']) + '\n')            
-                foutm.write('Ns ' + str(each['specular-exponent']) + '\n')            
+                foutm.write('Ka ' + str(each['emissiveColor'][0]) + ' ' + str(each['emissiveColor'][1]) + ' ' + str(each['emissiveColor'][2])  + '\n')            
+                foutm.write('Kd ' + str(each['diffuseColor'][0]) + ' ' + str(each['diffuseColor'][1]) + ' ' + str(each['diffuseColor'][2])  + '\n')            
+                foutm.write('Ks ' + str(each['specularColor'][0]) + ' ' + str(each['specularColor'][1]) + ' ' + str(each['specularColor'][2])  + '\n')            
+                foutm.write('illum 2\n')            
                 foutm.write('\n')
         if 'textures' in cm['appearance']:
             for each in cm['appearance']['textures']:
