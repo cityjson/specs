@@ -48,7 +48,7 @@ An empty CityJSON will look like this:
 
   {
     "type": "CityModel",
-    "version": "http://www.cityjson.org/version/0.1",
+    "version": "http://www.cityjson.org/version/0.2",
     "metadata": {},
     "transform": {
       "scale": [],
