@@ -356,7 +356,11 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["Solid"] },
-        "lod": {"type": "number"},
+        "lod": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 3.5
+        },
         "boundaries": {
           "type": "array",
           "items": {
@@ -381,7 +385,11 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["MultiSolid"] },
-        "lod": {"type": "number"},
+        "lod": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 3.5
+        },
         "boundaries": {
           "type": "array",
           "items": {
@@ -406,7 +414,11 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["CompositeSolid"] },
-        "lod": {"type": "number"},
+        "lod": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 3.5
+        },
         "boundaries": {
           "type": "array",
           "items": {
@@ -431,7 +443,11 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["MultiSurface"] },
-        "lod": {"type": "number"},
+        "lod": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 3.5
+        },
         "boundaries": {
           "type": "array",
           "items": {
@@ -453,7 +469,11 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["CompositeSurface"] },
-        "lod": {"type": "number"},
+        "lod": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 3.5
+        },
         "boundaries": {
           "type": "array",
           "items": {
@@ -472,7 +492,11 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["MultiLineString"] },
-        "lod": {"type": "number"},
+        "lod": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 3.5
+        },
         "boundaries": {
           "type": "array",
           "items": {
@@ -488,7 +512,11 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["MultiPoint"] },
-        "lod": {"type": "number"},
+        "lod": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 3.5
+        },
         "boundaries": {
            "type": "array",
            "items": {"type": "integer"}
@@ -579,7 +607,6 @@
           "minItems": 6,    
           "maxItems": 6    
         },
-        "cityjson-version": {"type": "string"},
         "keywords": {
           "type": "array",
           "items": {"type": "string"}
