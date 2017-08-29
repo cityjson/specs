@@ -99,7 +99,6 @@ int main(int argc, char *argv[]) {
       std::cout << "\t#" << s << std::endl;
   }
 
-
   //-- metadata
   tmp = jschema["properties"]["metadata"]["properties"];
   for (json::iterator it = j["metadata"].begin(); it != j["metadata"].end(); ++it) {
@@ -107,9 +106,39 @@ int main(int argc, char *argv[]) {
       std::cout << "WARNING: Metadata '" << it.key() << "' not CityJSON schema." << std::endl;
   }
 
+  //-- geometry/semantics arrays
+  // for (json::iterator it = j["CityObjects"].begin(); it != j["CityObjects"].end(); ++it) {
+  //   for (auto& g : it.value()["geometry"]) {
+  //     std::cout << g["type"] << std::endl;
+  //     std::vector<int> c;
+  //     if (g["type"] == "Solid") {
+  //       for (auto& shell : g["boundaries"]) {
+  //         for (auto& surface : shell) { 
+  //           // std::cout << surface << std::endl;
+  //           std::vector< std::vector<int> > t = surface;
+  //           c.push_back()
+  //         }
+  //       }
+  //       // for (auto& shell : g["semantics"]) {
+  //       //   for (auto& surface : shell) { 
+  //       //     // std::cout << surface << std::endl;
+  //       //     std::vector< std::vector<int> > t = surface;
+            
+  //       //   }
+  //       // }
+  //     }
+  //     // else if ( (g["type"] == "MultiSurface") || (g["type"] == "CompositeSurface") ) {
+  //     //   for (auto& surface : g["boundaries"]) { 
+  //     //     std::vector< std::vector<int> > t = surface;
+  //     //     write_surface(output, t);
+  //     //   }
+  //     // }
+  //   }
+  // }
+
+
   return 1;
 }
-
 
 bool is_valid_json_schema(json& j, json& jschema, std::stringstream& ss)
 {
