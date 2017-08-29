@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "CityJSON",
-  "description": "CityJSON specifications",
+  "title": "CityJSON v0.2",
+  "description": "CityJSON specifications v0.2",
   "type": "object",
 
   "definitions": {
