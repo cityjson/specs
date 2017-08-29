@@ -13,6 +13,10 @@ CityJSON schema download
 
 version |version|: 
 
-- :download:`download cityjson.schema.json <../schema/cityjson.schema.json>`
+- :download:`download cityjson-v02.schema.json <../schema/cityjson-v02.schema.json>`
+
+version 0.1:
+
+- :download:`download cityjson-v01.schema.json <../schema/cityjson-v01.schema.json>`
 
 
