@@ -372,7 +372,15 @@
             }
           }
         },
-        "semantics": {},
+        "semantics": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Semantics"
+            }
+          }
+        },
         "material": {},
         "texture": {}
       },
@@ -400,6 +408,18 @@
                   "type": "array",
                   "items": {"type": "integer"}
                 }
+              }
+            }
+          }
+        },
+        "semantics": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Semantics"
               }
             }
           }
@@ -432,6 +452,18 @@
               }
             }
           }
+        },
+        "semantics": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Semantics"
+              }
+            }
+          }
         }
       },
       "required": ["type", "lod", "boundaries"]
@@ -456,7 +488,12 @@
             }
           }
         },
-        "semantics": {},
+        "semantics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Semantics"
+          }
+        },
         "material": {},
         "texture": {}        
       },
@@ -481,9 +518,15 @@
                 "items": {"type": "integer"}
             }
           }
+        },
+        "semantics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Semantics"
+          }
         }
       },        
-    "required": ["type", "lod", "boundaries"]
+      "required": ["type", "lod", "boundaries"]
     },
 
     "MultiLineString": {
