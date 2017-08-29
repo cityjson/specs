@@ -484,6 +484,8 @@ A Semantic Object:
   - must have one member with the name ``"type"``, whose value is one of the allowed value. These depend on the City Object, see below.
   - may have other attributes in the form of a JSON key-value pair 
 
+If one surface does not have any semantics, it must be represented with an empty object ``{}``; the third surface in the example below is one such example.
+
 .. code-block:: js
 
   {
@@ -502,11 +504,7 @@ A Semantic Object:
         "type": "WallSurface",
         "type-paint": "gold paint"
       },
-      {
-        "type": "RoofSurface",
-        "slope": 36.4,
-        "solar-potential": 2
-      },
+      {},
       {
         "type": "GroundSurface"
       }
