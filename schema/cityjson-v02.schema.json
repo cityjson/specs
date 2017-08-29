@@ -685,7 +685,8 @@
             "maxItems": 2
           }
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "required": ["type", "version", "CityObjects", "vertices"],
