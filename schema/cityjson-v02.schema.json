@@ -25,8 +25,7 @@
             "storeysHeightsAboveGround": { "type": "integer"},
             "storeysHeightsBelowGround": { "type": "integer"},
             "yearOfConstruction": { "type": "integer"},
-            "yearOfDemoltion": { "type": "integer"},
-            "address": {}
+            "yearOfDemolition": { "type": "integer"}
           }
         },
         "address": {
@@ -83,8 +82,7 @@
             "storeysHeightsAboveGround": { "type": "integer"},
             "storeysHeightsBelowGround": { "type": "integer"},
             "yearOfConstruction": { "type": "integer"},
-            "yearOfDemoltion": { "type": "integer"},
-            "address": {}
+            "yearOfDemolition": { "type": "integer"}
           }
         },
         "address": {
