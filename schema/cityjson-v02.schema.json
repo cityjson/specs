@@ -587,7 +587,8 @@
       "enum": ["CityModel"]
     },
     "version": {
-      "type": "string"
+      "type": "string",
+      "pattern": "http://www.cityjson.org/version/\\d.\\d"
     },
     "metadata": {
       "type": "object",
