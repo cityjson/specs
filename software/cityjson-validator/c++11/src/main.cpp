@@ -44,6 +44,12 @@ int main(int argc, char *argv[]) {
         std::cout << "WARNING: attributes '" << it.key() << "' not in CityGML schema (" << cotype << " #" << coit.key() << ")" << std::endl;
       }
     }
+    tmp = jschema["definitions"][cotype]["properties"]["address"]["properties"];
+    for (json::iterator it = coit.value()["address"].begin(); it != coit.value()["address"].end(); ++it) {
+      if (tmp.find(it.key()) == tmp.end()) {
+        std::cout << "WARNING: address attributes '" << it.key() << "' not in CityGML schema (" << cotype << " #" << coit.key() << ")" << std::endl;
+      }
+    }
   }
 
   //-- BuildingParts
