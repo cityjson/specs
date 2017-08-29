@@ -17,7 +17,6 @@ bool is_valid_json_schema(json& j, json& jschema, std::stringstream& ss);
 int main(int argc, char *argv[]) {
   const char* nameschema = (argc > 2) ? argv[2] : "../../../../schema/cityjson-v02.schema.json";
   std::ifstream input(nameschema);
-  std::cout << "Schema: " << nameschema << std::endl;
   json jschema;
   input >> jschema;
   
@@ -25,43 +24,83 @@ int main(int argc, char *argv[]) {
   const char* nameinput = (argc > 1) ? argv[1] : "/Users/hugo/temp/example2.json";
   std::ifstream input2(nameinput);
   input2 >> j;
+  std::cout << "Input file: " << nameinput << std::endl;
+  std::cout << "Schema: " << nameschema << std::endl << std::endl;
   std::stringstream ss;
   if (is_valid_json_schema(j, jschema, ss) == false) {
     std::cout << ss.str() << std::endl;
     return 1;
   }
+  std::cout << "File valid according to the schema." << std::endl;
 
-
-  //-- 2. More than just with the schema
-  std::cout << "---" << std::endl;
+  //-- 2. Checking mandatory CityGML attributes
+  std::cout << "---Mandatory attributes" << std::endl;
   json tmp;
-  
-  tmp = jschema["properties"]["metadata"]["properties"];
-  for (json::iterator it = j["metadata"].begin(); it != j["metadata"].end(); ++it) {
-    if (tmp.find(it.key()) == tmp.end()) 
-      std::cout << "Metadata " << it.key() << " not CityJSON" << std::endl;
-  }
-
-  // tmp = jschema["definitions"]["Building"]["properties"]["attributes"]["properties"];
   for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
     std::string cotype = coit.value()["type"];
     tmp = jschema["definitions"][cotype]["properties"]["attributes"]["properties"];
     for (json::iterator it = coit.value()["attributes"].begin(); it != coit.value()["attributes"].end(); ++it) {
       if (tmp.find(it.key()) == tmp.end()) {
-        std::cout << "Attributes '" << it.key() << "' not CityGML compliant." << std::endl;
-        std::cout << "\tCO: " << cotype << std::endl;
-      }
-    }
-    if (coit.value().count("Parts") > 0) {
-      for (auto& pid : coit.value()["Parts"]) {
-        if (j["CityObjects"].count(pid) == 0)
-        std::cout << pid << " doesnt exist." << std::endl;
+        std::cout << "WARNING: attributes '" << it.key() << "' not in CityGML schema (" << cotype << " #" << coit.key() << ")" << std::endl;
       }
     }
   }
 
-  //-- 3. "Conformance requirements"
-  std::cout << "Document is valid" << std::endl;
+  //-- BuildingParts
+  for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
+    if ( (coit.value()["type"] == "Building") && (coit.value().count("Parts") > 0) ){
+      for (std::string pid : coit.value()["Parts"]) {
+        if (j["CityObjects"].count(pid) == 0) {
+          std::cout << "ERROR: BuildingPart #" << pid << " is not present." << std::endl;
+          std::cout << "\t(Building #" << coit.key() << " references it.)" << std::endl;
+        }
+      }
+    }
+  }
+
+  //-- BuildingInstallation
+  for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
+    if ( (coit.value()["type"] == "Building") && (coit.value().count("Installations") > 0) ){
+      for (std::string pid : coit.value()["Installations"]) {
+        if (j["CityObjects"].count(pid) == 0) {
+          std::cout << "ERROR: BuildingInstallation #" << pid << " is not present." << std::endl;
+          std::cout << "\t(Building #" << coit.key() << " references it.)" << std::endl;
+        }
+      }
+    }
+  }
+
+  //-- Building Parts and Installations without parents
+  std::set<std::string> pis;
+  for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) 
+    if ( (coit.value()["type"] == "BuildingPart") || (coit.value()["type"] == "BuildingInstallation") ) 
+      pis.insert(coit.key());
+  for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
+    if (coit.value()["type"] == "Building") {
+      for (std::string pid : coit.value()["Parts"]) {
+        if (pis.count(pid) > 0)
+          pis.erase(pid);
+      }
+      for (std::string pid : coit.value()["Installations"]) {
+        if (pis.count(pid) > 0)
+          pis.erase(pid);
+      }
+    }
+  }
+  if (pis.size() > 0) {
+    std::cout << "ERROR: BuildingParts and BuildingInstallations have no parent Building:" << std::endl;
+    for (std::string s : pis)
+      std::cout << "\t#" << s << std::endl;
+  }
+
+
+  //-- metadata
+  tmp = jschema["properties"]["metadata"]["properties"];
+  for (json::iterator it = j["metadata"].begin(); it != j["metadata"].end(); ++it) {
+    if (tmp.find(it.key()) == tmp.end()) 
+      std::cout << "WARNING: Metadata '" << it.key() << "' not CityJSON schema." << std::endl;
+  }
+
   return 1;
 }
 
