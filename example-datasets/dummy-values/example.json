@@ -6,14 +6,11 @@
       "epsg": 7415
     },
     "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-    "title": "what is this dataset?",
-    "abstract": "what is this dataset?",
-    "dataUrl": "what is this dataset?",
-    "metadataUrl": "https://3d.bk.tudelft.nl/blabla",
-    "dateOfCreation": "2011-02-28",
-    "dateOfLastRevision": "2016-06-26",
-    "dateOfPublication": "2016-11-26",
-    "copyright": "CC0"
+    "datasetTitle": "what is this dataset?",
+    "datasetAbstract": "what is this dataset?",
+    "datasetReferenceDate": "2011-02-28",
+    "copyright": "CC0",
+    "pointOfContact": "Hugo Ledoux <h.ledoux@tudelft.nl>"
   },
   "CityObjects": {
   	"102636712": {
@@ -87,13 +84,8 @@
       "geometry": [{
         "type": "Solid",
         "lod": 2.1,
-          "boundaries": [
-            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
-          ],
-        "semantics": [
-          [
-            {"type": "RoofSurface"}
-          ]
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
         ]
       }]
     },
@@ -102,7 +94,7 @@
       "attributes": { 
         "measuredHeight": 223
       },
-      "Installations": ["801", "802"],
+      "Installations": ["801"],
       "geometry": [{
         "type": "MultiSurface",
         "lod": 2,
