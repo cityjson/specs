@@ -41,36 +41,57 @@ bool is_valid_building_pi_parent(json& j);
 
 
 int main(int argc, char *argv[]) {
-  const char* nameschema = (argc > 2) ? argv[2] : "../../../../schema/cityjson-v02.schema.json";
-  std::ifstream input(nameschema);
-  json jschema;
-  input >> jschema;
-  
+  bool isValid = true;
+  bool woWarnings = true;
   json j;
   const char* nameinput = (argc > 1) ? argv[1] : "/Users/hugo/temp/example2.json";
   std::ifstream input2(nameinput);
   input2 >> j;
   std::cout << "Input file: " << nameinput << std::endl;
-  std::cout << "Schema: " << nameschema << std::endl << std::endl;
-  std::stringstream ss;
-  if (is_valid_json_schema(j, jschema, ss) == false) {
-    std::cout << ss.str() << std::endl;
-    return 1;
+
+  //-- look for version and fetch the schema file
+  json jschema;
+  if (argc > 2) {
+    const char* nameschema = argv[2];
+    std::cout << "Schema: " << nameschema << std::endl << std::endl;
+    std::ifstream input(nameschema);
+    input >> jschema;
   }
-  bool isValid = true;
-  if (is_valid_building_parts(j) == false)
+  else {
+    std::string tmp = j["version"];
+    std::string version;
+    if (tmp.find("http://www.cityjson.org/version/") != std::string::npos) {
+      version = tmp.substr(tmp.size() - 3);
+      std::string nameschema = "../../../../schema/cityjson-v" + version.substr(0, 1) + version.substr(2) + ".schema.json";
+      std::cout << "Schema: " << nameschema << std::endl << std::endl;
+      std::ifstream input(nameschema);
+      input >> jschema;
+    }
+    else {
+      std::cout << "ERROR:   input file doesn't have a valid 'version'" << std::endl;  
+      isValid = false;
+    }
+  }
+
+  std::stringstream ss;
+  if ( (isValid == true) && (is_valid_json_schema(j, jschema, ss) == false) ){
+    std::cout << ss.str() << std::endl;
     isValid = false;
-  if (is_valid_building_installations(j) == false)
-    isValid = false;
-  if (is_valid_building_pi_parent(j) == false)
-    isValid = false;
-  if (is_valid_semantics(j) == false)
-    isValid = false;
-  bool woWarnings = true;
-  if (is_valid_metadata(j, jschema) == false)
-    woWarnings = false;
-  if (is_valid_citygml_attributes(j, jschema) == false)
-    woWarnings = false;
+  }
+  if (isValid == true) {
+    if (is_valid_building_parts(j) == false)
+      isValid = false;
+    if (is_valid_building_installations(j) == false)
+      isValid = false;
+    if (is_valid_building_pi_parent(j) == false)
+      isValid = false;
+    if (is_valid_semantics(j) == false)
+      isValid = false;
+    if (is_valid_metadata(j, jschema) == false)
+      woWarnings = false;
+    if (is_valid_citygml_attributes(j, jschema) == false)
+      woWarnings = false;
+  }
 
   std::cout << std::endl;
   if (isValid == true) {
