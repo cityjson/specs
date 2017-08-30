@@ -1,5 +1,5 @@
 
-- Nothing needs to be installed, this [JSON header-only library](https://github.com/nlohmann/json) is used
+- Nothing needs to be installed, both dependencies are in the `include` folder
 - C++11 is necessary
 
 To compile and run:
@@ -8,4 +8,4 @@ To compile and run:
     $ cd build
     $ cmake ..
     $ make
-    $ ./cityjson-info ../../../../example-datasets/Munich/LOD2_4424_5482_solid.json
+    $ ./cityjson-valschema ../../../../example-datasets/dummy/example2.json
