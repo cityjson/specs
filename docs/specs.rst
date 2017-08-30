@@ -127,6 +127,12 @@ Dataset Topic Category
 **********************
 A one-word category, the possible values are enumerated in the Table B.3.30 of the `ISO19115-1:2014 document <https://www.iso.org/standard/53798.html>`_
 
+.. code-block:: js
+
+  "metadata": {
+    "datasetTopicCategory": "planningCadastre"
+  }
+
 Present LoDs (levels-of-detail)
 *******************************
 An array of all the LoDs present in the file.
