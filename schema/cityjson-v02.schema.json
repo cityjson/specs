@@ -356,7 +356,7 @@
         "type": { "enum": ["Solid"] },
         "lod": {
           "type": "number",
-          "minimum": 1.0,
+          "minimum": 0.0,
           "maximum": 3.5
         },
         "boundaries": {
@@ -393,7 +393,7 @@
         "type": { "enum": ["MultiSolid"] },
         "lod": {
           "type": "number",
-          "minimum": 1.0,
+          "minimum": 0.0,
           "maximum": 3.5
         },
         "boundaries": {
@@ -434,7 +434,7 @@
         "type": { "enum": ["CompositeSolid"] },
         "lod": {
           "type": "number",
-          "minimum": 1.0,
+          "minimum": 0.0,
           "maximum": 3.5
         },
         "boundaries": {
@@ -475,7 +475,7 @@
         "type": { "enum": ["MultiSurface"] },
         "lod": {
           "type": "number",
-          "minimum": 1.0,
+          "minimum": 0.0,
           "maximum": 3.5
         },
         "boundaries": {
@@ -506,7 +506,7 @@
         "type": { "enum": ["CompositeSurface"] },
         "lod": {
           "type": "number",
-          "minimum": 1.0,
+          "minimum": 0.0,
           "maximum": 3.5
         },
         "boundaries": {
@@ -535,7 +535,7 @@
         "type": { "enum": ["MultiLineString"] },
         "lod": {
           "type": "number",
-          "minimum": 1.0,
+          "minimum": 0.0,
           "maximum": 3.5
         },
         "boundaries": {
@@ -555,7 +555,7 @@
         "type": { "enum": ["MultiPoint"] },
         "lod": {
           "type": "number",
-          "minimum": 1.0,
+          "minimum": 0.0,
           "maximum": 3.5
         },
         "boundaries": {
@@ -653,14 +653,25 @@
           "type": "array",
           "items": {"type": "string"}
         },        
-        "title": {"type": "string"},
-        "abstract": {"type": "string"},
-        "dataUrl": {"type": "string"},
-        "metadataUrl": {"type": "string"},
-        "dateOfCreation": {"type": "string"},
-        "dateOfLastRevision": {"type": "string"},
-        "dateOfPublication": {"type": "string"},
-        "copyright": {"type": "string"}
+        "datasetTitle": {"type": "string"},
+        "datasetReferenceDate": {"type": "string"},
+        "geographicLocation": {
+          "type": "string",
+          "description": "the name of the area for instance"
+        },
+        "datasetLanguage": {"type": "string"},
+        "datasetTopicCategory": {
+          "type": "string",
+          "description": "see Table B.3.30 in ISO19115 document"
+        },
+        "datasetAbstract": {"type": "string"},
+        "metadataDateStamp": {"type": "string"},
+        "pointOfContact": {"type": "string"},
+        "copyright": {"type": "string"},
+        "presentLoDs":  {
+          "type": "array",
+          "items": {"type": "number"}
+        }
       }
     },
     "CityObjects": {

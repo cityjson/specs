@@ -67,10 +67,11 @@ Metadata
 --------
 
 The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows.
+The mandatory members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``copyright``, and ``presentLoDs`` because they are useful in 3D in a city modelling context).
+
 
 ``"crs"`` (Coordinate reference system)
 ***************************************
-
 The CRS may be given with a JSON object that must contain one member ``"epsg"`` with as value the `EPSG code <https://epsg.io>`_, as an integer.
 For instance, for the WGS84 latitude-longitude:
 
@@ -83,7 +84,7 @@ For instance, for the WGS84 latitude-longitude:
   }
 
 
-Be aware that the EPSG code should be a 3D CRS, ie the elevation/height values should be with respect to a specific datum.
+Be aware that the EPSG code should be a three-dimensional CRS, ie the elevation/height values should be with respect to a specific datum.
 It is not possible to give a WKT string with the parameters, or any other way.
 
 .. note::
@@ -92,7 +93,6 @@ It is not possible to give a WKT string with the parameters, or any other way.
 
 ``"bbox"`` (extent of the dataset)
 **********************************
-
 While this can be extracted from the dataset itself, it is useful to store it. 
 It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
 
@@ -105,29 +105,50 @@ It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
 
 ``"keywords"``
 **************
-
 An array of keywords of type ``"string"`` may be listed:
 
 .. code-block:: js
 
   "metadata": {
-    "keywords": [ "energy", "solar potential" ]
+    "keywords": ["energy", "solar potential"]
   }
 
+Geographic Location
+*******************
+The name of an area or a city.
+
+.. code-block:: js
+
+  "metadata": {
+    "geographicLocation": "TU Delft campus"
+  }
+
+Dataset Topic Category
+**********************
+A one-word category, the possible values are enumerated in the Table B.3.30 of the `ISO19115-1:2014 document <https://www.iso.org/standard/53798.html>`_
+
+Present LoDs (levels-of-detail)
+*******************************
+An array of all the LoDs present in the file.
+
+.. code-block:: js
+
+  "metadata": {
+    "presentLoDs": ["1.2", "2.2", "2.3"]
+  }
 
 Other properties
 ****************
-
 The following are all of type ``"string"``:
 
-- ``"title"``
-- ``"abstract"``
-- ``"dataUrl"``
-- ``"metadataUrl"``
-- ``"dateOfCreation"``
-- ``"dateOfLastRevision"``
-- ``"dateOfPublication"``
+- ``"datasetTitle"``
+- ``"datasetReferenceDate"``
+- ``"datasetLanguage"``
+- ``"datasetAbstract"``
+- ``"metadataDateStamp"``
+- ``"pointOfContact"``
 - ``"copyright"``
+
 
 .. note::
   
