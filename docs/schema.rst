@@ -2,12 +2,6 @@
 Schema validation
 =================
 
- `JSON Schema <https://json-schema.org>`_ is used to validate.
-
- To validate a file, either `install a validator <https://json-schema.org/implementations.html>`_ or use the `online validator <https://jsonschemalint.com/#/version/draft-04/markup/json>`_ and copy the schema in the left window.
-
- The simplest way is perhaps using Python, follow the instruction `there <https://github.com/tudelft3d/cityjson/tree/master/schema>`_
-
 CityJSON schema download
 ------------------------
 
@@ -19,4 +13,18 @@ version 0.1:
 
 - :download:`download cityjson-v01.schema.json <../schema/cityjson-v01.schema.json>`
 
+
+Software to validate a file against the schema
+----------------------------------------------
+
+`cityjson-valschema <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson-valschema/c%2B%2B11>`_ validates a CityJSON against the schema and does extra validation, eg:
+
+- are the attributes of City Objects and metadata according to CityGML?
+- do the BuildingParts have a parent Building?
+- do the BuildingInstallation have a parent Building?
+- are the arrays for the boundaries and the semantics coherent? (same structure)
+
+Errors and warnings are returned to the user.
+
+`JSON Schema <https://json-schema.org>`_ is used to validate.
 
