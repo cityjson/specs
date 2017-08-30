@@ -9,3 +9,5 @@ To compile and run:
     $ cmake ..
     $ make
     $ ./cityjson-valschema ../../../../example-datasets/dummy/example2.json
+
+The appropriate version of the schema is read from the `version` of the input file and used to validate.    
