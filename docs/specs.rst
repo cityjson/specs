@@ -155,7 +155,6 @@ The following are all of type ``"string"``:
 - ``"pointOfContact"``
 - ``"copyright"``
 
-
 .. note::
   
   It should be noticed that JSON does not have a date type, thus for all dates in a CityJSON document the following should be used: ``"YYYY-MM-DD"`` (as a string).
@@ -212,9 +211,10 @@ A City Object:
 Building, BuildingPart, and BuildingInstallation
 ************************************************
 
-
 - A City Object of type ``"Building"`` may have a member ``"Parts"``, whose value is an array of the IDs of the City Objects of type ``"BuildingPart"`` it contains.
+- A City Object of type ``"BuildingPart"`` must have a parent ``"Building"`` referencing it, however, unlike in CityGML, a ``"BuildingPart"`` cannot be decomposed into a ``"BuildingPart"``.
 - A City Object of type ``"Building"`` or ``"BuildingPart"`` may have a member ``"Installations"``, whose value is an array of the IDs of the City Objects of type ``"BuildingInstallation"`` it contains.
+- A City Object of type ``"BuildingInstallation"`` must have a parent ``"Building"`` referencing it.
 - The geometry of both ``"Building"`` and ``"BuildingPart"`` can only be represented with these Geometry Objects: (1) ``"Solid"``, (2) ``"CompositeSolid"``, (3) ``"MultiSurface"``.
 - The geometry of a ``"BuildingInstallation"`` object can be represented with any of the Geometry Objects.
 - A City Object of type ``"Building"`` or ``"BuildingPart"`` may have a member ``"address"``, whose value is a JSON object describing the address. One location (a ``"MultiPoint"``) can be given, to for instance locate the front door inside the building.
@@ -239,7 +239,6 @@ Building, BuildingPart, and BuildingInstallation
         ...
       }
   }
-
 
 .. code-block:: js
 
@@ -312,7 +311,7 @@ LandUse
       "type": "MultiSurface",
       "lod": 1,
       "boundaries": [
-        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]] ]
+        [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
       ]
     }]    
   }
