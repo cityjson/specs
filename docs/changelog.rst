@@ -9,6 +9,8 @@ Changelog
 - Bridge, Tunnels and Transportation packages of CityGML
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
 
+----
+
 [0.2] - 2017-08-30
 ------------------
 
@@ -24,6 +26,7 @@ Changed
 - metadata now ISO19115 compliant
 - improved greatly the schema (more is validated) 
 
+----
 
 [0.1] - 2017-08-01 
 ------------------
