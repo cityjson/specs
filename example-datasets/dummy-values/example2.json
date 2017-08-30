@@ -6,13 +6,7 @@
       "epsg": 7415
     },
     "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-    "title": "what is this dataset?",
-    "abstract": "what is this dataset?",
-    "dataUrl": "what is this dataset?",
-    "metadataUrl": "https://3d.bk.tudelft.nl/blabla",
-    "dateOfCreation": "2011-02-28",
-    "dateOfLastRevision": "2016-06-26",
-    "dateOfPublication": "2016-11-26",
+    "datasetTitle": "what is this dataset?",
     "copyrights": "CC0"
   },
   "CityObjects": {
