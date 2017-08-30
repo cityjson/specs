@@ -4,3 +4,4 @@
 *.pyc
 /docs/_build
 /software/cityjson-validator/c++11/build
+/software/cityjson-valschema/c++11/build
