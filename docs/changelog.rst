@@ -6,7 +6,7 @@ Changelog
 
 [Unreleased]
 ------------
-- Bridge, Tunnels and Transportation packages of CityGML
+- Bridge, Tunnels, and Transportation modules of CityGML
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
 
 ----
