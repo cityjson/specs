@@ -27,7 +27,7 @@ def convert(fIn):
     lstFaces.append(map(int, fIn.next().split()[1:]))
   cm = {}
   cm["type"] = "CityModel"
-  cm["version"] = "http://www.cityjson.org/version/0.1"
+  cm["version"] = "http://www.cityjson.org/version/0.2"
   cm["CityObjects"] = {}
   cm["vertices"] = []
   for v in lstVertices:
