@@ -23,7 +23,7 @@ def main():
     #-- the CityModel JSON object
     cm = {}
     cm["type"] = "CityModel"
-    cm["version"] = "http://www.cityjson.org/version/0.1"
+    cm["version"] = "http://www.cityjson.org/version/0.2"
     cm["metadata"] = {}
     cm["metadata"]["crs"] = {'epsg': 7415}
     cm["metadata"]["bbox"] = [4424648.79, 5482614.69, 310.19, 4424852.33, 5482813.83, 330.28] 
@@ -134,8 +134,8 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                 g['boundaries'] = thes
                 thesem = []
                 for s in thes:
-                    thesem.append("WallSurface")
-                g['semantics'] = [thesem]
+                    thesem.append({'type': 'WallSurface'})
+                g['semantics'] = thesem
                 for v in thepts:
                     cm['vertices'].append(v)
                 b['geometry'].append(g)
