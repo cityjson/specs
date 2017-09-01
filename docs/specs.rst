@@ -181,31 +181,64 @@ A City Object is a JSON object for which the type member’s value is one of the
 
 A City Object:
 
-- must have one member with the name ``"geometry"``, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to have several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
-- may have one member with the name ``"attributes"``, whose value is an object with the different attributes allowed by CityGML. The attributes differ per City Object, and can be seen either in the `official CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ or in the schema of CityJSON (:doc:`schema`). Any other attributes can be added with a JSON key-value pair ("owner" in the following is one such attribute), although it is not guaranteed that a parser will read them.
-
+- must have one member with the name ``"geometry"``, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
+- may have one member with the name ``"attributes"``, whose value is an object with the different attributes allowed by CityGML. 
 
 .. code-block:: js
 
   "CityObjects": {
-      "id-1": {
-        "type": "Building", 
-        "attributes": { 
-          "measuredHeight": 22.3,
-          "roofType": "gable",
-          "owner": "Elvis Presley"
-        },
-        "geometry": [
-          {
-            ...
-          }        
-        ]
+    "id-1": {
+      "type": "Building", 
+      "attributes": { 
+        "measuredHeight": 22.3,
+        "roofType": "gable",
+        "owner": "Elvis Presley"
       },
-      "id-2": {
-        "type": "PlantCover", 
-        ...
-      }
+      "geometry": [{...}]
+    },
+    "id-2": {
+      "type": "PlantCover", 
+      ...
+    }
   }
+
+Attributes
+**********
+
+The attributes prescribed by CityGML differ per City Object, and can be seen either in the `official CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ or in the schema of CityJSON (:doc:`schema`). 
+The program `cityjson_valschema <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson-valschema>`_ returns WARNINGS when a City Object has attributes not in the CityGML list.
+In CityJSON any other attributes can be added with a JSON key-value pair ("owner" in the example above is one such attribute)---it is however not guaranteed that a parser will read them.
+
+All the City Objects have the following 3 possible attributes:
+  - ``"class"``
+  - ``"function"``
+  - ``"usage"``
+
+While CityGML does not prescribe the values for these, the `SIG 3D maintains a codelist <http://www.sig3d.de/codelists/standard/>`_ that can be used.
+In CityJSON, as can be seen in the schema, the values should be a string, thus either the name of the values should be used, or the code as a string:
+
+.. code-block:: js
+
+  "CityObjects": {
+    "id-1": {
+      "type": "LandUse", 
+      "attributes": { 
+        "function": "Industry and Business"
+      },
+      "geometry": [{...}]
+    },
+    "id-2": {
+      "type": "WaterBody", 
+      "attributes": { 
+        "class": "1010"
+      },
+      "geometry": [{...}]
+    }
+  }
+
+
+
+
 
 
 Building, BuildingPart, and BuildingInstallation
@@ -222,22 +255,22 @@ Building, BuildingPart, and BuildingInstallation
 .. code-block:: js
 
   "CityObjects": {
-      "id-1": {
-        "type": "Building", 
-        "attributes": { 
-          "roofType": "gable"
-        },
-        "Parts": ["id-56", "id-832"],
-        "Installations": ["mybalcony"]
+    "id-1": {
+      "type": "Building", 
+      "attributes": { 
+        "roofType": "gable"
       },
-      "id-56": {
-        "type": "BuildingPart", 
-        ...
-      },
-      "mybalcony": {
-        "type": "BuildingInstallation", 
-        ...
-      }
+      "Parts": ["id-56", "id-832"],
+      "Installations": ["mybalcony"]
+    },
+    "id-56": {
+      "type": "BuildingPart", 
+      ...
+    },
+    "mybalcony": {
+      "type": "BuildingInstallation", 
+      ...
+    }
   }
 
 .. code-block:: js
@@ -247,10 +280,9 @@ Building, BuildingPart, and BuildingInstallation
     "address": {
       "CountryName": "Canada",
       "LocalityName": "Chibougamau",
-      "ThoroughfareNumber": "4419",
+      "ThoroughfareNumber": "1",
       "ThoroughfareName": "rue de la Patate",
       "PostalCode": "H0H 0H0"
-
     },
   }
 
@@ -283,19 +315,18 @@ WaterBody
 .. code-block:: js
 
   "mygreatlake": {
-        "type": "WaterBody", 
-        "attributes": {
-          "usage": "leisure",
-        },
-        "geometry": [{
-          "type": "Solid",
-          "lod": 2,
-          "boundaries": [
-            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]] ]
-          ]
-        }]    
-      }               
-    }
+    "type": "WaterBody", 
+    "attributes": {
+      "usage": "leisure",
+    },
+    "geometry": [{
+      "type": "Solid",
+      "lod": 2,
+      "boundaries": [
+        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]] ]
+      ]
+    }]    
+  }               
 
 
 LandUse
@@ -498,6 +529,7 @@ Arrays to represent boundaries
   }
 
 
+.. _specs_semantics:
 
 Semantics Object
 ****************

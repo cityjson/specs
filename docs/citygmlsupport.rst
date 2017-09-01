@@ -23,7 +23,7 @@ The types of objects stored in CityGML are grouped into different modules, and C
 #. **Appearance**: the CityGML concept of *themes* is not supported, this means that only one texture and one material per surface is allowed, and only one side of a surface can have a texture. Different LoDs can however have different textures/materials. The CityGML class ``GeoreferencedTexture`` is not supported. The CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files. Also, the texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
 
 .. note::
-  CityJSON has built-in support for the metadata of a dataset, while, oddly, CityGML does not.
+  CityJSON has built-in support for the metadata of a dataset, while, surprisingly, CityGML does not.
 
 
 CityGML modules and characteristics not supported
@@ -41,4 +41,4 @@ Furthermore, these are not supported:
 #. no support for ADEs (or other extension mechanism)
 #. no support for the topological relationships that can be defined, eg  *relativeToTerrain* and *relativeToWater*
 #. no support for arbitrary coordinate reference systems (CRSs). Only an `EPSG code <https://epsg.io>`_ can be used. Furthermore, all geometries in a given CityJSON must be using the same CRS.
-#. in CityGML most objects can have an ID (usually ``gml:id``), that is one Building can have an ID, but also each 3D primitive forming its geometry can have an ID. In CityJSON, only :ref:`specs_cityobjects` can have IDs, and each surface. 
+#. in CityGML most objects can have an ID (usually ``gml:id``), that is one Building can have an ID, but also each 3D primitive forming its geometry can have an ID. In CityJSON, only :ref:`specs_cityobjects` can have IDs, and each :ref:`specs_semantics`. 
