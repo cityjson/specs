@@ -26,8 +26,14 @@ int main(int argc, const char * argv[]) {
   input >> j;
 
   std::cout << "Printing (some) information about:" << std::endl;
-  std::cout << "  " << filename << std::endl;
+  std::cout << "  " << filename << std::endl << std::endl;
 
+  //-- CityJSON version
+  std::string tmp = j["version"];
+  std::string version;
+  version = tmp.substr(tmp.size() - 3);
+  std::cout << "CityJSON version: " << version << std::endl;
+  
   //-- CityObjects
   std::cout << "===== CityObjects =====" << std::endl;
   std::cout << "Total : " << j["CityObjects"].size() << std::endl;
@@ -74,9 +80,9 @@ int main(int argc, const char * argv[]) {
     std::cout << "  none" << std::endl;
   else {
     if (j["appearance"].count("textures") > 0)
-      std::cout << "  textures" << std::endl;
+      std::cout << "  textures: " << j["appearance"]["textures"].size() << std::endl;
     if (j["appearance"].count("materials") > 0)
-      std::cout << "  materials:" << j["appearance"]["materials"].size() << std::endl;    
+      std::cout << "  materials: " << j["appearance"]["materials"].size() << std::endl;    
   }
     
     
