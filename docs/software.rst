@@ -20,4 +20,4 @@ We have currently the following:
 Software reading and/or writing CityJSON
 ----------------------------------------
 
-  #. [val3dity](https://github.com/tudelft3d/val3dity): the branch 'v2' reads CityJSON as input and everything is supported
+  #. `val3dity <https://github.com/tudelft3d/val3dity>`_: the branch 'v2' reads CityJSON as input and everything is supported
