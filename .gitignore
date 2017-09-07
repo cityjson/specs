@@ -5,3 +5,9 @@
 /docs/_build
 /software/cityjson-validator/c++11/build
 /software/cityjson-valschema/c++11/build
+.DS_Store
+/software/cityjson-info/c++11/cityjson-info
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles
+Makefile
