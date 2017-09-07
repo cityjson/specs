@@ -542,6 +542,7 @@ A Semantic Object:
   - must have one member with the name ``"type"``, whose value is one of the allowed value. These depend on the City Object, see below.
   - may have other attributes in the form of a JSON key-value pair 
 
+Each surface of a Geometry Object must have one corresponding Semantic Object, and thus the "depth" of the nested arrays is different for different objects.
 If one surface does not have any semantics, it must be represented with an empty object ``{}``; the third surface in the example below is one such example.
 
 .. code-block:: js
@@ -569,6 +570,26 @@ If one surface does not have any semantics, it must be represented with an empty
     ]
   }
 
+.. code-block:: js
+
+  {
+    "type": "Solid",
+    "lod": 2.3,
+    "boundaries": [
+      [ [[10, 123, 322, 231]], [[24, 3, 34, 666]], [[10, 232, 2325, 44]] ]
+    ],    
+    "semantics": [
+      [
+        {
+          "type": "RoofSurface",
+          "slope": 16.4,
+          "solar-potential": 5
+        },
+        {},
+        {}
+      ]
+    ]
+  }
 
 ``"Building"``, ``"BuildingPart"``, and ``"BuildingInstallation"`` can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
 
