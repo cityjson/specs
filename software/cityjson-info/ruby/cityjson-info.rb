@@ -1,45 +1,79 @@
+#!/usr/bin/env ruby
+#  _____ _ _          __ _____ _____ _____     _     ___     
+# |     |_| |_ _ _ __|  |   __|     |   | |___|_|___|  _|___ 
+# |   --| |  _| | |  |  |__   |  |  | | | |___| |   |  _| . |
+# |_____|_|_| |_  |_____|_____|_____|_|___|   |_|_|_|_| |___|
+#             |___|                                          
+
+#   cityjson-info
+#   Created by Ken Arroyo Ohori on 07/09/2017.
+#   Copyright © 2017 Ken Arroyo Ohori. All rights reserved.
+
 require 'json'
+require 'set'
 require 'pp'
 
-test01file = File.read('test01ken.json')
-test01json = JSON.parse(test01file)
+ARGV.length >= 1 ? filename = ARGV[0] : filename = "../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.json"
+input = File.read(filename)
+j = JSON.parse(input)
 
-# Get all objects
-print "Getting all objects\n"
-pp test01json["CityObjects"]
+puts "Printing (some) information about:"
+puts "  " + filename + "\n"
 
-# Get all surfaces for visualisation
-print "Getting all surfaces for visualisation\n"
-test01json["CityObjects"].each do |key,value|
-	print "object " + key + ":\n"
-	if value["geometry"]["type"] == "MultiSurface" || value["geometry"]["type"] == "Solid" then
-		value["geometry"]["surfaces"].each do |surface|
-			print "\tsurface:\n"
-			surface.each do |polygon|
-				print "\t\tpolygon:\n"
-				polygon.each do |vertex|
-					print "\t\t\t" + test01json["vertices"][vertex].to_s + "\n"
-				end
-			end
+# CityJSON version
+version = j["version"][-3, 3]
+puts "CityJSON version: " + version
+
+# CityObjects
+puts "===== CityObjects ====="
+puts "Total : " + j["CityObjects"].length.to_s
+d = Set.new
+j["CityObjects"].each do |id, co|
+	d.add(co["type"])
+end
+puts "Types:"
+d.each do |each|
+	puts "  " + each.to_s
+end
+d.clear
+j["CityObjects"].each do |id, co|
+	co["geometry"].each do |g|
+		d.add(g["type"])
+	end
+end
+puts "Geometries present:"
+d.each do |each|
+	puts "  " + each.to_s
+end
+d.clear
+
+# metadata
+puts "===== Metadata ====="
+if !j.has_key?("metadata")
+	puts "  none"
+else
+	j["metadata"].each do |id, it|
+		if id == "crs" 
+			puts "  crs: EPSG:" + j["metadata"]["crs"]["epsg"].to_s
+		else
+			puts "  " + id
 		end
-	else
-		print "type " + value["geometry"]["type"] + " unsupported\n"
 	end
 end
 
-# Get all surfaces of object "102636712"
-print "Getting all surfaces of object 102636712\n"
-test01json["CityObjects"]["102636712"]["geometry"]["surfaces"].each do |surface|
-	print "\tsurface:\n"
-	surface.each do |polygon|
-		print "\t\t\t" + polygon.to_s + "\n"
-	end
-end
-test01json["CityObjects"]["102636712"]["properties"]["parts"].each do |part|
-	test01json["CityObjects"][part]["geometry"]["surfaces"].each do |surface|
-	print "\tsurface:\n"
-	surface.each do |polygon|
-		print "\t\t\t" + polygon.to_s + "\n"
-	end
-end
+# vertices
+puts "===== Vertices ====="
+puts "Total: " << j["vertices"].length.to_s
+
+# appearance
+puts "===== Appearance ====="
+if !j.has_key?("appearance")
+  puts "  none"
+else
+  if j["appearance"].has_key?("textures")
+    puts "  textures: " + j["appearance"]["textures"].length.to_s
+  end
+  if (j["appearance"].count("materials") > 0)
+    puts "  materials: " + j["appearance"]["materials"].length.to_s
+  end
 end
