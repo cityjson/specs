@@ -17,7 +17,7 @@ We have currently the following:
 - `cityjson-info <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson-info>`_ : displays some general information a CityJSON file; useful to learn to parse a CityJSON file.
 - `cityjson2obj <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson2obj>`_ : converts a CityJSON to an OBJ file (textures/materials are ignored in the C++, considered in the Python script)
 
-Software reading and/or writing CityJSON
-----------------------------------------
+Software supporting CityJSON
+----------------------------
 
-  #. `val3dity <https://github.com/tudelft3d/val3dity>`_: the branch 'v2' reads CityJSON as input and everything is supported
+  #. `val3dity <https://github.com/tudelft3d/val3dity>`_: validation of the geometric 3D primitives (the branch 'v2' reads CityJSON as input; everything is supported)
