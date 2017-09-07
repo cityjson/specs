@@ -20,7 +20,7 @@
 using json = nlohmann::json;
 
 int main(int argc, const char * argv[]) {
-  const char* filename = (argc > 1) ? argv[1] : "../../../../example-datasets/Munich/LOD2_4424_5482_solid.json";
+  const char* filename = (argc > 1) ? argv[1] : "../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.json";
   std::ifstream input(filename);
   json j;
   input >> j;
