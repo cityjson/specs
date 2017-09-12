@@ -93,6 +93,10 @@
         ]
       }]
     },
+    "2929": {
+      "type": "Building", 
+      "geometry": []
+    },     
     "tudelft": {
       "type": "Building", 
       "attributes": { 

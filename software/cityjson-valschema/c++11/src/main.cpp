@@ -93,6 +93,16 @@ int main(int argc, char *argv[]) {
       woWarnings = false;
   }
 
+  //-- unique keys for CO?
+  std::cout << "=====" << std::endl;
+  for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
+    std::cout << coit.key() << std::endl;
+    if (coit.key() == "2929")
+      std::cout << coit.value() << std::endl;
+  }
+  std::cout << "=====" << std::endl;
+
+
   std::cout << std::endl;
   if (isValid == true) {
     std::cout << "File is VALID";

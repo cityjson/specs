@@ -7,12 +7,13 @@
 # 
 #   cityjson-info.py
 #   Created by Hugo Ledoux on 14/06/2017.
-#   Copyright © 2017 Hugo Ledoux. All rights reserved.
+#   Copyright 2017 Hugo Ledoux. All rights reserved.
 # 
 
 import json
 
-fin = open('mycity.json')
+# fin = open('mycity.json')
+fin = open('/Users/hugo/projects/cityjson-new/example-datasets/dummy-values/example2.json')
 cm = json.loads(fin.read())
 
 print "CRS:", cm['metadata']['crs']['epsg']
@@ -23,6 +24,8 @@ for id in cm['CityObjects']:
     print "\t", id
 
 print "-"*10
+
+print cm['CityObjects']['2929']
 
 # list all BuildingParts    
 for id in cm['CityObjects']:
