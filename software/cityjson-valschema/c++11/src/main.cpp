@@ -20,6 +20,7 @@ __   ____ _| |___  ___| |__   ___ _ __ ___   __ _
 */
 
 #include <json-schema.hpp>
+#include "json/json.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -32,6 +33,7 @@ using nlohmann::json_schema_draft4::json_validator;
 
 static void loader(const json_uri &uri, json &schema);
 bool is_valid_json_schema(json& j, json& jschema, std::stringstream& ss);
+bool is_valid_duplicate_keys(const char* nameinput);
 bool is_valid_citygml_attributes(json& j, json& jschema);
 bool is_valid_metadata(json& j, json& jschema);
 bool is_valid_semantics(json& j);
@@ -44,7 +46,7 @@ int main(int argc, char *argv[]) {
   bool isValid = true;
   bool woWarnings = true;
   json j;
-  const char* nameinput = (argc > 1) ? argv[1] : "/Users/hugo/temp/example2.json";
+  const char* nameinput = (argc > 1) ? argv[1] : "../../../../example-datasets/dummy-values/example2.json";
   std::ifstream input2(nameinput);
   input2 >> j;
   std::cout << "Input file: " << nameinput << std::endl;
@@ -74,8 +76,14 @@ int main(int argc, char *argv[]) {
   }
 
   std::stringstream ss;
+  //-- validate the schema
   if ( (isValid == true) && (is_valid_json_schema(j, jschema, ss) == false) ){
     std::cout << ss.str() << std::endl;
+    isValid = false;
+  }
+  //-- check for duplicate keys, which is impossible with schema and/or my parsing library
+  if ( (isValid == true) && (is_valid_duplicate_keys(nameinput) == false) ){
+    std::cout << "ERROR:   Duplicate IDs (keys) for the City Objects." << std::endl;  
     isValid = false;
   }
   if (isValid == true) {
@@ -106,6 +114,18 @@ int main(int argc, char *argv[]) {
     std::cout << "" << std::endl;
 
   return 1;
+}
+
+
+bool is_valid_duplicate_keys(const char* nameinput) {
+  Json::CharReaderBuilder builder;
+  builder["rejectDupKeys"] = true;
+  JSONCPP_STRING errs;
+  Json::Value j;   // 'root' will contain the root value after parsing.
+  // const char* nameinput = "/Users/hugo/projects/cityjson-new/example-datasets/dummy-values/example3.json";
+  std::ifstream input(nameinput);
+  bool ok = parseFromStream(builder, input, &j, &errs);
+  return ok;
 }
 
 
