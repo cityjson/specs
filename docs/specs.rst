@@ -21,7 +21,7 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 
   #. one member with the name ``"type"``, whose value must be ``"CityModel"``;
   #. one member with the name ``"version"``, whose value must be a URL pointing to the CityJSON version;
-  #. one member with the name ``"CityObjects"``. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object.
+  #. one member with the name ``"CityObjects"``. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one dataset/file).
   #. one member with the name ``"vertices"``, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is basically reused.
 
 

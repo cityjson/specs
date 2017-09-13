@@ -23,6 +23,7 @@ Software to validate a file against the schema
 - do the BuildingParts have a parent Building?
 - do the BuildingInstallation have a parent Building?
 - are the arrays for the boundaries and the semantics coherent? (same structure)
+- are there duplicate keys (IDs) for the City Objects? If yes then an error is returned.
 
 Errors and warnings are returned to the user.
 
