@@ -1,0 +1,223 @@
+{
+  "type": "CityModel",
+  "version": "http://www.cityjson.org/version/0.2",
+  "metadata": {
+    "crs": { 
+      "epsg": 7415
+    },
+    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
+    "datasetTitle": "what is this dataset?",
+    "copyrights": "CC0"
+  },
+  "CityObjects": {
+  	"102636712": {
+      "type": "Building", 
+      "attributes": { 
+        "measuredHeight": 22.3,
+        "roofType": "gable",
+        "yearOfConstruction": 1904,
+        "owner": "Elvis Presley",
+        "renovation": 1977
+      },
+      "address": {
+        "CountryName": "Canada",
+        "LocalityName": "Chibougamau",
+        "ThoroughfareNumber": "666",
+        "ThoroughfareName": "rue du Diable",
+        "PostalCode": "H0H 0H0"
+      },
+      "Parts": ["2929", "RogerHouse"],
+      "geometry": [
+      {
+        "type": "Solid",
+        "lod": 1.1,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+        ],
+        "semantics": [
+          [
+            {
+              "type": "RoofSurface",
+              "slope": 33.4
+            }, 
+            {
+              "type": "RoofSurface",
+              "slope": 66.4
+            },
+            {},
+            {},
+            {
+              "type": "WallSurface",
+              "paint": "blue" 
+            },
+            {
+              "type": "WallSurface",
+              "paint": "red" 
+            }
+          ]
+        ],
+        "material": [
+          [0, 0, 1, 1, 1, 1]
+        ]
+      },
+      {
+        "type": "Solid",
+        "lod": 3.1,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ],
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ]          
+        ],
+        "texture": [
+          [ [[0, 0, 3, 2, 1]], [[0, 4, 5, 6, 7]], [[0, 0, 1, 5, 4]], [[0, 1, 2, 6, 5]], [[0, 2, 3, 7, 6]], [[0, 3, 0, 4, 7]] ],
+          [ [[0, 0, 3, 2, 1]], [[0, 4, 5, 6, 7]], [[0, 0, 1, 5, 4]], [[0, 1, 2, 6, 5]] ]                      
+        ]
+      }        
+    ]
+    },
+    "2929": {
+      "type": "BuildingPart", 
+      "geometry": [{
+        "type": "Solid",
+        "lod": 2.1,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+        ],
+        "semantics": [
+          [
+            {"type": "RoofSurface"},
+            {"type": "RoofSurface"},
+            {"type": "RoofSurface"},
+            {"type": "WallSurface"},
+            {"type": "WallSurface"}
+          ]
+        ]
+      }]
+    },
+    "2929": {
+      "type": "Building", 
+      "geometry": []
+    },     
+    "tudelft": {
+      "type": "Building", 
+      "attributes": { 
+        "measuredHeight": 22.3,
+        "roofType": "gable",
+        "yearOfConstruction": 1904
+      },
+      "geometry": []
+    },    
+    "itcanbeastringtoo": {
+      "type": "Building", 
+      "attributes": { 
+        "measuredHeight": 223
+      },
+      "Installations": ["801", "802"],
+      "geometry": [{
+        "type": "MultiSurface",
+        "lod": 2,
+        "boundaries": [ 
+           [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+        ]
+      }]
+    },
+    "801": {
+      "type": "BuildingInstallation", 
+      "attributes": { 
+        "function": "balcony"
+      },
+      "geometry": [{
+        "type": "MultiSurface",
+        "lod" : 2.2, 
+        "boundaries": [
+          [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] 
+        ]
+      }]
+    },
+    "myterrain01": {
+      "type": "TINRelief", 
+      "attributes": {
+        "yearAcquistion": 1976
+      },
+      "geometry": [{
+        "type": "CompositeSurface",
+        "lod": 2,
+        "boundaries": [
+           [[0, 3, 2]], [[4, 5, 6]], [[0, 1, 5]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
+        ]
+      }]    
+    },
+    "mycanal": {
+      "type": "WaterBody", 
+      "geometry": [{
+        "type": "CompositeSurface",
+        "lod": 1,
+        "boundaries": [
+          [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+        ]
+      }]    
+    },
+    "mylake": {
+      "type": "WaterBody", 
+      "attributes": {
+        "usage": "leisure",
+        "function": "leisure"
+      },
+      "geometry": [{
+        "type": "Solid",
+        "lod": 2,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+        ],
+        "semantics": [ 
+          [
+          {"type":"WaterSurface"},  {"type":"WaterGroundSurface"},  {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}
+          ]
+        ]
+      }]    
+    }               
+  },
+  "vertices": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [1.0, 1.0, 0.0],
+    [0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0],
+    [1.0, 0.0, 1.0],
+    [1.0, 1.0, 1.0],
+    [0.0, 1.0, 1.0]
+  ],
+  "appearance": {
+    "vertices-texture": [
+      [0.0, 0.5],
+      [1.0, 0.0],
+      [1.0, 1.0],
+      [0.0, 1.0]
+    ],
+    "textures": [
+      {
+        "type": "PNG",
+        "image": "myfacade.png"
+      },
+      {
+        "type": "JPG",
+        "image": "myroof.jpg"
+      }      
+    ],
+    "materials": [
+      {
+        "name": "mymaterial1",
+        "ambientIntensity": 0.7500,
+        "diffuseColor":  [0.9000, 0.1000, 0.7500],
+        "specularColor": [0.9000, 0.1000, 0.7500],
+        "transparency": 1.0
+      },
+      {
+        "name": "mymaterial2",
+        "diffuseColor":  [0.9000, 0.1000, 0.7500],
+        "shininess": 0.0,
+        "transparency": 0.5,
+        "isSmooth": true      
+      }            
+    ]
+  }
+}
