@@ -11,6 +11,15 @@ Changelog
 
 ----
 
+[0.3] - 2017-09-13
+------------------
+
+Added
+*****
+- utility cityjson-valschema now ensures that no two City Objects have the same ID/key
+
+----
+
 [0.2] - 2017-09-05
 ------------------
 
