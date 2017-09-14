@@ -116,8 +116,9 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                 thes = shells[0].get_array_surfaces(len(cm['vertices']))
                 g['boundaries'] = [thes]
                 thesem = []
-                for s in thes:
-                    thesem.append({'type': 'WallSurface'})
+                for each in shells[0]:
+                    t = {'type': each.get_semantics()}
+                    thesem.append(t)
                 g['semantics'] = [thesem]
                 for v in thepts:
                     cm['vertices'].append(v)
