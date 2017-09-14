@@ -117,7 +117,7 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                 g['boundaries'] = [thes]
                 thesem = []
                 for s in thes:
-                    thesem.append("WallSurface")
+                    thesem.append({'type': 'WallSurface'})
                 g['semantics'] = [thesem]
                 for v in thepts:
                     cm['vertices'].append(v)
@@ -140,7 +140,7 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                     cm['vertices'].append(v)
                 b['geometry'].append(g)
             cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
-            print "Building", building.get("{%s}id" % ns['gml'])
+            # print "Building", building.get("{%s}id" % ns['gml'])
 
     return 1
 
