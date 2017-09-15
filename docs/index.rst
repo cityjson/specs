@@ -51,7 +51,7 @@ It also defines different standard levels of detail (LODs) for the 3D objects, w
 
 CityGML currently has 2 implementations:
 
-  #. the GML encoding is the "standard" one, and is defined in the `official documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_
+  #. the GML encoding is the "standard" one, and is defined in the `offical documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_
   #. a database schema called `3DCityDB <http://www.3dcitydb.org>`_, which can be implemented both for `PostgreSQL <https://www.postgresql.org>`_ and `Oracle Spatial <https://www.oracle.com/database/spatial/index.html>`_.
 
 CityJSON can be considered as the third implementation of the CityGML data model.
