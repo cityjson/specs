@@ -116,15 +116,20 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                 thes = shells[0].get_array_surfaces(len(cm['vertices']))
                 g['boundaries'] = [thes]
                 thesem = []
+                hasSem = True
                 for each in shells[0]:
+                    if each.get_semantics() == "":
+                        hasSem = False
+                        break
                     t = {'type': each.get_semantics()}
                     thesem.append(t)
-                g['semantics'] = [thesem]
+                if hasSem == True:
+                    g['semantics'] = [thesem]
                 for v in thepts:
                     cm['vertices'].append(v)
                 b['geometry'].append(g)
             cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
-            print "Building", building.get("{%s}id" % ns['gml'])
+            print "[Solid]Building", building.get("{%s}id" % ns['gml'])
         else:
             for each in building.findall(".//{%s}MultiSurface" % ns['gml']):
                 g = {'type': 'MultiSurface'}
@@ -134,14 +139,20 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
                 thes = shell.get_array_surfaces(len(cm['vertices']))
                 g['boundaries'] = thes
                 thesem = []
-                for s in thes:
-                    thesem.append({'type': 'WallSurface'})
-                g['semantics'] = thesem
+                hasSem = True
+                for each in shell:
+                    if each.get_semantics() == "":
+                        hasSem = False
+                        break
+                    t = {'type': each.get_semantics()}
+                    thesem.append(t)
+                if hasSem == True:
+                    g['semantics'] = thesem
                 for v in thepts:
                     cm['vertices'].append(v)
                 b['geometry'].append(g)
             cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
-            # print "Building", building.get("{%s}id" % ns['gml'])
+            print "[MultiSolid]Building", building.get("{%s}id" % ns['gml'])
 
     return 1
 
