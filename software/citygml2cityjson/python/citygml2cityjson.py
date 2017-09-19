@@ -13,6 +13,7 @@ from gmltypes import Ring, Surface, Shell
 import json
 
 ns = {}
+dxlinks = {}
 bVerbose = False
 
 def main():
@@ -72,7 +73,7 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
             ns['xsi'] = "%s" % root.nsmap[key]
 
     #-- handling of (potential) xlinks
-    dxlinks = {}
+    global dxlinks
     if 'xlink' in ns:
         print "Oh no, the file might contain xlinks :/"
         print "Parsing whole file to find and store them."
@@ -93,6 +94,14 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
     else:
         dxlinks = None
 
+
+    # lsBuildings = []
+    # for each in root.iter():
+    #     if each.tag == ("{%s}Building" % ns['cgmlb']):
+    #         lsBuildings.append(each)
+    # print "#Buildings: ", len(lsBuildings)
+
+
     buildings = root.findall(".//{%s}Building" % ns['cgmlb'])
     print "# Buildings:", len(buildings)
     for building in buildings:
@@ -106,44 +115,77 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
             elif child.tag == "{%s}roofType" % ns['cgmlb']:
                 b['attributes']['roofType'] = child.text
         b['geometry'] = []
-        bsolids = building.findall(".//{%s}Solid" % ns['gml'])
-        if len(bsolids) != 0:
-            for each in bsolids:
-                g = {'type': 'Solid'}
-                g['lod'] = 2
-                shells = [Shell(each.find("{%s}exterior" % ns['gml']), dxlinks, ns)]
-                thepts = shells[0].get_array_points()
-                thes = shells[0].get_array_surfaces(len(cm['vertices']))
-                g['boundaries'] = [thes]
-                thesem = []
-                for s in thes:
-                    thesem.append({'type': 'WallSurface'})
-                g['semantics'] = [thesem]
-                for v in thepts:
-                    cm['vertices'].append(v)
-                b['geometry'].append(g)
+
+        xmlnode = building.find("./{%s}lod1MultiSurface" % ns['cgmlb'])
+        if (xmlnode != None):
+            process_lodXSolid(xmlnode, cm, b)
             cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
-            print "Building", building.get("{%s}id" % ns['gml'])
-        else:
-            for each in building.findall(".//{%s}MultiSurface" % ns['gml']):
-                g = {'type': 'MultiSurface'}
-                g['lod'] = 2
-                shell = Shell(each, dxlinks, ns)
-                thepts = shell.get_array_points()
-                thes = shell.get_array_surfaces(len(cm['vertices']))
-                g['boundaries'] = thes
-                thesem = []
-                for s in thes:
-                    thesem.append({'type': 'WallSurface'})
-                g['semantics'] = thesem
-                for v in thepts:
-                    cm['vertices'].append(v)
-                b['geometry'].append(g)
+            print "[lod1MultiSurface]Building", building.get("{%s}id" % ns['gml'])
+        xmlnode = building.find("./{%s}lod2MultiSurface" % ns['cgmlb'])
+        if (xmlnode != None):
+            process_lodXSolid(xmlnode, cm, b)
             cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
-            # print "Building", building.get("{%s}id" % ns['gml'])
+            print "[lod2MultiSurface]Building", building.get("{%s}id" % ns['gml'])
+        xmlnode = building.find("./{%s}lod1Solid" % ns['cgmlb'])
+        if (xmlnode != None):
+            process_lodXSolid(xmlnode, cm, b)
+            cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
+            print "[lod1Solid]Building", building.get("{%s}id" % ns['gml'])
+        xmlnode = building.find("./{%s}lod2Solid" % ns['cgmlb'])
+        if (xmlnode != None):
+            process_lodXSolid(xmlnode, cm, b)
+            cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
+            print "[lod2Solid]Building", building.get("{%s}id" % ns['gml'])
 
     return 1
 
+
+def process_lodXMultiSurface(xmlnode, cm, b):
+    for each in xmlnode.findall(".//{%s}MultiSurface" % ns['gml']):
+        g = {'type': 'MultiSurface'}
+        g['lod'] = 2
+        shell = Shell(each, dxlinks, ns)
+        thepts = shell.get_array_points()
+        thes = shell.get_array_surfaces(len(cm['vertices']))
+        g['boundaries'] = thes
+        thesem = []
+        hasSem = True
+        for each in shell:
+            if each.get_semantics() == "":
+                hasSem = False
+                break
+            t = {'type': each.get_semantics()}
+            thesem.append(t)
+        if hasSem == True:
+            g['semantics'] = thesem
+        for v in thepts:
+            cm['vertices'].append(v)
+        b['geometry'].append(g)
+
+
+
+def process_lodXSolid(xmlnode, cm, b):
+    for each in xmlnode.findall(".//{%s}Solid" % ns['gml']):
+        g = {'type': 'Solid'}
+        g['lod'] = 2
+        shells = [Shell(each.find("{%s}exterior" % ns['gml']), dxlinks, ns)]
+        thepts = shells[0].get_array_points()
+        thes = shells[0].get_array_surfaces(len(cm['vertices']))
+        g['boundaries'] = [thes]
+        thesem = []
+        hasSem = True
+        for each in shells[0]:
+            if each.get_semantics() == "":
+                hasSem = False
+                break
+            t = {'type': each.get_semantics()}
+            thesem.append(t)
+        if hasSem == True:
+            g['semantics'] = [thesem]
+        for v in thepts:
+            cm['vertices'].append(v)
+        b['geometry'].append(g)
+        
 
 def clean_xml_tag(tag):
     """Desc:  Method to clean a xml tag, so that the {} in the ns are removed

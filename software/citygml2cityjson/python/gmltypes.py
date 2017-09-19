@@ -90,6 +90,7 @@ class Surface:
     def __init__(self, oring=None):
         self.oring = oring #-- outer Ring
         self.irings = [] #-- list of inner Ring(s)
+        self.semantics = ""
     def get_gml_repr(self, ns):
         topnode = etree.Element('{%s}surfaceMember' % ns['gml'], nsmap=ns)
         polynode = etree.SubElement(topnode, '{%s}Polygon' % ns['gml'], nsmap=ns)
@@ -103,6 +104,14 @@ class Surface:
     def set_outer_ring(self, ring):
         assert(isinstance(ring, Ring))
         self.oring = ring
+    def set_semantics(self, sem):
+        i = sem.find("}")
+        if (i != -1):
+            sem = sem[i+1:]
+        # print sem
+        self.semantics = sem
+    def get_semantics(self):
+        return self.semantics
     def append_inner_ring(self, ring):
         assert(isinstance(ring, Ring))
         self.irings.append(ring)
@@ -188,6 +197,16 @@ class Shell:
             if link[0] == '#':
                 link = link[1:]
             polynode = self.dxlinks[link]
+            
+            curp = polynode.getparent()
+            while (True):
+                if ( (curp.tag.find("GroundSurface") == -1) and
+                     (curp.tag.find("WallSurface")   == -1) and
+                     (curp.tag.find("RoofSurface")   == -1) ):
+                    curp = curp.getparent()
+                else:
+                    break
+            surf.set_semantics(curp.tag)
         else:
             polynode = surfacenode.find(".//{%s}Polygon" % self.ns['gml'])
         self.parse_gml_polygon(polynode, surf)
