@@ -25,12 +25,26 @@
 using json = nlohmann::json;
 
 int main(int argc, const char * argv[]) {
-  const char* inputfile = (argc > 1) ? argv[1] : "../../../../example-datasets/Munich/LOD2_4424_5482_solid.json";
+  const char* inputfile = (argc > 1) ? argv[1] : "../../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.json";
   const char* d = (argc > 2) ? argv[2] : "3";
   int importantdigits = atoi(d);
+  std::cout << "Input file: " << inputfile << std::endl;
+  std::cout << "Number of digits kept after the dot: " << importantdigits << std::endl;
   std::ifstream input(inputfile);
+
+  //-- size input file
+  std::streampos sizei;
+  std::streampos begin, end;
+  begin = input.tellg();
+  input.seekg(0, std::ios::end);
+  end = input.tellg();
+  sizei = end - begin;
+  // std::cout << "size is: " << sizei << " bytes.\n";
+  input.seekg(0);
+  
   json j;
   input >> j;
+  input.close();
 
   //-- vertices
   std::vector<Point3> vertices;
@@ -65,23 +79,39 @@ int main(int argc, const char * argv[]) {
     if (each != -1)
       totalmerged++;
   }
+  std::cout << "---" << std::endl;
+  std::cout << "bbox min: (" << minx << ", " << miny << ", " << minz << ")" << std::endl;
   std::cout << "Vertices merged: " << totalmerged << std::endl;
 
   //-- update the indices
   for (auto& co : j["CityObjects"]) {
     for (auto& g : co["geometry"]) {
-      // TODO : write code for other geometric types
       if (g["type"] == "Solid") {
         for (auto& shell : g["boundaries"]) 
           for (auto& surface : shell) 
             for (auto& ring : surface) 
               for (auto& v : ring) 
                 if (newids[v] != -1) 
-                  v = newids[v]; //-- update the element in the json structure
+                  v = newids[v]; 
       }
+      else if ( (g["type"] == "MultiSurface") || (g["type"] == "CompositeSurface") ) {
+        for (auto& surface : g["boundaries"]) 
+          for (auto& ring : surface) 
+            for (auto& v : ring) 
+              if (newids[v] != -1) 
+                v = newids[v]; 
+      }
+      else if ( (g["type"] == "MultiSolid") || (g["type"] == "CompositeSolid") ) {
+        for (auto& solid : g["boundaries"]) 
+          for (auto& shell : solid) 
+            for (auto& surface : shell) 
+              for (auto& ring : surface) 
+                for (auto& v : ring) 
+                  if (newids[v] != -1) 
+                    v = newids[v];
+      }            
     }
   }
-
 
   //-- convert to int and write the transform
   std::vector< std::array<int, 3> > vvv;
@@ -99,9 +129,20 @@ int main(int argc, const char * argv[]) {
   std::size_t found = s.find(".json");
   if (found != std::string::npos) {
     s.insert(found, ".compress");
-    std::cout << s << std::endl;
+    std::cout << "File saved: " << s << std::endl;
     std::ofstream o(s);
     o << j << std::endl;
+
+    //-- size output file
+    std::ifstream outputfile(s);
+    std::streampos sizeo;
+    begin = outputfile.tellg();
+    outputfile.seekg(0, std::ios::end);
+    end = outputfile.tellg();
+    sizeo = end - begin;
+    // std::cout << "size is: " << sizeo << " bytes.\n";
+    outputfile.close();
+    std::cout << "Compression factor: " << float(sizei)/float(sizeo) << std::endl;
   }
       
   return 0;
