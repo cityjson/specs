@@ -90,7 +90,7 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
-    'logo': 'logo.svg',
+    'logo': 'cityjson_logo.svg',
     # 'logo_text_align': 'left-align',
     # 'body_text_align': 'left-align',
     'description': 'JSON-based implementation of CityGML, easy-to-use and compact',
