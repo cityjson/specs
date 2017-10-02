@@ -32,14 +32,15 @@ using nlohmann::json_schema_draft4::json_validator;
 
 
 static void loader(const json_uri &uri, json &schema);
-bool is_valid_json_schema(json& j, json& jschema, std::stringstream& ss);
-bool is_valid_duplicate_keys(const char* nameinput);
-bool is_valid_citygml_attributes(json& j, json& jschema);
-bool is_valid_metadata(json& j, json& jschema);
-bool is_valid_semantics(json& j);
-bool is_valid_building_parts(json& j);
-bool is_valid_building_installations(json& j);
-bool is_valid_building_pi_parent(json& j);
+bool json_schema(json& j, json& jschema, std::stringstream& ss);
+bool duplicate_keys(const char* nameinput);
+bool citygml_attributes(json& j, json& jschema);
+bool metadata(json& j, json& jschema);
+bool geometry_empty(json& j, json& jschema);
+bool semantics(json& j);
+bool building_parts(json& j);
+bool building_installations(json& j);
+bool building_pi_parent(json& j);
 
 
 int main(int argc, char *argv[]) {
@@ -77,27 +78,29 @@ int main(int argc, char *argv[]) {
 
   std::stringstream ss;
   //-- validate the schema
-  if ( (isValid == true) && (is_valid_json_schema(j, jschema, ss) == false) ){
+  if ( (isValid == true) && (json_schema(j, jschema, ss) == false) ){
     std::cout << ss.str() << std::endl;
     isValid = false;
   }
   //-- check for duplicate keys, which is impossible with schema and/or my parsing library
-  if ( (isValid == true) && (is_valid_duplicate_keys(nameinput) == false) ){
-    std::cout << "ERROR:   Duplicate IDs (keys) for the City Objects." << std::endl;  
+  if ( (isValid == true) && (duplicate_keys(nameinput) == false) ) {
+    std::cout << "ERROR:   Duplicate IDs (keys) for the City Objects" << std::endl;  
     isValid = false;
   }
   if (isValid == true) {
-    if (is_valid_building_parts(j) == false)
+    if (building_parts(j) == false)
       isValid = false;
-    if (is_valid_building_installations(j) == false)
+    if (building_installations(j) == false)
       isValid = false;
-    if (is_valid_building_pi_parent(j) == false)
+    if (building_pi_parent(j) == false)
       isValid = false;
-    if (is_valid_semantics(j) == false)
+    if (semantics(j) == false)
       isValid = false;
-    if (is_valid_metadata(j, jschema) == false)
+    if (geometry_empty(j, jschema) == false)
       woWarnings = false;
-    if (is_valid_citygml_attributes(j, jschema) == false)
+    if (metadata(j, jschema) == false)
+      woWarnings = false;
+    if (citygml_attributes(j, jschema) == false)
       woWarnings = false;
   }
 
@@ -117,7 +120,7 @@ int main(int argc, char *argv[]) {
 }
 
 
-bool is_valid_duplicate_keys(const char* nameinput) {
+bool duplicate_keys(const char* nameinput) {
   Json::CharReaderBuilder builder;
   builder["rejectDupKeys"] = true;
   JSONCPP_STRING errs;
@@ -129,7 +132,7 @@ bool is_valid_duplicate_keys(const char* nameinput) {
 }
 
 
-bool is_valid_building_pi_parent(json& j) {
+bool building_pi_parent(json& j) {
   bool isValid = true;
   std::set<std::string> pis;
   for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) 
@@ -156,15 +159,15 @@ bool is_valid_building_pi_parent(json& j) {
   return isValid;
 }
 
-bool is_valid_building_parts(json& j) {
+bool building_parts(json& j) {
   bool isValid = true;
   for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
     if ( (coit.value()["type"] == "Building") && (coit.value().count("Parts") > 0) ){
       for (std::string pid : coit.value()["Parts"]) {
         if (j["CityObjects"].count(pid) == 0) {
           isValid = false;
-          std::cout << "ERROR:   BuildingPart #" << pid << " is not present." << std::endl;
-          std::cout << "\t(Building #" << coit.key() << " references it.)" << std::endl;
+          std::cout << "ERROR:   BuildingPart #" << pid << " is not present" << std::endl;
+          std::cout << "\t(Building #" << coit.key() << " references it)" << std::endl;
         }
       }
     }
@@ -173,15 +176,15 @@ bool is_valid_building_parts(json& j) {
 }
 
 
-bool is_valid_building_installations(json& j) {
+bool building_installations(json& j) {
   bool isValid = true;
   for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
     if ( (coit.value()["type"] == "Building") && (coit.value().count("Installations") > 0) ){
       for (std::string pid : coit.value()["Installations"]) {
         if (j["CityObjects"].count(pid) == 0) {
           isValid = false;
-          std::cout << "ERROR:   BuildingInstallation #" << pid << " is not present." << std::endl;
-          std::cout << "\t(Building #" << coit.key() << " references it.)" << std::endl;
+          std::cout << "ERROR:   BuildingInstallation #" << pid << " is not present" << std::endl;
+          std::cout << "\t(Building #" << coit.key() << " references it)" << std::endl;
         }
       }
     }
@@ -190,30 +193,55 @@ bool is_valid_building_installations(json& j) {
 }
 
 
-bool is_valid_citygml_attributes(json& j, json& jschema) {
+bool citygml_attributes(json& j, json& jschema) {
   bool isValid = true;
   json tmp;
+  std::map<std::string,std::vector<std::string>> thewarnings;
   for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
     std::string cotype = coit.value()["type"];
     tmp = jschema["definitions"][cotype]["properties"]["attributes"]["properties"];
     for (json::iterator it = coit.value()["attributes"].begin(); it != coit.value()["attributes"].end(); ++it) {
       if (tmp.find(it.key()) == tmp.end()) {
         isValid = false;
-        std::cout << "WARNING: attributes '" << it.key() << "' not in CityGML schema (" << cotype << " #" << coit.key() << ")" << std::endl;
+        std::stringstream ss;
+        ss << "WARNING: attributes '" << it.key() << "' not in CityGML schema";
+        if (thewarnings.find(ss.str()) == thewarnings.end()) {
+          thewarnings[ss.str()] = {coit.key()};
+        }
+        else
+          thewarnings[ss.str()].push_back(coit.key());
       }
     }
     tmp = jschema["definitions"][cotype]["properties"]["address"]["properties"];
     for (json::iterator it = coit.value()["address"].begin(); it != coit.value()["address"].end(); ++it) {
       if (tmp.find(it.key()) == tmp.end()) {
         isValid = false;
-        std::cout << "WARNING: address attributes '" << it.key() << "' not in CityGML schema (" << cotype << " #" << coit.key() << ")" << std::endl;
+        std::stringstream ss;
+        ss << "WARNING: address attributes '" << it.key() << "' not in CityGML schema"; 
+        if (thewarnings.find(ss.str()) == thewarnings.end())
+          thewarnings[ss.str()] = {coit.key()};
+        else
+          thewarnings[ss.str()].push_back(coit.key());
       }
+    }
+  }
+  for (auto& each : thewarnings) {
+    std::cout << each.first;
+    if (each.second.size() <= 3) {
+      std::cout << " (";
+      for (auto& i : each.second) 
+        std::cout << " #" << i << " ";
+      std::cout << ")" << std::endl;
+    }
+    else {
+      std::cout << " (" << each.second.size() << " CityObjects have this warning)" << std::endl; 
     }
   }
   return isValid;
 }
 
-bool is_valid_json_schema(json& j, json& jschema, std::stringstream& ss)
+
+bool json_schema(json& j, json& jschema, std::stringstream& ss)
 {
   //-- 1. Schema validation with http://json-schema.org
   json_validator validator(loader, [](const std::string &, const std::string &) {});
@@ -221,7 +249,7 @@ bool is_valid_json_schema(json& j, json& jschema, std::stringstream& ss)
     validator.set_root_schema(jschema);
   } 
   catch (std::exception& e) {
-    ss << "ERROR:   CityJSON schema invalid." << std::endl;
+    ss << "ERROR:   CityJSON schema invalid" << std::endl;
     ss << e.what() << std::endl;
     return false;
   }
@@ -229,14 +257,14 @@ bool is_valid_json_schema(json& j, json& jschema, std::stringstream& ss)
     validator.validate(j);
   } 
   catch (std::exception& e) {
-    ss << "ERROR:   Schema validation failed." << std::endl;
+    ss << "ERROR:   Schema validation failed" << std::endl;
     ss << e.what() << " at offset: " << std::cin.tellg() << std::endl;
     return false;
   }
   return true;
 }
 
-bool is_valid_metadata(json& j, json& jschema) {
+bool metadata(json& j, json& jschema) {
   bool isValid = true;
   json tmp = jschema["properties"]["metadata"]["properties"];
   for (json::iterator it = j["metadata"].begin(); it != j["metadata"].end(); ++it) {
@@ -245,7 +273,11 @@ bool is_valid_metadata(json& j, json& jschema) {
       std::cout << "WARNING: Metadata '" << it.key() << "' not CityJSON schema." << std::endl;
     }
   }
+  return isValid;
+}
 
+bool geometry_empty(json& j, json& jschema) {
+  bool isValid = true;
   for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
     if (coit.value()["geometry"].size() == 0) {
       isValid = false;
@@ -257,7 +289,7 @@ bool is_valid_metadata(json& j, json& jschema) {
 }
 
 
-bool is_valid_semantics(json& j) {
+bool semantics(json& j) {
   bool isValid = true;
   for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
     for (auto& g : coit.value()["geometry"]) {
@@ -277,14 +309,14 @@ bool is_valid_semantics(json& j) {
         if ( (i != is) || (j != js) ) {
           isValid = false;
           std::string cotype = coit.value()["type"];
-          std::cout << "ERROR:   " << cotype << " #" << coit.key() << " has arrays with different structure for 'boundaries' and 'semantics'." << std::endl;
+          std::cout << "ERROR:   " << cotype << " #" << coit.key() << " has arrays with different structure for 'boundaries' and 'semantics'" << std::endl;
         }
       }
       else if ( (g["type"] == "MultiSurface") || (g["type"] == "CompositeSurface") ) {
         if (g["boundaries"].size() != g["semantics"].size()) {
           isValid = false;
           std::string cotype = coit.value()["type"];
-          std::cout << "ERROR:   " << cotype << " #" << coit.key() << " has arrays with different structure for 'boundaries' and 'semantics'." << std::endl;  
+          std::cout << "ERROR:   " << cotype << " #" << coit.key() << " has arrays with different structure for 'boundaries' and 'semantics'" << std::endl;  
         }
       }
       else if ( (g["type"] == "MultiSolid") || (g["type"] == "CompositeSolid") ) {
