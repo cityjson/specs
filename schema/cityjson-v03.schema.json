@@ -22,8 +22,14 @@
             "roofType": { "type": "string"},
             "storeysAboveGround": { "type": "integer"},
             "storeysBelowGround": { "type": "integer"},
-            "storeysHeightsAboveGround": { "type": "integer"},
-            "storeysHeightsBelowGround": { "type": "integer"},
+            "storeyHeightsAboveGround": { 
+              "type": "array",
+              "items": {"type": "number"}
+            },
+            "storeyHeightsBelowGround": { 
+              "type": "array",
+              "items": {"type": "number"}
+            },
             "yearOfConstruction": { "type": "integer"},
             "yearOfDemolition": { "type": "integer"}
           }
@@ -79,8 +85,14 @@
             "roofType": { "type": "string"},
             "storeysAboveGround": { "type": "integer"},
             "storeysBelowGround": { "type": "integer"},
-            "storeysHeightsAboveGround": { "type": "integer"},
-            "storeysHeightsBelowGround": { "type": "integer"},
+            "storeyHeightsAboveGround": { 
+              "type": "array",
+              "items": {"type": "number"}
+            },
+            "storeyHeightsBelowGround": { 
+              "type": "array",
+              "items": {"type": "number"}
+            },
             "yearOfConstruction": { "type": "integer"},
             "yearOfDemolition": { "type": "integer"}
           }
