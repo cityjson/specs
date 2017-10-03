@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
   input2 >> j;
   std::cout << "Input file: " << nameinput << std::endl;
   //-- make sure it's a CityJSON file
-  if (j["type"] != "CityJSON") {
+  if (!( (j["type"] == "CityJSON") || (j["type"] == "CityModel") ) ) {
     std::cout << "ERROR:   not a CityJSON file" << std::endl;  
     isValid = false;
   }
@@ -66,6 +66,8 @@ int main(int argc, char *argv[]) {
   }
   else {
     std::string v = j["version"];
+    if (v.find("http://www.cityjson.org/version/") != std::string::npos)
+        v = v.substr(v.size() - 3);
     std::string nameschema = "../../../../schema/cityjson-v" + v.substr(0, 1) + v.substr(2) + ".schema.json";
     std::ifstream input(nameschema);
     std::cout << "Schema: " << nameschema << std::endl << std::endl;
