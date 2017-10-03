@@ -51,7 +51,11 @@ int main(int argc, char *argv[]) {
   std::ifstream input2(nameinput);
   input2 >> j;
   std::cout << "Input file: " << nameinput << std::endl;
-
+  //-- make sure it's a CityJSON file
+  if (j["type"] != "CityJSON") {
+    std::cout << "ERROR:   not a CityJSON file" << std::endl;  
+    isValid = false;
+  }
   //-- look for version and fetch the schema file
   json jschema;
   if (argc > 2) {
@@ -61,18 +65,17 @@ int main(int argc, char *argv[]) {
     input >> jschema;
   }
   else {
-    std::string tmp = j["version"];
-    std::string version;
-    if (tmp.find("http://www.cityjson.org/version/") != std::string::npos) {
-      version = tmp.substr(tmp.size() - 3);
-      std::string nameschema = "../../../../schema/cityjson-v" + version.substr(0, 1) + version.substr(2) + ".schema.json";
-      std::cout << "Schema: " << nameschema << std::endl << std::endl;
-      std::ifstream input(nameschema);
+    std::string v = j["version"];
+    std::string nameschema = "../../../../schema/cityjson-v" + v.substr(0, 1) + v.substr(2) + ".schema.json";
+    std::ifstream input(nameschema);
+    std::cout << "Schema: " << nameschema << std::endl << std::endl;
+    if (input.is_open() == true) {
       input >> jschema;
     }
     else {
-      std::cout << "ERROR:   input file doesn't have a valid 'version'" << std::endl;  
-      isValid = false;
+      std::cout << "ERROR:   cannot find schema v" << v << std::endl << std::endl;  
+      // std::cout << "File is VALID";
+      return 0;
     }
   }
 
