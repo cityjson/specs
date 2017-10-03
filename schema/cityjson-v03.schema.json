@@ -635,13 +635,10 @@
   },
 
   "properties": {
-    "type": {
-      "description": "The type of JSON must be CityModel",
-      "enum": ["CityModel"]
-    },
-    "version": {
+    "type": { "enum": ["CityJSON"] },
+    "version": { 
       "type": "string",
-      "pattern": "http://www.cityjson.org/version/\\d.\\d"
+      "pattern": "\\d.\\d"
     },
     "metadata": {
       "type": "object",
@@ -734,6 +731,8 @@
     "appearance": {
       "type": "object",
       "properties": {
+        "default-theme-texture": {"type": "string"},
+        "default-theme-material": {"type": "string"},
         "materials": {
           "type": "array",
           "items": {"$ref": "#/definitions/Material"}
