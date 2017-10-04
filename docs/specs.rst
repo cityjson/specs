@@ -19,8 +19,8 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 - A CityJSON object is a JSON object.
 - A CityJSON object must have 4 members: 
 
-  #. one member with the name ``"type"``, whose value must be ``"CityModel"``;
-  #. one member with the name ``"version"``, whose value must be a URL pointing to the CityJSON version;
+  #. one member with the name ``"type"``, whose value must be ``"CityJSON"``;
+  #. one member with the name ``"version"``, whose value must be a string with the version (X.Y) of CityJSON used;
   #. one member with the name ``"CityObjects"``. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one dataset/file).
   #. one member with the name ``"vertices"``, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is basically reused.
 
@@ -35,8 +35,8 @@ The minimal valid CityJSON object is thus:
 .. code-block:: js
 
   {
-    "type": "CityModel",
-    "version": "http://www.cityjson.org/version/0.2",
+    "type": "CityJSON",
+    "version": "0.3",
     "CityObjects": {},
     "vertices": []
   }
@@ -47,8 +47,8 @@ An empty CityJSON will look like this:
 .. code-block:: js
 
   {
-    "type": "CityModel",
-    "version": "http://www.cityjson.org/version/0.2",
+    "type": "CityJSON",
+    "version": "0.3",
     "metadata": {},
     "transform": {
       "scale": [],
