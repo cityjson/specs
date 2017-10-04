@@ -47,7 +47,11 @@ int main(int argc, char *argv[]) {
   bool isValid = true;
   bool woWarnings = true;
   json j;
-  const char* nameinput = (argc > 1) ? argv[1] : "../../../../example-datasets/dummy-values/example2.json";
+  if (argc <= 1) {
+    std::cout << "ERROR: input file needed" << std::endl;
+    return 0;
+  }
+  const char* nameinput = argv[1];
   std::ifstream input2(nameinput);
   input2 >> j;
   std::cout << "Input file: " << nameinput << std::endl;

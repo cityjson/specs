@@ -8,6 +8,6 @@ To compile and run:
     $ cd build
     $ cmake ..
     $ make
-    $ ./cityjson-valschema ../../../../example-datasets/dummy/example2.json
+    $ ./cityjson-valschema ../../../../example-datasets/dummy/example.json
 
 The appropriate version of the schema is read from the `version` of the input file and used to validate.    
