@@ -682,11 +682,10 @@ Both operation use a tolerance, which is given as number-of-digits-after-the-dot
 Appearance Object
 -----------------
 
-Most of the Appearance module of CityGML is supported, and both textures and materials are supported. 
+Both textures and materials are supported, and the same mechanisms as CityGML are used for these, so the conversion back-and-forth should be easy.
 The material is represented with the `X3D <http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material>`_ specifications, as is the case for CityGML.
 For the texture, the COLLADA is reused, as is the case for CityGML.
 However:
-  - the CityGML concept of *themes* is not supported, this means that only one texture and one material per surface is allowed, and only one side of a surface can have a texture. Different LoDs can however have different textures/materials.
   - the CityGML class ``GeoreferencedTexture`` is not supported. 
   - the CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files.
   - texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
@@ -695,23 +694,35 @@ However:
 An Appearance Object is a JSON object that
   - may have one member with the name ``"materials"``, whose value is an array of Material Objects.
   - may have one member with the name ``"textures"``, whose value is an array of Texture Objects.
+  - may have both ``"materials"`` and ``"textures"``.
   - may have one member with the name ``"vertex-texture"``, whose value is an array of coordinates of each so-called UV vertex of the city model.
-
+  - may have one member with the name ``"default-theme-texture"``, whose value is the name of the default theme for the appearance (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
+  - may have one member with the name ``"default-theme-material"``, whose value is the name of the default theme for the material (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
+  
+        
 .. code-block:: js
 
   "appearance": {
     "materials": [],
     "textures":[],
-    "vertices-texture": []
+    "vertices-texture": [],
+    "default-theme-texture": "myDefaultTheme1",
+    "default-theme-material": "myDefaultTheme2"
   }
 
-Geometry Object having a material
-*********************************
 
-To store the material, a Geometry Object may have a member with the value ``"material"``, whose value is a hierarchy of arrays with integers (the depth depends on the Geometry object).
+Geometry Object having material(s)
+**********************************
+
+Each surface in a Geometry Object can have one or more materials assigned to it.
+To store these, a Geometry Object may have a member ``"material"``, the value of this member is a collection of key-value pairs, where the key is the *theme* of the material, and the value is one JSON object that must contain one member ``"values"``, whose value is a hierarchy of arrays with integers.
 Each integer refers to the position (0-based) in the ``"materials"`` member of the ``"appearance"`` member of the CityJSON object.
+If a surface has no material, then ``null`` should be used in the array.
 
-In the following, the 6 surfaces representing a building get different materials, the roof and ground surfaces get the first material listed in the appearance, and the others get the second.
+The depth of the array depends on the Geometry object, and is equal to the depth of the ``"boundary"`` array minus 2, because each surface (``[[]]``) gets one material.
+
+In the following, the Solid has 4 surfaces, and there are 2 themes: "irradiation" and "irradiation-2" could for instance represent different colours based on different scenarios of an solar irradiation analysis.
+Notice that the last surface get no material (for both themes), thus ``null`` is used.
 
 .. code-block:: js
 
@@ -719,37 +730,52 @@ In the following, the 6 surfaces representing a building get different materials
     "type": "Solid",
     "lod": 2,
     "boundaries": [
-      [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+      [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ] 
     ],
-    "material": [
-      [0, 0, 1, 1, 1, 1]
-    ]
+    "material": {
+      "irradiation": { 
+        "values": [[0, 0, 1, null]] 
+      },
+      "irradiation-2": { 
+        "values": [[2, 2, 1, null]] 
+      }
+    }
   }
 
 
-Geometry Object having a texture
-********************************
+Geometry Object having texture(s)
+*********************************
 
-To store the textures of surfaces, a Geometry Object may have a member with value ``"texture"``, whose value is a hierarchy of arrays with integers (the depth depends on the Geometry object).
-
+To store the texture(s) of a surface, a Geometry Object may have a member with the value ``"texture"``, its value is a collection of key-value pairs, where the key is the *theme* of the textures, and the value is one JSON object that must contain one member ``"values"``, whose value is a hierarchy of arrays with integers.
 For each ring of each surface, the first value refers to the position (0-based) in the ``"textures"`` member of the ``"appearance"`` member of the CityJSON object.
 The other indices refer to the UV positions of the corresponding vertices (as listed in the ``"boundaries"`` member of the geometry).
 Each array representing a ring therefore has one more value than that to store its vertices.
 
-In the following, there are 6 surfaces representing a building and each get a texture.
-The first 5 refer to the first texture, and the last one to the second one.
+The depth of the array depends on the Geometry object, and is equal to the depth of the ``"boundary"`` array.
+
+In the following, the Solid has 4 surfaces, and there are 2 themes: "winter-textures" and "summer-textures" could for instance represent the textures during winter and summer..
+Notice that the last 2 surfaces of the first theme gets no material, thus ``null`` is used.
 
 .. code-block:: js
 
   {
     "type": "Solid",
-    "lod": 2.1,
+    "lod": 2,
     "boundaries": [
-      [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+      [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ] 
     ],
-    "texture": [
-      [ [[0, 10, 23, 23, 11]], [[0, 124, 35, 56, 76]], [[0, 10, 11, 45, 54]], [[0, 13, 52, 66, 57]], [[0, 12, 23, 17, 46]], [[1, 453, 4540, 44, 57]] ]
-    ]
+    "texture": {
+      "winter-textures": {
+        "values": [
+          [ [[0, 10, 23, 22, 21]], [[0, 1, 2, 6, 5]], [[null]], [[null]] ]                  
+        ]
+      },
+      "summer-textures": {
+        "values": [
+          [ [[1, 10, 23, 22, 21]], [[1, 1, 2, 6, 5]], [[1, 66, 12, 64, 5]], [[2, 99, 21, 16, 25]] ]                  
+        ]      
+      }
+    }     
   }        
 
 Material Object
