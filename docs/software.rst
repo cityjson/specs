@@ -20,5 +20,6 @@ We have currently the following:
 Software supporting CityJSON
 ----------------------------
 
-  - `val3dity <https://github.com/tudelft3d/val3dity>`_: validation of the geometric 3D primitives (the branch 'v2' reads CityJSON as input; everything is supported)
   - `azul <https://github.com/tudelft3d/azul>`_: a CityGML viewer for macOS (the branch 'cityjson' supports CityJSON as input; appearance is not supported yet)
+  - `3dfier <https://github.com/tudelft3d/3dfier>`_: '3dfication' of 2D GIS datasets (the branch 'cityjson-output' outputs CityJSON)
+  - `val3dity <https://github.com/tudelft3d/val3dity>`_: validation of the geometric 3D primitives (the branch 'v2' reads CityJSON as input; everything is supported)
