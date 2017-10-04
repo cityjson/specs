@@ -18,6 +18,11 @@ Added
 *****
 - utility cityjson-valschema now ensures that no two City Objects have the same ID/key
 
+Changed
+*******
+- change to "header" and versioning of the file
+- >1 textures and materials per geometry
+
 ----
 
 [0.2] - 2017-09-05
