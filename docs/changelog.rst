@@ -8,6 +8,7 @@ Changelog
 ------------
 - Bridge, Tunnels, and Transportation modules of CityGML
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
+- handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
 
 ----
 
