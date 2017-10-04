@@ -550,8 +550,48 @@
               }
             }
           }
+        },
+        "material": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": { "type": ["integer", "null"] }
+                }
+              }
+            }
+          }
+        },
+        "texture": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+              "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": { 
+                        "type": "array",
+                        "items": { "type": ["integer", "null"] }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }                
         }
-      },
+      },        
       "required": ["type", "lod", "boundaries"]
     },
 
@@ -559,6 +599,65 @@
       "type": "object",
       "properties": {
         "type": { "enum": ["MultiSurface"] },
+        "lod": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 3.5
+        },
+        "boundaries": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+                "items": { "type": "integer" }
+            }
+          }
+        },
+        "semantics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Semantics"
+          }
+        },
+        "material": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+                "type": "array",
+                "items": { "type": ["integer", "null"] }
+              }
+            }
+          }
+        },
+        "texture": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+              "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": { "type": ["integer", "null"] }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },       
+      "required": ["type", "lod", "boundaries"]
+    },
+
+    "CompositeSurface": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["CompositeSurface"] },
         "lod": {
           "type": "number",
           "minimum": 0.0,
@@ -592,36 +691,24 @@
             }
           }
         },
-        "texture": {}        
-      },
-      "required": ["type", "lod", "boundaries"]
-    },
-
-    "CompositeSurface": {
-      "type": "object",
-      "properties": {
-        "type": { "enum": ["CompositeSurface"] },
-        "lod": {
-          "type": "number",
-          "minimum": 0.0,
-          "maximum": 3.5
-        },
-        "boundaries": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
+        "texture": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
               "type": "array",
-                "items": {"type": "integer"}
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": { "type": ["integer", "null"] }
+                  }
+                }
+              }
             }
           }
-        },
-        "semantics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Semantics"
-          }
-        }
+        }        
       },        
       "required": ["type", "lod", "boundaries"]
     },
