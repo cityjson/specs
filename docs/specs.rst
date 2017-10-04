@@ -99,7 +99,7 @@ It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
 .. code-block:: js
 
   "metadata": {
-    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ]
+    "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
   }
 
 
@@ -113,6 +113,7 @@ An array of keywords of type ``"string"`` may be listed:
     "keywords": ["energy", "solar potential"]
   }
 
+
 Geographic Location
 *******************
 The name of an area or a city.
@@ -122,6 +123,7 @@ The name of an area or a city.
   "metadata": {
     "geographicLocation": "TU Delft campus"
   }
+
 
 Dataset Topic Category
 **********************
@@ -133,6 +135,7 @@ A one-word category, the possible values are enumerated in the Table B.3.30 of t
     "datasetTopicCategory": "planningCadastre"
   }
 
+
 Present LoDs (levels-of-detail)
 *******************************
 An array of all the LoDs present in the file.
@@ -142,6 +145,7 @@ An array of all the LoDs present in the file.
   "metadata": {
     "presentLoDs": ["1.2", "2.2", "2.3"]
   }
+
 
 Other properties
 ****************
@@ -485,8 +489,8 @@ The coordinates of the vertices
 A CityJSON must have one member named ``"vertices"``, whose value is an array of coordinates of each vertex of the city model. 
 Their position in this array (0-based) is used to represent the Geometric Objects.
 
-  - the array of vertices may be empty.
   - one vertex must be an array with exactly 3 values, representing the *(x,y,z)* location of the vertex.
+  - the array of vertices may be empty.
   - vertices may be repeated
 
 
