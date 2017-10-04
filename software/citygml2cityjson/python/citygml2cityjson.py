@@ -23,8 +23,8 @@ def main():
         st = options.snap_tolerance
     #-- the CityModel JSON object
     cm = {}
-    cm["type"] = "CityModel"
-    cm["version"] = "http://www.cityjson.org/version/0.2"
+    cm["type"] = "CityJSON"
+    cm["version"] = "0.3"
     cm["metadata"] = {}
     cm["metadata"]["crs"] = {'epsg': 7415}
     cm["metadata"]["bbox"] = [4424648.79, 5482614.69, 310.19, 4424852.33, 5482813.83, 330.28] 
@@ -103,7 +103,9 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
 
 
     buildings = root.findall(".//{%s}Building" % ns['cgmlb'])
-    print "# Buildings:", len(buildings)
+    nobuildingtags = len(buildings)
+    print "# Buildings:", nobuildingtags
+    nobuildingwogeom = 0
     for building in buildings:
         b = {'type': 'Building'}
         b["attributes"] = {}
@@ -136,6 +138,12 @@ def process(fIn, cm, snap_tolerance = '1e-3'):
             process_lodXSolid(xmlnode, cm, b)
             cm["CityObjects"][building.get("{%s}id" % ns['gml'])] = b
             print "[lod2Solid]Building", building.get("{%s}id" % ns['gml'])
+        if (xmlnode == None):
+            nobuildingwogeom += 1
+            print "WARNING: Building", building.get("{%s}id" % ns['gml']), "has no geometry"
+            continue
+    if (nobuildingtags == nobuildingwogeom):
+        print "\nWARNING: none of the buildings have a geometry."
 
     return 1
 
