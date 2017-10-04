@@ -1,5 +1,5 @@
 {
-    "version": "http://www.cityjson.org/version/0.2",
+    "version": "0.3",
     "CityObjects": {
         "2C40B9B8-194F-40A5-A95B-FCFB30DFDC46": {
             "geometry": [{
@@ -801,7 +801,9 @@
                     {"type" : "WallSurface"},
                     {"type" : "WallSurface"}
                 ],
-                "texture": [
+                "texture": {
+                    "default": { 
+                        "values": [
                     [[]],
                     [[]],
                     [[]],
@@ -1480,6 +1482,8 @@
                         82
                     ]]
                 ]
+                }
+            }
             }],
             "type": "Building"
         },
@@ -1597,7 +1601,9 @@
                         6
                     ]]
                 ],
-                "texture": [
+                "texture": {
+                    "default": {
+                        "values": [
                     [[]],
                     [[]],
                     [[]],
@@ -1715,7 +1721,10 @@
                         36,
                         34
                     ]]
-                ],
+                ]
+                    }
+                },
+
                 "type": "MultiSurface",
                 "semantics": [
                     {"type": "WallSurface"},
@@ -2776,7 +2785,7 @@
             ]
         ]
     },
-    "type": "CityModel",
+    "type": "CityJSON",
     "vertices": [
         [
             92534.82536,
