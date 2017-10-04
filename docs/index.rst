@@ -13,8 +13,8 @@ CityJSON
 .. code-block:: js
 
   {
-    "type": "CityModel",
-    "version": "http://www.cityjson.org/version/0.2",
+    "type": "CityJSON",
+    "version": "0.3",
     "metadata": {
       "crs": { "epsg": 7415 }
     },
