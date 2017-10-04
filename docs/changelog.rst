@@ -1,3 +1,4 @@
+
 =========
 Changelog
 =========
@@ -18,6 +19,9 @@ Changelog
 Added
 *****
 - utility cityjson-valschema now ensures that no two City Objects have the same ID/key
+- the schema now has depths of Geometry Objects for "texture", "material", and "semantics" arrays.
+- the schema and the validator are generally better
+- clear use of null and empty {} where appropriate
 
 Changed
 *******
