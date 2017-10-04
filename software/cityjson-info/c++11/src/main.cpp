@@ -20,7 +20,7 @@
 using json = nlohmann::json;
 
 int main(int argc, const char * argv[]) {
-  const char* filename = (argc > 1) ? argv[1] : "../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.json";
+  const char* filename = (argc > 1) ? argv[1] : "../../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.json";
   std::ifstream input(filename);
   json j;
   input >> j;
@@ -29,10 +29,7 @@ int main(int argc, const char * argv[]) {
   std::cout << "  " << filename << std::endl << std::endl;
 
   //-- CityJSON version
-  std::string tmp = j["version"];
-  std::string version;
-  version = tmp.substr(tmp.size() - 3);
-  std::cout << "CityJSON version: " << version << std::endl;
+  std::cout << "CityJSON version: " << j["version"] << std::endl;
   
   //-- CityObjects
   std::cout << "===== CityObjects =====" << std::endl;

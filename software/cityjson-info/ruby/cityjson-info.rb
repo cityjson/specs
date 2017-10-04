@@ -21,7 +21,7 @@ puts "Printing (some) information about:"
 puts "  " + filename + "\n"
 
 # CityJSON version
-version = j["version"][-3, 3]
+version = j["version"]
 puts "CityJSON version: " + version
 
 # CityObjects
