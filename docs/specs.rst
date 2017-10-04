@@ -398,16 +398,50 @@ SolitaryVegetationObject
 .. note::
   The concept of Implicit Geometries, as defined in CityGML, is not supported. An implicit geometry is a template, eg of certain species of a tree, that can be reused with different parameters to define its appearance.
 
+
 CityFurniture
 *************
 
 - The geometry of a City Object of type ``"CityFurniture"`` can be any of the following: ``"MultiPoint"``, ``"MultiLineString"``, ``"MultiSurface"``, ``"CompositeSurface"``, ``"Solid"``, or ``"CompositeSolid"``.
+
+.. code-block:: js
+
+  "stop": {
+    "type": "CityFurniture", 
+    "attributes": { 
+      "function": "bus stop"
+    },
+    "geometry": [{
+      "type": "MultiSurface",
+      "lod": 2,
+      "boundaries": [
+        [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+      ]
+    }]
+  }
 
 
 GenericCityObject
 *****************
 
 - The geometry of a City Object of type ``"GenericCityObject"`` can be any of the following: ``"MultiPoint"``, ``"MultiLineString"``, ``"MultiSurface"``, ``"CompositeSurface"``, ``"Solid"``, or ``"CompositeSolid"``.
+
+.. code-block:: js
+
+  "whatisthat": {
+    "type": "GenericCityObject", 
+    "attributes": { 
+      "usage": "it's not clear"
+    },
+    "geometry": [{
+      "type": "CompositeSurface",
+      "lod": 1,
+      "boundaries": [
+        [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+      ]
+    }]
+  }
+
 
 
 ----------------
