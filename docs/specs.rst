@@ -531,18 +531,19 @@ Arrays to represent boundaries
 
 .. _specs_semantics:
 
-Semantics Object
-****************
 
-A Semantics Object is a JSON representing the semantics of a surface, and may also represent other attributes of the surface (eg the slope of the roof, or the solar potential).
-Since surfaces are assigned a semantics, and not rings, the depth of an array is one less than the array for storing the boundaries, eg for the case above.
+Semantic Surface Object
+***********************
+
+A Semantics Surface is a JSON object representing the semantics of a surface, and may also represent other attributes of the surface (eg the slope of the roof or the solar potential).
+Since surfaces are assigned a semantics (and not rings), the depth of an array is one less than the array for storing the boundaries.
 
 A Semantic Object:
   
   - must have one member with the name ``"type"``, whose value is one of the allowed value. These depend on the City Object, see below.
-  - may have other attributes in the form of a JSON key-value pair 
+  - may have other attributes in the form of a JSON key-value pair, where the value must not be a JSON object (but a string/number/integer/boolean). 
 
-Each surface of a Geometry Object must have one corresponding Semantic Object, and thus the "depth" of the nested arrays is different for different objects.
+If a Geometry Objects has a key ``"semantics"``, then each of its surfaces must have one corresponding Semantic Surface Object, and thus the depth of the nested arrays is different for different Geometry Objects.
 If one surface does not have any semantics, it must be represented with an empty object ``{}``; the third surface in the example below is one such example.
 
 .. code-block:: js
@@ -591,27 +592,28 @@ If one surface does not have any semantics, it must be represented with an empty
     ]
   }
 
+
 ``"Building"``, ``"BuildingPart"``, and ``"BuildingInstallation"`` can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
 
-- ``"RoofSurface"``, 
-- ``"GroundSurface"``, 
-- ``"WallSurface"``,
-- ``"ClosureSurface"``,
-- ``"OuterCeilingSurface"``,
-- ``"OuterFloorSurface"``,
-- ``"Window"``,
-- ``"Door"``.
+- ``"RoofSurface"`` 
+- ``"GroundSurface"`` 
+- ``"WallSurface"``
+- ``"ClosureSurface"``
+- ``"OuterCeilingSurface"``
+- ``"OuterFloorSurface"``
+- ``"Window"``
+- ``"Door"``
 
 For ``"WaterBody"``:
 
-- ``"WaterSurface"``,
-- ``"WaterGroundSurface"``,
-- ``"WaterClosureSurface".``
+- ``"WaterSurface"``
+- ``"WaterGroundSurface"``
+- ``"WaterClosureSurface"``
 
 
-------------------------------------------------
-Transform Object (to compress the CityJSON file)
-------------------------------------------------
+----------------------------------------------
+Transform Object (to compress a CityJSON file)
+----------------------------------------------
 
 To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles).
 To use compression, a CityJSON object may have one member ``"transform"``, whose values are 2 mandatory JSON objects (``"scale"`` and ``"translate"``), both arrays with 3 values.
