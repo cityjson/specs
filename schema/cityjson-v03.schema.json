@@ -379,7 +379,7 @@
               "type": "array",
               "items": {
                 "type": "array",
-                "items": {"type": "integer"}
+                "items": { "type": "integer" }
               }
             }
           }
@@ -393,8 +393,42 @@
             }
           }
         },
-        "material": {},
-        "texture": {}
+        "material": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {"type": ["integer", "null"]}
+                }
+              }
+            }
+          }
+        },
+        "texture": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+              "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": { "type": ["integer", "null"] }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "required": ["type", "lod", "boundaries"]
     },
@@ -435,6 +469,46 @@
               }
             }
           }
+        },
+        "material": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": { "type": ["integer", "null"] }
+                }
+              }
+            }
+          }
+        },
+        "texture": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+              "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": { 
+                        "type": "array",
+                        "items": { "type": ["integer", "null"] }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }                
         }
       },
       "required": ["type", "lod", "boundaries"]
@@ -506,7 +580,18 @@
             "$ref": "#/definitions/Semantics"
           }
         },
-        "material": {},
+        "material": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+                "type": "array",
+                "items": { "type": ["integer", "null"] }
+              }
+            }
+          }
+        },
         "texture": {}        
       },
       "required": ["type", "lod", "boundaries"]
