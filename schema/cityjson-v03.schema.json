@@ -581,7 +581,21 @@
     "Semantics": {
       "type": "object",
       "properties": {
-        "type": { "enum": ["RoofSurface", "GroundSurface", "WallSurface", "ClosureSurface", "OuterCeilingSurface", "OuterFloorSurface", "Window", "Door", "WaterSurface", "WaterGroundSurface", "WaterClosureSurface"] }
+        "type": { 
+          "enum": [
+            "RoofSurface", 
+            "GroundSurface", 
+            "WallSurface", 
+            "ClosureSurface", 
+            "OuterCeilingSurface", 
+            "OuterFloorSurface", 
+            "Window", 
+            "Door", 
+            "WaterSurface", 
+            "WaterGroundSurface", 
+            "WaterClosureSurface"
+          ] 
+        }
       }
     },
 
