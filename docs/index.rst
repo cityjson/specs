@@ -67,10 +67,10 @@ CityJSON can be considered as the third implementation of the CityGML data model
 .. toctree::
    :maxdepth: 2
 
-   citygmlsupport
    specs
    schema
    software
+   citygmlsupport
    datasets
    changelog
    contact
