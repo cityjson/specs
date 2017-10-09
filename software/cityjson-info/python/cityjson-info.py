@@ -12,75 +12,82 @@
 
 import json
 
-# fin = open('mycity.json')
-fin = open('/Users/hugo/projects/cityjson-new/example-datasets/dummy-values/example2.json')
-cm = json.loads(fin.read())
+filename = '../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN_solids.json'
+fin = open(filename)
+j = json.loads(fin.read())
 
-print "CRS:", cm['metadata']['crs']['epsg']
+print "Printing (some) information about:"
+print "   ", filename
 
-print "There are", len(cm['CityObjects']), "CityObjects"
-# list all ids
-for id in cm['CityObjects']:
-    print "\t", id
+#-- CityJSON version
+print "CityJSON version: ", j["version"] 
 
-print "-"*10
+#-- CityObjects
+print "===== CityObjects ====="
+print "Total : ", len(j["CityObjects"])
 
-print cm['CityObjects']['2929']
+d = set();
+for id in j["CityObjects"]:
+    d.add(j['CityObjects'][id]['type'])
+print "Types:" 
+for each in d:
+    print "\t", each
+d.clear()
+for id in j["CityObjects"]:
+    for geom in j['CityObjects'][id]['geometry']:
+        d.add(geom["type"])
+print "Geometries present:"
+for each in d:
+    print "\t", each
 
-# list all BuildingParts    
-for id in cm['CityObjects']:
-    if cm['CityObjects'][id]['type'] == 'BuildingPart':
-        print "BuildingPart", id
 
-
-for id in cm['CityObjects']:
-    if cm['CityObjects'][id]['type'] == 'TINRelief':
-        g = cm['CityObjects'][id]['geometry']
-        if 'semantics' in g:
-            print "yessss:", g['semantics']
+#-- metadata
+print "===== Metadata =====" 
+if "metadata" not in j:
+    print "  none" 
+else:
+    for each in j["metadata"]:
+        if each == 'crs':
+            print "  crs: EPSG:", j["metadata"]["crs"]["epsg"]
         else:
-            print "no semantics"
+            print " ", each
 
-for id in cm['CityObjects']:
-    if cm['CityObjects'][id]['type'] == 'WaterSurface':
-        geoms = cm['CityObjects'][id]['geometry']
-        for g in geoms:
-            if ('semantics' in g) and (g['semantics'] != None):
-                print "yessss:", g['semantics']
-            else:
-                print "no semantics"
+#--  vertices
+print "===== Vertices ====="
+print "Total:", len(j["vertices"])
 
-# find all Solids
-for id in cm['CityObjects']:
-    for geom in cm['CityObjects'][id]['geometry']:
-        # print geom
-        if geom['type'] == "Solid":
-            print "Solid LoD:", geom['lod'], id
+#-- appearance
+print "===== Appearance ====="
+if 'appearance' not in j:
+    print "  none"
+else:
+    if 'textures' in j['appearance']:
+        print "  textures:", len(j['appearance']['textures'])
+    if 'materials' in j['appearance']:
+        print "  materials:", len(j['appearance']['materials'])
 
-# vertices
-print "number of vertices:", len(cm['vertices'])
+# # list all BuildingParts    
+# for id in cm['CityObjects']:
+#     if cm['CityObjects'][id]['type'] == 'BuildingPart':
+#         print "BuildingPart", id
 
-# appearance
-if 'appearance' in cm:
-    print "Appearance:"
-    if 'materials' in cm['appearance']:
-        print "\t", len(cm['appearance']['materials']), "materials"
-    if 'textures' in cm['appearance']:
-        print "\t", len(cm['appearance']['textures']), "textures"
-    if 'vertex-texture' in cm['appearance']:
-        print "\t", len(cm['appearance']['vertex-texture']), "vertex-texture"
+# # find all Solids
+# for id in cm['CityObjects']:
+#     for geom in cm['CityObjects'][id]['geometry']:
+#         # print geom
+#         if geom['type'] == "Solid":
+#             print "Solid LoD:", geom['lod'], id
 
+# for id in cm['CityObjects']:
+#     geoms = cm['CityObjects'][id]['geometry']
+#     for g in geoms:
+#         # print g['texture']
+#         for each in g['texture']:
+#             # print each[0]
+#             if not each[0]:
+#                 print "empty"
+#             else:
+#                 print each[0]
 
-for id in cm['CityObjects']:
-    geoms = cm['CityObjects'][id]['geometry']
-    for g in geoms:
-        # print g['texture']
-        for each in g['texture']:
-            # print each[0]
-            if not each[0]:
-                print "empty"
-            else:
-                print each[0]
-
-        break
-    break
+#         break
+#     break
