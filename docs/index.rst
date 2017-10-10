@@ -47,7 +47,7 @@ This considerably simplifies the storage of a city model, and furthermore does n
 
 While its name otherwise implies, CityGML is not only a GML encoding, but is actually an open standardised data model to store digital 3D models of cities and landscapes. 
 It defines ways to describe most of the common 3D features found in cities, and the relationships between them. 
-It also defines different standard levels of detail (LODs) for the 3D objects, which allows us to represent objects for different applications and purposes.
+It also defines different standard levels of detail (LoDs) for the 3D objects, which allows us to represent objects for different applications and purposes.
 
 CityGML currently has 2 implementations:
 
