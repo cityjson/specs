@@ -175,6 +175,9 @@ A City Object is a JSON object for which the type member’s value is one of the
   #. ``"Building"``
   #. ``"BuildingPart"``
   #. ``"BuildingInstallation"``
+  #. ``"Road"``
+  #. ``"Railway"``
+  #. ``"TransportSquare"``
   #. ``"TINRelief"``
   #. ``"WaterBody"``
   #. ``"PlantCover"``
@@ -289,6 +292,43 @@ Building, BuildingPart, and BuildingInstallation
       "PostalCode": "H0H 0H0"
     },
   }
+
+
+Transportation: Road, Railway, and TransportSquare 
+**************************************************
+
+CityJSON uses 3 classes related to transportation (``"Road"``, ``"Railway"``, ``"TransportSquare"``) and omits the "Track" because it can be a road with specific attributes.
+In CityGML, each of the classes can have a number of "TrafficArea" and "AuxiliaryTrafficArea", which are defined as new surfaces. 
+In CityJSON, the surfaces of the road are Semantic Surface Objects.
+
+- The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` can be of types ``"MultiSurface"`` or ``"CompositeSurface"``.
+- The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` can not be of ``"lod"`` 0, only 1 and above are allowed.
+
+.. code-block:: js
+
+  "ma_rue": {
+    "type": "Raod", 
+    "geometry": [{
+      "type": "MultiSurface",
+      "lod": 2,
+      "boundaries": [
+         [[0, 3, 2, 1, 4]], [[4, 5, 6, 666, 12]], [[0, 1, 5]]
+      ]
+    }],
+    "semantics": [
+      {
+        "type": "TrafficArea",
+        "surfaceMaterial": ["asphalt"],
+        "function": "road"
+      },
+      {
+        "type": "AuxiliaryTrafficArea",
+        "function": "green areas"
+      },
+      {}
+    ]
+  }
+
 
 
 TINRelief
@@ -647,6 +687,11 @@ For ``"WaterBody"``:
 - ``"WaterSurface"``
 - ``"WaterGroundSurface"``
 - ``"WaterClosureSurface"``
+
+For Transporation (``"Road"``, ``"Railway"``, ``"TransportSquare"``):
+
+- ``"TrafficArea"``
+- ``"AuxiliaryTrafficArea"``
 
 
 ----------------------------------------------
