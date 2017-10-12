@@ -5,7 +5,10 @@ Schema validation
 CityJSON schema download
 ------------------------
 
-version |version|: 
+version 0.5: 
+- :download:`download cityjson-v05.schema.json <../schema/cityjson-v03.schema.json>`
+
+version 0.3: 
 - :download:`download cityjson-v03.schema.json <../schema/cityjson-v03.schema.json>`
 
 version 0.2: 
