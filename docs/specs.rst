@@ -297,12 +297,12 @@ Building, BuildingPart, and BuildingInstallation
 Transportation: Road, Railway, and TransportSquare 
 **************************************************
 
-CityJSON uses 3 classes related to transportation (``"Road"``, ``"Railway"``, ``"TransportSquare"``) and omits the "Track" because it can be a road with specific attributes.
+CityJSON uses 3 classes related to transportation (``"Road"``, ``"Railway"``, ``"TransportSquare"``) and omits the "Track" from CityGML because it simply can be a road with specific attributes.
 In CityGML, each of the classes can have a number of "TrafficArea" and "AuxiliaryTrafficArea", which are defined as new surfaces. 
-In CityJSON, the surfaces of the road are Semantic Surface Objects.
+In CityJSON, these surfaces do not need to be defined again since the road surfaces become Semantic Surface Objects (with type ``"TrafficArea"`` or ``"AuxiliaryTrafficArea"``)
 
 - The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` can be of types ``"MultiSurface"`` or ``"CompositeSurface"``.
-- The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` can not be of ``"lod"`` 0, only 1 and above are allowed.
+- The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` cannot be of ``"lod"`` 0, only 1 and above are allowed.
 
 .. code-block:: js
 

@@ -21,8 +21,12 @@ CityJSON
     "CityObjects": {
       "id-1": {
         "type": "Building",
-        "geometry": [...]
-        ...
+        "attributes": { "roofType": "gable" },
+        "geometry": [{
+          "type": "Solid",
+          "lod": 2,
+          "boundaries": [...]
+        }]
       }
     },
     "vertices": [
