@@ -159,98 +159,6 @@
       "required": ["type", "geometry"]
     },
 
-    "Road": {
-      "type": "object",
-      "properties": {
-        "type": { "enum": ["Road"] },
-        "attributes": {
-          "type": "object",
-          "properties": {
-            "creationDate" : {"type": "string"},
-            "terminationDate" : {"type": "string"},
-            "class": {"type": "string"},
-            "function": {"type": "string"},
-            "usage": {"type": "string"},
-            "surfaceMaterial": { 
-              "type": "array",
-              "items": {"type": "string"}
-            }
-          }
-        },        
-        "geometry": {
-          "type": "array",
-          "items": {
-            "oneOf": [
-              {"$ref": "#/definitions/MultiSurface"},
-              {"$ref": "#/definitions/CompositeSurface"}
-            ]
-          }
-        }
-      },
-      "required": ["type", "geometry"]
-    },
-
-    "Railway": {
-      "type": "object",
-      "properties": {
-        "type": { "enum": ["Railway"] },
-        "attributes": {
-          "type": "object",
-          "properties": {
-            "creationDate" : {"type": "string"},
-            "terminationDate" : {"type": "string"},
-            "class": {"type": "string"},
-            "function": {"type": "string"},
-            "usage": {"type": "string"},
-            "surfaceMaterial": { 
-              "type": "array",
-              "items": {"type": "string"}
-            }
-          }
-        },        
-        "geometry": {
-          "type": "array",
-          "items": {
-            "oneOf": [
-              {"$ref": "#/definitions/MultiSurface"},
-              {"$ref": "#/definitions/CompositeSurface"}
-            ]
-          }
-        }
-      },
-      "required": ["type", "geometry"]
-    },
-
-    "TransportSquare": {
-      "type": "object",
-      "properties": {
-        "type": { "enum": ["TransportSquare"] },
-        "attributes": {
-          "type": "object",
-          "properties": {
-            "creationDate" : {"type": "string"},
-            "terminationDate" : {"type": "string"},
-            "class": {"type": "string"},
-            "function": {"type": "string"},
-            "usage": {"type": "string"},
-            "surfaceMaterial": { 
-              "type": "array",
-              "items": {"type": "string"}
-            }
-          }
-        },        
-        "geometry": {
-          "type": "array",
-          "items": {
-            "oneOf": [
-              {"$ref": "#/definitions/MultiSurface"},
-              {"$ref": "#/definitions/CompositeSurface"}
-            ]
-          }
-        }
-      },
-      "required": ["type", "geometry"]
-    },   
     "TINRelief": {
       "type": "object",
       "properties": {
@@ -259,10 +167,7 @@
           "type": "object",
           "properties": {
             "creationDate" : {"type": "string"},
-            "terminationDate" : {"type": "string"},
-            "class": {"type": "string"},
-            "function": {"type": "string"},
-            "usage": {"type": "string"}
+            "terminationDate" : {"type": "string"}
           }
         },        
         "geometry": {
@@ -860,9 +765,7 @@
             "Door", 
             "WaterSurface", 
             "WaterGroundSurface", 
-            "WaterClosureSurface",
-            "TrafficArea",
-            "AuxiliaryTrafficArea"
+            "WaterClosureSurface"
           ] 
         }
       }
@@ -973,9 +876,6 @@
           { "$ref": "#/definitions/Building" },
           { "$ref": "#/definitions/BuildingPart" },
           { "$ref": "#/definitions/BuildingInstallation" },
-          { "$ref": "#/definitions/Road" },
-          { "$ref": "#/definitions/Railway" },
-          { "$ref": "#/definitions/TransportSquare" },
           { "$ref": "#/definitions/TINRelief" },
           { "$ref": "#/definitions/WaterBody" },
           { "$ref": "#/definitions/LandUse" },
