@@ -182,7 +182,7 @@
           "items": {
             "oneOf": [
               {"$ref": "#/definitions/MultiSurface"},
-              {"$ref": "#/definitions/CompositeSurface"},
+              {"$ref": "#/definitions/CompositeSurface"}
             ]
           }
         }
@@ -213,7 +213,7 @@
           "items": {
             "oneOf": [
               {"$ref": "#/definitions/MultiSurface"},
-              {"$ref": "#/definitions/CompositeSurface"},
+              {"$ref": "#/definitions/CompositeSurface"}
             ]
           }
         }
@@ -244,15 +244,13 @@
           "items": {
             "oneOf": [
               {"$ref": "#/definitions/MultiSurface"},
-              {"$ref": "#/definitions/CompositeSurface"},
+              {"$ref": "#/definitions/CompositeSurface"}
             ]
           }
         }
       },
       "required": ["type", "geometry"]
-    },    
-
-
+    },   
     "TINRelief": {
       "type": "object",
       "properties": {
