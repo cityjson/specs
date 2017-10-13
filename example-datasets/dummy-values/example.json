@@ -1,6 +1,6 @@
 {
   "type": "CityJSON",
-  "version": "0.3",
+  "version": "0.5",
   "metadata": {
     "crs": { 
       "epsg": 7415
@@ -37,18 +37,16 @@
         "boundaries": [
           [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
         ],
-        "semantics": [
-          [
+        "semantics": {
+          "surfaces" : [
             {
               "type": "RoofSurface",
               "slope": 33.4
             }, 
             {
               "type": "RoofSurface",
-              "slope": 66.4
+              "slope": 66.6
             },
-            {},
-            {},
             {
               "type": "WallSurface",
               "paint": "blue" 
@@ -57,14 +55,21 @@
               "type": "WallSurface",
               "paint": "red" 
             }
+          ],
+          "values": [
+            [0, 1, null, null, 2, 3]
           ]
-        ],
+        },
         "material": {
           "irradiation": { 
-            "values": [[0, 0, null, null, 1, 1]] 
+            "values": [
+              [0, 0, null, null, 1, 1]
+            ] 
           },
           "irradiation-2": { 
-            "values": [[2, 2, null, null, 1, 1]] 
+            "values": [
+              [2, 2, null, null, 1, 1]
+            ] 
           }
         }
       },
@@ -96,7 +101,7 @@
       "type": "BuildingPart", 
       "geometry": [{
         "type": "Solid",
-        "lod": 2.1,
+        "lod": 2,
         "boundaries": [
           [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
         ]
@@ -161,15 +166,10 @@
         "function": "leisure"
       },
       "geometry": [{
-        "type": "Solid",
-        "lod": 2,
+        "type": "MultiSurface",
+        "lod": 1,
         "boundaries": [
-          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
-        ],
-        "semantics": [ 
-          [
-          {"type":"WaterSurface"},  {"type":"WaterGroundSurface"},  {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}
-          ]
+           [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] 
         ]
       }]    
     }               

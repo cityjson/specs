@@ -480,11 +480,18 @@
           }
         },
         "semantics": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Semantics"
+          "type": "object",
+          "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Semantics" }
+            },
+            "values": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {"type": ["integer", "null"]}
+              }
             }
           }
         },
