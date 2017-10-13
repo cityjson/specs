@@ -11,7 +11,11 @@ Changelog
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
 - handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
 <<<<<<< HEAD
+<<<<<<< HEAD
 - binary encoding of JSON, with either [CBOR](http://cbor.io) or [BSON](http://bsonspec.org)
+=======
+- binary encoding of JSON, with either `CBOR <http://cbor.io>`_ or `BSON <http://bsonspec.or>`_
+>>>>>>> the goal is, of course, to have binary files
 =======
 - binary encoding of JSON, with either `CBOR <http://cbor.io>`_ or `BSON <http://bsonspec.or>`_
 >>>>>>> the goal is, of course, to have binary files
