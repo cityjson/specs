@@ -103,8 +103,8 @@ int main(int argc, char *argv[]) {
       isValid = false;
     if (building_pi_parent(j) == false)
       isValid = false;
-    if (semantics(j) == false)
-      isValid = false;
+    // if (semantics(j) == false)
+    //   isValid = false;
     if (geometry_empty(j, jschema) == false)
       woWarnings = false;
     if (metadata(j, jschema) == false)
