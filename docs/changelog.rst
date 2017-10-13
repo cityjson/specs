@@ -7,9 +7,24 @@ Changelog
 
 [Unreleased]
 ------------
-- Bridge, Tunnels, and Transportation modules of CityGML
+- Bridge and Tunnels modules of CityGML
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
 - handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
+
+----
+
+[0.5] - 
+------------------
+
+Added
+*****
+- CityGML module 'Transportation' added
+- handling of ``null`` values at any level in a nested arrays is now supported in the schema
+
+Changed
+*******
+- the way semantics is stored for the surface is completely changed and breaks previous version
+- material now can be per surface ``"values": []`` or ``"value": 2`` 
 
 ----
 
