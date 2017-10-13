@@ -36,7 +36,7 @@ The minimal valid CityJSON object is thus:
 
   {
     "type": "CityJSON",
-    "version": "0.3",
+    "version": "0.5",
     "CityObjects": {},
     "vertices": []
   }
@@ -245,9 +245,6 @@ In CityJSON, as can be seen in the schema, the values should be a string, thus e
 
 
 
-
-
-
 Building, BuildingPart, and BuildingInstallation
 ************************************************
 
@@ -315,7 +312,7 @@ That is, the surface representing a road should be split into sub-surfaces (ther
       "type": "MultiSurface",
       "lod": 2,
       "boundaries": [
-         [[0, 3, 2, 1, 4]], [[4, 5, 6, 666, 12]], [[0, 1, 5]]
+         [[0, 3, 2, 1, 4]], [[4, 5, 6, 666, 12]], [[0, 1, 5]], [[20, 21, 75]]
       ]
     }],
     "semantics": {
@@ -335,7 +332,7 @@ That is, the surface representing a road should be split into sub-surfaces (ther
           "function": "road"
         }
       ],
-      "values": [0, 1, 3]
+      "values": [0, 1, null, 2]
     }
   }
 
@@ -663,7 +660,7 @@ For ``"WaterBody"``:
   * ``"WaterGroundSurface"``
   * ``"WaterClosureSurface"``
 
-For Transporation (``"Road"``, ``"Railway"``, ``"TransportSquare"``):
+For Transportation (``"Road"``, ``"Railway"``, ``"TransportSquare"``):
 
   * ``"TrafficArea"``
   * ``"AuxiliaryTrafficArea"``
@@ -677,7 +674,7 @@ A Geometry object:
 
   - may have one member with the name ``"semantics"``, whose values are two keys ``"surfaces"`` and ``"values"``. Both have to be present.
   -  the value of ``"surfaces"`` is an array of Semantic Surface Objects.
-  -  the value of ``"values"`` is a hierarchy of arrays (the depth depends on the Geometry object; it is two less than the array ``"boundaries"``) with integers. An integer refers to the index in the ``"surfaces"`` array of the same geometry, and it is 0-based. If one surface has semantics, a value of ``null`` must be used.
+  -  the value of ``"values"`` is a hierarchy of arrays (the depth depends on the Geometry object; it is two less than the array ``"boundaries"``) with integers. An integer refers to the index in the ``"surfaces"`` array of the same geometry, and it is 0-based. If one surface has no semantics, a value of ``null`` must be used.
 
 .. code-block:: js
 
@@ -697,11 +694,49 @@ A Geometry object:
           "type": "RoofSurface",
           "slope": 66.6
         },
+        {
+          "type": "GroundSurface"
+        }
       ],
-      "values": [0, 0, null, 1, 1]
+      "values": [0, 0, null, 1, 2]
     },
   }
 
+.. note::
+   A ``null`` value is used to specify that a given surface has no semantics, but to avoid having arrays filled with ``null``, it is also possible to specify ``null`` for a shell or a whole Solid in a MultiSolid, the ``null`` propagates to the nested arrays.
+
+   .. code-block:: js
+     
+     {
+        "type": "CompositeSolid",
+        "lod": 2,
+        "boundaries": [
+          [ //-- 1st Solid
+            [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ]
+          ],
+          [ //-- 2nd Solid
+            [ [[666, 667, 668]], [[74, 75, 76]], [[880, 881, 885]], [[111, 122, 226]] ] 
+          ]    
+        ],
+        "semantics": {
+          "surfaces" : [
+            {      
+              "type": "RoofSurface",
+            }, 
+            {
+              "type": "WallSurface",
+            }
+          ],
+          "values": [
+            [ //-- 1st Solid
+              [0, 1, 1, null]
+            ],
+            [ //-- 2nd Solid get all null values
+              null
+            ]
+          ]
+        }
+      }  
 
 
 ----------------------------------------------
