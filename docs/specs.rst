@@ -770,11 +770,10 @@ Geometry Object having material(s)
 **********************************
 
 Each surface in a Geometry Object can have one or more materials assigned to it.
-To store these, a Geometry Object may have a member ``"material"``, the value of this member is a collection of key-value pairs, where the key is the *theme* of the material, and the value is one JSON object that must contain one member ``"values"``, whose value is a hierarchy of arrays with integers.
-Each integer refers to the position (0-based) in the ``"materials"`` member of the ``"appearance"`` member of the CityJSON object.
-If a surface has no material, then ``null`` should be used in the array.
+To store these, a Geometry Object may have a member ``"material"``, the value of this member is a collection of key-value pairs, where the key is the *theme* of the material, and the value is one JSON object that must contain either:
 
-The depth of the array depends on the Geometry object, and is equal to the depth of the ``"boundary"`` array minus 2, because each surface (``[[]]``) gets one material.
+  * one member ``"values"``, whose value is a hierarchy of arrays with integers. Each integer refers to the position (0-based) in the ``"materials"`` member of the ``"appearance"`` member of the CityJSON object. If a surface has no material, then ``null`` should be used in the array. The depth of the array depends on the Geometry object, and is equal to the depth of the ``"boundary"`` array minus 2, because each surface (``[[]]``) gets one material.
+  * one member ``"value"``, whose value is one integer referring to the position (0-based) in the ``"materials"`` member of the ``"appearance"`` member of the CityJSON object. This is used because often the materials are used to colour full objects, and repetition of materials is not necessary.
 
 In the following, the Solid has 4 surfaces, and there are 2 themes: "irradiation" and "irradiation-2" could for instance represent different colours based on different scenarios of an solar irradiation analysis.
 Notice that the last surface get no material (for both themes), thus ``null`` is used.
