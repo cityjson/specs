@@ -487,10 +487,12 @@
               "items": { "$ref": "#/definitions/Semantics" }
             },
             "values": {
-              "type": "array",
+              "type": ["array", "null"],
               "items": {
-                "type": "array",
-                "items": {"type": ["integer", "null"]}
+                "type": ["array", "null"],
+                "items": {
+                  "type": ["integer", "null"]
+                }
               }
             }
           },
@@ -562,16 +564,26 @@
           }
         },
         "semantics": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
+          "type": "object",
+          "properties": {
+            "surfaces": {
               "type": "array",
+              "items": { "$ref": "#/definitions/Semantics" }
+            },
+            "values": {
+              "type": ["array", "null"],
               "items": {
-                "$ref": "#/definitions/Semantics"
+                "type": ["array", "null"],
+                "items": {
+                  "type": ["array", "null"],
+                  "items": {
+                    "type": ["integer", "null"]
+                  }
+                }
               }
             }
-          }
+          },
+          "required": ["surfaces", "values"]
         },
         "material": {
           "type": "object",
@@ -643,16 +655,26 @@
           }
         },
         "semantics": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
+          "type": "object",
+          "properties": {
+            "surfaces": {
               "type": "array",
+              "items": { "$ref": "#/definitions/Semantics" }
+            },
+            "values": {
+              "type": ["array", "null"],
               "items": {
-                "$ref": "#/definitions/Semantics"
+                "type": ["array", "null"],
+                "items": {
+                  "type": ["array", "null"],
+                  "items": {
+                    "type": ["integer", "null"]
+                  }
+                }
               }
             }
-          }
+          },
+          "required": ["surfaces", "values"]
         },
         "material": {
           "type": "object",
@@ -725,8 +747,10 @@
               "items": { "$ref": "#/definitions/Semantics" }
             },
             "values": {
-              "type": "array",
-              "items": { "type": ["integer", "null"] }
+              "type": ["array", "null"],
+              "items": {
+                "type": ["integer", "null"]
+              }
             }
           },
           "required": ["surfaces", "values"]
@@ -780,15 +804,25 @@
             "type": "array",
             "items": {
               "type": "array",
-                "items": {"type": "integer"}
+                "items": { "type": "integer" }
             }
           }
         },
         "semantics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Semantics"
-          }
+          "type": "object",
+          "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Semantics" }
+            },
+            "values": {
+              "type": ["array", "null"],
+              "items": {
+                "type": ["integer", "null"]
+              }
+            }
+          },
+          "required": ["surfaces", "values"]
         },
         "material": {
           "type": "object",
