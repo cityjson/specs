@@ -298,8 +298,11 @@ Transportation: Road, Railway, and TransportSquare
 **************************************************
 
 CityJSON uses 3 classes related to transportation (``"Road"``, ``"Railway"``, ``"TransportSquare"``) and omits the "Track" from CityGML because it simply can be a road with specific attributes.
-In CityGML, each of the classes can have a number of "TrafficArea" and "AuxiliaryTrafficArea", which are defined as new surfaces. 
-In CityJSON, these surfaces do not need to be defined again since the road surfaces become Semantic Surface Objects (with type ``"TrafficArea"`` or ``"AuxiliaryTrafficArea"``)
+``"TransportSquare"`` is used to model for instance parking lots and squares.
+
+In CityGML, each of the 3 classes can have a number of "TrafficArea" and "AuxiliaryTrafficArea", which are defined as new surfaces. 
+In CityJSON, these surfaces do not need to be defined again since the road surfaces become Semantic Surface Objects (with type ``"TrafficArea"`` or ``"AuxiliaryTrafficArea"``).
+That is, the surface representing a road should be split into sub-surfaces (therefore forming a ``"MultiSurface"``), and each of the sub-surfaces get a semantics attached to it.
 
 - The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` can be of types ``"MultiSurface"`` or ``"CompositeSurface"``.
 - The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` cannot be of ``"lod"`` 0, only 1 and above are allowed.
@@ -307,7 +310,7 @@ In CityJSON, these surfaces do not need to be defined again since the road surfa
 .. code-block:: js
 
   "ma_rue": {
-    "type": "Raod", 
+    "type": "Road", 
     "geometry": [{
       "type": "MultiSurface",
       "lod": 2,
@@ -315,18 +318,25 @@ In CityJSON, these surfaces do not need to be defined again since the road surfa
          [[0, 3, 2, 1, 4]], [[4, 5, 6, 666, 12]], [[0, 1, 5]]
       ]
     }],
-    "semantics": [
-      {
-        "type": "TrafficArea",
-        "surfaceMaterial": ["asphalt"],
-        "function": "road"
-      },
-      {
-        "type": "AuxiliaryTrafficArea",
-        "function": "green areas"
-      },
-      {}
-    ]
+    "semantics": {
+      "surfaces": [
+        {
+          "type": "TrafficArea",
+          "surfaceMaterial": ["asphalt"],
+          "function": "road"
+        },
+        {
+          "type": "AuxiliaryTrafficArea",
+          "function": "green areas"
+        },
+        {
+          "type": "TrafficArea",
+          "surfaceMaterial": ["dirt"],
+          "function": "road"
+        }
+      ],
+      "values": [0, 1, 3]
+    }
   }
 
 
