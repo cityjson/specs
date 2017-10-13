@@ -311,7 +311,7 @@ bool semantics(json& j) {
           j++;
           i += shell.size();
         }
-        for (auto& shell : g["semantics"]) {
+        for (auto& shell : g["semantics"]["values"]) {
           js++;
           is += shell.size();
         }
@@ -322,7 +322,7 @@ bool semantics(json& j) {
         }
       }
       else if ( (g["type"] == "MultiSurface") || (g["type"] == "CompositeSurface") ) {
-        if (g["boundaries"].size() != g["semantics"].size()) {
+        if (g["boundaries"].size() != g["semantics"]["values"].size()) {
           isValid = false;
           std::string cotype = coit.value()["type"];
           std::cout << "ERROR:   " << cotype << " #" << coit.key() << " has arrays with different structure for 'boundaries' and 'semantics'" << std::endl;  
@@ -336,7 +336,7 @@ bool semantics(json& j) {
             i += shell.size();
           }
         }
-        for (auto& solid : g["semantics"]) {
+        for (auto& solid : g["semantics"]["values"]) {
           ks++;
           for (auto& shell : solid) {
             js++;

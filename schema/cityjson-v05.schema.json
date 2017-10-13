@@ -493,7 +493,8 @@
                 "items": {"type": ["integer", "null"]}
               }
             }
-          }
+          },
+          "required": ["surfaces", "values"]
         },
         "material": {
           "type": "object",
@@ -717,10 +718,18 @@
           }
         },
         "semantics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Semantics"
-          }
+          "type": "object",
+          "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Semantics" }
+            },
+            "values": {
+              "type": "array",
+              "items": { "type": ["integer", "null"] }
+            }
+          },
+          "required": ["surfaces", "values"]
         },
         "material": {
           "type": "object",
