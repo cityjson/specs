@@ -502,7 +502,7 @@ GenericCityObject
 Geometry Objects
 ----------------
 
-CityJSON defines the following 3D geometric primitives, ie all of them are embedded in 3D space and thus have coordinates *(x, y, z)* for their vertices. 
+CityJSON defines the following 3D geometric primitives, ie all of them are embedded in 3D space (and therefore their vertices have *(x, y, z)* coordinates). 
 The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is reused, ie a geometry does not store the locations of its vertices, but points to a vertex in a list (in the CityJSON member object ``"vertices"``).
 
 As is the case in CityGML, only linear and planar primitives are allowed (no curves or parametric surfaces for instance).
@@ -565,6 +565,10 @@ Arrays to represent boundaries
 - A ``"Solid"`` has an array of shells, the first array being the exterior shell of the solid, and the others the interior shells. Each shell has an array of surfaces, modelled in the exact same way as a MultiSurface/CompositeSurface.
 - A ``"MultiSolid"``, or a ``"CompositeSolid"``, has an array containing solids, each solid is modelled as above.
 
+.. note::
+
+  JSON does not allow comments, the comments in the example below (C++ style: ``//-- my comments``) are only to explain the cases, and should be removed
+
 .. code-block:: js
 
   {
@@ -596,8 +600,8 @@ Arrays to represent boundaries
   {
     "type": "Solid",
     "boundaries": [
-      [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ], //exterior shell
-      [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ] //interior shell
+      [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ], //-- exterior shell
+      [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ] //-- interior shell
     ]
   }
 
@@ -606,11 +610,11 @@ Arrays to represent boundaries
   {
     "type": "CompositeSolid",
     "boundaries": [
-      [ // 1st Solid
+      [ //-- 1st Solid
         [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ],
         [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ]
       ],
-      [ // 2st Solid
+      [ //-- 2st Solid
         [ [[666, 667, 668]], [[74, 75, 76]], [[880, 881, 885]], [[111, 122, 226]] ] 
       ]    
     ]
@@ -624,15 +628,56 @@ Semantic Surface Object
 ***********************
 
 A Semantics Surface is a JSON object representing the semantics of a surface, and may also represent other attributes of the surface (eg the slope of the roof or the solar potential).
-Since surfaces are assigned a semantics (and not rings), the depth of an array is one less than the array for storing the boundaries.
-
 A Semantic Object:
   
   - must have one member with the name ``"type"``, whose value is one of the allowed value. These depend on the City Object, see below.
   - may have other attributes in the form of a JSON key-value pair, where the value must not be a JSON object (but a string/number/integer/boolean). 
 
-If a Geometry Objects has a key ``"semantics"``, then each of its surfaces must have one corresponding Semantic Surface Object, and thus the depth of the nested arrays is different for different Geometry Objects.
-If one surface does not have any semantics, it must be represented with an empty object ``{}``; the third surface in the example below is one such example.
+.. code-block:: js
+
+  {
+    "type": "RoofSurface",
+    "slope": 16.4,
+    "solar-potential": 5
+  }
+
+----
+
+.. rubric:: Values for Semantics
+
+``"Building"``, ``"BuildingPart"``, and ``"BuildingInstallation"`` can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
+
+
+  * ``"RoofSurface"`` 
+  * ``"GroundSurface"`` 
+  * ``"WallSurface"``
+  * ``"ClosureSurface"``
+  * ``"OuterCeilingSurface"``
+  * ``"OuterFloorSurface"``
+  * ``"Window"``
+  * ``"Door"``
+
+For ``"WaterBody"``:
+
+  * ``"WaterSurface"``
+  * ``"WaterGroundSurface"``
+  * ``"WaterClosureSurface"``
+
+For Transporation (``"Road"``, ``"Railway"``, ``"TransportSquare"``):
+
+  * ``"TrafficArea"``
+  * ``"AuxiliaryTrafficArea"``
+
+----
+
+Because in one given City Object (say a ``"Building"``) several surfaces can have the same semantics (think of a complex that has been triangulated, there can be dozens of triangles used to model the same surface), the Semantic Surfaces have to be declared once and each of the surfaces used to represent it point to it.
+This is achieved by first declaring all the Semantic Surfaces in array, and then having an array where each surface in the is linked to the position of the Semantic Surfaces array.
+
+A Geometry object:
+
+  - may have one member with the name ``"semantics"``, whose values are two keys ``"surfaces"`` and ``"values"``. Both have to be present.
+  -  the value of ``"surfaces"`` is an array of Semantic Surface Objects.
+  -  the value of ``"values"`` is a hierarchy of arrays (the depth depends on the Geometry object; it is two less than the array ``"boundaries"``) with integers. An integer refers to the index in the ``"surfaces"`` array of the same geometry, and it is 0-based. If one surface has semantics, a value of ``null`` must be used.
 
 .. code-block:: js
 
@@ -640,68 +685,23 @@ If one surface does not have any semantics, it must be represented with an empty
     "type": "MultiSurface",
     "lod": 2,
     "boundaries": [
-      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4], [[0, 2, 3, 8]]
+      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4], [[0, 2, 3, 8], [[10, 12, 23, 48]]
     ],
-    "semantics": [
-      {
-        "type": "RoofSurface",
-        "slope": 16.4,
-        "solar-potential": 5
-      },
-      {
-        "type": "WallSurface",
-        "type-paint": "gold paint"
-      },
-      {},
-      {
-        "type": "GroundSurface"
-      }
-    ]
-  }
-
-.. code-block:: js
-
-  {
-    "type": "Solid",
-    "lod": 2.3,
-    "boundaries": [
-      [ [[10, 123, 322, 231]], [[24, 3, 34, 666]], [[10, 232, 2325, 44]] ]
-    ],    
-    "semantics": [
-      [
+    "semantics": {
+      "surfaces" : [
         {
           "type": "RoofSurface",
-          "slope": 16.4,
-          "solar-potential": 5
+          "slope": 33.4
+        }, 
+        {
+          "type": "RoofSurface",
+          "slope": 66.6
         },
-        {},
-        {}
-      ]
-    ]
+      ],
+      "values": [0, 0, null, 1, 1]
+    },
   }
 
-
-``"Building"``, ``"BuildingPart"``, and ``"BuildingInstallation"`` can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
-
-- ``"RoofSurface"`` 
-- ``"GroundSurface"`` 
-- ``"WallSurface"``
-- ``"ClosureSurface"``
-- ``"OuterCeilingSurface"``
-- ``"OuterFloorSurface"``
-- ``"Window"``
-- ``"Door"``
-
-For ``"WaterBody"``:
-
-- ``"WaterSurface"``
-- ``"WaterGroundSurface"``
-- ``"WaterClosureSurface"``
-
-For Transporation (``"Road"``, ``"Railway"``, ``"TransportSquare"``):
-
-- ``"TrafficArea"``
-- ``"AuxiliaryTrafficArea"``
 
 
 ----------------------------------------------
