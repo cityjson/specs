@@ -13,12 +13,15 @@
 
 #include <iostream>
 #include <fstream>
-#include "json.hpp"
 #include <set>
 #include <vector>
 #include <string>
-#include "Point3.h"
 #include <cstdlib>
+
+#include "nlohmann-json/json.hpp"
+#include <tclap/CmdLine.h>
+
+#include "Point3.h"
 
 
 bool bConvertInt = false;
@@ -26,6 +29,30 @@ bool bConvertInt = false;
 using json = nlohmann::json;
 
 int main(int argc, const char * argv[]) {
+
+
+try {  
+  TCLAP::CmdLine cmd("Command description message", ' ', "0.9");
+  TCLAP::ValueArg<std::string> nameArg("n","name","Name to print",true,"homer","string");
+  cmd.add( nameArg );
+  TCLAP::SwitchArg reverseSwitch("r","reverse","Print name backwards", cmd, false);
+  cmd.parse( argc, argv );
+  std::string name = nameArg.getValue();
+  bool reverseName = reverseSwitch.getValue();
+
+  if ( reverseName )
+  {
+    std::reverse(name.begin(),name.end());
+    std::cout << "My name (spelled backwards) is: " << name << std::endl;
+  }
+  else
+    std::cout << "My name is: " << name << std::endl;
+  } 
+  catch (TCLAP::ArgException &e)
+  { 
+    std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl; 
+  }
+
   const char* inputfile = argv[1];
   const char* d = (argc > 2) ? argv[2] : "3";
   int importantdigits = atoi(d);
