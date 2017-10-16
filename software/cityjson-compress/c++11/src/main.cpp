@@ -19,7 +19,7 @@
 #include <cstdlib>
 
 #include "nlohmann-json/json.hpp"
-#include <tclap/CmdLine.h>
+#include "tclap/CmdLine.h"
 
 #include "Point3.h"
 
@@ -98,7 +98,7 @@ try {
     vertices.push_back(tmp);
   }
 
-  //-- merge close ones (based on a tolerance)
+  //-- merge close vertices (based on a tolerance)
   std::vector<unsigned long> newids (vertices.size(), -1);
   std::map<std::string,unsigned long> m;
   int i = 0;
@@ -123,6 +123,7 @@ try {
   std::cout << "\tmerged: " << totalmerged << std::endl;
   std::cout << "\toutput: " << m.size() << std::endl;
 
+  std::vector<bool> usedids (vertices.size(), false);
   //-- update the indices
   for (auto& co : j["CityObjects"]) {
     for (auto& g : co["geometry"]) {
@@ -131,8 +132,10 @@ try {
           for (auto& surface : shell) 
             for (auto& ring : surface) 
               for (auto& v : ring) 
-                if (newids[v] != -1) 
+                if (newids[v] != -1) {
                   v = newids[v]; 
+                  usedids[v] = true;
+                }
       }
       else if ( (g["type"] == "MultiSurface") || (g["type"] == "CompositeSurface") ) {
         for (auto& surface : g["boundaries"]) 
@@ -152,6 +155,26 @@ try {
       }            
     }
   }
+  std::cout << "ici" << std::endl;
+  //-- purge unused ones
+  int shift = 0;
+  for (auto& newid: newids) {
+    std::cout << newid << std::endl;
+    std::cout << usedids[newid] << std::endl;
+    if (usedids[newid] == true) {
+      newid -= shift;
+    }
+    else {
+      newid = -1;
+      shift++;
+    }
+  }
+  std::cout << "là" << std::endl;
+  int newtotal = 0;
+  for (auto& newid: newids) 
+    if (newid != -1)
+      newtotal++;
+  std::cout << "newtotal: " << newtotal << std::endl;
 
   if (intvertex.getValue() == true) { //-- convert to int and write the transform
     std::cout << "Converting to integer coordinates." << std::endl;
@@ -167,9 +190,11 @@ try {
     j["transform"]["translate"] = {minx, miny, minz};
   }
   else {
-    std::vector<std::array<double, 3>> vout(m.size());
+    std::vector<std::array<double, 3>> vout(newtotal);
     for (auto& newid: newids) {
-      vout[newid] = j["vertices"][newid];
+      std::cout << newid << std::endl; 
+      if (newid != -1)
+        vout[newid] = j["vertices"][newid];
     }
     j["vertices"] = vout;
   }
