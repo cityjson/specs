@@ -24,11 +24,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9AFA47E31F94DF3F00918405 /* compress2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = compress2; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AFA47EF1F94DFA400918405 /* main.cpp */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../src/main.cpp; sourceTree = "<group>"; tabWidth = 2; };
-		9AFA47F01F94DFAB00918405 /* Point3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Point3.cpp; path = ../src/Point3.cpp; sourceTree = "<group>"; };
-		9AFA47F51F94DFF400918405 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = json.hpp; path = ../include/json.hpp; sourceTree = "<group>"; };
-		9AFA47F61F94E00E00918405 /* Point3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Point3.h; path = ../include/Point3.h; sourceTree = "<group>"; };
+		9AFA47E31F94DF3F00918405 /* cityjson-compress */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cityjson-compress"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AFA47EF1F94DFA400918405 /* main.cpp */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; tabWidth = 2; };
+		9AFA47F01F94DFAB00918405 /* Point3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Point3.cpp; path = src/Point3.cpp; sourceTree = "<group>"; };
+		9AFA47F51F94DFF400918405 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = json.hpp; path = include/json.hpp; sourceTree = "<group>"; };
+		9AFA47F61F94E00E00918405 /* Point3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Point3.h; path = include/Point3.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		9AFA47E41F94DF3F00918405 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9AFA47E31F94DF3F00918405 /* compress2 */,
+				9AFA47E31F94DF3F00918405 /* cityjson-compress */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,9 +64,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9AFA47E21F94DF3F00918405 /* compress2 */ = {
+		9AFA47E21F94DF3F00918405 /* cityjson-compress */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "compress2" */;
+			buildConfigurationList = 9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "cityjson-compress" */;
 			buildPhases = (
 				9AFA47DF1F94DF3F00918405 /* Sources */,
 				9AFA47E01F94DF3F00918405 /* Frameworks */,
@@ -76,9 +76,9 @@
 			);
 			dependencies = (
 			);
-			name = compress2;
+			name = "cityjson-compress";
 			productName = compress2;
-			productReference = 9AFA47E31F94DF3F00918405 /* compress2 */;
+			productReference = 9AFA47E31F94DF3F00918405 /* cityjson-compress */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -96,7 +96,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "compress2" */;
+			buildConfigurationList = 9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "cityjson-compress" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -108,7 +108,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9AFA47E21F94DF3F00918405 /* compress2 */,
+				9AFA47E21F94DF3F00918405 /* cityjson-compress */,
 			);
 		};
 /* End PBXProject section */
@@ -248,7 +248,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "compress2" */ = {
+		9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "cityjson-compress" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AFA47E81F94DF3F00918405 /* Debug */,
@@ -257,7 +257,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "compress2" */ = {
+		9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "cityjson-compress" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AFA47EB1F94DF3F00918405 /* Debug */,
