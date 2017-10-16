@@ -17,21 +17,23 @@
 #include <set>
 #include <vector>
 #include <string>
-#include <Point3.h>
+#include "Point3.h"
 #include <cstdlib>
 
 
+bool bConvertInt = false;
 
 using json = nlohmann::json;
 
 int main(int argc, const char * argv[]) {
-  const char* inputfile = (argc > 1) ? argv[1] : "../../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN.json";
+  const char* inputfile = argv[1];
   const char* d = (argc > 2) ? argv[2] : "3";
   int importantdigits = atoi(d);
   std::cout << "Input file: " << inputfile << std::endl;
   std::cout << "Number of digits kept after the dot: " << importantdigits << std::endl;
   std::ifstream input(inputfile);
 
+  
   //-- size input file
   std::streampos sizei;
   std::streampos begin, end;
@@ -45,6 +47,8 @@ int main(int argc, const char * argv[]) {
   json j;
   input >> j;
   input.close();
+
+  std::cout << "size input vertices: " << j["vertices"].size() << std::endl;
 
   //-- vertices
   std::vector<Point3> vertices;
@@ -63,25 +67,32 @@ int main(int argc, const char * argv[]) {
   }
 
   //-- merge close ones (based on a tolerance)
-  std::vector<int> newids (vertices.size(), -1);
-  std::map<std::string,int> m;
+  std::vector<unsigned long> newids (vertices.size(), -1);
+  std::map<std::string,unsigned long> m;
   int i = 0;
+  int totalmerged = 0;
   for (auto& v : vertices) {
     auto it = m.find(v.get_key(importantdigits));
-    if (it == m.end()) 
-      m[v.get_key(importantdigits)] = i;
-    else 
+    if (it == m.end()) {
+      unsigned long a = m.size();
+      newids[i] = a;
+      m[v.get_key(importantdigits)] = a;
+    }
+    else {
       newids[i] = it->second;
+      totalmerged++;
+    }
     i++;
   }
-  int totalmerged = 0;
-  for (auto& each : newids) {
-    if (each != -1)
-      totalmerged++;
-  }
   std::cout << "---" << std::endl;
-  std::cout << "bbox min: (" << minx << ", " << miny << ", " << minz << ")" << std::endl;
-  std::cout << "Vertices merged: " << totalmerged << std::endl;
+  std::cout << std::cout.precision(3) << std::fixed << "bbox min: (" << minx << ", " << miny << ", " << minz << ")" << std::endl;
+  std::cout << "Vertices" << std::endl;
+  std::cout << "\tinput: "  << j["vertices"].size() << std::endl;
+  std::cout << "\tmerged: " << totalmerged << std::endl;
+  std::cout << "\toutput: " << m.size() << std::endl;
+
+  // for (auto& each: newids)
+  //   std::cout << "--" << each << std::endl;
 
   //-- update the indices
   for (auto& co : j["CityObjects"]) {
@@ -113,18 +124,30 @@ int main(int argc, const char * argv[]) {
     }
   }
 
-  //-- convert to int and write the transform
-  std::vector< std::array<int, 3> > vvv;
-  for (auto& v : vertices) {
-    v.translate(-minx, -miny, -minz); 
-    vvv.emplace_back(v.get_array_int(importantdigits));
+  if (bConvertInt == true) { //-- convert to int and write the transform
+    std::cout << "Converting to integer coordinates." << std::endl;
+    std::vector<std::array<int, 3>> vout(m.size());
+    for (auto& newid: newids) {
+      Point3 v(j["vertices"][newid][0], j["vertices"][newid][1], j["vertices"][newid][2]);
+      v.translate(-minx, -miny, -minz); 
+      vout[newid] = v.get_array_int(importantdigits);
+    }
+    j["vertices"] = vout;
+    double scalefactor = 1 / (pow(10, importantdigits));
+    j["transform"]["scale"] = {scalefactor, scalefactor, scalefactor};
+    j["transform"]["translate"] = {minx, miny, minz};
   }
-  j["vertices"] = vvv;
-  double scalefactor = 1 / (pow(10, importantdigits));
-  j["transform"]["scale"] = {scalefactor, scalefactor, scalefactor};
-  j["transform"]["translate"] = {minx, miny, minz};
+  else {
+    std::vector<std::array<double, 3>> vout(m.size());
+    for (auto& newid: newids) {
+      vout[newid] = j["vertices"][newid];
+    }
+    j["vertices"] = vout;
+  }
+  std::cout << "done." << std::endl;
 
-  // -- write prettified JSON to another file
+  
+  //-- write prettified JSON to another file
   std::string s = inputfile;
   std::size_t found = s.find(".json");
   if (found != std::string::npos) {
@@ -132,6 +155,8 @@ int main(int argc, const char * argv[]) {
     std::cout << "File saved: " << s << std::endl;
     std::ofstream o(s);
     o << j << std::endl;
+    // o << j.dump(2) << std::endl;
+    std::cout << "size output vertices: " << j["vertices"].size() << std::endl;
 
     //-- size output file
     std::ifstream outputfile(s);
