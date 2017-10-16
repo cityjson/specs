@@ -32,33 +32,40 @@ int main(int argc, const char * argv[]) {
 
 
 try {  
-  TCLAP::CmdLine cmd("Command description message", ' ', "0.9");
-  TCLAP::ValueArg<std::string> nameArg("n","name","Name to print",true,"homer","string");
-  cmd.add( nameArg );
-  TCLAP::SwitchArg reverseSwitch("r","reverse","Print name backwards", cmd, false);
+  TCLAP::CmdLine cmd("Allowed options", ' ', "");
+
+  TCLAP::UnlabeledValueArg<std::string>   inputfile(
+                                              "inputfile", 
+                                              "input CityJSON file", 
+                                              true, 
+                                              "", 
+                                              "string");
+  TCLAP::SwitchArg      intvertex("",
+                                  "intvertex",
+                                  "convert vertices to integer",
+                                  false);
+  TCLAP::SwitchArg      duplicates("",
+                                   "duplicate",
+                                   "merge duplicate vertices",
+                                   false);
+  TCLAP::ValueArg<int>  tolerance("", 
+                                  "tolerance",
+                                  "tolerance for merging duplicates and converting to int",
+                                  false,
+                                  3,
+                                  "integer");
+  
+  cmd.add(inputfile);
+  cmd.add(intvertex);
+  cmd.add(duplicates);
+  cmd.add(tolerance);
   cmd.parse( argc, argv );
-  std::string name = nameArg.getValue();
-  bool reverseName = reverseSwitch.getValue();
-
-  if ( reverseName )
-  {
-    std::reverse(name.begin(),name.end());
-    std::cout << "My name (spelled backwards) is: " << name << std::endl;
-  }
-  else
-    std::cout << "My name is: " << name << std::endl;
-  } 
-  catch (TCLAP::ArgException &e)
-  { 
-    std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl; 
-  }
-
-  const char* inputfile = argv[1];
-  const char* d = (argc > 2) ? argv[2] : "3";
-  int importantdigits = atoi(d);
-  std::cout << "Input file: " << inputfile << std::endl;
+  
+  std::string ifile = inputfile.getValue();
+  int importantdigits = tolerance.getValue();
+  std::cout << "Input file: " << ifile << std::endl;
   std::cout << "Number of digits kept after the dot: " << importantdigits << std::endl;
-  std::ifstream input(inputfile);
+  std::ifstream input(ifile);
 
   
   //-- size input file
@@ -175,7 +182,7 @@ try {
 
   
   //-- write prettified JSON to another file
-  std::string s = inputfile;
+  std::string s = ifile;
   std::size_t found = s.find(".json");
   if (found != std::string::npos) {
     s.insert(found, ".compress");
@@ -198,4 +205,9 @@ try {
   }
       
   return 0;
+  }
+  catch (TCLAP::ArgException &e)
+  { 
+    std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl; 
+  }
 }
