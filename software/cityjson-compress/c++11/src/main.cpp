@@ -44,10 +44,10 @@ try {
                                   "intvertex",
                                   "convert vertices to integer",
                                   false);
-  TCLAP::SwitchArg      duplicates("",
-                                   "duplicate",
-                                   "merge duplicate vertices",
-                                   false);
+  TCLAP::SwitchArg      prettified("",
+                                  "prettified",
+                                  "prettified JSON",
+                                  false);
   TCLAP::ValueArg<int>  tolerance("", 
                                   "tolerance",
                                   "tolerance for merging duplicates and converting to int",
@@ -57,7 +57,6 @@ try {
   
   cmd.add(inputfile);
   cmd.add(intvertex);
-  cmd.add(duplicates);
   cmd.add(tolerance);
   cmd.parse( argc, argv );
   
@@ -75,14 +74,13 @@ try {
   input.seekg(0, std::ios::end);
   end = input.tellg();
   sizei = end - begin;
-  // std::cout << "size is: " << sizei << " bytes.\n";
   input.seekg(0);
   
   json j;
   input >> j;
   input.close();
 
-  std::cout << "size input vertices: " << j["vertices"].size() << std::endl;
+  std::cout << "Number input vertices: " << j["vertices"].size() << std::endl;
 
   //-- vertices
   std::vector<Point3> vertices;
@@ -125,9 +123,6 @@ try {
   std::cout << "\tmerged: " << totalmerged << std::endl;
   std::cout << "\toutput: " << m.size() << std::endl;
 
-  // for (auto& each: newids)
-  //   std::cout << "--" << each << std::endl;
-
   //-- update the indices
   for (auto& co : j["CityObjects"]) {
     for (auto& g : co["geometry"]) {
@@ -158,7 +153,7 @@ try {
     }
   }
 
-  if (bConvertInt == true) { //-- convert to int and write the transform
+  if (intvertex.getValue() == true) { //-- convert to int and write the transform
     std::cout << "Converting to integer coordinates." << std::endl;
     std::vector<std::array<int, 3>> vout(m.size());
     for (auto& newid: newids) {
@@ -178,18 +173,18 @@ try {
     }
     j["vertices"] = vout;
   }
-  std::cout << "done." << std::endl;
 
-  
-  //-- write prettified JSON to another file
+    
   std::string s = ifile;
   std::size_t found = s.find(".json");
   if (found != std::string::npos) {
     s.insert(found, ".compress");
     std::cout << "File saved: " << s << std::endl;
     std::ofstream o(s);
-    o << j << std::endl;
-    // o << j.dump(2) << std::endl;
+    if (prettified.getValue() == true)
+      o << j.dump(2) << std::endl;
+    else
+      o << j << std::endl;
     std::cout << "size output vertices: " << j["vertices"].size() << std::endl;
 
     //-- size output file
