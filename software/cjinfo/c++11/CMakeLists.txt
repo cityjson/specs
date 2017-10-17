@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.2)
-project (cityjson-info)
+project (cjinfo)
 
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "-Wall -std=c++11")

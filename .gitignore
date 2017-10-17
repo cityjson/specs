@@ -12,3 +12,6 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 libthirdparty.a
+/software/cjvalschema/c++11/build
+/software/cjinfo/c++11/build
+/software/cjcompress/c++11/build
