@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9AFA47E21F94DF3F00918405"
-               BuildableName = "cityjson-compress"
-               BlueprintName = "cityjson-compress"
-               ReferencedContainer = "container:cityjson-compress.xcodeproj">
+               BuildableName = "cjcompress"
+               BlueprintName = "cjcompress"
+               ReferencedContainer = "container:cjcompress.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9AFA47E21F94DF3F00918405"
-            BuildableName = "cityjson-compress"
-            BlueprintName = "cityjson-compress"
-            ReferencedContainer = "container:cityjson-compress.xcodeproj">
+            BuildableName = "cjcompress"
+            BlueprintName = "cjcompress"
+            ReferencedContainer = "container:cjcompress.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,9 +58,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9AFA47E21F94DF3F00918405"
-            BuildableName = "cityjson-compress"
-            BlueprintName = "cityjson-compress"
-            ReferencedContainer = "container:cityjson-compress.xcodeproj">
+            BuildableName = "cjcompress"
+            BlueprintName = "cjcompress"
+            ReferencedContainer = "container:cjcompress.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9AFA47E21F94DF3F00918405"
-            BuildableName = "cityjson-compress"
-            BlueprintName = "cityjson-compress"
-            ReferencedContainer = "container:cityjson-compress.xcodeproj">
+            BuildableName = "cjcompress"
+            BlueprintName = "cjcompress"
+            ReferencedContainer = "container:cjcompress.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

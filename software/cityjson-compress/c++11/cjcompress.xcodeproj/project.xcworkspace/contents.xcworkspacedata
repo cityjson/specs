@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../thirdparty/nlohmann-json">
-   </FileRef>
-   <FileRef
-      location = "self:">
+      location = "self:/Users/hugo/temp/ooo/cityjson-compress/c++11/cjcompress.xcodeproj">
    </FileRef>
 </Workspace>
