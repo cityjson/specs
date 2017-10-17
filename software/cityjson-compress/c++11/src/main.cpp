@@ -109,19 +109,21 @@ void convert_vertices_to_integer(json& j, int importantdigits) {
   double miny = 1e9;
   double minz = 1e9;
   for (auto& v : j["vertices"]) {
-    Point3 tmp(v[0], v[1], v[2]);
-    if (v[0] < minx)
-      minx = v[0];
-    if (v[1] < miny)
-      miny = v[1];    
-    if (v[2] < minz)
-      minz = v[2];    
-    vertices.push_back(tmp);
+    std::vector<double> t = v;
+    Point3 p(t[0], t[1], t[2]);
+    if (t[0] < minx)
+      minx = t[0];
+    if (t[1] < miny)
+      miny = t[1];
+    if (t[2] < minz)
+      minz = t[2];
+    vertices.push_back(p);
   }
   std::cout << "Converting to integer coordinates." << std::endl;
   std::vector<std::array<int, 3>> vout; 
   for (auto& v : j["vertices"]) {
-    Point3 p(v[0], v[1], v[2]);
+    std::vector<double> t = v;
+    Point3 p(t[0], t[1], t[2]);
     p.translate(-minx, -miny, -minz);
     vout.push_back(p.get_array_int(importantdigits));
   }
@@ -158,7 +160,8 @@ void save_to_file(json& j, std::string ifile, std::streampos& sizei) {
 void merge_duplicate_vertices(json& j, int importantdigits) {
   std::vector<Point3> vertices;
   for (auto& v : j["vertices"]) {
-    Point3 tmp(v[0], v[1], v[2]);
+    std::vector<double> t = v;
+    Point3 tmp(t[0], t[1], t[2]);
     vertices.push_back(tmp);
   }
   std::map<std::string,unsigned long> hash;
@@ -269,9 +272,14 @@ void remove_unused_vertices(json& j) {
       }      
   }
   //-- replace the vertices
-  std::vector<std::array<double, 3>> vout; 
-  for (auto& v : newvertices) 
-    vout.push_back(j["vertices"][v]);
+  std::vector<std::array<double, 3>> vout;
+  for (int& v : newvertices) {
+    std::array<double,3> t;
+    t[0] = j["vertices"][v][0];
+    t[1] = j["vertices"][v][1];
+    t[2] = j["vertices"][v][2];
+    vout.push_back(t);
+  }
   j["vertices"] = vout;
 }
 
