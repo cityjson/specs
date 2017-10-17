@@ -25,7 +25,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9A228FE21F95ED9A00437CBD /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
 		9A228FE41F95EE5200437CBD /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = ../../../../../../usr/local/Cellar/boost/1.64.0_1/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
 		9ACC6A4B1F952C92000E62BD /* Point3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Point3.h; path = src/Point3.h; sourceTree = "<group>"; };
 		9ACC6A4C1F952C92000E62BD /* Point3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Point3.cpp; path = src/Point3.cpp; sourceTree = "<group>"; };
@@ -56,7 +55,6 @@
 		9AFA47DA1F94DF3F00918405 = {
 			isa = PBXGroup;
 			children = (
-				9A228FE21F95ED9A00437CBD /* include */,
 				9ACC6A4D1F952C92000E62BD /* main.cpp */,
 				9ACC6A4C1F952C92000E62BD /* Point3.cpp */,
 				9ACC6A4B1F952C92000E62BD /* Point3.h */,
