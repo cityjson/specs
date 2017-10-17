@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9AFA47F31F94DFDB00918405 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AFA47EF1F94DFA400918405 /* main.cpp */; };
-		9AFA47F41F94DFDE00918405 /* Point3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AFA47F01F94DFAB00918405 /* Point3.cpp */; };
+		9A228FE51F95EE5200437CBD /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A228FE41F95EE5200437CBD /* libboost_program_options.dylib */; };
+		9ACC6A4E1F952C92000E62BD /* Point3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC6A4C1F952C92000E62BD /* Point3.cpp */; };
+		9ACC6A4F1F952C92000E62BD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC6A4D1F952C92000E62BD /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,11 +25,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9AFA47E31F94DF3F00918405 /* cityjson-compress */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cityjson-compress"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AFA47EF1F94DFA400918405 /* main.cpp */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; tabWidth = 2; };
-		9AFA47F01F94DFAB00918405 /* Point3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Point3.cpp; path = src/Point3.cpp; sourceTree = "<group>"; };
-		9AFA47F51F94DFF400918405 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = json.hpp; path = include/json.hpp; sourceTree = "<group>"; };
-		9AFA47F61F94E00E00918405 /* Point3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Point3.h; path = include/Point3.h; sourceTree = "<group>"; };
+		9A228FE21F95ED9A00437CBD /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		9A228FE41F95EE5200437CBD /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = ../../../../../../usr/local/Cellar/boost/1.64.0_1/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
+		9ACC6A4B1F952C92000E62BD /* Point3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Point3.h; path = src/Point3.h; sourceTree = "<group>"; };
+		9ACC6A4C1F952C92000E62BD /* Point3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Point3.cpp; path = src/Point3.cpp; sourceTree = "<group>"; };
+		9ACC6A4D1F952C92000E62BD /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		9AFA47E31F94DF3F00918405 /* cjcompress */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cjcompress; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,27 +38,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A228FE51F95EE5200437CBD /* libboost_program_options.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A228FE31F95EE5100437CBD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A228FE41F95EE5200437CBD /* libboost_program_options.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9AFA47DA1F94DF3F00918405 = {
 			isa = PBXGroup;
 			children = (
-				9AFA47F61F94E00E00918405 /* Point3.h */,
-				9AFA47F51F94DFF400918405 /* json.hpp */,
-				9AFA47F01F94DFAB00918405 /* Point3.cpp */,
-				9AFA47EF1F94DFA400918405 /* main.cpp */,
+				9A228FE21F95ED9A00437CBD /* include */,
+				9ACC6A4D1F952C92000E62BD /* main.cpp */,
+				9ACC6A4C1F952C92000E62BD /* Point3.cpp */,
+				9ACC6A4B1F952C92000E62BD /* Point3.h */,
 				9AFA47E41F94DF3F00918405 /* Products */,
+				9A228FE31F95EE5100437CBD /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		9AFA47E41F94DF3F00918405 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9AFA47E31F94DF3F00918405 /* cityjson-compress */,
+				9AFA47E31F94DF3F00918405 /* cjcompress */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,9 +78,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9AFA47E21F94DF3F00918405 /* cityjson-compress */ = {
+		9AFA47E21F94DF3F00918405 /* cjcompress */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "cityjson-compress" */;
+			buildConfigurationList = 9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "cjcompress" */;
 			buildPhases = (
 				9AFA47DF1F94DF3F00918405 /* Sources */,
 				9AFA47E01F94DF3F00918405 /* Frameworks */,
@@ -76,9 +90,9 @@
 			);
 			dependencies = (
 			);
-			name = "cityjson-compress";
+			name = cjcompress;
 			productName = compress2;
-			productReference = 9AFA47E31F94DF3F00918405 /* cityjson-compress */;
+			productReference = 9AFA47E31F94DF3F00918405 /* cjcompress */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -96,7 +110,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "cityjson-compress" */;
+			buildConfigurationList = 9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "cjcompress" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -108,7 +122,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9AFA47E21F94DF3F00918405 /* cityjson-compress */,
+				9AFA47E21F94DF3F00918405 /* cjcompress */,
 			);
 		};
 /* End PBXProject section */
@@ -118,8 +132,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AFA47F31F94DFDB00918405 /* main.cpp in Sources */,
-				9AFA47F41F94DFDE00918405 /* Point3.cpp in Sources */,
+				9ACC6A4F1F952C92000E62BD /* main.cpp in Sources */,
+				9ACC6A4E1F952C92000E62BD /* Point3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +246,15 @@
 		9AFA47EB1F94DF3F00918405 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.64.0_1/lib,
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -240,7 +262,15 @@
 		9AFA47EC1F94DF3F00918405 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.64.0_1/lib,
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -248,7 +278,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "cityjson-compress" */ = {
+		9AFA47DE1F94DF3F00918405 /* Build configuration list for PBXProject "cjcompress" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AFA47E81F94DF3F00918405 /* Debug */,
@@ -257,7 +287,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "cityjson-compress" */ = {
+		9AFA47EA1F94DF3F00918405 /* Build configuration list for PBXNativeTarget "cjcompress" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AFA47EB1F94DF3F00918405 /* Debug */,
