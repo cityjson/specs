@@ -6,6 +6,113 @@
 
   "definitions": {
 
+    "Tunnel": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["Tunnel"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "creationDate" : {"type": "string"},
+            "terminationDate" : {"type": "string"},
+            "class": {"type": "string"},
+            "function": {"type": "string"},
+            "usage": {"type": "string"},
+            "yearOfConstruction": { "type": "integer"},
+            "yearOfDemolition": { "type": "integer"}
+          }
+        },
+        "Parts": {
+          "type": "array",
+          "description": "the IDs of the TunnelPart of this Tunnel",
+          "items": {"type": "string"}
+        },
+        "Installations": {
+          "type": "array",
+          "description": "the IDs of the TunnelInstallation of this Tunnel",
+          "items": {"type": "string"}
+        },
+        "geometry": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/Solid"},
+              {"$ref": "#/definitions/CompositeSolid"},
+              {"$ref": "#/definitions/MultiSurface"}
+            ] 
+          }
+        }
+      },
+      "required": ["type", "geometry"]
+    },    
+    
+    "TunnelPart": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["TunnelPart"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "creationDate" : {"type": "string"},
+            "terminationDate" : {"type": "string"},
+            "class": {"type": "string"},
+            "function": {"type": "string"},
+            "usage": {"type": "string"},
+            "yearOfConstruction": { "type": "integer"},
+            "yearOfDemolition": { "type": "integer"}
+          }
+        },
+        "Installations": {
+          "type": "array",
+          "description": "the IDs of the TunnelInstallation of this TunnelPart",
+          "items": {"type": "string"}
+        },
+        "geometry": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/Solid"},
+              {"$ref": "#/definitions/CompositeSolid"},
+              {"$ref": "#/definitions/MultiSurface"}
+            ] 
+          }
+        }
+      },
+      "required": ["type", "geometry"]
+    },
+
+    "TunnelInstallation": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["TunnelInstallation"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "creationDate" : {"type": "string"},
+            "terminationDate" : {"type": "string"},            
+            "class": {"type": "string"},
+            "function": {"type": "string"},
+            "usage": {"type": "string"}
+          }
+        },
+        "geometry": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/MultiPoint"},
+              {"$ref": "#/definitions/MultiLineString"},
+              {"$ref": "#/definitions/Solid"},
+              {"$ref": "#/definitions/MultiSolid"},
+              {"$ref": "#/definitions/CompositeSolid"},
+              {"$ref": "#/definitions/MultiSurface"},
+              {"$ref": "#/definitions/CompositeSurface"}            
+            ] 
+          }
+        }
+      },
+      "required": ["type", "geometry"]
+    },
+
     "Bridge": {
       "type": "object",
       "properties": {
@@ -1226,10 +1333,6 @@
       "type": "object",
       "additionalProperties": {
         "oneOf": [
-          { "$ref": "#/definitions/Bridge" },
-          { "$ref": "#/definitions/BridgePart" },
-          { "$ref": "#/definitions/BridgeInstallation" },
-          { "$ref": "#/definitions/BridgeConstructionElement" },
           { "$ref": "#/definitions/Building" },
           { "$ref": "#/definitions/BuildingPart" },
           { "$ref": "#/definitions/BuildingInstallation" },
@@ -1242,7 +1345,14 @@
           { "$ref": "#/definitions/GenericCityObject" },
           { "$ref": "#/definitions/CityFurniture" },
           { "$ref": "#/definitions/SolitaryVegetationObject" },
-          { "$ref": "#/definitions/PlantCover" }
+          { "$ref": "#/definitions/PlantCover" },
+          { "$ref": "#/definitions/Bridge" },
+          { "$ref": "#/definitions/BridgePart" },
+          { "$ref": "#/definitions/BridgeInstallation" },
+          { "$ref": "#/definitions/BridgeConstructionElement" },
+          { "$ref": "#/definitions/Tunnel" },
+          { "$ref": "#/definitions/TunnelPart" },
+          { "$ref": "#/definitions/TunnelInstallation" }
         ]
       }
     },

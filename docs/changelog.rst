@@ -18,9 +18,10 @@ Changelog
 
 Added
 *****
+- handling of ``null`` values at any level in a nested arrays is now supported in the schema
 - CityGML module 'Transportation' added
 - CityGML module 'Bridge' added, thus the 4 classes: Bridge, BridgePart, BridgeInstallation, and BridgeConstructionElement 
-- handling of ``null`` values at any level in a nested arrays is now supported in the schema
+- CityGML module 'Tunnel' added, thus the 4 classes: Tunnel, TunnelPart, and TunnelInstallation
 
 Changed
 *******
