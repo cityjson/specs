@@ -5,7 +5,180 @@
   "type": "object",
 
   "definitions": {
+
+    "Bridge": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["Bridge"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "creationDate" : {"type": "string"},
+            "terminationDate" : {"type": "string"},
+            "class": {"type": "string"},
+            "function": {"type": "string"},
+            "usage": {"type": "string"},
+            "yearOfConstruction": { "type": "integer"},
+            "yearOfDemolition": { "type": "integer"},
+            "isMovable": { "type": "boolean"}
+          }
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "CountryName": {"type": "string"},
+            "LocalityName": {"type": "string"},
+            "ThoroughfareNumber": {"type": "string"},
+            "ThoroughfareName": {"type": "string"},
+            "PostalCode": {"type": "string"},
+            "location": {"$ref": "#/definitions/MultiPoint"}
+          }
+        },
+        "Parts": {
+          "type": "array",
+          "description": "the IDs of the BridgePart of this Bridge",
+          "items": {"type": "string"}
+        },
+        "Installations": {
+          "type": "array",
+          "description": "the IDs of the BridgeInstallation of this Bridge",
+          "items": {"type": "string"}
+        },
+        "ConstructionElement": {
+          "type": "array",
+          "description": "the IDs of the BridgeConstructionElement of this Bridge",
+          "items": {"type": "string"}
+        },        
+        "geometry": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/Solid"},
+              {"$ref": "#/definitions/CompositeSolid"},
+              {"$ref": "#/definitions/MultiSurface"}
+            ] 
+          }
+        }
+      },
+      "required": ["type", "geometry"]
+    },    
     
+    "BridgePart": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["BridgePart"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "creationDate" : {"type": "string"},
+            "terminationDate" : {"type": "string"},
+            "class": {"type": "string"},
+            "function": {"type": "string"},
+            "usage": {"type": "string"},
+            "yearOfConstruction": { "type": "integer"},
+            "yearOfDemolition": { "type": "integer"},
+            "isMovable": { "type": "boolean"}
+          }
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "CountryName": {"type": "string"},
+            "LocalityName": {"type": "string"},
+            "ThoroughfareNumber": {"type": "string"},
+            "ThoroughfareName": {"type": "string"},
+            "PostalCode": {"type": "string"},
+            "location": {"$ref": "#/definitions/MultiPoint"}
+          }
+        },
+        "Installations": {
+          "type": "array",
+          "description": "the IDs of the BridgeInstallation of this BridgePart",
+          "items": {"type": "string"}
+        },
+        "ConstructionElement": {
+          "type": "array",
+          "description": "the IDs of the BridgeConstructionElement of this BridgePart",
+          "items": {"type": "string"}
+        },        
+        "geometry": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/Solid"},
+              {"$ref": "#/definitions/CompositeSolid"},
+              {"$ref": "#/definitions/MultiSurface"}
+            ] 
+          }
+        }
+      },
+      "required": ["type", "geometry"]
+    },
+
+    "BridgeInstallation": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["BridgeInstallation"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "creationDate" : {"type": "string"},
+            "terminationDate" : {"type": "string"},            
+            "class": {"type": "string"},
+            "function": {"type": "string"},
+            "usage": {"type": "string"}
+          }
+        },
+        "geometry": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/MultiPoint"},
+              {"$ref": "#/definitions/MultiLineString"},
+              {"$ref": "#/definitions/Solid"},
+              {"$ref": "#/definitions/MultiSolid"},
+              {"$ref": "#/definitions/CompositeSolid"},
+              {"$ref": "#/definitions/MultiSurface"},
+              {"$ref": "#/definitions/CompositeSurface"}            
+            ] 
+          }
+        }
+      },
+      "required": ["type", "geometry"]
+    },
+
+    "BridgeConstructionElement": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["BridgeConstructionElement"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "creationDate" : {"type": "string"},
+            "terminationDate" : {"type": "string"},            
+            "class": {"type": "string"},
+            "function": {"type": "string"},
+            "usage": {"type": "string"}
+          }
+        },
+        "geometry": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/definitions/MultiPoint"},
+              {"$ref": "#/definitions/MultiLineString"},
+              {"$ref": "#/definitions/Solid"},
+              {"$ref": "#/definitions/MultiSolid"},
+              {"$ref": "#/definitions/CompositeSolid"},
+              {"$ref": "#/definitions/MultiSurface"},
+              {"$ref": "#/definitions/CompositeSurface"}            
+            ] 
+          }
+        }
+      },
+      "required": ["type", "geometry"]
+    },
+
     "Building": {
       "type": "object",
       "properties": {
@@ -1053,6 +1226,10 @@
       "type": "object",
       "additionalProperties": {
         "oneOf": [
+          { "$ref": "#/definitions/Bridge" },
+          { "$ref": "#/definitions/BridgePart" },
+          { "$ref": "#/definitions/BridgeInstallation" },
+          { "$ref": "#/definitions/BridgeConstructionElement" },
           { "$ref": "#/definitions/Building" },
           { "$ref": "#/definitions/BuildingPart" },
           { "$ref": "#/definitions/BuildingInstallation" },

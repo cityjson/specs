@@ -7,7 +7,6 @@ Changelog
 
 [Unreleased]
 ------------
-- Bridge and Tunnels modules of CityGML
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
 - handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
 - binary encoding of JSON, with either `CBOR <http://cbor.io>`_ or `BSON <http://bsonspec.org>`_
@@ -20,6 +19,7 @@ Changelog
 Added
 *****
 - CityGML module 'Transportation' added
+- CityGML module 'Bridge' added, thus the 4 classes: Bridge, BridgePart, BridgeInstallation, and BridgeConstructionElement 
 - handling of ``null`` values at any level in a nested arrays is now supported in the schema
 
 Changed
