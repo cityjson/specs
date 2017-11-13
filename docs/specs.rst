@@ -555,7 +555,14 @@ Tunnel, TunnelPart, and TunnelInstallation
         "yearOfConstruction": "2000",
         "length": "24.5km"
       },
-      "Installations": ["stoparea1"]
+      "Installations": ["stoparea1"],
+      "geometry": [{
+        "type": "Solid",
+        "lod": 2,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]] ]
+        ]
+      }] 
     }
   }
 
