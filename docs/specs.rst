@@ -185,6 +185,15 @@ A City Object is a JSON object for which the type member’s value is one of the
   #. ``"LandUse"``
   #. ``"CityFurniture"``
   #. ``"GenericCityObject"``
+  #. ``"Bridge"``
+  #. ``"BridgePart"``
+  #. ``"BridgeInstallation"``
+  #. ``"BridgeConstructionElement"``
+  #. ``"Tunnel"``
+  #. ``"TunnelPart"``
+  #. ``"TunnelInstallation"``
+
+
 
 A City Object:
 
@@ -493,6 +502,62 @@ GenericCityObject
     }]
   }
 
+
+Bridge, BridgePart, BridgeInstallation, and BridgeConstructionElement
+*********************************************************************
+
+- A City Object of type ``"Bridge"`` may have a member ``"Parts"``, whose value is an array of the IDs of the City Objects of type ``"BridgePart"`` it contains.
+- A City Object of type ``"BridgePart"`` must have a parent ``"Bridge"`` referencing it, however, unlike in CityGML, a ``"BridgePart"`` cannot be decomposed into a ``"BridgePart"``.
+- A City Object of type ``"Bridge"`` or ``"BridgePart"`` may have a member ``"Installations"``, whose value is an array of the IDs of the City Objects of type ``"BridgeInstallation"`` it contains.
+- A City Object of type ``"BridgeInstallation"`` must have a parent ``"Bridge"`` or ``"BridgePart"`` referencing it.
+- A City Object of type ``"Bridge"`` or ``"BridgePart"`` may have a member ``"ConstructionElement"``, whose value is an array of the IDs of the City Objects of type ``"BridgeConstructionElement"`` it contains.
+- A City Object of type ``"BridgeConstructionElement"`` must have a parent ``"Bridge"`` or ``"BridgePart"`` referencing it.
+- The geometry of both ``"Bridge"`` and ``"BridgePart"`` can only be represented with these Geometry Objects: (1) ``"Solid"``, (2) ``"CompositeSolid"``, (3) ``"MultiSurface"``.
+- The geometry of a ``"BridgeInstallation"`` or ``"BridgeConstructionElement"`` object can be represented with any of the Geometry Objects.
+- A City Object of type ``"Bridge"`` or ``"BridgePart"`` may have a member ``"address"``, whose value is a JSON object describing the address. One location (a ``"MultiPoint"``) can be given, to for instance locate the front door inside the building.
+
+.. code-block:: js
+
+  "CityObjects": {
+    "LondonTower": {
+      "type": "Bridge", 
+      "address": {
+        "CountryName": "UK",
+        "LocalityName": "London"
+      },
+      "geometry": [{
+        "type": "MultiSurface",
+        "lod": 2,
+        "boundaries": [
+          [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+        ]
+      }]    
+    }
+  }
+
+
+Tunnel, TunnelPart, and TunnelInstallation
+************************************************
+
+- A City Object of type ``"Tunnel"`` may have a member ``"Parts"``, whose value is an array of the IDs of the City Objects of type ``"TunnelPart"`` it contains.
+- A City Object of type ``"TunnelPart"`` must have a parent ``"Tunnel"`` referencing it, however, unlike in CityGML, a ``"TunnelPart"`` cannot be decomposed into a ``"TunnelPart"``.
+- A City Object of type ``"Tunnel"`` or ``"TunnelPart"`` may have a member ``"Installations"``, whose value is an array of the IDs of the City Objects of type ``"TunnelInstallation"`` it contains.
+- A City Object of type ``"TunnelInstallation"`` must have a parent ``"Tunnel"`` referencing it.
+- The geometry of both ``"Tunnel"`` and ``"TunnelPart"`` can only be represented with these Geometry Objects: (1) ``"Solid"``, (2) ``"CompositeSolid"``, (3) ``"MultiSurface"``.
+- The geometry of a ``"TunnelInstallation"`` object can be represented with any of the Geometry Objects.
+
+.. code-block:: js
+
+  "CityObjects": {
+    "Lærdalstunnelen": {
+      "type": "Tunnel", 
+      "attributes": { 
+        "yearOfConstruction": "2000",
+        "length": "24.5km"
+      },
+      "Installations": ["stoparea1"]
+    }
+  }
 
 
 ----------------
