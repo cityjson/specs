@@ -63,7 +63,7 @@ CityJSON can be considered as the third implementation of the CityGML data model
 
 .. note::       
    CityJSON is not an official standard, and it is not part of the OGC standards (unlike its parent standard CityGML).
-   It is developed by the `3D geoinformation group at TU Delft <https://3d.bk.tudelft.nl>`_.
+   It was started by the `3D geoinformation group at TU Delft <https://3d.bk.tudelft.nl>`_ (who is the main maintainer) and other developers are welcome to contribute.
 
 
 .. rubric:: Content

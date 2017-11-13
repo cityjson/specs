@@ -3,19 +3,15 @@ Contact
 =======
 
 
-.. image:: _static/logo-url-black.png
-   :alt: 3D geoinformation at TU Delft
-   :align: right
-   :width: 50%
-   :target: https://3d.bk.tudelft.nl
+The CityJSON specifications and the accompanying software are mostly developed and maintained by the following people `3D geoinformation group at TU Delft <https://3d.bk.tudelft.nl>`_.
 
-The CityJSON specification and the accompanying software are developed and maintained by the `3D geoinformation group at TU Delft <https://3d.bk.tudelft.nl>`_.
+The following are the currently the main collaborators:
 
-For any questions/issues/errors, please either:
+  1. `Hugo Ledoux <https://3d.bk.tudelft.nl/hledoux>`_, TU Delft
+  2. Claus Nagel, `virtualcitySYSTEMS <https://www.virtualcitysystems.de>`_
+  3. `Ken Arroyo Ohori <https://3d.bk.tudelft.nl/ken>`_, TU Delft
 
-  - `open an issue on GitHub <https://github.com/tudelft3d/cityjson/issues>`_
-  - contact `Hugo Ledoux <https://3d.bk.tudelft.nl/hledoux>`_
-   
+For any questions/issues/errors, please `open an issue on GitHub <https://github.com/tudelft3d/cityjson/issues>`_ so that everyone can benefit from the question (and its answer).
 
 
 
