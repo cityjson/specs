@@ -21,7 +21,7 @@ version 0.1:
 Software to validate a file against the schema
 ----------------------------------------------
 
-`cityjson-valschema <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson-valschema/c%2B%2B11>`_ validates a CityJSON against the schema and does extra validation, eg:
+`cjvalschema <https://github.com/tudelft3d/cityjson/tree/master/software/cjvalschema/c%2B%2B11>`_ validates a CityJSON against the schema and does extra validation, eg:
 
 - are the attributes of City Objects and metadata according to CityGML?
 - do the BuildingParts have a parent Building?
