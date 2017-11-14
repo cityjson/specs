@@ -27,13 +27,15 @@ One of the example dataset on the `official CityGML website <https://www.citygml
 #. LandUse 
 
 
-The `geoRES_testdata.zip <../example-datasets/geoRES/geoRES_testdata.zip>`_ contains:
+- :download:`geoRES_testdata.zip <../example-datasets/geoRES/geoRES_testdata.zip>`
+
+It contains:
 
 #. the original CityGML file with textures
 #. the CityJSON file
 #. the compressed CityJSON file
 
-This file was automatically converted with <`the beta version of citygml4j <https://github.com/citygml4j/citygml4j>`_.
+This file was automatically converted with `the beta version of citygml4j <https://github.com/citygml4j/citygml4j>`_.
 
 ----
 
