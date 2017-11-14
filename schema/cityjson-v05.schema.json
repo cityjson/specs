@@ -151,7 +151,7 @@
           "description": "the IDs of the BridgeInstallation of this Bridge",
           "items": {"type": "string"}
         },
-        "ConstructionElement": {
+        "ConstructionElements": {
           "type": "array",
           "description": "the IDs of the BridgeConstructionElement of this Bridge",
           "items": {"type": "string"}
@@ -203,7 +203,7 @@
           "description": "the IDs of the BridgeInstallation of this BridgePart",
           "items": {"type": "string"}
         },
-        "ConstructionElement": {
+        "ConstructionElements": {
           "type": "array",
           "description": "the IDs of the BridgeConstructionElement of this BridgePart",
           "items": {"type": "string"}
