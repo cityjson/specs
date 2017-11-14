@@ -15,7 +15,7 @@ Dummy file showcasing the different possibilities
 ----------------
 
 .. image:: _static/dataset_geores.jpg
-   :width: 60%
+   :width: 40%
 
 
 One of the example dataset on the `official CityGML website <https://www.citygml.org/samplefiles/>`_, it contains several CityGML classes with textures:
@@ -44,7 +44,7 @@ Rotterdam (the Netherlands)
 ---------------------------
 
 .. image:: _static/dataset_delfshaven.png
-   :width: 60%
+   :width: 50%
 
 One part of the `open dataset of Rotterdam <http://rotterdamopendata.nl/dataset/rotterdam-3d-bestanden>`_ was converted to CityJSON.
 
