@@ -6,13 +6,15 @@ CityGML support
 CityGML modules and characteristics supported
 ---------------------------------------------
 
-At this moment, CityJSON implements most of the data model.
-However, for the sake of simplicity and efficiency, some modules and features have been omitted.
+At this moment, CityJSON implements most of the data model, and *all* the CityGML modules have been mapped to CityJSON objects (as of v0.5).
+However, for the sake of simplicity and efficiency, some modules and features have been omitted and/or simplified.
 If a module is supported, it does not mean that there is a 1-to-1 mapping between the classes and features in CityGML and CityJSON, but rather that it is possible to represent the same information, but in a different manner.
 
 The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these (more details below):
 
 #. **Building**: everything is supported except LOD4 features (interior of buildings) and the concept of Terrain-Intersection-Curve (TIC)
+#. **Bridge**: everything is supported except LOD4 features (interior rooms of bridges)
+#. **Tunnel**: everything is supported except LOD4 features (interior parts of Tunnel Installations)
 #. **CityFurniture**: benches, traffic lights, signs, etc. are all supported
 #. **LandUse**: everything supported
 #. **Relief**: only the ``TINRelief/TriangulatedSurface`` is currently supported. ``Tin`` (where only elevation points and break lines are stored) is not supported since it would require viewer/applications to have a Constrained Delaunay Triangulator, which is problematic (especially for web-based tools). Also, it is not possible to store areas over a terrain that would support different resolutions (as in Figure 25 of the `CityGML standard document <https://portal.opengeospatial.org/files/?artifact_id=47842>`_). ``RasterRelief`` is also not supported.
@@ -29,13 +31,6 @@ The types of objects stored in CityGML are grouped into different modules, and C
 
 CityGML modules and characteristics not supported
 -------------------------------------------------
-
-The following modules are **not** supported (but we're working on it):
-
-#. **Bridge**: bridge-related structures, possibly split into parts
-#. **Tunnel**: tunnels, possibly split into parts
-
-Furthermore, these are not supported:
 
 #. no support for ImplicitGeometries
 #. no support for ADEs (or other extension mechanism)
