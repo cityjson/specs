@@ -19,7 +19,7 @@ We have currently the following:
 Software supporting CityJSON
 ----------------------------
 
+  - `citygml4j <https://github.com/citygml4j/citygml4j>`_: The open-source Java API for CityGML, allows us to convert back and forth between CityJSON and CityGML. (the branch 'json' is in beta and supports v0.5)
   - `3dfier <https://github.com/tudelft3d/3dfier>`_: '3dfication' of 2D GIS datasets (the branch 'cityjson-output' outputs CityJSON)
-  - `azul <https://github.com/tudelft3d/azul>`_
-  - `citygml4j <https://github.com/citygml4j/citygml4j>`_: The open-source Java API for CityGML, allows us to convert back and forth between CityJSON and CityGML. (the branch 'json' is in beta and supports v0.3 fully at this moment)
-  - `val3dity <https://github.com/tudelft3d/val3dity>`_: validation of the geometric 3D primitives (the branch 'v2' reads CityJSON as input; everything is supported)
+  - `azul <https://github.com/tudelft3d/azul>`_: beta support for CityJSON
+  - `val3dity <https://github.com/tudelft3d/val3dity>`_: validation of the geometric 3D primitives (everything is supported in master branch); the `web-application <http://geovalidation.bk.tudelft.nl/val3dity/>`_ also fully CityJSON input)
