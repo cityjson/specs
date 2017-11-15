@@ -36,7 +36,7 @@ The minimal valid CityJSON object is thus:
 
   {
     "type": "CityJSON",
-    "version": "0.5",
+    "version": "0.6",
     "CityObjects": {},
     "vertices": []
   }
@@ -48,7 +48,7 @@ An empty CityJSON will look like this:
 
   {
     "type": "CityJSON",
-    "version": "0.3",
+    "version": "0.6",
     "metadata": {},
     "transform": {
       "scale": [],

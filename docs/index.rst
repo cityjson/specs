@@ -14,7 +14,7 @@ CityJSON
 
   {
     "type": "CityJSON",
-    "version": "0.5",
+    "version": "0.6",
     "metadata": {
       "crs": { "epsg": 7415 }
     },
