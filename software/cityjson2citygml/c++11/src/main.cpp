@@ -78,20 +78,60 @@ void metadata() {
 }
 
 
-void surface() {
+void surface(std::vector<std::vector<int>> &onesurface) {
+  std::cout << "<gml:surfaceMember>" << std::endl;
   std::cout << "<gml:Polygon>" << std::endl;
-
-
+  std::cout << "<gml:exterior>" << std::endl;
+  std::cout << "<gml:LinearRing>" << std::endl;
+  for (auto& v: onesurface[0]) {
+    std::cout << "<gml:pos>";
+    std::cout << j["vertices"][v][0] << " ";
+    std::cout << j["vertices"][v][1] << " ";
+    std::cout << j["vertices"][v][2];
+    std::cout << "</gml:pos>" << std::endl;
+  }
+  //-- repeat first vertex
+  auto firstv = onesurface[0][0];
+  std::cout << "<gml:pos>";
+  std::cout << j["vertices"][firstv][0] << " ";
+  std::cout << j["vertices"][firstv][1] << " ";
+  std::cout << j["vertices"][firstv][2];
+  std::cout << "</gml:pos>" << std::endl;
+  std::cout << "</gml:LinearRing>" << std::endl;
+  std::cout << "</gml:exterior>" << std::endl;
+  if (onesurface.size() > 1) {
+    for (int i = 1; i < onesurface.size(); i++) {
+      std::cout << "<gml:interior>" << std::endl;
+      std::cout << "<gml:LinearRing>" << std::endl;
+      for (auto& v: onesurface[i]) {
+        std::cout << "<gml:pos>";
+        std::cout << j["vertices"][v][0] << " ";
+        std::cout << j["vertices"][v][1] << " ";
+        std::cout << j["vertices"][v][2];
+        std::cout << "</gml:pos>" << std::endl;
+      }
+      //-- repeat first vertex
+      auto firstv = onesurface[i][0];
+      std::cout << "<gml:pos>";
+      std::cout << j["vertices"][firstv][0] << " ";
+      std::cout << j["vertices"][firstv][1] << " ";
+      std::cout << j["vertices"][firstv][2];
+      std::cout << "</gml:pos>" << std::endl;
+      std::cout << "</gml:LinearRing>" << std::endl;
+      std::cout << "</gml:interior>" << std::endl;
+    }
+  }
   std::cout << "</gml:Polygon>" << std::endl;
+  std::cout << "</gml:surfaceMember>" << std::endl;
 }
 
 
-void shell(json& js) {
+void shell(json& jsh) {
   std::cout << "<gml:CompositeSurface>" << std::endl;
-  std::cout << "<gml:surfaceMember>" << std::endl;
-
-
-  std::cout << "</gml:surfaceMember>" << std::endl;
+  for (auto& polygon : jsh) { 
+    std::vector<std::vector<int>> t = polygon;
+    surface(t);
+  }
   std::cout << "</gml:CompositeSurface>" << std::endl;
 }
 
@@ -111,9 +151,17 @@ void solid(json& js) {
       std::cout << "</gml:interior>" << std::endl;
     numshell++;
   }
-
-  
   std::cout << "</gml:Solid>" << std::endl;
+}
+
+
+void multisurface(json& js) {
+  std::cout << "<gml:MultiSurface>" << std::endl;
+  for (auto& polygon : js["boundaries"]) {
+    std::vector<std::vector<int>> t = polygon;
+    surface(t);
+  }
+  std::cout << "</gml:MultiSurface>" << std::endl;
 }
 
 
@@ -132,19 +180,19 @@ void building(std::string id, json& jb) {
     }
     else {
       // std::cout << "ATTRIBUTE GENERICS" << std::endl;
-      std::cout << "<gen:stringAttribute name=\"" << it.key() << ">" << std::endl;
+      std::cout << "<gen:stringAttribute name=\"" << it.key() << "\">" << std::endl;
       std::cout << "<gen:value>" << it.value() << "</gen:value>" << std::endl;
       std::cout << "</gen:stringAttribute>" << std::endl;
     }
   }
   // 2. each geoms
   for (auto& g : jb["geometry"]) {
-    // std::cout << g["type"] << std::endl;
     int lod = g["lod"].get<int>();
     std::cout << "<bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
-    if (g["type"] == "Solid") {
+    if (g["type"] == "Solid")
       solid(g);
-    }
+    if (g["type"] == "MultiSurface")
+      multisurface(g);
     std::cout << "</bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
   }
 
@@ -170,7 +218,7 @@ int main(int argc, const char * argv[]) {
       v = v.substr(v.size() - 3);
   std::string nameschema = "../../../../schema/cityjson-v" + v.substr(0, 1) + v.substr(2) + ".schema.json";
   std::ifstream inputs(nameschema);
-  std::cout << "Schema: " << nameschema << std::endl << std::endl;
+  // std::cout << "Schema: " << nameschema << std::endl << std::endl;
   if (inputs.is_open() == true) {
     inputs >> jschema;
   }
