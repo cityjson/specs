@@ -155,6 +155,27 @@ void solid(json& js) {
 }
 
 
+void solid_w_semantics(json& js, json& jsem) {
+  //-- 1. sem surfaces first
+  int i = 0, j = 0;
+  for (auto& sh : js["boundaries"]) {
+    j = 0;
+    for (auto& polygon : sh) { 
+      std::cout << "===== " << jsem["values"][i][j] << std::endl;
+      if (jsem["values"][i][j].is_null() == false) {
+        int sem = jsem["values"][i][j];
+        std::cout << jsem["surfaces"][sem] << std::endl;
+      }
+      else
+        std::cout << "null" << std::endl;
+      j++;
+    }
+    i++;
+  }
+}
+
+
+
 void multisurface(json& js) {
   std::cout << "<gml:MultiSurface>" << std::endl;
   for (auto& polygon : js["boundaries"]) {
@@ -189,10 +210,16 @@ void building(std::string id, json& jb) {
   for (auto& g : jb["geometry"]) {
     int lod = g["lod"].get<int>();
     std::cout << "<bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
-    if (g["type"] == "Solid")
-      solid(g);
-    if (g["type"] == "MultiSurface")
-      multisurface(g);
+    if (g.count("semantics") != 0) {
+      if (g["type"] == "Solid")
+        solid_w_semantics(g, g["semantics"]);
+    }
+    else {
+      if (g["type"] == "Solid")
+        solid(g);
+      if (g["type"] == "MultiSurface")
+        multisurface(g);
+    }
     std::cout << "</bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
   }
 
