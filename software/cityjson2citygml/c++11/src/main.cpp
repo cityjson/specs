@@ -7,61 +7,89 @@
 
 using json = nlohmann::json;
 
+json j;
 
 
-void get_xml_header(std::ostream& of) {
-  of << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+void get_xml_header() {
+  std::cout << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 }
 
-void get_citygml_namespaces(std::ostream& of) {
-  of << "<CityModel xmlns=\"http://www.opengis.net/citygml/2.0\"\n";
-  of << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n";
-  of << "xmlns:xAL=\"urn:oasis:names:tc:ciq:xsdschema:xAL:2.0\"\n";
-  of << "xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n";
-  of << "xmlns:gml=\"http://www.opengis.net/gml\"\n";
-  of << "xmlns:bldg=\"http://www.opengis.net/citygml/building/2.0\"\n";
-  of << "xmlns:wtr=\"http://www.opengis.net/citygml/waterbody/2.0\"\n";
-  of << "xmlns:veg=\"http://www.opengis.net/citygml/vegetation/2.0\"\n";
-  of << "xmlns:dem=\"http://www.opengis.net/citygml/relief/2.0\"\n";
-  of << "xmlns:tran=\"http://www.opengis.net/citygml/transportation/2.0\"\n";
-  of << "xmlns:luse=\"http://www.opengis.net/citygml/landuse/2.0\"\n";
-  of << "xmlns:gen=\"http://www.opengis.net/citygml/generics/2.0\"\n";
-  of << "xmlns:brg=\"http://www.opengis.net/citygml/bridge/2.0\"\n";
-  of << "xmlns:app=\"http://www.opengis.net/citygml/appearance/2.0\"\n";
-  of << "xmlns:tun=\"http://www.opengis.net/citygml/tunnel/2.0\"\n";
-  of << "xmlns:cif=\"http://www.opengis.net/citygml/cityfurniture/2.0\"\n";
-  of << "xsi:schemaLocation=\"http://www.opengis.net/citygml/2.0 ./CityGML_2.0/CityGML.xsd\">\n";
+void get_citygml_namespaces() {
+  //-- boiler template for all files
+  std::cout << "<CityModel xmlns=\"http://www.opengis.net/citygml/2.0\"\n";
+  std::cout << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n";
+  std::cout << "xmlns:xAL=\"urn:oasis:names:tc:ciq:xsdschema:xAL:2.0\"\n";
+  std::cout << "xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n";
+  std::cout << "xmlns:gml=\"http://www.opengis.net/gml\"\n";
+  //-- if appearances
+  if (j.count("appearance") != 0)
+    std::cout << "xmlns:app=\"http://www.opengis.net/citygml/appearance/2.0\"\n";
+  //-- collect all CO types
+  std::set<std::string> d;
+  for (auto& co : j["CityObjects"]) {
+    std::string tmp = co["type"];
+    d.insert(tmp);
+  }
+  //-- if there then put the XSD module
+  if (d.count("Building") != 0)
+    std::cout << "xmlns:bldg=\"http://www.opengis.net/citygml/building/2.0\"\n";
+  if (d.count("WaterBody") != 0)
+    std::cout << "xmlns:wtr=\"http://www.opengis.net/citygml/waterbody/2.0\"\n";
+  if ( (d.count("PlantCover") != 0) || (d.count("SolitaryVegetationObject") != 0) )
+    std::cout << "xmlns:veg=\"http://www.opengis.net/citygml/vegetation/2.0\"\n";
+  if (d.count("TINRelief") != 0)
+    std::cout << "xmlns:dem=\"http://www.opengis.net/citygml/relief/2.0\"\n";
+  if ( (d.count("Road") != 0) || (d.count("Railway") != 0) || (d.count("TransportSquare") != 0) )
+    std::cout << "xmlns:tran=\"http://www.opengis.net/citygml/transportation/2.0\"\n";
+  if (d.count("LandUse") != 0)
+    std::cout << "xmlns:luse=\"http://www.opengis.net/citygml/landuse/2.0\"\n";
+  if (d.count("GenericCityObject") != 0)
+    std::cout << "xmlns:gen=\"http://www.opengis.net/citygml/generics/2.0\"\n";
+  if (d.count("Bridge") != 0)
+    std::cout << "xmlns:brg=\"http://www.opengis.net/citygml/bridge/2.0\"\n";
+  if (d.count("Tunnel") != 0)
+    std::cout << "xmlns:tun=\"http://www.opengis.net/citygml/tunnel/2.0\"\n";
+  if (d.count("CityFurniture") != 0)
+    std::cout << "xmlns:cif=\"http://www.opengis.net/citygml/cityfurniture/2.0\"\n";
+  std::cout << "xsi:schemaLocation=\"http://www.opengis.net/citygml/2.0 ./CityGML_2.0/CityGML.xsd\">\n";
 }
 
-void create_citygml_header(std::ostream& of) {
-    of << std::setprecision(3) << std::fixed;
-    get_xml_header(of);
-    get_citygml_namespaces(of);
-    of << "<!-- Automatically converted from CityJSON (http://www.cityjson.org) -->\n";
-    of << "<gml:name>my 3dfied map</gml:name>\n";
-    // of << "<gml:boundedBy>";
-    // of << "<gml:Envelope srsDimension=\"3\" srsName=\"urn:ogc:def:crs:EPSG::7415\">";
-    // of << "<gml:lowerCorner>";
-    // of << bg::get<bg::min_corner, 0>(_bbox) << " " << bg::get<bg::min_corner, 1>(_bbox) << " 0";
-    // of << "</gml:lowerCorner>";
-    // of << "<gml:upperCorner>";
-    // of << bg::get<bg::max_corner, 0>(_bbox) << " " << bg::get<bg::max_corner, 1>(_bbox) << " 100";
-    // of << "</gml:upperCorner>";
-    // of << "</gml:Envelope>";
-    // of << "</gml:boundedBy>\n";
+
+void get_citygml_metadata() {
+  if (j.count("metadata") != 0) {
+    json jm = j["metadata"];
+    if (jm.count("bbox") != 0) {
+      std::cout << "<gml:boundedBy>" << std::endl;
+      std::cout << "<gml:Envelope srsDimension=\"3\">" << std::endl;
+      std::cout << "<gml:lowerCorner>" << std::endl;
+      std::cout << jm["bbox"][0] << " " << jm["bbox"][1] << " " << jm["bbox"][2] << std::endl;
+      std::cout << "</gml:lowerCorner>" << std::endl;
+      std::cout << "<gml:upperCorner>" << std::endl;
+      std::cout << jm["bbox"][3] << " " << jm["bbox"][4] << " " << jm["bbox"][5] << std::endl;
+      std::cout << "</gml:upperCorner>" << std::endl;
+      std::cout << "</gml:Envelope>" << std::endl;
+      std::cout << "</gml:boundedBy>" << std::endl;
+    }
+    if (jm.count("datasetTitle") != 0) {
+      std::cout << "<gml:name>" << jm["datasetTitle"].get<std::string>() << "</gml:name>" << std::endl;
+    }
+  }
 }
+
 
 int main(int argc, const char * argv[]) {
   const char* filename = argv[1];
   std::ifstream input(filename);
-  json j;
   input >> j;
 
-  std::ofstream of("mycitygml.gml", std::ofstream::out);
-  get_xml_header(of);
-  get_citygml_namespaces(of);
+  std::cout << std::setprecision(3) << std::fixed;
+  get_xml_header();
+  get_citygml_namespaces();
+  std::cout << "<!-- Automatically converted from CityJSON (http://www.cityjson.org) -->\n";
+  get_citygml_metadata();
+  std::cout << "</CityModel>" << std::endl;
 
-  of.close();
+
   // //-- CityJSON version
   // std::cout << "CityJSON version: " << j["version"] << std::endl;
   
