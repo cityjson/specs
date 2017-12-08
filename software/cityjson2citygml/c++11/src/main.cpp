@@ -199,7 +199,6 @@ void solid_w_semantics(json& js) {
         std::cout << "<gml:exterior>" << std::endl;
       else
         std::cout << "<gml:interior>" << std::endl;
-      pj = 0;
       std::set<int> aset;
       bool anynull = false;
       for (auto& each : shell) {
@@ -211,6 +210,16 @@ void solid_w_semantics(json& js) {
       for (auto& each : aset) { 
         std::cout << "<gml:surfaceMember xlink:href=\"";
         std::cout << "#" << myuuid << "_" << each << "\"/>" << std::endl;
+      }
+      if (anynull == true) {
+        pj = 0;
+        for (auto& each : shell) {
+          if (each.is_null() == true) {
+            std::vector<std::vector<int>> t = js["boundaries"][pi][pj];
+            surface(t);
+          }
+          pj++;
+        }
       }
       if (pi == 0) 
         std::cout << "</gml:exterior>" << std::endl;
