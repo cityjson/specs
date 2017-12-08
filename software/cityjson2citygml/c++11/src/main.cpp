@@ -4,6 +4,9 @@
 #include "json.hpp"
 #include <set>
 #include <string>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
 
 using json = nlohmann::json;
 
@@ -136,6 +139,7 @@ void shell(json& jsh) {
 }
 
 
+
 void solid(json& js) {
   std::cout << "<gml:Solid>" << std::endl;
   int numshell = 0;
@@ -155,23 +159,68 @@ void solid(json& js) {
 }
 
 
-void solid_w_semantics(json& js, json& jsem) {
-  //-- 1. sem surfaces first
-  int i = 0, j = 0;
-  for (auto& sh : js["boundaries"]) {
-    j = 0;
-    for (auto& polygon : sh) { 
-      std::cout << "===== " << jsem["values"][i][j] << std::endl;
-      if (jsem["values"][i][j].is_null() == false) {
-        int sem = jsem["values"][i][j];
-        std::cout << jsem["surfaces"][sem] << std::endl;
+void solid_w_semantics(json& js) {
+  int i = 0;
+  int lod = js["lod"].get<int>();
+  boost::uuids::uuid myuuid = boost::uuids::random_generator()();
+  for (auto& semsur : js["semantics"]["surfaces"]) {
+    std::cout << "<bldg:boundedBy>" << std::endl;
+    std::cout << "<bldg:" << semsur["type"].get<std::string>();
+    std::cout << " gml:id=\"" << myuuid << "_" << i << "\">" << std::endl;
+    std::cout << "<bldg:lod" << lod << "MultiSurface>" << std::endl;
+    std::cout << "<gml:MultiSurface>" << std::endl;
+
+    int pi = 0, pj = 0;
+    for (auto& shell : js["semantics"]["values"]) { 
+      pj = 0;
+      for (auto& sur : shell) { 
+        if (sur == i) {
+          std::vector<std::vector<int>> t = js["boundaries"][pi][pj];
+          surface(t);
+        }
+        pj++;
       }
-      else
-        std::cout << "null" << std::endl;
-      j++;
+      pi++;
     }
+    std::cout << "</gml:MultiSurface>" << std::endl;
+    std::cout << "</bldg:lod" << lod << "MultiSurface>" << std::endl;
+    std::cout << "</bldg:" << semsur["type"].get<std::string>() << ">" << std::endl;
+    std::cout << "</bldg:boundedBy>" << std::endl;
     i++;
   }
+
+  //-- bundle the sem-surfaces with a GML geometry
+  std::cout << "<bldg:lod" << lod << js["type"].get<std::string>() << ">" << std::endl;
+  if (js["type"] == "Solid") {
+    std::cout << "<gml:Solid>" << std::endl;
+    int pi = 0, pj = 0;
+    for (auto& shell : js["semantics"]["values"]) { 
+      if (pi == 0) 
+        std::cout << "<gml:exterior>" << std::endl;
+      else
+        std::cout << "<gml:interior>" << std::endl;
+      pj = 0;
+      std::set<int> aset;
+      bool anynull = false;
+      for (auto& each : shell) {
+        if (each.is_null() == false)
+          aset.insert(each.get<int>());
+        else
+          anynull = true;
+      }
+      for (auto& each : aset) { 
+        std::cout << "<gml:surfaceMember xlink:href=\"";
+        std::cout << "#" << myuuid << "_" << each << "\"/>" << std::endl;
+      }
+      if (pi == 0) 
+        std::cout << "</gml:exterior>" << std::endl;
+      else
+        std::cout << "</gml:interior>" << std::endl;
+      pi++;
+    }
+    std::cout << "</gml:Solid>" << std::endl;
+  }
+  std::cout << "</bldg:lod" << lod << js["type"].get<std::string>() << ">" << std::endl;
 }
 
 
@@ -208,19 +257,19 @@ void building(std::string id, json& jb) {
   }
   // 2. each geoms
   for (auto& g : jb["geometry"]) {
-    int lod = g["lod"].get<int>();
-    std::cout << "<bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
     if (g.count("semantics") != 0) {
       if (g["type"] == "Solid")
-        solid_w_semantics(g, g["semantics"]);
+        solid_w_semantics(g);
     }
     else {
+      int lod = g["lod"].get<int>();
+      std::cout << "<bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
       if (g["type"] == "Solid")
         solid(g);
       if (g["type"] == "MultiSurface")
         multisurface(g);
+      std::cout << "</bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
     }
-    std::cout << "</bldg:lod" << lod << g["type"].get<std::string>() << ">" << std::endl;
   }
 
 
