@@ -313,14 +313,11 @@ void multisurface(json& js) {
 }
 
 
-void building(std::string id, json& jb) {
-  std::cout << "<cityObjectMember>" << std::endl;
-  std::cout << "<bldg:Building gml:id=\"" << id << "\">" << std::endl;
-  //-- 1. attributes
+void attributes(json& jco) {
   json tmp;
-  std::string cotype = jb["type"];
+  std::string cotype = jco["type"];
   tmp = jschema["definitions"][cotype]["properties"]["attributes"]["properties"];
-  for (json::iterator it = jb["attributes"].begin(); it != jb["attributes"].end(); ++it) {
+  for (json::iterator it = jco["attributes"].begin(); it != jco["attributes"].end(); ++it) {
     if (tmp.find(it.key()) != tmp.end()) {
       std::cout << "<" << it.key() << ">";
       std::cout << it.value();
@@ -333,6 +330,14 @@ void building(std::string id, json& jb) {
       std::cout << "</gen:stringAttribute>" << std::endl;
     }
   }
+}
+
+
+void building(std::string id, json& jb) {
+  std::cout << "<cityObjectMember>" << std::endl;
+  std::cout << "<bldg:Building gml:id=\"" << id << "\">" << std::endl;
+  //-- 1. attributes
+  attributes(jb);
   // 2. each geoms
   for (auto& g : jb["geometry"]) {
     if (g.count("semantics") != 0) {
@@ -340,7 +345,6 @@ void building(std::string id, json& jb) {
         solid_w_semantics(g);
       if (g["type"] == "MultiSurface")
         multisurface_w_semantics(g);
-
     }
     else {
       int lod = g["lod"].get<int>();
@@ -353,11 +357,8 @@ void building(std::string id, json& jb) {
     }
   }
 
-
   // 3. TODO: BuildingParts?
   // 4. TODO: BuildingInstallations?
-
-
 
   std::cout << "</bldg:Building>" << std::endl;
   std::cout << "</cityObjectMember>" << std::endl;
