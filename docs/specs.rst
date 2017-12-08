@@ -741,8 +741,8 @@ For Transportation (``"Road"``, ``"Railway"``, ``"TransportSquare"``):
 
 ----
 
-Because in one given City Object (say a ``"Building"``) several surfaces can have the same semantics (think of a complex that has been triangulated, there can be dozens of triangles used to model the same surface), the Semantic Surfaces have to be declared once and each of the surfaces used to represent it point to it.
-This is achieved by first declaring all the Semantic Surfaces in array, and then having an array where each surface in the is linked to the position of the Semantic Surfaces array.
+Because in one given City Object (say a ``"Building"``) several surfaces can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Surfaces object has to be declared once, and each of the surfaces used to represent it points to it.
+This is achieved by first declaring all the Semantic Surfaces in an array, and then having an array where each surface links to Semantic Surfaces (position in the array).
 
 A Geometry object:
 
