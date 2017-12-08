@@ -188,50 +188,103 @@ void solid_w_semantics(json& js) {
     std::cout << "</bldg:boundedBy>" << std::endl;
     i++;
   }
-
   //-- bundle the sem-surfaces with a GML geometry
   std::cout << "<bldg:lod" << lod << js["type"].get<std::string>() << ">" << std::endl;
-  if (js["type"] == "Solid") {
-    std::cout << "<gml:Solid>" << std::endl;
-    int pi = 0, pj = 0;
-    for (auto& shell : js["semantics"]["values"]) { 
-      if (pi == 0) 
-        std::cout << "<gml:exterior>" << std::endl;
+  std::cout << "<gml:Solid>" << std::endl;
+  int pi = 0, pj = 0;
+  for (auto& shell : js["semantics"]["values"]) { 
+    if (pi == 0) 
+      std::cout << "<gml:exterior>" << std::endl;
+    else
+      std::cout << "<gml:interior>" << std::endl;
+    std::set<int> aset;
+    bool anynull = false;
+    for (auto& each : shell) {
+      if (each.is_null() == false)
+        aset.insert(each.get<int>());
       else
-        std::cout << "<gml:interior>" << std::endl;
-      std::set<int> aset;
-      bool anynull = false;
-      for (auto& each : shell) {
-        if (each.is_null() == false)
-          aset.insert(each.get<int>());
-        else
-          anynull = true;
-      }
-      for (auto& each : aset) { 
-        std::cout << "<gml:surfaceMember xlink:href=\"";
-        std::cout << "#" << myuuid << "_" << each << "\"/>" << std::endl;
-      }
-      if (anynull == true) {
-        pj = 0;
-        for (auto& each : shell) {
-          if (each.is_null() == true) {
-            std::vector<std::vector<int>> t = js["boundaries"][pi][pj];
-            surface(t);
-          }
-          pj++;
-        }
-      }
-      if (pi == 0) 
-        std::cout << "</gml:exterior>" << std::endl;
-      else
-        std::cout << "</gml:interior>" << std::endl;
-      pi++;
+        anynull = true;
     }
-    std::cout << "</gml:Solid>" << std::endl;
+    for (auto& each : aset) { 
+      std::cout << "<gml:surfaceMember xlink:href=\"";
+      std::cout << "#" << myuuid << "_" << each << "\"/>" << std::endl;
+    }
+    if (anynull == true) {
+      pj = 0;
+      for (auto& each : shell) {
+        if (each.is_null() == true) {
+          std::vector<std::vector<int>> t = js["boundaries"][pi][pj];
+          surface(t);
+        }
+        pj++;
+      }
+    }
+    if (pi == 0) 
+      std::cout << "</gml:exterior>" << std::endl;
+    else
+      std::cout << "</gml:interior>" << std::endl;
+    pi++;
   }
+  std::cout << "</gml:Solid>" << std::endl;
   std::cout << "</bldg:lod" << lod << js["type"].get<std::string>() << ">" << std::endl;
 }
 
+
+void multisurface_w_semantics(json& js) {
+  int i = 0;
+  int lod = js["lod"].get<int>();
+  boost::uuids::uuid myuuid = boost::uuids::random_generator()();
+  for (auto& semsur : js["semantics"]["surfaces"]) {
+    std::cout << "<bldg:boundedBy>" << std::endl;
+    std::cout << "<bldg:" << semsur["type"].get<std::string>();
+    std::cout << " gml:id=\"" << myuuid << "_" << i << "\">" << std::endl;
+    std::cout << "<bldg:lod" << lod << "MultiSurface>" << std::endl;
+    std::cout << "<gml:MultiSurface>" << std::endl;
+
+    int pi = 0;
+    for (auto& sur : js["semantics"]["values"]) { 
+      if (sur == i) {
+        std::vector<std::vector<int>> t = js["boundaries"][pi];
+        surface(t);
+      }
+      pi++;
+    }
+    std::cout << "</gml:MultiSurface>" << std::endl;
+    std::cout << "</bldg:lod" << lod << "MultiSurface>" << std::endl;
+    std::cout << "</bldg:" << semsur["type"].get<std::string>() << ">" << std::endl;
+    std::cout << "</bldg:boundedBy>" << std::endl;
+    i++;
+  }
+  //-- bundle the sem-surfaces with a GML geometry
+  std::cout << "<bldg:lod" << lod << js["type"].get<std::string>() << ">" << std::endl;
+  if (js["type"] == "MultiSurface") {
+    std::cout << "<gml:MultiSurface>" << std::endl;
+    std::set<int> aset;
+    bool anynull = false;
+    for (auto& sems : js["semantics"]["values"]) {
+      if (sems.is_null() == false)
+        aset.insert(sems.get<int>());
+      else
+        anynull = true;
+    }
+    for (auto& each : aset) { 
+      std::cout << "<gml:surfaceMember xlink:href=\"";
+      std::cout << "#" << myuuid << "_" << each << "\"/>" << std::endl;
+    }
+    if (anynull == true) {
+      int k = 0;
+      for (auto& each : js["semantics"]["values"]) {
+        if (each.is_null() == true) {
+          std::vector<std::vector<int>> t = js["boundaries"][k];
+          surface(t);
+        }
+        k++;
+      }
+    }
+    std::cout << "</gml:MultiSurface>" << std::endl;
+  }
+  std::cout << "</bldg:lod" << lod << js["type"].get<std::string>() << ">" << std::endl;
+}
 
 
 void multisurface(json& js) {
@@ -269,6 +322,9 @@ void building(std::string id, json& jb) {
     if (g.count("semantics") != 0) {
       if (g["type"] == "Solid")
         solid_w_semantics(g);
+      if (g["type"] == "MultiSurface")
+        multisurface_w_semantics(g);
+
     }
     else {
       int lod = g["lod"].get<int>();
@@ -282,8 +338,8 @@ void building(std::string id, json& jb) {
   }
 
 
-  // 3. BuildingParts?
-  // 4. BuildingInstallations?
+  // 3. TODO: BuildingParts?
+  // 4. TODO: BuildingInstallations?
 
 
 
