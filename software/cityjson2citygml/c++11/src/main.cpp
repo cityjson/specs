@@ -139,7 +139,6 @@ void shell(json& jsh) {
 }
 
 
-
 void solid(json& js) {
   std::cout << "<gml:Solid>" << std::endl;
   int numshell = 0;
@@ -167,6 +166,15 @@ void solid_w_semantics(json& js) {
     std::cout << "<bldg:boundedBy>" << std::endl;
     std::cout << "<bldg:" << semsur["type"].get<std::string>();
     std::cout << " gml:id=\"" << myuuid << "_" << i << "\">" << std::endl;
+    //-- extra attributes
+    for (json::iterator it = semsur.begin(); it != semsur.end(); ++it) {
+      if (it.key() != "type") {
+        std::cout << "<" << it.key() << ">";
+        std::cout << it.value();
+        std::cout << "</" << it.key() << ">" << std::endl;
+      }
+    }
+    //-- geometry
     std::cout << "<bldg:lod" << lod << "MultiSurface>" << std::endl;
     std::cout << "<gml:MultiSurface>" << std::endl;
 
@@ -238,9 +246,17 @@ void multisurface_w_semantics(json& js) {
     std::cout << "<bldg:boundedBy>" << std::endl;
     std::cout << "<bldg:" << semsur["type"].get<std::string>();
     std::cout << " gml:id=\"" << myuuid << "_" << i << "\">" << std::endl;
+    //-- extra attributes
+    for (json::iterator it = semsur.begin(); it != semsur.end(); ++it) {
+      if (it.key() != "type") {
+        std::cout << "<" << it.key() << ">";
+        std::cout << it.value();
+        std::cout << "</" << it.key() << ">" << std::endl;
+      }
+    }
+    //-- geometry
     std::cout << "<bldg:lod" << lod << "MultiSurface>" << std::endl;
     std::cout << "<gml:MultiSurface>" << std::endl;
-
     int pi = 0;
     for (auto& sur : js["semantics"]["values"]) { 
       if (sur == i) {
@@ -368,7 +384,6 @@ int main(int argc, const char * argv[]) {
     return 0;
   }
 
-
   std::cout << std::setprecision(3) << std::fixed;
   xml_header();
   std::cout << "<!-- Automatically converted from CityJSON (http://www.cityjson.org) -->\n";
@@ -383,66 +398,5 @@ int main(int argc, const char * argv[]) {
   }
 
   std::cout << "</CityModel>" << std::endl;
-
-
-  // //-- CityJSON version
-  // std::cout << "CityJSON version: " << j["version"] << std::endl;
-  
-  // //-- CityObjects
-  // std::cout << "===== CityObjects =====" << std::endl;
-  // std::cout << "Total : " << j["CityObjects"].size() << std::endl;
-  // std::set<std::string> d;
-  // for (auto& co : j["CityObjects"]) {
-  //   std::string tmp = co["type"];
-  //   d.insert(tmp);
-  // }
-  // std::cout << "Types:" << std::endl;
-  // for (auto& each : d)
-  //   std::cout << "  " << each << std::endl; 
-  // d.clear();
-  // for (auto& co : j["CityObjects"]) {
-  //   for (auto& g : co["geometry"]) {
-  //     std::string tmp = g["type"];
-  //     d.insert(tmp);
-  //   }
-  // }
-  // std::cout << "Geometries present:" << std::endl;
-  // for (auto& each : d)
-  //   std::cout << "  " << each << std::endl; 
-  // d.clear();
-
-  // //-- metadata
-  // std::cout << "===== Metadata =====" << std::endl;
-  // if (j.count("metadata") == 0)
-  //   std::cout << "  none" << std::endl;
-  // else {
-  //   for (json::iterator it = j["metadata"].begin(); it != j["metadata"].end(); ++it) {
-  //     if (it.key() == "crs")
-  //       std::cout << "  crs: EPSG:" << j["metadata"]["crs"]["epsg"] << std::endl;
-  //     else  
-  //       std::cout << "  " << it.key() << std::endl;
-  //   }
-  // }
-
-  // //-- vertices
-  // std::cout << "===== Vertices =====" << std::endl;
-  // std::cout << "Total: " << j["vertices"].size() << std::endl;
-
-  // //-- appearance
-  // std::cout << "===== Appearance =====" << std::endl;
-  // if (j.count("appearance") == 0)
-  //   std::cout << "  none" << std::endl;
-  // else {
-  //   if (j["appearance"].count("textures") > 0)
-  //     std::cout << "  textures: " << j["appearance"]["textures"].size() << std::endl;
-  //   if (j["appearance"].count("materials") > 0)
-  //     std::cout << "  materials: " << j["appearance"]["materials"].size() << std::endl;    
-  // }
-    
-    
-// write prettified JSON to another file
-//    std::ofstream o("/Users/hugo/projects/cityjson/pretty.json");
-//    o << std::setw(4) << j << std::endl;
-    
-    return 0;
+  return 0;
 }
