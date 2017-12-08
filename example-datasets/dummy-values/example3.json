@@ -1,0 +1,86 @@
+{
+  "type": "CityJSON",
+  "version": "0.6",
+  "metadata": {
+    "crs": { 
+      "epsg": 7415
+    },
+    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
+    "datasetTitle": "what is this dataset?",
+    "datasetAbstract": "what is this dataset?",
+    "datasetReferenceDate": "2011-02-28",
+    "copyright": "CC0",
+    "pointOfContact": "Hugo Ledoux <h.ledoux@tudelft.nl>"
+  },
+  "CityObjects": {
+  	"102636712": {
+      "type": "Building", 
+      "attributes": { 
+        "measuredHeight": 22.3,
+        "roofType": "gable",
+        "yearOfConstruction": 1904,
+        "owner": "Elvis Presley"
+      },
+      "address": {
+        "CountryName": "Canada",
+        "LocalityName": "Chibougamau",
+        "ThoroughfareNumber": "666",
+        "ThoroughfareName": "rue du Diable",
+        "PostalCode": "H0H 0H0"
+      },
+      "Parts": ["2929"],
+      "geometry": [
+      {
+        "type": "Solid",
+        "lod": 1.1,
+        "boundaries": [
+          [ [[0, 3, 2, 1],[0,1,2]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+        ],
+        "semantics": {
+          "surfaces" : [
+            {
+              "type": "RoofSurface",
+              "slope": 33.4
+            }, 
+            {
+              "type": "RoofSurface",
+              "slope": 66.6
+            },
+            {
+              "type": "WallSurface",
+              "paint": "blue" 
+            },
+            {
+              "type": "WallSurface",
+              "paint": "red" 
+            }
+          ],
+          "values": [
+            [0, 1, 1, null, 2, 3]
+          ]
+        },
+        "material": {
+          "irradiation": { 
+            "values": [
+              [0, 0, null, null, 1, 1]
+            ] 
+          },
+          "irradiation-2": { 
+            "value": 2
+          }
+        }
+      }
+    ]              
+  }
+  },
+  "vertices": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [1.0, 1.0, 0.0],
+    [0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0],
+    [1.0, 0.0, 1.0],
+    [1.0, 1.0, 1.0],
+    [0.0, 1.0, 1.0]
+  ]
+}
