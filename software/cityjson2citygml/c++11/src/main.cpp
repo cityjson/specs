@@ -24,8 +24,9 @@ void solid_w_semantics(json& js);
 void geometry(json& jg, bool csasms);
 
 void cityobject(std::string id, json& jco);
-void waterbody(std::string id, json& jco);
 void building(std::string id, json& jb);
+void waterbody(std::string id, json& jco);
+void landuse(std::string id, json& jco);
 
 
 //------------------------------------
@@ -430,7 +431,6 @@ void waterbody(std::string id, json& jco) {
       std::string cotype = g["type"].get<std::string>();
       bool csasms = false;
       if (g["type"] == "CompositeSurface") {
-        std::cerr << "Compoia;dlfkj" << std::endl;
         cotype = "MultiSurface";
         csasms = true;
       }
@@ -443,6 +443,37 @@ void waterbody(std::string id, json& jco) {
     }
   }
   std::cout << "</wtr:WaterBody>" << std::endl;
+}
+
+
+void landuse(std::string id, json& jco) {
+  std::cout << "<luse:LandUse gml:id=\"" << id << "\">" << std::endl;
+  //-- 1. attributes
+  attributes(jco);
+  //-- 2. geometry
+  for (auto& g : jco["geometry"]) {
+    if (g.count("semantics") != 0) {
+      // std::cout << "TODO" << std::endl;
+    }
+    else {
+      int lod = g["lod"].get<int>();
+      std::stringstream ss;
+      ss << "<luse:lod" << lod;
+      std::string cotype = g["type"].get<std::string>();
+      bool csasms = false;
+      if (g["type"] == "CompositeSurface") {
+        cotype = "MultiSurface";
+        csasms = true;
+      }
+      ss << cotype << ">";
+      std::cout << ss.str() << std::endl;
+      geometry(g, csasms);
+      std::string tmp = ss.str();
+      tmp = tmp.insert(1, "/");
+      std::cout << tmp;
+    }
+  }
+  std::cout << "</luse:LandUse>" << std::endl;
 }
 
 
