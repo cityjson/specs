@@ -4,14 +4,35 @@
 #include "json.hpp"
 #include <set>
 #include <string>
+#include <sstream>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
 using json = nlohmann::json;
 
+void xml_header();
+void citygml_header();
+void metadata();
+void surface(std::vector<std::vector<int>> &onesurface);
+void shell(json& jsh);
+void multisurface(json& js);
+void multisurface_w_semantics(json& js);
+void compositesurface(json& js);
+void solid(json& js);
+void solid_w_semantics(json& js);
+void geometry(json& jg, bool csasms);
+
+void cityobject(std::string id, json& jco);
+void waterbody(std::string id, json& jco);
+void building(std::string id, json& jb);
+
+
+//------------------------------------
+// GLOBAL VARIABLES FOR CONVENIENCE
 json j;
 json jschema;
+//------------------------------------
 
 
 void xml_header() {
@@ -313,6 +334,16 @@ void multisurface(json& js) {
 }
 
 
+void compositesurface(json& js) {
+  std::cout << "<gml:CompositeSurface>" << std::endl;
+  for (auto& polygon : js["boundaries"]) {
+    std::vector<std::vector<int>> t = polygon;
+    surface(t);
+  }
+  std::cout << "</gml:CompositeSurface>" << std::endl;
+}
+
+
 void attributes(json& jco) {
   json tmp;
   std::string cotype = jco["type"];
@@ -320,13 +351,19 @@ void attributes(json& jco) {
   for (json::iterator it = jco["attributes"].begin(); it != jco["attributes"].end(); ++it) {
     if (tmp.find(it.key()) != tmp.end()) {
       std::cout << "<" << it.key() << ">";
-      std::cout << it.value();
+      if (it.value().is_string())
+        std::cout << it.value().get<std::string>();
+      else
+        std::cout << it.value();
       std::cout << "</" << it.key() << ">" << std::endl;
     }
     else {
       // std::cout << "ATTRIBUTE GENERICS" << std::endl;
       std::cout << "<gen:stringAttribute name=\"" << it.key() << "\">" << std::endl;
-      std::cout << "<gen:value>" << it.value() << "</gen:value>" << std::endl;
+      if (it.value().is_string())
+        std::cout << "<gen:value>" << it.value().get<std::string>() << "</gen:value>" << std::endl;
+      else
+        std::cout << "<gen:value>" << it.value() << "</gen:value>" << std::endl;
       std::cout << "</gen:stringAttribute>" << std::endl;
     }
   }
@@ -334,7 +371,6 @@ void attributes(json& jco) {
 
 
 void building(std::string id, json& jb) {
-  std::cout << "<cityObjectMember>" << std::endl;
   std::cout << "<bldg:Building gml:id=\"" << id << "\">" << std::endl;
   //-- 1. attributes
   attributes(jb);
@@ -361,6 +397,63 @@ void building(std::string id, json& jb) {
   // 4. TODO: BuildingInstallations?
 
   std::cout << "</bldg:Building>" << std::endl;
+}
+
+
+void geometry(json& jg, bool csasms) {
+  if (jg["type"] == "Solid")
+    solid(jg);
+  if (jg["type"] == "MultiSurface")
+    multisurface(jg);
+  if (jg["type"] == "CompositeSurface") {
+    if (csasms == true)   
+      multisurface(jg);
+    else
+      compositesurface(jg);
+  }
+}
+
+
+void waterbody(std::string id, json& jco) {
+  std::cout << "<wtr:WaterBody gml:id=\"" << id << "\">" << std::endl;
+  //-- 1. attributes
+  attributes(jco);
+  //-- 2. geometry
+  for (auto& g : jco["geometry"]) {
+    if (g.count("semantics") != 0) {
+      // std::cout << "TODO" << std::endl;
+    }
+    else {
+      int lod = g["lod"].get<int>();
+      std::stringstream ss;
+      ss << "<wtr:lod" << lod;
+      std::string cotype = g["type"].get<std::string>();
+      bool csasms = false;
+      if (g["type"] == "CompositeSurface") {
+        std::cerr << "Compoia;dlfkj" << std::endl;
+        cotype = "MultiSurface";
+        csasms = true;
+      }
+      ss << cotype << ">";
+      std::cout << ss.str() << std::endl;
+      geometry(g, csasms);
+      std::string tmp = ss.str();
+      tmp = tmp.insert(1, "/");
+      std::cout << tmp;
+    }
+  }
+  std::cout << "</wtr:WaterBody>" << std::endl;
+}
+
+
+void cityobject(std::string id, json& jco) {
+  std::cout << "<cityObjectMember>" << std::endl;
+  if (jco["type"] == "Building")
+    building(id, jco);
+  else if (jco["type"] == "WaterBody")
+    waterbody(id, jco);
+  else
+    std::cerr << jco["type"] <<  ": NOT IMPLEMENTED YET." << std::endl;
   std::cout << "</cityObjectMember>" << std::endl;
 }
 
@@ -391,12 +484,8 @@ int main(int argc, const char * argv[]) {
   citygml_header();
   metadata();
   
-  for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit) {
-    if (coit.value()["type"] == "Building") {
-      // std::cout << "BUILDING" << std::endl;
-      building(coit.key(), coit.value());
-    }
-  }
+  for (json::iterator coit = j["CityObjects"].begin(); coit != j["CityObjects"].end(); ++coit)
+      cityobject(coit.key(), coit.value());
 
   std::cout << "</CityModel>" << std::endl;
   return 0;
