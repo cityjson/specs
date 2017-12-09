@@ -93,7 +93,7 @@ html_theme_options = {
     'logo': 'cityjson_logo.svg',
     # 'logo_text_align': 'left-align',
     # 'body_text_align': 'left-align',
-    'description': 'JSON-based implementation of CityGML, easy-to-use and compact',
+    'description': 'JSON-based implementation of CityGML data model, easy-to-use and compact',
     # 'logo_name': 'true',
     'github_user': 'tudelft3d',
     'github_repo': 'cityjson',
