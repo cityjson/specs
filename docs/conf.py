@@ -99,6 +99,7 @@ html_theme_options = {
     'github_repo': 'cityjson',
     'show_powered_by': 'false',
     'extra_nav_links': {
+        'GitHub homepage': 'https://github.com/tudelft3d/cityjson',
         'CityGML homepage': 'https://www.citygml.org',
         'JSON homepage': 'http://json.org',
     },
