@@ -31,5 +31,5 @@ Software to validate a file against the schema
 
 Errors and warnings are returned to the user.
 
-`JSON Schema <https://json-schema.org>`_ is used to validate.
+`JSON Schema <http://json-schema.org>`_ is used to validate.
 
