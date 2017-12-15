@@ -70,7 +70,8 @@ def building_pi_parent(j):
         if j['CityObjects'][id]['type'] == 'Building':
             if 'Parts' in j['CityObjects'][id]:
                 for pid in j['CityObjects'][id]['Parts']:
-                    pis.remove(pid)
+                    if pid in pis:
+                        pis.remove(pid)
         if j['CityObjects'][id]['type'] == 'Building':
             if 'Installations' in j['CityObjects'][id]:
                 for pid in j['CityObjects'][id]['Installations']:
@@ -141,12 +142,59 @@ def geometry_empty(j):
     return isValid
 
 
+def semantics(j):
+    isValid = True
+    for id in j["CityObjects"]:
+        geomid = 0
+        for g in j['CityObjects'][id]['geometry']:
+            if 'semantics' not in g:
+                continue
+            else:
+                sem = g['semantics']
+                if g['type'] == 'Solid':
+                    shellid = 0
+                    for shell in g["boundaries"]:
+                        surfaceid = 0
+                        for surface in shell:
+                            i = None
+                            if sem['values'] is not None:
+                                if sem['values'][shellid] is not None:
+                                    i = sem['values'][shellid][surfaceid]
+                            if i is not None:
+                                if i > (len(sem['surfaces']) - 1):
+                                    sys.stdout.write("ERROR:   semantics arrays problems ( #" + id)
+                                    sys.stdout.write("; geom=" + str(geomid) + ",shell=" + str(shellid) + ",surface=" + str(surfaceid) + " )\n")
+                                    isValid = False;
+                                    break
+
+                            surfaceid += 1
+                        shellid += 1
+                if g['type'] == 'MultiSurface' or g['type'] == 'CompositeSurface':
+                    surfaceid = 0
+                    for surface in g["boundaries"]:
+                        i = None
+                        if sem['values'] is not None:
+                            if sem['values'][surfaceid] is not None:
+                                i = sem['values'][surfaceid]
+                        if i is not None:
+                            if i > (len(sem['surfaces']) - 1):
+                                sys.stdout.write("ERROR:   semantics arrays problems ( #" + id)
+                                sys.stdout.write("; geom=" + str(geomid) + ",surface=" + str(surfaceid) + " )\n")
+                                isValid = False;
+                                break
+                        surfaceid += 1
+                # TODO if g['type'] == 'MultiSolid' or g['type'] == 'CompositeSolid':
+
+            geomid += 1            
+    return isValid
+
+
 def main():
     isValid = True
     woWarnings = True
 
-    filename = '../../../example-datasets/dummy-values/example.json'
-    # filename = '../../../example-datasets/dummy-values/invalid.json'
+    # filename = '../../../example-datasets/dummy-values/example.json'
+    filename = '../../../example-datasets/dummy-values/invalid2.json'
     # filename = '../../../example-datasets/dummy-values/invalid3.json'
     # filename = '/Users/hugo/temp/schemas/myfile.json'
     fin = open(filename)
@@ -220,6 +268,8 @@ def main():
     if building_installations(j) == False:
         isValid = False
     if building_pi_parent(j) == False:
+        isValid = False
+    if semantics(j) == False:
         isValid = False
     if metadata(j, js) == False:
         woWarnings = False
