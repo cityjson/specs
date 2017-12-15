@@ -132,12 +132,20 @@ def citygml_attributes(j, js):
     return isValid
 
 
+def geometry_empty(j):
+    isValid = True
+    for id in j["CityObjects"]:
+        if len(j['CityObjects'][id]['geometry']) == 0:
+            isValid = False
+            sys.stdout.write("WARNING: " + j['CityObjects'][id]['type'] + " #" + id + " has no geometry.\n")
+    return isValid
+
 
 def main():
     isValid = True
     woWarnings = True
 
-    filename = '../../../example-datasets/dummy-values/example2.json'
+    filename = '../../../example-datasets/dummy-values/example.json'
     # filename = '../../../example-datasets/dummy-values/invalid.json'
     # filename = '../../../example-datasets/dummy-values/invalid3.json'
     # filename = '/Users/hugo/temp/schemas/myfile.json'
@@ -216,6 +224,8 @@ def main():
     if metadata(j, js) == False:
         woWarnings = False
     if citygml_attributes(j, jsco) == False:
+        woWarnings = False
+    if geometry_empty(j) == False:
         woWarnings = False
 
 
