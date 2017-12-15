@@ -49,6 +49,45 @@ def building_parts(j):
     return isValid
 
 
+def building_installations(j):
+    isValid = True
+    for id in j["CityObjects"]:
+        # print j['CityObjects'][id]['type']
+        if (j['CityObjects'][id]['type'] == 'Building') and ('Installations' in j['CityObjects'][id]):
+            for each in j['CityObjects'][id]['Installations']:
+                if (each in j['CityObjects']) and (j['CityObjects'][each]['type'] == 'BuildingInstallation'):
+                    pass
+                else:
+                    sys.stdout.write("ERROR: BuildingInstallation #" + each + " doesn't exist.\n")
+                    sys.stdout.write("\t(Building #" + id + " references it)\n")    
+                    isValid = False
+    return isValid
+
+
+def building_pi_parent(j):
+    isValid = True
+    pis = set()
+    for id in j["CityObjects"]:
+        if j['CityObjects'][id]['type'] == 'BuildingPart' or j['CityObjects'][id]['type'] == 'BuildingInstallation':
+            pis.add(id)
+    for id in j["CityObjects"]:
+        if j['CityObjects'][id]['type'] == 'Building':
+            if 'Parts' in j['CityObjects'][id]:
+                for pid in j['CityObjects'][id]['Parts']:
+                    pis.remove(pid)
+        if j['CityObjects'][id]['type'] == 'Building':
+            if 'Installations' in j['CityObjects'][id]:
+                for pid in j['CityObjects'][id]['Installations']:
+                    if pid in pis:
+                        pis.remove(pid)
+    if len(pis) > 0:
+        isValid = False
+        sys.stdout.write("ERROR: BuildingParts and/or BuildingInstallations don't have a parent:\n")
+        for each in pis:
+            sys.stdout.write("\t#" + each + "\n")
+    return isValid
+
+
 def main():
     global isValid
     global woWarnings
@@ -121,6 +160,11 @@ def main():
 
     if building_parts(j) == False:
         isValid = False
+    if building_installations(j) == False:
+        isValid = False
+    if building_pi_parent(j) == False:
+        isValid = False
+
 
     byebye()
     return
