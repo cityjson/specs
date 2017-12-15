@@ -31,7 +31,7 @@ def main():
         print "ERROR: Duplicate keys!"
         return
 
-    schema = '/Users/hugo/projects/cityjson/schema/v06/cityjson.schema.json'
+    schema = '../../../schema/v06/cityjson.schema.json'
     # schema = '/Users/hugo/temp/schemas/schema2.json'
     fin2 = open(schema)
     jtmp = json.loads(fin2.read())
@@ -44,7 +44,7 @@ def main():
         base_uri = u.scheme + "://" + u.netloc + os.path.dirname(u.path) + "/" 
     else:
         print "$id not defined, using local files"
-        abs_path = os.path.dirname(schema)
+        abs_path = os.path.abspath(os.path.dirname(schema))
         base_uri = 'file://{}/'.format(abs_path)
     print base_uri
 
