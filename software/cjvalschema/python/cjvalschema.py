@@ -7,8 +7,6 @@ import urlparse
 from pprint import pprint
 
 
-isValid = True
-woWarnings = True
 
 def dict_raise_on_duplicates(ordered_pairs):
     d = {}
@@ -19,9 +17,7 @@ def dict_raise_on_duplicates(ordered_pairs):
            d[k] = v
     return d
 
-def byebye():
-    global isValid
-    global woWarnings
+def byebye(isValid, woWarnings):
     sys.stdout.write("\n==========\n")
     if (isValid == True):
         sys.stdout.write("File is VALID")
@@ -88,9 +84,58 @@ def building_pi_parent(j):
     return isValid
 
 
+def metadata(j, js):
+    isValid = True
+    jtmp = js['properties']['metadata']['properties']
+    if 'metadata' in j:
+        for each in j['metadata']:
+            if each not in jtmp:
+                isValid = False
+                sys.stdout.write("WARNING: Metadata '" + each + "' not in CityJSON schema.\n")
+    return isValid
+
+
+def citygml_attributes(j, js):
+    isValid = True
+    thewarnings = {}
+    for id in j["CityObjects"]:
+        cotype = j['CityObjects'][id]['type']
+        tmp = js[str(cotype)]["properties"]["attributes"]["properties"]
+        if 'attributes' in j['CityObjects'][id]:
+            for a in j['CityObjects'][id]['attributes']:
+                if a not in tmp:
+                    isValid = False;
+                    s = "WARNING: attributes '" + a + "' not in CityGML schema"
+                    if s not in thewarnings:
+                        thewarnings[s] = [id]
+                    else:
+                        thewarnings[s].append(id)
+        if 'address' in j['CityObjects'][id]:
+            tmp = js[str(cotype)]["properties"]["address"]["properties"]                        
+            for a in j['CityObjects'][id]['address']:
+                if a not in tmp:
+                    isValid = False;
+                    s = "WARNING: address attributes '" + a + "' not in CityGML schema"
+                    if s not in thewarnings:
+                        thewarnings[s] = [id]
+                    else:
+                        thewarnings[s].append(id)                        
+    for each in thewarnings:
+        sys.stdout.write(each)
+        if len(thewarnings[each]) < 3:
+            sys.stdout.write(" (")
+            for coid in thewarnings[each]:
+                sys.stdout.write(" #" + coid + " ")
+            sys.stdout.write(")\n")
+        else:
+            sys.stdout.write(" (" + len(thewarnings[each]) + " CityObjects have this warning)\n")
+    return isValid
+
+
+
 def main():
-    global isValid
-    global woWarnings
+    isValid = True
+    woWarnings = True
 
     filename = '../../../example-datasets/dummy-values/example2.json'
     # filename = '../../../example-datasets/dummy-values/invalid.json'
@@ -106,14 +151,14 @@ def main():
     except ValueError, Argument:
         print "ERROR: ", Argument
         isValid = False
-        byebye()
+        byebye(isValid, woWarnings)
         return
 
     #-- make sure it's a CityJSON file
     if (j["type"] != "CityJSON"):
         print "ERROR: not a CityJSON file"
         isValid = False
-        byebye()
+        byebye(isValid, woWarnings)
         return
 
     #-- fetch proper schema
@@ -124,7 +169,7 @@ def main():
     else:
         sys.stdout.write("ERROR: version not supported.\n")
         isValid = False
-        byebye()
+        byebye(isValid, woWarnings)
         return
     fins = open(schema)
     jtmp = json.loads(fins.read())
@@ -140,7 +185,11 @@ def main():
         base_uri = 'file://{}/'.format(abs_path)
     print "Schema used:", os.path.abspath(schema)
     js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
-    
+    #-- load the schema for the cityobjects.json
+    sco_path = os.path.abspath(os.path.dirname(schema))
+    sco_path += '/cityobjects.json'
+    jsco = json.loads(open(sco_path).read())
+    # print jsco
     print "="*10    
     
     #-- validate the file against the schema
@@ -149,12 +198,12 @@ def main():
     except jsonschema.ValidationError as e:
         print "ERROR:", e.message
         isValid = False
-        byebye()
+        byebye(isValid, woWarnings)
         return
     except jsonschema.SchemaError as e:
         print "ERROR:", e
         isValid = False
-        byebye()
+        byebye(isValid, woWarnings)
         return
 
 
@@ -164,9 +213,13 @@ def main():
         isValid = False
     if building_pi_parent(j) == False:
         isValid = False
+    if metadata(j, js) == False:
+        woWarnings = False
+    if citygml_attributes(j, jsco) == False:
+        woWarnings = False
 
 
-    byebye()
+    byebye(isValid, woWarnings)
     return
 
 if __name__ == '__main__':
