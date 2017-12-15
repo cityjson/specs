@@ -39,7 +39,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },    
 
   "TunnelPart": {
@@ -74,7 +75,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "TunnelInstallation": {
@@ -106,7 +108,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "Bridge": {
@@ -163,7 +166,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },    
 
   "BridgePart": {
@@ -215,7 +219,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "BridgeInstallation": {
@@ -247,7 +252,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "BridgeConstructionElement": {
@@ -279,7 +285,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "Building": {
@@ -342,7 +349,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "BuildingPart": {
@@ -400,7 +408,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "BuildingInstallation": {
@@ -432,7 +441,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "Road": {
@@ -463,7 +473,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "Railway": {
@@ -494,7 +505,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "TransportSquare": {
@@ -525,7 +537,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },   
   "TINRelief": {
     "type": "object",
@@ -546,7 +559,8 @@
         "items": {"$ref": "geomprimitives.json#/CompositeSurface"}
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "WaterBody": {
@@ -576,7 +590,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "PlantCover": {
@@ -604,7 +619,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },    
 
   "SolitaryVegetationObject": {
@@ -639,7 +655,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "LandUse": {
@@ -666,7 +683,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "CityFurniture": {
@@ -698,7 +716,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   },
 
   "GenericCityObject": {
@@ -730,7 +749,8 @@
         }
       }
     },
-    "required": ["type", "geometry"]
+    "required": ["type", "geometry"],
+    "additionalProperties": false
   }
 
 }
