@@ -1,7 +1,10 @@
 import json
 import jsonschema
-from jsonref import JsonRef
+import jsonref
+import os
+import urlparse
 from pprint import pprint
+
 
 def dict_raise_on_duplicates(ordered_pairs):
     """Reject duplicate keys."""
@@ -13,9 +16,13 @@ def dict_raise_on_duplicates(ordered_pairs):
            d[k] = v
     return d
 
+
 def main():
-    # filename = '../../../example-datasets/dummy-values/example.json'
-    filename = '../../../example-datasets/dummy-values/invalid.json'
+
+    filename = '/Users/hugo/projects/cityjson/example-datasets/dummy-values/example.json'
+    # filename = '/Users/hugo/projects/cityjson/example-datasets/dummy-values/invalid.json'
+    # filename = '../../../example-datasets/dummy-values/invalid.json'
+    # filename = '/Users/hugo/temp/schemas/myfile.json'
     fin = open(filename)
 
     try:
@@ -24,25 +31,38 @@ def main():
         print "ERROR: Duplicate keys!"
         return
 
-    # schema = '../../../schema/cityjson-v06.schema.json'
-    schema = '/Users/hugo/temp/schemas/schema.json'
-    js = json.loads(open(schema).read())
-    pprint(JsonRef.replace_refs(js))
+    schema = '/Users/hugo/projects/cityjson/schema/v06/cityjson.schema.json'
+    # schema = '/Users/hugo/temp/schemas/schema2.json'
+    fin2 = open(schema)
+    jtmp = json.loads(fin2.read())
+    fin2.seek(0)
 
-# with open(os.path.join(absolute_path_to_base_directory, base_filename)) as file_object:
-#     schema = json.load(file_object)
-# resolver = jsonschema.RefResolver('file://' + absolute_path_to_base_directory + '/', schema)
-# jsonschema.Draft4Validator(schema, resolver=resolver).validate(data)
+    if "$id" in jtmp:
+        print "$id: ", jtmp['$id']
+        u = urlparse.urlparse(jtmp['$id'])
+        os.path.dirname(u.path)
+        base_uri = u.scheme + "://" + u.netloc + os.path.dirname(u.path) + "/" 
+    else:
+        print "$id not defined, using local files"
+        abs_path = os.path.dirname(schema)
+        base_uri = 'file://{}/'.format(abs_path)
+    print base_uri
+
+
+    js = jsonref.loads(fin2.read(), jsonschema=True, base_uri=base_uri)
+    # pprint(js)
+    
+    print "="*10    
     
     try:
         jsonschema.validate(j, js)
     except jsonschema.ValidationError as e:
-        print e.message
+        print "ERROR:", e.message
     except jsonschema.SchemaError as e:
-        print e
+        print "ERROR:", e
 
-    for id in j["CityObjects"]:
-        print j['CityObjects'][id]['type']
+    # for id in j["CityObjects"]:
+    #     print j['CityObjects'][id]['type']
 
 
 

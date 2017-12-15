@@ -1,0 +1,736 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CityJSON City Objects schema v0.6",
+
+  "Tunnel": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["Tunnel"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "yearOfConstruction": { "type": "integer"},
+          "yearOfDemolition": { "type": "integer"}
+        }
+      },
+      "Parts": {
+        "type": "array",
+        "description": "the IDs of the TunnelPart of this Tunnel",
+        "items": {"type": "string"}
+      },
+      "Installations": {
+        "type": "array",
+        "description": "the IDs of the TunnelInstallation of this Tunnel",
+        "items": {"type": "string"}
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"}
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },    
+
+  "TunnelPart": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["TunnelPart"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "yearOfConstruction": { "type": "integer"},
+          "yearOfDemolition": { "type": "integer"}
+        }
+      },
+      "Installations": {
+        "type": "array",
+        "description": "the IDs of the TunnelInstallation of this TunnelPart",
+        "items": {"type": "string"}
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"}
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "TunnelInstallation": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["TunnelInstallation"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}            
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "Bridge": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["Bridge"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "yearOfConstruction": { "type": "integer"},
+          "yearOfDemolition": { "type": "integer"},
+          "isMovable": { "type": "boolean"}
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "CountryName": {"type": "string"},
+          "LocalityName": {"type": "string"},
+          "ThoroughfareNumber": {"type": "string"},
+          "ThoroughfareName": {"type": "string"},
+          "PostalCode": {"type": "string"},
+          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+        }
+      },
+      "Parts": {
+        "type": "array",
+        "description": "the IDs of the BridgePart of this Bridge",
+        "items": {"type": "string"}
+      },
+      "Installations": {
+        "type": "array",
+        "description": "the IDs of the BridgeInstallation of this Bridge",
+        "items": {"type": "string"}
+      },
+      "ConstructionElements": {
+        "type": "array",
+        "description": "the IDs of the BridgeConstructionElement of this Bridge",
+        "items": {"type": "string"}
+      },        
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"}
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },    
+
+  "BridgePart": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["BridgePart"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "yearOfConstruction": { "type": "integer"},
+          "yearOfDemolition": { "type": "integer"},
+          "isMovable": { "type": "boolean"}
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "CountryName": {"type": "string"},
+          "LocalityName": {"type": "string"},
+          "ThoroughfareNumber": {"type": "string"},
+          "ThoroughfareName": {"type": "string"},
+          "PostalCode": {"type": "string"},
+          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+        }
+      },
+      "Installations": {
+        "type": "array",
+        "description": "the IDs of the BridgeInstallation of this BridgePart",
+        "items": {"type": "string"}
+      },
+      "ConstructionElements": {
+        "type": "array",
+        "description": "the IDs of the BridgeConstructionElement of this BridgePart",
+        "items": {"type": "string"}
+      },        
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"}
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "BridgeInstallation": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["BridgeInstallation"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}            
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "BridgeConstructionElement": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["BridgeConstructionElement"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}            
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "Building": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["Building"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "measuredHeight": { "type": "number"},
+          "roofType": { "type": "string"},
+          "storeysAboveGround": { "type": "integer"},
+          "storeysBelowGround": { "type": "integer"},
+          "storeyHeightsAboveGround": { 
+            "type": "array",
+            "items": {"type": "number"}
+          },
+          "storeyHeightsBelowGround": { 
+            "type": "array",
+            "items": {"type": "number"}
+          },
+          "yearOfConstruction": { "type": "integer"},
+          "yearOfDemolition": { "type": "integer"}
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "CountryName": {"type": "string"},
+          "LocalityName": {"type": "string"},
+          "ThoroughfareNumber": {"type": "string"},
+          "ThoroughfareName": {"type": "string"},
+          "PostalCode": {"type": "string"},
+          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+        }
+      },
+      "Parts": {
+        "type": "array",
+        "description": "the IDs of the BuildingPart of this Building",
+        "items": {"type": "string"}
+      },
+      "Installations": {
+        "type": "array",
+        "description": "the IDs of the BuildingInstallation of this Building",
+        "items": {"type": "string"}
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"}
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "BuildingPart": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["BuildingPart"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "measuredHeight": { "type": "number"},
+          "roofType": { "type": "string"},
+          "storeysAboveGround": { "type": "integer"},
+          "storeysBelowGround": { "type": "integer"},
+          "storeyHeightsAboveGround": { 
+            "type": "array",
+            "items": {"type": "number"}
+          },
+          "storeyHeightsBelowGround": { 
+            "type": "array",
+            "items": {"type": "number"}
+          },
+          "yearOfConstruction": { "type": "integer"},
+          "yearOfDemolition": { "type": "integer"}
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "CountryName": {"type": "string"},
+          "LocalityName": {"type": "string"},
+          "ThoroughfareNumber": {"type": "string"},
+          "ThoroughfareName": {"type": "string"},
+          "PostalCode": {"type": "string"},
+          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+        },
+        "additionalProperties": false
+      },              
+      "Installations": {
+        "type": "array",
+          "items": {"type": "string"}
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"}
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "BuildingInstallation": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["BuildingInstallation"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}            
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "Road": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["Road"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "surfaceMaterial": { 
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },        
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "Railway": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["Railway"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "surfaceMaterial": { 
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },        
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "TransportSquare": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["TransportSquare"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "surfaceMaterial": { 
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },        
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },   
+  "TINRelief": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["TINRelief"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },        
+      "geometry": {
+        "type": "array",
+        "items": {"$ref": "geomprimitives.json#/CompositeSurface"}
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "WaterBody": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["WaterBody"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},                        
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "PlantCover": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["PlantCover"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},                        
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "averageHeight": {"type": "number"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/MultiSolid"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },    
+
+  "SolitaryVegetationObject": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["SolitaryVegetationObject"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},                        
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "species": {"type": "string"},
+          "trunkDiameter": {"type": "number"},
+          "crownDiameter": {"type": "number"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "LandUse": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["LandUse"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},                        
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "CityFurniture": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["CityFurniture"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  },
+
+  "GenericCityObject": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["GenericCityObject"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"]
+  }
+
+}
