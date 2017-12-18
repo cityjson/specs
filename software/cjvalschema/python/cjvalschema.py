@@ -39,7 +39,7 @@ def building_parts(j):
                 if (each in j['CityObjects']) and (j['CityObjects'][each]['type'] == 'BuildingPart'):
                     pass
                 else:
-                    sys.stdout.write("ERROR: BuildingPart #" + each + " doesn't exist.\n")
+                    sys.stdout.write("ERROR:   BuildingPart #" + each + " doesn't exist.\n")
                     sys.stdout.write("\t(Building #" + id + " references it)\n")    
                     isValid = False
     return isValid
@@ -54,7 +54,7 @@ def building_installations(j):
                 if (each in j['CityObjects']) and (j['CityObjects'][each]['type'] == 'BuildingInstallation'):
                     pass
                 else:
-                    sys.stdout.write("ERROR: BuildingInstallation #" + each + " doesn't exist.\n")
+                    sys.stdout.write("ERROR:   BuildingInstallation #" + each + " doesn't exist.\n")
                     sys.stdout.write("\t(Building #" + id + " references it)\n")    
                     isValid = False
     return isValid
@@ -79,7 +79,7 @@ def building_pi_parent(j):
                         pis.remove(pid)
     if len(pis) > 0:
         isValid = False
-        sys.stdout.write("ERROR: BuildingParts and/or BuildingInstallations don't have a parent:\n")
+        sys.stdout.write("ERROR:   BuildingParts and/or BuildingInstallations don't have a parent:\n")
         for each in pis:
             sys.stdout.write("\t#" + each + "\n")
     return isValid
@@ -173,6 +173,8 @@ def semantics(j):
                     surfaceid = 0
                     for surface in g["boundaries"]:
                         i = None
+                        # print "surfaceid", surfaceid
+                        # print "---", sem['values']
                         if sem['values'] is not None:
                             if sem['values'][surfaceid] is not None:
                                 i = sem['values'][surfaceid]
@@ -193,8 +195,8 @@ def main():
     isValid = True
     woWarnings = True
 
-    # filename = '../../../example-datasets/dummy-values/example.json'
-    filename = '../../../example-datasets/dummy-values/invalid2.json'
+    filename = '../../../example-datasets/dummy-values/example.json'
+    # filename = '../../../example-datasets/dummy-values/invalid2.json'
     # filename = '../../../example-datasets/dummy-values/invalid3.json'
     # filename = '/Users/hugo/temp/schemas/myfile.json'
     fin = open(filename)
@@ -205,14 +207,14 @@ def main():
     try:
         j = json.loads(fin.read(), object_pairs_hook=dict_raise_on_duplicates)
     except ValueError, Argument:
-        print "ERROR: ", Argument
+        print "ERROR:   ", Argument
         isValid = False
         byebye(isValid, woWarnings)
         return
 
     #-- make sure it's a CityJSON file
     if (j["type"] != "CityJSON"):
-        print "ERROR: not a CityJSON file"
+        print "ERROR:   not a CityJSON file"
         isValid = False
         byebye(isValid, woWarnings)
         return
@@ -223,7 +225,7 @@ def main():
     elif j["version"] == "0.5":
         schema = '../../../schema/cityjson-v05.schema.json'
     else:
-        sys.stdout.write("ERROR: version not supported.\n")
+        sys.stdout.write("ERROR:   version not supported.\n")
         isValid = False
         byebye(isValid, woWarnings)
         return
@@ -252,12 +254,12 @@ def main():
     try:
         jsonschema.validate(j, js)
     except jsonschema.ValidationError as e:
-        print "ERROR:", e.message
+        print "ERROR:   ", e.message
         isValid = False
         byebye(isValid, woWarnings)
         return
     except jsonschema.SchemaError as e:
-        print "ERROR:", e
+        print "ERROR:   ", e
         isValid = False
         byebye(isValid, woWarnings)
         return
