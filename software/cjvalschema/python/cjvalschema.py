@@ -223,7 +223,7 @@ def main():
 
     #-- fetch proper schema
     if j["version"] == "0.6":
-        schema = '../../../schema/v06/cityjson.schema.json'
+        schema = '../../../schema/v06/cityjson.json'
     elif j["version"] == "0.5":
         schema = '../../../schema/cityjson-v05.schema.json'
     else:
