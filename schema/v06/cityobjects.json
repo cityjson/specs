@@ -2,6 +2,41 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "CityJSON City Objects schema v0.6",
 
+  "CityObjectGroup": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["CityObjectGroup"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "members": {
+        "type": "array",
+        "description": "the IDs of the CityObjects members of that group",
+        "items": {"type": "string"}
+      },
+      "geometry": {
+        "type": "object",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}            
+          ] 
+        }
+      }
+    },
+    "required": ["type", "members"]
+  },
+
   "Tunnel": {
     "type": "object",
     "properties": {
@@ -539,7 +574,8 @@
     },
     "required": ["type", "geometry"],
     "additionalProperties": false
-  },   
+  },  
+
   "TINRelief": {
     "type": "object",
     "properties": {
