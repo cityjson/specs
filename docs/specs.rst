@@ -166,6 +166,7 @@ The following are all of type ``"string"``:
 
 .. _specs_cityobjects:
 
+
 -----------------
 City Object types
 -----------------
@@ -192,6 +193,7 @@ A City Object is a JSON object for which the type member’s value is one of the
   #. ``"Tunnel"``
   #. ``"TunnelPart"``
   #. ``"TunnelInstallation"``
+  #. ``"CityObjectGroup"``
 
 
 
@@ -567,6 +569,31 @@ Tunnel, TunnelPart, and TunnelInstallation
       }] 
     }
   }
+
+
+CityObjectGroup
+***************
+
+The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood for instance), is possible in CityJSON too.
+As in CityGML, the group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
+
+- A City Object of type ``"CityObjectGroup"`` must have a member ``"members"``, whose value is an array of the IDs of the City Objects that the group contains. Since a ``"CityObjectGroup"`` is also a City Object, it can be part of another group.
+- A City Object of type ``"CityObjectGroup"`` may have a member ``"geometry"``, whose value is one Geometry Object (of any type).
+
+.. code-block:: js
+
+  "CityObjects": {
+    "my-neighbourhood": {
+      "type": "CityObjectGroup",
+      "members": ["building1", "building2"],
+      "geometry": {
+        "type": "MultiSurface",
+        "lod": 2,
+        "boundaries": [ [[2, 4, 5]] ]
+      }
+    }
+  }
+
 
 
 ----------------
