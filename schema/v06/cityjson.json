@@ -4,7 +4,6 @@
   "description": "CityJSON specifications v0.6",
   "type": "object",
 
-
   "properties": {
     "type": { "enum": ["CityJSON"] },
     "version": { 
@@ -58,6 +57,7 @@
       "type": "object",
       "additionalProperties": {
         "oneOf": [
+          { "$ref": "cityobjects.json#/CityObjectGroup" },
           { "$ref": "cityobjects.json#/Building" },
           { "$ref": "cityobjects.json#/BuildingPart" },
           { "$ref": "cityobjects.json#/BuildingInstallation" },
