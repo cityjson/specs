@@ -20,7 +20,7 @@
         "items": {"type": "string"}
       },
       "geometry": {
-        "type": "object",
+        "type": "array",
         "items": {
           "oneOf": [
             {"$ref": "geomprimitives.json#/MultiPoint"},
@@ -31,7 +31,9 @@
             {"$ref": "geomprimitives.json#/MultiSurface"},
             {"$ref": "geomprimitives.json#/CompositeSurface"}            
           ] 
-        }
+        },
+        "minItems": 0,    
+        "maxItems": 1 
       }
     },
     "required": ["type", "members"]

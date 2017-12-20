@@ -16,11 +16,13 @@
     "mygroup1": {
       "type": "CityObjectGroup",
       "members": ["102636712", "mylake"],
-      "geometry": {
+      "geometry": [ 
+      { 
         "type": "MultiSurface",
         "lod": 2,
         "boundaries": [ [[2, 4, 5]] ]
       }
+      ]
     },
   	"102636712": {
       "type": "Building", 
