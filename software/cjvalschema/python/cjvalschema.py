@@ -155,6 +155,8 @@ def semantics(j):
                     shellid = 0
                     for shell in g["boundaries"]:
                         surfaceid = 0
+                        # print "surfaceid", surfaceid
+                        # print "---", sem['values']
                         for surface in shell:
                             i = None
                             if sem['values'] is not None:
