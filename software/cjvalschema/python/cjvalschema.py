@@ -30,6 +30,20 @@ def byebye(isValid, woWarnings):
     sys.stdout.write('\n')
 
 
+def city_object_groups(j):
+    isValid = True
+    for id in j["CityObjects"]:
+        # print j['CityObjects'][id]['type']
+        if j['CityObjects'][id]['type'] == 'CityObjectGroup':
+            for each in j['CityObjects'][id]['members']:
+                if each in j['CityObjects']:
+                    pass
+                else:
+                    sys.stdout.write("ERROR:   CityObjectGroup (#" + id + ") contains member #" + each + ", but it doesn't exist.\n") 
+                    isValid = False
+    return isValid
+
+
 def building_parts(j):
     isValid = True
     for id in j["CityObjects"]:
@@ -267,6 +281,8 @@ def main():
         return
 
 
+    if city_object_groups(j) == False:
+        isValid = False
     if building_parts(j) == False:
         isValid = False
     if building_installations(j) == False:
