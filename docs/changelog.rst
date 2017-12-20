@@ -14,6 +14,18 @@ Changelog
 
 ----
 
+[0.6] - xxxxxxxxxx
+------------------
+Added
+*****
+- support for CityGML City Object Groups
+
+Changed
+*******
+- the schema is now split into different schemas that are linked together
+- the schema validator (software cjvalschema) is now in Python, thus everyone can run it easily
+
+
 [0.5] - 2017-11-14 
 ------------------
 
