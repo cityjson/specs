@@ -19,6 +19,12 @@
         "description": "the IDs of the CityObjects members of that group",
         "items": {"type": "string"}
       },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
       "geometry": {
         "type": "array",
         "items": {
@@ -65,6 +71,12 @@
         "description": "the IDs of the TunnelInstallation of this Tunnel",
         "items": {"type": "string"}
       },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
       "geometry": {
         "type": "array",
         "items": {
@@ -101,6 +113,12 @@
         "description": "the IDs of the TunnelInstallation of this TunnelPart",
         "items": {"type": "string"}
       },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
       "geometry": {
         "type": "array",
         "items": {
@@ -129,6 +147,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",
@@ -191,6 +215,12 @@
         "type": "array",
         "description": "the IDs of the BridgeConstructionElement of this Bridge",
         "items": {"type": "string"}
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },        
       "geometry": {
         "type": "array",
@@ -244,6 +274,12 @@
         "type": "array",
         "description": "the IDs of the BridgeConstructionElement of this BridgePart",
         "items": {"type": "string"}
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },        
       "geometry": {
         "type": "array",
@@ -273,6 +309,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",
@@ -306,6 +348,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",
@@ -375,6 +423,12 @@
         "description": "the IDs of the BuildingInstallation of this Building",
         "items": {"type": "string"}
       },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
       "geometry": {
         "type": "array",
         "items": {
@@ -434,6 +488,12 @@
         "type": "array",
           "items": {"type": "string"}
       },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
       "geometry": {
         "type": "array",
         "items": {
@@ -462,6 +522,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",
@@ -499,6 +565,12 @@
             "items": {"type": "string"}
           }
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },        
       "geometry": {
         "type": "array",
@@ -531,6 +603,12 @@
             "items": {"type": "string"}
           }
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },        
       "geometry": {
         "type": "array",
@@ -563,6 +641,12 @@
             "items": {"type": "string"}
           }
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },        
       "geometry": {
         "type": "array",
@@ -591,6 +675,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },        
       "geometry": {
         "type": "array",
@@ -614,6 +704,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",
@@ -647,6 +743,12 @@
           "averageHeight": {"type": "number"}
         }
       },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
       "geometry": {
         "type": "array",
         "items": {
@@ -677,6 +779,12 @@
           "trunkDiameter": {"type": "number"},
           "crownDiameter": {"type": "number"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",
@@ -711,6 +819,12 @@
           "usage": {"type": "string"}
         }
       },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
       "geometry": {
         "type": "array",
         "items": {
@@ -738,6 +852,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",
@@ -771,6 +891,12 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
       },
       "geometry": {
         "type": "array",

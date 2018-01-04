@@ -204,6 +204,7 @@
     },    
     "mylake": {
       "type": "WaterBody", 
+      "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
       "attributes": {
         "usage": "leisure",
         "function": "leisure"

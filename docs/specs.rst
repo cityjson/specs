@@ -194,17 +194,19 @@ A City Object is a JSON object for which the type member’s value is one of the
   #. ``"CityObjectGroup"``
 
 
-
 A City Object:
 
 - must have one member with the name ``"geometry"``, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
 - may have one member with the name ``"attributes"``, whose value is an object with the different attributes allowed by CityGML. 
+- may have one member with the name ``"bbox"`` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
+
 
 .. code-block:: js
 
   "CityObjects": {
     "id-1": {
       "type": "Building", 
+      "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
       "attributes": { 
         "measuredHeight": 22.3,
         "roofType": "gable",
@@ -218,11 +220,12 @@ A City Object:
     }
   }
 
+
 Attributes
 **********
 
 The attributes prescribed by CityGML differ per City Object, and can be seen either in the `official CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ or in the schema of CityJSON (:doc:`schema`). 
-The program `cityjson_valschema <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson-valschema>`_ returns WARNINGS when a City Object has attributes not in the CityGML list.
+The program `cjvalschema <https://github.com/tudelft3d/cityjson/tree/master/software/cjvalschema>`_ returns WARNINGS when a City Object has attributes not in the CityGML list.
 In CityJSON any other attributes can be added with a JSON key-value pair ("owner" in the example above is one such attribute)---it is however not guaranteed that a parser will read them.
 
 All the City Objects have the following 3 possible attributes:
@@ -273,6 +276,7 @@ Building, BuildingPart, and BuildingInstallation
       "attributes": { 
         "roofType": "gable"
       },
+      "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
       "Parts": ["id-56", "id-832"],
       "Installations": ["mybalcony"]
     },
