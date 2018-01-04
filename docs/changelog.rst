@@ -19,6 +19,8 @@ Changelog
 Added
 *****
 - support for CityGML City Object Groups
+- any members at the root of CityJSON are now allowed (but might be ignored by parser)
+- each City Object can have a "bbox" member
 
 Changed
 *******
