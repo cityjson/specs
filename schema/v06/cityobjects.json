@@ -435,7 +435,8 @@
           "oneOf": [
             {"$ref": "geomprimitives.json#/Solid"},
             {"$ref": "geomprimitives.json#/CompositeSolid"},
-            {"$ref": "geomprimitives.json#/MultiSurface"}
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomtemplates.json#/GeometryInstance"}
           ] 
         }
       }
