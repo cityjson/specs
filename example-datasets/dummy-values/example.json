@@ -234,6 +234,10 @@
     [1.0, 1.0, 1.0],
     [0.0, 1.0, 1.0]
   ],
+  "something-else": {
+    "this": 1.0,
+    "that": "blablabla"
+  },
   "appearance": {
     "default-theme-texture": "summer-textures",
     "default-theme-material": "irradiation",

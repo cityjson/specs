@@ -135,7 +135,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["type", "version", "CityObjects", "vertices"],
-  "additionalProperties": false
+  "required": ["type", "version", "CityObjects", "vertices"]
 }
 

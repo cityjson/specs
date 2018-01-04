@@ -109,6 +109,14 @@ def metadata(j, js):
                 sys.stdout.write("WARNING: Metadata '" + each + "' not in CityJSON schema.\n")
     return isValid
 
+def cityjson_properties(j, js):
+    isValid = True
+    thewarnings = {}
+    for property in j:
+        if property not in js["properties"]:
+            isValid = False
+            sys.stdout.write("WARNING: root property '" + property + "' not in CityJSON schema, might be ignored by some parsers\n")
+    return isValid
 
 def citygml_attributes(j, js):
     isValid = True
@@ -292,6 +300,8 @@ def main():
     if semantics(j) == False:
         isValid = False
     if metadata(j, js) == False:
+        woWarnings = False
+    if cityjson_properties(j, js) == False:
         woWarnings = False
     if citygml_attributes(j, jsco) == False:
         woWarnings = False

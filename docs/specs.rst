@@ -17,18 +17,17 @@ CityJSON Object
 A CityJSON object represents one 3D city model of a given area, this model may contain features of different types, as defined in the CityGML data model.
 
 - A CityJSON object is a JSON object.
-- A CityJSON object must have 4 members: 
+- A CityJSON object must have the following 4 members: 
 
   #. one member with the name ``"type"``, whose value must be ``"CityJSON"``;
   #. one member with the name ``"version"``, whose value must be a string with the version (X.Y) of CityJSON used;
   #. one member with the name ``"CityObjects"``. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one dataset/file).
   #. one member with the name ``"vertices"``, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is basically reused.
 
-
 - A CityJSON may have one member with the name ``"metadata"``, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
 - A CityJSON may have one member with the name ``"transform"``, whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
 - A CityJSON may have one member with name ``"appearance"``, the value may contain JSON objects representing the textures and/or materials of surfaces.
-- A CityJSON must not have other members.
+- A CityJSON may have other members, and their value is not prescribed. Because these are not standard in CityJSON, they might be ignored by parsers.
 
 The minimal valid CityJSON object is thus:
 
@@ -40,7 +39,6 @@ The minimal valid CityJSON object is thus:
     "CityObjects": {},
     "vertices": []
   }
-
 
 An empty CityJSON will look like this:
 
