@@ -673,6 +673,7 @@ Arrays to represent boundaries
 
   {
     "type": "MultiPoint",
+    "lod": 1,
     "boundaries": [2, 44, 0, 7]
   }
 
@@ -680,6 +681,7 @@ Arrays to represent boundaries
 
   {
     "type": "MultiLineString",
+    "lod": 1,
     "boundaries": [
       [2, 3, 5], [77, 55, 212]
     ]  
@@ -690,6 +692,7 @@ Arrays to represent boundaries
 
   {
     "type": "MultiSurface",
+    "lod": 2,
     "boundaries": [
       [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
     ]
@@ -699,6 +702,7 @@ Arrays to represent boundaries
 
   {
     "type": "Solid",
+    "lod": 2,
     "boundaries": [
       [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ], //-- exterior shell
       [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ] //-- interior shell
@@ -709,6 +713,7 @@ Arrays to represent boundaries
 
   {
     "type": "CompositeSolid",
+    "lod": 3,
     "boundaries": [
       [ //-- 1st Solid
         [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ],
