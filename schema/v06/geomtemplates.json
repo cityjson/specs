@@ -14,7 +14,9 @@
         "minItems": 16,    
         "maxItems": 16          
       }
-    }
+    },
+    "required": ["type", "template", "referencePoint", "transformationMatrix"],
+    "additionalProperties": false
   }
 
 }

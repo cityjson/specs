@@ -132,9 +132,25 @@
         ]
       }]
     },
-    "mycabin": {
-      "type": "Building", 
-      "geometry": []
+    "onebigtree": {
+      "type": "SolitaryVegetationObject", 
+      "geometry": [
+        {
+          "type": "GeometryInstance",
+          "template": "spruce",
+          "referencePoint": {
+            "type": "MultiPoint",
+            "lod": 1,
+            "boundaries": [2]
+          },
+          "transformationMatrix": [
+            2.0, 0.0, 0.0, 0.0,
+            0.0, 2.0, 0.0, 0.0,
+            0.0, 0.0, 2.0, 0.0,
+            0.0, 0.0, 0.0, 1.0
+          ]
+        }
+      ]
     },
     "itcanbeastringtoo": {
       "type": "Building", 
