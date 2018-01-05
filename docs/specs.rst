@@ -883,7 +883,7 @@ Geometry templates (aka as Implicit Geometries in CityGML)
 ----------------------------------------------------------
 
 CityGML's Implicit Geometries, better known in computer graphics as *templates*, are one method to compress files since geometries, often trees for instance, need only be defined once.
-They are implemented slightly different than in CityGML: they are defined separately in the file, and can be reused; while in CityGML one reuses another geometry used for another City Object.
+They are implemented slightly different than in CityGML: they are defined separately in the file, and can be reused while in CityGML one reuses another geometry used for another City Object.
 
 The Geometry Templates are defined as a JSON object that:
   - must have one member with the name ``"templates"``, whose value is an array of Geometry Objects
@@ -919,7 +919,7 @@ The Geometry Templates are defined as a JSON object that:
 A given template can be used instead of a Geometry Object for a City Object. A new JSON object of type ``"GeometryInstance"`` is defined, and it
 
   - must have one member with the name ``"template"``, whose value the position of the template in the ``"geometry-templates" (0-indexing)
-  - must have one member with the name ``"referencePoint"``, whose value is a ``"MultiPoint" containing only one point
+  - must have one member with the name ``"referencePoint"``, whose value is a ``"MultiPoint"`` containing only one point
   - must have one member with the name ``"transformationMatrix"``, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML v2.0 documentation)
  
 .. code-block:: js
