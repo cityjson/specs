@@ -866,7 +866,7 @@ If a CityJSON object has a member ``"transform"``, to obtain the real position o
 
 If the CityJSON file does not have a ``"transform"`` member, then the values of the vertices must be read as-is.
 
-The program `cityjson-compress <https://github.com/tudelft3d/cityjson/tree/master/software/cityjson-compress/>`_ compresses a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
+The program `cityjson-compress <https://github.com/tudelft3d/cityjson/tree/master/software/cjcompress/>`_ compresses a given file by: (1) merging duplicate vertices; (2) convert coordinates to integer. 
 Both operation use a tolerance, which is given as number-of-digits-after-the-dot-to-preserve.
 
 
