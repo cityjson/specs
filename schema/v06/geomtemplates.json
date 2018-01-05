@@ -6,7 +6,7 @@
     "type": "object",
     "properties": {
       "type": { "enum": ["GeometryInstance"] },
-      "template": {"type": "string"},
+      "template": {"type": "integer"},
       "referencePoint": {"$ref": "geomprimitives.json#/MultiPoint"},
       "transformationMatrix": {
         "type": "array",
