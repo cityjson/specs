@@ -10,7 +10,6 @@ Changelog
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
 - handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
 - binary encoding of JSON, with either `CBOR <http://cbor.io>`_ or `BSON <http://bsonspec.org>`_
-- support of "Implicit Geometries" (geometry templates in CityGML)
 
 ----
 
@@ -18,7 +17,8 @@ Changelog
 ------------------
 Added
 *****
-- support for CityGML City Object Groups
+- support for Geometry Templates (aka Implicit Geometries)
+- support for City Object Groups
 - any members at the root of CityJSON are now allowed (but might be ignored by parser)
 - each City Object can have a "bbox" member
 

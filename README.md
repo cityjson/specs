@@ -14,4 +14,4 @@ It was also designed to be compact (we have noticed a factor at least 4X, often 
 A CityJSON object, representing a city, is as 'flat' as possible, ie the hierarchy of CityGML has been flattened out and only the city objects which are 'leaves' of this hierarchy are implemented.
 This considerably simplifies the storage of a city model, and furthermore does not mean that information is lost.
 
--->[http://www.cityjson.org](http://www.cityjson.org)
+--> [http://www.cityjson.org](http://www.cityjson.org)

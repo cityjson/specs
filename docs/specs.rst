@@ -878,16 +878,17 @@ Both operation use a tolerance, which is given as number-of-digits-after-the-dot
   }
 
 
-----------------------------------------------------------
-Geometry templates (aka as Implicit Geometries in CityGML)
-----------------------------------------------------------
+-------------------------------------------------------
+Geometry templates (aka Implicit Geometries in CityGML)
+-------------------------------------------------------
 
-CityGML's Implicit Geometries, better known in computer graphics as *templates*, are one method to compress files since geometries, often trees for instance, need only be defined once.
-They are implemented slightly different than in CityGML: they are defined separately in the file, and can be reused while in CityGML one reuses another geometry used for another City Object.
+CityGML's Implicit Geometries, better known in computer graphics as *templates*, are one method to compress files since the geometries (eg benches, lamp posts, and trees), need only be defined once.
+In CityJSON, they are implemented slightly different from in CityGML: they are defined separately in the file, and each template can be reused. 
+(While in CityGML one reuses another geometry used for another City Object.)
 
 The Geometry Templates are defined as a JSON object that:
-  - must have one member with the name ``"templates"``, whose value is an array of Geometry Objects
-  - must have one member with the name ``"vertices-templates"``, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that calculating the bounding box of a file will not be affected by the templates (since they will often will defined locally, and translated/scaled to their final position).
+  - must have one member with the name ``"templates"``, whose value is an array of Geometry Objects.
+  - must have one member with the name ``"vertices-templates"``, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that calculating the bounding box of a CityJSON file/dataset will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
 
 .. code-block:: js
 
@@ -916,11 +917,12 @@ The Geometry Templates are defined as a JSON object that:
     ]
   },
 
-A given template can be used instead of a Geometry Object for a City Object. A new JSON object of type ``"GeometryInstance"`` is defined, and it
+A given template can be used for a City Object instead of a Geometry Object. 
+A new JSON object of type ``"GeometryInstance"`` is defined, and it:
 
-  - must have one member with the name ``"template"``, whose value the position of the template in the ``"geometry-templates" (0-indexing)
-  - must have one member with the name ``"referencePoint"``, whose value is a ``"MultiPoint"`` containing only one point
-  - must have one member with the name ``"transformationMatrix"``, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML v2.0 documentation)
+  - must have one member with the name ``"template"``, whose value is the position of the template in the ``"geometry-templates" (0-indexing).
+  - must have one member with the name ``"referencePoint"``, whose value is a ``"MultiPoint"`` containing only one point/location (in 3D, since it refers to one vertex in the ``"vertices"`` property of a CityJSON file).
+  - must have one member with the name ``"transformationMatrix"``, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML v2.0 documentation).
  
 .. code-block:: js
 
