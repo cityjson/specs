@@ -1,3 +1,20 @@
+# +-------------------------------------------------------+
+# |                                                       |
+# |        ____ _ _             _ ____   ___  _   _       |
+# |       / ___(_) |_ _   _    | / ___| / _ \| \ | |      |
+# |      | |   | | __| | | |_  | \___ \| | | |  \| |      |
+# |      | |___| | |_| |_| | |_| |___) | |_| | |\  |      |
+# |       \____|_|\__|\__, |\___/|____/ \___/|_| \_|      |
+# |                   |___/                               |
+# |                                                       |
+# +-------------------------------------------------------+
+# +-------------------------------------------------------+
+# |                +-+-+-+-+-+-+-+-+-+-+-+                |
+# |                |c|j|v|a|l|s|c|h|e|m|a|                |
+# |                +-+-+-+-+-+-+-+-+-+-+-+                |
+# |                                                       |
+# +-------------------------------------------------------+
+
 import os
 import sys
 import json
@@ -5,7 +22,6 @@ import jsonschema
 import jsonref
 import urlparse
 from pprint import pprint
-
 
 
 def dict_raise_on_duplicates(ordered_pairs):
@@ -288,7 +304,6 @@ def main():
         byebye(isValid, woWarnings)
         return
 
-
     if city_object_groups(j) == False:
         isValid = False
     if building_parts(j) == False:
@@ -308,9 +323,9 @@ def main():
     if geometry_empty(j) == False:
         woWarnings = False
 
-
     byebye(isValid, woWarnings)
     return
+
 
 if __name__ == '__main__':
     main()
