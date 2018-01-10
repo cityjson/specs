@@ -10,33 +10,25 @@ def main():
   fIn = '../../../example-datasets/dummy-values/example.json'
   j = json.loads(open(fIn).read())
 
-  j2 = copy.deepcopy(j)
+  j2 = {}
+  j2["type"] = j["type"]
+  j2["version"] = j["version"]
+  j2["CityObjects"] = {}
   
-  lProperties = ["type", "version", "CityObjects", "vertices", "transform", "metadata", "appearance", "geometry-templates"]
-
-  for each in j:
-    if each not in lProperties:
-      del j2[each]
-  del j2["metadata"]
-  del j2["vertices"]
-  del j2["appearance"]
-  del j2["geometry-templates"]
-
+  #-- copy each CO to the output json
   for each in j["CityObjects"]:
-    if each not in ids:
-      del j2["CityObjects"][each]
+    if each in ids:
+      j2["CityObjects"][each] = j["CityObjects"][each]
 
+  #-- update vertex indices
+  oldnewids = {}
+  newvertices = []    
   for each in j2["CityObjects"]:
     for geom in j2['CityObjects'][each]['geometry']:
-      modify_vertex_index(geom["boundaries"])
-      print "test:", geom
+      update_vertex_index(geom["boundaries"], oldnewids, j["vertices"], newvertices)
+  j2["vertices"] = newvertices
 
-
-
-
-  # print json.dumps(j2, indent=2)
-
-
+  print json.dumps(j2, indent=2)
 
   # json_str = json.dumps(cm)
   # json_str = json.dumps(cm, indent=2)
@@ -47,13 +39,17 @@ def main():
 
 
 
-def modify_vertex_index(a):
+def update_vertex_index(a, oldnewids, oldvertices, newvertices):
   for i, each in enumerate(a):
     if isinstance(each, list):
-      modify_vertex_index(each)
+      update_vertex_index(each, oldnewids, oldvertices, newvertices)
     else:
-      # print each
-      a[i] = a[i] + 100
+      if each in oldnewids:
+        a[i] = oldnewids[each]
+      else:
+        a[i] = len(newvertices)
+        oldnewids[each] = len(newvertices)
+        newvertices.append(oldvertices[each])
 
 
 
