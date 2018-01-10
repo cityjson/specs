@@ -73,11 +73,11 @@
         "material": {
           "irradiation": { 
             "values": [
-              [0, 0, null, null, 1, 1]
+              [0, 0, null, null, 2, 2]
             ] 
           },
           "irradiation-2": { 
-            "value": 2
+            "value": 1
           }
         }
       },
