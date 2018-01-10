@@ -26,7 +26,7 @@ print "CityJSON version: ", j["version"]
 print "===== CityObjects ====="
 print "Total : ", len(j["CityObjects"])
 
-d = set();
+d = set()
 for id in j["CityObjects"]:
     d.add(j['CityObjects'][id]['type'])
 print "Types:" 
