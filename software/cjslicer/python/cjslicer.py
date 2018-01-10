@@ -1,21 +1,30 @@
+
+
 import sys
 import json
+import argparse
 
 
 def main():
+
+  # parser = argparse.ArgumentParser()
+  # parser.add_argument('inputfile', help='input CityJSON file')
+  # parser.add_argument('ids', help='list IDs')
+  # args = parser.parse_args()
+  
   # fIn = open(sys.argv[1])
   # fIn = '../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN_solids.json'
   fIn = '../../../example-datasets/dummy-values/example.json'
   ids = ["102636712", "2929"]
   j = json.loads(open(fIn).read())
 
-  #-- sliced CityJSON object
+  #-- new sliced CityJSON object
   j2 = {}
   j2["type"] = j["type"]
   j2["version"] = j["version"]
   j2["CityObjects"] = {}
   
-  #-- copy each CO to the output json
+  #-- copy CO to the j2
   for each in j["CityObjects"]:
     if each in ids:
       j2["CityObjects"][each] = j["CityObjects"][each]
@@ -38,7 +47,6 @@ def main():
   for each in j2["CityObjects"]:
     for geom in j2['CityObjects'][each]['geometry']:
       if "material" in geom:
-        print "MATERIAL"
         for each in geom["material"]:
           if 'value' in geom["material"][each]:
             v = geom["material"][each]["value"]
@@ -59,7 +67,6 @@ def main():
   for each in j2["CityObjects"]:
     for geom in j2['CityObjects'][each]['geometry']:
       if "texture" in geom:
-        print "texture"
         for each in geom["texture"]:
           if 'values' in geom["texture"][each]:
             update_array_indices(geom["texture"][each]['values'], dOldNewIDs, j["appearance"]["textures"], newtextures, 0)
@@ -71,12 +78,15 @@ def main():
   for each in j2["CityObjects"]:
     for geom in j2['CityObjects'][each]['geometry']:
       if "texture" in geom:
-        print "texture"
         for each in geom["texture"]:
           if 'values' in geom["texture"][each]:
             update_array_indices(geom["texture"][each]['values'], dOldNewIDs, j["appearance"]["vertices-texture"], newtextures, 1)
   if len(newtextures) > 0:
     j2["appearance"]["vertices-texture"] = newtextures
+
+  #-- metadata
+  j2["metadata"] = j["metadata"]
+  j2["metadata"]["bbox"] = update_bbox(j["vertices"])
 
 
   #-- save sliced CityJSON file
@@ -87,6 +97,18 @@ def main():
   # json_str = json.dumps(cm)
   # json_str = json.dumps(cm, indent=2)
   # print "\nDone, output written to:", outname
+
+
+def update_bbox(vertices):
+  bbox = [9e9, 9e9, 9e9, -9e9, -9e9, -9e9]
+  for v in vertices:
+    for i in range(3):
+      if v[i] < bbox[i]:
+        bbox[i] = v[i]
+    for i in range(3):
+      if v[i] > bbox[i+3]:
+        bbox[i+3] = v[i]
+  return bbox
 
 
 def update_array_indices(a, dOldNewIDs, oldarray, newarray, slicearray):
