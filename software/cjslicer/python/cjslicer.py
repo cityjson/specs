@@ -1,5 +1,4 @@
 
-# TODO : BuildingParts
 # TODO : transform
 # TODO : geom templates
 
@@ -44,15 +43,42 @@ def main():
   for each in j["CityObjects"]:
     if each in args.id:
       j2["CityObjects"][each] = j["CityObjects"][each]
+  #-- deal with Parts and Installations and ConstructionElements
+  for each in j["CityObjects"]:
+    if each in args.id:
+      if "Parts" in j["CityObjects"][each]:
+        for part in j["CityObjects"][each]["Parts"]:
+          j2["CityObjects"][part] = j["CityObjects"][part]
+  for each in j["CityObjects"]:
+    if each in args.id:
+      if "Installations" in j["CityObjects"][each]:
+        for i in j["CityObjects"][each]["Installations"]:
+          j2["CityObjects"][i] = j["CityObjects"][i]
+  for each in j["CityObjects"]:
+    if each in args.id:
+      if "ConstructionElements" in j["CityObjects"][each]:
+        for i in j["CityObjects"][each]["ConstructionElements"]:
+          j2["CityObjects"][i] = j["CityObjects"][i]
 
+    
   #-- geometry
   process_geometry(j, j2)
-  # TODO : how to deal with BuildingParts for instance? keep in the same file?
 
   #-- appearance
   if ("appearance" in j) and (args.no_appearance is False):
     j2["appearance"] = {}
     process_appearance(j, j2)
+  else:
+    if ("appearance" in j) and (args.no_appearance is True):
+      #-- remove the "material" and "texture" from j2
+      for each in j2["CityObjects"]:
+        for geom in j2['CityObjects'][each]['geometry']:
+          if "material" in geom:
+            del geom["material"]
+          if "texture" in geom:
+            del geom["texture"]
+
+
 
   #-- metadata
   if ("metadata" in j) and (args.no_metadata is False):
