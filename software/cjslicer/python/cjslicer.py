@@ -1,16 +1,14 @@
 
-# TODO : transform
 # TODO : geom templates
 
 
-
+import os
 import sys
 import json
 import argparse
 
-
 def main():
-  # CLI
+  #-- CLI stuff
   parser = argparse.ArgumentParser()
   parser.add_argument('inputfile', help='input CityJSON file')
   parser.add_argument('--no_appearance', help='ignore appearance in output', action="store_true")
@@ -25,10 +23,6 @@ def main():
   )
   args = parser.parse_args()
   
-  # fIn = open(sys.argv[1])
-  # fIn = '../../../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN_solids.json'
-  # fIn = '../../../example-datasets/dummy-values/example.json'
-  # ids = ["102636712", "2929"]
   j = json.loads(open(args.inputfile).read())
 
   #-- new sliced CityJSON object
@@ -38,31 +32,15 @@ def main():
   j2["CityObjects"] = {}
   if "transform" in j:
     j2["transform"] = j["transform"]
-  
-  #-- copy CO to the j2
-  for each in j["CityObjects"]:
-    if each in args.id:
-      j2["CityObjects"][each] = j["CityObjects"][each]
-  #-- deal with Parts and Installations and ConstructionElements
-  for each in j["CityObjects"]:
-    if each in args.id:
-      if "Parts" in j["CityObjects"][each]:
-        for part in j["CityObjects"][each]["Parts"]:
-          j2["CityObjects"][part] = j["CityObjects"][part]
-  for each in j["CityObjects"]:
-    if each in args.id:
-      if "Installations" in j["CityObjects"][each]:
-        for i in j["CityObjects"][each]["Installations"]:
-          j2["CityObjects"][i] = j["CityObjects"][i]
-  for each in j["CityObjects"]:
-    if each in args.id:
-      if "ConstructionElements" in j["CityObjects"][each]:
-        for i in j["CityObjects"][each]["ConstructionElements"]:
-          j2["CityObjects"][i] = j["CityObjects"][i]
 
-    
+  #-- copy selected CO to the j2
+  select_cityobjects(j, j2, args.id)
+  
   #-- geometry
   process_geometry(j, j2)
+
+  #-- templates
+  process_templates(j, j2)
 
   #-- appearance
   if ("appearance" in j) and (args.no_appearance is False):
@@ -78,8 +56,6 @@ def main():
           if "texture" in geom:
             del geom["texture"]
 
-
-
   #-- metadata
   if ("metadata" in j) and (args.no_metadata is False):
     j2["metadata"] = j["metadata"]
@@ -87,12 +63,41 @@ def main():
 
   #-- save sliced CityJSON file
   json_str = json.dumps(j2, indent=2)
-  f = open("/Users/hugo/temp/z.json", "w")
+  s = os.path.abspath(args.inputfile)
+  p = s.rfind(".json")
+  for i in range(100):
+    outputfile = s[:p] + "." + str(i) + ".json"
+    if os.path.exists(outputfile) is False:
+      break
+  f = open(outputfile, "w")
   f.write(json_str)
-  # outname = sys.argv[1][:-3] + "json"
-  # json_str = json.dumps(cm)
-  # json_str = json.dumps(cm, indent=2)
-  # print "\nDone, output written to:", outname
+  print "\nDone, output written to:", outputfile
+
+
+
+def select_cityobjects(j, j2, IDs):
+  for each in j["CityObjects"]:
+    if each in IDs:
+      j2["CityObjects"][each] = j["CityObjects"][each]
+  for theid in IDs:
+    if theid not in j["CityObjects"]:
+      print "WARNING: ID", theid, "not found in input file; ignored."
+  #-- deal with Parts and Installations and ConstructionElements
+  for each in j["CityObjects"]:
+    if each in IDs:
+      if "Parts" in j["CityObjects"][each]:
+        for part in j["CityObjects"][each]["Parts"]:
+          j2["CityObjects"][part] = j["CityObjects"][part]
+  for each in j["CityObjects"]:
+    if each in IDs:
+      if "Installations" in j["CityObjects"][each]:
+        for i in j["CityObjects"][each]["Installations"]:
+          j2["CityObjects"][i] = j["CityObjects"][i]
+  for each in j["CityObjects"]:
+    if each in IDs:
+      if "ConstructionElements" in j["CityObjects"][each]:
+        for i in j["CityObjects"][each]["ConstructionElements"]:
+          j2["CityObjects"][i] = j["CityObjects"][i]
 
 
 def process_geometry(j, j2):
@@ -101,8 +106,30 @@ def process_geometry(j, j2):
   newvertices = []    
   for each in j2["CityObjects"]:
     for geom in j2['CityObjects'][each]['geometry']:
-      update_array_indices(geom["boundaries"], oldnewids, j["vertices"], newvertices, -1)
+      if geom["type"] != "GeometryInstance": 
+        update_array_indices(geom["boundaries"], oldnewids, j["vertices"], newvertices, -1)
+      # else: TODO harmonise GeometryInstance with boundaries simply? solves a lot of parsing
+
   j2["vertices"] = newvertices
+
+
+def process_templates(j, j2):
+  dOldNewIDs = {}
+  newones = []
+  for each in j2["CityObjects"]:
+    for geom in j2['CityObjects'][each]['geometry']:
+      if geom["type"] == "GeometryInstance": 
+        t = geom["template"] 
+        if t in dOldNewIDs:
+          geom["template"] = dOldNewIDs[v]
+        else:
+          geom["template"] = len(newones)
+          dOldNewIDs[t] = len(newones)
+          newones.append(j["geometry-templates"]["templates"][t])      
+  if len(newones) > 0:
+    j2["geometry-templates"] = {}
+    j2["geometry-templates"]["vertices-templates"] = j["geometry-templates"]["vertices-templates"]
+    j2["geometry-templates"]["templates"] = newones
 
 
 def process_appearance(j, j2):
