@@ -6,8 +6,13 @@
     "type": "object",
     "properties": {
       "type": { "enum": ["GeometryInstance"] },
-      "template": {"type": "integer"},
-      "referencePoint": {"$ref": "geomprimitives.json#/MultiPoint"},
+      "template": { "type": "integer" },
+      "boundaries": { 
+        "type": "array",
+        "items": { "type": "integer" },
+        "minItems": 1,    
+        "maxItems": 1          
+      },
       "transformationMatrix": {
         "type": "array",
         "items": { "type": "number" },
@@ -15,7 +20,7 @@
         "maxItems": 16          
       }
     },
-    "required": ["type", "template", "referencePoint", "transformationMatrix"],
+    "required": ["type", "template", "boundaries", "transformationMatrix"],
     "additionalProperties": false
   }
 
