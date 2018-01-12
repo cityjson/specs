@@ -1,6 +1,22 @@
 
-# TODO : geom templates
-
+# +--------------------------------------------------------------------+
+# |               _____ _ _          __ _____ _____ _____              |
+# |              |     |_| |_ _ _ __|  |   __|     |   | |             |
+# |              |   --| |  _| | |  |  |__   |  |  | | | |             |
+# |              |_____|_|_| |_  |_____|_____|_____|_|___|             |
+# |                          |___|                                     |
+# +--------------------------------------------------------------------+
+# |                          +-+-+-+-+-+-+-+-+                         |
+# |                          |c|j|s|l|i|c|e|r|                         |
+# |                          +-+-+-+-+-+-+-+-+                         |
+# +--------------------------------------------------------------------+
+# |cjslicer.py                                                         |
+# |Selection and export of some City Objects in a CityJSON file        |
+# |2018-01-12                                                          |
+# |                                                                    |
+# |$ python cjslicer.py --help                                         |
+# |                                                                    |
+# +--------------------------------------------------------------------+
 
 import os
 import sys
@@ -106,10 +122,7 @@ def process_geometry(j, j2):
   newvertices = []    
   for each in j2["CityObjects"]:
     for geom in j2['CityObjects'][each]['geometry']:
-      if geom["type"] != "GeometryInstance": 
-        update_array_indices(geom["boundaries"], oldnewids, j["vertices"], newvertices, -1)
-      # else: TODO harmonise GeometryInstance with boundaries simply? solves a lot of parsing
-
+      update_array_indices(geom["boundaries"], oldnewids, j["vertices"], newvertices, -1)
   j2["vertices"] = newvertices
 
 
