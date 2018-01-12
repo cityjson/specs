@@ -921,7 +921,7 @@ A given template can be used for a City Object instead of a Geometry Object.
 A new JSON object of type ``"GeometryInstance"`` is defined, and it:
 
   - must have one member with the name ``"template"``, whose value is the position of the template in the ``"geometry-templates" (0-indexing).
-  - must have one member with the name ``"referencePoint"``, whose value is a ``"MultiPoint"`` containing only one point/location (in 3D, since it refers to one vertex in the ``"vertices"`` property of a CityJSON file).
+  - must have one member with the name ``"boundaries"``, whose value is an array containing only one vertex index, which refers to one vertex in the ``"vertices"`` property of a CityJSON file. (This is the "referencePoint" in CityGML.)
   - must have one member with the name ``"transformationMatrix"``, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML v2.0 documentation).
  
 .. code-block:: js
@@ -932,11 +932,7 @@ A new JSON object of type ``"GeometryInstance"`` is defined, and it:
       {
         "type": "GeometryInstance",
         "template": 0,
-        "referencePoint": {
-          "type": "MultiPoint",
-          "lod": 1,
-          "boundaries": [372]
-        },
+        "boundaries": [372]
         "transformationMatrix": [
           2.0, 0.0, 0.0, 0.0,
           0.0, 2.0, 0.0, 0.0,

@@ -138,11 +138,7 @@
         {
           "type": "GeometryInstance",
           "template": 0,
-          "referencePoint": {
-            "type": "MultiPoint",
-            "lod": 1,
-            "boundaries": [2]
-          },
+          "boundaries": [2],
           "transformationMatrix": [
             2.0, 0.0, 0.0, 0.0,
             0.0, 2.0, 0.0, 0.0,
