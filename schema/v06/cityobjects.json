@@ -9,6 +9,8 @@
       "attributes": {
         "type": "object",
         "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
