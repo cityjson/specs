@@ -920,7 +920,7 @@ The Geometry Templates are defined as a JSON object that:
 A given template can be used for a City Object instead of a Geometry Object. 
 A new JSON object of type ``"GeometryInstance"`` is defined, and it:
 
-  - must have one member with the name ``"template"``, whose value is the position of the template in the ``"geometry-templates" (0-indexing).
+  - must have one member with the name ``"template"``, whose value is the position of the template in the ``"geometry-templates"`` (0-indexing).
   - must have one member with the name ``"boundaries"``, whose value is an array containing only one vertex index, which refers to one vertex in the ``"vertices"`` property of a CityJSON file. (This is the "referencePoint" in CityGML.)
   - must have one member with the name ``"transformationMatrix"``, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML v2.0 documentation).
  
@@ -952,6 +952,7 @@ Both textures and materials are supported, and the same mechanisms as CityGML ar
 The material is represented with the `X3D <http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material>`_ specifications, as is the case for CityGML.
 For the texture, the COLLADA is reused, as is the case for CityGML.
 However:
+  
   - the CityGML class ``GeoreferencedTexture`` is not supported. 
   - the CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files.
   - texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
@@ -1091,7 +1092,7 @@ Texture Object
 A Texture Object:
 
   - must have one member with the name ``"type"``, whose value is a string with either "PNG" or "JPG" as value
-  - must have one member with the name ``"image"``, whose value is a string with the name of the file. This file must be in a folder named ``"appearances"`` located in the same folder as the CityJSON file.
+  - must have one member with the name ``"image"``, whose value is a string with the name of the file. This file can be a URL (eg ``"http://www.hugo.com/filename.jpg"``), a relative path (eg ``"appearances/myroof.jpg"``), or an absolute path (eg ``"/home/elvis/mycityjson/appearances/myroof.jpg"``).
   - may have one member with the name ``"wrapMode"``, whose value can be any of the following: ``"none"``, ``"wrap"``, ``"mirror"``, ``"clamp"``, or ``"border"``.
   - may have one member with the name ``"textureType"``, whose value can be any of the following: ``"unknown"``, ``"specific"``, or ``"typical"``.
   - may have one member with the name ``"borderColor"``, whose value is an array with 4 numbers between 0.0 and 1.0 (RGBA colour).
@@ -1101,11 +1102,11 @@ A Texture Object:
   "textures": [
     {
       "type": "PNG",
-      "image": "myfacade.png"
+      "image": "http://www.hugo.com/filename.jpg"
     },
     {
       "type": "JPG",
-      "image": "myroof.jpg",
+      "image": "appearances/myroof.jpg",
       "wrapMode": "wrap",
       "textureType": "unknown",
       "borderColor": [0.0, 0.1, 0.2, 1.0]
