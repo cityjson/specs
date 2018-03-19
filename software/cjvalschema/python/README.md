@@ -9,3 +9,5 @@ Requires:
 Simply run the file and the correct schema (only v0.5+) will be fetched automatically from `../../../schemas`
 
     $ python cjvalschema delft.json
+
+Only Python2.7

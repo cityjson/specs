@@ -15,13 +15,14 @@
 # |                                                       |
 # +-------------------------------------------------------+
 
+
+from __future__ import print_function
 import os
 import sys
 import json
 import jsonschema
 import jsonref
 import urlparse
-from pprint import pprint
 
 
 def dict_raise_on_duplicates(ordered_pairs):
@@ -235,26 +236,32 @@ def main():
     isValid = True
     woWarnings = True
 
-    filename = '../../../example-datasets/dummy-values/example.json'
-    # filename = '../../../example-datasets/dummy-values/invalid2.json'
-    # filename = '../../../example-datasets/dummy-values/invalid3.json'
-    # filename = '/Users/hugo/temp/schemas/myfile.json'
+    if len(sys.argv) == 1:
+        filename = '../../../example-datasets/dummy-values/example.json'
+    elif len(sys.argv) > 2:
+        print("ERROR: too many arguments")
+        print("python cjvalschema.py myfile.json")
+        return
+    else:
+        filename = sys.argv[1]
+
+
     fin = open(filename)
-    print "Input file:", os.path.abspath(filename)
+    print("Input file:", os.path.abspath(filename))
     
     #-- check if CityObjects have duplicate keys at reading time
     #-- otherwise it's too late: one object has been overwritten!
     try:
         j = json.loads(fin.read(), object_pairs_hook=dict_raise_on_duplicates)
     except ValueError, Argument:
-        print "ERROR:   ", Argument
+        print ("ERROR:   ", Argument)
         isValid = False
         byebye(isValid, woWarnings)
         return
 
     #-- make sure it's a CityJSON file
     if (j["type"] != "CityJSON"):
-        print "ERROR:   not a CityJSON file"
+        print ("ERROR:   not a CityJSON file")
         isValid = False
         byebye(isValid, woWarnings)
         return
@@ -281,25 +288,25 @@ def main():
         # print "$id not defined, using local files"
         abs_path = os.path.abspath(os.path.dirname(schema))
         base_uri = 'file://{}/'.format(abs_path)
-    print "Schema used:", os.path.abspath(schema)
+    print ("Schema used:", os.path.abspath(schema))
     js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
     #-- load the schema for the cityobjects.json
     sco_path = os.path.abspath(os.path.dirname(schema))
     sco_path += '/cityobjects.json'
     jsco = json.loads(open(sco_path).read())
     # print jsco
-    print "="*10    
+    print ("==========")    
     
     #-- validate the file against the schema
     try:
         jsonschema.validate(j, js)
     except jsonschema.ValidationError as e:
-        print "ERROR:   ", e.message
+        print ("ERROR:   ", e.message)
         isValid = False
         byebye(isValid, woWarnings)
         return
     except jsonschema.SchemaError as e:
-        print "ERROR:   ", e
+        print ("ERROR:   ", e)
         isValid = False
         byebye(isValid, woWarnings)
         return
