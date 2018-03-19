@@ -26,6 +26,7 @@ Changed
 *******
 - the schema is now split into different schemas that are linked together
 - the schema validator (software cjvalschema) is now in Python, thus everyone can run it easily
+- textures are not forced to be in the folder 'appearances' anymore, any link to an image will do (useful for WFS for instance).
 
 
 [0.5] - 2017-11-14 
