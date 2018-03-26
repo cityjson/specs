@@ -9,6 +9,9 @@ public:
   void                  translate(double x, double y, double z);
   std::array<double,3>  get_array_double();
   std::array<int,3>     get_array_int(int precision = 3);
+  double                x();
+  double                y();
+  double                z();
 private:
   std::string _id;
   double      _x;

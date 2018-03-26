@@ -6,8 +6,7 @@
  |___|                                          
  
  cityjson-compress
- Created by Hugo Ledoux on 14/06/2017.
- Copyright © 2017 Hugo Ledoux. All rights reserved.
+  Copyright © 2017-2018 Hugo Ledoux. All rights reserved.
  
  */
 
@@ -33,14 +32,14 @@ int main(int argc, const char * argv[]) {
   
   int importantdigits;
   std::string ifile; 
-  bool bv2int = false;
+  bool bv2int = true;
   try {
     namespace po = boost::program_options;
     po::options_description pomain("Allowed options");
     pomain.add_options()
     ("help", "View all options")
     ("tolerance", po::value<int>(&importantdigits)->default_value(3), "number of digit to keep for merging duplicates")
-    ("v2int", "Convert vertices to integer (Transform/Quantize)")
+    ("no_v2int", "Do *not* convert vertices to integer (Transform/Quantize)")
     ;
     po::options_description pohidden("Hidden options");
     pohidden.add_options()
@@ -66,8 +65,8 @@ int main(int argc, const char * argv[]) {
       std::cout << std::endl << pomain << std::endl;
       return 0;  
     }
-    if (vm.count("v2int")) 
-      bv2int = true;
+    if (vm.count("no_v2int")) 
+      bv2int = false;
   } 
   catch(std::exception& e) {
     std::cerr << "Error: " << e.what() << "\n";
@@ -91,12 +90,22 @@ int main(int argc, const char * argv[]) {
   input >> j;
   input.close();
 
+  //-- if already compressed then do nothing
+  if (j.count("transform") > 0) {
+    std::cout << "ERROR: Input file already compressed. Abort" << std::endl;
+    return 0;
+  }
+
   size_t noinputvertices = j["vertices"].size();
   merge_duplicate_vertices(j, importantdigits);
   remove_unused_vertices(j);
   std::cout << "Number duplicates/unused vertices removed: " << (noinputvertices - j["vertices"].size()) << std::endl;
-  if (bv2int == true)
+  if (bv2int == true) {
+    std::cout << "Converting vertex coordinates to integer" << std::endl;
     convert_vertices_to_integer(j, importantdigits);
+  }
+  else
+    std::cout << "Vertex coordinates NOT converted to integer (use option '--no_v2int')" << std::endl;
   save_to_file(j, ifile, sizei);
   return 0;
 }
@@ -169,6 +178,8 @@ void merge_duplicate_vertices(json& j, int importantdigits) {
   unsigned long i = 0;
   unsigned long totalmerged = 0;
   for (auto& v : vertices) {
+    // std::cout << v.x() << "|" << v.y() << "|" << v.z() << std::endl;
+    // std::cout << v.get_key(importantdigits) << std::endl;
     auto it = hash.find(v.get_key(importantdigits));
     if (it == hash.end()) {
       newids[i] = i;
@@ -177,6 +188,7 @@ void merge_duplicate_vertices(json& j, int importantdigits) {
     else {
       newids[i] = it->second;
       totalmerged++;
+      // std::cout << "  --- " << it->first  << std::endl;
     }
     i++;
   }

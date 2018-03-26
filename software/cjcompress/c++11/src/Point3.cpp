@@ -33,5 +33,14 @@ std::array<int,3> Point3::get_array_int(int precision) {
   return {{int(_x * pow(10, precision)), int(_y * pow(10, precision)), int(_z * pow(10, precision))}};
 }
 
+double Point3::x() {
+  return _x;
+}
 
+double Point3::y() {
+  return _y;
+}
 
+double Point3::z() {
+  return _z;
+}
