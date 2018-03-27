@@ -161,7 +161,7 @@ The following are all of type ``"string"``:
 
 .. note::
   
-  It should be noticed that JSON does not have a date type, thus for all dates in a CityJSON document the following should be used: ``"YYYY-MM-DD"`` (as a string).
+  It should be noticed that JSON does not have a date type, and thus the representations defined by `RFC 3339, Section 5.6 <https://tools.ietf.org/html/rfc3339#section-5.6>`_ should be used. A simple date is ``"full-date"`` (thus ``"1977-07-11"`` as a string), and a date with a time is a ``"full-time"`` (thus ``"1985-04-12T23:20:50.52Z"`` as a string).
 
 
 .. _specs_cityobjects:
