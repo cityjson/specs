@@ -193,7 +193,7 @@ def citygml_attributes(j, js):
 def geometry_empty(j):
     isValid = True
     for id in j["CityObjects"]:
-        if len(j['CityObjects'][id]['geometry']) == 0:
+        if (j['CityObjects'][id]['type'] != 'CityObjectGroup') and (len(j['CityObjects'][id]['geometry']) == 0):
             isValid = False
             sys.stdout.write("WARNING: " + j['CityObjects'][id]['type'] + " #" + id + " has no geometry.\n")
     return isValid
