@@ -23,6 +23,7 @@ import json
 import jsonschema
 import jsonref
 import urlparse
+import argparse
 
 
 def dict_raise_on_duplicates(ordered_pairs):
@@ -130,7 +131,7 @@ def duplicate_vertices(j):
         sys.stdout.write('WARNING: there are ' + str(len(duplicates)) + ' duplicate vertices in j["vertices"]\n') 
     if len(duplicates) < 10:
         for v in duplicates:
-            sys.stdout.write(v + '\n')
+            sys.stdout.write('\t(' + v + ')\n')
     return isValid
 
 
@@ -251,21 +252,17 @@ def semantics(j):
 
 
 def main():
+    #-- CLI stuff
+    parser = argparse.ArgumentParser()
+    parser.add_argument('inputfile', help='input CityJSON file')
+    parser.add_argument('--skip_schema', help='skip schema (can be loooooonnng', action="store_true")
+    args = parser.parse_args()
+
+    fin = open(args.inputfile)
+    print("Input file:", os.path.abspath(args.inputfile))
+
     isValid = True
     woWarnings = True
-
-    if len(sys.argv) == 1:
-        filename = '../../../example-datasets/dummy-values/example.json'
-    elif len(sys.argv) > 2:
-        print("ERROR: too many arguments")
-        print("python cjvalschema.py myfile.json")
-        return
-    else:
-        filename = sys.argv[1]
-
-
-    fin = open(filename)
-    print("Input file:", os.path.abspath(filename))
     
     #-- check if CityObjects have duplicate keys at reading time
     #-- otherwise it's too late: one object has been overwritten!
@@ -314,20 +311,23 @@ def main():
     jsco = json.loads(open(sco_path).read())
     # print jsco
     print ("==========")    
-    
+
     #-- validate the file against the schema
-    try:
-        jsonschema.validate(j, js)
-    except jsonschema.ValidationError as e:
-        print ("ERROR:   ", e.message)
-        isValid = False
-        byebye(isValid, woWarnings)
-        return
-    except jsonschema.SchemaError as e:
-        print ("ERROR:   ", e)
-        isValid = False
-        byebye(isValid, woWarnings)
-        return
+    if (args.skip_schema is False):
+        try:
+            jsonschema.validate(j, js)
+        except jsonschema.ValidationError as e:
+            print ("ERROR:   ", e.message)
+            isValid = False
+            byebye(isValid, woWarnings)
+            return
+        except jsonschema.SchemaError as e:
+            print ("ERROR:   ", e)
+            isValid = False
+            byebye(isValid, woWarnings)
+            return
+    else:
+        print ("WATCH OUT: validation against schema is skipped.")
 
     if city_object_groups(j) == False:
         isValid = False
