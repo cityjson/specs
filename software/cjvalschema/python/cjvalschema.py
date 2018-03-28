@@ -116,6 +116,24 @@ def building_pi_parent(j):
     return isValid
 
 
+def duplicate_vertices(j):
+    isValid = True
+    thev = set()
+    duplicates = set()
+    for v in j["vertices"]:
+        s = str(v[0]) + " " + str(v[1]) + " " + str(v[2])
+        if s in thev:
+            duplicates.add(s)
+        else:
+            thev.add(s)
+    if len(duplicates) > 0:
+        sys.stdout.write('WARNING: there are ' + str(len(duplicates)) + ' duplicate vertices in j["vertices"]\n') 
+    if len(duplicates) < 10:
+        for v in duplicates:
+            sys.stdout.write(v + '\n')
+    return isValid
+
+
 def metadata(j, js):
     isValid = True
     jtmp = js['properties']['metadata']['properties']
@@ -328,6 +346,8 @@ def main():
     if citygml_attributes(j, jsco) == False:
         woWarnings = False
     if geometry_empty(j) == False:
+        woWarnings = False
+    if duplicate_vertices(j) == False:
         woWarnings = False
 
     byebye(isValid, woWarnings)
