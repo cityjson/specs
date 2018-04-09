@@ -24,8 +24,8 @@
 
 using json = nlohmann::json;
 
-void remove_unused_vertices(json& j);
-void merge_duplicate_vertices(json& j, int importantdigits);
+void duplicate_vertices(json& j, int importantdigits, bool bv2int);
+void remove_unused_vertices(json& j, bool bv2int);
 void convert_vertices_to_integer(json& j, int importantdigits);
 void save_to_file(json& j, std::string ifile, std::streampos& sizei);
 void tokenize(const std::string& str, std::vector<std::string>& tokens);
@@ -97,19 +97,18 @@ int main(int argc, const char * argv[]) {
     std::cout << "ERROR: Input file already compressed. Abort" << std::endl;
     return 0;
   }
-
   size_t noinputvertices = j["vertices"].size();
-  merge_duplicate_vertices(j, importantdigits);
+  duplicate_vertices(j, importantdigits, bv2int);
   std::cout << "Number duplicates/unused vertices removed: " << (noinputvertices - j["vertices"].size()) << std::endl;
-  if (bv2int == true) {
+  if (bv2int == true)
     std::cout << "Converting vertex coordinates to integer" << std::endl;
-    convert_vertices_to_integer(j, importantdigits);
-  }
   else
     std::cout << "Vertex coordinates NOT converted to integer (use option '--no_v2int')" << std::endl;
+  remove_unused_vertices(j, bv2int);
   save_to_file(j, ifile, sizei);
   return 0;
 }
+
 
 
 void convert_vertices_to_integer(json& j, int importantdigits) {
@@ -167,13 +166,31 @@ void save_to_file(json& j, std::string ifile, std::streampos& sizei) {
 }
 
 
-void merge_duplicate_vertices(json& j, int importantdigits) {
+
+void duplicate_vertices(json& j, int importantdigits, bool bv2int) {
+  //-- find bbox
+  double minx = 1e9;
+  double miny = 1e9;
+  double minz = 1e9;
+  for (auto& v : j["vertices"]) {
+    if (v[0] < minx)
+      minx = v[0];
+    if (v[1] < miny)
+      miny = v[1];
+    if (v[2] < minz)
+      minz = v[2];
+  }
+  
+
   std::vector<Point3> vertices;
   for (auto& v : j["vertices"]) {
     std::vector<double> t = v;
     Point3 tmp(t[0], t[1], t[2]);
+    if (bv2int == true)
+      tmp.translate(-minx, -miny, -minz);
     vertices.push_back(tmp);
   }
+  
   std::map<std::string,unsigned long> hash;
   std::vector<unsigned long> newids (vertices.size(), 0);
   std::vector<std::string> newvertices;
@@ -192,7 +209,6 @@ void merge_duplicate_vertices(json& j, int importantdigits) {
     }
     i++;
   }
-  std::cout << "Merged " << (vertices.size() - newvertices.size()) << " duplicate vertices." << std::endl;
   //-- update IDs for the faces
   for (auto& co : j["CityObjects"]) {
     for (auto& g : co["geometry"]) {
@@ -220,21 +236,40 @@ void merge_duplicate_vertices(json& j, int importantdigits) {
     }
   }
   //-- replace the vertices
-  std::vector<std::array<double, 3>> vout;
-  for (std::string& s : newvertices) {
-    std::vector<std::string> ls;
-    tokenize(s, ls);
-    // for (auto& each : ls) {
-    //   std::size_t found = each.find(".");
-    //   each.erase(found, 1);
-    // }
-    std::array<double,3> t;
-    t[0] = std::stod(ls[0]);
-    t[1] = std::stod(ls[1]);
-    t[2] = std::stod(ls[2]);
-    vout.push_back(t);
+  if (bv2int == true) { //-- write integers
+    std::vector<std::array<int, 3>> vout;
+    for (std::string& s : newvertices) {
+      std::vector<std::string> ls;
+      tokenize(s, ls);
+      for (auto& each : ls) {
+        std::size_t found = each.find(".");
+        each.erase(found, 1);
+      }
+      // std::cout << ls[0] << std::endl;
+      std::array<int,3> t;
+      t[0] = std::stoi(ls[0]);
+      t[1] = std::stoi(ls[1]);
+      t[2] = std::stoi(ls[2]);
+      vout.push_back(t);
+    }
+    j["vertices"] = vout;
+    double scalefactor = 1 / (pow(10, importantdigits));
+    j["transform"]["scale"] = {scalefactor, scalefactor, scalefactor};
+    j["transform"]["translate"] = {minx, miny, minz};
   }
-  j["vertices"] = vout;
+  else { //-- write doubles
+    std::vector<std::array<double, 3>> vout;
+    for (std::string& s : newvertices) {
+      std::vector<std::string> ls;
+      tokenize(s, ls);
+      std::array<double,3> t;
+      t[0] = std::stod(ls[0]);
+      t[1] = std::stod(ls[1]);
+      t[2] = std::stod(ls[2]);
+      vout.push_back(t);
+    }
+    j["vertices"] = vout;
+  }
 }
 
 
@@ -245,6 +280,93 @@ void tokenize(const std::string& str, std::vector<std::string>& tokens) {
     tokens.push_back(str.substr(lastPos, pos - lastPos));
     lastPos = str.find_first_not_of(" ", pos);
     pos = str.find_first_of(" ", lastPos);
+  }
+}
+
+
+void remove_unused_vertices(json& j, bool bv2int) {
+  std::map<int,int> oldnewids;
+  std::vector<int> newvertices;
+  for (auto& co : j["CityObjects"]) 
+    for (auto& g : co["geometry"]) 
+      if (g["type"] == "Solid") {
+        for (auto& shell : g["boundaries"]) 
+          for (auto& surface : shell) 
+            for (auto& ring : surface) 
+              for (auto& v : ring) 
+                if (oldnewids.find(v) == oldnewids.end()) {
+                  oldnewids[v] = int(newvertices.size());
+                  newvertices.push_back(v);
+                }
+      }
+      else if ( (g["type"] == "MultiSurface") || (g["type"] == "CompositeSurface") ) {
+        for (auto& surface : g["boundaries"])
+          for (auto& ring : surface)
+            for (auto& v : ring)
+              if (oldnewids.find(v) == oldnewids.end()) {
+                oldnewids[v] = int(newvertices.size());
+                newvertices.push_back(v);
+              }  
+      }
+      else if ( (g["type"] == "MultiSolid") || (g["type"] == "CompositeSolid") ) {
+        for (auto& solid : g["boundaries"])
+          for (auto& shell : solid)
+            for (auto& surface : shell)
+              for (auto& ring : surface)
+                for (auto& v : ring)
+                  if (oldnewids.find(v) == oldnewids.end()) {
+                   oldnewids[v] = int(newvertices.size());
+                    newvertices.push_back(v);
+                  }
+      }      
+
+  //-- update the faces ids
+  for (auto& co : j["CityObjects"]) {
+    for (auto& g : co["geometry"]) 
+      if (g["type"] == "Solid") {
+        for (auto& shell : g["boundaries"]) 
+          for (auto& surface : shell) 
+            for (auto& ring : surface) 
+              for (auto& v : ring) 
+                v = oldnewids[v];
+      }
+      else if ( (g["type"] == "MultiSurface") || (g["type"] == "CompositeSurface") ) {
+        for (auto& surface : g["boundaries"])
+          for (auto& ring : surface)
+            for (auto& v : ring)
+              v = oldnewids[v];  
+      }
+      else if ( (g["type"] == "MultiSolid") || (g["type"] == "CompositeSolid") ) {
+        for (auto& solid : g["boundaries"])
+          for (auto& shell : solid)
+            for (auto& surface : shell)
+              for (auto& ring : surface)
+                for (auto& v : ring)
+                  v = oldnewids[v];
+      }      
+  }
+  //-- replace the vertices
+  if (bv2int == true) {
+    std::vector<std::array<int, 3>> vout;
+    for (int& v : newvertices) {
+      std::array<int,3> t;
+      t[0] = j["vertices"][v][0];
+      t[1] = j["vertices"][v][1];
+      t[2] = j["vertices"][v][2];
+      vout.push_back(t);
+    }
+    j["vertices"] = vout;
+  }
+  else {
+    std::vector<std::array<double, 3>> vout;
+    for (int& v : newvertices) {
+      std::array<double,3> t;
+      t[0] = j["vertices"][v][0];
+      t[1] = j["vertices"][v][1];
+      t[2] = j["vertices"][v][2];
+      vout.push_back(t);
+    }
+    j["vertices"] = vout;    
   }
 }
 
