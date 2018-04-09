@@ -187,7 +187,7 @@ def citygml_attributes(j, js):
                 sys.stdout.write(" #" + coid + " ")
             sys.stdout.write(")\n")
         else:
-            sys.stdout.write(" (" + len(thewarnings[each]) + " CityObjects have this warning)\n")
+            sys.stdout.write(" (" + str(len(thewarnings[each])) + " CityObjects have this warning)\n")
     return isValid
 
 
