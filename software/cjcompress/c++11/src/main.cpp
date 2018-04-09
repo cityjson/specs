@@ -24,9 +24,8 @@
 
 using json = nlohmann::json;
 
-void duplicate_vertices(json& j, int importantdigits, bool bv2int);
-void remove_unused_vertices(json& j, bool bv2int);
-void convert_vertices_to_integer(json& j, int importantdigits);
+int  duplicate_vertices(json& j, int importantdigits, bool bv2int);
+int  remove_unused_vertices(json& j, bool bv2int);
 void save_to_file(json& j, std::string ifile, std::streampos& sizei);
 void tokenize(const std::string& str, std::vector<std::string>& tokens);
 
@@ -97,49 +96,20 @@ int main(int argc, const char * argv[]) {
     std::cout << "ERROR: Input file already compressed. Abort" << std::endl;
     return 0;
   }
-  size_t noinputvertices = j["vertices"].size();
-  duplicate_vertices(j, importantdigits, bv2int);
-  std::cout << "Number duplicates/unused vertices removed: " << (noinputvertices - j["vertices"].size()) << std::endl;
+  
+  //-- duplicates in j["vertices"]
+  int noduplicates = duplicate_vertices(j, importantdigits, bv2int);
+  std::cout << "Number duplicates vertices removed: " << noduplicates << std::endl;
   if (bv2int == true)
     std::cout << "Converting vertex coordinates to integer" << std::endl;
   else
     std::cout << "Vertex coordinates NOT converted to integer (use option '--no_v2int')" << std::endl;
-  remove_unused_vertices(j, bv2int);
+  
+  //-- unused vertices, ie those than do not have a geom pointing to them
+  int nounused = remove_unused_vertices(j, bv2int);
+  std::cout << "Number unused vertices removed: " << nounused << std::endl;
   save_to_file(j, ifile, sizei);
   return 0;
-}
-
-
-
-void convert_vertices_to_integer(json& j, int importantdigits) {
-  //-- vertices
-  std::vector<Point3> vertices;
-  double minx = 1e9;
-  double miny = 1e9;
-  double minz = 1e9;
-  for (auto& v : j["vertices"]) {
-    std::vector<double> t = v;
-    Point3 p(t[0], t[1], t[2]);
-    if (t[0] < minx)
-      minx = t[0];
-    if (t[1] < miny)
-      miny = t[1];
-    if (t[2] < minz)
-      minz = t[2];
-    vertices.push_back(p);
-  }
-  std::cout << "Converting to integer coordinates." << std::endl;
-  std::vector<std::array<int, 3>> vout; 
-  for (auto& v : j["vertices"]) {
-    std::vector<double> t = v;
-    Point3 p(t[0], t[1], t[2]);
-    p.translate(-minx, -miny, -minz);
-    vout.push_back(p.get_array_int(importantdigits));
-  }
-  j["vertices"] = vout;
-  double scalefactor = 1 / (pow(10, importantdigits));
-  j["transform"]["scale"] = {scalefactor, scalefactor, scalefactor};
-  j["transform"]["translate"] = {minx, miny, minz};
 }
 
 
@@ -167,7 +137,8 @@ void save_to_file(json& j, std::string ifile, std::streampos& sizei) {
 
 
 
-void duplicate_vertices(json& j, int importantdigits, bool bv2int) {
+int duplicate_vertices(json& j, int importantdigits, bool bv2int) {
+  size_t inputsize = j["vertices"].size();
   //-- find bbox
   double minx = 1e9;
   double miny = 1e9;
@@ -180,8 +151,7 @@ void duplicate_vertices(json& j, int importantdigits, bool bv2int) {
     if (v[2] < minz)
       minz = v[2];
   }
-  
-
+  //-- read points and translate now (if int)
   std::vector<Point3> vertices;
   for (auto& v : j["vertices"]) {
     std::vector<double> t = v;
@@ -270,6 +240,7 @@ void duplicate_vertices(json& j, int importantdigits, bool bv2int) {
     }
     j["vertices"] = vout;
   }
+  return (inputsize - j["vertices"].size());
 }
 
 
@@ -284,7 +255,8 @@ void tokenize(const std::string& str, std::vector<std::string>& tokens) {
 }
 
 
-void remove_unused_vertices(json& j, bool bv2int) {
+int remove_unused_vertices(json& j, bool bv2int) {
+  size_t inputsize = j["vertices"].size();
   std::map<int,int> oldnewids;
   std::vector<int> newvertices;
   for (auto& co : j["CityObjects"]) 
@@ -368,6 +340,7 @@ void remove_unused_vertices(json& j, bool bv2int) {
     }
     j["vertices"] = vout;    
   }
+  return (inputsize - j["vertices"].size());
 }
 
 
