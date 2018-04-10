@@ -25,7 +25,7 @@
 using json = nlohmann::json;
 
 int  duplicate_vertices(json& j, int importantdigits, bool bv2int);
-int  remove_unused_vertices(json& j, bool bv2int);
+int  remove_orphan_vertices(json& j, bool bv2int);
 void save_to_file(json& j, std::string ifile, std::streampos& sizei);
 void tokenize(const std::string& str, std::vector<std::string>& tokens);
 
@@ -40,6 +40,8 @@ int main(int argc, const char * argv[]) {
     pomain.add_options()
     ("help", "View all options")
     ("tolerance", po::value<int>(&importantdigits)->default_value(3), "number of digit to keep for merging duplicates")
+    ("no_duplicates", "Do *not* remove the duplicate vertices")
+    ("no_orphans", "Do *not* remove the orphans")
     ("no_v2int", "Do *not* convert vertices to integer (Transform/Quantize)")
     ;
     po::options_description pohidden("Hidden options");
@@ -91,7 +93,7 @@ int main(int argc, const char * argv[]) {
   input >> j;
   input.close();
 
-  // //-- if already compressed then do nothing
+  // if already compressed then do nothing
   if (j.count("transform") > 0) {
     std::cout << "ERROR: Input file already compressed. Abort" << std::endl;
     return 0;
@@ -100,14 +102,10 @@ int main(int argc, const char * argv[]) {
   //-- duplicates in j["vertices"]
   int noduplicates = duplicate_vertices(j, importantdigits, bv2int);
   std::cout << "Number duplicates vertices removed: " << noduplicates << std::endl;
-  if (bv2int == true)
-    std::cout << "Converting vertex coordinates to integer" << std::endl;
-  else
-    std::cout << "Vertex coordinates NOT converted to integer (use option '--no_v2int')" << std::endl;
   
-  //-- unused vertices, ie those than do not have a geom pointing to them
-  int nounused = remove_unused_vertices(j, bv2int);
-  std::cout << "Number unused vertices removed: " << nounused << std::endl;
+  //-- unused vertices ("orphans"), ie those than do not have a geom pointing to them
+  int noorphans = remove_orphan_vertices(j, bv2int);
+  std::cout << "Number unused vertices removed: " << noorphans << std::endl;
   save_to_file(j, ifile, sizei);
   return 0;
 }
@@ -258,7 +256,7 @@ void tokenize(const std::string& str, std::vector<std::string>& tokens) {
 }
 
 //-- orphans
-int remove_unused_vertices(json& j, bool bv2int) {
+int remove_orphan_vertices(json& j, bool bv2int) {
   size_t inputsize = j["vertices"].size();
   std::map<int,int> oldnewids;
   std::vector<int> newvertices;
