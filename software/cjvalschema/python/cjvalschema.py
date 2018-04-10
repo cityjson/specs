@@ -135,6 +135,34 @@ def duplicate_vertices(j):
     return isValid
 
 
+def orphan_vertices(j):
+    def recusionvisit(a, ids):
+      for each in a:
+        if isinstance(each, list):
+            recusionvisit(each, ids)
+        else:
+            ids.add(each)
+    isValid = True
+    ids = set()
+    for co in j["CityObjects"]:
+        for g in j['CityObjects'][co]['geometry']:
+            recusionvisit(g["boundaries"], ids)
+    noorphans = len(j["vertices"]) - len(ids)
+    if noorphans > 0:
+        sys.stdout.write('WARNING: there are ' + str(noorphans) + ' orphan vertices in j["vertices"]\n') 
+        isValid
+    if noorphans > 5:
+        all = set()
+        for i in range(len(j["vertices"])):
+            all.add(i)
+        symdiff = all.symmetric_difference(ids)
+        sys.stdout.write('\t[')
+        for each in symdiff:
+            sys.stdout.write(str(each) + ', ')
+        sys.stdout.write(']\n')
+    return isValid
+
+
 def metadata(j, js):
     isValid = True
     jtmp = js['properties']['metadata']['properties']
@@ -348,6 +376,8 @@ def main():
     if geometry_empty(j) == False:
         woWarnings = False
     if duplicate_vertices(j) == False:
+        woWarnings = False
+    if orphan_vertices(j) == False:
         woWarnings = False
 
     byebye(isValid, woWarnings)
