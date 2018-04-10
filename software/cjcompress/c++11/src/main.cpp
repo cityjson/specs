@@ -91,7 +91,7 @@ int main(int argc, const char * argv[]) {
   input >> j;
   input.close();
 
-  //-- if already compressed then do nothing
+  // //-- if already compressed then do nothing
   if (j.count("transform") > 0) {
     std::cout << "ERROR: Input file already compressed. Abort" << std::endl;
     return 0;
@@ -254,14 +254,21 @@ void tokenize(const std::string& str, std::vector<std::string>& tokens) {
   }
 }
 
-
+//-- orphans
 int remove_unused_vertices(json& j, bool bv2int) {
   size_t inputsize = j["vertices"].size();
   std::map<int,int> oldnewids;
   std::vector<int> newvertices;
   for (auto& co : j["CityObjects"]) 
     for (auto& g : co["geometry"]) 
-      if (g["type"] == "Solid") {
+      if (g["type"] == "GeometryInstance") {
+        int v = g["boundaries"][0];
+        if (oldnewids.find(v) == oldnewids.end()) {
+          oldnewids[v] = int(newvertices.size());
+          newvertices.push_back(v);
+        }
+      }
+      else if (g["type"] == "Solid") {
         for (auto& shell : g["boundaries"]) 
           for (auto& surface : shell) 
             for (auto& ring : surface) 
@@ -295,7 +302,10 @@ int remove_unused_vertices(json& j, bool bv2int) {
   //-- update the faces ids
   for (auto& co : j["CityObjects"]) {
     for (auto& g : co["geometry"]) 
-      if (g["type"] == "Solid") {
+      if (g["type"] == "GeometryInstance") {
+        g["boundaries"][0] = oldnewids[g["boundaries"][0]];
+      }
+      else if (g["type"] == "Solid") {
         for (auto& shell : g["boundaries"]) 
           for (auto& surface : shell) 
             for (auto& ring : surface) 
