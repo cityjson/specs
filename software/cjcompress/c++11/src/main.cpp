@@ -182,7 +182,10 @@ int duplicate_vertices(json& j, int importantdigits, bool bv2int) {
   //-- update IDs for the faces
   for (auto& co : j["CityObjects"]) {
     for (auto& g : co["geometry"]) {
-      if (g["type"] == "Solid") {
+      if (g["type"] == "GeometryInstance") {
+        g["boundaries"][0] = newids[g["boundaries"][0]];
+      }
+      else if (g["type"] == "Solid") {
         for (auto& shell : g["boundaries"])
           for (auto& surface : shell)
             for (auto& ring : surface)
