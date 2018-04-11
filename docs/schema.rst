@@ -24,7 +24,7 @@ version 0.1:
 Software to validate a file against the schema
 ----------------------------------------------
 
-The software `cjvalschema <https://github.com/tudelft3d/cityjson/tree/master/software/cjvalschema/>`_ validates a CityJSON against the schema and does extra validation, eg:
+The software `cjvalschema <https://github.com/tudelft3d/cityjson/tree/master/software/cjvalschema/python/>`_ validates a CityJSON against the schema and does extra validation, eg:
 
 - are the attributes of City Objects and metadata according to CityGML?
 - do the BuildingParts have a parent Building?
@@ -33,6 +33,6 @@ The software `cjvalschema <https://github.com/tudelft3d/cityjson/tree/master/sof
 - are there duplicate keys (IDs) for the City Objects? If yes then an error is returned.
 - are there duplicate or orphan vertices? If yes a warning is returned
 
-Errors and warnings are returned to the user.
+
 
 
