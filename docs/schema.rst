@@ -24,7 +24,7 @@ version 0.1:
 Software to validate a file against the schema
 ----------------------------------------------
 
-`cjvalschema <https://github.com/tudelft3d/cityjson/tree/master/software/cjvalschema/>`_ validates a CityJSON against the schema and does extra validation, eg:
+The software `cjvalschema <https://github.com/tudelft3d/cityjson/tree/master/software/cjvalschema/>`_ validates a CityJSON against the schema and does extra validation, eg:
 
 - are the attributes of City Objects and metadata according to CityGML?
 - do the BuildingParts have a parent Building?
@@ -35,5 +35,4 @@ Software to validate a file against the schema
 
 Errors and warnings are returned to the user.
 
-`JSON Schema <http://json-schema.org>`_ is used to validate.
 

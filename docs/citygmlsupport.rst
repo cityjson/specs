@@ -6,7 +6,7 @@ CityGML support
 CityGML modules and characteristics supported
 ---------------------------------------------
 
-At this moment, CityJSON implements most of the data model, and *all* the CityGML modules have been mapped to CityJSON objects (as of v0.5).
+At this moment, CityJSON implements most of the data model, and *all* the CityGML modules have been mapped to CityJSON objects.
 However, for the sake of simplicity and efficiency, some modules and features have been omitted and/or simplified.
 If a module is supported, it does not mean that there is a 1-to-1 mapping between the classes and features in CityGML and CityJSON, but rather that it is possible to represent the same information, but in a different manner.
 
