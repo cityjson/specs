@@ -33,7 +33,8 @@ CityJSON
       [23.1, 2321.2, 11.0],
       ...
     ],
-    "appearance": {...}
+    "appearance": {...},
+    "geometry-templates": {}
   }
 
 CityJSON is a format for encoding a subset of the `CityGML <https://www.citygml.org>`_ data model using JavaScript Object Notation (`JSON <http://json.org>`_).

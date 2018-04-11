@@ -5,6 +5,9 @@ Schema validation
 CityJSON schema download
 ------------------------
 
+version 0.6: 
+- :download:`download cityjson-v05.schema.json <../schema/v06/cityjson-v06-schema.zip>`
+
 version 0.5: 
 - :download:`download cityjson-v05.schema.json <../schema/cityjson-v05.schema.json>`
 
@@ -28,6 +31,7 @@ Software to validate a file against the schema
 - do the BuildingInstallation have a parent Building?
 - are the arrays for the boundaries and the semantics coherent? (same structure)
 - are there duplicate keys (IDs) for the City Objects? If yes then an error is returned.
+- are there duplicate or orphan vertices? If yes a warning is returned
 
 Errors and warnings are returned to the user.
 

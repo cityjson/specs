@@ -5,15 +5,15 @@ Changelog
 
 .. http://keepachangelog.com/en/1.0.0/
 
-[Unreleased]
-------------
+[Unreleased - coming in the future]
+-----------------------------------
 - ADE or mechanisms to extend the CityJSON data model in a structured and document way
 - handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
 - binary encoding of JSON, with either `CBOR <http://cbor.io>`_ or `BSON <http://bsonspec.org>`_
 
 ----
 
-[0.6] - xxxxxxxxxx
+[0.6] - 2018-04-11
 ------------------
 Added
 *****
@@ -25,7 +25,8 @@ Added
 Changed
 *******
 - the schema is now split into different schemas that are linked together
-- the schema validator (software cjvalschema) is now in Python, thus everyone can run it easily
+- the schema validator (software cjvalschema) is now in Python and improved, thus everyone can run it easily
+- cjcompress does a better job and bugs have been removed
 - textures are not forced to be in the folder 'appearances' anymore, any link to an image will do (useful for WFS for instance).
 
 
