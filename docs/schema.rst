@@ -6,7 +6,7 @@ CityJSON schema download
 ------------------------
 
 version 0.6: 
-- :download:`download cityjson-v05.schema.json <../schema/v06/cityjson-v06-schema.zip>`
+- :download:`download cityjson-v06.schema.zip <../schema/v06/cityjson-v06-schema.zip>`
 
 version 0.5: 
 - :download:`download cityjson-v05.schema.json <../schema/cityjson-v05.schema.json>`

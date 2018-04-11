@@ -7,8 +7,8 @@ Changelog
 
 [Unreleased - coming in the future]
 -----------------------------------
-- ADE or mechanisms to extend the CityJSON data model in a structured and document way
 - handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
+- ADE or mechanisms to extend the CityJSON data model in a structured and document way
 - binary encoding of JSON, with either `CBOR <http://cbor.io>`_ or `BSON <http://bsonspec.org>`_
 
 ----

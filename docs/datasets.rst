@@ -2,14 +2,44 @@
 Example datasets
 ================
 
+.. note::
+  The files below were automatically converted from CityGML with `citygml4j <https://github.com/citygml4j/citygml4j>`_.
+
+
 Dummy file showcasing the different possibilities
 -------------------------------------------------
 
-- :download:`example.json <../example-datasets/dummy-values/example.json>`
+- :download:`download example.json <../example-datasets/dummy-values/example.json>`
 
+Dummy means that the values of the coordinates have no value, this is just to see how a file could look like with different possibilities of CityJSON.
 
 ----
 
+
+Example CityGML v2 file (aka Railway)
+-------------------------------------
+
+.. image:: https://www.citygml.org/samplefiles/CityGML_2.0_Test_Dataset_FME2012_SP2_small.jpg
+   :width: 40%
+
+
+The first CityGML v2.0 that was released, available on the `official CityGML website <https://www.citygml.org/samplefiles/>`_, it contains several CityGML classes with textures, and classes that were new in v2.0
+
+#. Railway
+#. Relief 
+#. Vegetation (with Implicit Geometries)
+#. Water
+#. Tunnels
+
+- :download:`download geores.zip <../example-datasets/Railway/Railway.zip>`
+
+It contains:
+
+#. the original CityGML file with textures
+#. the CityJSON file
+#. the compressed CityJSON file
+
+----
 
 "geoRES" dataset
 ----------------
@@ -27,15 +57,13 @@ One of the example dataset on the `official CityGML website <https://www.citygml
 #. LandUse 
 
 
-- :download:`geoRES_testdata.zip <../example-datasets/geoRES/geoRES_testdata.zip>`
+- :download:`download geores.zip <../example-datasets/geoRES/geores.zip>`
 
 It contains:
 
 #. the original CityGML file with textures
 #. the CityJSON file
 #. the compressed CityJSON file
-
-This file was automatically converted with `the beta version of citygml4j <https://github.com/citygml4j/citygml4j>`_.
 
 ----
 
@@ -48,13 +76,11 @@ Rotterdam (the Netherlands)
 
 One part of the `open dataset of Rotterdam <http://rotterdamopendata.nl/dataset/rotterdam-3d-bestanden>`_ was converted to CityJSON.
 
-Only the geometry:
+- :download:`download rotterdam.zip <../example-datasets/Rotterdam/rotterdam.zip>`
 
-- :download:`3-20-DELFSHAVEN_solids.json (CityJSON) <../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN_solids.json>`
-- :download:`3-20-DELFSHAVEN_solids.compress.json (CityJSON) <../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN_solids.compress.json>`
-- :download:`3-20-DELFSHAVEN_solids.xml (CityGML) <../example-datasets/Rotterdam/Delfshaven/3-20-DELFSHAVEN_solids.xml>`
+It contains:
 
-Two buildings randomly chosen (without attributes):
+#. the original CityGML file with textures
+#. the CityJSON file
+#. the compressed CityJSON file
 
-- :download:`with textures (two-buildings-textures.zip) <../example-datasets/Rotterdam/two-buildings-textures.zip>`
-- :download:`with materials/colours (twobuildings_m.json) <../example-datasets/Rotterdam/two-buildings-materials/twobuildings_m.json>`
