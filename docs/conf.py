@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'CityJSON'
-copyright = u'2017, 3D geoinformation group at TU Delft'
+copyright = u'2018, 3D geoinformation group at TU Delft'
 author = u'Hugo Ledoux'
 
 # The version info for the project you're documenting, acts as replacement for
