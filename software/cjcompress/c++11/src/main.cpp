@@ -1,18 +1,30 @@
 /*
- _____ _ _          __ _____ _____ _____     _     ___     
- |     |_| |_ _ _ __|  |   __|     |   | |___|_|___|  _|___ 
- |   --| |  _| | |  |  |__   |  |  | | | |___| |   |  _| . |
- |_____|_|_| |_  |_____|_____|_____|_|___|   |_|_|_|_| |___|
- |___|                                          
+
+ +-----------------------------------------------------+
+ |                                                     |
+ |     _____ _ _              _  _____  ____  _   _    |
+ |    / ____(_) |            | |/ ____|/ __ \| \ | |   |
+ |   | |     _| |_ _   _     | | (___ | |  | |  \| |   |
+ |   | |    | | __| | | |_   | |\___ \| |  | | . ` |   |
+ |   | |____| | |_| |_| | |__| |____) | |__| | |\  |   |
+ |    \_____|_|\__|\__, |\____/|_____/ \____/|_| \_|   |
+ |                  __/ |                              |
+ |                 |___/                               |
+ |                                                     |
+ |                                                     |
+ +-----------------------------------------------------+
+ +-----------------------------------------------------+
+ |                +-+-+-+-+-+-+-+-+-+-+                |
+ |                |c|j|c|o|m|p|r|e|s|s|                |
+ |                +-+-+-+-+-+-+-+-+-+-+                |
+ +-----------------------------------------------------+
+
+ Copyright © 2017-2018 Hugo Ledoux. All rights reserved.
  
- cityjson-compress
-  Copyright © 2017-2018 Hugo Ledoux. All rights reserved.
- 
- */
+*/
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <set>
 #include <vector>
 #include <string>
@@ -25,6 +37,7 @@
 using json = nlohmann::json;
 
 int  duplicate_vertices(json& j, int importantdigits);
+int  duplicate_vertices_int(json& j);
 int  remove_orphan_vertices(json& j);
 void save_to_file(json& j, std::string ifile, std::streampos& sizei);
 void tokenize(const std::string& str, std::vector<std::string>& tokens);
@@ -89,16 +102,15 @@ int main(int argc, const char * argv[]) {
   input >> j;
   input.close();
 
-  // if already compressed then do nothing
+  // if vertices already on integers
   if (j.count("transform") > 0) {
-    std::cout << "ERROR: Input file already compressed. Abort" << std::endl;
-    return 0;
+    int noduplicates = duplicate_vertices_int(j);
+    std::cout << "Number duplicates vertices removed: " << noduplicates << std::endl;
   }
-  
-  //-- duplicates in j["vertices"]
-  int noduplicates = duplicate_vertices(j, importantdigits);
-  std::cout << "Number duplicates vertices removed: " << noduplicates << std::endl;
-  //-- unused vertices ("orphans"), ie those than do not have a geom pointing to them
+  else {
+    int noduplicates = duplicate_vertices(j, importantdigits);
+    std::cout << "Number duplicates vertices removed: " << noduplicates << std::endl;
+  }
   int noorphans = remove_orphan_vertices(j);
   std::cout << "Number unused vertices removed: " << noorphans << std::endl;
   save_to_file(j, ifile, sizei);
@@ -112,6 +124,7 @@ void save_to_file(json& j, std::string ifile, std::streampos& sizei) {
   std::size_t found = ifile.find(".json");
   if (found != std::string::npos) {
     ifile.insert(found, ".compress");
+    // ifile.insert(found, ".test");
     std::cout << "File saved: " << ifile << std::endl;
     std::ofstream o(ifile);
     o << j << std::endl;
@@ -158,6 +171,58 @@ void update_to_new_ids(json& j, std::vector<unsigned long> &newids) {
       }
     }
   }
+}
+
+
+int duplicate_vertices_int(json& j) {
+  size_t inputsize = j["vertices"].size();
+  //-- read points and translate now (if int)
+  // std::vector<Point3> vertices;
+  // for (auto& v : j["vertices"]) {
+  //   std::vector<double> t = v;
+  //   Point3 tmp(t[0], t[1], t[2]);
+  //   tmp.translate(-minx, -miny, -minz);
+  //   vertices.push_back(tmp);
+  // }
+  
+  std::map<std::string,unsigned long> hash;
+  std::vector<unsigned long> newids (j["vertices"].size(), 0);
+  std::vector<std::string> newvertices;
+  unsigned long i = 0;
+  for (auto& v : j["vertices"]) {
+    std::string thekey = std::to_string(int(v[0])) + " "; 
+    thekey += std::to_string(int(v[1])) + " ";
+    thekey += std::to_string(int(v[2]));
+    // std::cout << thekey << std::endl;
+    // return 0;
+    // std::string thekey = v.get_key(importantdigits);
+    auto it = hash.find(thekey);
+    if (it == hash.end()) {
+      unsigned long newid = (unsigned long)(hash.size());
+      newids[i] = newid;
+      hash[thekey] = newid;
+      newvertices.push_back(thekey);
+    }
+    else {
+      newids[i] = it->second;
+    }
+    i++;
+  }
+  //-- update IDs for the faces
+  update_to_new_ids(j, newids);
+  //-- replace the vertices
+  std::vector<std::array<int, 3>> vout;
+  for (std::string& s : newvertices) {
+    std::vector<std::string> ls;
+    tokenize(s, ls);
+    std::array<int,3> t;
+    t[0] = std::stoi(ls[0]);
+    t[1] = std::stoi(ls[1]);
+    t[2] = std::stoi(ls[2]);
+    vout.push_back(t);
+  }
+  j["vertices"] = vout;
+  return (inputsize - j["vertices"].size());
 }
 
 
@@ -323,6 +388,4 @@ int remove_orphan_vertices(json& j) {
   j["vertices"] = vout;
   return (inputsize - j["vertices"].size());
 }
-
-
 
