@@ -957,7 +957,6 @@ However:
   
   - the CityGML class ``GeoreferencedTexture`` is not supported. 
   - the CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files.
-  - texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
   - the major difference is that in CityGML each Material/Texture object keeps a list of the primitives using it, while in CityJSON it is the opposite: if a primitive has a Material/Texture than it is stated with the primitive (with a link to it).
 
 An Appearance Object is a JSON object that
