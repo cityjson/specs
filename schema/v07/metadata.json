@@ -181,7 +181,7 @@
                                     "required": [
                                         "website", "contactType"
                                     ]
-                                },
+                                }
                             ]
                         },
                         "metadataStandard": {
