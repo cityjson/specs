@@ -10,7 +10,9 @@ import argparse
 def main():
 
   # filename = '/Users/hugo/projects/cityjson/example-datasets/dummy-values/example.json'    
-  filename = '/Users/hugo/Dropbox/data/cityjson/claus/Railway/v0.6/railway_cityjson_0.6/LoD3_railway_uncompressed.json'
+  # filename = '/Users/hugo/Dropbox/data/cityjson/claus/Railway/v0.6/railway_cityjson_0.6/LoD3_railway_uncompressed.json'
+  # filename = '/Users/hugo/Dropbox/data/cityjson/size-index-vs-sf/s5.json'
+  filename = '/Users/hugo/Dropbox/data/cityjson/size-index-vs-sf/VM05_2009.json'
   j = json.loads(open(filename).read())
 
   for each in j["CityObjects"]:
@@ -19,13 +21,13 @@ def main():
   del j["vertices"]
 
   #-- save sliced CityJSON file
-  json_str = json.dumps(j)
+  json_str = json.dumps(j, separators=(',',':'))
   s = os.path.abspath(filename)
   p = s.rfind(".json")
   outputfile = s[:p] + ".sf" + ".json"
   f = open(outputfile, "w")
   f.write(json_str)
-  print "\nDone, output written to:", outputfile
+  print ("\nDone, output written to:", outputfile)
 
 
 
