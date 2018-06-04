@@ -1,0 +1,188 @@
+﻿{
+  "type": "CityJSON",
+  "version": "0.7",
+    "metadata": {
+        "citymodelIdentifier": "81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
+        "ISOmetadata": {
+            "datasetTitle": "3D city model with Building and CityObjectGroup",
+            "datasetReferenceDate": "2017-01-01",
+            "geoLocation": "Chibougamau, Canada",
+            "datasetLanguage": "English",
+            "datasetTopicCategory": "geoscientificInformation",
+            "datasetDescription": "3D city model with Building and CityObjectGroup",
+            "distributionFormatVersion": "0.7",
+            "referenceSystem": "urn:ogc:def:crs:EPSG::28992",
+            "spatialRepresentationType": "vector",
+            "temporalInformation": {
+                "timestamp": "2017-01-11T18:25:43",
+                "temporalDescription": "here here.."
+            },
+            "onlineResource": "https://github.com/tudelft3d/cityjson/",
+            "fileIdentifier": "example_metadata.json",
+            "datasetPointOfContact": {
+                "contactName": "3D Geoinformation Group",
+                "phone": "+31-6666666666",
+                "address": "Delft University of Technology, the Netherlands",
+                "emailAddress": "3d.bk@tudelft.nl",
+                "contactType": "organization",
+                "website": "https://3d.bk.tudelft.nl"
+            },
+            "metadataStandard": "IS0 19115",
+            "metadataStandardVersion": "1.0",
+            "metadataLanguage": "English",
+            "metadataCharacterSet": "UTF-8",
+            "metadataDateStamp": "2014-04-22",
+            "metadataPointOfContact": {
+                "contactName": "Technical Committee ISO/TC 211, Geographic information/Geomatics",
+                "phone": "+46-855552000 ",
+                "address": "Swedish Standards Institute, P.O. Box 45443, SE-SE-104 31 Stockholm, Sweden",
+                "emailAddress": "info@sis.se",
+                "contactType": "organization",
+                "website": "https://www.iso.org/committee/54904.html"
+            },
+            "lineage": [
+                {
+                    "source": "Point cloud AHN3",
+                    "processStep": "3Dfier processing"
+                },
+                {
+                    "source": "2D BGT",
+                    "processStep": "3Dfier processing"
+                }
+            ],
+            "bbox3d": [
+                84710,
+                446846,
+                -5,
+                84757,
+                446944,
+                40
+            ],
+            "abstract": "la la la la....",
+            "specificUsage": "for environmental simulations",
+            "keywords": [
+                "cityjson",
+                "3D",
+                "noise mapping"
+            ],
+            "constraints": {
+                "legalConstraints": "unrestricted",
+                "securityConstraints": "protected",
+                "userNote": "open access"
+            }
+        },
+        "semanticsMetadata": {
+            "semantics": {
+                "state": "present",
+                "semanticClasses": [
+                    "Building",
+                    "CityObjectGroup"
+                ]
+            }
+        },
+        "appearanceMetadata": {
+            "textures": {
+                "state": "present"
+            },
+            "materials": {
+                "state": "present"
+            }
+        },
+        "presentLODs": [
+            {
+                "lod": 1.0,
+                "count": 122
+            },
+            {
+                "lod": 1.1,
+                "count": 100
+            }
+        ],
+        "terrainMetadata": [ {
+                "terrainType": "TINRelief",
+                "triangleCount": 100,
+                "presentLODs": [
+                    {
+                        "lod": 1.0,
+                        "count": 122
+                    }
+                ]
+        },
+        {
+            "terrainType": "RasterRelief",
+            "bbox": [ 84710, 446846, 84757,446944],
+            "resolution": "25 cm",
+            "presentLODs": [
+                {
+                    "lod": 1.0,
+                    "count": 122
+                }
+            ]
+        }
+    ],
+        "landuseMetadata": [
+            {
+                "class": "SettlementArea",
+                "function": "Residential",
+                "usage": "Residential",
+                "presentLODs": [
+                    {
+                        "lod": 1.0,
+                        "count": 122
+                    },
+                    {
+                        "lod": 1.1,
+                        "count": 100
+                    }
+                ]
+            },
+            {
+                "class": "SettlementArea",
+                "function": "Residential",
+                "usage": "Residential",
+                "presentLODs": [
+                    {
+                        "lod": 1.0,
+                        "count": 122
+                    },
+                    {
+                        "lod": 1.1,
+                        "count": 100
+                    }
+                ]
+            }
+        ],
+        "cityfeatureMetadata": [ 
+            {
+                "cityfeatureType": "Building",
+                "presentLODs": [
+                    {
+                        "lod": 1.0,
+                        "count": 122
+                    }
+                ],
+                "citySubfeatures": [
+                    {
+                        "citySubfeatureType": "BuildingPart",
+                        "citySubfeatureCount": 1
+                    },
+                    {
+                        "citySubfeatureType": "BuildingInstallation",
+                        "citySubfeatureCount": 1
+                    }
+                ]
+            },
+            {
+                "cityfeatureType": "CityObjectGroup",
+                "presentLODs": [
+                    {
+                        "lod": 1.0,
+                        "count": 122
+                    }
+                ]
+            }
+        ]
+    },
+    "CityObjects": {},
+    "vertices": []
+}

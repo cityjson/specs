@@ -1,346 +1,627 @@
 ﻿{
     "title": "CityJSON metadata schema v0.7",
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "metadata": {
+    "definitions": {
+        "presentLODs": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "lod": {
+                        "type": "number",
+                        "minimum": 0.0,
+                        "maximum": 3.5
+                    },
+                    "count": {
+                        "type": "number"
+                    }
+                },
+                "required": ["lod","count"]
+            }
+        },
+        "contactDetails": {
             "type": "object",
             "properties": {
-                "citymodelIdentifier": {
-                    "type": "string",
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                "contactName": {
+                    "type": "string"
                 },
-                "ISOmetadata": {
+                "phone": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "emailAddress": {
+                    "type": "string",
+                    "format": "email"
+                }
+            },
+            "required": [
+                "contactName",
+                "phone",
+                "address",
+                "emailAddress"],
+            "oneOf": [
+                {
                     "type": "object",
                     "properties": {
-                        "datasetTitle": {
-                            "type": "string"
-                        },
-                        "datasetReferenceDate": {
+                        "contactType": {
                             "type": "string",
-                            "format": "date"
-                        },
-                        "geoLocation": {
-                            "type": "string",
-                            "description": "the name of the area for instance"
-                        },
-                        "datasetLanguage": {
-                            "type": "string"
-                        },
-                        "datasetTopicCategory": {
-                            "type": "string",
-                            "description": "from ISO19115 codelist",
                             "enum": [
-                                "farming",
-                                "bioata",
-                                "boundaries",
-                                "climatology",
-                                "meteorology",
-                                "atmosphere",
-                                "economy",
-                                "elevation",
-                                "environment",
-                                "geoscientificInformation",
-                                "health",
-                                "imageryBaseMapsEarthCover",
-                                "intelligenceMilitary",
-                                "inlandWaters",
-                                "location",
-                                "oceans",
-                                "planningCadastre",
-                                "society",
-                                "structure",
-                                "transportation",
-                                "utilitiesCommunication",
-                                "extraTerrestrial",
-                                "disaster"
+                                "individual"
                             ]
                         },
-                        "datasetDescription": {
-                            "type": "string"
-                        },
-                        "distributionFormatVersion": {
+                        "role": {
                             "type": "string",
-                            "pattern": "\\d.\\d"
-                        },
-                        "spatialRepresentationType": {
-                            "type": "string",
-                            "description": "from ISO19115 codelist",
+                            "description": "from ISO 19115 codelist",
                             "enum": [
-                                "vector",
-                                "grid",
-                                "TIN",
-                                "textTable",
-                                "stereoModel",
-                                "video"
+                                "resourceProvider",
+                                "custodian",
+                                "owner",
+                                "user",
+                                "distributor",
+                                "originator",
+                                "pointOfContact",
+                                "principalInvestigator",
+                                "processor",
+                                "publisher",
+                                "author",
+                                "sponsor",
+                                "co-author",
+                                "collaborator",
+                                "editor",
+                                "mediator",
+                                "rightsHolder",
+                                "contributor",
+                                "funder",
+                                "stakeholder"
                             ]
                         },
-                        "referenceSystem": {
+                        "organization": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "role",
+                        "organization",
+                        "contactType"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "contactType": {
                             "type": "string",
-                            "pattern": "^EPSG:[0-9]{4,5}$"
+                            "enum": [
+                                "organization"
+                            ]
                         },
-                        "temporalInformation": {
-                            "type": "object",
-                            "properties": {
-                                "timestamp": {
-                                    "type": "string",
-                                    "format": "date"
-                                },
-                                "temporalDescription": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "onlineResource": {
+                        "website": {
                             "type": "string",
                             "format": "uri",
-                            "pattern": "^(https?|ftp)://"
-                        },
-                        "fileIdentifier": {
-                            "type": "string"
-                        },
-                        "datasetPointOfContact": {
-                            "type": "object",
-                            "additionalProperties": true,
-                            "properties": {
-                                "contactName": {
-                                    "type": "string"
-                                },
-                                "phone": {
-                                    "type": "string"
-                                },
-                                "address": {
-                                    "type": "string"
-                                },
-                                "emailAddress": {
-                                    "type": "string",
-                                    "format": "email"
-                                }
-                            },
-                            "required": [
-                                "contactName",
-                                "phone",
-                                "address",
-                                "emailAddress"
-                            ],
-                            "oneOf": [
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "contactType": {
-                                            "type": "string",
-                                            "enum": ["individual"]
-                                        },
-                                        "role": {
-                                            "type": "string",
-                                            "description": "from ISO 19115 codelist",
-                                            "enum": [
-                                                "resourceProvider",
-                                                "custodian",
-                                                "owner",
-                                                "user",
-                                                "distributor",
-                                                "originator",
-                                                "pointOfContact",
-                                                "principalInvestigator",
-                                                "processor",
-                                                "publisher",
-                                                "author",
-                                                "sponsor",
-                                                "co-author",
-                                                "collaborator",
-                                                "editor",
-                                                "mediator",
-                                                "rightsHolder",
-                                                "contributor",
-                                                "funder",
-                                                "stakeholder"
-                                            ]
-                                        },
-                                        "organization": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "role",
-                                        "organization",
-                                        "contactType"
-                                    ]
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "contactType": {
-                                            "type": "string",
-                                            "enum": ["organization"]
-                                        },
-                                        "website": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "pattern": "^(https?)://"
-                                        }
-                                    },
-                                    "required": [
-                                        "website", "contactType"
-                                    ]
-                                },
-                            ]
-                        },
-                        "metadataStandard": {
-                            "type": "string"
-                        },
-                        "metadataStandardVersion": {
-                            "type": "string",
-                            "pattern": "\\d.\\d"
-                        },
-                        "metadataLanguage": {
-                            "type": "string"
-                        },
-                        "metadataCharacterSet": {
-                            "type": "string"
-                        },
-                        "metadataDateStamp": {
-                            "type": "string",
-                            "format": "date"
-                        },
-                        "lineage": {
-                            "type": "object",
-                            "properties": {
-                                "source": {"type":"string"},
-                                "processStep": {"type":"string"}
-                            }
-                        },
-                        "bbox3d": {
-                            "type": "array",
-                            "items": {
-                                "type": "number"
-                            },
-                            "minItems": 6,
-                            "maxItems": 6
-                        },
-                        "abstract": {
-                            "type": "string"
-                        },
-                        "specificUsage": {
-                            "type": "string"
-                        },
-                        "keywords": {
-                            "type": "array",
-                            "items": {"type": "string"}
-                        },
-                        "constraints": {
-                            "type": "object",
-                            "properties": {
-                                "legalConstraints": {
-                                    "type": "string",
-                                    "enum": [
-                                        "copyright",
-                                        "patent",
-                                        "patentPending",
-                                        "trademark",
-                                        "licence",
-                                        "intellectualPropertyRights",
-                                        "restricted",
-                                        "otherRestrictions",
-                                        "unrestricted",
-                                        "licenseUnrestricted",
-                                        "licenseEndUser",
-                                        "licenseDistributor",
-                                        "private",
-                                        "statutory",
-                                        "confidential",
-                                        "sensitiveButUnclassified",
-                                        "in-confidence"
-                                    ]
-                                },
-                                "securityConstraints": {
-                                    "type": "string",
-                                    "enum": [
-                                        "unclassified",
-                                        "restricted",
-                                        "confidential",
-                                        "secret",
-                                        "topSecret",
-                                        "sensitiveButUnclassified",
-                                        "forOfficialUseOnly",
-                                        "protected",
-                                        "limitedDistribution"
-                                    ]
-                                },
-                                "userNote": {"type": "string"}
-                            }
+                            "pattern": "^(https?)://"
                         }
-                    }
+                    },
+                    "required": [
+                        "website",
+                        "contactType"
+                    ]
                 },
-                "semanticsMetadata": {
-                    "type": "object",
-                    "properties": {
-                        "semantics": {
-                            "type": "object",
-                            "properties": {
-                                 "state": {
-                                    "type": "string",
-                                    "enum": [
-                                        "present",
-                                        "absent"
-                                    ]
-                                },
-                                "semanticClasses": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string",
-                                        "enum": [
-                                            "Building",
-                                            "Terrain",
-                                            "LandUse",
-                                            "Vegetation",
-                                            "WaterBody",
-                                            "Bridge",
-                                            "Tunnel",
-                                            "Transportation",
-                                            "Generics",
-                                            "CityObjectGroup"
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "appearanceMetadata": {
-                    "type": "object",
-                    "properties": {
-                        "textures": {
-                            "type": "object",
-                            "properties": {
-                                "state": {
-                                    "type": "string",
-                                    "enum": [
-                                        "present",
-                                        "absent"
-                                    ]
-                                }
-                            }
-                        },
-                        "materials": {
-                            "type": "object",
-                            "properties": {
-                                "state": {
-                                    "type": "string",
-                                    "enum": [
-                                        "present",
-                                        "absent"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "presentLODs": {},
-                "terrainMetadata": {},
-                "landuseMetadata": {},
-                "cityFeatureMetadata": {}
+            ]
+        },
+        "TINproperties": {
+            "type": "object",
+            "properties": {
+                "terrainType":{ 
+                    "type": "string",
+                    "enum": [ "TINRelief"]
+                    }, 
+                "triangleCount": {
+                    "type": "number"
+                }
             },
-             "additionalProperties": false
+            "required": [ "terrainType", "triangleCount" ]
+        },
+        "Rasterproperties": {
+            "type": "object",
+            "properties": {
+                "terrainType": { 
+                    "type": "string",
+                    "enum": [ "RasterRelief" ]
+                    },
+                "bbox": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                },
+                "resolution": {
+                    "type": "string"
+                }
+            },
+             "required": [ "terrainType", "bbox", "resolution" ]
+        },
+        "MassPointproperties": {
+            "type": "object",
+            "properties": {
+                "terrainType": {
+                    "type": "string",
+                    "enum": [ "MassPointRelief" ]
+                },
+                "pointCount": {
+                    "type": "number"
+                }
+            },
+             "required": [ "terrainType", "pointCount" ]
+        },
+        "Breaklineproperties": {
+            "type": "object",
+            "properties": {
+                "terrainType": {
+                    "type": "string",
+                    "enum": [ "BreaklineRelief" ]
+                },
+                "lineCount": { "type": "number" }
+            },
+            "required": [ "terrainType", "lineCount" ]
+        }
+    },
+    "metadata": {
+        "type": "object",
+        "properties": {
+            "citymodelIdentifier": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            "ISOmetadata": {
+                "type": "object",
+                "properties": {
+                    "datasetTitle": {
+                        "type": "string"
+                    },
+                    "datasetReferenceDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "geoLocation": {
+                        "type": "string",
+                        "description": "the name of the area for instance"
+                    },
+                    "datasetLanguage": {
+                        "type": "string"
+                    },
+                    "datasetTopicCategory": {
+                        "type": "string",
+                        "description": "from ISO19115 codelist",
+                        "enum": [
+                            "farming",
+                            "bioata",
+                            "boundaries",
+                            "climatology",
+                            "meteorology",
+                            "atmosphere",
+                            "economy",
+                            "elevation",
+                            "environment",
+                            "geoscientificInformation",
+                            "health",
+                            "imageryBaseMapsEarthCover",
+                            "intelligenceMilitary",
+                            "inlandWaters",
+                            "location",
+                            "oceans",
+                            "planningCadastre",
+                            "society",
+                            "structure",
+                            "transportation",
+                            "utilitiesCommunication",
+                            "extraTerrestrial",
+                            "disaster"
+                        ]
+                    },
+                    "datasetDescription": {
+                        "type": "string"
+                    },
+                    "distributionFormatVersion": {
+                        "type": "string",
+                        "pattern": "\\d.\\d"
+                    },
+                    "spatialRepresentationType": {
+                        "type": "string",
+                        "description": "from ISO19115 codelist",
+                        "enum": [
+                            "vector",
+                            "grid",
+                            "TIN",
+                            "textTable",
+                            "stereoModel",
+                            "video"
+                        ]
+                    },
+                    "referenceSystem": {
+                        "type": "string",
+                        "pattern": "^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
+                    },
+                    "temporalInformation": {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "temporalDescription": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "onlineResource": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^(https?|ftp)://"
+                    },
+                    "fileIdentifier": {
+                        "type": "string"
+                    },
+                    "datasetPointOfContact": {
+                        "$ref": "#/definitions/contactDetails"
+                    },
+                    "metadataStandard": {
+                        "type": "string"
+                    },
+                    "metadataStandardVersion": {
+                        "type": "string",
+                        "pattern": "\\d.\\d"
+                    },
+                    "metadataLanguage": {
+                        "type": "string"
+                    },
+                    "metadataCharacterSet": {
+                        "type": "string"
+                    },
+                    "metadataDateStamp": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "metadataPointOfContact": {
+                        "$ref": "#/definitions/contactDetails"
+                    },
+                    "lineage": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "processStep": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "bbox3d": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 6,
+                        "maxItems": 6
+                    },
+                    "abstract": {
+                        "type": "string"
+                    },
+                    "specificUsage": {
+                        "type": "string"
+                    },
+                    "keywords": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "constraints": {
+                        "type": "object",
+                        "properties": {
+                            "legalConstraints": {
+                                "type": "string",
+                                "enum": [
+                                    "copyright",
+                                    "patent",
+                                    "patentPending",
+                                    "trademark",
+                                    "licence",
+                                    "intellectualPropertyRights",
+                                    "restricted",
+                                    "otherRestrictions",
+                                    "unrestricted",
+                                    "licenseUnrestricted",
+                                    "licenseEndUser",
+                                    "licenseDistributor",
+                                    "private",
+                                    "statutory",
+                                    "confidential",
+                                    "sensitiveButUnclassified",
+                                    "in-confidence"
+                                ]
+                            },
+                            "securityConstraints": {
+                                "type": "string",
+                                "enum": [
+                                    "unclassified",
+                                    "restricted",
+                                    "confidential",
+                                    "secret",
+                                    "topSecret",
+                                    "sensitiveButUnclassified",
+                                    "forOfficialUseOnly",
+                                    "protected",
+                                    "limitedDistribution"
+                                ]
+                            },
+                            "userNote": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "datasetTitle",
+                    "datasetReferenceDate",
+                    "geoLocation",
+                    "datasetLanguage",
+                    "datasetTopicCategory",
+                    "datasetDescription",
+                    "datasetPointOfContact",
+                    "referenceSystem",
+                    "metadataStandard",
+                    "metadataDateStamp",
+                    "metadataPointOfContact",
+                    "bbox3d",
+                    "abstract",
+                    "specificUsage",
+                    "keywords"
+                ]
+            },
+            "semanticsMetadata": {
+                "type": "object",
+                "properties": {
+                    "semantics": {
+                        "type": "object",
+                        "properties": {
+                            "state": {
+                                "type": "string",
+                                "enum": [
+                                    "present",
+                                    "absent"
+                                ]
+                            },
+                            "semanticClasses": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "Building",
+                                        "Terrain",
+                                        "LandUse",
+                                        "Vegetation",
+                                        "WaterBody",
+                                        "Bridge",
+                                        "Tunnel",
+                                        "Transportation",
+                                        "Generics",
+                                        "CityObjectGroup"
+                                    ]
+                                }
+                            }
+                        },
+                        "required": ["state"]
+                    }
+                }
+            },
+            "appearanceMetadata": {
+                "type": "object",
+                "properties": {
+                    "textures": {
+                        "type": "object",
+                        "properties": {
+                            "state": {
+                                "type": "string",
+                                "enum": [
+                                    "present",
+                                    "absent"
+                                ]
+                            }
+                        },
+                        "required": ["state"]
+                    },
+                    "materials": {
+                        "type": "object",
+                        "properties": {
+                            "state": {
+                                "type": "string",
+                                "enum": [
+                                    "present",
+                                    "absent"
+                                ]
+                            }
+                        },
+                        "required": ["state"]
+                    }
+                },
+                "required": ["textures", "materials"]
+            },
+            "presentLODs": {
+                "$ref": "#/definitions/presentLODs"
+            },
+            "terrainMetadata": {
+                "type": "array",
+                "items": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/TINproperties"
+                        },
+                        {
+                            "$ref": "#/definitions/Rasterproperties"
+                        },
+                        {
+                            "$ref": "#/definitions/MassPointproperties"
+                        },
+                        {
+                            "$ref": "#/definitions/Breaklineproperties"
+                        },
+                    ],
+                    "presentLODs": {
+                        "$ref": "#/definitions/presentLODs"
+                    }
+                }
+            },
+            "landuseMetadata": {
+                "type": "array",
+                "items": {
+                    "class": {
+                        "type": "string",
+                        "enum": [
+                            "SettlementArea",
+                            "UndevelopedArea",
+                            "Traffic",
+                            "Vegetation",
+                            "Water"
+                        ]
+                    },
+                    "function": {
+                        "type": "string",
+                        "enum": [
+                            "Residential",
+                            "Industry/Business",
+                            "MixedUse",
+                            "SpecialFunctionArea",
+                            "Monument",
+                            "Dump",
+                            "Mining",
+                            "Park",
+                            "Cemetary",
+                            "Sports/Recreation",
+                            "OpenPit/Quarry",
+                            "Road",
+                            "Railway",
+                            "Airfield",
+                            "Shipping",
+                            "Track",
+                            "Square",
+                            "Grassland",
+                            "Agriculture",
+                            "Forest",
+                            "Grove",
+                            "Heath",
+                            "Moor",
+                            "Marsh",
+                            "UntilledLand",
+                            "River",
+                            "StandingWaterbody",
+                            "Harbour",
+                            "Sea"
+                        ]
+                    },
+                    "usage": {
+                        "type": "string",
+                        "enum": [
+                            "Residential",
+                            "Industry/Business",
+                            "MixedUse",
+                            "SpecialFunctionArea",
+                            "Monument",
+                            "Dump",
+                            "Mining",
+                            "Park",
+                            "Cemetary",
+                            "Sports/Recreation",
+                            "OpenPit/Quarry",
+                            "Road",
+                            "Railway",
+                            "Airfield",
+                            "Shipping",
+                            "Track",
+                            "Square",
+                            "Grassland",
+                            "Agriculture",
+                            "Forest",
+                            "Grove",
+                            "Heath",
+                            "Moor",
+                            "Marsh",
+                            "UntilledLand",
+                            "River",
+                            "StandingWaterbody",
+                            "Harbour",
+                            "Sea"
+                        ]
+                    },
+                    "presentLODs": {
+                        "$ref": "#/definitions/presentLODs"
+                    }
+                }
+            },
+            "cityfeatureMetadata": {
+                "type": "array",
+                "items": {
+                    "cityfeatureType": {
+                        "type": "string",
+                        "enum": [
+                            "Building",
+                            "Bridge",
+                            "CityFurniture",
+                            "CityObjectGroup",
+                            "Generics",
+                            "Transportation",
+                            "Tunnel",
+                            "Vegetation",
+                            "WaterBody"
+                        ]
+                    },
+                    "cityfeatureCount": {
+                        "type": "number"
+                    },
+                    "presentLODs": {
+                        "$ref": "#/definitions/presentLODs"
+                    },
+                    "citySubfeatures": {
+                        "type": "array",
+                        "items": {
+                            "citySubfeatureType": {
+                                "type": "string",
+                                "enum": [
+                                    "Building",
+                                    "BuildingPart",
+                                    "BuildingInstallation",
+                                    "Bridge",
+                                    "BridgePart",
+                                    "CityFurniture",
+                                    "CityObjectGroup",
+                                    "Generics",
+                                    "Road",
+                                    "Railway",
+                                    "Square",
+                                    "Track",
+                                    "Tunnel",
+                                    "TunnelPart",
+                                    "PlantCover",
+                                    "SolitaryVegetationObject",
+                                    "WaterBody"
+                                ]
+                            },
+                            "citySubfeatureCount": {
+                                "type": "number"
+                            }
+                        },
+                        "required": ["citySubfeatureType", "citySubfeatureCount"]
+                    }
+                },
+                "required": ["cityfeatureType", "cityfeatureCount", "presentLODs"]
             }
-   
-        
+           
+        }
+    },
+    "additionalProperties": false
 }
