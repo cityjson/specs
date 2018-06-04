@@ -47,7 +47,7 @@
             "bbox3d": [ 84710, 446846, -5, 84757, 446944, 40 ],
             "abstract": "la la la la....",
             "specificUsage": "for environmental simulations",
-            "keywords": [ "cityjson", "3D", "noise mapping" ],
+            "keywords": [ "cityjson", "3D" ],
             "constraints": {
                 "legalConstraints": "unrestricted",
                 "securityConstraints": "protected",

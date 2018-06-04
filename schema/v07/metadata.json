@@ -298,101 +298,6 @@
                                 "processStep": {
                                     "type": "string"
                                 }
-<<<<<<< HEAD
-=======
-                            },
-                            "required": [
-                                "contactName",
-                                "phone",
-                                "address",
-                                "emailAddress"
-                            ],
-                            "oneOf": [
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "contactType": {
-                                            "type": "string",
-                                            "enum": ["individual"]
-                                        },
-                                        "role": {
-                                            "type": "string",
-                                            "description": "from ISO 19115 codelist",
-                                            "enum": [
-                                                "resourceProvider",
-                                                "custodian",
-                                                "owner",
-                                                "user",
-                                                "distributor",
-                                                "originator",
-                                                "pointOfContact",
-                                                "principalInvestigator",
-                                                "processor",
-                                                "publisher",
-                                                "author",
-                                                "sponsor",
-                                                "co-author",
-                                                "collaborator",
-                                                "editor",
-                                                "mediator",
-                                                "rightsHolder",
-                                                "contributor",
-                                                "funder",
-                                                "stakeholder"
-                                            ]
-                                        },
-                                        "organization": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "role",
-                                        "organization",
-                                        "contactType"
-                                    ]
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "contactType": {
-                                            "type": "string",
-                                            "enum": ["organization"]
-                                        },
-                                        "website": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "pattern": "^(https?)://"
-                                        }
-                                    },
-                                    "required": [
-                                        "website", "contactType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "metadataStandard": {
-                            "type": "string"
-                        },
-                        "metadataStandardVersion": {
-                            "type": "string",
-                            "pattern": "\\d.\\d"
-                        },
-                        "metadataLanguage": {
-                            "type": "string"
-                        },
-                        "metadataCharacterSet": {
-                            "type": "string"
-                        },
-                        "metadataDateStamp": {
-                            "type": "string",
-                            "format": "date"
-                        },
-                        "lineage": {
-                            "type": "object",
-                            "properties": {
-                                "source": {"type":"string"},
-                                "processStep": {"type":"string"}
->>>>>>> origin/metadata_in_cityjson
                             }
                         }
                     },
@@ -706,9 +611,7 @@
                                     "WaterBody"
                                 ]
                             },
-                            "citySubfeatureCount": {
-                                "type": "number"
-                            }
+                            "citySubfeatureCount": { "type": "number" }
                         },
                         "required": ["citySubfeatureType", "citySubfeatureCount"]
                     }
