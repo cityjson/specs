@@ -61,7 +61,7 @@
             "1.1": 1 ,
             "2.1": 1 
         },
-        "cityfeatures": {
+        "cityfeatureMetadata": {
             "Building": {
                 "featureCount": 2,
                 "presentLODs": { "1.1": 1, "2.0":1, "2.1": 1},
