@@ -2,8 +2,7 @@
   "type": "CityJSON",
   "version": "0.6",
     "metadata": {
-        "citymodelIdentifier": "81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
-        "ISOmetadata": {
+            "citymodelIdentifier": "81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
             "datasetTitle": "3D city model of Chibougamau, Canada",
             "datasetReferenceDate": "2011-02-28",
             "geoLocation": "Chibougamau, Canada",
@@ -44,7 +43,7 @@
                 { "source": "Point cloud AHN3", "processStep": "3Dfier processing"},
                 { "source": "2D BGT", "processStep": "3Dfier processing"}
             ],
-            "bbox3d": [ 84710, 446846, -5, 84757, 446944, 40 ],
+            "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
             "abstract": "la la la la....",
             "specificUsage": "for environmental simulations",
             "keywords": [ "cityjson", "3D" ],
@@ -52,62 +51,33 @@
                 "legalConstraints": "unrestricted",
                 "securityConstraints": "protected",
                 "userNote": "open access"
-            }
-        },
-        "semanticsMetadata": {
-            "semantics": {
-                "state": "present",
-                "semanticClasses": [ "Building", "Terrain", "WaterBody"]
-            }
-        },
-        "appearanceMetadata": {
-            "textures": { "state": "present" },
-            "materials": { "state": "present"}
-        },
-        "presentLODs": [
-            { "lod": 1.0, "count": 1 },
-            { "lod": 2.0, "count": 3 },
-            { "lod": 1.1, "count": 1 },
-            { "lod": 2.1, "count": 1 }
-        ],
-        "terrainMetadata": [
-            {
-                "terrainType": "TINRelief",
-                "triangleCount": 6,
-                "presentLODs": [
-                    { "lod": 2.0, "count": 1 }
-                ]
-            }
-        ],
-        "cityfeatureMetadata": [
-            {
-                "cityfeatureType": "Building",
-                "cityfeatureCount":2,
-                "presentLODs": [
-                    { "lod": 1.1, "count": 1 },
-                    { "lod": 2.1, "count": 1 },
-                    { "lod": 2.0, "count": 1 }
-                ],
-                "citySubfeatures": [
-                    {
-                        "citySubfeatureType": "BuildingPart",
-                        "citySubfeatureCount": 1
-                    },
-                    {
-                        "citySubfeatureType": "BuildingInstallation",
-                        "citySubfeatureCount": 1
-                    }
-                ]
             },
-            {
-                "cityfeatureType": "WaterBody",
-                "cityfeatureCount": 2,
-                "presentLODs": [
-                    { "lod": 1.0, "count": 1 },
-                    { "lod": 2.0, "count": 1 }
-                ]
+        "semanticClasses": [ "Building", "TINRelief", "WaterBody"],
+        "textures": "present",
+        "materials": "present",
+        "presentLODs": {
+            "1.0": 1 ,
+            "2.0": 3 ,
+            "1.1": 1 ,
+            "2.1": 1 
+        },
+        "cityfeatures": {
+            "Building": {
+                "featureCount": 2,
+                "presentLODs": { "1.1": 1, "2.0":1, "2.1": 1},
+                "BuildingParts": 1,
+                "BuildingInstallations": 1
+            },
+            "TINRelief":{
+                "featureCount": 1,
+                "presentLODs": { "2.0": 1},
+                "triangleCount": 6
+            },
+            "WaterBody": {
+                "featureCount": 2,
+                "presentLODs": { "1.0": 1, "2.0": 1}
             }
-        ]
+        }
     },
     "CityObjects": {
   	"102636712": {
