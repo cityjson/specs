@@ -172,7 +172,7 @@
         "type": "string",
         "format": "date"
       },
-      "geoLocation": {
+      "geographicLocation": {
         "type": "string",
         "description": "the name of the area for instance"
       },
