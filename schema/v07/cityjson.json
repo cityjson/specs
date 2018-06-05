@@ -12,46 +12,7 @@
     },
     "metadata": {
       "type": "object",
-      "properties": {
-        "crs": {
-          "type": "object",
-          "properties": {
-            "epsg": {"type": "integer"}
-          },
-          "required": ["epsg"]
-        },
-        "bbox": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          },
-          "minItems": 6,    
-          "maxItems": 6    
-        },
-        "keywords": {
-          "type": "array",
-          "items": {"type": "string"}
-        },        
-        "datasetTitle": {"type": "string"},
-        "datasetReferenceDate": {"type": "string"},
-        "geographicLocation": {
-          "type": "string",
-          "description": "the name of the area for instance"
-        },
-        "datasetLanguage": {"type": "string"},
-        "datasetTopicCategory": {
-          "type": "string",
-          "description": "see Table B.3.30 in ISO19115 document"
-        },
-        "datasetAbstract": {"type": "string"},
-        "metadataDateStamp": {"type": "string"},
-        "pointOfContact": {"type": "string"},
-        "copyright": {"type": "string"},
-        "presentLoDs":  {
-          "type": "array",
-          "items": {"type": "number"}
-        }
-      }
+      "$ref": "metadata.json#/metadata"
     },
     "CityObjects": {
       "type": "object",
