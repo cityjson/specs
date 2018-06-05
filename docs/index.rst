@@ -15,9 +15,7 @@ CityJSON
   {
     "type": "CityJSON",
     "version": "0.7",
-    "metadata": {
-      "crs": { "epsg": 7415 }
-    },
+    "metadata": { "referenceSystem": "urn:ogc:def:crs:EPSG::4326" },
     "CityObjects": {
       "id-1": {
         "type": "Building",
@@ -25,15 +23,19 @@ CityJSON
         "geometry": [{
           "type": "Solid",
           "lod": 2,
-          "boundaries": [...]
+          "boundaries": []
         }]
       }
     },
     "vertices": [
       [23.1, 2321.2, 11.0],
+      [14.0, 2299.5, 14.0],
       ...
     ],
-    "appearance": {...},
+    "appearance": {
+      "materials": [],
+      "textures": []
+    },
     "geometry-templates": {}
   }
 
