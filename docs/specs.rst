@@ -79,7 +79,7 @@ For instance, for the `Dutch national CRS in 3D <http://www.spatialreference.org
 .. code-block:: js
 
   "metadata": {
-    "referenceSystem": "urn:ogc:def:crs:EPSG::4326"
+    "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
   }
 
 Be aware that the EPSG code should be a three-dimensional CRS, ie the elevation/height values should be with respect to a specific datum.
