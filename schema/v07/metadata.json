@@ -1,4 +1,4 @@
-﻿{
+{
     "title": "CityJSON metadata schema v0.7",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "definitions": {
@@ -443,24 +443,7 @@
                     }
                 }
             }
-        },
-        "required": [
-            "datasetTitle",
-            "datasetReferenceDate",
-            "geoLocation",
-            "datasetLanguage",
-            "datasetTopicCategory",
-            "datasetDescription",
-            "datasetPointOfContact",
-            "referenceSystem",
-            "metadataStandard",
-            "metadataDateStamp",
-            "metadataPointOfContact",
-            "bbox",
-            "abstract",
-            "specificUsage",
-            "keywords"
-        ]
+        }
     },
     "additionalProperties": false
 }
