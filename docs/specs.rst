@@ -67,14 +67,14 @@ Metadata
 --------
 
 The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows.
-The members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``copyright``, and ``presentLoDs`` because they are useful in 3D in a city modelling context).
+The members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``presentLoDs`` ``semanticClasses``, because they are useful in 3D in a city modelling context).
 To see all the possible ones, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
 
 
 ``"referenceSystem"``
 *********************
 The coordinate reference system (CRS) may be given as a string with an URI to the `EPSG code <https://epsg.io>`_.
-For instance, for the [Dutch national CRS in 3D](http://www.spatialreference.org/ref/epsg/7415/):
+For instance, for the `Dutch national CRS in 3D <http://www.spatialreference.org/ref/epsg/7415/>`_:
 
 .. code-block:: js
 
@@ -156,7 +156,7 @@ To view all the possible properties, look at the schema file `metadata.json <htt
 
 Or have a look at the following example file:
 
-:download:`download example_metadata.json <../example-datasets/dummy-value/v07/example_metadata.json>`
+:download:`download example_metadata.json <../example-datasets/dummy-value/example_metadata.json>`
 
 
 .. note::
