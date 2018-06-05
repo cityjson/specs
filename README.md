@@ -1,5 +1,5 @@
 
-# CityJSON
+# CityJSON: CityGML without the GML
 
 ![](docs/_static/cityjson_logo.jpg)
 
