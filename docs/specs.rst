@@ -112,8 +112,8 @@ An array of keywords of type ``"string"`` may be listed:
   }
 
 
-Geographic Location
-*******************
+``"geographicLocation"``
+************************
 The name of an area or a city.
 
 .. code-block:: js
@@ -123,8 +123,8 @@ The name of an area or a city.
   }
 
 
-Dataset Topic Category
-**********************
+``"datasetTopicCategory"``
+**************************
 A one-word category, the possible values are enumerated in the Table B.3.30 of the `ISO19115-1:2014 document <https://www.iso.org/standard/53798.html>`_
 
 .. code-block:: js
@@ -134,8 +134,8 @@ A one-word category, the possible values are enumerated in the Table B.3.30 of t
   }
 
 
-Present LoDs (levels-of-detail)
-*******************************
+``"presentLODs"``
+*****************
 An array of all the LoDs present in the file, with the number of City Objects represented at that level
 
 .. code-block:: js
@@ -156,7 +156,7 @@ To view all the possible properties, look at the schema file `metadata.json <htt
 
 Or have a look at the following example file:
 
-:download:`download example_metadata.json <../example-datasets/dummy-value/example_metadata.json>`
+:download:`download example_metadata.json <../example-datasets/dummy-values/example_metadata.json>`
 
 
 .. note::
