@@ -13,6 +13,15 @@ Changelog
 
 ----
 
+[0.7] - xxxx-xx-xx
+------------------
+Changed
+*******
+- metadata has now the full ISO 19115 enchilada
+
+
+----
+
 [0.6] - 2018-04-11
 ------------------
 Added
