@@ -16,7 +16,7 @@ CityJSON
     "type": "CityJSON",
     "version": "0.7",
     "metadata": {
-      "crs": { "epsg": 7415 }
+      "referenceSystem": "urn:ogc:def:crs:EPSG::4326"
     },
     "CityObjects": {
       "id-1": {
