@@ -1,104 +1,208 @@
 {
   "type": "CityJSON",
   "version": "0.7",
-    "metadata": {
-            "citymodelIdentifier": "81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
-            "datasetTitle": "3D city model of Chibougamau, Canada",
-            "datasetReferenceDate": "2011-02-28",
-            "geoLocation": "Chibougamau, Canada",
-            "datasetLanguage": "English",
-            "datasetTopicCategory": "geoscientificInformation",
-            "datasetDescription": "3D city model with different city features",
-            "distributionFormatVersion": "0.7",
-            "referenceSystem": "urn:ogc:def:crs:EPSG::4326",
-            "spatialRepresentationType": "vector",
-            "temporalInformation": {
-                "timestamp": "2017-01-11T18:25:43",
-                "temporalDescription": "here here.."
-            },
-            "onlineResource": "https://github.com/tudelft3d/cityjson/",
-            "fileIdentifier": "example_metadata.json",
-            "datasetPointOfContact": {
-                "contactName": "3D Geoinformation Group",
-                "phone": "+31-6666666666",
-                "address": "Delft University of Technology, the Netherlands",
-                "emailAddress": "3d.bk@tudelft.nl",
-                "contactType": "organization",
-                "website": "https://3d.bk.tudelft.nl"
-            },
-            "metadataStandard": "IS0 19115",
-            "metadataStandardVersion": "1.0",
-            "metadataLanguage": "English",
-            "metadataCharacterSet": "UTF-8",
-            "metadataDateStamp": "2014-04-22",
-            "metadataPointOfContact": {
-                "contactName": "Technical Committee ISO/TC 211, Geographic information/Geomatics",
-                "phone": "+46-855552000 ",
-                "address": "Swedish Standards Institute, P.O. Box 45443, SE-SE-104 31 Stockholm, Sweden",
-                "emailAddress": "info@sis.se",
-                "contactType": "organization",
-                "website": "https://www.iso.org/committee/54904.html"
-            },
-            "lineage": [
-                { "source": "Point cloud AHN3", "processStep": "3Dfier processing"},
-                { "source": "2D BGT", "processStep": "3Dfier processing"}
-            ],
-            "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-            "abstract": "la la la la....",
-            "specificUsage": "for environmental simulations",
-            "keywords": [ "cityjson", "3D" ],
-            "constraints": {
-                "legalConstraints": "unrestricted",
-                "securityConstraints": "protected",
-                "userNote": "open access"
-        },
-        "semanticClasses": [ "Building", "TINRelief", "WaterBody"],
-        "textures": "present",
-        "materials": "present",
-        "presentLODs": {
-            "1.0": 1 ,
-            "2.0": 3 ,
-            "1.1": 1 ,
-            "2.1": 1 
-        },
-        "cityfeatureMetadata": {
-            "Building": {
-                "featureCount": 2,
-                "presentLODs": { "1.1": 1, "2.0":1, "2.1": 1},
-                "BuildingParts": 1,
-                "BuildingInstallations": 1
-            },
-            "TINRelief":{
-                "featureCount": 1,
-                "presentLODs": { "2.0": 1},
-                "triangleCount": 6
-            },
-            "WaterBody": {
-                "featureCount": 2,
-                "presentLODs": { "1.0": 1, "2.0": 1}
-            }
-        }
+  "metadata": {
+    "citymodelIdentifier": "81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
+    "datasetTitle": "3D city model of Chibougamau, Canada",
+    "datasetReferenceDate": "2011-02-28",
+    "geographicLocation": "Chibougamau, Canada",
+    "datasetLanguage": "English",
+    "datasetTopicCategory": "geoscientificInformation",
+    "datasetDescription": "3D city model with different city features",
+    "distributionFormatVersion": "0.7",
+    "referenceSystem": "urn:ogc:def:crs:EPSG::4326",
+    "spatialRepresentationType": "vector",
+    "temporalInformation": {
+      "timestamp": "2017-01-11T18:25:43",
+      "temporalDescription": "here here.."
     },
-    "CityObjects": {
-      "myterrain01": {
-        "type": "TINRelief", 
-        "geometry": [{
+    "onlineResource": "https://github.com/tudelft3d/cityjson/",
+    "fileIdentifier": "example_metadata.json",
+    "datasetPointOfContact": {
+      "contactName": "3D Geoinformation Group",
+      "phone": "+31-6666666666",
+      "address": "Delft University of Technology, the Netherlands",
+      "emailAddress": "3d.bk@tudelft.nl",
+      "contactType": "organization",
+      "website": "https://3d.bk.tudelft.nl"
+    },
+    "metadataStandard": "IS0 19115",
+    "metadataStandardVersion": "1.0",
+    "metadataLanguage": "English",
+    "metadataCharacterSet": "UTF-8",
+    "metadataDateStamp": "2014-04-22",
+    "metadataPointOfContact": {
+      "contactName": "Technical Committee ISO/TC 211, Geographic information/Geomatics",
+      "phone": "+46-855552000 ",
+      "address": "Swedish Standards Institute, P.O. Box 45443, SE-SE-104 31 Stockholm, Sweden",
+      "emailAddress": "info@sis.se",
+      "contactType": "organization",
+      "website": "https://www.iso.org/committee/54904.html"
+    },
+    "lineage": [
+      {
+        "source": "Point cloud AHN3",
+        "processStep": "3Dfier processing"
+      },
+      {
+        "source": "2D BGT",
+        "processStep": "3Dfier processing"
+      }
+    ],
+    "bbox": [
+      84710,
+      446846,
+      -5,
+      84757,
+      446944,
+      40
+    ],
+    "abstract": "la la la la....",
+    "specificUsage": "for environmental simulations",
+    "keywords": [
+      "cityjson",
+      "3D"
+    ],
+    "constraints": {
+      "legalConstraints": "unrestricted",
+      "securityConstraints": "protected",
+      "userNote": "open access"
+    },
+    "semanticClasses": [
+      "Building",
+      "TINRelief",
+      "WaterBody"
+    ],
+    "textures": "present",
+    "materials": "present",
+    "presentLODs": {
+      "1.0": 1,
+      "2.0": 3,
+      "1.1": 1,
+      "2.1": 1
+    },
+    "cityfeatureMetadata": {
+      "Building": {
+        "featureCount": 2,
+        "presentLODs": {
+          "1.1": 1,
+          "2.0": 1,
+          "2.1": 1
+        },
+        "BuildingParts": 1,
+        "BuildingInstallations": 1
+      },
+      "TINRelief": {
+        "featureCount": 1,
+        "presentLODs": {
+          "2.0": 1
+        },
+        "triangleCount": 6
+      },
+      "WaterBody": {
+        "featureCount": 2,
+        "presentLODs": {
+          "1.0": 1,
+          "2.0": 1
+        }
+      }
+    }
+  },
+  "CityObjects": {
+    "myterrain01": {
+      "type": "TINRelief",
+      "geometry": [
+        {
           "type": "CompositeSurface",
           "lod": 2,
           "boundaries": [
-             [[0, 3, 2]], [[4, 5, 6]], [[0, 1, 5]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
+            [
+              [
+                0,
+                3,
+                2
+              ]
+            ],
+            [
+              [
+                4,
+                5,
+                6
+              ]
+            ],
+            [
+              [
+                0,
+                1,
+                5
+              ]
+            ],
+            [
+              [
+                1,
+                2,
+                6
+              ]
+            ],
+            [
+              [
+                2,
+                3,
+                7
+              ]
+            ],
+            [
+              [
+                3,
+                0,
+                4
+              ]
+            ]
           ]
-        }]    
-      }
-    },
-    "vertices": [
-      [0.0, 0.0, 0.0],
-      [1.0, 0.0, 0.0],
-      [1.0, 1.0, 0.0],
-      [0.0, 1.0, 0.0],
-      [0.0, 0.0, 1.0],
-      [1.0, 0.0, 1.0],
-      [1.0, 1.0, 1.0],
-      [0.0, 1.0, 1.0]
+        }
+      ]
+    }
+  },
+  "vertices": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0,
+      1.0
     ]
+  ]
 }
