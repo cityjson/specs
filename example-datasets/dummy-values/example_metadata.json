@@ -75,7 +75,7 @@
     ],
     "textures": "present",
     "materials": "present",
-    "presentLODs": {
+    "presentLoDs": {
       "1.0": 1,
       "2.0": 3,
       "1.1": 1,
@@ -84,7 +84,7 @@
     "cityfeatureMetadata": {
       "Building": {
         "featureCount": 2,
-        "presentLODs": {
+        "presentLoDs": {
           "1.1": 1,
           "2.0": 1,
           "2.1": 1
@@ -94,14 +94,14 @@
       },
       "TINRelief": {
         "featureCount": 1,
-        "presentLODs": {
+        "presentLoDs": {
           "2.0": 1
         },
         "triangleCount": 6
       },
       "WaterBody": {
         "featureCount": 2,
-        "presentLODs": {
+        "presentLoDs": {
           "1.0": 1,
           "2.0": 1
         }
