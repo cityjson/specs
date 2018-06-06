@@ -36,7 +36,7 @@ The software `cjio <https://github.com/tudelft3d/cjio>`_ can validate a CityJSON
 - are there duplicate keys (IDs) for the City Objects? If yes then an error is returned.
 - are there duplicate or orphan vertices? If yes a warning is returned
 
-To install you need Python 3 and just `pip install cjio`
+To install you need Python 3 and just ``pip install cjio``
 
-To validate a file: `cjio myfile.json validate`
+To validate a file: ``cjio myfile.json validate``
 
