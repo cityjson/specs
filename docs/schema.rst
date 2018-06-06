@@ -6,7 +6,7 @@ CityJSON schema download
 ------------------------
 
 version 0.7: 
-- see `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_
+- `available on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema>`_
 
 version 0.6: 
 - :download:`download cityjson-v06.schema.zip <../schema/v06/cityjson-v06-schema.zip>`
