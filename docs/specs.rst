@@ -73,7 +73,8 @@ To see all the possible ones, look at the schema file `metadata.json <https://gi
 
 ``"referenceSystem"``
 *********************
-The coordinate reference system (CRS) may be given as a string with an URI to the `EPSG code <https://epsg.io>`_.
+The coordinate reference system (CRS) may be given as a string. `OGC CRS URNs <http://www.opengeospatial.org/ogcna/>`_ such as ``"urn:ogc:def:crs:EPSG::7415"`` are favoured over the legacy ones such as ``"EPSG:7415"``:
+
 For instance, for the `Dutch national CRS in 3D <http://www.spatialreference.org/ref/epsg/7415/>`_:
 
 .. code-block:: js
@@ -82,8 +83,8 @@ For instance, for the `Dutch national CRS in 3D <http://www.spatialreference.org
     "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
   }
 
-Be aware that the EPSG code should be a three-dimensional CRS, ie the elevation/height values should be with respect to a specific datum.
-It is not possible to give a WKT string with the parameters, or any other way.
+Be aware that the CRS should be a three-dimensional one, ie the elevation/height values should be with respect to a specific datum.
+
 
 .. note::
   Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
