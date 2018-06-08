@@ -38,7 +38,8 @@
           { "$ref": "cityobjects.json#/BridgeConstructionElement" },
           { "$ref": "cityobjects.json#/Tunnel" },
           { "$ref": "cityobjects.json#/TunnelPart" },
-          { "$ref": "cityobjects.json#/TunnelInstallation" }
+          { "$ref": "cityobjects.json#/TunnelInstallation" },
+          { "$ref": "cityobjects.json#/ADEObject" }
         ]
       }
     },
