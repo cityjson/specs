@@ -310,7 +310,9 @@ def main():
         return
 
     #-- fetch proper schema
-    if j["version"] == "0.6":
+    if j["version"] == "0.7":
+        schema = '../../../schema/v07/cityjson.json'
+    elif j["version"] == "0.6":
         schema = '../../../schema/v06/cityjson.json'
     elif j["version"] == "0.5":
         schema = '../../../schema/cityjson-v05.schema.json'
@@ -356,6 +358,10 @@ def main():
             return
     else:
         print ("WATCH OUT: validation against schema is skipped.")
+
+    print ("Schema done.")
+    byebye(isValid, woWarnings)
+    return
 
     if city_object_groups(j) == False:
         isValid = False
