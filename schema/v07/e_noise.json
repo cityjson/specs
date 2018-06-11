@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Noise ADE made better, schema v0.7",
-  "type": "object",
+
 
   "+NoiseBuilding": {
     "type": "object",
@@ -86,4 +86,5 @@
     "additionalProperties": false
   }
 
+  
 }
