@@ -361,51 +361,26 @@ def main():
 
     if "extensions" in j:
         print ("===\nextension validation\n===")
-        schema = '/Users/hugo/projects/cityjson/schema/v07/e_noise2.json'
-        # schema = '/Users/hugo/temp/0000/e_noise2.json'
+        schema = '/Users/hugo/projects/cityjson/schema/v07/e_noise.json'
         fins = open(schema)
         abs_path = os.path.abspath(os.path.dirname(schema))
         base_uri = 'file://{}/'.format(abs_path)
-        # base_uri = 'file:///Users/hugo/projects/cityjson/schema/v07/'
 
-        
-        jse = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
-        
-        print (jse)
-        
-        # json_str = json.dumps(jse, indent=2)
-        # f = open("/Users/hugo/temp/js.json", "w")
-        # f.write(json_str)
-        # return
+        jeval = {}
+        jeval["$schema"] = "http://json-schema.org/draft-04/schema#"
+        jeval["type"] = "object"
+        jeval["$ref"] = "file://"
+        jeval["$ref"] += schema 
+        jeval["$ref"] += "#/+NoiseBuilding"
 
-        # jeval = {}
-        # jeval["$schema"] = "http://json-schema.org/draft-04/schema#"
-        # jeval["type"] = "object"
-        # jeval["$ref"] = "file:///Users/hugo/projects/cityjson/schema/v07/e_noise.json#/+NoiseBuilding"
-        # # jeval["$ref"] = "file:///Users/hugo/temp/0000/e_noise.json#/+NoiseBuilding"
-        
-        # try:
-        #     print(jsonref.JsonRef.replace_refs(jeval, jsonschema=True, base_uri=base_uri))
-        # except jsonref.JsonRefError, e:
-        #     print ("FUK")
-        # print ("doie")
-        # return
-
-        # print("-->", base_uri)
-        # jeval2 = jsonref.loads(json.dumps(jeval), jsonschema=True, base_uri=base_uri)
-        # json_str = json.dumps(jeval2, indent=2)
-        # f = open("/Users/hugo/temp/js.json", "w")
-        # f.write(json_str)
-        # return
+        jeval2 = jsonref.loads(json.dumps(jeval), jsonschema=True, base_uri=base_uri)
 
         for theid in j["CityObjects"]:
             if j["CityObjects"][theid]["type"][0] == '+':
                 oneco = j["CityObjects"][theid]
                 # print (oneco)
                 try:
-                    # print("here")
-                    jsonschema.validate(oneco, jse)
-                    # print("here2")
+                    jsonschema.validate(oneco, jeval2)
                 except jsonschema.ValidationError as e:
                     print ("ERROR:   ", e.message)
                 except jsonschema.SchemaError as e:
