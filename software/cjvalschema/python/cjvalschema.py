@@ -336,9 +336,9 @@ def main():
     print ("Schema used:", os.path.abspath(schema))
     js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
     #-- load the schema for the cityobjects.json
-    sco_path = os.path.abspath(os.path.dirname(schema))
-    sco_path += '/cityobjects.json'
-    jsco = json.loads(open(sco_path).read())
+    # sco_path = os.path.abspath(os.path.dirname(schema))
+    # sco_path += '/cityobjects.json'
+    # jsco = json.loads(open(sco_path).read())
     # print jsco
     print ("==========")    
 
@@ -360,6 +360,34 @@ def main():
         print ("WATCH OUT: validation against schema is skipped.")
 
     print ("Schema done.")
+
+    if "extensions" in j:
+        print ("===\nextension validation===\n")
+        se = '../../../schema/v07/valnoise.json'
+        abs_path = os.path.abspath(os.path.dirname(se))
+        base_uri = 'file://{}/'.format(abs_path)
+        fins = open(se)
+        print ("Schema used:", os.path.abspath(se))
+        jse = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
+        
+        jeval = {}
+        jeval["$schema"] = "http://json-schema.org/draft-04/schema#"
+        jeval["type"] = "object"
+        jeval["$ref"] = "file:///Users/hugo/projects/cityjson/schema/v07/e_noise.json#/+NoiseBuilding"
+
+        for theid in j["CityObjects"]:
+            if j["CityObjects"][theid]["type"][0] == '+':
+                oneco = j["CityObjects"][theid]
+                # print (oneco)
+                try:
+                    print("here")
+                    jsonschema.validate(oneco, jeval)
+                    print("here2")
+                except jsonschema.ValidationError as e:
+                    print ("ERROR:   ", e.message)
+                except jsonschema.SchemaError as e:
+                    print ("ERROR:   ", e)
+
     byebye(isValid, woWarnings)
     return
 
