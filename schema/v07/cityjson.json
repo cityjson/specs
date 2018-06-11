@@ -14,6 +14,14 @@
       "type": "object",
       "$ref": "metadata.json#/metadata"
     },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": { 
+        "type": "string",
+        "pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?",
+        "description": "the string needs to be a URI"
+      }
+    },
     "CityObjects": {
       "type": "object",
       "additionalProperties": {
@@ -39,7 +47,7 @@
           { "$ref": "cityobjects.json#/Tunnel" },
           { "$ref": "cityobjects.json#/TunnelPart" },
           { "$ref": "cityobjects.json#/TunnelInstallation" },
-          { "$ref": "cityobjects.json#/ADEObject" }
+          { "$ref": "cityobjects.json#/ExtensionObject" }
         ]
       }
     },
