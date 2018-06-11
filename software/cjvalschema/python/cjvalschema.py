@@ -26,6 +26,7 @@ import urlparse
 import argparse
 
 
+
 def dict_raise_on_duplicates(ordered_pairs):
     d = {}
     for k, v in ordered_pairs:
@@ -333,8 +334,13 @@ def main():
         # print "$id not defined, using local files"
         abs_path = os.path.abspath(os.path.dirname(schema))
         base_uri = 'file://{}/'.format(abs_path)
+    print ("-->", base_uri)
     print ("Schema used:", os.path.abspath(schema))
     js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
+    # json_str = json.dumps(js, indent=2)
+    # f = open("/Users/hugo/temp/js.json", "w")
+    # f.write(json_str)
+    # return
     #-- load the schema for the cityobjects.json
     # sco_path = os.path.abspath(os.path.dirname(schema))
     # sco_path += '/cityobjects.json'
@@ -362,27 +368,39 @@ def main():
     print ("Schema done.")
 
     if "extensions" in j:
-        print ("===\nextension validation===\n")
-        se = '../../../schema/v07/valnoise.json'
-        abs_path = os.path.abspath(os.path.dirname(se))
-        base_uri = 'file://{}/'.format(abs_path)
-        fins = open(se)
-        print ("Schema used:", os.path.abspath(se))
-        jse = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
+        print ("===\nextension validation\n===")
+        # se = '../../../schema/v07/valnoise.json'
+        # abs_path = os.path.abspath(os.path.dirname(se))
+        # base_uri = 'file://{}/'.format(abs_path)
+        # fins = open(se)
+        # print ("Schema used:", os.path.abspath(se))
+        # jse = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
         
         jeval = {}
         jeval["$schema"] = "http://json-schema.org/draft-04/schema#"
         jeval["type"] = "object"
         jeval["$ref"] = "file:///Users/hugo/projects/cityjson/schema/v07/e_noise.json#/+NoiseBuilding"
+        
+        # try:
+        #     print(jsonref.JsonRef.replace_refs(jeval, jsonschema=True))
+        # except jsonref.JsonRefError, e:
+        #     print ("FUK")
+        # return
+
+        # jeval2 = jsonref.loads(json.dumps(jeval), jsonschema=True, base_uri=base_uri)
+        # json_str = json.dumps(jeval2, indent=2)
+        # f = open("/Users/hugo/temp/js.json", "w")
+        # f.write(json_str)
+        # return
 
         for theid in j["CityObjects"]:
             if j["CityObjects"][theid]["type"][0] == '+':
                 oneco = j["CityObjects"][theid]
                 # print (oneco)
                 try:
-                    print("here")
+                    # print("here")
                     jsonschema.validate(oneco, jeval)
-                    print("here2")
+                    # print("here2")
                 except jsonschema.ValidationError as e:
                     print ("ERROR:   ", e.message)
                 except jsonschema.SchemaError as e:
