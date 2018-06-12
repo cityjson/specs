@@ -1,6 +1,91 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Noise ADE made better, schema v0.7",
+  "title": "The 'Noise ADE' made better, schema v0.7",
+
+
+  "+NoiseCityFurnitureSegment": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["+NoiseCityFurnitureSegment"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"},
+          "type": {"type": "integer"},
+          "reflection": {"type": "string"},
+          "reflectionCorrection": {"type": "number"},
+          "height": {"type": "number"},
+          "distance": {"type": "number"}
+        }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiLineString"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"],
+    "additionalProperties": false
+  },
+
+
+  "+NoiseCityFurniture": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["+NoiseCityFurniture"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "creationDate" : {"type": "string"},
+          "terminationDate" : {"type": "string"},            
+          "class": {"type": "string"},
+          "function": {"type": "string"},
+          "usage": {"type": "string"}
+        }
+      },
+      "NoiseCityFurnitureSegments": {
+        "type": "array",
+        "description": "the IDs of the +NoiseCityFurnitureSegment",
+        "items": {"type": "string"}
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiPoint"},
+            {"$ref": "geomprimitives.json#/MultiLineString"},
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/MultiSolid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"},
+            {"$ref": "geomtemplates.json#/GeometryInstance"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"],
+    "additionalProperties": false
+  },
 
 
   "+NoiseBuilding": {
