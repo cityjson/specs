@@ -180,13 +180,88 @@ A CityJSON file containing this new City Object would look like this (see <noise
       },
 
 
+Adding complex types for CityFurniture
+**************************************
 
+.. image:: _static/noise_cf.png
+   :width: 80%
 
+As can be seen in the UML diagram, extending CityFurniture is more challenging because not only new simple attributes are defined, but a CityFurniture object can contain several 'NoiseCityFurnitureSegment', which have their own geometry (a 'gml:Curve'). 
+The solution to this (which can be seen in the file `e_noise.json <https://github.com/tudelft3d/cityjson/blob/test_ade/extensions/e_noise.json>`_) is:
 
+  1. create 2 new City Objects: ``"+NoiseCityFurniture"`` and ``"+NoiseCityFurnitureSegment"``
+  2. ``"+NoiseCityFurniture"`` can be copied from ``"CityFurniture"``, and we need to add a new property ``"NoiseCityFurnitureSegment"`` which contains a list of the IDs of the segments. This is similar to what is done for ``"BuildingParts"`` and ``"BuildingIntallations"``: each City Object has its own geometries, and they are linked together with this simple method.
+  3. ``"+NoiseCityFurnitureSegment"`` is a new City Object and it gets the attributes common to all City Objects, and its geometry is restricted to a ``"MultiLineString"``.
 
+.. code-block:: js
 
+  "+NoiseCityFurniture": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["+NoiseCityFurniture"] },
+      ...
+      "NoiseCityFurnitureSegments": {
+        "type": "array",
+        "description": "the IDs of the +NoiseCityFurnitureSegment",
+        "items": {"type": "string"}
+      }
+      ...
+  }
 
+.. code-block:: js
 
+  "+NoiseCityFurnitureSegment": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["+NoiseCityFurnitureSegment"] },
+      "attributes": {
+        ...
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiLineString"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry"],
+    "additionalProperties": false
+  }
+
+A snippet from the `example file noise_data.json <https://github.com/tudelft3d/cityjson/blob/test_ade/example-datasets/extensions/noise_data.json>`_ :
+
+.. code-block:: js
+
+  "a_noisy_bench": {
+    "type": "+NoiseCityFurniture",
+    "geometry": [
+      {
+        "type": "Solid",
+        "lod": 2,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+        ]
+      }
+    ],
+    "NoiseCityFurnitureSegments": ["thesegment_1", "thesegment_2"]
+  },
+  "thesegment_1": {
+    "type": "+NoiseCityFurnitureSegment",
+    "geometry": [
+      {
+        "type": "MultiLineString",
+        "lod": 0,
+        "boundaries": [
+          [2, 3, 5], [77, 55, 212]
+        ]
+      }      
+    ],
+    "attributes": {
+      "reflectionCorrection": 2.33
+    }
+  }    
 
 
 -----------------------------------------
@@ -194,4 +269,13 @@ Validation of files containing extensions
 -----------------------------------------
 
 TODO
-cjio does it
+  
+  - 2-step validation: (1) the normal validation; (2) each new City Objects are validated against their schema
+  - cjio allows to validate with the 2-step
+  - just copy all the schemas somewhere, add yours to the same folder (important, all schemas need to be in the same folder)
+  - and then:
+
+.. code-block:: bash
+
+  $ cjio noise_data.json validate --extensions --folder_schemas /Users/elvis/myschemas/
+
