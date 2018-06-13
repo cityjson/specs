@@ -71,10 +71,8 @@ However, these will not be documented, nor will they be validated.
 It is recommended to document complex attributes in a schema, and thus a new City Object needs to be defined; see below.
 
 
-
 2. Creating/extending new City Objects
 **************************************
-
 
 The creation of a new City Object is done by defining it in a JSON schema file.
 Since all City Objects are documented in the schemas of CityJSON (see `cityobjects.json <https://github.com/tudelft3d/cityjson/blob/master/schema/v07/cityobjects.json>`_), it is basically a matter of copying the parts needed in a new file and modifying it.
@@ -85,4 +83,115 @@ The following rules should be followed:
   2. a new City Object must conform to the rules of CityJSON, ie it must contain a property ``"type"`` and one ``"geometry"``
   3. all the geometries must be in the property ``"geometry"``, and cannot be somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process and manipulate CityJSON files (eg `cjio <https://github.com/tudelft3d/cjio>`_) will be working without modifications. If a new City Object needs to store more geometries, then new City Objects need to be defined, as explained below for the Noise extension.
   4. the reuse of types defined in CityJSON, eg ``"Solid"`` of semantic surfaces, is allowed
+  5. since JSON schema does not allow inheritance, the only way to extend a City Object is to copy its schema and extend it. 
 
+The new City Objects must be defined in a new schema file.
+
+If a CityJSON file contains City Objects not in the core, then the CityJSON must contain an extra member ``"extensions"`` whose values are the name-value pairs of the new objects and the name of the file (this can be a URI where the schema is hosted).
+
+.. code-block:: js
+
+  {
+    "type": "CityJSON",
+    "version": "0.7",
+    "extensions": {
+      "+TallBuilding": "https://www.hugo.com/extensions/improved_buildings.json",
+      "+Statue": "https://www.hugo.com/extensions/statues.json"
+    },
+    "CityObjects": {},
+    "vertices": []
+  }
+
+
+-----------------
+Noise ADE example
+-----------------
+
+To illustrate the process, the Noise ADE, which is the example case in the `CityGML documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ (Section 10.13.2 on p. 151 describes it; and Annex H on p.305 gives more implementation details).
+The XSDs and some test datasets are available `there <http://schemas.opengis.net/citygml/examples/2.0/ade/noise-ade/>`_.
+
+
+Adding new attributes to a Building
+***********************************
+
+.. image:: _static/noise_building.png
+   :width: 60%
+
+To add these attributes (they are not complex, but for the sake of the exercice let us assume they are) one needs:
+
+  1. define a new City Object of ``"+NoiseBuilding"`` in a new schema file
+  2. copy the schema of ``"Building"``, `defined in this file <https://github.com/tudelft3d/cityjson/blob/master/schema/v07/cityobjects.json>`_
+  3. extend the schema and add one new property ``"noise-attributes"``. The new attributes could have been simply added to the list of ``"attributes"`` too.
+
+
+.. code-block:: js
+
+  "+NoiseBuilding": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["+NoiseBuilding"] },
+        "attributes": ...
+        "noise-attributes": {
+          "buildingReflection": {"type": "string"},
+          "buildingReflectionCorrection": {"type": "number"},
+          "buildingLDenMax": {"type": "number"},
+          "buildingLDenMin": {"type": "number"},
+          "buildingLNightMax": {"type": "number"},
+          "buildingLNightMin": {"type": "number"},
+          "buildingLDenEq": {"type": "number"},
+          "buildingLNightEq": {"type": "number"},
+          "buildingHabitants": {"type": "integer"},
+          "buildingImmissionPoints": {"type": "integer"},
+          "remark": {"type": "string"}
+        }
+        ...
+
+The result can be seen in the file `e_noise.json <https://github.com/tudelft3d/cityjson/blob/test_ade/extensions/e_noise.json>`_
+
+A CityJSON file containing this new City Object would look like this (see <noise_data.json <https://github.com/tudelft3d/cityjson/blob/test_ade/example-datasets/extensions/noise_data.json>`_:
+
+.. code-block:: js
+
+  {
+    "type": "CityJSON",
+    "version": "0.7",
+    "extensions": {
+      "+NoiseBuilding": "e_noise.json" 
+    },
+    "CityObjects": {
+      "1234": {
+        "type": "+NoiseBuilding",
+        "geometry": [
+          {
+            "type": "Solid",
+            "lod": 2,
+            "boundaries": [
+              [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+            ]
+          }
+        ],
+        "attributes": {
+          "roofType": "pointy"
+        },
+        "noise-attributes": {
+          "buildingReflectionCorrection": 234,
+          "buildingLNightMax": 17.33
+        }
+      },
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------
+Validation of files containing extensions
+-----------------------------------------
+
+TODO
+cjio does it
