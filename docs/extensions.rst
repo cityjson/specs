@@ -18,8 +18,8 @@ CityJSON allows its data model to be extended with what we call *Extensions*.
 These extensions are defined as JSON schemas, and thus validation is possible.
 The following cases are possible with CityJSON extensions:
 
-  1. **Adding new (complex) attributes to City Objects**
-  2. **Creating a new City Object, or extending one, and define complex geometries**
+  1. Adding new (complex) attributes to City Objects
+  2. Creating a new City Object, or extending one, and define complex geometries
 
 
 1. Adding new (complex) attributes to City Objects
@@ -74,3 +74,15 @@ It is recommended to document complex attributes in a schema, and thus a new Cit
 
 2. Creating/extending new City Objects
 **************************************
+
+
+The creation of a new City Object is done by defining it in a JSON schema file.
+Since all City Objects are documented in the schemas of CityJSON (see `cityobjects.json <https://github.com/tudelft3d/cityjson/blob/master/schema/v07/cityobjects.json>`_), it is basically a matter of copying the parts needed in a new file and modifying it.
+
+The following rules should be followed:
+
+  1. the name of an new City Object must begin with a '+', eg ``"+NoiseBuilding"``
+  2. a new City Object must conform to the rules of CityJSON, ie it must contain a property ``"type"`` and one ``"geometry"``
+  3. all the geometries must be in the property ``"geometry"``, and cannot be somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process and manipulate CityJSON files (eg `cjio <https://github.com/tudelft3d/cjio>`_) will be working without modifications. If a new City Object needs to store more geometries, then new City Objects need to be defined, as explained below for the Noise extension.
+  4. the reuse of types defined in CityJSON, eg ``"Solid"`` of semantic surfaces, is allowed
+
