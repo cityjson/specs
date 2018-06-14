@@ -271,7 +271,7 @@ Validation of files containing extensions
 -----------------------------------------
 
 The validation of a CityJSON file containing extensions needs to be performed as a 2-step operation:
-  1. the standar validation of all City Objects (except the new ones; those starting with ``"+"`` are ignored at this step); 
+  1. the standard validation of all City Objects (except the new ones; those starting with ``"+"`` are ignored at this step); 
   2. each new City Objects is validated against its schema defined in the new schema file.
 
 While this could be done with any JSON schema validator, resolving all the JSON references could be slightly tricky. 
