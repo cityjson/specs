@@ -270,14 +270,18 @@ A snippet from the `example file noise_data.json <https://github.com/tudelft3d/c
 Validation of files containing extensions
 -----------------------------------------
 
-TODO
-  
-  - 2-step validation: (1) the normal validation; (2) each new City Objects are validated against their schema
-  - cjio allows to validate with the 2-step
-  - just copy all the schemas somewhere, add yours to the same folder (important, all schemas need to be in the same folder)
+The validation of a CityJSON file containing extensions needs to be performed as a 2-step operation:
+  1. the standar validation of all City Objects (except the new ones; those starting with ``"+"`` are ignored at this step); 
+  2. each new City Objects is validated against its schema defined in the new schema file.
+
+While this could be done with any JSON schema validator, resolving all the JSON references could be slightly tricky. 
+Thus, `cjio <https://github.com/tudelft3d/cjio>`_ (with the option ``--validate``) has automated this process:
+  - copy all the CityJSON schemas in a given folder (say ``/home/elvis/noise_extension/``, 
+  - add your new schema to this folder (important, all schemas need to be in the same folder!)
   - and then:
 
 .. code-block:: bash
 
-  $ cjio noise_data.json validate --extensions --folder_schemas /Users/elvis/myschemas/
+  $ cjio noise_data.json validate --extensions --folder_schemas /home/elvis/noise_extension/
+
 
