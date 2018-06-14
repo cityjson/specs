@@ -276,8 +276,8 @@ The validation of a CityJSON file containing extensions needs to be performed as
 
 While this could be done with any JSON schema validator, resolving all the JSON references could be slightly tricky. 
 Thus, `cjio <https://github.com/tudelft3d/cjio>`_ (with the option ``--validate``) has automated this process:
-  - copy all the CityJSON schemas in a given folder (say ``/home/elvis/noise_extension/``, 
-  - add your new schema to this folder (important, all schemas need to be in the same folder!)
+  - copy all the CityJSON schemas in a given folder (say ``/home/elvis/noise_extension/``), 
+  - add your new schema to this folder (**important**, all schemas need to be in the same folder!)
   - and then:
 
 .. code-block:: bash
