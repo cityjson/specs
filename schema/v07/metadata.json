@@ -352,7 +352,7 @@
           }
         }
       },
-      "semanticClasses": {
+      "thematicModels": {
         "type": "array",
         "items": {
           "type": "string",
