@@ -1,0 +1,111 @@
+{
+  "type": "CityJSON",
+  "version": "0.7",
+  "extensions": {
+    "+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
+    "+NoiseCityFurniture": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
+    "+NoiseCityFurnitureSegment": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json"
+  },
+  "CityObjects": {
+    "1234": {
+      "type": "+NoiseBuilding",
+      "geometry": [
+        {
+          "type": "Solid",
+          "lod": 2,
+          "boundaries": [
+            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+          ]
+        }
+      ],
+      "attributes": {
+        "roofType": "pointy"
+      },
+      "noise-attributes": {
+        "buildingReflectionCorrection": 234,
+        "buildingLNightMax": 17.33
+      }
+    },
+    "thesegment_1": {
+      "type": "+NoiseCityFurnitureSegment",
+      "geometry": [
+        {
+          "type": "MultiLineString",
+          "lod": 0,
+          "boundaries": [
+            [2, 3, 5], [77, 55, 212]
+          ]
+        }      
+      ],
+      "attributes": {
+        "reflectionCorrection": 2.33
+      }
+    },    
+    "thesegment_2": {
+      "type": "+NoiseCityFurnitureSegment",
+      "geometry": [
+        {
+          "type": "MultiLineString",
+          "lod": 0,
+          "boundaries": [ 
+            [2, 3, 5], [77, 55, 212]
+          ]
+        }      
+      ],
+      "attributes": {
+        "reflectionCorrection": 2.33
+      }
+    },    
+    "a_noisy_bench": {
+      "type": "+NoiseCityFurniture",
+      "geometry": [
+        {
+          "type": "Solid",
+          "lod": 2,
+          "boundaries": [
+            [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+          ]
+        }
+      ],
+      "NoiseCityFurnitureSegments": ["thesegment_1", "thesegment_2"]
+    },
+  	"onebuilding": {
+      "type": "Building", 
+      "geometry": [
+      {
+        "type": "Solid",
+        "lod": 1,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+        ]
+      },
+      {
+        "type": "Solid",
+        "lod": 2,
+        "boundaries": [
+          [ [[8, 11, 10, 9]], [[12, 13, 14, 15]], [[8, 9, 13, 12]], [[9, 10, 14, 13]], [[10, 11, 15, 14]], [[11, 8, 12, 15]] ] 
+        ]
+      }      
+      ]        
+    }  
+  },
+  "vertices": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [1.0, 1.0, 0.0],
+    [0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0],
+    [1.0, 0.0, 1.0],
+    [1.0, 1.0, 1.0],
+    [0.0, 1.0, 1.0],
+    [1.0, 0.0, 0.0],
+    [2.0, 0.0, 0.0],
+    [2.0, 1.0, 0.0],
+    [1.0, 1.0, 0.0],
+    [1.0, 0.0, 1.0],
+    [2.0, 0.0, 1.0],
+    [2.0, 1.0, 1.0],
+    [1.0, 1.0, 1.0]
+
+  ]
+}

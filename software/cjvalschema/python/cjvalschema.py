@@ -26,6 +26,7 @@ import urlparse
 import argparse
 
 
+
 def dict_raise_on_duplicates(ordered_pairs):
     d = {}
     for k, v in ordered_pairs:
@@ -310,7 +311,9 @@ def main():
         return
 
     #-- fetch proper schema
-    if j["version"] == "0.6":
+    if j["version"] == "0.7":
+        schema = '../../../schema/v07/cityjson.json'
+    elif j["version"] == "0.6":
         schema = '../../../schema/v06/cityjson.json'
     elif j["version"] == "0.5":
         schema = '../../../schema/cityjson-v05.schema.json'
@@ -320,23 +323,20 @@ def main():
         byebye(isValid, woWarnings)
         return
     fins = open(schema)
-    jtmp = json.loads(fins.read())
-    fins.seek(0)
-    if "$id" in jtmp:
-        # print "$id: ", jtmp['$id']
-        u = urlparse.urlparse(jtmp['$id'])
-        os.path.dirname(u.path)
-        base_uri = u.scheme + "://" + u.netloc + os.path.dirname(u.path) + "/" 
-    else:
-        # print "$id not defined, using local files"
-        abs_path = os.path.abspath(os.path.dirname(schema))
-        base_uri = 'file://{}/'.format(abs_path)
+    abs_path = os.path.abspath(os.path.dirname(schema))
+    base_uri = 'file://{}/'.format(abs_path)
+    print ("-->", base_uri)
     print ("Schema used:", os.path.abspath(schema))
     js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
+
+    # json_str = json.dumps(js, indent=2)
+    # f = open("/Users/hugo/temp/js.json", "w")
+    # f.write(json_str)
+    # return
     #-- load the schema for the cityobjects.json
-    sco_path = os.path.abspath(os.path.dirname(schema))
-    sco_path += '/cityobjects.json'
-    jsco = json.loads(open(sco_path).read())
+    # sco_path = os.path.abspath(os.path.dirname(schema))
+    # sco_path += '/cityobjects.json'
+    # jsco = json.loads(open(sco_path).read())
     # print jsco
     print ("==========")    
 
@@ -356,6 +356,38 @@ def main():
             return
     else:
         print ("WATCH OUT: validation against schema is skipped.")
+
+    print ("Schema done.")
+
+    if "extensions" in j:
+        print ("===\nextension validation\n===")
+        schema = '/Users/hugo/projects/cityjson/schema/v07/e_noise.json'
+        fins = open(schema)
+        abs_path = os.path.abspath(os.path.dirname(schema))
+        base_uri = 'file://{}/'.format(abs_path)
+
+        jeval = {}
+        jeval["$schema"] = "http://json-schema.org/draft-04/schema#"
+        jeval["type"] = "object"
+        jeval["$ref"] = "file://"
+        jeval["$ref"] += schema 
+        jeval["$ref"] += "#/+NoiseBuilding"
+
+        jeval2 = jsonref.loads(json.dumps(jeval), jsonschema=True, base_uri=base_uri)
+
+        for theid in j["CityObjects"]:
+            if j["CityObjects"][theid]["type"][0] == '+':
+                oneco = j["CityObjects"][theid]
+                # print (oneco)
+                try:
+                    jsonschema.validate(oneco, jeval2)
+                except jsonschema.ValidationError as e:
+                    print ("ERROR:   ", e.message)
+                except jsonschema.SchemaError as e:
+                    print ("ERROR:   ", e)
+
+    byebye(isValid, woWarnings)
+    return
 
     if city_object_groups(j) == False:
         isValid = False

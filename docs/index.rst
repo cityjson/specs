@@ -79,6 +79,7 @@ CityJSON can be considered as the third implementation of the CityGML data model
    specs
    schema
    software
+   extensions
    citygmlsupport
    datasets
    changelog
