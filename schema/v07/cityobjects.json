@@ -9,8 +9,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string","format": "date"},
+          "terminationDate" : {"type": "string","format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -54,8 +54,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -102,8 +102,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -145,8 +145,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},            
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},            
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -185,8 +185,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -250,8 +250,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -310,8 +310,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},            
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string","format": "date"},            
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -350,8 +350,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},            
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},            
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -390,8 +390,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -461,8 +461,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -527,8 +527,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},            
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},            
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -567,8 +567,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -605,8 +605,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -643,8 +643,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -682,8 +682,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -711,8 +711,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},                        
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},                        
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -748,8 +748,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},                        
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},                        
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -784,8 +784,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},                        
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},                        
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"},
@@ -827,8 +827,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},                        
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},                        
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -861,8 +861,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},            
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},            
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
@@ -901,8 +901,8 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},            
+          "creationDate" : {"type": "string", "format": "date"},
+          "terminationDate" : {"type": "string", "format": "date"},            
           "class": {"type": "string"},
           "function": {"type": "string"},
           "usage": {"type": "string"}
