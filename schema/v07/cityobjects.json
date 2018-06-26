@@ -75,14 +75,9 @@
           "yearOfDemolition": { "type": "integer"}
         }
       },
-      "Parts": {
+      "children": {
         "type": "array",
-        "description": "the IDs of the TunnelPart of this Tunnel",
-        "items": {"type": "string"}
-      },
-      "Installations": {
-        "type": "array",
-        "description": "the IDs of the TunnelInstallation of this Tunnel",
+        "description": "the IDs of the TunnelPart and TunnelInstallation of this Tunnel",
         "items": {"type": "string"}
       },
       "bbox": {
@@ -123,7 +118,12 @@
           "yearOfDemolition": { "type": "integer"}
         }
       },
-      "Installations": {
+      "parent": {
+        "type": "array",
+        "description": "the IDs of the parent Tunnel",
+        "items": {"type": "string"}
+      },
+      "children": {
         "type": "array",
         "description": "the IDs of the TunnelInstallation of this TunnelPart",
         "items": {"type": "string"}
@@ -146,7 +146,7 @@
         }
       }
     },
-    "required": ["type", "geometry"],
+    "required": ["type", "geometry", "parent"],
     "additionalProperties": false
   },
 
@@ -163,6 +163,11 @@
           "function": {"type": "string"},
           "usage": {"type": "string"}
         }
+      },
+      "parent": {
+        "type": "array",
+        "description": "the IDs of the parent Tunnel",
+        "items": {"type": "string"}
       },
       "bbox": {
         "type": "array",
@@ -186,7 +191,7 @@
         }
       }
     },
-    "required": ["type", "geometry"],
+    "required": ["type", "geometry", "parent"],
     "additionalProperties": false
   },
 
@@ -218,19 +223,9 @@
           "location": {"$ref": "geomprimitives.json#/MultiPoint"}
         }
       },
-      "Parts": {
+      "children": {
         "type": "array",
-        "description": "the IDs of the BridgePart of this Bridge",
-        "items": {"type": "string"}
-      },
-      "Installations": {
-        "type": "array",
-        "description": "the IDs of the BridgeInstallation of this Bridge",
-        "items": {"type": "string"}
-      },
-      "ConstructionElements": {
-        "type": "array",
-        "description": "the IDs of the BridgeConstructionElement of this Bridge",
+        "description": "the IDs of the BridgePart/Installation/ConstructionElement of this Bridge",
         "items": {"type": "string"}
       },
       "bbox": {
@@ -283,16 +278,16 @@
           "location": {"$ref": "geomprimitives.json#/MultiPoint"}
         }
       },
-      "Installations": {
+      "children": {
         "type": "array",
-        "description": "the IDs of the BridgeInstallation of this BridgePart",
+        "description": "the IDs of the BridgeInstallation/ConstructionElement of this BridgePart",
         "items": {"type": "string"}
       },
-      "ConstructionElements": {
+      "parent": {
         "type": "array",
-        "description": "the IDs of the BridgeConstructionElement of this BridgePart",
+        "description": "the IDs of the parent Bridge",
         "items": {"type": "string"}
-      },
+      },      
       "bbox": {
         "type": "array",
         "items": { "type": "number" },
@@ -311,7 +306,7 @@
         }
       }
     },
-    "required": ["type", "geometry"],
+    "required": ["type", "geometry", "parent"],
     "additionalProperties": false
   },
 
@@ -335,6 +330,11 @@
         "minItems": 6,    
         "maxItems": 6    
       },
+      "parent": {
+        "type": "array",
+        "description": "the IDs of the parent Bridge",
+        "items": {"type": "string"}
+      },      
       "geometry": {
         "type": "array",
         "items": {
@@ -351,7 +351,7 @@
         }
       }
     },
-    "required": ["type", "geometry"],
+    "required": ["type", "geometry", "parent"],
     "additionalProperties": false
   },
 
@@ -375,6 +375,11 @@
         "minItems": 6,    
         "maxItems": 6    
       },
+      "parent": {
+        "type": "array",
+        "description": "the IDs of the parent Bridge",
+        "items": {"type": "string"}
+      },      
       "geometry": {
         "type": "array",
         "items": {
@@ -391,7 +396,7 @@
         }
       }
     },
-    "required": ["type", "geometry"],
+    "required": ["type", "geometry", "parent"],
     "additionalProperties": false
   },
 
@@ -434,14 +439,9 @@
           "location": {"$ref": "geomprimitives.json#/MultiPoint"}
         }
       },
-      "Parts": {
+      "children": {
         "type": "array",
-        "description": "the IDs of the BuildingPart of this Building",
-        "items": {"type": "string"}
-      },
-      "Installations": {
-        "type": "array",
-        "description": "the IDs of the BuildingInstallation of this Building",
+        "description": "the IDs of the BuildingPart/Installation of this Building",
         "items": {"type": "string"}
       },
       "bbox": {
@@ -506,10 +506,15 @@
         },
         "additionalProperties": false
       },              
-      "Installations": {
+      "children": {
         "type": "array",
           "items": {"type": "string"}
       },
+      "parent": {
+        "type": "array",
+        "description": "the IDs of the parent Building",
+        "items": {"type": "string"}
+      },      
       "bbox": {
         "type": "array",
         "items": { "type": "number" },
@@ -528,7 +533,7 @@
         }
       }
     },
-    "required": ["type", "geometry"],
+    "required": ["type", "geometry", "parent"],
     "additionalProperties": false
   },
 
@@ -546,6 +551,12 @@
           "usage": {"type": "string"}
         }
       },
+      "parent": {
+        "type": "array",
+        "description": "the IDs of the parent Tunnel",
+        "items": {"type": "string"}
+      },
+
       "bbox": {
         "type": "array",
         "items": { "type": "number" },
@@ -568,7 +579,7 @@
         }
       }
     },
-    "required": ["type", "geometry"],
+    "required": ["type", "geometry", "parent"],
     "additionalProperties": false
   },
 
