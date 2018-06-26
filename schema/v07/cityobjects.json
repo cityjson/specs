@@ -119,9 +119,8 @@
         }
       },
       "parent": {
-        "type": "array",
-        "description": "the IDs of the parent Tunnel",
-        "items": {"type": "string"}
+        "type": "string",
+        "description": "the ID of the parent Tunnel"
       },
       "children": {
         "type": "array",
@@ -165,9 +164,8 @@
         }
       },
       "parent": {
-        "type": "array",
-        "description": "the IDs of the parent Tunnel",
-        "items": {"type": "string"}
+        "type": "string",
+        "description": "the ID of the parent Tunnel"
       },
       "bbox": {
         "type": "array",
@@ -284,9 +282,8 @@
         "items": {"type": "string"}
       },
       "parent": {
-        "type": "array",
-        "description": "the IDs of the parent Bridge",
-        "items": {"type": "string"}
+        "type": "string",
+        "description": "the ID of the parent Bridge"
       },      
       "bbox": {
         "type": "array",
@@ -331,9 +328,8 @@
         "maxItems": 6    
       },
       "parent": {
-        "type": "array",
-        "description": "the IDs of the parent Bridge",
-        "items": {"type": "string"}
+        "type": "string",
+        "description": "the ID of the parent Bridge"
       },      
       "geometry": {
         "type": "array",
@@ -376,9 +372,8 @@
         "maxItems": 6    
       },
       "parent": {
-        "type": "array",
-        "description": "the IDs of the parent Bridge",
-        "items": {"type": "string"}
+        "type": "string",
+        "description": "the ID of the parent Bridge"
       },      
       "geometry": {
         "type": "array",
@@ -511,9 +506,8 @@
           "items": {"type": "string"}
       },
       "parent": {
-        "type": "array",
-        "description": "the IDs of the parent Building",
-        "items": {"type": "string"}
+        "type": "string",
+        "description": "the ID of the parent Building"
       },      
       "bbox": {
         "type": "array",
@@ -552,9 +546,8 @@
         }
       },
       "parent": {
-        "type": "array",
-        "description": "the IDs of the parent Tunnel",
-        "items": {"type": "string"}
+        "type": "string",
+        "description": "the ID of the parent Tunnel"
       },
 
       "bbox": {
