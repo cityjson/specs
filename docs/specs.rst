@@ -198,7 +198,6 @@ A City Object is a JSON object for which the type member’s value is one of the
   #. ``"TunnelInstallation"``
   #. ``"CityObjectGroup"``
 
-
 A City Object:
 
 - must have one member with the name ``"geometry"``, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
@@ -224,6 +223,60 @@ A City Object:
       ...
     }
   }
+
+
+1st- and 2nd-level City Objects
+*******************************
+
+There are 2 kinds of City Objects: 
+
+1. 1st-level: the numbered City Objects below. These may have ``"children"``, which consists of a an array of the IDs (of type string) of the 2nd-level that are part of the City Object.
+2. 2nd-level: the one after a "-" below. These have exactly one ``"parent"``, which is the ID of the City Object (of type string).
+
+.. code-block:: js
+
+  "CityObjects": {
+    "id-1": {
+      "type": "Building", 
+      "children": ["id-666"], 
+      "geometry": [{...}]
+    },
+    "id-666": {
+      "type": "BuildingPart", 
+      "parent": "id-1",
+      ...
+    }
+  }
+  
+1. ``"Building"``
+ 
+  - ``"BuildingPart"``
+  - ``"BuildingInstallation"``
+
+2. ``"Road"``
+3. ``"Railway"``
+4. ``"TransportSquare"``
+5. ``"TINRelief"``
+6. ``"WaterBody"``
+7. ``"PlantCover"``
+8. ``"SolitaryVegetationObject"``
+9. ``"LandUse"``
+10. ``"CityFurniture"``
+11. ``"GenericCityObject"``
+12. ``"Bridge"``
+
+  - ``"BridgePart"``
+  - ``"BridgeInstallation"``
+  - ``"BridgeConstructionElement"``
+
+13. ``"Tunnel"``
+
+  - ``"TunnelPart"``
+  - ``"TunnelInstallation"``
+
+14. ``"CityObjectGroup"``
+
+
 
 
 Attributes
