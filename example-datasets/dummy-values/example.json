@@ -40,6 +40,7 @@
         "PostalCode": "H0H 0H0"
       },
       "Parts": ["2929"],
+      "Installations": ["myinst"],
       "geometry": [
       {
         "type": "Solid",
@@ -132,6 +133,16 @@
         ]
       }]
     },
+    "myinst": {
+      "type": "BuildingInstallation", 
+      "geometry": [{
+        "type": "Solid",
+        "lod": 2,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+        ]
+      }]
+    },    
     "onebigtree-template": {
       "type": "SolitaryVegetationObject", 
       "geometry": [
