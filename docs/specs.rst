@@ -206,8 +206,8 @@ A City Object:
 - must have one member with the name ``"geometry"``, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
 - may have one member with the name ``"attributes"``, whose value is an object with the different attributes allowed by CityGML. 
 - may have one member with the name ``"bbox"`` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
-- of type 1st-level may have one member ``"children"``, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. 
-- of type 2nd-level must have one member ``"parent"``, which is the ID of its parent City Object  (of type string).
+- of type 1st-level may have one member ``"children"``, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A parent City Object can have different City Objects children (a ``"Building"`` can have both as children ``"BuildingPart"`` and ``"BuildingInstallation"``)
+- of type 2nd-level must have one member ``"parent"``, which is the ID of its parent City Object  (of type string). It may also have one member ``"children"`` (for instance for a ``"BuildingPart"`` that contains a ``"BuildingInstallation"``), but if a City Object has a ``"parent"`` then it is considered to be of the 2nd-level type.
 
 
 .. code-block:: js
@@ -280,10 +280,6 @@ In CityJSON, as can be seen in the schema, the values should be a string, thus e
 Building, BuildingPart, and BuildingInstallation
 ************************************************
 
-- A City Object of type ``"Building"`` may have a member ``"Parts"``, whose value is an array of the IDs of the City Objects of type ``"BuildingPart"`` it contains.
-- A City Object of type ``"BuildingPart"`` must have a parent ``"Building"`` referencing it, however, unlike in CityGML, a ``"BuildingPart"`` cannot be decomposed into a ``"BuildingPart"``.
-- A City Object of type ``"Building"`` or ``"BuildingPart"`` may have a member ``"Installations"``, whose value is an array of the IDs of the City Objects of type ``"BuildingInstallation"`` it contains.
-- A City Object of type ``"BuildingInstallation"`` must have a parent ``"Building"`` referencing it.
 - The geometry of both ``"Building"`` and ``"BuildingPart"`` can only be represented with these Geometry Objects: (1) ``"Solid"``, (2) ``"CompositeSolid"``, (3) ``"MultiSurface"``.
 - The geometry of a ``"BuildingInstallation"`` object can be represented with any of the Geometry Objects.
 - A City Object of type ``"Building"`` or ``"BuildingPart"`` may have a member ``"address"``, whose value is a JSON object describing the address. One location (a ``"MultiPoint"``) can be given, to for instance locate the front door inside the building.
@@ -297,15 +293,16 @@ Building, BuildingPart, and BuildingInstallation
         "roofType": "gable"
       },
       "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
-      "Parts": ["id-56", "id-832"],
-      "Installations": ["mybalcony"]
+      "children": ["id-56", "id-832", "mybalcony"]
     },
     "id-56": {
       "type": "BuildingPart", 
+      "parent": "id-1",
       ...
     },
     "mybalcony": {
       "type": "BuildingInstallation", 
+      "parent": "id-1",
       ...
     }
   }
@@ -528,12 +525,6 @@ GenericCityObject
 Bridge, BridgePart, BridgeInstallation, and BridgeConstructionElement
 *********************************************************************
 
-- A City Object of type ``"Bridge"`` may have a member ``"Parts"``, whose value is an array of the IDs of the City Objects of type ``"BridgePart"`` it contains.
-- A City Object of type ``"BridgePart"`` must have a parent ``"Bridge"`` referencing it, however, unlike in CityGML, a ``"BridgePart"`` cannot be decomposed into a ``"BridgePart"``.
-- A City Object of type ``"Bridge"`` or ``"BridgePart"`` may have a member ``"Installations"``, whose value is an array of the IDs of the City Objects of type ``"BridgeInstallation"`` it contains.
-- A City Object of type ``"BridgeInstallation"`` must have a parent ``"Bridge"`` or ``"BridgePart"`` referencing it.
-- A City Object of type ``"Bridge"`` or ``"BridgePart"`` may have a member ``"ConstructionElements"``, whose value is an array of the IDs of the City Objects of type ``"BridgeConstructionElement"`` it contains.
-- A City Object of type ``"BridgeConstructionElement"`` must have a parent ``"Bridge"`` or ``"BridgePart"`` referencing it.
 - The geometry of both ``"Bridge"`` and ``"BridgePart"`` can only be represented with these Geometry Objects: (1) ``"Solid"``, (2) ``"CompositeSolid"``, (3) ``"MultiSurface"``.
 - The geometry of a ``"BridgeInstallation"`` or ``"BridgeConstructionElement"`` object can be represented with any of the Geometry Objects.
 - A City Object of type ``"Bridge"`` or ``"BridgePart"`` may have a member ``"address"``, whose value is a JSON object describing the address. One location (a ``"MultiPoint"``) can be given, to for instance locate the front door inside the building.
@@ -547,8 +538,7 @@ Bridge, BridgePart, BridgeInstallation, and BridgeConstructionElement
         "CountryName": "UK",
         "LocalityName": "London"
       },
-      "ConstructionElements": ["Bext1", "Bext2"],
-      "Installations": ["Inst-2017-11-14"],
+      "children": ["Bext1", "Bext2", "Inst-2017-11-14"],
       "geometry": [{
         "type": "MultiSurface",
         "lod": 2,
@@ -563,10 +553,6 @@ Bridge, BridgePart, BridgeInstallation, and BridgeConstructionElement
 Tunnel, TunnelPart, and TunnelInstallation
 ******************************************
 
-- A City Object of type ``"Tunnel"`` may have a member ``"Parts"``, whose value is an array of the IDs of the City Objects of type ``"TunnelPart"`` it contains.
-- A City Object of type ``"TunnelPart"`` must have a parent ``"Tunnel"`` referencing it, however, unlike in CityGML, a ``"TunnelPart"`` cannot be decomposed into a ``"TunnelPart"``.
-- A City Object of type ``"Tunnel"`` or ``"TunnelPart"`` may have a member ``"Installations"``, whose value is an array of the IDs of the City Objects of type ``"TunnelInstallation"`` it contains.
-- A City Object of type ``"TunnelInstallation"`` must have a parent ``"Tunnel"`` referencing it.
 - The geometry of both ``"Tunnel"`` and ``"TunnelPart"`` can only be represented with these Geometry Objects: (1) ``"Solid"``, (2) ``"CompositeSolid"``, (3) ``"MultiSurface"``.
 - The geometry of a ``"TunnelInstallation"`` object can be represented with any of the Geometry Objects.
 
@@ -579,7 +565,7 @@ Tunnel, TunnelPart, and TunnelInstallation
         "yearOfConstruction": "2000",
         "length": "24.5km"
       },
-      "Installations": ["stoparea1"],
+      "children": ["stoparea1"],
       "geometry": [{
         "type": "Solid",
         "lod": 2,
