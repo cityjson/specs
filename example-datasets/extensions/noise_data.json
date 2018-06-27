@@ -3,6 +3,7 @@
   "version": "0.7",
   "extensions": {
     "+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
+    "+NoiseBuildingPart": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
     "+NoiseCityFurniture": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
     "+NoiseCityFurnitureSegment": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json"
   },
@@ -39,7 +40,8 @@
       ],
       "attributes": {
         "reflectionCorrection": 2.33
-      }
+      },
+      "parent": "a_noisy_bench"
     },    
     "thesegment_2": {
       "type": "+NoiseCityFurnitureSegment",
@@ -54,7 +56,8 @@
       ],
       "attributes": {
         "reflectionCorrection": 2.33
-      }
+      },
+      "parent": "a_noisy_bench"
     },    
     "a_noisy_bench": {
       "type": "+NoiseCityFurniture",
@@ -67,7 +70,7 @@
           ]
         }
       ],
-      "NoiseCityFurnitureSegments": ["thesegment_1", "thesegment_2"]
+      "children": ["thesegment_1", "thesegment_2"]
     },
   	"onebuilding": {
       "type": "Building", 
