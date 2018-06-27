@@ -480,9 +480,6 @@ SolitaryVegetationObject
     }]
   }
 
-.. note::
-  The concept of Implicit Geometries, as defined in CityGML, is not supported. An implicit geometry is a template, eg of certain species of a tree, that can be reused with different parameters to define its appearance.
-
 
 CityFurniture
 *************
