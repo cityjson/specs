@@ -121,8 +121,8 @@ To illustrate the process of creating a new CityJSON extension, we use the Noise
 The XSDs and some test datasets are available `there <http://schemas.opengis.net/citygml/examples/2.0/ade/noise-ade/>`_.
 
 The resulting files for the Noise Extension are available:
-  - :download:`e_noise.json <../extensions/e_noise.json>`
-  - :download:`noise_data.json <../example-datasets/extensions/noise_data.json>`
+  - :download:`download e_noise.json <../extensions/e_noise.json>`
+  - :download:`download noise_data.json <../example-datasets/extensions/noise_data.json>`
 
 
 Adding new attributes to a Building
