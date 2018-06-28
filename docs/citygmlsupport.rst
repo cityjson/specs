@@ -9,6 +9,7 @@ CityGML modules and characteristics supported
 At this moment, CityJSON implements most of the data model, and *all* the CityGML modules have been mapped to CityJSON objects.
 However, for the sake of simplicity and efficiency, some modules and features have been omitted and/or simplified.
 If a module is supported, it does not mean that there is a 1-to-1 mapping between the classes and features in CityGML and CityJSON, but rather that it is possible to represent the same information, but in a different manner.
+CityJSON is thus conformant to a subset of CityGML (although technically only CityGML files can be conformant to the specifications of CityGML, see Section 2 of `the official documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_).
 
 The types of objects stored in CityGML are grouped into different modules, and CityJSON supports these (more details below):
 
@@ -25,7 +26,10 @@ The types of objects stored in CityGML are grouped into different modules, and C
 #. **WaterBody**: everything is supported
 #. **Generics**: everything is supported
 #. **Address**: everything is supported
+#. **Groups**: everything is supported, except that groups can only be for grouping City Objects (and not surfaces or parts of City Objects as it can be in CityGML)
 #. **Appearance**: The CityGML class ``GeoreferencedTexture`` is not supported. The CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files. Also, the texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
+
+`ADEs (Application Domain Extensions) <https://www.citygml.org/ade/>`_ are also supported since CityJSON v0.7, see :doc:`extensions`.
 
 .. note::
   CityJSON has built-in support for the metadata of a dataset, while, surprisingly, CityGML does not.
@@ -34,8 +38,7 @@ The types of objects stored in CityGML are grouped into different modules, and C
 Other CityGML modules and characteristics not supported
 -------------------------------------------------------
 
-#. no support for ADEs (or other extension mechanism)
+#. in CityGML most objects can have an ID (usually ``gml:id``), that is one Building can have an ID, but also each 3D primitive forming its geometry can have an ID. In CityJSON, only :ref:`specs_cityobjects` can have IDs, and each :ref:`specs_semantics`. 
+#. no support for arbitrary coordinate reference systems (CRSs). Only an `EPSG code <https://epsg.io>`_ can be used. Furthermore, all geometries in a given CityJSON must be using the same CRS.
 #. no support for the topological relationships that can be defined, eg  *relativeToTerrain* and *relativeToWater*
 #. no *ClosureSurface*
-#. no support for arbitrary coordinate reference systems (CRSs). Only an `EPSG code <https://epsg.io>`_ can be used. Furthermore, all geometries in a given CityJSON must be using the same CRS.
-#. in CityGML most objects can have an ID (usually ``gml:id``), that is one Building can have an ID, but also each 3D primitive forming its geometry can have an ID. In CityJSON, only :ref:`specs_cityobjects` can have IDs, and each :ref:`specs_semantics`. 
