@@ -25,13 +25,14 @@ Example CityGML v2 file (aka Railway)
 
 The first CityGML v2.0 that was released, available on the `official CityGML website <https://www.citygml.org/samplefiles/>`_, it contains several CityGML classes with textures, and classes that were new in v2.0
 
+#. Buildings
 #. Railway
 #. Relief 
 #. Vegetation (with Implicit Geometries)
 #. Water
 #. Tunnels
 
-- :download:`download geores.zip <../example-datasets/Railway/Railway.zip>`
+- :download:`download Railway.zip <../example-datasets/Railway/Railway.zip>`
 
 It contains:
 

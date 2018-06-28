@@ -67,7 +67,7 @@ Metadata
 --------
 
 The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows.
-The members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``presentLoDs`` ``semanticClasses``, because they are useful in 3D in a city modelling context).
+The members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``presentLoDs`` ``thematicModels``, because they are useful in 3D in a city modelling context).
 To see all the possible ones, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
 
 
