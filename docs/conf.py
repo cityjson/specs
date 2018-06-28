@@ -103,6 +103,7 @@ html_theme_options = {
         'GitHub repository': 'https://github.com/tudelft3d/cityjson',
         'CityGML homepage': 'https://www.citygml.org',
         'JSON homepage': 'http://json.org',
+        'cjio': 'https://github.com/tudelft3d/cjio',
     },
     'font_family': 'helvetica',
     'head_font_family': 'helvetica',
