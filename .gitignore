@@ -17,3 +17,9 @@ libthirdparty.a
 /software/cjcompress/c++11/build
 /software/cityjson2citygml/c++11/build
 /software/cjcompress/c++11/buildx
+/extensions/metadata.json
+/extensions/geomtemplates.json
+/extensions/geomprimitives.json
+/extensions/cityobjects.json
+/extensions/cityjson.json
+/extensions/appearance.json
