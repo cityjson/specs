@@ -62,110 +62,6 @@ An "empty" CityJSON will look like this:
 .. note::
   While the order of the member values of a CityJSON should preferably be as above, not all JSON generators allow one to do this, thus the order is not prescribed.
 
---------
-Metadata
---------
-
-The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows.
-The members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``presentLoDs`` ``thematicModels``, because they are useful in 3D in a city modelling context).
-To see all the possible ones, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
-
-
-``"referenceSystem"``
-*********************
-The coordinate reference system (CRS) may be given as a string. `OGC CRS URNs <http://www.opengeospatial.org/ogcna/>`_ such as ``"urn:ogc:def:crs:EPSG::7415"`` are favoured over the legacy ones such as ``"EPSG:7415"``:
-
-For instance, for the `Dutch national CRS in 3D <http://www.spatialreference.org/ref/epsg/7415/>`_:
-
-.. code-block:: js
-
-  "metadata": {
-    "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
-  }
-
-Be aware that the CRS should be a three-dimensional one, ie the elevation/height values should be with respect to a specific datum.
-
-
-.. note::
-  Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
-
-
-``"bbox"`` (extent of the dataset)
-**********************************
-While this can be extracted from the dataset itself, it is useful to store it. 
-It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
-
-.. code-block:: js
-
-  "metadata": {
-    "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
-  }
-
-
-``"keywords"``
-**************
-An array of keywords of type ``"string"`` may be listed:
-
-.. code-block:: js
-
-  "metadata": {
-    "keywords": ["energy", "solar potential"]
-  }
-
-
-``"geographicLocation"``
-************************
-The name of an area or a city.
-
-.. code-block:: js
-
-  "metadata": {
-    "geographicLocation": "TU Delft campus"
-  }
-
-
-``"datasetTopicCategory"``
-**************************
-A one-word category, the possible values are enumerated in the Table B.3.30 of the `ISO19115-1:2014 document <https://www.iso.org/standard/53798.html>`_
-
-.. code-block:: js
-
-  "metadata": {
-    "datasetTopicCategory": "planningCadastre"
-  }
-
-
-``"presentLODs"``
-*****************
-An array of all the LoDs present in the file, with the number of City Objects represented at that level
-
-.. code-block:: js
-
-  "metadata": {
-    "presentLODs": {
-      "1.0": 1,
-      "2.0": 3,
-      "1.1": 1,
-      "2.1": 1 
-    }
-  }
-
-
-Other properties
-****************
-To view all the possible properties, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
-
-Or have a look at the following example file:
-
-:download:`download example_metadata.json <../example-datasets/dummy-values/example_metadata.json>`
-
-
-.. note::
-  
-  It should be noticed that JSON does not have a date type, and thus the representations defined by `RFC 3339, Section 5.6 <https://tools.ietf.org/html/rfc3339#section-5.6>`_ should be used. A simple date is ``"full-date"`` (thus ``"1977-07-11"`` as a string), and should be used for the metadata above. 
-
-  It's also possible, for other attributes in a CityJSON file, to have a date with a time is a ``"full-time"`` (thus ``"1985-04-12T23:20:50.52Z"`` as a string).
-
 
 .. _specs_cityobjects:
 
@@ -849,6 +745,110 @@ A Geometry object:
           ]
         }
       }  
+
+--------
+Metadata
+--------
+
+The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows.
+The members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``presentLoDs`` ``thematicModels``, because they are useful in 3D in a city modelling context).
+To see all the possible ones, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
+
+
+``"referenceSystem"``
+*********************
+The coordinate reference system (CRS) may be given as a string. `OGC CRS URNs <http://www.opengeospatial.org/ogcna/>`_ such as ``"urn:ogc:def:crs:EPSG::7415"`` are favoured over the legacy ones such as ``"EPSG:7415"``:
+
+For instance, for the `Dutch national CRS in 3D <http://www.spatialreference.org/ref/epsg/7415/>`_:
+
+.. code-block:: js
+
+  "metadata": {
+    "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
+  }
+
+Be aware that the CRS should be a three-dimensional one, ie the elevation/height values should be with respect to a specific datum.
+
+
+.. note::
+  Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
+
+
+``"bbox"`` (extent of the dataset)
+**********************************
+While this can be extracted from the dataset itself, it is useful to store it. 
+It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
+
+.. code-block:: js
+
+  "metadata": {
+    "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
+  }
+
+
+``"keywords"``
+**************
+An array of keywords of type ``"string"`` may be listed:
+
+.. code-block:: js
+
+  "metadata": {
+    "keywords": ["energy", "solar potential"]
+  }
+
+
+``"geographicLocation"``
+************************
+The name of an area or a city.
+
+.. code-block:: js
+
+  "metadata": {
+    "geographicLocation": "TU Delft campus"
+  }
+
+
+``"datasetTopicCategory"``
+**************************
+A one-word category, the possible values are enumerated in the Table B.3.30 of the `ISO19115-1:2014 document <https://www.iso.org/standard/53798.html>`_
+
+.. code-block:: js
+
+  "metadata": {
+    "datasetTopicCategory": "planningCadastre"
+  }
+
+
+``"presentLODs"``
+*****************
+An array of all the LoDs present in the file, with the number of City Objects represented at that level
+
+.. code-block:: js
+
+  "metadata": {
+    "presentLODs": {
+      "1.0": 1,
+      "2.0": 3,
+      "1.1": 1,
+      "2.1": 1 
+    }
+  }
+
+
+Other properties
+****************
+To view all the possible properties, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
+
+Or have a look at the following example file:
+
+:download:`download example_metadata.json <../example-datasets/dummy-values/example_metadata.json>`
+
+
+.. note::
+  
+  It should be noticed that JSON does not have a date type, and thus the representations defined by `RFC 3339, Section 5.6 <https://tools.ietf.org/html/rfc3339#section-5.6>`_ should be used. A simple date is ``"full-date"`` (thus ``"1977-07-11"`` as a string), and should be used for the metadata above. 
+
+  It's also possible, for other attributes in a CityJSON file, to have a date with a time is a ``"full-time"`` (thus ``"1985-04-12T23:20:50.52Z"`` as a string).
 
 
 ----------------------------------------------
