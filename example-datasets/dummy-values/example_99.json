@@ -113,7 +113,7 @@
       "attributes": {
         "renovation": "2001/09/11"
       },
-      "parent": ["102636712"],
+      "parent": "102636712",
       "geometry": [{
         "type": "Solid",
         "lod": 2,
@@ -122,6 +122,20 @@
         ]
       }]
     },
+    "orphanpower": {
+      "type": "BuildingPart", 
+      "attributes": {
+        "renovation": "2001/09/11"
+      },
+      "parent": "adf",
+      "geometry": [{
+        "type": "Solid",
+        "lod": 2,
+        "boundaries": [
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+        ]
+      }]
+    },    
     "onebigtree-template": {
       "type": "SolitaryVegetationObject", 
       "geometry": [
@@ -162,7 +176,7 @@
       "attributes": { 
         "function": "balcony"
       },
-      "parent": ["itcanbeastringtoo"],
+      "parent": "itcanbeastringtoo",
       "geometry": [{
         "type": "MultiSurface",
         "lod" : 2.2, 
