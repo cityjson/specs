@@ -1,17 +1,6 @@
 {
   "type": "CityJSON",
-  "version": "0.6",
-  "metadata": {
-    "crs": { 
-      "epsg": 7415
-    },
-    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-    "datasetTitle": "what is this dataset?",
-    "datasetAbstract": "what is this dataset?",
-    "datasetReferenceDate": "2011-02-28",
-    "copyright": "CC0",
-    "pointOfContact": "Hugo Ledoux <h.ledoux@tudelft.nl>"
-  },
+  "version": "0.7",
   "CityObjects": {
     "mygroup1": {
       "type": "CityObjectGroup",
@@ -39,8 +28,7 @@
         "ThoroughfareName": "rue du Diable",
         "PostalCode": "H0H 0H0"
       },
-      "Parts": ["2929"],
-      "Installations": ["myinst"],
+      "children": ["2929"],
       "geometry": [
       {
         "type": "Solid",
@@ -125,6 +113,7 @@
       "attributes": {
         "renovation": "2001/09/11"
       },
+      "parent": "102636712",
       "geometry": [{
         "type": "Solid",
         "lod": 2,
@@ -133,8 +122,12 @@
         ]
       }]
     },
-    "myinst": {
-      "type": "BuildingInstallation", 
+    "orphanpower": {
+      "type": "BuildingPart", 
+      "attributes": {
+        "renovation": "2001/09/11"
+      },
+      "parent": "adf",
       "geometry": [{
         "type": "Solid",
         "lod": 2,
@@ -164,7 +157,7 @@
       "attributes": { 
         "measuredHeight": 223
       },
-      "Installations": ["801"],
+      "children": ["801"],
       "geometry": [{
         "type": "MultiSurface",
         "lod": 2,
@@ -183,6 +176,7 @@
       "attributes": { 
         "function": "balcony"
       },
+      "parent": "itcanbeastringtoo",
       "geometry": [{
         "type": "MultiSurface",
         "lod" : 2.2, 
