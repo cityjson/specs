@@ -25,6 +25,7 @@ A CityJSON object represents one 3D city model of a given area, this model may c
   #. one member with the name ``"vertices"``, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is basically reused.
 
 - A CityJSON may have one member with the name ``"metadata"``, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
+- A CityJSON may have one member with the name ``"extensions"``, used if there are (:doc:`extensions`) used in the file. 
 - A CityJSON may have one member with the name ``"transform"``, whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
 - A CityJSON may have one member with name ``"appearance"``, the value may contain JSON objects representing the textures and/or materials of surfaces.
 - A CityJSON may have one member with name ``"geometry-templates"``, the value may contain JSON objects representing the templates that can be reused by different City Objects (usually for trees). This is the concept of "implicit geometries" in CityGML.
@@ -48,6 +49,7 @@ An "empty" CityJSON will look like this:
   {
     "type": "CityJSON",
     "version": "0.6",
+    "extensions": {},
     "metadata": {},
     "transform": {
       "scale": [],
