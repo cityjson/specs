@@ -21,7 +21,11 @@ These Extensions are defined as JSON Schemas, and thus their content can be vali
 The following cases are possible with CityJSON extensions:
 
   1. Adding new (complex) attributes to City Objects
-  2. Creating a new City Object, or extending one, and define complex geometries
+  2. Creating a new City Object, or "extending" one, and define complex geometries
+
+.. important::
+
+  While Extensions are less flexible and powerful than CityGML ADEs, it should be noticed that the flexibility of ADEs come at a price: standard software (eg viewer or spatial analysis software) will not process correctly files containing ADEs since specific code needs to be written. CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the code is required. This is achieved by enforcing a set of simple rules, as defined below, when adding new complex attributes and City Objects; if these are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
 
 
 1. Adding new (complex) attributes to City Objects
