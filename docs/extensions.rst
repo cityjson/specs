@@ -6,7 +6,7 @@ Extensions
 
 The CityGML data model allows us to represent the most common city features, but sometimes practitioners may want to model additional features and/or add certain attributes to the data model.
 For this, CityGML has the concept of `ADEs (Application Domain Extensions) <https://www.citygml.org/ade/>`_.
-An ADE is defined in an extra `XML Schema <https://en.wikipedia.org/wiki/XML_schema/>`_ (XSD file) with its own namespace, and often inheritance is used to refine the classes of the CityGML data model, but entirely new classes can be defined too.
+An ADE is defined in an extra `XML Schema <https://en.wikipedia.org/wiki/XML_schema/>`_ (XSD file) with its own namespace, and often inheritance is used to refine the classes of the CityGML data model, to define entirely new classes, and to modify any class by adding for instance new geometries and complex attribute anywhere in a City Model.
 The ADE allows us to document in a structured way, and also to validate, an instance CityGML document that would contain a both classes from the core model and from the ADEs.
 
 -------------------
@@ -16,7 +16,7 @@ CityJSON Extensions
 CityJSON uses `JSON Schemas <http://json-schema.org/>`_ to document and validate the data model, and these are less powerful and less flexible than XML Schemas.
 Inheritance and namespaces are for instance not supported; schemas should be seen as basically validating the syntax of a JSON document.
 
-CityJSON nevertheless allows its data model to be extended with what is simply called *Extensions*.
+CityJSON nevertheless allows its data model to be extended with what is called *Extensions*.
 These Extensions are defined as JSON Schemas, and thus their content can be validated.
 The following cases are possible with CityJSON extensions:
 
@@ -25,13 +25,13 @@ The following cases are possible with CityJSON extensions:
 
 .. important::
 
-  While Extensions are less flexible and powerful than CityGML ADEs, it should be noticed that the flexibility of ADEs come at a price: standard software (eg viewer or spatial analysis software) will not process correctly files containing ADEs since specific code needs to be written. CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the code is required. This is achieved by enforcing a set of simple rules, as defined below, when adding new complex attributes and City Objects; if these are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
+  While Extensions are less flexible than CityGML ADEs (ie they have a narrower scope, and less customisation is possible), it should be noticed that the flexibility of ADEs come at a price: standard software (eg viewer or spatial analysis software) will not process correctly files containing ADEs since specific code needs to be written. CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the code is required. This is achieved by enforcing a set of simple rules, as defined below, when adding new complex attributes and City Objects; if these are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
 
 
 1. Adding new (complex) attributes to City Objects
 **************************************************
 
-One of the philosophy of JSON is "schema-less", which means that one is allowed to define "new" properties for her JSON objects.
+One of the philosophy of JSON is "schema-less", which means that one is allowed to define "new" properties for the JSON objects.
 While this is in contrast to CityGML (and GML as a whole where schemas are encouraged), the schemas of CityJSON (:doc:`schema`) are partly following that philosophy.
 That is, for a given City Object, the list of "allowed" properties/attributes is listed in the schema, but it is not an error to add new ones. 
 The validator of CityJSON (`cjio <https://github.com/tudelft3d/cjio>`_ with the option ``--validate``) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered invalid in CityJSON.
@@ -82,13 +82,15 @@ It is recommended to document complex attributes in a JSON schema, and thus a ne
 
 The creation of a new City Object is done by defining it in a JSON schema file.
 Since all City Objects are documented in the schemas of CityJSON (in `cityobjects.json <https://github.com/tudelft3d/cityjson/blob/master/schema/v07/cityobjects.json>`_), it is basically a matter of copying the parts needed in a new file and modifying its content.
+A new name for the City Object (for the class) must be given.
   
-It should be observed since JSON schema does not allow inheritance, the only way to extend a City Object is to copy its schema and extend it. 
+It should be observed that since JSON schema does not allow inheritance, the only way to extend a City Object is to define an entirely new one (with a new name, eg ``"+NoiseBuilding"``).
+This is done by copying the schema of the parent City Object, and by extending it. 
 
-.. note::
+.. important::
 
   The challenge is creating Extensions that will not break the software packages (viewers, spatial analysis, etc) that already read and process CityJSON.
-  While one could define a new City Object and document it, if it doesn't follow the rules then it will mean that new specific software needs to be built for it; this is not the idea.
+  While one could define a new City Object and document it, if this new object doesn't follow the rules below then it will mean that new specific software needs to be built for it; this is not the idea.
 
 
 When defining new City Objects, the following rules should be followed:
