@@ -25,13 +25,13 @@ The following cases are possible with CityJSON extensions:
 
 .. important::
 
-  While Extensions are less flexible than CityGML ADEs (ie they have a narrower scope, and less customisation is possible), it should be noticed that the flexibility of ADEs come at a price: standard software (eg viewer or spatial analysis software) will not process correctly files containing ADEs since specific code needs to be written. CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the code is required. This is achieved by enforcing a set of simple rules, as defined below, when adding new complex attributes and City Objects; if these are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
+  While Extensions are less flexible than CityGML ADEs (ie they have a narrower scope, and less customisation is possible), it should be noticed that the flexibility of ADEs comes at a price: standard software (eg viewer or spatial analysis software) will not process correctly files containing ADEs since specific code needs to be written. CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, and no changes in the code should be required. This is achieved by enforcing a set of simple rules when adding new complex attributes and City Objects (as defined below); if these rules are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
 
 
 1. Adding new (complex) attributes to City Objects
 **************************************************
 
-One of the philosophy of JSON is "schema-less", which means that one is allowed to define "new" properties for the JSON objects.
+One of the philosophy of JSON is "schema-less", which means that one is allowed to define "new" properties for the JSON objects (watch out: this does not mean that JSON cannot have schemas!).
 While this is in contrast to CityGML (and GML as a whole where schemas are encouraged), the schemas of CityJSON (:doc:`schema`) are partly following that philosophy.
 That is, for a given City Object, the list of "allowed" properties/attributes is listed in the schema, but it is not an error to add new ones. 
 The validator of CityJSON (`cjio <https://github.com/tudelft3d/cjio>`_ with the option ``--validate``) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered invalid in CityJSON.
