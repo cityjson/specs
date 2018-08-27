@@ -101,9 +101,9 @@ html_theme_options = {
     'show_powered_by': 'false',
     'extra_nav_links': {
         'GitHub repository': 'https://github.com/tudelft3d/cityjson',
-        'CityGML homepage': 'https://www.citygml.org',
+        'cjio (CityJSON/io)': 'https://github.com/tudelft3d/cjio',
         'JSON homepage': 'http://json.org',
-        'cjio': 'https://github.com/tudelft3d/cjio',
+        'CityGML homepage': 'https://www.citygml.org',
     },
     'font_family': 'helvetica',
     'head_font_family': 'helvetica',
