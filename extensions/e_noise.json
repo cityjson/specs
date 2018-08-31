@@ -1,59 +1,64 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "The 'Noise ADE' cityjsonified",
-
+"definitions": {
+  "noise-attributes": {
+    "buildingReflection": {"type": "string"},
+    "buildingReflectionCorrection": {"type": "number"},
+    "buildingLDenMax": {"type": "number"},
+    "buildingLDenMin": {"type": "number"},
+    "buildingLNightMax": {"type": "number"},
+    "buildingLNightMin": {"type": "number"},
+    "buildingLDenEq": {"type": "number"},
+    "buildingLNightEq": {"type": "number"},
+    "buildingHabitants": {"type": "integer"},
+    "buildingImmissionPoints": {"type": "integer"},
+    "remark": {"type": "string"}
+  },
+  "building-attributes": {
+     "creationDate" : {"type": "string"},
+     "terminationDate" : {"type": "string"},
+     "class": {"type": "string"},
+     "function": {"type": "string"},
+     "usage": {"type": "string"},
+     "measuredHeight": { "type": "number"},
+     "roofType": { "type": "string"},
+     "storeysAboveGround": { "type": "integer" },
+     "storeysBelowGround": { "type": "integer" },
+     "storeyHeightsAboveGround": { 
+        "type": "array",
+        "items": {"type": "number"}
+      },
+      "storeyHeightsBelowGround": { 
+        "type": "array",
+        "items": {"type": "number"}
+      },
+      "yearOfConstruction": { "type": "integer"},
+      "yearOfDemolition": { "type": "integer"}
+  },
+  "address" : {
+    "CountryName": {"type": "string"},
+    "LocalityName": {"type": "string"},
+    "ThoroughfareNumber": {"type": "string"},
+    "ThoroughfareName": {"type": "string"},
+    "PostalCode": {"type": "string"},
+    "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+  }
+  
+},
 "+NoiseBuilding": {
     "type": "object",
     "properties": {
       "type": { "enum": ["+NoiseBuilding"] },
-      "attributes": {
-        "type": "object",
-        "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
-          "class": {"type": "string"},
-          "function": {"type": "string"},
-          "usage": {"type": "string"},
-          "measuredHeight": { "type": "number"},
-          "roofType": { "type": "string"},
-          "storeysAboveGround": { "type": "integer" },
-          "storeysBelowGround": { "type": "integer" },
-          "storeyHeightsAboveGround": { 
-            "type": "array",
-            "items": {"type": "number"}
-          },
-          "storeyHeightsBelowGround": { 
-            "type": "array",
-            "items": {"type": "number"}
-          },
-          "yearOfConstruction": { "type": "integer"},
-          "yearOfDemolition": { "type": "integer"}
-        }
+      "attributes": { 
+      	"$ref": "#/definitions/building-attributes"  
       },
       "noise-attributes": {
-        "buildingReflection": {"type": "string"},
-        "buildingReflectionCorrection": {"type": "number"},
-        "buildingLDenMax": {"type": "number"},
-        "buildingLDenMin": {"type": "number"},
-        "buildingLNightMax": {"type": "number"},
-        "buildingLNightMin": {"type": "number"},
-        "buildingLDenEq": {"type": "number"},
-        "buildingLNightEq": {"type": "number"},
-        "buildingHabitants": {"type": "integer"},
-        "buildingImmissionPoints": {"type": "integer"},
-        "remark": {"type": "string"}
+        "$ref": "#/definitions/noise-attributes"
       },
-      "address": {
-        "type": "object",
-        "properties": {
-          "CountryName": {"type": "string"},
-          "LocalityName": {"type": "string"},
-          "ThoroughfareNumber": {"type": "string"},
-          "ThoroughfareName": {"type": "string"},
-          "PostalCode": {"type": "string"},
-          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
-        }
-      },
+       "address": {
+         "$ref": "#/definitions/address"
+      }, 
       "children": {
         "type": "array",
         "items": {"type": "string"}
@@ -84,54 +89,14 @@
     "type": "object",
     "properties": {
       "type": { "enum": ["BuildingPart"] },
-      "attributes": {
-        "type": "object",
-        "properties": {
-          "creationDate" : {"type": "string"},
-          "terminationDate" : {"type": "string"},
-          "class": {"type": "string"},
-          "function": {"type": "string"},
-          "usage": {"type": "string"},
-          "measuredHeight": { "type": "number"},
-          "roofType": { "type": "string"},
-          "storeysAboveGround": { "type": "integer"},
-          "storeysBelowGround": { "type": "integer"},
-          "storeyHeightsAboveGround": { 
-            "type": "array",
-            "items": {"type": "number"}
-          },
-          "storeyHeightsBelowGround": { 
-            "type": "array",
-            "items": {"type": "number"}
-          },
-          "yearOfConstruction": { "type": "integer"},
-          "yearOfDemolition": { "type": "integer"}
-        }
+	  "attributes": { 
+      	"$ref": "#/definitions/building-attributes"  
       },
       "noise-attributes": {
-        "buildingReflection": {"type": "string"},
-        "buildingReflectionCorrection": {"type": "number"},
-        "buildingLDenMax": {"type": "number"},
-        "buildingLDenMin": {"type": "number"},
-        "buildingLNightMax": {"type": "number"},
-        "buildingLNightMin": {"type": "number"},
-        "buildingLDenEq": {"type": "number"},
-        "buildingLNightEq": {"type": "number"},
-        "buildingHabitants": {"type": "integer"},
-        "buildingImmissionPoints": {"type": "integer"},
-        "remark": {"type": "string"}
+        "$ref": "#/definitions/noise-attributes"
       },
       "address": {
-        "type": "object",
-        "properties": {
-          "CountryName": {"type": "string"},
-          "LocalityName": {"type": "string"},
-          "ThoroughfareNumber": {"type": "string"},
-          "ThoroughfareName": {"type": "string"},
-          "PostalCode": {"type": "string"},
-          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
-        },
-        "additionalProperties": false
+         "$ref": "#/definitions/address"
       },              
       "children": {
         "type": "array",
