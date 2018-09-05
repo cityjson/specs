@@ -149,7 +149,10 @@
     "featureData": {
       "type": "object",
       "properties": {
-        "featureCount": {
+        "uniqueFeatureCount": {
+          "type": "integer"
+        },
+        "aggregateFeatureCount": {
           "type": "integer"
         },
         "presentLoDs": {
@@ -207,9 +210,6 @@
           "extraTerrestrial",
           "disaster"
         ]
-      },
-      "datasetDescription": {
-        "type": "string"
       },
       "distributionFormatVersion": {
         "type": "string",
@@ -280,15 +280,42 @@
           "type": "object",
           "properties": {
             "source": {
-              "type": "string"
-            },
+              "description": "string",
+              "sourceSpatialResolution": "number",
+              "sourceReferenceSystem": "string",
+              "sourceCitation": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
+                },
+              "sourceMetadata": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
+                },
+              "scope": "string"
+              },
             "processStep": {
-              "type": "string"
+              "description": "string",
+              "rational": "string",
+              "stepDateTime": {
+                "type": "string",
+                "format": "date"
+              },
+              "processor": {
+                "$ref": "#/definitions/contactDetails"
+              },
+              "reference": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
+              },
+              "scope": "string"
             }
           }
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": {
           "type": "number"
@@ -296,6 +323,16 @@
         "minItems": 6,
         "maxItems": 6
       },
+      "temporalExtent" : {
+        "startDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date"
+        }
+        },
       "abstract": {
         "type": "string"
       },
@@ -382,6 +419,20 @@
         ]
       },
       "materials": {
+        "type": "string",
+        "enum": [
+          "present",
+          "absent"
+        ]
+      },
+      "xlinks": {
+        "type": "string",
+        "enum": [
+          "present",
+          "absent"
+        ]
+      },
+      "externalReferences": {
         "type": "string",
         "enum": [
           "present",
