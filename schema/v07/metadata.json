@@ -425,13 +425,6 @@
           "absent"
         ]
       },
-      "xlinks": {
-        "type": "string",
-        "enum": [
-          "present",
-          "absent"
-        ]
-      },
       "externalReferences": {
         "type": "string",
         "enum": [
