@@ -23,3 +23,5 @@ libthirdparty.a
 /extensions/cityobjects.json
 /extensions/cityjson.json
 /extensions/appearance.json
+/example-datasets/misc/out.obj
+/example-datasets/dummy-values/out.obj
