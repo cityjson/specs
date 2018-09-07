@@ -49,7 +49,7 @@
         "processStep": "3Dfier processing"
       }
     ],
-    "bbox": [
+    "geographicalExtent": [
       84710,
       446846,
       -5,
