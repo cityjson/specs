@@ -1,4 +1,4 @@
-{
+{ 
   "title": "CityJSON metadata schema v0.7",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
@@ -182,6 +182,9 @@
       "datasetLanguage": {
         "type": "string"
       },
+      "datasetCharacterSet": {
+        "type": "string"
+      },
       "datasetTopicCategory": {
         "type": "string",
         "description": "from ISO19115 codelist",
@@ -231,18 +234,6 @@
         "type": "string",
         "pattern": "^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
       },
-      "temporalInformation": {
-        "type": "object",
-        "properties": {
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "temporalDescription": {
-            "type": "string"
-          }
-        }
-      },
       "onlineResource": {
         "type": "string",
         "format": "uri",
@@ -279,10 +270,24 @@
         "items": {
           "type": "object",
           "properties": {
+            "statement": {"type": "string"},
+            "scope": {"type": "string"},
+            "additionalDocumentation" : {
+            	"type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
+            },
+            "featureIDs":{
+            	"type": "array",
+            	"items": {"type": "string"}
+            },
             "source": {
               "description": "string",
-              "sourceSpatialResolution": "number",
-              "sourceReferenceSystem": "string",
+              "sourceSpatialResolution": "string",
+              "sourceReferenceSystem": {
+                  "type": "string",
+			      "pattern": "^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
+              },
               "sourceCitation": {
                 "type": "string",
                 "format": "uri",
@@ -297,10 +302,10 @@
               },
             "processStep": {
               "description": "string",
-              "rational": "string",
+              "rationale": "string",
               "stepDateTime": {
                 "type": "string",
-                "format": "date"
+                "format": "date-time"
               },
               "processor": {
                 "$ref": "#/definitions/contactDetails"
@@ -312,7 +317,9 @@
               },
               "scope": "string"
             }
-          }
+          },
+          "required": ["featureIDs","source", "processStep"],
+          "additionalProperties": false
         }
       },
       "geographicalExtent": {
@@ -324,15 +331,18 @@
         "maxItems": 6
       },
       "temporalExtent" : {
-        "startDate": {
-          "type": "string",
-          "format": "date"
-        },
-        "endDate": {
-          "type": "string",
-          "format": "date"
+		"type": "object",
+        "properties": {        
+			"startDate": {
+			  "type": "string",
+			  "format": "date-time"
+			},
+			"endDate": {
+			  "type": "string",
+			  "format": "date-time"
+			}
         }
-        },
+      },
       "abstract": {
         "type": "string"
       },
@@ -425,13 +435,6 @@
           "absent"
         ]
       },
-      "externalReferences": {
-        "type": "string",
-        "enum": [
-          "present",
-          "absent"
-        ]
-      },
       "presentLoDs": {
         "$ref": "#/definitions/presentLoDs"
       },
@@ -506,6 +509,8 @@
           }
         }
       }
-    }
-  }
+    },
+     "additionalProperties": false
+  },
+  "additionalProperties": false
 }
