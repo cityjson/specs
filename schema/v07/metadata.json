@@ -1,4 +1,4 @@
-{
+{ 
   "title": "CityJSON metadata schema v0.7",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
@@ -149,7 +149,10 @@
     "featureData": {
       "type": "object",
       "properties": {
-        "featureCount": {
+        "uniqueFeatureCount": {
+          "type": "integer"
+        },
+        "aggregateFeatureCount": {
           "type": "integer"
         },
         "presentLoDs": {
@@ -177,6 +180,9 @@
         "description": "the name of the area for instance"
       },
       "datasetLanguage": {
+        "type": "string"
+      },
+      "datasetCharacterSet": {
         "type": "string"
       },
       "datasetTopicCategory": {
@@ -208,9 +214,6 @@
           "disaster"
         ]
       },
-      "datasetDescription": {
-        "type": "string"
-      },
       "distributionFormatVersion": {
         "type": "string",
         "pattern": "\\d.\\d"
@@ -230,18 +233,6 @@
       "referenceSystem": {
         "type": "string",
         "pattern": "^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
-      },
-      "temporalInformation": {
-        "type": "object",
-        "properties": {
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "temporalDescription": {
-            "type": "string"
-          }
-        }
       },
       "onlineResource": {
         "type": "string",
@@ -279,22 +270,78 @@
         "items": {
           "type": "object",
           "properties": {
-            "source": {
-              "type": "string"
+            "statement": {"type": "string"},
+            "scope": {"type": "string"},
+            "additionalDocumentation" : {
+            	"type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
             },
+            "featureIDs":{
+            	"type": "array",
+            	"items": {"type": "string"}
+            },
+            "source": {
+              "description": "string",
+              "sourceSpatialResolution": "string",
+              "sourceReferenceSystem": {
+                  "type": "string",
+			      "pattern": "^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
+              },
+              "sourceCitation": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
+                },
+              "sourceMetadata": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
+                },
+              "scope": "string"
+              },
             "processStep": {
-              "type": "string"
+              "description": "string",
+              "rationale": "string",
+              "stepDateTime": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "processor": {
+                "$ref": "#/definitions/contactDetails"
+              },
+              "reference": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^(https?|ftp)://"
+              },
+              "scope": "string"
             }
-          }
+          },
+          "required": ["featureIDs","source", "processStep"],
+          "additionalProperties": false
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": {
           "type": "number"
         },
         "minItems": 6,
         "maxItems": 6
+      },
+      "temporalExtent" : {
+		"type": "object",
+        "properties": {        
+			"startDate": {
+			  "type": "string",
+			  "format": "date-time"
+			},
+			"endDate": {
+			  "type": "string",
+			  "format": "date-time"
+			}
+        }
       },
       "abstract": {
         "type": "string"
@@ -462,6 +509,8 @@
           }
         }
       }
-    }
-  }
+    },
+     "additionalProperties": false
+  },
+  "additionalProperties": false
 }

@@ -7,15 +7,11 @@
     "datasetReferenceDate": "2011-02-28",
     "geographicLocation": "Chibougamau, Canada",
     "datasetLanguage": "English",
+    "datasetCharacterSet": "UTF-8",
     "datasetTopicCategory": "geoscientificInformation",
-    "datasetDescription": "3D city model with different city features",
     "distributionFormatVersion": "0.7",
     "referenceSystem": "urn:ogc:def:crs:EPSG::4326",
     "spatialRepresentationType": "vector",
-    "temporalInformation": {
-      "timestamp": "2017-01-11T18:25:43",
-      "temporalDescription": "here here.."
-    },
     "onlineResource": "https://github.com/tudelft3d/cityjson/",
     "fileIdentifier": "example_metadata.json",
     "datasetPointOfContact": {
@@ -41,15 +37,26 @@
     },
     "lineage": [
       {
-        "source": "Point cloud AHN3",
-        "processStep": "3Dfier processing"
-      },
-      {
-        "source": "2D BGT",
-        "processStep": "3Dfier processing"
+      	"featureIDs": ["myterrain01"],
+      	"source": {
+      		"description": "Source of Terrain Data",
+             "sourceSpatialResolution": "10 points/m2",
+             "sourceReferenceSystem": "urn:ogc:def:crs:EPSG::4326"
+      	},
+      	"processStep": {
+      		"description" : "Processing of Terrain Data using 3dfier",
+      		"processor": {
+      			"contactName": "3D Geoinformation Group",
+				"phone": "+31-6666666666",
+			    "address": "Delft University of Technology, the Netherlands",
+			    "emailAddress": "3d.bk@tudelft.nl",
+			    "contactType": "organization",
+			    "website": "https://3d.bk.tudelft.nl"
+      		}
+      	}
       }
     ],
-    "bbox": [
+    "geographicalExtent": [
       84710,
       446846,
       -5,
@@ -57,7 +64,11 @@
       446944,
       40
     ],
-    "abstract": "la la la la....",
+    "temporalExtent": {
+      "timestamp": "2017-01-11T18:25:43",
+      "temporalDescription": "here here.."
+    },
+    "abstract": "3D city model with different city features",
     "specificUsage": "for environmental simulations",
     "keywords": [
       "cityjson",
@@ -83,7 +94,8 @@
     },
     "cityfeatureMetadata": {
       "Building": {
-        "featureCount": 2,
+        "uniqueFeatureCount": 2,
+        "aggregateFeatureCount": 2,
         "presentLoDs": {
           "1.1": 1,
           "2.0": 1,
@@ -93,14 +105,16 @@
         "BuildingInstallations": 1
       },
       "TINRelief": {
-        "featureCount": 1,
+        "uniqueFeatureCount": 1,
+        "aggregateFeatureCount": 1,
         "presentLoDs": {
           "2.0": 1
         },
         "triangleCount": 6
       },
       "WaterBody": {
-        "featureCount": 2,
+        "uniqueFeatureCount": 2,
+        "aggregateFeatureCount": 2,
         "presentLoDs": {
           "1.0": 1,
           "2.0": 1
