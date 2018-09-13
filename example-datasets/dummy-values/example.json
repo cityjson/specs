@@ -7,10 +7,8 @@
     },
     "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
     "datasetTitle": "what is this dataset?",
-    "datasetAbstract": "what is this dataset?",
-    "datasetReferenceDate": "2011-02-28",
-    "copyright": "CC0",
-    "pointOfContact": "Hugo Ledoux <h.ledoux@tudelft.nl>"
+    "abstract": "what is this dataset?",
+    "datasetReferenceDate": "2011-02-28"
   },
   "CityObjects": {
     "mygroup1": {

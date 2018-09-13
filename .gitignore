@@ -25,3 +25,4 @@ libthirdparty.a
 /extensions/appearance.json
 /example-datasets/misc/out.obj
 /example-datasets/dummy-values/out.obj
+/example-datasets/dummy-values/out.json
