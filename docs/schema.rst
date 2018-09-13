@@ -5,8 +5,8 @@ Schema validation
 CityJSON schema download
 ------------------------
 
-version 0.7: 
-- `available on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema>`_
+version 0.8: 
+- `available on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema/v08/>`_
 
 version 0.6: 
 - :download:`download cityjson-v06.schema.zip <../schema/v06/cityjson-v06-schema.zip>`
@@ -36,7 +36,7 @@ The software `cjio <https://github.com/tudelft3d/cjio>`_ can validate a CityJSON
 - are there duplicate keys (IDs) for the City Objects? If yes then an error is returned.
 - are there duplicate or orphan vertices? If yes a warning is returned
 
-To install you need Python 3 and just ``pip install cjio``
+To install you need Python 3 and just ``pip install cjio``, the schemas of versions 0.6+ are included with cjio.
 
 To validate a file: ``cjio myfile.json validate``
 

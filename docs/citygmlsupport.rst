@@ -29,7 +29,7 @@ The types of objects stored in CityGML are grouped into different modules, and C
 #. **Groups**: everything is supported, except that groups can only be for grouping City Objects (and not surfaces or parts of City Objects as it can be in CityGML)
 #. **Appearance**: The CityGML class ``GeoreferencedTexture`` is not supported. The CityGML class ``TexCoordGen`` is not supported, ie one must specify the UV coordinates in the texture files. Also, the texture files have to be local and put in folder named ``"appearances"`` located in the same folder as the CityJSON file (thus requests to web services as is the case with CityGML are not supported).
 
-`ADEs (Application Domain Extensions) <https://www.citygml.org/ade/>`_ are also supported since CityJSON v0.7, see :doc:`extensions`.
+`ADEs (Application Domain Extensions) <https://www.citygml.org/ade/>`_ are also supported from CityJSON v0.8, see :doc:`extensions`.
 
 .. note::
   CityJSON has built-in support for the metadata of a dataset, while, surprisingly, CityGML does not.

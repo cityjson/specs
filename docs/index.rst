@@ -14,7 +14,7 @@ CityJSON
 
   {
     "type": "CityJSON",
-    "version": "0.7",
+    "version": "0.8",
     "extensions": {
       "+NoiseBuilding": "e_noise.json",
     },

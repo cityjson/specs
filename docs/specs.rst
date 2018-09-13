@@ -24,8 +24,8 @@ A CityJSON object represents one 3D city model of a given area, this model may c
   #. one member with the name ``"CityObjects"``. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one dataset/file).
   #. one member with the name ``"vertices"``, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format `Wavefront OBJ <https://en.wikipedia.org/wiki/Wavefront_.obj_file>`_ is basically reused.
 
-- A CityJSON may have one member with the name ``"metadata"``, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
 - A CityJSON may have one member with the name ``"extensions"``, used if there are Extensions used in the file, see the page :doc:`extensions` for all the details.
+- A CityJSON may have one member with the name ``"metadata"``, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
 - A CityJSON may have one member with the name ``"transform"``, whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
 - A CityJSON may have one member with name ``"appearance"``, the value may contain JSON objects representing the textures and/or materials of surfaces.
 - A CityJSON may have one member with name ``"geometry-templates"``, the value may contain JSON objects representing the templates that can be reused by different City Objects (usually for trees). This is the concept of "implicit geometries" in CityGML.
@@ -37,7 +37,7 @@ The minimal valid CityJSON object is thus:
 
   {
     "type": "CityJSON",
-    "version": "0.7",
+    "version": "0.8",
     "CityObjects": {},
     "vertices": []
   }
@@ -48,7 +48,7 @@ An "empty" CityJSON will look like this:
 
   {
     "type": "CityJSON",
-    "version": "0.7",
+    "version": "0.8",
     "extensions": {},
     "metadata": {},
     "transform": {
@@ -753,8 +753,31 @@ Metadata
 --------
 
 The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows.
-The members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``presentLoDs`` ``thematicModels``, because they are useful in 3D in a city modelling context).
-To see all the possible ones, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
+Many of the members in `ISO19115 <https://www.iso.org/standard/53798.html>`_ are used, and a few are added (eg ``presentLoDs`` ``thematicModels``, because they are useful in 3D in a city modelling context).
+To see all the possible ones, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version, and look at the demo file:
+
+:download:`example_metadata.json <../example-datasets/dummy-values/example_metadata.json>`
+
+
+.. code-block:: js
+
+  "metadata": {
+    "datasetTitle": "3D city model of Chibougamau, Canada",
+    "datasetReferenceDate": "1977-02-28",
+    "geographicLocation": "Chibougamau, Québec, Canada",
+    "referenceSystem": "urn:ogc:def:crs:EPSG::2355",
+    "geographicalExtent": [ 84710, 346846, 5, 84757, 346944, 40 ],
+    "datasetPointOfContact": {
+      "contactName": "3D Geoinformation Group",
+      "phone": "+31-6666666666",
+      "address": "Delft University of Technology, the Netherlands",
+      "emailAddress": "elvis@tudelft.nl",
+      "contactType": "organization",
+      "website": "https://3d.bk.tudelft.nl"
+    },
+    "metadataStandard": "ISO 19115 - Geographic Information - Metadata",
+    "metadataStandardVersion": "ISO 19115:2014(E)"
+  }
 
 
 ``"referenceSystem"``
@@ -776,28 +799,16 @@ Be aware that the CRS should be a three-dimensional one, ie the elevation/height
   Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
 
 
-``"bbox"`` (extent of the dataset)
-**********************************
+``"geographicalExtent"``
+************************
 While this can be extracted from the dataset itself, it is useful to store it. 
 It may be stored as an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
 
 .. code-block:: js
 
   "metadata": {
-    "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
+    "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
   }
-
-
-``"keywords"``
-**************
-An array of keywords of type ``"string"`` may be listed:
-
-.. code-block:: js
-
-  "metadata": {
-    "keywords": ["energy", "solar potential"]
-  }
-
 
 ``"geographicLocation"``
 ************************
@@ -806,7 +817,7 @@ The name of an area or a city.
 .. code-block:: js
 
   "metadata": {
-    "geographicLocation": "TU Delft campus"
+    "geographicLocation": "Chibougamau, Québec, Canada"
   }
 
 
@@ -820,31 +831,34 @@ A one-word category, the possible values are enumerated in the Table B.3.30 of t
     "datasetTopicCategory": "planningCadastre"
   }
 
-
-``"presentLODs"``
-*****************
-An array of all the LoDs present in the file, with the number of City Objects represented at that level
+``"lineage"``
+**************************
+It is possible to give the lineage of one or more city objects in the datasets.
+This allows us to document how certain city objects were reconstructed; if many were with the same method then their IDs should simply be listed in ``"featureID"``.
 
 .. code-block:: js
 
-  "metadata": {
-    "presentLODs": {
-      "1.0": 1,
-      "2.0": 3,
-      "1.1": 1,
-      "2.1": 1 
+ "lineage": [
+    {
+      "featureIDs": ["id-1", "id-2", "id-8235"],
+      "source": {
+        "description": "Source of Terrain Data",
+           "sourceSpatialResolution": "10 points/m2",
+           "sourceReferenceSystem": "urn:ogc:def:crs:EPSG::4326"
+      },
+      "processStep": {
+        "description" : "Processing of Terrain Data using 3dfier",
+        "processor": {
+          "contactName": "3D Geoinformation Group",
+      "phone": "+31-6666666666",
+        "address": "Delft University of Technology, the Netherlands",
+        "emailAddress": "3d.bk@tudelft.nl",
+        "contactType": "organization",
+        "website": "https://3d.bk.tudelft.nl"
+        }
+      }
     }
-  }
-
-
-Other properties
-****************
-To view all the possible properties, look at the schema file `metadata.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_ of a given version.
-
-Or have a look at the following example file:
-
-:download:`download example_metadata.json <../example-datasets/dummy-values/example_metadata.json>`
-
+  ]
 
 .. note::
   
