@@ -38,33 +38,7 @@ It contains:
 
 #. the original CityGML file with textures
 #. the CityJSON file
-#. the compressed CityJSON file
 
-----
-
-"geoRES" dataset
-----------------
-
-.. image:: _static/dataset_geores.jpg
-   :width: 40%
-
-
-One of the example dataset on the `official CityGML website <https://www.citygml.org/samplefiles/>`_, it contains several CityGML classes with textures:
-
-#. Buildings 
-#. Relief 
-#. Vegetation
-#. Water
-#. LandUse 
-
-
-- :download:`download geores.zip <../example-datasets/geoRES/geores.zip>`
-
-It contains:
-
-#. the original CityGML file with textures
-#. the CityJSON file
-#. the compressed CityJSON file
 
 ----
 
@@ -83,5 +57,4 @@ It contains:
 
 #. the original CityGML file with textures
 #. the CityJSON file
-#. the compressed CityJSON file
 
