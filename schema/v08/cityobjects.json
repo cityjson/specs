@@ -33,7 +33,7 @@
         "description": "the IDs of the CityObjects members of that group",
         "items": {"type": "string"}
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -80,7 +80,7 @@
         "description": "the IDs of the TunnelPart and TunnelInstallation of this Tunnel",
         "items": {"type": "string"}
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -127,7 +127,7 @@
         "description": "the IDs of the TunnelInstallation of this TunnelPart",
         "items": {"type": "string"}
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -167,7 +167,7 @@
         "type": "string",
         "description": "the ID of the parent Tunnel"
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -226,7 +226,7 @@
         "description": "the IDs of the BridgePart/Installation/ConstructionElement of this Bridge",
         "items": {"type": "string"}
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -285,7 +285,7 @@
         "type": "string",
         "description": "the ID of the parent Bridge"
       },      
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -321,7 +321,7 @@
           "usage": {"type": "string"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -365,7 +365,7 @@
           "usage": {"type": "string"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -439,7 +439,7 @@
         "description": "the IDs of the BuildingPart/Installation of this Building",
         "items": {"type": "string"}
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -509,7 +509,7 @@
         "type": "string",
         "description": "the ID of the parent Building"
       },      
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -550,7 +550,7 @@
         "description": "the ID of the parent Tunnel"
       },
 
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -594,7 +594,7 @@
           }
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -632,7 +632,7 @@
           }
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -670,7 +670,7 @@
           }
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -705,7 +705,7 @@
           "usage": {"type": "string"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -734,7 +734,7 @@
           "usage": {"type": "string"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -772,7 +772,7 @@
           "averageHeight": {"type": "number"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -810,7 +810,7 @@
           "crownDiameter": {"type": "number"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -850,7 +850,7 @@
           "usage": {"type": "string"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -884,7 +884,7 @@
           "usage": {"type": "string"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
@@ -924,7 +924,7 @@
           "usage": {"type": "string"}
         }
       },
-      "bbox": {
+      "geographicalExtent": {
         "type": "array",
         "items": { "type": "number" },
         "minItems": 6,    
