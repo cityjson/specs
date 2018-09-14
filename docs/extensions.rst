@@ -109,7 +109,7 @@ If a CityJSON file contains City Objects not in the core, then the CityJSON must
 
   {
     "type": "CityJSON",
-    "version": "0.7",
+    "version": "0.8",
     "extensions": {
       "+TallBuilding": "https://www.hugo.com/extensions/improved_buildings.json",
       "+Statue": "https://www.hugo.com/extensions/statues.json"
@@ -173,7 +173,7 @@ A CityJSON file containing this new City Object would look like this:
 
   {
     "type": "CityJSON",
-    "version": "0.7",
+    "version": "0.8",
     "extensions": {
       "+NoiseBuilding": "e_noise.json" 
     },
