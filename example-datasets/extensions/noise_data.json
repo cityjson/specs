@@ -1,6 +1,6 @@
 {
   "type": "CityJSON",
-  "version": "0.7",
+  "version": "0.8",
   "extensions": {
     "+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
     "+NoiseBuildingPart": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
@@ -34,7 +34,7 @@
           "type": "MultiLineString",
           "lod": 0,
           "boundaries": [
-            [2, 3, 5], [77, 55, 212]
+            [2, 3, 5], [7, 5, 12]
           ]
         }      
       ],
@@ -50,7 +50,7 @@
           "type": "MultiLineString",
           "lod": 0,
           "boundaries": [ 
-            [2, 3, 5], [77, 55, 212]
+            [2, 3, 5], [7, 2, 12]
           ]
         }      
       ],
@@ -109,6 +109,5 @@
     [2.0, 0.0, 1.0],
     [2.0, 1.0, 1.0],
     [1.0, 1.0, 1.0]
-
   ]
 }
