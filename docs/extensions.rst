@@ -299,7 +299,7 @@ Thus, `cjio <https://github.com/tudelft3d/cjio>`_ (with the option ``--validate`
 
   - copy all the CityJSON schemas in a given folder (say ``/home/elvis/noise_extension/``), 
   - add your new schema to this folder (**important**, all schemas need to be in the same folder!)
-  - and then:
+  - and then use that command (do not forget the option ``--extensions`` to also validate the Extensions used in the file):
 
 .. code-block:: bash
 
