@@ -72,12 +72,6 @@
           "format": "email"
         }
       },
-      "required": [
-        "contactName",
-        "phone",
-        "address",
-        "emailAddress"
-      ],
       "oneOf": [
         {
           "type": "object",
@@ -119,8 +113,6 @@
             }
           },
           "required": [
-            "role",
-            "organization",
             "contactType"
           ]
         },
@@ -140,7 +132,6 @@
             }
           },
           "required": [
-            "website",
             "contactType"
           ]
         }
@@ -318,7 +309,6 @@
               "scope": "string"
             }
           },
-          "required": ["featureIDs","source", "processStep"],
           "additionalProperties": false
         }
       },
