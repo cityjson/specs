@@ -12,18 +12,17 @@ Changelog
 
 ----
 
-[0.7] - xxxx-xx-xx
+[0.8] - xxxx-xx-xx
 ------------------
 Added
 *****
-- Extensions, aka ADEs in the CityGML world, are now supported. The page 'extension' explains how to create one (its schema), how to validate your data, etc.
+- Extensions, aka ADEs in the CityGML world, are now supported. The page 'Extensions' explains how to create one (its schema), how to validate your data, etc.
 
 Changed
 *******
 - introduction of a concept that was implicit but never mentioned: City Objects can be either of type '1st-level' or '2nd-level' (a Building would be 1st-level, and a BuildingPart 2nd-level). This concept is now for all City Object, including those that are defined in an Extension. This means that the properties "Parts" and "Installations" dissapear from the schema of Building/Bridge/Tunnel, and are replaced by a single one: "children". Also, a child (2nd-level City Object) needs to have a link to its parent City Object (with "parent").
 - metadata has more possibilities, it's been extended to 3D city models needs. Some fields from the previous metadata properties were modified, be aware. 
-- Observe that the software cjio (https://github.com/tudelft3d/cjio) offers an option '--upgrade_version' (from v0.6 --> v0.7) that takes care of the changes above. Simply run the file and it's v0.7 automagically.
-
+- Observe that the software cjio (https://github.com/tudelft3d/cjio) offers an option '--upgrade_version' (from v0.6 --> v0.8) that takes care of the changes above (except the metadata, you'll need to adjust manually, sorry I am not coding all this). Simply run a v0.6 file and it's upgraded.
 
 ----
 
