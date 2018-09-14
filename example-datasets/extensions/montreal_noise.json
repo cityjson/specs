@@ -1,9 +1,7 @@
 {
     "type": "CityJSON",
-    "version": "0.7",
-    "extensions": {
-        "+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json"
-      },
+    "version": "0.8",
+    "extensions": {"+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json"},
     "CityObjects": {
         "un": {
             "type": "+NoiseBuilding",
@@ -10166,7 +10164,7 @@
             32.624
         ]
     ],
-    "metadata": {"bbox": [
+    "metadata": {"geographicalExtent": [
         300364.793,
         5041256.096,
         16.013,
