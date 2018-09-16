@@ -87,20 +87,18 @@ A new name for the City Object (for the class) must be given.
 It should be observed that since JSON schema does not allow inheritance, the only way to extend a City Object is to define an entirely new one (with a new name, eg ``"+NoiseBuilding"``).
 This is done by copying the schema of the parent City Object, and by extending it. 
 
-.. important::
+.. admonition:: Rules to follow to define new City Objects
 
   The challenge is creating Extensions that will not break the software packages (viewers, spatial analysis, etc) that already read and process CityJSON.
   While one could define a new City Object and document it, if this new object doesn't follow the rules below then it will mean that new specific software needs to be built for it; this is not the idea.
 
+    1. The name of a new City Object must begin with a ``+``, eg ``"+NoiseBuilding"``
+    2. A new City Object must conform to the rules of CityJSON, ie it must contain a property ``"type"`` and one ``"geometry"``. If the object contains appearances, the same schemes should be used so that the new City Objects can be processed by the tools without modification. 
+    3. All the geometries must be in the property ``"geometry"``, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files (eg `cjio <https://github.com/tudelft3d/cjio>`_ and `azul <https://github.com/tudelft3d/azul>`_) will be working without modifications. 
+    4. If a new City Object needs to store more geometries (see below for an example), then a new City Object needs to be defined using the same structure of parent-children, as used by ``"Building"`` and ``"BuildingPart"``.
+    5. The reuse of types defined in CityJSON, eg ``"Solid"`` or semantic surfaces, is allowed.
+    6. To define new semantic surfaces, simply add a ``+`` to its name, eg ``"+ThermalSurface"``.
 
-When defining new City Objects, the following rules should be followed:
-
-  1. The name of a new City Object must begin with a ``+``, eg ``"+NoiseBuilding"``
-  2. A new City Object must conform to the rules of CityJSON, ie it must contain a property ``"type"`` and one ``"geometry"``. If the object contains appearances, the same schemes should be used so that the new City Objects can be processed by the tools without modification. 
-  3. All the geometries must be in the property ``"geometry"``, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files (eg `cjio <https://github.com/tudelft3d/cjio>`_ and `azul <https://github.com/tudelft3d/azul>`_) will be working without modifications. 
-  4. If a new City Object needs to store more geometries (see below for an example), then a new City Object needs to be defined using the same structure of parent-children, as used by ``"Building"`` and ``"BuildingPart"``.
-  5. The reuse of types defined in CityJSON, eg ``"Solid"`` or semantic surfaces, is allowed.
-  6. To define new semantic surfaces, simply add a ``+`` to its name, eg ``"+ThermalSurface"``.
 
   
 If a CityJSON file contains City Objects not in the core, then the CityJSON must contain an extra member called ``"extensions"`` whose values are the name-value pairs of the new City Objects and the name of the file (this can be a URI where the schema is hosted).
