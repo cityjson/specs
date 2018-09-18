@@ -7,13 +7,13 @@ Extensions
 The CityGML data model allows us to represent the most common city features, but sometimes practitioners may want to model additional features and/or add certain attributes to the data model.
 For this, CityGML has the concept of `ADEs (Application Domain Extensions) <https://www.citygml.org/ade/>`_.
 An ADE is defined in an extra `XML Schema <https://en.wikipedia.org/wiki/XML_schema/>`_ (XSD file) with its own namespace, and often inheritance is used to refine the classes of the CityGML data model, to define entirely new classes, and to modify any class by adding for instance new geometries and complex attribute anywhere in a City Model.
-The ADE allows us to document in a structured way, and also to validate, an instance CityGML document that would contain a both classes from the core model and from the ADEs.
+The ADE allows us to document in a structured way, and also to validate, an instance of a CityGML document that would contain both classes from the core model and from the ADEs.
 
 -------------------
 CityJSON Extensions
 -------------------
 
-CityJSON uses `JSON Schemas <http://json-schema.org/>`_ to document and validate the data model, and these are less powerful and less flexible than XML Schemas.
+CityJSON uses `JSON Schemas <http://json-schema.org/>`_ to document and validate the data model, and these are less flexible than XML Schemas.
 Inheritance and namespaces are for instance not supported; schemas should be seen as basically validating the syntax of a JSON document.
 
 CityJSON nevertheless allows its data model to be extended with what is called *Extensions*.
@@ -25,7 +25,7 @@ The following cases are possible with CityJSON extensions:
 
 .. important::
 
-  While Extensions are less flexible than CityGML ADEs (ie they have a narrower scope, and less customisation is possible), it should be noticed that the flexibility of ADEs comes at a price: standard software (eg viewer or spatial analysis software) will not process correctly files containing ADEs since specific code needs to be written. CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, and no changes in the code should be required. This is achieved by enforcing a set of simple rules when adding new complex attributes and City Objects (as defined below); if these rules are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
+  While Extensions are less flexible than CityGML ADEs (ie they have a narrower scope and less customisation is possible), it should be noted that the flexibility of ADEs come at a price: standard software (eg viewer or spatial analysis software) will not process correctly the files containing ADEs since specific code needs to be written. CityJSON Extensions are designed as such that they can be read and processed by standard CityJSON software, often no changes in the code is required. This is achieved by enforcing a set of simple rules, as defined below, when adding new complex attributes and City Objects; if these are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
 
 
 1. Adding new (complex) attributes to City Objects
@@ -85,12 +85,12 @@ Since all City Objects are documented in the schemas of CityJSON (in `cityobject
 A new name for the City Object (for the class) must be given.
   
 It should be observed that since JSON schema does not allow inheritance, the only way to extend a City Object is to define an entirely new one (with a new name, eg ``"+NoiseBuilding"``).
-This is done by copying the schema of the parent City Object, and by extending it. 
+This is done by copying the schema of the parent City Object and extending it. 
 
 .. admonition:: Rules to follow to define new City Objects
 
   The challenge is creating Extensions that will not break the software packages (viewers, spatial analysis, etc) that already read and process CityJSON.
-  While one could define a new City Object and document it, if this new object doesn't follow the rules below then it will mean that new specific software needs to be built for it; this is not the idea.
+  While one could define a new City Object and document it, if this new object doesn't follow the rules below then it will mean that new specific software needs to be built for it; this would go against the fundamental ideas behind CityJSON.
 
     1. The name of a new City Object must begin with a ``+``, eg ``"+NoiseBuilding"``
     2. A new City Object must conform to the rules of CityJSON, ie it must contain a property ``"type"`` and one ``"geometry"``. If the object contains appearances, the same schemes should be used so that the new City Objects can be processed by the tools without modification. 
@@ -122,7 +122,7 @@ Mapping of the Noise ADE to a CityJSON Extension
 ------------------------------------------------
 
 To illustrate the process of creating a new CityJSON extension, we use the Noise ADE, which is the example case in the `CityGML 2.0 documentation <https://portal.opengeospatial.org/files/?artifact_id=47842>`_ (Section 10.13.2 on p. 151 describes it; and Annex H on p. 305 gives more implementation details).
-The XSDs and some test datasets are available `there <http://schemas.opengis.net/citygml/examples/2.0/ade/noise-ade/>`_.
+The XSDs and some test datasets are available `here <http://schemas.opengis.net/citygml/examples/2.0/ade/noise-ade/>`_.
 
 The resulting files for the Noise Extension are available:
   - :download:`download noise.json <../schema/v08/extensions/noise.json>`
