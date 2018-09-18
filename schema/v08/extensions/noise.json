@@ -1,52 +1,52 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "The 'Noise ADE' cityjsonified",
-"definitions": {
-  "noise-attributes": {
-    "buildingReflection": {"type": "string"},
-    "buildingReflectionCorrection": {"type": "number"},
-    "buildingLDenMax": {"type": "number"},
-    "buildingLDenMin": {"type": "number"},
-    "buildingLNightMax": {"type": "number"},
-    "buildingLNightMin": {"type": "number"},
-    "buildingLDenEq": {"type": "number"},
-    "buildingLNightEq": {"type": "number"},
-    "buildingHabitants": {"type": "integer"},
-    "buildingImmissionPoints": {"type": "integer"},
-    "remark": {"type": "string"}
+  "definitions": {
+    "noise-attributes": {
+      "buildingReflection": {"type": "string"},
+      "buildingReflectionCorrection": {"type": "number"},
+      "buildingLDenMax": {"type": "number"},
+      "buildingLDenMin": {"type": "number"},
+      "buildingLNightMax": {"type": "number"},
+      "buildingLNightMin": {"type": "number"},
+      "buildingLDenEq": {"type": "number"},
+      "buildingLNightEq": {"type": "number"},
+      "buildingHabitants": {"type": "integer"},
+      "buildingImmissionPoints": {"type": "integer"},
+      "remark": {"type": "string"}
+    },
+    "building-attributes": {
+       "creationDate" : {"type": "string"},
+       "terminationDate" : {"type": "string"},
+       "class": {"type": "string"},
+       "function": {"type": "string"},
+       "usage": {"type": "string"},
+       "measuredHeight": { "type": "number"},
+       "roofType": { "type": "string"},
+       "storeysAboveGround": { "type": "integer" },
+       "storeysBelowGround": { "type": "integer" },
+       "storeyHeightsAboveGround": { 
+          "type": "array",
+          "items": {"type": "number"}
+        },
+        "storeyHeightsBelowGround": { 
+          "type": "array",
+          "items": {"type": "number"}
+        },
+        "yearOfConstruction": { "type": "integer"},
+        "yearOfDemolition": { "type": "integer"}
+    },
+    "address" : {
+      "CountryName": {"type": "string"},
+      "LocalityName": {"type": "string"},
+      "ThoroughfareNumber": {"type": "string"},
+      "ThoroughfareName": {"type": "string"},
+      "PostalCode": {"type": "string"},
+      "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+    }
   },
-  "building-attributes": {
-     "creationDate" : {"type": "string"},
-     "terminationDate" : {"type": "string"},
-     "class": {"type": "string"},
-     "function": {"type": "string"},
-     "usage": {"type": "string"},
-     "measuredHeight": { "type": "number"},
-     "roofType": { "type": "string"},
-     "storeysAboveGround": { "type": "integer" },
-     "storeysBelowGround": { "type": "integer" },
-     "storeyHeightsAboveGround": { 
-        "type": "array",
-        "items": {"type": "number"}
-      },
-      "storeyHeightsBelowGround": { 
-        "type": "array",
-        "items": {"type": "number"}
-      },
-      "yearOfConstruction": { "type": "integer"},
-      "yearOfDemolition": { "type": "integer"}
-  },
-  "address" : {
-    "CountryName": {"type": "string"},
-    "LocalityName": {"type": "string"},
-    "ThoroughfareNumber": {"type": "string"},
-    "ThoroughfareName": {"type": "string"},
-    "PostalCode": {"type": "string"},
-    "location": {"$ref": "geomprimitives.json#/MultiPoint"}
-  }
-  
-},
-"+NoiseBuilding": {
+
+  "+NoiseBuilding": {
     "type": "object",
     "properties": {
       "type": { "enum": ["+NoiseBuilding"] },
@@ -73,10 +73,10 @@
         "type": "array",
         "items": {
           "oneOf": [
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"},
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomtemplates.json#/GeometryInstance"}
+            {"$ref": "../geomprimitives.json#/Solid"},
+            {"$ref": "../geomprimitives.json#/CompositeSolid"},
+            {"$ref": "../geomprimitives.json#/MultiSurface"},
+            {"$ref": "../geomtemplates.json#/GeometryInstance"}
           ] 
         }
       }
@@ -116,10 +116,10 @@
         "type": "array",
         "items": {
           "oneOf": [
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"},
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomtemplates.json#/GeometryInstance"}
+            {"$ref": "../geomprimitives.json#/Solid"},
+            {"$ref": "../geomprimitives.json#/CompositeSolid"},
+            {"$ref": "../geomprimitives.json#/MultiSurface"},
+            {"$ref": "../geomtemplates.json#/GeometryInstance"}
           ] 
         }
       }
@@ -159,7 +159,7 @@
         "type": "array",
         "items": {
           "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiLineString"}
+            {"$ref": "../geomprimitives.json#/MultiLineString"}
           ]
         }
       }
@@ -198,14 +198,14 @@
         "type": "array",
         "items": {
           "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiPoint"},
-            {"$ref": "geomprimitives.json#/MultiLineString"},
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/MultiSolid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"},
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/CompositeSurface"},
-            {"$ref": "geomtemplates.json#/GeometryInstance"}
+            {"$ref": "../geomprimitives.json#/MultiPoint"},
+            {"$ref": "../geomprimitives.json#/MultiLineString"},
+            {"$ref": "../geomprimitives.json#/Solid"},
+            {"$ref": "../geomprimitives.json#/MultiSolid"},
+            {"$ref": "../geomprimitives.json#/CompositeSolid"},
+            {"$ref": "../geomprimitives.json#/MultiSurface"},
+            {"$ref": "../geomprimitives.json#/CompositeSurface"},
+            {"$ref": "../geomtemplates.json#/GeometryInstance"}
           ]
         }
       }
