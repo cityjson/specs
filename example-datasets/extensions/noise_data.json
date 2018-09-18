@@ -2,10 +2,10 @@
   "type": "CityJSON",
   "version": "0.8",
   "extensions": {
-    "+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
-    "+NoiseBuildingPart": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
-    "+NoiseCityFurniture": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json",
-    "+NoiseCityFurnitureSegment": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json"
+    "+NoiseBuilding": "noise.json",
+    "+NoiseBuildingPart": "noise.json",
+    "+NoiseCityFurniture": "noise.json",
+    "+NoiseCityFurnitureSegment": "noise.json"
   },
   "CityObjects": {
     "1234": {

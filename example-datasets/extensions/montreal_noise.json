@@ -1,7 +1,7 @@
 {
     "type": "CityJSON",
     "version": "0.8",
-    "extensions": {"+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/e_noise.json"},
+    "extensions": {"+NoiseBuilding": "https://3d.bk.tudelft.nl/cityjson/extensions/noise.json"},
     "CityObjects": {
         "un": {
             "type": "+NoiseBuilding",
