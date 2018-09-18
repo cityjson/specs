@@ -16,7 +16,7 @@ CityJSON
     "type": "CityJSON",
     "version": "0.8",
     "extensions": {
-      "+NoiseBuilding": "e_noise.json",
+      "+NoiseBuilding": "noise.json",
     },
     "metadata": { "referenceSystem": "urn:ogc:def:crs:EPSG::7415" },
     "CityObjects": {

@@ -125,7 +125,7 @@ To illustrate the process of creating a new CityJSON extension, we use the Noise
 The XSDs and some test datasets are available `there <http://schemas.opengis.net/citygml/examples/2.0/ade/noise-ade/>`_.
 
 The resulting files for the Noise Extension are available:
-  - :download:`download e_noise.json <../extensions/e_noise.json>`
+  - :download:`download noise.json <../schema/v08/extensions/noise.json>`
   - :download:`download noise_data.json <../example-datasets/extensions/noise_data.json>`
 
 
@@ -173,7 +173,7 @@ A CityJSON file containing this new City Object would look like this:
     "type": "CityJSON",
     "version": "0.8",
     "extensions": {
-      "+NoiseBuilding": "e_noise.json" 
+      "+NoiseBuilding": "noise.json" 
     },
     "CityObjects": {
       "1234": {
@@ -241,7 +241,7 @@ The steps to follow are thus:
         "type": "array",
         "items": {
           "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiLineString"}
+            {"$ref": "../geomprimitives.json#/MultiLineString"}
           ]
         }
       }
@@ -290,17 +290,27 @@ Validation of files containing extensions
 
 The validation of a CityJSON file containing extensions needs to be performed as a 2-step operation:
   1. The standard validation of all City Objects (except the new ones; those starting with ``"+"`` are ignored at this step); 
-  2. Each new City Object is (individually) validated against its schema defined in the new schema file.
+  2. Each City Object defined in the Extensions is (individually) validated against its schema defined in the new schema file.
 
 While this could be done with any JSON schema validator, resolving all the JSON references could be slightly tricky. 
-Thus, `cjio <https://github.com/tudelft3d/cjio>`_ (with the option ``--validate``) has automated this process:
-
-  - copy all the CityJSON schemas in a given folder (say ``/home/elvis/noise_extension/``), 
-  - add your new schema to this folder (**important**, all schemas need to be in the same folder!)
-  - and then use that command (do not forget the option ``--extensions`` to also validate the Extensions used in the file):
-
+Thus, `cjio <https://github.com/tudelft3d/cjio>`_ (with the option ``--validate``) has automated this process. 
+You just need to add the new schemas in the folder ``/extensions`` in the ``schema/v08/`` folder; ``noise.json`` is already present in the `GitHub repository of CityJSON <https://github.com/tudelft3d/cityjson/tree/master/schema/v08>`_.
+Then specify the folder where the schemas are with the option ``--folder_schemas``.
+  
 .. code-block:: bash
 
-  $ cjio noise_data.json validate --extensions --folder_schemas /home/elvis/noise_extension/
+  $ cjio noise_data.json validate --folder_schemas /home/elvis/cityjson/schema/v08/
 
+This assumes that the folder is structured as follows:
 
+.. code-block:: console
+
+  appearance.json
+  cityjson.json
+  cityobjects.json
+  extensions
+  geomprimitives.json
+  geomtemplates.json
+  metadata.json
+  extensions/
+      noise.json
