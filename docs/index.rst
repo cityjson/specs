@@ -28,7 +28,8 @@ CityJSON
           "lod": 2,
           "boundaries": []
         }]
-      }
+      },
+      "id-56": {...}
     },
     "vertices": [
       [23.1, 2321.2, 11.0],
@@ -36,7 +37,6 @@ CityJSON
       ...
     ],
     "appearance": {
-      "materials": [],
       "textures": []
     },
     "geometry-templates": {}
