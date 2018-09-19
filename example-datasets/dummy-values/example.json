@@ -1,14 +1,16 @@
 {
   "type": "CityJSON",
-  "version": "0.6",
+  "version": "0.8",
   "metadata": {
-    "crs": { 
-      "epsg": 7415
-    },
-    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-    "datasetTitle": "what is this dataset?",
-    "abstract": "what is this dataset?",
-    "datasetReferenceDate": "2011-02-28"
+    "geographicalExtent": [
+        0.0,
+        0.0,
+        0.0,
+        771.0,
+        61.0,
+        51.0
+    ],
+    "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
   },
   "CityObjects": {
     "mygroup1": {
@@ -37,8 +39,7 @@
         "ThoroughfareName": "rue du Diable",
         "PostalCode": "H0H 0H0"
       },
-      "Parts": ["2929"],
-      "Installations": ["myinst"],
+      "children": ["2929", "myinst"],
       "geometry": [
       {
         "type": "Solid",
@@ -123,6 +124,7 @@
       "attributes": {
         "renovation": "2001/09/11"
       },
+      "parent": "102636712",
       "geometry": [{
         "type": "Solid",
         "lod": 2,
@@ -133,6 +135,7 @@
     },
     "myinst": {
       "type": "BuildingInstallation", 
+      "parent": "102636712",
       "geometry": [{
         "type": "Solid",
         "lod": 2,
@@ -162,7 +165,7 @@
       "attributes": { 
         "measuredHeight": 223
       },
-      "Installations": ["801"],
+      "children": ["801"],
       "geometry": [{
         "type": "MultiSurface",
         "lod": 2,
@@ -181,6 +184,7 @@
       "attributes": { 
         "function": "balcony"
       },
+      "parent": "itcanbeastringtoo",
       "geometry": [{
         "type": "MultiSurface",
         "lod" : 2.2, 
@@ -229,7 +233,7 @@
     },    
     "mylake": {
       "type": "WaterBody", 
-      "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
+      "geographicalExtent": [ 84710, 446846, -5, 84757, 446944, 40 ],
       "attributes": {
         "usage": "leisure",
         "function": "leisure"
