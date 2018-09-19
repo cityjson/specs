@@ -173,7 +173,7 @@ A CityJSON file containing this new City Object would look like this:
     "type": "CityJSON",
     "version": "0.8",
     "extensions": {
-      "+NoiseBuilding": "noise.json" 
+      "+NoiseBuilding": "https://someurl.org/noise.json" 
     },
     "CityObjects": {
       "1234": {

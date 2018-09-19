@@ -2,10 +2,10 @@
   "type": "CityJSON",
   "version": "0.8",
   "extensions": {
-    "+NoiseBuilding": "noise.json",
-    "+NoiseBuildingPart": "noise.json",
-    "+NoiseCityFurniture": "noise.json",
-    "+NoiseCityFurnitureSegment": "noise.json"
+    "+NoiseBuilding": "https://someurl.org/noise.json",
+    "+NoiseBuildingPart": "https://someurl.org/noise.json",
+    "+NoiseCityFurniture": "https://someurl.org/noise.json",
+    "+NoiseCityFurnitureSegment": "https://someurl.org/noise.json"
   },
   "CityObjects": {
     "1234": {
