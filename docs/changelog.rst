@@ -21,6 +21,7 @@ Added
 Changed
 *******
 - introduction of a concept that was implicit but never mentioned: City Objects can be either of type '1st-level' or '2nd-level' (a Building would be 1st-level, and a BuildingPart 2nd-level). This concept is now for all City Object, including those that are defined in an Extension. This means that the properties "Parts" and "Installations" dissapear from the schema of Building/Bridge/Tunnel, and are replaced by a single one: "children". Also, a child (2nd-level City Object) needs to have a link to its parent City Object (with "parent").
+- metadata/crs and metadata/bbox have been replaced by metadata/geographicReference and metadata/geographicExtent. Longer to type (file sizes will increase!), but ISO19115-compliant. Also, bbox->geographicExtent for each of the City Object too. cjio's upgrade_version() takes care of all these automatically.
 - metadata has more possibilities, it's been extended to 3D city models needs. Some fields from the previous metadata properties were modified, be aware. 
 - Observe that the software cjio (https://github.com/tudelft3d/cjio) offers an option '--upgrade_version' (from v0.6 --> v0.8) that takes care of the changes above (except the metadata, you'll need to adjust manually, sorry I am not coding all this). Simply run a v0.6 file and it's upgraded.
 
