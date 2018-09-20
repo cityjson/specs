@@ -304,27 +304,33 @@
                      "$ref":"#/definitions/thematicModels"
                      },
                      "source":{
-                        "description":"string",
-                        "sourceSpatialResolution":"string",
-                        "sourceReferenceSystem":{
-                           "type":"string",
-                           "pattern":"^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
-                        },
-                        "sourceCitation":{
-                           "type":"string",
-                           "format":"uri",
-                           "pattern":"^(https?|ftp)://"
-                        },
-                        "sourceMetadata":{
-                           "type":"string",
-                           "format":"uri",
-                           "pattern":"^(https?|ftp)://"
-                        },
-                        "scope":"string"
+                       "type": "array",
+                       "items":{
+                          "type": "object",
+                            "properties": {
+                              "description": { "type": "string" },
+                              "sourceSpatialResolution":{ "type": "string" },
+                                "sourceReferenceSystem":{
+                                  "type":"string",
+                                  "pattern":"^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
+                                 },
+                                "sourceCitation":{
+                                  "type":"string",
+                                  "format":"uri",
+                                  "pattern":"^(https?|ftp)://"
+                                },
+                                "sourceMetadata":{
+                                  "type":"string",
+                                  "format":"uri",
+                                  "pattern":"^(https?|ftp)://"
+                                },
+                                "scope":"string"
+                           }
+                       }
                      },
                      "processStep":{
-                        "description":"string",
-                        "rationale":"string",
+                        "description":{ "type": "string" },
+                        "rationale":{ "type": "string" },
                         "stepDateTime":{
                            "type":"string",
                            "format":"date-time"
@@ -337,7 +343,7 @@
                            "format":"uri",
                            "pattern":"^(https?|ftp)://"
                         },
-                        "scope":"string"
+                        "scope":{ "type": "string" }
                      }
                   },
                   "additionalProperties":false
@@ -507,13 +513,66 @@
                      "$ref":"#/definitions/featureData"
                   },
                   "CityObjectGroup":{
-                     "$ref":"#/definitions/featureData"
+                     "type": "object",
+                      "properties": {
+                        "uniqueFeatureCount":{ "type":"integer" },
+                        "aggregateFeatureCount":{ "type":"integer" },
+                        "presentLoDs":{ "$ref":"#/definitions/presentLoDs" },
+                        "Building":{
+                              "$ref":"#/definitions/featureData",
+                              "BuildingParts":{ "type":"integer" },
+                              "BuildingInstallations":{ "type":"integer" }
+                            },
+                        "Bridge":{
+                            "$ref":"#/definitions/featureData",
+                            "BridgeParts":{ "type":"integer" },
+                            "BridgeInstallations":{ "type":"integer" },
+                            "BridgeConstructionElements":{ "type":"integer" }
+                          },
+                        "Tunnel":{
+                            "$ref":"#/definitions/featureData",
+                            "TunnelParts":{ "type":"number" },
+                            "TunnelInstallations":{ "type":"integer" }
+                          },
+                        "TINRelief":{
+                           "$ref":"#/definitions/featureData",
+                           "triangleCount":{ "type":"integer" } 
+                          },
+                        "Road":{
+                           "$ref":"#/definitions/featureData"
+                          },
+                        "Railway":{
+                           "$ref":"#/definitions/featureData"
+                          },
+                        "TransportSquare":{
+                            "$ref":"#/definitions/featureData"
+                          },
+                        "WaterBody":{
+                            "$ref":"#/definitions/featureData"
+                          },
+                        "PlantCover":{
+                            "$ref":"#/definitions/featureData"
+                          },
+                        "SolitaryVegetationObject":{
+                            "$ref":"#/definitions/featureData"
+                          },
+                        "LandUse":{
+                            "$ref":"#/definitions/featureData"
+                          },
+                        "CityFurniture":{
+                            "$ref":"#/definitions/featureData"
+                          },
+                        "GenericCityObject":{
+                            "$ref":"#/definitions/featureData"
+                         } 
+                      },
+                      "additionalProperties":false
                   }
-               }
-            }
-         },
-         "additionalProperties":false
+               },
+               "additionalProperties" : false
+          } 
+        },
+        "additionalProperties":false
       },
       "additionalProperties":false
-   }
 }
