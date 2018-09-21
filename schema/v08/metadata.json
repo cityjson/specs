@@ -321,7 +321,8 @@
                                 "pattern":"^(https?|ftp)://"
                                },
                                 "scope":{"type": "string"}
-                           }
+                           },
+                           "additionalProperties":false
                        }
                      },
                   "processStep":{
@@ -342,7 +343,8 @@
                            "pattern":"^(https?|ftp)://"
                         },
                         "scope": {"type": "string"}
-                     }
+                     },
+                     "additionalProperties":false
                   }
                 }
              } 
