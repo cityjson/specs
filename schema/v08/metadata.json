@@ -281,14 +281,10 @@
          "lineage":{
             "type":"array",
             "items":{
-               "type":"object",
+              "type":"object",
                "properties":{
-                  "statement":{
-                     "type":"string"
-                  },
-                  "scope":{
-                     "type":"string"
-                  },
+                  "statement": {"type": "string"},
+                  "scope": {"type": "string"},
                   "additionalDocumentation":{
                      "type":"string",
                      "format":"uri",
@@ -302,35 +298,37 @@
                   },
                   "thematicModels":{
                      "$ref":"#/definitions/thematicModels"
-                     },
-                     "source":{
-                       "type": "array",
-                       "items":{
-                          "type": "object",
-                            "properties": {
-                              "description": { "type": "string" },
-                              "sourceSpatialResolution":{ "type": "string" },
-                                "sourceReferenceSystem":{
-                                  "type":"string",
-                                  "pattern":"^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
-                                 },
-                                "sourceCitation":{
-                                  "type":"string",
-                                  "format":"uri",
-                                  "pattern":"^(https?|ftp)://"
-                                },
-                                "sourceMetadata":{
-                                  "type":"string",
-                                  "format":"uri",
-                                  "pattern":"^(https?|ftp)://"
-                                },
-                                "scope":"string"
+                  },
+                  "source":{
+                    "type": "array",
+                      "items":{
+                        "type": "object",
+                          "properties": {
+                            "description": {"type": "string"},
+                            "sourceSpatialResolution":{"type": "string"},
+                            "sourceReferenceSystem":{
+                               "type":"string",
+                               "pattern":"^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
+                              },
+                             "sourceCitation":{
+                               "type":"string",
+                                "format":"uri",
+                                "pattern":"^(https?|ftp)://"
+                               },
+                              "sourceMetadata":{
+                                "type":"string",
+                                "format":"uri",
+                                "pattern":"^(https?|ftp)://"
+                               },
+                                "scope":{"type": "string"}
                            }
                        }
                      },
-                     "processStep":{
-                        "description":{ "type": "string" },
-                        "rationale":{ "type": "string" },
+                  "processStep":{
+                    "type":"object",
+                    "properties":{
+                        "description":{"type": "string"} ,
+                        "rationale":{"type": "string"} ,
                         "stepDateTime":{
                            "type":"string",
                            "format":"date-time"
@@ -343,13 +341,13 @@
                            "format":"uri",
                            "pattern":"^(https?|ftp)://"
                         },
-                        "scope":{ "type": "string" }
+                        "scope": {"type": "string"}
                      }
-                  },
-                  "additionalProperties":false
-               }
-            },
-            "geographicalExtent":{
+                  }
+                }
+             } 
+          },
+         "geographicalExtent":{
                "type":"array",
                "items":{
                   "type":"number"
@@ -512,7 +510,7 @@
                   "GenericCityObject":{
                      "$ref":"#/definitions/featureData"
                   },
-                  "CityObjectGroup":{
+                   "CityObjectGroup":{
                      "type": "object",
                       "properties": {
                         "uniqueFeatureCount":{ "type":"integer" },
@@ -568,9 +566,9 @@
                       },
                       "additionalProperties":false
                   }
-               },
+                },
                "additionalProperties" : false
-          } 
+            }
         },
         "additionalProperties":false
       },
