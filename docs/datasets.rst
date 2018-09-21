@@ -22,7 +22,7 @@ Den Haag
 .. image:: _static/dataset_denhaag.png
    :width: 50%
 
-'Tile 01' of the `open dataset of Den Haag <https://data.overheid.nl/data/dataset/ngr-3d-model-den-haag>`_ was converted to CityJSON, noticed that buildings and the terrain were combined into one file for convenience.
+'Tile 01' of the `open dataset of Den Haag <https://data.overheid.nl/data/dataset/ngr-3d-model-den-haag>`_ was converted to CityJSON; the buildings and the terrain were combined into one file for convenience.
 This dataset has no textures.
 
 - :download:`download DenHaag_01.zip <../example-datasets/DenHaag/DenHaag_01.zip>`
