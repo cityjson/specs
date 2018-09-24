@@ -244,12 +244,11 @@
             "TunnelInstallations":2
          },
          "CityObjectGroup":{
-            "uniqueFeatureCount":50,
-            "aggregateFeatureCount":50,
+            "uniqueFeatureCount":45,
+            "aggregateFeatureCount":55,
             "presentLoDs":{
-               "1.0":10,
-               "2.0":20,
-               "3.0":20
+               "1.0":40,
+               "2.0":15
             },
             "Tunnel":{
             "uniqueFeatureCount":5,
