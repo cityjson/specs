@@ -31,37 +31,37 @@ Several cities around the world
       -  details
       -  textures
    *  -  `Den Haag <https://data.overheid.nl/data/dataset/ngr-3d-model-den-haag>`_
-      -  :download:`DenHaag.zip <../example-datasets/DenHaag/DenHaag.zip>`     
+      -  :download:`DenHaag.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/DenHaag.zip>`     
       -  .. image:: _static/dataset_denhaag.png
             :width: 100%      
       -  'Tile 01', Buildings (in LoD2) and Terrain are merged
       -  no
    *  -  `Montréal <http://donnees.ville.montreal.qc.ca/dataset/maquette-numerique-batiments-citygml-lod2-avec-textures/resource/36047113-aa19-4462-854a-cdcd6281a5af>`_
-      -  :download:`Montreal.zip <../example-datasets/Montreal/Montreal.zip>`  
+      -  :download:`Montreal.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/Montreal.zip>`  
       -  .. image:: _static/dataset_montreal.png
             :width: 100%      
       -  tile 'VM05'. Buildings in LoD2
       -  no
    *  -  `New York <https://www1.nyc.gov/site/doitt/initiatives/3d-building.page>`_
-      -  :download:`NewYork.zip <../example-datasets/NewYork/NewYork.zip>`     
+      -  :download:`NewYork.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/NewYork.zip>`     
       -  .. image:: _static/dataset_newyork.png
             :width: 100%      
       -  tile 'DA13'. Buildings in LoD2
       -  no
    *  -  `Rotterdam <http://rotterdamopendata.nl/dataset/rotterdam-3d-bestanden/resource/edacea54-76ce-41c7-a0cc-2ebe5750ac18>`_
-      -  :download:`Rotterdam.zip <../example-datasets/Rotterdam/Rotterdam.zip>`
+      -  :download:`Rotterdam.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/Rotterdam.zip>`
       -  .. image:: _static/dataset_rotterdam.png
             :width: 100%      
       -  neighbourhood 'Delfshaven'. Buildings in LoD2
       -  yes
    *  -  `Vienna <https://www.data.gv.at/katalog/dataset/86d88cae-ad97-4476-bae5-73488a12776d>`_
-      -  :download:`Vienna.zip <../example-datasets/Vienna/Vienna.zip>`     
+      -  :download:`Vienna.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/Vienna.zip>`     
       -  .. image:: _static/dataset_vienna.png
             :width: 100%      
       -  Buildings in LoD2
       -  no
    *  -  `"GeoRes" <https://www.citygml.org/samplefiles/>`_
-      -  :download:`GeoRes.zip <../example-datasets/GeoRes/GeoRes.zip>`     
+      -  :download:`GeoRes.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/GeoRes.zip>`     
       -  .. image:: _static/dataset_geores.jpg
             :width: 100%
       -  CityGML demo. Buildings, Terrain, Vegetation, Water, LandUse. 
