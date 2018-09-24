@@ -3,6 +3,7 @@ Example datasets
 ================
 
 
+.. contents:: :local:
 
 Dummy file showcasing the different possibilities
 -------------------------------------------------
@@ -74,27 +75,57 @@ Several cities around the world
 
 
 
+CityJSON compression factors 
+----------------------------
+
 .. list-table:: 
    :header-rows: 1
    :stub-columns: 1
 
-   *  -  dataset
-      -  screenshot
+   *  -  CityGML dataset
       -  CityGML size
-      -  CityJSON size
-      -  CityJSON compression
-      -  CityJSON file
-
-   *  -  'Tile 01' of the `open dataset of Den Haag <https://data.overheid.nl/data/dataset/ngr-3d-model-den-haag>`_
-      -  .. image:: _static/dataset_denhaag.png
+      -  CityGML size (w/o spaces)
+      -  CityJSON
+      -  compression
+    
+   *  -  Den Haag
+      -  23MB 
+      -  18MB 
+      -  2.9MB 
+      -  6.2
+   *  -  Montréal
+      -  56MB 
+      -  42MB 
+      -  5.4MB 
+      -  7.8
+   *  -  New York
+      -  590MB 
+      -  574MB 
+      -  105MB 
+      -  5.5
+   *  -  Rotterdam
+      -  16MB 
+      -  15MB 
+      -  2.6MB 
+      -  5.8
+   *  -  Vienna
+      -  37MB 
+      -  36MB 
+      -  5.3MB 
+      -  6.8 
+   *  -  "GeoRes"
       -  4.3MB 
+      -  4.1MB 
       -  524KB 
-      -  8.0 
-      -  :download:`DenHaag_01.zip <../example-datasets/DenHaag/DenHaag.zip>`
+      -  8.0
+   *  -  "Railway"
+      -  45MB 
+      -  34MB 
+      -  4.3MB 
+      -  8.1 
 
+.. note:: 
 
-
-
-
-
-
+   - Observe that the file size doesn't take into account the size of the textures files (PNG, JPG, etc) since CityJSON refers to the same ones. 
+   - 'w/o spaces' means that CityGML files have all the carriage returns, tabs and spaces removed with `this script <https://gist.github.com/hugoledoux/acc66a41b2262ff9b8efb7cf515440f9>`_, for a fair estimation of the compression factor
+   
