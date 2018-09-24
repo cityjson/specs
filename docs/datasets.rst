@@ -75,6 +75,7 @@ Several cities around the world
       -  yes
 
 
+.. _compression_factors:
 
 CityJSON compression factors 
 ----------------------------
@@ -87,7 +88,7 @@ CityJSON compression factors
       -  CityGML size
       -  CityGML size (w/o spaces)
       -  CityJSON
-      -  compression
+      -  compression factor
     
    *  -  Den Haag
       -  23MB 
