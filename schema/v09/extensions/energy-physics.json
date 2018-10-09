@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "The 'Energy ADE' cityjsonified -- BuildingPhysics only",
+
+  "definitions": {
+    "energy-attributes": {
+      "buildingType": { "type": "string" },
+      "constructionWeight": { "enum": ["veryLight", "light", "medium", "heavy"] },
+      "energyPerformanceCertification": {
+        "type": "array",
+        "items": { 
+          "type": "object",
+          "properties": {
+            "rating" : { "type": "string" },
+            "name" : { "type": "string" },
+            "certificationId" : { "type": "string" }
+          },
+          "required": ["rating", "name", "certificationId"],
+          "additionalProperties": false
+        }
+      },
+      "isLandmarked": {"type": "boolean"}
+    },
+    "building-attributes": {
+       "creationDate" : {"type": "string"},
+       "terminationDate" : {"type": "string"},
+       "class": {"type": "string"},
+       "function": {"type": "string"},
+       "usage": {"type": "string"},
+       "measuredHeight": { "type": "number"},
+       "roofType": { "type": "string"},
+       "storeysAboveGround": { "type": "integer" },
+       "storeysBelowGround": { "type": "integer" },
+       "storeyHeightsAboveGround": { 
+          "type": "array",
+          "items": {"type": "number"}
+        },
+        "storeyHeightsBelowGround": { 
+          "type": "array",
+          "items": {"type": "number"}
+        },
+        "yearOfConstruction": { "type": "integer"},
+        "yearOfDemolition": { "type": "integer"}
+    },
+    "address" : {
+      "CountryName": {"type": "string"},
+      "LocalityName": {"type": "string"},
+      "ThoroughfareNumber": {"type": "string"},
+      "ThoroughfareName": {"type": "string"},
+      "PostalCode": {"type": "string"},
+      "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+    }
+  },
+
+  "+EnergyBuilding": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["+EnergyBuilding"] },
+      "attributes": { 
+      	"$ref": "#/definitions/building-attributes"  
+      },
+      "energy-attributes": {
+        "$ref": "#/definitions/energy-attributes"
+      },
+       "address": {
+         "$ref": "#/definitions/address"
+      }, 
+      "children": {
+        "type": "array",
+        "items": {"type": "string"}
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "../geomprimitives.json#/Solid"},
+            {"$ref": "../geomprimitives.json#/CompositeSolid"},
+            {"$ref": "../geomprimitives.json#/MultiSurface"},
+            {"$ref": "../geomtemplates.json#/GeometryInstance"}
+          ] 
+        }
+      }
+    },
+    "required": ["type", "geometry"],
+    "additionalProperties": false
+  },
+
+  
+  "+ThermalZone": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": ["+ThermalZone"] },
+      "attributes": {
+        "type": "object",
+        "properties": {
+          "additionalThermalBridgeUValue": { "type": "string"},
+          "isCooled": { "type": "boolean"}
+        }
+      },
+      "bbox": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
+      "parent": {"type": "string"},
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "../geomprimitives.json#/MultiSurface"}
+          ]
+        }
+      }
+    },
+    "required": ["type", "geometry", "parent"],
+    "additionalProperties": false
+  }
+
+  
+}
