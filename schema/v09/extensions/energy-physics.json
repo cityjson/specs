@@ -5,7 +5,10 @@
   "definitions": {
     "energy-attributes": {
       "buildingType": { "type": "string" },
-      "constructionWeight": { "enum": ["veryLight", "light", "medium", "heavy"] },
+      "constructionWeight": { 
+        "type": "string",
+        "enum": ["veryLight", "light", "medium", "heavy"] 
+      },
       "energyPerformanceCertification": {
         "type": "array",
         "items": { 
@@ -62,7 +65,11 @@
       "energy-attributes": {
         "$ref": "#/definitions/energy-attributes"
       },
-       "address": {
+      "test": {
+        "type": "string",
+        "enum": ["veryLight", "light", "medium", "heavy"]
+      },
+      "address": {
          "$ref": "#/definitions/address"
       }, 
       "children": {

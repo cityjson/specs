@@ -5,6 +5,7 @@
     "CityObjects": {
         "un": {
             "type": "+EnergyBuilding",
+            "test": "veryLight",
             "energy-attributes": {
                 "buildingType": "my favourite type, innit?",
                 "constructionWeight": "veryLight2"
