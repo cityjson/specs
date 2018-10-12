@@ -1,31 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "The 'Noise ADE' cityjsonified",
+  
   "definitions": {
+  
     "noise-attributes": {
-      "buildingReflection": {"type": "string"},
-      "buildingReflectionCorrection": {"type": "number"},
-      "buildingLDenMax": {"type": "number"},
-      "buildingLDenMin": {"type": "number"},
-      "buildingLNightMax": {"type": "number"},
-      "buildingLNightMin": {"type": "number"},
-      "buildingLDenEq": {"type": "number"},
-      "buildingLNightEq": {"type": "number"},
-      "buildingHabitants": {"type": "integer"},
-      "buildingImmissionPoints": {"type": "integer"},
-      "remark": {"type": "string"}
+      "type": "object",
+      "properties": {
+        "buildingReflection": {"type": "string"},
+        "buildingReflectionCorrection": {"type": "number"},
+        "buildingLDenMax": {"type": "number"},
+        "buildingLDenMin": {"type": "number"},
+        "buildingLNightMax": {"type": "number"},
+        "buildingLNightMin": {"type": "number"},
+        "buildingLDenEq": {"type": "number"},
+        "buildingLNightEq": {"type": "number"},
+        "buildingHabitants": {"type": "integer"},
+        "buildingImmissionPoints": {"type": "integer"},
+        "remark": {"type": "string"}
+      },
+      "additionalProperties": false
     },
+  
     "building-attributes": {
-       "creationDate" : {"type": "string"},
-       "terminationDate" : {"type": "string"},
-       "class": {"type": "string"},
-       "function": {"type": "string"},
-       "usage": {"type": "string"},
-       "measuredHeight": { "type": "number"},
-       "roofType": { "type": "string"},
-       "storeysAboveGround": { "type": "integer" },
-       "storeysBelowGround": { "type": "integer" },
-       "storeyHeightsAboveGround": { 
+      "type": "object",
+      "properties": {
+        "creationDate" : {"type": "string"},
+        "terminationDate" : {"type": "string"},
+        "class": {"type": "string"},
+        "function": {"type": "string"},
+        "usage": {"type": "string"},
+        "measuredHeight": { "type": "number"},
+        "roofType": { "type": "string"},
+        "storeysAboveGround": { "type": "integer" },
+        "storeysBelowGround": { "type": "integer" },
+        "storeyHeightsAboveGround": { 
           "type": "array",
           "items": {"type": "number"}
         },
@@ -35,14 +44,17 @@
         },
         "yearOfConstruction": { "type": "integer"},
         "yearOfDemolition": { "type": "integer"}
+      },
+      "additionalProperties": false  
     },
+
     "address" : {
       "CountryName": {"type": "string"},
       "LocalityName": {"type": "string"},
       "ThoroughfareNumber": {"type": "string"},
       "ThoroughfareName": {"type": "string"},
       "PostalCode": {"type": "string"},
-      "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+      "location": {"$ref": "../geomprimitives.json#/MultiPoint"}
     }
   },
 
