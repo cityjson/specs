@@ -1,14 +1,25 @@
 {
     "type": "CityJSON",
     "version": "0.8",
-    "extensions": {"+EnergyBuilding": "https://someurl.org/energy-physics.json"},
+    "extensions": {
+        "+EnergyBuilding": "https://someurl.org/energy-physics.json",
+        "+ThermalZone": "https://someurl.org/energy-physics.json"
+    },
     "CityObjects": {
         "un": {
             "type": "+EnergyBuilding",
-            "energy-attributes": {
-                "buildingType": "my favourite type, innit?",
-                "constructionWeight": "veryLight"
+            "attributes": {
+                "roofType": "roger"
             },
+            "attributes-energy": {
+                "buildingType": "my favourite type, innit?",
+                "constructionWeight": "veryLight",
+                "floorArea": {
+                    "value": 234.2,
+                    "uom": "m2"
+                }
+            },
+            "children": ["unezonethermale"],
             "geometry": [{
                 "type": "MultiSurface",
                 "boundaries": [
@@ -4224,6 +4235,15 @@
                 },
                 "lod": 2
             }]
+        },
+        "unezonethermale": {
+            "type": "+ThermalZone",
+            "attributes": {
+                "isCooled": false,
+                "isHeated": false
+            },
+            "parent": "un",
+            "geometry": []
         }
     },
     "vertices": [

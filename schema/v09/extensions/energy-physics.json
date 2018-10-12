@@ -3,29 +3,7 @@
   "title": "The 'Energy ADE' cityjsonified -- BuildingPhysics only",
 
   "definitions": {
-    "energy-attributes": {
-      "type": "object",
-      "properties": {
-        "buildingType": { "type": "string" },
-        "constructionWeight": { 
-          "type": "string",
-          "enum": ["veryLight", "light", "medium", "heavy"] 
-        },
-        "energyPerformanceCertification": {
-          "type": "array",
-          "items": { 
-            "type": "object",
-            "properties": {
-              "rating" : { "type": "string" },
-              "name" : { "type": "string" },
-              "certificationId" : { "type": "string" }
-            }
-          }
-        },
-        "isLandmarked": { "type": "boolean" }
-      },
-      "additionalProperties": false
-    },
+
     "building-attributes": {
       "type": "object",
       "properties": {
@@ -50,6 +28,7 @@
         "yearOfDemolition": { "type": "integer"}
       }
     },
+    
     "address" : {
       "type": "object",
       "properties": {
@@ -61,17 +40,96 @@
         "location": {"$ref": "geomprimitives.json#/MultiPoint"}
       }
     }
+
   },
+
 
   "+EnergyBuilding": {
     "type": "object",
     "properties": {
       "type": { "enum": ["+EnergyBuilding"] },
       "attributes": { 
-      	"$ref": "#/definitions/building-attributes"  
+        "$ref": "#/definitions/building-attributes"  
       },
-      "energy-attributes": {
-        "$ref": "#/definitions/energy-attributes"
+      "attributes-energy": { 
+      	"type": "object",
+        "properties": {
+          "buildingType": { "type": "string" },
+          "constructionWeight": { "enum": ["veryLight", "light", "medium", "heavy"] },
+          "energyPerformanceCertification": {
+            "type": "array",
+            "items": { 
+              "type": "object",
+              "properties": {
+                "rating" : { "type": "string" },
+                "name" : { "type": "string" },
+                "certificationId" : { "type": "string" }
+              },
+              "required": ["rating", "name"],
+              "additionalProperties": false  
+            }
+          },
+          "volume": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" }
+            },
+            "required": ["value", "uom"],
+            "additionalProperties": false
+          },
+          "isLandmarked": { "type": "boolean" },
+          "refurbishmentMeasure": {
+            "type": "array",
+            "items": { 
+              "type": "object",
+              "properties": {
+                "date" : { "type": "string" },
+                "level" : { "type": "string" },
+                "description" : { "type": "string" }
+              },
+              "required": ["date", "level"],
+              "additionalProperties": false  
+            }
+          },
+          "floorArea": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" }
+            },
+            "required": ["value", "uom"],
+            "additionalProperties": false  
+          },
+          "heightAboveGround": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "heightReference": { 
+                "type": "string",
+                "enum": [
+                  "bottomOfConstruction",
+                  "entrancePoint",
+                  "generalEave",
+                  "generalRoof",
+                  "generalRoofEdge",
+                  "highestEave",
+                  "highestPoint",
+                  "highestRoofEdge",
+                  "lowestEave",
+                  "lowestFloorAboveGround",
+                  "lowestRoofEdge",
+                  "topOfConstruction",
+                  "topThermalBoundary",
+                  "bottomThermalBoundary"
+                ] 
+              }
+            },
+            "required": ["value", "heightReference"],
+            "additionalProperties": false  
+          }
+        },
+        "additionalProperties": false  
       },
       "address": {
          "$ref": "#/definitions/address"
@@ -111,8 +169,28 @@
         "type": "object",
         "properties": {
           "additionalThermalBridgeUValue": { "type": "string"},
-          "isCooled": { "type": "boolean"}
-        }
+          "isCooled": { "type": "boolean"},
+          "isHeated": { "type": "boolean"},
+          "volume": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" }
+            },
+            "required": ["value", "uom"],
+            "additionalProperties": false
+          },
+          "floorArea": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" }
+            },
+            "required": ["value", "uom"],
+            "additionalProperties": false  
+          }
+        },
+        "additionalProperties": false  
       },
       "bbox": {
         "type": "array",
@@ -125,7 +203,7 @@
         "type": "array",
         "items": {
           "oneOf": [
-            {"$ref": "../geomprimitives.json#/MultiSurface"}
+            {"$ref": "../geomprimitives.json#/Solid"}
           ]
         }
       }
