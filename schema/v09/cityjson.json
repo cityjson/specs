@@ -8,7 +8,7 @@
     "type": { "enum": ["CityJSON"] },
     "version": { 
       "type": "string",
-      "pattern": "\\d.\\d"
+      "pattern": "^(\\d\\.)(\\d+\\.)?(\\*|\\d+)$"
     },
     "metadata": {
       "type": "object",
