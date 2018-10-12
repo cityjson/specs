@@ -4,37 +4,41 @@
 
   "definitions": {
     "energy-attributes": {
-      "buildingType": { "type": "string" },
-      "constructionWeight": { 
-        "type": "string",
-        "enum": ["veryLight", "light", "medium", "heavy"] 
+      "type": "object",
+      "properties": {
+        "buildingType": { "type": "string" },
+        "constructionWeight": { 
+          "type": "string",
+          "enum": ["veryLight", "light", "medium", "heavy"] 
+        },
+        "energyPerformanceCertification": {
+          "type": "array",
+          "items": { 
+            "type": "object",
+            "properties": {
+              "rating" : { "type": "string" },
+              "name" : { "type": "string" },
+              "certificationId" : { "type": "string" }
+            }
+          }
+        },
+        "isLandmarked": { "type": "boolean" }
       },
-      "energyPerformanceCertification": {
-        "type": "array",
-        "items": { 
-          "type": "object",
-          "properties": {
-            "rating" : { "type": "string" },
-            "name" : { "type": "string" },
-            "certificationId" : { "type": "string" }
-          },
-          "required": ["rating", "name", "certificationId"],
-          "additionalProperties": false
-        }
-      },
-      "isLandmarked": {"type": "boolean"}
+      "additionalProperties": false
     },
     "building-attributes": {
-       "creationDate" : {"type": "string"},
-       "terminationDate" : {"type": "string"},
-       "class": {"type": "string"},
-       "function": {"type": "string"},
-       "usage": {"type": "string"},
-       "measuredHeight": { "type": "number"},
-       "roofType": { "type": "string"},
-       "storeysAboveGround": { "type": "integer" },
-       "storeysBelowGround": { "type": "integer" },
-       "storeyHeightsAboveGround": { 
+      "type": "object",
+      "properties": {
+        "creationDate" : {"type": "string"},
+        "terminationDate" : {"type": "string"},
+        "class": {"type": "string"},
+        "function": {"type": "string"},
+        "usage": {"type": "string"},
+        "measuredHeight": { "type": "number"},
+        "roofType": { "type": "string"},
+        "storeysAboveGround": { "type": "integer" },
+        "storeysBelowGround": { "type": "integer" },
+        "storeyHeightsAboveGround": { 
           "type": "array",
           "items": {"type": "number"}
         },
@@ -44,14 +48,18 @@
         },
         "yearOfConstruction": { "type": "integer"},
         "yearOfDemolition": { "type": "integer"}
+      }
     },
     "address" : {
-      "CountryName": {"type": "string"},
-      "LocalityName": {"type": "string"},
-      "ThoroughfareNumber": {"type": "string"},
-      "ThoroughfareName": {"type": "string"},
-      "PostalCode": {"type": "string"},
-      "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+      "type": "object",
+      "properties": {
+        "CountryName": {"type": "string"},
+        "LocalityName": {"type": "string"},
+        "ThoroughfareNumber": {"type": "string"},
+        "ThoroughfareName": {"type": "string"},
+        "PostalCode": {"type": "string"},
+        "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+      }
     }
   },
 
@@ -64,10 +72,6 @@
       },
       "energy-attributes": {
         "$ref": "#/definitions/energy-attributes"
-      },
-      "test": {
-        "type": "string",
-        "enum": ["veryLight", "light", "medium", "heavy"]
       },
       "address": {
          "$ref": "#/definitions/address"
