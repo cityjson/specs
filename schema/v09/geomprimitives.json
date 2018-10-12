@@ -6,25 +6,30 @@
     "type": "object",
     "properties": {
       "type": { 
-        "enum": [
-          "RoofSurface", 
-          "GroundSurface", 
-          "WallSurface", 
-          "ClosureSurface", 
-          "OuterCeilingSurface", 
-          "OuterFloorSurface", 
-          "Window", 
-          "Door", 
-          "WaterSurface", 
-          "WaterGroundSurface", 
-          "WaterClosureSurface",
-          "TrafficArea",
-          "AuxiliaryTrafficArea",
-          "+ExtensionSemantics"
-        ] 
+        "type": "string",  
+        "oneOf": [
+          { "enum": ["RoofSurface"] }, 
+          { "enum": ["GroundSurface"] }, 
+          { "enum": ["WallSurface"] }, 
+          { "enum": ["ClosureSurface"] }, 
+          { "enum": ["OuterCeilingSurface"] }, 
+          { "enum": ["OuterFloorSurface"] }, 
+          { "enum": ["Window"] }, 
+          { "enum": ["Door"] }, 
+          { "enum": ["WaterSurface"] }, 
+          { "enum": ["WaterGroundSurface"] }, 
+          { "enum": ["WaterClosureSurface"] },
+          { "enum": ["TrafficArea"] },
+          { "enum": ["AuxiliaryTrafficArea"] },
+          { "type": "string", "pattern": "(\\+)\\w+"}
+        ]
       }
     }
   },
+
+
+          
+
 
   "Solid": {
     "type": "object",
