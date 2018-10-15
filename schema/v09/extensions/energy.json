@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-09/schema#",
+  "title": "The 'Energy ADE' cityjsonified",
+  "allOf": [ { "$ref": "cityjson.json" } ],
+  
+  "+EnergyBuilding": {
+      "type": "object",
+      "properties": {
+      	  "type": { "const":"+EnergyBuilding" } 
+      }, 
+      "required": ["type"],
+     "additionalProperties": false
+  }
+  
+  
+}
