@@ -638,6 +638,8 @@ A Semantics Surface is a JSON object representing the semantics of a surface, an
 A Semantic Object:
   
   - must have one member with the name ``"type"``, whose value is one of the allowed value. These depend on the City Object, see below.
+  - may have an attribute ``"parent"``, whose value is an integer pointing to another Semantic Object of the same geometry (index of it, 0-based). This is used to explicitly represent to which wall or roof a window or door belongs to; there can be only one parent.
+  - may have an attribute ``"children"``, whose value is an array of integers pointing to other Semantic Objects of the same geometry (index of it, 0-based). This is used to explicitly represent the openings (windows and doors) of walls and roofs.
   - may have other attributes in the form of a JSON key-value pair, where the value must not be a JSON object (but a string/number/integer/boolean). 
 
 .. code-block:: js
@@ -645,8 +647,16 @@ A Semantic Object:
   {
     "type": "RoofSurface",
     "slope": 16.4,
+    "children": [2, 37],
     "solar-potential": 5
   }
+
+  {
+    "type": "Window",
+    "parent": 2,
+    "type-glass": "HR++"
+  }
+
 
 ----
 
@@ -682,7 +692,7 @@ This is achieved by first declaring all the Semantic Surfaces in an array, and t
 
 A Geometry object:
 
-  - may have one member with the name ``"semantics"``, whose values are two keys ``"surfaces"`` and ``"values"``. Both have to be present.
+  - may have one member with the name ``"semantics"``, whose values are two properties: ``"surfaces"`` and ``"values"``. Both have to be present.
   -  the value of ``"surfaces"`` is an array of Semantic Surface Objects.
   -  the value of ``"values"`` is a hierarchy of arrays (the depth depends on the Geometry object; it is two less than the array ``"boundaries"``) with integers. An integer refers to the index in the ``"surfaces"`` array of the same geometry, and it is 0-based. If one surface has no semantics, a value of ``null`` must be used.
 
@@ -697,15 +707,18 @@ A Geometry object:
     "semantics": {
       "surfaces" : [
         {
-          "type": "RoofSurface",
-          "slope": 33.4
+          "type": "WallSurface",
+          "slope": 33.4,
+          "children": [2]
         }, 
         {
           "type": "RoofSurface",
           "slope": 66.6
         },
         {
-          "type": "GroundSurface"
+          "type": "Door",
+          "parent": 0,
+          "colour": "blue"
         }
       ],
       "values": [0, 0, null, 1, 2]

@@ -50,8 +50,8 @@
         "semantics": {
           "surfaces" : [
             {
-              "type": "RoofSurface",
-              "slope": 33.4
+              "type": "WallSurface",
+              "children": [3, 4]
             }, 
             {
               "type": "RoofSurface",
@@ -62,9 +62,13 @@
               "paint": "blue" 
             },
             {
-              "type": "WallSurface",
-              "paint": "red" 
-            }
+              "type": "Door",
+              "parent": 0 
+            },
+            {
+              "type": "Window",
+              "parent": 0 
+            }            
           ],
           "values": [
             [0, 1, null, null, 2, 3]
