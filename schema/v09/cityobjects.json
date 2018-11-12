@@ -412,78 +412,74 @@
   },
 
   "_AbstractBuilding": {
-    "allof": [
-      { "$ref" : "#/_AbstractCityObject" },
-      {
+    "properties": {
+      "attributes": {
         "properties": {
-          "attributes": {
-            "properties": {
-              "measuredHeight": { "type": "number"},
-              "roofType": { "type": "string"},
-              "storeysAboveGround": { "type": "integer"},
-              "storeysBelowGround": { "type": "integer"},
-              "storeyHeightsAboveGround": { 
-                "type": "array",
-                "items": {"type": "number"}
-              },
-              "storeyHeightsBelowGround": { 
-                "type": "array",
-                "items": {"type": "number"}
-              },
-              "yearOfConstruction": { "type": "integer"},
-              "yearOfDemolition": { "type": "integer"}
-            }
-          },
-          "address": {
-            "type": "object",
-            "properties": {
-              "CountryName": {"type": "string"},
-              "LocalityName": {"type": "string"},
-              "ThoroughfareNumber": {"type": "string"},
-              "ThoroughfareName": {"type": "string"},
-              "PostalCode": {"type": "string"},
-              "location": {"$ref": "geomprimitives.json#/MultiPoint"}
-            }
-          },
-          "children": {
+          "measuredHeight": { "type": "number"},
+          "roofType": { "type": "string"},
+          "storeysAboveGround": { "type": "integer"},
+          "storeysBelowGround": { "type": "integer"},
+          "storeyHeightsAboveGround": { 
             "type": "array",
-            "description": "the IDs of the BuildingPart/Installation of this Building",
-            "items": {"type": "string"}
+            "items": {"type": "number"}
           },
-          "geographicalExtent": {
+          "storeyHeightsBelowGround": { 
             "type": "array",
-            "items": { "type": "number" },
-            "minItems": 6,    
-            "maxItems": 6    
+            "items": {"type": "number"}
           },
-          "geometry": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {"$ref": "geomprimitives.json#/Solid"},
-                {"$ref": "geomprimitives.json#/CompositeSolid"},
-                {"$ref": "geomprimitives.json#/MultiSurface"},
-                {"$ref": "geomtemplates.json#/GeometryInstance"}
-              ] 
-            }
-          }
-        },
-        "required": ["geometry"]
+          "yearOfConstruction": { "type": "integer"},
+          "yearOfDemolition": { "type": "integer"}
+        }
+      },
+      "address": {
+        "type": "object",
+        "properties": {
+          "CountryName": {"type": "string"},
+          "LocalityName": {"type": "string"},
+          "ThoroughfareNumber": {"type": "string"},
+          "ThoroughfareName": {"type": "string"},
+          "PostalCode": {"type": "string"},
+          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+        }
+      },
+      "children": {
+        "type": "array",
+        "description": "the IDs of the BuildingPart/Installation of this Building",
+        "items": {"type": "string"}
+      },
+      "geographicalExtent": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 6,    
+        "maxItems": 6    
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/Solid"},
+            {"$ref": "geomprimitives.json#/CompositeSolid"},
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomtemplates.json#/GeometryInstance"}
+          ] 
+        }
       }
-    ]
+    }
   },
+
   
   "Building": {
-    "allOf": [
-      { "$ref" : "#/_AbstractBuilding" },
-      {
-        "properties": {
-          "type": { "enum": ["Building"] }
-        },
-        "required": ["type"]
-      }
-    ]
+    "allOf": [ 
+      { "$ref" : "#/_AbstractCityObject" }, 
+      { "$ref" : "#/_AbstractBuilding" }
+    ],
+    "properties": {
+      "type": { "enum": ["Building"] },
+      "geometry": {}
+    },
+    "required": ["type", "geometry"]
   },
+
 
   "BuildingPart": {
     "allOf": [
