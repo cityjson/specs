@@ -32,6 +32,7 @@
         "yearOfConstruction": 1904,
         "owner": "Elvis Presley"
       },
+      "geographicalExtent": [ 84710, 446846, -5, 84757, 446944, 40 ],
       "address": {
         "CountryName": "Canada",
         "LocalityName": "Chibougamau",
@@ -150,6 +151,9 @@
     },    
     "onebigtree-template": {
       "type": "SolitaryVegetationObject", 
+      "attributes": {
+        "measuredHeight": 223    
+      },
       "geometry": [
         {
           "type": "GeometryInstance",

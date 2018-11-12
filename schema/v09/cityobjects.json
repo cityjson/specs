@@ -757,161 +757,118 @@
     "additionalProperties": false
   },    
 
+
   "SolitaryVegetationObject": {
-    "type": "object",
-    "properties": {
-      "type": { "enum": ["SolitaryVegetationObject"] },
-      "attributes": {
-        "type": "object",
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "creationDate" : {"type": "string", "format": "date"},
-          "terminationDate" : {"type": "string", "format": "date"},                        
-          "class": {"type": "string"},
-          "function": {"type": "string"},
-          "usage": {"type": "string"},
-          "species": {"type": "string"},
-          "trunkDiameter": {"type": "number"},
-          "crownDiameter": {"type": "number"}
-        }
-      },
-      "geographicalExtent": {
-        "type": "array",
-        "items": { "type": "number" },
-        "minItems": 6,    
-        "maxItems": 6    
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiPoint"},
-            {"$ref": "geomprimitives.json#/MultiLineString"},
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/MultiSolid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"},
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/CompositeSurface"},
-            {"$ref": "geomtemplates.json#/GeometryInstance"}
-          ]
-        }
+          "type": { "enum": ["SolitaryVegetationObject"] },
+          "attributes": {
+            "properties": {
+              "species": {"type": "string"},
+              "trunkDiameter": {"type": "number"},
+              "crownDiameter": {"type": "number"}
+            }
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiPoint"},
+                {"$ref": "geomprimitives.json#/MultiLineString"},
+                {"$ref": "geomprimitives.json#/Solid"},
+                {"$ref": "geomprimitives.json#/MultiSolid"},
+                {"$ref": "geomprimitives.json#/CompositeSolid"},
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/CompositeSurface"},
+                {"$ref": "geomtemplates.json#/GeometryInstance"}
+              ]
+            }
+          }        
+        },
+        "required": ["type", "geometry"]
       }
-    },
-    "required": ["type", "geometry"],
-    "additionalProperties": false
+    ]
   },
+
 
   "LandUse": {
-    "type": "object",
-    "properties": {
-      "type": { "enum": ["LandUse"] },
-      "attributes": {
-        "type": "object",
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "creationDate" : {"type": "string", "format": "date"},
-          "terminationDate" : {"type": "string", "format": "date"},                        
-          "class": {"type": "string"},
-          "function": {"type": "string"},
-          "usage": {"type": "string"}
-        }
-      },
-      "geographicalExtent": {
-        "type": "array",
-        "items": { "type": "number" },
-        "minItems": 6,    
-        "maxItems": 6    
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/CompositeSurface"}
-          ]
-        }
+          "type": { "enum": ["LandUse"] },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/CompositeSurface"}
+              ]
+            }
+          }        
+        },
+        "required": ["type", "geometry"]
       }
-    },
-    "required": ["type", "geometry"],
-    "additionalProperties": false
+    ]
   },
+
 
   "CityFurniture": {
-    "type": "object",
-    "properties": {
-      "type": { "enum": ["CityFurniture"] },
-      "attributes": {
-        "type": "object",
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "creationDate" : {"type": "string", "format": "date"},
-          "terminationDate" : {"type": "string", "format": "date"},            
-          "class": {"type": "string"},
-          "function": {"type": "string"},
-          "usage": {"type": "string"}
-        }
-      },
-      "geographicalExtent": {
-        "type": "array",
-        "items": { "type": "number" },
-        "minItems": 6,    
-        "maxItems": 6    
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiPoint"},
-            {"$ref": "geomprimitives.json#/MultiLineString"},
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/MultiSolid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"},
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/CompositeSurface"},
-            {"$ref": "geomtemplates.json#/GeometryInstance"}
-          ]
-        }
+          "type": { "enum": ["CityFurniture"] },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiPoint"},
+                {"$ref": "geomprimitives.json#/MultiLineString"},
+                {"$ref": "geomprimitives.json#/Solid"},
+                {"$ref": "geomprimitives.json#/MultiSolid"},
+                {"$ref": "geomprimitives.json#/CompositeSolid"},
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/CompositeSurface"},
+                {"$ref": "geomtemplates.json#/GeometryInstance"}
+              ]
+            }
+          }        
+        },
+        "required": ["type", "geometry"]
       }
-    },
-    "required": ["type", "geometry"],
-    "additionalProperties": false
+    ]
   },
 
+
   "GenericCityObject": {
-    "type": "object",
-    "properties": {
-      "type": { "enum": ["GenericCityObject"] },
-      "attributes": {
-        "type": "object",
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "creationDate" : {"type": "string", "format": "date"},
-          "terminationDate" : {"type": "string", "format": "date"},            
-          "class": {"type": "string"},
-          "function": {"type": "string"},
-          "usage": {"type": "string"}
-        }
-      },
-      "geographicalExtent": {
-        "type": "array",
-        "items": { "type": "number" },
-        "minItems": 6,    
-        "maxItems": 6    
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiPoint"},
-            {"$ref": "geomprimitives.json#/MultiLineString"},
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/MultiSolid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"},
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/CompositeSurface"},
-            {"$ref": "geomtemplates.json#/GeometryInstance"}
-          ]
-        }
+          "type": { "enum": ["GenericCityObject"] },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiPoint"},
+                {"$ref": "geomprimitives.json#/MultiLineString"},
+                {"$ref": "geomprimitives.json#/Solid"},
+                {"$ref": "geomprimitives.json#/MultiSolid"},
+                {"$ref": "geomprimitives.json#/CompositeSolid"},
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/CompositeSurface"},
+                {"$ref": "geomtemplates.json#/GeometryInstance"}
+              ]
+            }
+          }        
+        },
+        "required": ["type", "geometry"]
       }
-    },
-    "required": ["type", "geometry"],
-    "additionalProperties": false
+    ]
   }
+
 
 }
