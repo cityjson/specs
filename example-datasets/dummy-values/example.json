@@ -168,11 +168,11 @@
       "type": "Building", 
       "attributes": { 
         "measuredHeight": 223,
-        "function": 222
+        "function": "222"
       },
       "children": ["801"],
       "geometry": [{
-        "type": "MultiSurfaces",
+        "type": "MultiSurface",
         "lod": 2,
         "boundaries": [ 
            [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]

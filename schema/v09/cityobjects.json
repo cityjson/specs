@@ -395,8 +395,8 @@
     "additionalProperties": false
   },
 
+
   "_AbstractCityObject": {
-    "type": "object",
     "properties": {
       "attributes": {
         "type": "object",
@@ -464,37 +464,40 @@
           ] 
         }
       }
-    }
+    },
+    "required": ["geometry"]
   },
-
   
   "Building": {
-    "allOf": [ 
-      { "$ref" : "#/_AbstractCityObject" }, 
-      { "$ref" : "#/_AbstractBuilding" }
-    ],
-    "properties": {
-      "type": { "enum": ["Building"] },
-      "geometry": {}
-    },
-    "required": ["type", "geometry"]
-  },
-
-
-  "BuildingPart": {
     "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractBuilding" },
       {
         "properties": {
-          "type": { "enum": ["BuildingPart"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Building"
+          "type": { "enum": ["Building"] },
+          "attributes": {
+            "properties": {
+              "test": {"type": "string"}
+            }
           }
         },
-        "required": ["parent"]
+        "required": ["type"]
       }
     ]
+  },
+
+  "BuildingPart": {
+    "allOf": [
+      { "$ref": "#/_AbstractBuilding" }
+    ],
+    "properties": {
+      "type": { "enum": ["BuildingPart"] },
+      "parent": {
+        "type": "string",
+        "description": "the ID of the parent Building"
+      }
+    },
+    "required": ["parent"]
   },
 
   "BuildingInstallation": {
