@@ -127,7 +127,8 @@
     "2929": {
       "type": "BuildingPart", 
       "attributes": {
-        "renovation": "2001/09/11"
+        "renovation": "2001/09/11",
+        "yearOfConstruction": 2912
       },
       "parent": "102636712",
       "geometry": [{
