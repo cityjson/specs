@@ -28,9 +28,6 @@
   },
 
 
-          
-
-
   "Solid": {
     "type": "object",
     "properties": {
@@ -114,7 +111,8 @@
         }
       }
     },
-    "required": ["type", "lod", "boundaries"]
+    "required": ["type", "lod", "boundaries"],
+    "additionalProperties": false
   },
 
   "MultiSolid": {
@@ -212,8 +210,10 @@
         }                
       }
     },
-    "required": ["type", "lod", "boundaries"]
+    "required": ["type", "lod", "boundaries"],
+    "additionalProperties": false
   },
+
 
   "CompositeSolid": {
     "type": "object",
@@ -310,8 +310,10 @@
         }                
       }
     },        
-    "required": ["type", "lod", "boundaries"]
+    "required": ["type", "lod", "boundaries"],
+    "additionalProperties": false
   },
+
 
   "MultiSurface": {
     "type": "object",
@@ -384,8 +386,10 @@
         }
       }
     },       
-    "required": ["type", "lod", "boundaries"]
+    "required": ["type", "lod", "boundaries"],
+    "additionalProperties": false
   },
+
 
   "CompositeSurface": {
     "type": "object",
@@ -462,8 +466,10 @@
         }
       }        
     },        
-    "required": ["type", "lod", "boundaries"]
+    "required": ["type", "lod", "boundaries"],
+    "additionalProperties": false
   },
+
 
   "MultiLineString": {
     "type": "object",
@@ -482,8 +488,10 @@
         }
       }
     },        
-    "required": ["type", "lod", "boundaries"]
+    "required": ["type", "lod", "boundaries"],
+    "additionalProperties": false
   },
+
 
   "MultiPoint": {
     "type": "object",
@@ -499,7 +507,8 @@
          "items": {"type": "integer"}
       }
     },
-    "required": ["type", "lod", "boundaries"]
+    "required": ["type", "lod", "boundaries"],
+    "additionalProperties": false
   }
 
 }
