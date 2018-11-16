@@ -1,7 +1,8 @@
 {
   "type": "CityJSON extension",
-  "description": "Extension to model the noise, innit?",
+  "name": "Noise",
   "version": "0.1",
+  "description": "Extension to model the noise, innit?",
 
   "extraRootProperties": {
 
@@ -12,7 +13,8 @@
         "deux": { "type": "integer"},
         "trois": { "type": "integer"}
       },
-      "required": ["un", "deux"]
+      "required": ["un", "deux", "trois"],
+      "additionalProperties": false
     }
   
   },
