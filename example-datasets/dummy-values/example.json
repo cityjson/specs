@@ -30,7 +30,8 @@
         "measuredHeight": 22.3,
         "roofType": "gable",
         "yearOfConstruction": 1904,
-        "owner": "Elvis Presley"
+        "owner": "Elvis Presley",
+        "creationDate": "2018 11 14"
       },
       "geographicalExtent": [ 84710, 446846, -5, 84757, 446944, 40 ],
       "address": {
