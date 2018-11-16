@@ -26,24 +26,18 @@
       "colour": {
         "type": "object",
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "rgba": {
-                "type": "array",
-                "items": {"type": "number"},
-                "minItems": 4,    
-                "maxItems": 4
-              },
-              "hex": {"type": "string"}
-            },
-            "additionalProperties": false
-          }
-        }
+          "rgba": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 4,    
+            "maxItems": 4
+          },
+          "hex": {"type": "string"}
+        },
+        "additionalProperties": false
       }
     }
-
+    
   },
 
 
