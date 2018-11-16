@@ -8,8 +8,9 @@
     "1234": {
       "type": "+NoiseBuilding",
       "attributes": {
-        "class": 22,
-        "hugo": "ledoux"
+        "class": "22",
+        "hugo": "ledoux",
+        "buildingLDenMin": 33
       },
       "geometry": [
         {
@@ -41,6 +42,7 @@
       ]        
     }  
   },
+  "+metadata2":{},
   "vertices": [
     [0.0, 0.0, 0.0],
     [1.0, 0.0, 0.0],

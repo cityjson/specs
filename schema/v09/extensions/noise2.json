@@ -3,9 +3,47 @@
   "description": "Extension to model the noise, innit?",
   "version": "0.1",
 
-  "extraRootProperties": {},
+  "extraRootProperties": {
+
+    "+metadata2": {
+      "type": "object",
+      "properties": {
+        "un": { "type": "integer"},
+        "deux": { "type": "integer"},
+        "trois": { "type": "integer"}
+      },
+      "required": ["un", "deux"]
+    }
   
-  "extraAttributes": {},
+  },
+
+   
+  "extraAttributes": {
+    
+    "Building": {
+      "colour": {
+        "type": "object",
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "rgba": {
+                "type": "array",
+                "items": {"type": "number"},
+                "minItems": 4,    
+                "maxItems": 4
+              },
+              "hex": {"type": "string"}
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+
+  },
+
 
   "extraCityObjects": {
 
@@ -17,7 +55,9 @@
           "properties": {
             "type": { "enum": ["+NoiseBuilding"] },
             "attributes": {
-              "buildingLDenMin": {"type": "number"}
+              "properties": {
+                "buildingLDenMin": {"type": "number"}
+              }
             }
           },
           "required": ["type"]
@@ -26,5 +66,7 @@
     }
 
   }
+
+
 }
  
