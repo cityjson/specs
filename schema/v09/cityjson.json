@@ -18,7 +18,7 @@
       "type": "object",
       "additionalProperties": { 
         "type": "string",
-        "pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?",
+        "format": "uri-reference",
         "description": "the string needs to be a URI"
       }
     },
