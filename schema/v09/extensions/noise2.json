@@ -1,0 +1,30 @@
+{
+  "type": "CityJSON extension",
+  "description": "Extension to model the noise, innit?",
+  "version": "0.1",
+
+  "extraRootProperties": {},
+  
+  "extraAttributes": {},
+
+  "extraCityObjects": {
+
+    "+NoiseBuilding": {
+      "allOf": [
+        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+        {
+          "properties": {
+            "type": { "enum": ["+NoiseBuilding"] },
+            "attributes": {
+              "buildingLDenMin": {"type": "number"}
+            }
+          },
+          "required": ["type"]
+        }
+      ]
+    }
+
+  }
+}
+ 
