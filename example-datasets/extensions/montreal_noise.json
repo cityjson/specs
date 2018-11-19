@@ -1,11 +1,11 @@
 {
     "type": "CityJSON",
     "version": "0.8",
-    "extensions": {"+NoiseBuilding": "https://someurl.org/noise.json"},
+    "extensions": { "Noise": "https://someurl.org/noise2.json" },
     "CityObjects": {
         "un": {
             "type": "+NoiseBuilding",
-            "noise-attributes": {
+            "attributes": {
                 "buildingReflectionCorrection": 234,
                 "buildingLNightMax": 17.33
             },
