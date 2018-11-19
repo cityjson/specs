@@ -53,7 +53,17 @@
             "type": { "enum": ["+NoiseBuilding"] },
             "attributes": {
               "properties": {
-                "buildingLDenMin": {"type": "number"}
+                "buildingReflection": {"type": "string"},
+                "buildingReflectionCorrection": {"type": "number"},
+                "buildingLDenMax": {"type": "number"},
+                "buildingLDenMin": {"type": "number"},
+                "buildingLNightMax": {"type": "number"},
+                "buildingLNightMin": {"type": "number"},
+                "buildingLDenEq": {"type": "number"},
+                "buildingLNightEq": {"type": "number"},
+                "buildingHabitants": {"type": "integer"},
+                "buildingImmissionPoints": {"type": "integer"},
+                "remark": {"type": "string"}
               }
             }
           },
@@ -61,6 +71,40 @@
         }
       ]
     },
+
+
+   "+NoiseBuildingPart": {
+      "allOf": [
+        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+        {
+          "properties": {
+            "type": { "enum": ["+NoiseBuildingPart"] },
+            "attributes": {
+              "properties": {
+                "buildingReflection": {"type": "string"},
+                "buildingReflectionCorrection": {"type": "number"},
+                "buildingLDenMax": {"type": "number"},
+                "buildingLDenMin": {"type": "number"},
+                "buildingLNightMax": {"type": "number"},
+                "buildingLNightMin": {"type": "number"},
+                "buildingLDenEq": {"type": "number"},
+                "buildingLNightEq": {"type": "number"},
+                "buildingHabitants": {"type": "integer"},
+                "buildingImmissionPoints": {"type": "integer"},
+                "remark": {"type": "string"}
+              }
+            },
+            "parent": {
+              "type": "string",
+              "description": "the ID of the parent +NoiseBuilding"
+            }
+          },
+          "required": ["type", "parent"]
+        }
+      ]
+    },
+
 
     "+NoiseCityFurniture": {
       "allOf": [
@@ -100,6 +144,14 @@
         {
           "properties": {
             "type": { "enum": ["+NoiseCityFurnitureSegment"] },
+            "attributes": {
+              "properties": {
+                "reflection": {"type": "string"},
+                "reflectionCorrection": {"type": "number"},
+                "height": {"type": "number"},
+                "distance": {"type": "number"}
+              }
+            },
             "parent": {
               "type": "string",
               "description": "the ID of the children +NoiseCityFurniture"

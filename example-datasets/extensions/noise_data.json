@@ -2,10 +2,7 @@
   "type": "CityJSON",
   "version": "0.8",
   "extensions": {
-    "+NoiseBuilding": "https://someurl.org/noise.json",
-    "+NoiseBuildingPart": "https://someurl.org/noise.json",
-    "+NoiseCityFurniture": "https://someurl.org/noise.json",
-    "+NoiseCityFurnitureSegment": "https://someurl.org/noise.json"
+    "Noise": "https://someurl.org/noise2.json"
   },
   "CityObjects": {
     "1234": {
@@ -20,9 +17,8 @@
         }
       ],
       "attributes": {
-        "roofType": "pointy"
-      },
-      "noise-attributes": {
+        "roofType": "pointy",
+        "class": "22",
         "buildingReflectionCorrection": 234,
         "buildingLNightMax": 17.33
       }
