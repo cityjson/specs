@@ -1,6 +1,7 @@
 {
   "type": "CityJSON extension",
   "name": "Noise",
+  "uri": "https://someurl.org/noise2.json",
   "version": "0.1",
   "description": "Extension to model the noise, innit?",
 
@@ -57,6 +58,62 @@
             }
           },
           "required": ["type"]
+        }
+      ]
+    },
+
+    "+NoiseCityFurniture": {
+      "allOf": [
+        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        {
+          "properties": {
+            "type": { "enum": ["+NoiseCityFurniture"] },
+            "children": {
+              "type": "array",
+              "description": "the IDs of the +NoiseCityFurnitureSegment",
+              "items": {"type": "string"}
+            },
+            "geometry": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {"$ref": "../geomprimitives.json#/MultiPoint"},
+                  {"$ref": "../geomprimitives.json#/MultiLineString"},
+                  {"$ref": "../geomprimitives.json#/Solid"},
+                  {"$ref": "../geomprimitives.json#/MultiSolid"},
+                  {"$ref": "../geomprimitives.json#/CompositeSolid"},
+                  {"$ref": "../geomprimitives.json#/MultiSurface"},
+                  {"$ref": "../geomprimitives.json#/CompositeSurface"},
+                  {"$ref": "../geomtemplates.json#/GeometryInstance"}
+                ]
+              }
+            }        
+          },
+          "required": ["type", "geometry"]
+        }
+      ]
+    },
+
+    "+NoiseCityFurnitureSegment": {
+      "allOf": [
+        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        {
+          "properties": {
+            "type": { "enum": ["+NoiseCityFurnitureSegment"] },
+            "parent": {
+              "type": "string",
+              "description": "the ID of the children +NoiseCityFurniture"
+            },
+            "geometry": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {"$ref": "../geomprimitives.json#/MultiLineString"}
+                ]
+              }
+            }        
+          },
+          "required": ["type", "parent", "geometry"]
         }
       ]
     }
