@@ -202,7 +202,6 @@ This is done by copying the schema of the parent City Object and extending it.
 It is allowed to add a new property at the root of a CityJSON file, but if you want to document it in a schema it needs to start with a ``+``.
 Say we wanted to store some census for a given neighbourhood for which we have a CityJSON file, then we could define the extra root property ``"+census"`` as follows:
 
-
 .. code-block:: js
 
   "extraRootProperties": {
@@ -225,16 +224,18 @@ Say we wanted to store some census for a given neighbourhood for which we have a
 
 And a CityJSON file would look like this:
 
-{
-  "type": "CityJSON",
-  "version": "0.9",
-  "CityObjects": {},
-  "vertices": [],
-  "+census": {
-    "percent_men": 49.5,
-    "percent_women": 51.5
+.. code-block:: js
+
+  {
+    "type": "CityJSON",
+    "version": "0.9",
+    "CityObjects": {},
+    "vertices": [],
+    "+census": {
+      "percent_men": 49.5,
+      "percent_women": 51.5
+    }
   }
-}
 
 
 
@@ -246,45 +247,49 @@ To illustrate the process of creating a new CityJSON extension, we use the Noise
 The XSDs and some test datasets are available `here <http://schemas.opengis.net/citygml/examples/2.0/ade/noise-ade/>`_.
 
 The resulting files for the Noise Extension are available:
-  - :download:`download noise.json <../schema/v08/extensions/noise.json>`
+  - :download:`download noise.json <../schema/v09/extensions/noise.json>`
   - :download:`download noise_data.json <../example-datasets/extensions/noise_data.json>`
 
 
-Adding new attributes to a Building
-***********************************
+Creating new City Objects
+*************************
 
 .. image:: _static/noise_building.png
    :width: 60%
 
-To add these attributes (they are not complex, but for the sake of the exercise let us assume that they are) one needs to:
-
-  1. Define in a new schema file two new City Objects: ``"+NoiseBuilding"`` and ``"+NoiseBuildingPart"`` 
-  2. Copy the schemas of ``"Building"`` and ``"BuildingPart"``, `defined in this file <https://github.com/tudelft3d/cityjson/blob/master/schema/v07/cityobjects.json>`_
-  3. Extend these schemas and add a new property ``"noise-attributes"``. The new attributes could have been simply added to the list of ``"attributes"`` too.
-
+We first need to define, in a new CityJSON Extension file ``noise.json``, two new City Objects: ``"+NoiseBuilding"`` and ``"+NoiseBuildingPart"``.
+Then copy the schemas of ``"Building"`` and ``"BuildingPart"``, defined in schemas of CityJSON, and extend these schemas to add new attributes.
 
 .. code-block:: js
 
-  "+NoiseBuilding": {
-      "type": "object",
-      "properties": {
-        "type": { "enum": ["+NoiseBuilding"] },
-        "attributes": ...
-        "noise-attributes": {
-          "buildingReflection": {"type": "string"},
-          "buildingReflectionCorrection": {"type": "number"},
-          "buildingLDenMax": {"type": "number"},
-          "buildingLDenMin": {"type": "number"},
-          "buildingLNightMax": {"type": "number"},
-          "buildingLNightMin": {"type": "number"},
-          "buildingLDenEq": {"type": "number"},
-          "buildingLNightEq": {"type": "number"},
-          "buildingHabitants": {"type": "integer"},
-          "buildingImmissionPoints": {"type": "integer"},
-          "remark": {"type": "string"}
+   "extraCityObjects": {
+    "+NoiseBuilding": {
+      "allOf": [
+        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+        {
+          "properties": {
+            "type": { "enum": ["+NoiseBuilding"] },
+            "attributes": {
+              "properties": {
+                "buildingReflection": {"type": "string"},
+                "buildingReflectionCorrection": {"type": "number"},
+                "buildingLDenMax": {"type": "number"},
+                "buildingLDenMin": {"type": "number"},
+                "buildingLNightMax": {"type": "number"},
+                "buildingLNightMin": {"type": "number"},
+                "buildingLDenEq": {"type": "number"},
+                "buildingLNightEq": {"type": "number"},
+                "buildingHabitants": {"type": "integer"},
+                "buildingImmissionPoints": {"type": "integer"},
+                "remark": {"type": "string"}
+              }
+            }
+          },
+          "required": ["type"]
         }
-        ...
-
+      ]
+    }
 
 A CityJSON file containing this new City Object would look like this:
 
@@ -292,13 +297,18 @@ A CityJSON file containing this new City Object would look like this:
 
   {
     "type": "CityJSON",
-    "version": "0.8",
+    "version": "0.9",
     "extensions": {
-      "+NoiseBuilding": "https://someurl.org/noise.json" 
+      "Noise": "https://someurl.org/noise.json" 
     },
     "CityObjects": {
       "1234": {
         "type": "+NoiseBuilding",
+        "attributes": {
+          "roofType": "gable",
+          "buildingReflectionCorrection": 234,
+          "buildingLNightMax": 17.33
+        },
         "geometry": [
           {
             "type": "Solid",
@@ -307,15 +317,10 @@ A CityJSON file containing this new City Object would look like this:
               [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
             ]
           }
-        ],
-        "attributes": {
-          "roofType": "pointy"
-        },
-        "noise-attributes": {
-          "buildingReflectionCorrection": 234,
-          "buildingLNightMax": 17.33
-        }
-      },
+        ]
+      }
+    }
+  }
 
 
 Adding complex types for CityFurniture
@@ -336,39 +341,53 @@ The steps to follow are thus:
 .. code-block:: js
 
   "+NoiseCityFurniture": {
-    "type": "object",
-    "properties": {
-      "type": { "enum": ["+NoiseCityFurniture"] },
-      ...
-      "children": {
-        "type": "array",
-        "description": "the IDs of the +NoiseCityFurnitureSegment",
-        "items": {"type": "string"}
+    "allOf": [
+      { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+      {
+        "properties": {
+          "type": { "enum": ["+NoiseCityFurniture"] },
+          "children": {
+            "type": "array",
+            "description": "the IDs of the +NoiseCityFurnitureSegment",
+            "items": {"type": "string"}
+          },
+          ...
       }
-      ...
+    ]
   }
 
 .. code-block:: js
 
   "+NoiseCityFurnitureSegment": {
-    "type": "object",
-    "properties": {
-      "type": { "enum": ["+NoiseCityFurnitureSegment"] },
-      "attributes": {
-        ...
-      },
-      "parent": { "type": "string" },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "../geomprimitives.json#/MultiLineString"}
-          ]
-        }
+    "allOf": [
+      { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+      {
+        "properties": {
+          "type": { "enum": ["+NoiseCityFurnitureSegment"] },
+          "attributes": {
+            "properties": {
+              "reflection": {"type": "string"},
+              "reflectionCorrection": {"type": "number"},
+              "height": {"type": "number"},
+              "distance": {"type": "number"}
+            }
+          },
+          "parent": {
+            "type": "string",
+            "description": "the ID of the children +NoiseCityFurniture"
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "../geomprimitives.json#/MultiLineString"}
+              ]
+            }
+          }        
+        },
+        "required": ["type", "parent", "geometry"]
       }
-    },
-    "required": ["type", "geometry", "parent"],
-    "additionalProperties": false
+    ]
   }
 
 
@@ -415,12 +434,12 @@ The validation of a CityJSON file containing extensions needs to be performed as
 
 While this could be done with any JSON schema validator, resolving all the JSON references could be slightly tricky. 
 Thus, `cjio <https://github.com/tudelft3d/cjio>`_ (with the option ``--validate``) has automated this process. 
-You just need to add the new schemas in the folder ``/extensions`` in the ``schema/v08/`` folder; ``noise.json`` is already present in the `GitHub repository of CityJSON <https://github.com/tudelft3d/cityjson/tree/master/schema/v08>`_.
+You just need to add the new schemas in the folder ``/extensions`` in the ``schema/v09/`` folder; ``noise.json`` is already present in the `GitHub repository of CityJSON <https://github.com/tudelft3d/cityjson>`_.
 Then specify the folder where the schemas are with the option ``--folder_schemas``.
   
 .. code-block:: bash
 
-  $ cjio noise_data.json validate --folder_schemas /home/elvis/cityjson/schema/v08/
+  $ cjio noise_data.json validate --folder_schemas /home/elvis/cityjson/schema/v09/
 
 This assumes that the folder is structured as follows:
 
