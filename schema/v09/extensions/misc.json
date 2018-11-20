@@ -3,11 +3,12 @@
   "name": "Misc",
   "uri": "https://someurl.org/misc.json",
   "version": "0.1",
-  "description": "Extension some possibilities, innit?",
+  "description": "Extension that demonstrate some possibilities, innit?",
+
 
   "extraRootProperties": {
 
-    "+metadata2": {
+    "+onetest": {
       "type": "object",
       "properties": {
         "un": { "type": "integer"},
@@ -16,6 +17,22 @@
       },
       "required": ["un", "deux", "trois"],
       "additionalProperties": false
+    },
+
+    "+census": {
+      "type": "object",
+      "properties": {
+        "percent_men": { 
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "percent_women": { 
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        }
+      }
     }
   
   },

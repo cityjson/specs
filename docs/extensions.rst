@@ -198,25 +198,43 @@ This is done by copying the schema of the parent City Object and extending it.
 3. Adding new properties at the root of a document
 **************************************************
 
-It is allowed to add new properties at the root of a CityJSON file, but if you want to document them in a schema this property needs to start with a ``+``
+
+It is allowed to add a new property at the root of a CityJSON file, but if you want to document it in a schema it needs to start with a ``+``.
+Say we wanted to store some census for a given neighbourhood for which we have a CityJSON file, then we could define the extra root property ``"+census"`` as follows:
 
 
 .. code-block:: js
 
   "extraRootProperties": {
-    "+extra": {
+    "+census": {
       "type": "object",
       "properties": {
-        "un": { "type": "integer"},
-        "deux": { "type": "integer"},
-        "trois": { "type": "integer"}
-      },
-      "required": ["un", "deux", "trois"],
-      "additionalProperties": false
+        "percent_men": { 
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "percent_women": { 
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        }
+      }
     }
   }
 
+And a CityJSON file would look like this:
 
+{
+  "type": "CityJSON",
+  "version": "0.9",
+  "CityObjects": {},
+  "vertices": [],
+  "+census": {
+    "percent_men": 49.5,
+    "percent_women": 51.5
+  }
+}
 
 
 
