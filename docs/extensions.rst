@@ -149,8 +149,34 @@ The value of the property is a JSON schema; this schema can reference and reuse 
 2. Creating/extending new City Objects
 **************************************
 
-The creation of a new City Object is done by defining it in a JSON schema file.
-Since all City Objects are documented in the schemas of CityJSON (in `cityobjects.json <https://github.com/tudelft3d/cityjson/blob/master/schema/v07/cityobjects.json>`_), it is basically a matter of copying the parts needed in a new file and modifying its content.
+The creation of a new City Object is done by defining it in the Extension file in the ``"extraCityObjects"`` property.
+The
+
+.. code-block:: js
+
+  "extraCityObjects": {
+    "+NoiseBuilding": {
+      "allOf": [
+        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+        {
+          "properties": {
+            "type": { "enum": ["+NoiseBuilding"] },
+            "attributes": {
+              "properties": {
+                "buildingLDenMin": {"type": "number"}
+              }
+            }
+          },
+          "required": ["type"]
+        }
+      ]
+    }
+  }
+
+
+
+Since all City Objects are documented in the schemas of CityJSON (in `cityobjects.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_), it is basically a matter of copying the parts needed in a new file and modifying its content.
 A new name for the City Object (for the class) must be given.
   
 It should be observed that since JSON schema does not allow inheritance, the only way to extend a City Object is to define an entirely new one (with a new name, eg ``"+NoiseBuilding"``).
@@ -169,21 +195,29 @@ This is done by copying the schema of the parent City Object and extending it.
     6. To define new semantic surfaces, simply add a ``+`` to its name, eg ``"+ThermalSurface"``.
 
 
-  
-If a CityJSON file contains City Objects not in the core, then the CityJSON must contain an extra member called ``"extensions"`` whose values are the name-value pairs of the new City Objects and the name of the file (this can be a URI where the schema is hosted).
+3. Adding new properties at the root of a document
+**************************************************
+
+It is allowed to add new properties at the root of a CityJSON file, but if you want to document them in a schema this property needs to start with a ``+``
+
 
 .. code-block:: js
 
-  {
-    "type": "CityJSON",
-    "version": "0.8",
-    "extensions": {
-      "+TallBuilding": "https://www.hugo.com/extensions/improved_buildings.json",
-      "+Statue": "https://www.hugo.com/extensions/statues.json"
-    },
-    "CityObjects": {},
-    "vertices": []
+  "extraRootProperties": {
+    "+extra": {
+      "type": "object",
+      "properties": {
+        "un": { "type": "integer"},
+        "deux": { "type": "integer"},
+        "trois": { "type": "integer"}
+      },
+      "required": ["un", "deux", "trois"],
+      "additionalProperties": false
+    }
   }
+
+
+
 
 
 ------------------------------------------------
