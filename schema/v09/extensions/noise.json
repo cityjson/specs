@@ -1,7 +1,7 @@
 {
   "type": "CityJSON extension",
   "name": "Noise",
-  "uri": "https://someurl.org/noise2.json",
+  "uri": "https://someurl.org/noise.json",
   "version": "0.1",
   "description": "Extension to model the noise, innit?",
 
