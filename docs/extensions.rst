@@ -35,7 +35,7 @@ The following 3 cases are possible:
 The Extension file
 ******************
 
-A CityJSON Extension is defined in a separate JSON file
+A CityJSON Extension is defined in a separate JSON file such as this one:
 
 .. code-block:: js
 
@@ -50,6 +50,10 @@ A CityJSON Extension is defined in a separate JSON file
     "extraCityObjects" {}
   }
 
+
+It must define the name of the Extension, its URI, and its version.
+The 3 cases to extend the core model, as described above, are 3 properties of the file.
+Each of these properties contain snippets of `JSON Schemas <http://json-schema.org/>`_, as explained below.
 
 
 
@@ -100,10 +104,44 @@ Another example would be to store the area of a the parcel of a building, and to
       "storeysAboveGround": 2,
       "+area-parcel": {
         "value": 437,
-        "uom": "m^2"
+        "uom": "m2"
       } 
     },
     "geometry": [...]
+  }
+
+For this 2 cases, the CityJSON Extension file would like the snippet below.
+Notice that ``"extraAttributes"`` may have several properties (the City Objects are the possibilities) and then each of these have as properties the new attributes.
+This attributes must start with ``+``.
+The value of the property is a JSON schema; this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
+
+.. code-block:: js
+
+  "extraAttributes": {
+    "Building": {
+      "+colour": {
+        "type": "object",
+        "properties": {
+          "rgba": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 4,    
+            "maxItems": 4
+          }
+        },
+        "required": ["rgba"],
+        "additionalProperties": false
+      },
+      "+area-parcel": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "number" },
+          "uom": { "type": "string", "enum": ["m2", "feet2"] }
+        },
+        "required": ["value", "uom"],
+        "additionalProperties": false
+      }      
+    } 
   }
 
 
