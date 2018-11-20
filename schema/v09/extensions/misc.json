@@ -32,11 +32,19 @@
             "items": {"type": "number"},
             "minItems": 4,    
             "maxItems": 4
-          },
-          "hex": {"type": "string"}
+          }
         },
         "additionalProperties": false
-      }
+      },
+      "+area-parcel": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "number" },
+          "uom": { "type": "string", "enum": ["m2", "feet2"] }
+        },
+        "required": ["value", "uom"],
+        "additionalProperties": false
+      }      
     }
     
   },
