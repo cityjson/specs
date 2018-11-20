@@ -31,53 +31,81 @@ The following 3 cases are possible:
   While Extensions are less flexible than CityGML ADEs (ie they have a narrower scope and less customisation is possible), it should be noted that the flexibility of ADEs come at a price: standard software (eg viewer or spatial analysis software) will often not be able to process correctly the files containing ADEs, because specific code needs to be written. Viewers might be working (the GML geometries are simply parsed), but software parsing the XML might not work directly). CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the code is required. This is achieved by enforcing a set of simple rules, as defined below, when adding new complex attributes and City Objects; if these are followed then a CityJSON files containing Extensions will be seen as 'standard' CityJSON files.
 
 
+
+The Extension file
+******************
+
+A CityJSON Extension is defined in a separate JSON file
+
+.. code-block:: js
+
+  {
+    "type": "CityJSON Extension",
+    "name": "Noise",
+    "uri": "https://someurl.org/noise.json",
+    "version": "0.1",
+    "description": "Extension to model the noise"
+    "extraRootProperties": {},     
+    "extraAttributes": {},
+    "extraCityObjects" {}
+  }
+
+
+
+
 1. Adding new complex attributes to existing City Objects
 *********************************************************
 
 One of the philosophy of JSON is "schema-less", which means that one is allowed to define "new" properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON cannot have schemas!).
-While this is in contrast to CityGML (and GML as a whole where schemas are encouraged), the schemas of CityJSON (:doc:`schema`) are partly following that philosophy.
+While this is in contrast to CityGML (and GML as a whole where schemas are holy), the schemas of CityJSON (:doc:`schema`) are partly following that philosophy.
 That is, for a given City Object, the list of "allowed" properties/attributes is listed in the schema, but it is not an error to add new ones. 
 The validator of CityJSON (`cjio <https://github.com/tudelft3d/cjio>`_ with the option ``--validate``) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered invalid in CityJSON.
 
-In brief, if one wants to add a new attribute to a given ``"Building"``, say to document its colour (``"colour": "red"``), the easiest way is to add a property to the City Object:
+In brief, if one wants to simply add a new attribute to a given ``"Building"``, say to document its colour (``"colour": "red"``), the easiest way is just to add a property to the City Object (notice that ``"storeysAboveGround"`` is in the CityJSON schema already):
 
 .. code-block:: js
 
   {
     "type": "Building", 
-    "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
     "attributes": { 
-      "roofType": "gable",
+      "storeysAboveGround": 2,
       "colour": "red"
     },
     "geometry": [...]
   }
 
-Observe that complex attributes (ie 'hierarchical') can be added:
+It is also possible to add, and document in a schema, complex attributes, for example is we wanted to have the colour as a RGBA value (red-green-blue-alpha):
 
 .. code-block:: js
 
   {
     "type": "Building", 
-    "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
     "attributes": { 
-      "roofType": "gable",
-      "colour": {
-        "facade": {
-          "rgba": [255,255,255,1],
-          "hex": "#000"
-        },
-        "roof": {
-          "rgba": [0,255,0,1],
-          "hex": "#0F0"
-        }
-      }
+      "storeysAboveGround": 2,
+      "+colour": {
+        "rgba": [255, 255, 255, 1],
+      },
     },
     "geometry": [...]
   }
 
-However, these will not be documented, nor will they be validated.
-It is recommended to document complex attributes in a JSON schema, and thus a new City Object needs to be defined (as explained below).
+
+Another example would be to store the area of a the parcel of a building, and to document also the unit of measurement:
+
+.. code-block:: js
+
+  {
+    "type": "Building", 
+    "attributes": { 
+      "storeysAboveGround": 2,
+      "+area-parcel": {
+        "value": 437,
+        "uom": "m^2"
+      } 
+    },
+    "geometry": [...]
+  }
+
 
 
 2. Creating/extending new City Objects
