@@ -5,6 +5,9 @@ Schema validation
 CityJSON schema download
 ------------------------
 
+version 0.9: 
+- `available on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema/v09/>`_
+
 version 0.8: 
 - `available on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema/v08/>`_
 
