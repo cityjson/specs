@@ -478,8 +478,7 @@
             "items": {
               "oneOf": [
                 {"$ref": "geomprimitives.json#/MultiSurface"},
-                {"$ref": "geomprimitives.json#/CompositeSurface"},
-                {"$ref": "geomtemplates.json#/GeometryInstance"}
+                {"$ref": "geomprimitives.json#/CompositeSurface"}
               ]
             }
           }        
