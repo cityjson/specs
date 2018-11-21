@@ -124,24 +124,6 @@
       {
         "properties": {
           "type": { "enum": ["BuildingInstallation"] },
-          "attributes": {
-            "properties": {
-              "measuredHeight": { "type": "number"},
-              "roofType": { "type": "string"},
-              "storeysAboveGround": { "type": "integer"},
-              "storeysBelowGround": { "type": "integer"},
-              "storeyHeightsAboveGround": { 
-                "type": "array",
-                "items": {"type": "number"}
-              },
-              "storeyHeightsBelowGround": { 
-                "type": "array",
-                "items": {"type": "number"}
-              },
-              "yearOfConstruction": { "type": "integer"},
-              "yearOfDemolition": { "type": "integer"}
-            }
-          },
           "parent": {
             "type": "string",
             "description": "the ID of the parent Building"
