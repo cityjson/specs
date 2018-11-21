@@ -400,31 +400,39 @@
   }, 
 
 
+  "_AbstractTransportationComplex": {
+    "properties": {
+      "attributes": {
+        "properties": {
+          "surfaceMaterial": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      },
+      "geometry": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {"$ref": "geomprimitives.json#/MultiSurface"},
+            {"$ref": "geomprimitives.json#/CompositeSurface"}
+          ] 
+        }
+      }
+    },
+    "required": ["geometry"]
+  },
+  
+  
   "Road": {
     "allOf": [
       { "$ref": "#/_AbstractCityObject"},
+      { "$ref": "#/_AbstractTransportationComplex" },
       {
         "properties": {
-          "type": { "enum": ["Road"] },
-          "attributes": {
-            "properties": {
-              "surfaceMaterial": { 
-                "type": "array",
-                "items": {"type": "string"}
-              }
-            }
-          },
-          "geometry": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {"$ref": "geomprimitives.json#/MultiSurface"},
-                {"$ref": "geomprimitives.json#/CompositeSurface"}
-              ]
-            }
-          }        
+          "type": { "enum": ["Road"] }
         },
-        "required": ["type", "geometry"]
+        "required": ["type"]
       }
     ]
   },
@@ -433,28 +441,12 @@
   "Railway": {
     "allOf": [
       { "$ref": "#/_AbstractCityObject"},
+      { "$ref": "#/_AbstractTransportationComplex" },
       {
         "properties": {
-          "type": { "enum": ["Railway"] },
-          "attributes": {
-            "properties": {
-              "surfaceMaterial": { 
-                "type": "array",
-                "items": {"type": "string"}
-              }
-            }
-          },
-          "geometry": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {"$ref": "geomprimitives.json#/MultiSurface"},
-                {"$ref": "geomprimitives.json#/CompositeSurface"}
-              ]
-            }
-          }        
+          "type": { "enum": ["Railway"] }
         },
-        "required": ["type", "geometry"]
+        "required": ["type"]
       }
     ]
   },
@@ -462,28 +454,12 @@
   "TransportSquare": {
     "allOf": [
       { "$ref": "#/_AbstractCityObject"},
+      { "$ref": "#/_AbstractTransportationComplex" },
       {
         "properties": {
-          "type": { "enum": ["TransportSquare"] },
-          "attributes": {
-            "properties": {
-              "surfaceMaterial": { 
-                "type": "array",
-                "items": {"type": "string"}
-              }
-            }
-          },
-          "geometry": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {"$ref": "geomprimitives.json#/MultiSurface"},
-                {"$ref": "geomprimitives.json#/CompositeSurface"}
-              ]
-            }
-          }        
+          "type": { "enum": ["TransportSquare"] }       
         },
-        "required": ["type", "geometry"]
+        "required": ["type"]
       }
     ]
   },  
