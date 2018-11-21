@@ -37,59 +37,63 @@
 
 
   "_AbstractBuilding": {
-    "properties": {
-      "attributes": {
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "measuredHeight": { "type": "number"},
-          "roofType": { "type": "string"},
-          "storeysAboveGround": { "type": "integer"},
-          "storeysBelowGround": { "type": "integer"},
-          "storeyHeightsAboveGround": { 
-            "type": "array",
-            "items": {"type": "number"}
+          "attributes": {
+            "properties": {
+              "measuredHeight": { "type": "number"},
+              "roofType": { "type": "string"},
+              "storeysAboveGround": { "type": "integer"},
+              "storeysBelowGround": { "type": "integer"},
+              "storeyHeightsAboveGround": {
+                "type": "array",
+                "items": {"type": "number"}
+              },
+              "storeyHeightsBelowGround": {
+                "type": "array",
+                "items": {"type": "number"}
+              },
+              "yearOfConstruction": { "type": "integer"},
+              "yearOfDemolition": { "type": "integer"}
+            }
           },
-          "storeyHeightsBelowGround": { 
-            "type": "array",
-            "items": {"type": "number"}
+          "address": {
+            "type": "object",
+            "properties": {
+              "CountryName": {"type": "string"},
+              "LocalityName": {"type": "string"},
+              "ThoroughfareNumber": {"type": "string"},
+              "ThoroughfareName": {"type": "string"},
+              "PostalCode": {"type": "string"},
+              "location": {"$ref": "geomprimitives.json#/MultiPoint"}
+            }
           },
-          "yearOfConstruction": { "type": "integer"},
-          "yearOfDemolition": { "type": "integer"}
-        }
-      },
-      "address": {
-        "type": "object",
-        "properties": {
-          "CountryName": {"type": "string"},
-          "LocalityName": {"type": "string"},
-          "ThoroughfareNumber": {"type": "string"},
-          "ThoroughfareName": {"type": "string"},
-          "PostalCode": {"type": "string"},
-          "location": {"$ref": "geomprimitives.json#/MultiPoint"}
-        }
-      },
-      "children": {
-        "type": "array",
-        "description": "the IDs of the BuildingPart/Installation of this Building",
-        "items": {"type": "string"}
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"}
-          ] 
-        }
+          "children": {
+            "type": "array",
+            "description": "the IDs of the BuildingPart/Installation of this Building",
+            "items": {"type": "string"}
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/Solid"},
+                {"$ref": "geomprimitives.json#/CompositeSolid"}
+              ]
+            }
+          }
+        },
+        "required": ["geometry"]
       }
-    },
-    "required": ["geometry"]
+    ]
   },
   
 
   "Building": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractBuilding" },
       {
         "properties": {
@@ -102,7 +106,6 @@
 
   "BuildingPart": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractBuilding" },
       {
         "properties": {
@@ -185,36 +188,40 @@
 
 
   "_AbstractTunnel": {
-    "properties": {
-      "attributes": {
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "yearOfConstruction": { "type": "integer"},
-          "yearOfDemolition": { "type": "integer"}
-        }
-      },
-      "children": {
-        "type": "array",
-        "description": "the IDs of the TunnelPart/Installation of this Tunnel",
-        "items": {"type": "string"}
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"}
-          ] 
-        }
+          "attributes": {
+            "properties": {
+              "yearOfConstruction": { "type": "integer"},
+              "yearOfDemolition": { "type": "integer"}
+            }
+          },
+          "children": {
+            "type": "array",
+            "description": "the IDs of the TunnelPart/Installation of this Tunnel",
+            "items": {"type": "string"}
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/Solid"},
+                {"$ref": "geomprimitives.json#/CompositeSolid"}
+              ]
+            }
+          }
+        },
+        "required": ["geometry"]
       }
-    },
-    "required": ["geometry"]
+    ]
   },
   
 
   "Tunnel": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractTunnel" },
       {
         "properties": {
@@ -227,7 +234,6 @@
 
   "TunnelPart": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractTunnel" },
       {
         "properties": {
@@ -276,37 +282,41 @@
 
 
   "_AbstractBridge": {
-    "properties": {
-      "attributes": {
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "yearOfConstruction": {"type": "integer"},
-          "yearOfDemolition": {"type": "integer"},
-          "isMovable": {"type": "boolean" }
-        }
-      },
-      "children": {
-        "type": "array",
-        "description": "the IDs of the Bridge/Part/Installation/CE of this Bridge",
-        "items": {"type": "string"}
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/Solid"},
-            {"$ref": "geomprimitives.json#/CompositeSolid"}
-          ] 
-        }
+          "attributes": {
+            "properties": {
+              "yearOfConstruction": {"type": "integer"},
+              "yearOfDemolition": {"type": "integer"},
+              "isMovable": {"type": "boolean" }
+            }
+          },
+          "children": {
+            "type": "array",
+            "description": "the IDs of the Bridge/Part/Installation/CE of this Bridge",
+            "items": {"type": "string"}
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/Solid"},
+                {"$ref": "geomprimitives.json#/CompositeSolid"}
+              ]
+            }
+          }
+        },
+        "required": ["geometry"]
       }
-    },
-    "required": ["geometry"]
+    ]
   },
   
 
   "Bridge": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractBridge" },
       {
         "properties": {
@@ -320,7 +330,6 @@
 
   "BridgePart": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractBridge" },
       {
         "properties": {
@@ -401,32 +410,36 @@
 
 
   "_AbstractTransportationComplex": {
-    "properties": {
-      "attributes": {
+    "allOf": [
+      { "$ref": "#/_AbstractCityObject"},
+      {
         "properties": {
-          "surfaceMaterial": {
+          "attributes": {
+            "properties": {
+              "surfaceMaterial": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "geometry": {
             "type": "array",
-            "items": {"type": "string"}
+            "items": {
+              "oneOf": [
+                {"$ref": "geomprimitives.json#/MultiSurface"},
+                {"$ref": "geomprimitives.json#/CompositeSurface"}
+              ]
+            }
           }
-        }
-      },
-      "geometry": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {"$ref": "geomprimitives.json#/MultiSurface"},
-            {"$ref": "geomprimitives.json#/CompositeSurface"}
-          ] 
-        }
+        },
+        "required": ["geometry"]
       }
-    },
-    "required": ["geometry"]
+    ]
   },
   
   
   "Road": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractTransportationComplex" },
       {
         "properties": {
@@ -440,7 +453,6 @@
 
   "Railway": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractTransportationComplex" },
       {
         "properties": {
@@ -453,7 +465,6 @@
 
   "TransportSquare": {
     "allOf": [
-      { "$ref": "#/_AbstractCityObject"},
       { "$ref": "#/_AbstractTransportationComplex" },
       {
         "properties": {
