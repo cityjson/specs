@@ -159,7 +159,6 @@ Here's an example:
   "extraCityObjects": {
     "+NoiseBuilding": {
       "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
         { "$ref": "../cityobjects.json#/_AbstractBuilding" },
         {
           "properties": {
@@ -264,7 +263,6 @@ Notice that these reuse the attributes and properties of the ``_AbstractCityObje
    "extraCityObjects": {
     "+NoiseBuilding": {
       "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
         { "$ref": "../cityobjects.json#/_AbstractBuilding" },
         {
           "properties": {
