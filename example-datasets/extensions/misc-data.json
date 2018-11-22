@@ -9,8 +9,9 @@
       "type": "Building", 
       "attributes": {
         "class": "potato",
+        "function": "4",
         "+Misc-colour": {
-          "rgba": [1,2,3]
+          "rgba": [1,2,3, 4]
         },
         "+Misc-area-parcel": {
           "value": 332.0,
@@ -37,7 +38,8 @@
   },
   "+onetest":{
     "un": 12,
-    "deux": 34
+    "deux": 34,
+    "trois": 2
   },
   "vertices": [
     [0.0, 0.0, 0.0],

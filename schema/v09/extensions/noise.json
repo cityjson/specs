@@ -46,7 +46,6 @@
 
     "+NoiseBuilding": {
       "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
         { "$ref": "../cityobjects.json#/_AbstractBuilding" },
         {
           "properties": {
@@ -75,7 +74,6 @@
 
    "+NoiseBuildingPart": {
       "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
         { "$ref": "../cityobjects.json#/_AbstractBuilding" },
         {
           "properties": {
