@@ -1,16 +1,107 @@
 {
-  "$schema": "http://json-schema.org/draft-09/schema#",
-  "title": "The 'Energy ADE' cityjsonified",
-  "allOf": [ { "$ref": "cityjson.json" } ],
+  "type": "CityJSON extension",
+  "name": "EnergyExtension",
+  "uri": "https://someurl.org/energy.json",
+  "version": "0.1",
+  "description": "CityJSON encoding for CityGML Energy ADE v1.0",
   
-  "+EnergyBuilding": {
-      "type": "object",
-      "properties": {
-      	  "type": { "const":"+EnergyBuilding" } 
-      }, 
-      "required": ["type"],
-     "additionalProperties": false
+  "extraRootProperties": {
+      
+  },
+  
+  "extraAttributes": {
+    "Building": {
+      "+buildingType": { "enum": ["Apartment Block", "Multi Family House", "Single Family House", "Terraced House"] },
+      "+constructionWeight": { "enum": ["veryLight", "light", "medium", "heavy"] },
+      "+energyPerformanceCertification": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "rating" : { "type": "string" },
+            "name" : { "type": "string" },
+            "certificationId" : { "type": "string" }
+          },
+          "required": [ "rating", "name" ],
+          "additionalProperties": false
+        }
+      },
+      "+volume": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["netVolume", "grossVolume", "energyReferenceVolume"] },
+            "value": { "type": "number" },
+            "uom": { "type": "string" }  
+          },
+          "required": [ "type", "value", "uom" ],
+          "additionalProperties": "false"
+        }
+      },
+      "+isLandmarked": { "type": "boolean" },
+      "+referencePoint": { "type": "boolean" },
+      "+refurbishmentMeasure": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "date": { "type":"string", "format":"date-time" },
+            "level": { "enum": ["Advanced", "No refurbishment", "Standard"] },
+            "description": { "type": "string" }
+          },
+          "required": [ "date", "level" ],
+          "additionalProperties": "false"
+        }
+      },
+      "+floorArea": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["netFloorArea", "grossFloorArea", "energyReferenceArea"] },
+            "value": { "type": "number" },
+            "uom": { "type": "string" }  
+          },
+          "required": [ "type", "value", "uom" ],
+          "additionalProperties": "false"
+        }
+      },
+      "+heightAboveGround": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "heightReference": {
+              "enum": [
+                  "bottomOfConstruction",
+                  "entrancePoint",
+                  "generalEave",
+                  "generalRoof",
+                  "generalRoofEdge",
+                  "highestEave",
+                  "highestPoint",
+                  "highestRoofEdge",
+                  "lowestEave",
+                  "lowestFloorAboveGround",
+                  "lowestRoofEdge",
+                  "topOfConstruction",
+                  "topThermalBoundary",
+                  "bottomThermalBoundary"
+                ] 
+            },
+            "value": {"type": "number"},
+            "uom": {"type": "string"}
+          },
+          "required": [ "heightReference", "value", "uom" ],
+          "additionalProperties": "false"
+        }
+      }
+    }
+  },
+  
+  "extraCityObjects": {
+      
   }
-  
   
 }
