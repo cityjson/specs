@@ -49,7 +49,7 @@ A CityJSON Extension is defined in a separate JSON file such as this one:
     "description": "Extension to model the noise"
     "extraRootProperties": {},     
     "extraAttributes": {},
-    "extraCityObjects" {}
+    "extraCityObjects": {}
   }
 
 
