@@ -4,6 +4,10 @@
   "extensions": {
     "Misc": "https://someurl.org/misc.json"
   },
+  "metadata": {
+    "datasetTitle": "3D city model of Chibougamau, Canada",
+    "datasetReferenceDate": "1977-02-28"
+  },
   "CityObjects": {
   	"onebuilding": {
       "type": "Building", 
