@@ -7,8 +7,22 @@ Changelog
 
 [Unreleased - coming in the future]
 -----------------------------------
+
 - handling of very large files, eg for streaming (see https://github.com/tudelft3d/cityjson/issues/6)
 - binary encoding of JSON, with either `CBOR <http://cbor.io>`_ or `BSON <http://bsonspec.org>`_
+
+----
+
+[0.9] - xxxx-xx-xx
+------------------
+
+Changed
+*******
+
+- the schemas have been revamped. The content is the same, but there are now abstract objects and city objects reuse these. It's thus way easier to modify and update and understand the schemas
+- the Extensions are not schemas files anymore, but JSON files with a specific syntax. The idea is the same, but now creating Extensions is simpler.
+- Extensions now allow new attributes for already existing City Objects, ie it's possible to add an attribute "+myattribute" to a "Building" and document it in a schema. Before it was only possible if one created a new specific City Object.
+- Extensions now allow root properties to be added and documented.
 
 ----
 
@@ -16,10 +30,12 @@ Changelog
 ------------------
 Added
 *****
+
 - Extensions, aka ADEs in the CityGML world, are now supported. The page 'Extensions' explains how to create one (its schema), how to validate your data, etc.
 
 Changed
 *******
+
 - introduction of a concept that was implicit but never mentioned: City Objects can be either of type '1st-level' or '2nd-level' (a Building would be 1st-level, and a BuildingPart 2nd-level). This concept is now for all City Object, including those that are defined in an Extension. This means that the properties "Parts" and "Installations" dissapear from the schema of Building/Bridge/Tunnel, and are replaced by a single one: "children". Also, a child (2nd-level City Object) needs to have a link to its parent City Object (with "parent").
 - metadata/crs and metadata/bbox have been replaced by metadata/geographicReference and metadata/geographicExtent. Longer to type (file sizes will increase!), but ISO19115-compliant. Also, bbox->geographicExtent for each of the City Object too. cjio's upgrade_version() takes care of all these automatically.
 - metadata has more possibilities, it's been extended to 3D city models needs. Some fields from the previous metadata properties were modified, be aware. 
@@ -29,8 +45,10 @@ Changed
 
 [0.6] - 2018-04-11
 ------------------
+
 Added
 *****
+
 - support for Geometry Templates (aka Implicit Geometries)
 - support for City Object Groups
 - any members at the root of CityJSON are now allowed (but might be ignored by parser)
@@ -38,6 +56,7 @@ Added
 
 Changed
 *******
+
 - the schema is now split into different schemas that are linked together
 - the schema validator (software cjvalschema) is now in Python and improved, thus everyone can run it easily
 - cjcompress does a better job and bugs have been removed
