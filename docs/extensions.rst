@@ -138,7 +138,7 @@ Another example would be to store the area of the parcel of a building, and to d
 
 For these 2 cases, the CityJSON Extension file would look like the snippet below.
 Notice that ``"extraAttributes"`` may have several properties (the types of the City Objects are the possibilities) and then each of these have as properties the new attributes (there can be several).
-An extra attribute must start with ``+``.
+An extra attribute must start with ``+``; notice that it is good practice to preprend the attribute with the name of the Extension, to avoid that 2 attributes from 2 difference extensions have the same name.
 The value of the property is a JSON schema, this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
 
 .. code-block:: js
