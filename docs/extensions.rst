@@ -57,6 +57,30 @@ It must define the name of the Extension, its URI, and its version.
 The 3 cases to extend the core model, as described above, are 3 properties of the file.
 Each of these properties contain snippets of `JSON Schemas <http://json-schema.org/>`_, as explained below.
 
+A CityJSON Extension file must be located in a folder ``/extensions`` in the folder where the schemas are. For a new extension ``myextension.json`` the following structure would result:
+
+.. code-block:: console
+
+  appearance.json
+  cityjson.json
+  cityobjects.json
+  extensions
+  geomprimitives.json
+  geomtemplates.json
+  metadata.json
+  extensions/
+      myextension.json
+
+This also means that if an element of the Extension reuses or references structures defined in the schemas of CityJSON, then the relative path ``../`` must be used. 
+An example would be to reuse the Solid type would be:
+
+.. code-block:: js
+
+  "items": {
+    "oneOf": [
+      {"$ref": "../geomprimitives.json#/Solid"}
+    ]
+  }
 
 
 1. Adding new complex attributes to existing City Objects
