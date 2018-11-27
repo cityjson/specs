@@ -1,6 +1,6 @@
 {
   "type": "CityJSON",
-  "version": "0.8",
+  "version": "0.9",
   "extensions": {
     "Energy": "https://someurl.org/energy.json"
   },
@@ -33,22 +33,186 @@
       "location": 1
     },
     "+refurbishmentMeasure": [{
-      "date": "2011-02-28T18:25:43",
+      "date": "2011-02-28T18:25:43Z",
       "level": "Advanced"
     }],
     "+floorArea": [{
-      "type": "grossVolume",
-      "value": 608.91789367799,
-      "uom": "m3"
+      "type": "grossFloorArea",
+      "value": 240,
+      "uom": "m2"
     }],
     "+heightAboveGround": [{
       "heightReference": "bottomOfConstruction",
       "value": 5,
       "uom": "m"
       }],
-    "+usageZone": [],
-    "+thermalZone": []
-    }
+    "+usageZone": ["uz01"],
+    "+thermalZone": ["tz01"],
+    "+aggregatedBuildingConstruction": []
+  },
+  "tz01":{
+    "type": "+ThermalZone",
+    "+additionalThermalBridgeUValue": {
+      "value": 240,
+      "uom": "J"
+    },
+    "+effectiveThermalCapacity": {
+      "value": 240,
+      "uom": "kcal"
+    },
+    "+floorArea": [{
+      "type": "grossFloorArea",
+      "value": 240,
+      "uom": "m2"
+      }],
+    "+volume": [{
+      "type": "grossVolume",
+      "value": 608.91789367799,
+      "uom": "m3"
+      }] ,
+    "indirectlyHeatedAreaRatio": {
+      "value": 240,
+      "uom": "m2"
+    },
+    "+infiltrationRate": {
+      "value": 2,
+      "uom": "m/s"
+    },
+    "+isCooled": false,
+    "isHeated": true,
+    "+volumeGeometry": [{
+      "type": "Solid",
+      "lod": 1,
+      "boundaries": [
+        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+      ]
+    }],
+    "+containedUsageZone": ["uz01"],
+    "+containedThermalBoundary": ["tb1", "tb2", "tb3", "tb4", "tb5", "tb6", "tb7"],
+    "+interiorRoom": [],
+    "geometry": [{
+      "type": "Solid",
+      "lod": 1,
+      "boundaries": [
+        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+      ]
+      }]
+
+  },
+  "tb1": {
+    "type": "+ThermalBoundary",
+    "+thermalBoundaryType": "outerWall" ,
+    "azimuth": {
+      "value": 0,
+      "uom": "deg"
+    },
+    "+inclination": {
+      "value": 90,
+      "uom": "deg"
+    },
+    "+area": {
+      "value": 43.5712812921102,
+      "uom": "m2"
+    },
+    "+refurbishmentMeasure": [{
+      "date": "2011-02-28T18:25:43Z",
+      "level": "Advanced"
+      }],
+    "+containedThermalOpening": ["to1"],
+    "+construction": ["const1"],
+    "geometry": [{
+      "type": "MultiSurface",
+      "lod": 1,
+      "boundaries": [ [[0, 3, 2, 1]] ]
+      }]
+  },
+
+  "to1": {
+    "type": "+ThermalOpening",
+    "+area": {
+      "value": 17.42851251684408,
+      "uom": "m2"
+    },
+    "+indoorShading": {
+      "maximumCoverRatio": {
+        "value": 300.42851251684408,
+        "uom": "nm"
+      },
+      "transmittance": {
+        "fraction": {
+          "value": 300.42851251684408,
+          "uom": "nm"
+        },
+        "wavelengthRange": "visible"
+      }
+    },
+    "+outdoorShading": {
+      "maximumCoverRatio": {
+        "value": 300.42851251684408,
+        "uom": "nm"
+      },
+      "transmittance": {
+        "fraction": {
+          "value": 300.42851251684408,
+          "uom": "nm"
+        },
+        "wavelengthRange": "visible"
+      }
+    },
+    "+openableRatio": {
+      "value": 30.42851251684408,
+      "uom": "m2"
+    },
+    "+construction": ["ct1"],
+    "geometry": [{
+      "type": "MultiSurface",
+      "lod": 1,
+      "boundaries": [ [[0, 3, 2, 1]] ]
+      }]
+  },
+
+  "uz01":{
+    "type": "+UsageZone",
+    "+usageZoneType": "residential" ,
+    "+coolingSchedule": "i'll do it later!!",
+    "+heatingSchedule": "i'll do it later!!",
+    "+ventilationSchedule": "i'll do it later!!",
+    "+usedFloors": [5],
+    "+floorArea": [{
+      "type": "grossFloorArea",
+      "value": 240,
+      "uom": "m2"
+    }],
+    "+averageInternalGains": {
+      "convectiveFraction": {
+        "value": 240,
+        "uom": "m2"
+      },
+      "latentFraction": {
+        "value": 240,
+        "uom": "m2"
+      },
+      "radiantFraction": {
+        "value": 240,
+        "uom": "m2"
+      },
+      "totalValue": {
+        "value": 240,
+        "uom": "m2"
+      }
+    },
+    "geometry": [{
+      "type": "Solid",
+      "lod": 1,
+      "boundaries": [
+        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+      ]
+      }],
+    "+containedBuidingUnits": ["bunit1"],
+    "+eqquipedWithFacilities": ["fac1"] ,
+    "+occupants": ["ocuup1"]
+  }
+
   },
   "vertices": [
     [0.0, 0.0, 0.0],
