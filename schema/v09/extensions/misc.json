@@ -72,7 +72,7 @@
 
     "+NoiseBuilding": {
       "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+        { "$ref": "../cityobjects.schema.json#/_AbstractBuilding" },
         {
           "properties": {
             "type": { "enum": ["+NoiseBuilding"] },
@@ -89,7 +89,7 @@
 
     "+NoiseCityFurniture": {
       "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject"},
         {
           "properties": {
             "type": { "enum": ["+NoiseCityFurniture"] },
@@ -102,14 +102,14 @@
               "type": "array",
               "items": {
                 "oneOf": [
-                  {"$ref": "../geomprimitives.json#/MultiPoint"},
-                  {"$ref": "../geomprimitives.json#/MultiLineString"},
-                  {"$ref": "../geomprimitives.json#/Solid"},
-                  {"$ref": "../geomprimitives.json#/MultiSolid"},
-                  {"$ref": "../geomprimitives.json#/CompositeSolid"},
-                  {"$ref": "../geomprimitives.json#/MultiSurface"},
-                  {"$ref": "../geomprimitives.json#/CompositeSurface"},
-                  {"$ref": "../geomtemplates.json#/GeometryInstance"}
+                  {"$ref": "../geomprimitives.schema.json#/MultiPoint"},
+                  {"$ref": "../geomprimitives.schema.json#/MultiLineString"},
+                  {"$ref": "../geomprimitives.schema.json#/Solid"},
+                  {"$ref": "../geomprimitives.schema.json#/MultiSolid"},
+                  {"$ref": "../geomprimitives.schema.json#/CompositeSolid"},
+                  {"$ref": "../geomprimitives.schema.json#/MultiSurface"},
+                  {"$ref": "../geomprimitives.schema.json#/CompositeSurface"},
+                  {"$ref": "../geomtemplates.schema.json#/GeometryInstance"}
                 ]
               }
             }        
@@ -121,7 +121,7 @@
 
     "+NoiseCityFurnitureSegment": {
       "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractCityObject"},
+        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject"},
         {
           "properties": {
             "type": { "enum": ["+NoiseCityFurnitureSegment"] },
@@ -133,7 +133,7 @@
               "type": "array",
               "items": {
                 "oneOf": [
-                  {"$ref": "../geomprimitives.json#/MultiLineString"}
+                  {"$ref": "../geomprimitives.schema.json#/MultiLineString"}
                 ]
               }
             }        
