@@ -1,6 +1,6 @@
 {
   "type": "CityJSON",
-  "version": "0.8",
+  "version": "0.9",
   "extensions": {
     "Noise": "https://someurl.org/noise.json"
   },

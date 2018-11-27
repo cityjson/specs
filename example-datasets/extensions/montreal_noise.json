@@ -1,7 +1,7 @@
 {
     "type": "CityJSON",
-    "version": "0.8",
-    "extensions": { "Noise": "https://someurl.org/noise2.json" },
+    "version": "0.9",
+    "extensions": { "Noise": "https://someurl.org/noise.json" },
     "CityObjects": {
         "un": {
             "type": "+NoiseBuilding",
