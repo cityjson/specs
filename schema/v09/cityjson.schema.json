@@ -12,7 +12,7 @@
     },
     "metadata": {
       "type": "object",
-      "$ref": "metadata.json#/metadata"
+      "$ref": "metadata.schema.json#/metadata"
     },
     "extensions": {
       "type": "object",
@@ -26,28 +26,28 @@
       "type": "object",
       "additionalProperties": {
         "oneOf": [
-          { "$ref": "cityobjects.json#/CityObjectGroup" },
-          { "$ref": "cityobjects.json#/Building" },
-          { "$ref": "cityobjects.json#/BuildingPart" },
-          { "$ref": "cityobjects.json#/BuildingInstallation" },
-          { "$ref": "cityobjects.json#/Road" },
-          { "$ref": "cityobjects.json#/Railway" },
-          { "$ref": "cityobjects.json#/TransportSquare" },
-          { "$ref": "cityobjects.json#/TINRelief" },
-          { "$ref": "cityobjects.json#/WaterBody" },
-          { "$ref": "cityobjects.json#/LandUse" },
-          { "$ref": "cityobjects.json#/GenericCityObject" },
-          { "$ref": "cityobjects.json#/CityFurniture" },
-          { "$ref": "cityobjects.json#/SolitaryVegetationObject" },
-          { "$ref": "cityobjects.json#/PlantCover" },
-          { "$ref": "cityobjects.json#/Bridge" },
-          { "$ref": "cityobjects.json#/BridgePart" },
-          { "$ref": "cityobjects.json#/BridgeInstallation" },
-          { "$ref": "cityobjects.json#/BridgeConstructionElement" },
-          { "$ref": "cityobjects.json#/Tunnel" },
-          { "$ref": "cityobjects.json#/TunnelPart" },
-          { "$ref": "cityobjects.json#/TunnelInstallation" },
-          { "$ref": "cityobjects.json#/ExtensionObject" }
+          { "$ref": "cityobjects.schema.json#/CityObjectGroup" },
+          { "$ref": "cityobjects.schema.json#/Building" },
+          { "$ref": "cityobjects.schema.json#/BuildingPart" },
+          { "$ref": "cityobjects.schema.json#/BuildingInstallation" },
+          { "$ref": "cityobjects.schema.json#/Road" },
+          { "$ref": "cityobjects.schema.json#/Railway" },
+          { "$ref": "cityobjects.schema.json#/TransportSquare" },
+          { "$ref": "cityobjects.schema.json#/TINRelief" },
+          { "$ref": "cityobjects.schema.json#/WaterBody" },
+          { "$ref": "cityobjects.schema.json#/LandUse" },
+          { "$ref": "cityobjects.schema.json#/GenericCityObject" },
+          { "$ref": "cityobjects.schema.json#/CityFurniture" },
+          { "$ref": "cityobjects.schema.json#/SolitaryVegetationObject" },
+          { "$ref": "cityobjects.schema.json#/PlantCover" },
+          { "$ref": "cityobjects.schema.json#/Bridge" },
+          { "$ref": "cityobjects.schema.json#/BridgePart" },
+          { "$ref": "cityobjects.schema.json#/BridgeInstallation" },
+          { "$ref": "cityobjects.schema.json#/BridgeConstructionElement" },
+          { "$ref": "cityobjects.schema.json#/Tunnel" },
+          { "$ref": "cityobjects.schema.json#/TunnelPart" },
+          { "$ref": "cityobjects.schema.json#/TunnelInstallation" },
+          { "$ref": "cityobjects.schema.json#/ExtensionObject" }
         ]
       }
     },
@@ -86,11 +86,11 @@
         "default-theme-material": {"type": "string"},
         "materials": {
           "type": "array",
-          "items": {"$ref": "appearance.json#/Material"}
+          "items": {"$ref": "appearance.schema.json#/Material"}
         },
         "textures": {
           "type": "array",
-          "items": {"$ref": "appearance.json#/Texture"}
+          "items": {"$ref": "appearance.schema.json#/Texture"}
         },
         "vertices-texture": {
           "type": "array",
@@ -111,13 +111,13 @@
           "type": "array",
           "items": {
             "oneOf": [
-              {"$ref": "geomprimitives.json#/MultiPoint"},
-              {"$ref": "geomprimitives.json#/MultiLineString"},
-              {"$ref": "geomprimitives.json#/Solid"},
-              {"$ref": "geomprimitives.json#/MultiSolid"},
-              {"$ref": "geomprimitives.json#/CompositeSolid"},
-              {"$ref": "geomprimitives.json#/MultiSurface"},
-              {"$ref": "geomprimitives.json#/CompositeSurface"}            
+              {"$ref": "geomprimitives.schema.json#/MultiPoint"},
+              {"$ref": "geomprimitives.schema.json#/MultiLineString"},
+              {"$ref": "geomprimitives.schema.json#/Solid"},
+              {"$ref": "geomprimitives.schema.json#/MultiSolid"},
+              {"$ref": "geomprimitives.schema.json#/CompositeSolid"},
+              {"$ref": "geomprimitives.schema.json#/MultiSurface"},
+              {"$ref": "geomprimitives.schema.json#/CompositeSurface"}            
             ] 
           }
         },
