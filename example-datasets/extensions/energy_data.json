@@ -20,7 +20,34 @@
         ]
       }
     ],
-    "+buildingType": "Apartment Block"
+    "+buildingType": "Apartment Block",
+    "+constructionWeight": "medium",
+    "isLandmarked": true,
+    "+volume": [{
+      "type": "grossVolume",
+      "value": 608.91789367799,
+      "uom": "m3"
+      }],
+    "+referencePoint": {
+      "type": "Point",
+      "location": 1
+    },
+    "+refurbishmentMeasure": [{
+      "date": "2011-02-28T18:25:43",
+      "level": "Advanced"
+    }],
+    "+floorArea": [{
+      "type": "grossVolume",
+      "value": 608.91789367799,
+      "uom": "m3"
+    }],
+    "+heightAboveGround": [{
+      "heightReference": "bottomOfConstruction",
+      "value": 5,
+      "uom": "m"
+      }],
+    "+usageZone": [],
+    "+thermalZone": []
     }
   },
   "vertices": [

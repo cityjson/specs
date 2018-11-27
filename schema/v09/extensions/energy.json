@@ -4,7 +4,43 @@
   "uri": "https://someurl.org/energy.json",
   "version": "0.1",
   "description": "CityJSON encoding for CityGML Energy ADE v1.0",
-  
+  "definitions": {
+    "floorArea": {
+      "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["netFloorArea", "grossFloorArea", "energyReferenceArea"] },
+            "value": { "type": "number" },
+            "uom": { "type": "string" }  
+          },
+          "required": [ "type", "value", "uom" ],
+          "additionalProperties": "false"
+        }
+    },
+    "volumeType": {
+      "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": { "enum": ["netVolume", "grossVolume", "energyReferenceVolume"] },
+            "value": { "type": "number" },
+            "uom": { "type": "string" }  
+          },
+          "required": [ "type", "value", "uom" ],
+          "additionalProperties": "false"
+        }
+      },
+    "point": {
+      "type": "object",
+        "properties": {
+          "type": { "enum": ["Point"] },
+          "location": { "type": "integer" }
+        },
+        "required": [ "type", "location" ],
+        "additionalProperties": false
+      }
+  },
   "extraRootProperties": {
       
   },
@@ -27,20 +63,10 @@
         }
       },
       "+volume": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "type": { "enum": ["netVolume", "grossVolume", "energyReferenceVolume"] },
-            "value": { "type": "number" },
-            "uom": { "type": "string" }  
-          },
-          "required": [ "type", "value", "uom" ],
-          "additionalProperties": "false"
-        }
+        "$ref":"#/definitions/volumeType"
       },
       "+isLandmarked": { "type": "boolean" },
-      "+referencePoint": { "type": "boolean" },
+      "+referencePoint": { "ref":"#/definitions/point"},
       "+refurbishmentMeasure": {
         "type": "array",
         "items": {
@@ -55,17 +81,7 @@
         }
       },
       "+floorArea": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "type": { "enum": ["netFloorArea", "grossFloorArea", "energyReferenceArea"] },
-            "value": { "type": "number" },
-            "uom": { "type": "string" }  
-          },
-          "required": [ "type", "value", "uom" ],
-          "additionalProperties": "false"
-        }
+        "$ref":"#/definitions/presentLoDs"
       },
       "+heightAboveGround": {
         "type": "array",
@@ -96,12 +112,69 @@
           "required": [ "heightReference", "value", "uom" ],
           "additionalProperties": "false"
         }
+      },
+      "+usageZone": {
+        "type": "array",
+        "items": {}
+      },
+      "+thermalZone": {
+        "type": "array",
+        "items": {}
       }
     }
   },
   
   "extraCityObjects": {
-      
+      "+ThermalZone": {
+        "type": "object",
+        "properties": {
+          "additionalThermalBridgeUValue": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" } 
+            }
+          },
+          "effectiveThermalCapacity": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" } 
+            }
+          },
+          "+floorArea": {
+            "$ref":"#/definitions/floorArea"
+          },
+          "+volume": {
+            "$ref":"#/definitions/volumeType"
+          },
+          "+indirectlyHeatedAreaRatio": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" } 
+            }
+          },
+          "+infiltrationRate": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "number" },
+              "uom": { "type": "string" } 
+            }
+          },
+          "isCooled": { "type": "boolean"},
+          "isHeated": { "type": "boolean"},
+          "volumeGeometry": {
+            "type": "object",
+            "oneOf": [
+              {"$ref": "geomprimitives.json#/Solid"},
+              {"$ref": "geomprimitives.json#/MultiSolid"},
+              {"$ref": "geomprimitives.json#/CompositeSolid"}
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
   }
   
 }
