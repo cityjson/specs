@@ -14,10 +14,10 @@
       "attributes": {
         "class": "potato",
         "function": "4",
-        "+Misc-colour": {
-          "rgba": [1,2,3,4]
+        "+colour": {
+          "rgba": [1,2,3]
         },
-        "+Misc-area-parcel": {
+        "+area-parcel": {
           "value": 332.0,
           "uom": "m2"
         }
