@@ -70,7 +70,7 @@
       "value": 608.91789367799,
       "uom": "m3"
       }] ,
-    "indirectlyHeatedAreaRatio": {
+    "+indirectlyHeatedAreaRatio": {
       "value": 240,
       "uom": "m2"
     },
@@ -79,14 +79,7 @@
       "uom": "m/s"
     },
     "+isCooled": false,
-    "isHeated": true,
-    "+volumeGeometry": [{
-      "type": "Solid",
-      "lod": 1,
-      "boundaries": [
-        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
-      ]
-    }],
+    "+isHeated": true,
     "+containedUsageZone": ["uz01"],
     "+containedThermalBoundary": ["tb1", "tb2", "tb3", "tb4", "tb5", "tb6", "tb7"],
     "+interiorRoom": [],
@@ -102,7 +95,7 @@
   "tb1": {
     "type": "+ThermalBoundary",
     "+thermalBoundaryType": "outerWall" ,
-    "azimuth": {
+    "+azimuth": {
       "value": 0,
       "uom": "deg"
     },
