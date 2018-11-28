@@ -1,5 +1,5 @@
 {
-  "type": "CityJSON extension",
+  "type": "CityJSON_Extension",
   "name": "Misc",
   "uri": "https://someurl.org/misc.json",
   "version": "0.1",
@@ -41,7 +41,7 @@
   "extraAttributes": {
     
     "Building": {
-      "+colour": {
+      "colour": {
         "type": "object",
         "properties": {
           "rgba": {
