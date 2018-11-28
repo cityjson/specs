@@ -41,7 +41,7 @@
   "extraAttributes": {
     
     "Building": {
-      "colour": {
+      "+colour": {
         "type": "object",
         "properties": {
           "rgba": {

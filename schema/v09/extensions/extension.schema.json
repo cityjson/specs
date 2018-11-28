@@ -19,6 +19,7 @@
     "type": { "enum": ["CityJSON_Extension"] },
     "name": { 
       "type": "string",
+      "pattern": "^\\w[a-zA-Z@#0-9.]*$",
       "description": "no spaces allowed"
     },
     "version": { 
@@ -65,13 +66,15 @@
         "TunnelInstallation": { "$ref": "#/definitions/Plus" }
       },
       "additionalProperties": false
-
-
     },
 
+    "extraCityObjects": {
+      "patternProperties": {
+        "(\\+)([A-Z])\\w+": {}
+      },
+      "additionalProperties": false
+    }
 
-
-    "extraCityObjects": {}
   },
   "required": ["type", "name", "version", "uri"],
   "additionalProperties": false

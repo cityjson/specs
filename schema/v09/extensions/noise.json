@@ -1,5 +1,5 @@
 {
-  "type": "CityJSON extension",
+  "type": "CityJSON_Extension",
   "name": "Noise",
   "uri": "https://someurl.org/noise.json",
   "version": "0.1",

@@ -42,7 +42,7 @@ A CityJSON Extension is defined in a separate JSON file such as this one:
 .. code-block:: js
 
   {
-    "type": "CityJSON Extension",
+    "type": "CityJSON_Extension",
     "name": "Noise",
     "uri": "https://someurl.org/noise.json",
     "version": "0.1",

@@ -5,9 +5,8 @@ import json
 import jsonschema
 import jsonref
 
-schema = '../../schema/v09/extension.schema.json'
+schema = '../../schema/v09/extensions/extension.schema.json'
 js = json.loads(open(schema).read())
-# print(js)
 
 dataset = '/Users/hugo/projects/cityjson/schema/v09/extensions/misc.json'
 j = json.loads(open(dataset).read())
