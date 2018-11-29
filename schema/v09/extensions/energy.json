@@ -151,7 +151,7 @@
       "+referencePoint": { "$ref":"#/definitions/point"},
       "+refurbishmentMeasure": {  "$ref":"#/definitions/refurbishmentMeasure" },
       "+floorArea": {
-        "$ref":"#/definitions/presentLoDs"
+        "$ref":"#/definitions/floorArea"
       },
       "+heightAboveGround": {
         "type": "array",
@@ -207,164 +207,206 @@
   },
   
   "extraCityObjects": {
-      "+ThermalZone": {
-        "allOf": [
-          { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
-          {
+		"+ThermalZone": {
+			"allOf": [
+					{ "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        	{
             "properties": {
               "type": { "enum": ["+ThermalZone"] },
-              "+additionalThermalBridgeUValue": {
-                "type": "object",
-                "properties": {
-                   "value": { "type": "number" },
+              "attributes": {
+              	"type": "object",
+              	"properties": {
+                "additionalThermalBridgeUValue": {
+                	"type": "object",
+                	"properties": {
+                  	"value": { "type": "number" },
                     "uom": { "type": "string" } 
-                }
+               	  }
+              	},
+              	"effectiveThermalCapacity": {
+                	"type": "object",
+                	"properties": {
+                  	"value": { "type": "number" },
+                  	"uom": { "type": "string" } 
+                 	}
+               	},
+              	"floorArea": { "$ref":"#/definitions/floorArea" },
+              	"volume": { "$ref":"#/definitions/volumeType" },
+              	"indirectlyHeatedAreaRatio": {
+                	"type": "object",
+                	"properties": {
+                  	"value": { "type": "number" },
+                  	"uom": { "type": "string" } 
+                	},
+                	"additionalProperties": false
+              	},
+              	"infiltrationRate": {
+                	"type": "object",
+                	"properties": {
+                  	"value": { "type": "number" },
+                  	"uom": { "type": "string" } 
+                	},
+                	"additionalProperties": false
+              	},
+              	"isCooled": { "type": "boolean"},
+              	"isHeated": { "type": "boolean"},
+              	"containedUsageZone": {
+                	"type": "array",
+                 	"items": {
+                 		"type": "string" 
+               		}
+             		},
+                "containedThermalBoundary": {
+               		"type": "array",
+               		"items": {
+                	 "type": "string" 
+               		}
+             		},
+              	"interiorRoom": {
+               		"type": "array",
+               		"items": {
+                 		"type": "string" 
+               		}
+             		}            
+              	},
+              	"additionalProperties": false
               },
-              "+effectiveThermalCapacity": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                 }
-               },
-              "+floorArea": { "$ref":"#/definitions/floorArea" },
-              "+volume": { "$ref":"#/definitions/volumeType" },
-              "+indirectlyHeatedAreaRatio": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                },
-                "additionalProperties": false
-              },
-              "+infiltrationRate": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                },
-                "additionalProperties": false
-              },
-              "+isCooled": { "type": "boolean"},
-              "+isHeated": { "type": "boolean"},
               "geometry": {
                 "type": "array",
+                	"items": {
+                  	"type": "object",
+                  	"oneOf": [
+                  		{"$ref": "../geomprimitives.schema.json#/Solid"},
+                  		{"$ref": "../geomprimitives.schema.json#/MultiSolid"},
+                  		{"$ref": "../geomprimitives.schema.json#/CompositeSolid"}
+                  	]
+                	},
+                	"minItems":0,
+                	"maxItems":1
+             		}
+              	
+            },
+            "required": ["type"],
+            "additionalProperties": false
+          }
+      ]
+    },
+    "+ThermalBoundary": {
+    	"allOf": [
+      	{ "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        {
+        	"properties": {
+        		"type": { "enum": ["+ThermalBoundary"] },
+        		"attributes": {
+        			"type": "object",
+        			"properties":{
+              "thermalBoundaryType": { "enum": [ "interiorWall", "intermediaryFloor", "sharedWall", "outerWall", "groundSlab", "basementCeiling", "atticFloor", "roof" ] },
+              "azimuth": {
+                "type": "object",
+                "properties": {
+                  "value": { "type": "number" },
+                  "uom": { "type": "string" } 
+                },
+                "additionalProperties": false
+              },
+              "inclination": {
+                "type": "object",
+                "properties": {
+                  "value": { "type": "number" },
+                  "uom": { "type": "string" } 
+                },
+                "additionalProperties": false
+              },
+              "area": {
+                "type": "object",
+                "properties": {
+                  "value": { "type": "number" },
+                  "uom": { "type": "string" } 
+                },
+                "additionalProperties": false
+              },
+              "refurbishmentMeasure": { "$ref":"#/definitions/refurbishmentMeasure" },
+              "containedThermalOpening": {
+                "type": "array",
                 "items": {
-                  "type": "object",
-                  "oneOf": [
-                  {"$ref": "../geomprimitives.schema.json#/Solid"},
-                  {"$ref": "../geomprimitives.schema.json#/MultiSolid"},
-                  {"$ref": "../geomprimitives.schema.json#/CompositeSolid"}
-                  ]
+                  "type": "string"
+                }
+              },
+              "construction": {
+                "type": "array",
+                "items": {
+                  "type": "string"
                 },
                 "minItems":0,
                 "maxItems":1
-             },
-              "+containedUsageZone": {
-                 "type": "array",
-                 "items": {
-                 "type": "string" 
-               }
-             },
-              "+containedThermalBoundary": {
-               "type": "array",
-               "items": {
-                 "type": "string" 
-               }
-             },
-              "+interiorRoom": {
-               "type": "array",
-               "items": {
-                 "type": "string" 
-               }
-             }
-             },
-            "required": ["type"],
-            "additionalProperties": false
-          }]
-      },
-      "+ThermalBoundary": {
-        "allOf": [
-          { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
-          {
-            "properties": {
-              "type": { "enum": ["+ThermalBoundary"] },
-              "+thermalBoundaryType": { "enum": [ "interiorWall", "intermediaryFloor", "sharedWall", "outerWall", "groundSlab", "basementCeiling", "atticFloor", "roof" ] },
-              "+azimuth": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                },
-                "additionalProperties": false
-              },
-              "+inclination": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                },
-                "additionalProperties": false
-              },
-              "+area": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                },
-                "additionalProperties": false
-              },
-              "geometry": {
-                "type": "array",
+              }             
+        			},
+        			"required": ["thermalBoundaryType"],
+        			"additionalProperties": false
+        		},
+        		"geometry": {
+              "type": "array",
                 "items": {
                   "type": "object",
                   "$ref": "../geomprimitives.schema.json#/MultiSurface" 
                 },
                 "minItems":0,
                 "maxItems":1
-              },
-              "+refurbishmentMeasure": { "$ref":"#/definitions/refurbishmentMeasure" },
-              "+containedThermalOpening": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "+construction": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "minItems":0,
-                "maxItems":1
               }
-             },
-            "required": ["type", "+thermalBoundaryType"],
-            "additionalProperties": false
-          }
-        ]
-      },
-      "+UsageZone": {
-        "allOf": [
-          { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
-          {
-            "properties": {
-              "type": { "enum": ["+UsageZone"] },
-              "+usageZoneType": { "type": "string"},
-              "+coolingSchedule": { "type": "string" },
-              "+heatingSchedule": { "type": "string" },
-              "+ventilationSchedule": { "type": "string" },
-              "+usedFloors": {
+              
+          },
+          "required": ["type"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "+UsageZone": {
+    	"allOf": [
+      	{ "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        {
+        	"properties": {
+        		"type": { "enum": ["+UsageZone"] },
+          	"attributes": {  
+          		"type": "object",
+          		"properties": {
+              "usageZoneType": { "type": "string"},
+              "coolingSchedule": { "type": "string" },
+              "heatingSchedule": { "type": "string" },
+              "ventilationSchedule": { "type": "string" },
+              "usedFloors": {
                 "type": "array",
                 "items": {
                   "type": "integer"
                 }
               },
-              "+floorArea": {
+              "floorArea": {
                 "$ref": "#/definitions/floorArea"
               },
-              "geometry": {
+              "averageInternalGains": { "$ref":"#/definitions/heatExchange" },
+              "containedBuidingUnits": {
                 "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "eqquipedWithFacilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "occupants": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }             
+          		},
+          		"required": ["usageZoneType"],
+          		"additionalProperties": false
+          	},
+          	"geometry": {
+              "type": "array",
                 "items": {
                   "type": "object",
                   "oneOf": [
@@ -375,76 +417,63 @@
                 },
                 "minItems":0,
                 "maxItems":1
-             },
-              "+averageInternalGains": { "$ref":"#/definitions/heatExchange" },
-              "+containedBuidingUnits": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "+eqquipedWithFacilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "+occupants": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-             },
-            "required": ["type", "+usageZoneType"],
-            "additionalProperties": false
+             }              
+          },
+           "required": ["type"],
+           "additionalProperties": false
           }
         ]
       },
-      "+ThermalOpening": {
-        "allOf": [
+    "+ThermalOpening": {
+       "allOf": [
           { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
           {
-            "properties": {
-              "type": { "enum": ["+ThermalOpening"] },
-              "+area": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                },
-                "additionalProperties": false
-              },
-              "+indoorShading": { "$ref":"#/definitions/shading" },
-              "+outdoorShading": { "$ref":"#/definitions/shading" },
-              "+openableRatio": {
-                "type": "object",
-                "properties": {
-                  "value": { "type": "number" },
-                  "uom": { "type": "string" } 
-                },
-                "additionalProperties": false
+          	"properties": {
+          		"type": { "enum": ["+ThermalOpening"] },
+              "attributes": {     
+              	"type": "object",
+              	"properties":{
+              	"area": {
+                	"type": "object",
+                	"properties": {
+                  	"value": { "type": "number" },
+                  	"uom": { "type": "string" } 
+                	},
+                	"additionalProperties": false
+             	  },
+              	"indoorShading": { "$ref":"#/definitions/shading" },
+              	"outdoorShading": { "$ref":"#/definitions/shading" },
+              	"openableRatio": {
+                	"type": "object",
+                	"properties": {
+                	  "value": { "type": "number" },
+                  	"uom": { "type": "string" } 
+                	},
+                	"additionalProperties": false
+              	},
+              	"construction": {
+               		"type": "array",
+                	"items": {
+                  	"type": "string"
+                	},
+                	"minItems":0,
+                	"maxItems":1
+              	}                       
+              	},
+              	"additionalProperties": false
               },
               "geometry": { 
                 "type": "array",
-                "items": {
-                  "type": "object",
-                  "$ref": "../geomprimitives.schema.json#/MultiSurface" 
-                }
-              },
-              "+construction": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "minItems":0,
-                "maxItems":1
-              }
-           },
-           "required": ["type"],
-           "additionalProperties": false
-         }
-       ]
-    }
+                	"items": {
+                  	"type": "object",
+                  	"$ref": "../geomprimitives.schema.json#/MultiSurface" 
+                	}
+              	}              	
+            },
+           	"required": ["type"],
+           	"additionalProperties": false
+         	}
+       	]
+    	}
   }
 }
