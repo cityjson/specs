@@ -121,7 +121,316 @@
         },
         "required": [ "type", "location" ],
         "additionalProperties": false
-      }
+      },
+     "timeSeries":{
+  		"type": "object",
+  		"properties":{
+  			"acquisitionMethod": { "enum": ["measurement","simulation","calibratedSimulation","estimation","unknown"] },
+  			"interpolationType": {"enum": ["averageInPrecedingInterval","averageInSucceedingInterval","constantInPrecedingInterval",
+  														"constantInSucceedingInterval","continuous","discontinuous","instantaneousTotal",
+  														"maximumInPrecedingInterval","maximumInSucceedingInterval","minimumInPrecedingInterval",
+  														"minimumInSucceedingInterval","precedingTotal","succeedingTotal"] },
+  			"qualityDescription": { "type": "string" },
+  			"source": { "type": "string" },
+  			"thematicDescription": { "type": "string" }
+  		},
+  		"required": ["acquisitionMethod", "interpolationType"],
+  		"oneOf": [
+  		{
+  			"type": "object",
+  			"properties": {
+  				"type": { "enum": ["RegularTimeSeries"] },
+  				"startDateTime": { "type":"string", "format":"date-time" },
+  				"endDateTime": { "type":"string", "format":"date-time" },
+  				"timeInterval": {
+  					"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+              "uom": { "type": "string" } 
+  					},
+  					"additionalProperties": false
+  				},
+  				"values": { 
+  					"type": "array",
+  					"items": {
+  						"type": "number"
+  					}
+  				}
+  			},
+  			"required": ["type", "startDateTime", "endDateTime", "values"]
+  		},
+  		{
+  			"type": "object",
+  			"properties": {
+  				"type": { "enum": ["IrregularTimeSeries"] },
+  				"uom": { "type":"string" },
+  				"measurementPoints": {
+  					"type": "array",
+  					"items": {
+  						"type": "object",
+  						"properties": {
+  							"time": {"type":"string", "format":"date-time"},
+  							"value": {"type":"number"}
+  						},
+  						"additionalProperties": false
+  					}
+  				}
+  			},
+  			"required": ["type", "uom"]
+  		},
+  		{
+  			"type": "object",
+  			"properties": {
+  				"type": { "enum": ["RegularTimeSeriesFile"] },
+  				"uom": { "type":"string" },
+  				"file": { "type":"string", "format":"uri" },
+  				"startDateTime": { "type":"string", "format":"date-time" },
+  				"endDateTime": { "type":"string", "format":"date-time" },
+  				"timeInterval": {
+  					"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+              "uom": { "type": "string" } 
+  					},
+  					"additionalProperties": false
+  				},
+  				"numberOfHeaderLines": { "type":"integer" },
+  				"fieldSeparator": { "type":"string" },
+  				"recordSeparator": { "type":"string" },
+  				"decimalSymbol": { "type":"string" },
+  				"valueColumnNumber" : { "type":"integer" }
+  			},
+  			"required": [ "type", "uom", "file", "startDateTime", "endDateTime", "timeInterval" ]
+  		},
+  		{
+  			"type": "object",
+  			"properties": {
+  				"type": { "enum": ["IrregularTimeSeriesFile"] },
+  				"uom": { "type":"string" },
+  				"file": { "type":"string", "format":"uri" },
+  				"numberOfHeaderLines": { "type":"integer" },
+  				"fieldSeparator": { "type":"string" },
+  				"recordSeparator": { "type":"string" },
+  				"decimalSymbol": { "type":"string" },
+  				"timeColumnNumber" : { "type":"integer" },
+  				"valueColumnNumber" : { "type":"integer" }
+  			},
+  			"required": [ "type", "uom", "file" ]
+  		}
+  		]
+  	}, 	
+  	"schedule":{
+  		"type": "object",
+  		"oneOf": [
+  			{
+  				"type": "object",
+  				"properties": {
+  					"type": { "enum": ["ConstantValueSchedule"] },
+  					"averageValue": {
+  						"type": "object",
+              "properties": {
+                 "value": { "type": "number" },
+                 "uom": { "type": "string" } 
+              },
+              "additionalProperties": false
+  					}
+  				},
+  				"required": [ "type", "averageValue"],
+  				"additionalProperties": false
+  			},
+  			{
+  				"type": "object",
+  				"properties": {
+  					"type": { "enum": ["DualValueSchedule"] },
+  					"usageHoursPerDay": {
+  						"type": "object",
+              "properties": {
+                 "value": { "type": "number" },
+                 "uom": { "type": "string" } 
+              }
+  					},
+  					"usageDaysPerYear": {
+  						"type": "object",
+              "properties": {
+                 "value": { "type": "number" },
+                 "uom": { "type": "string" } 
+              }
+  					},
+  					"usageValue": {
+  						"type": "object",
+              "properties": {
+                 "value": { "type": "number" },
+                 "uom": { "type": "string" } 
+              }
+  					},
+  					"idleValue": {
+  						"type": "object",
+              "properties": {
+                 "value": { "type": "number" },
+                 "uom": { "type": "string" } 
+              }
+  					}
+  				},
+  				"required": ["type", "usageValue", "idleValue"],
+  				"additionalProperties": false
+  			},
+  			{
+  				"type": "object",
+  				"properties": {
+  					"type": { "enum": ["DailyPatternSchedule"] },
+  					"startDateTime": { "type":"string", "format":"date-time" },
+  					"endDateTime": { "type":"string", "format":"date-time" },
+  					"dailySchedule": { 
+  						"type":"array",
+  						"items": {
+  							"type": "object",
+  							"properties": {
+  								"dayType": { "enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "designDay", "weekDay", "weekEnd", "typicalDay"] },
+  								"schedule": { "$ref":"#/definitions/timeSeries" }
+  							},
+  							"required": ["dayType", "schedule"],
+  							"additionalProperties": false
+  						}
+  					}
+  				},
+  				"required": [ "type", "startDateTime", "endDateTime", "dailySchedule"],
+  				"additionalProperties": false
+  			},
+  			{
+  				"type": "object",
+  				"properties": {
+  					"type": { "enum": ["TimeSeriesSchedule"] },
+  					"timeDependingValues": { "$ref":"#/definitions/timeSeries" }
+  				},
+  				"required": [ "type", "timeDependingValues"],
+  				"additionalProperties": false
+  			}
+  		]	
+		},		
+		"weatherData": {
+			"type": "object",
+			"properties": {
+				"weatherDataType": { "enum": ["airTemperature", "humidity", "windSpeed", "cloudiness", 
+														 "globalSolarIrradiance", "directSolarIrradiance", "diffuseSolarIrradiance",
+														 "terrestrialEmission", "downwardTerrestrialRadiation", "daylightIlluminance"] },
+				"values": { "$ref":"#/definitions/timeSeries" },
+				"position": { "$ref":"#/definitions/point" }
+			},
+			"required": [ "weatherDataType", "values" ],
+      "additionalProperties": false
+		},
+  	"serviceLife": {
+  		"type": "object",
+  		"properties": {
+  			"startOfLife": {"type":"string", "format": "date-time"},
+  			"lifeExpectancy": {
+  				"type": "object",
+  				"properties": {
+  					"uom": { "type":"string" },
+  					"value": { "type":"number" }
+  				}
+  		  },
+  			"mainMaintenanceInterval": {
+  				"type": "object",
+  				"properties": {
+  					"uom": { "type":"string" },
+  					"value": { "type":"number" }
+  				}
+  			}
+  		},
+  		"additionalProperties": false
+  	},
+  	"gas": {
+  		"type": "object",
+  		"properties": {
+  			"type": {"enum": ["Gas"]},
+  			"name": { "type": "string" },
+  			"description": { "type": "string" },
+  			"isVentilated": { "type": "boolean" },
+  			"rValue": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"imageTexture": {
+  				"type": "object",
+  				"properties": {
+  					"url": { "type": "string", "format": "uri" },
+  					"repeatS": { "type": "boolean" },
+  					"repeatT": { "type": "boolean" }
+  				}
+  			}
+  		},
+  		"additionalProperties": false
+  	},
+  	"solidMaterial": {
+  		"type": "object",
+  		"properties": {
+  			"type": { "enum": ["SolidMaterial"]},
+  			"name": { "type": "string" },
+  			"description": { "type": "string" },
+  			"conductivity": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"density": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"permeance": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"porosity": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"specificHeat": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"embodiedCarbon": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"embodiedEnergy": {
+  				"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  			"imageTexture": {
+  				"type": "object",
+  				"properties": {
+  					"url": { "type": "string", "format": "uri" },
+  					"repeatS": { "type": "boolean" },
+  					"repeatT": { "type": "boolean" }
+  				}
+  			}
+  		},
+  		"additionalProperties": false
+  	}
   },
 
   "extraRootProperties": {
@@ -191,7 +500,13 @@
         },
         "minItems":0,
         "maxItems":1
-      }
+      },
+      "+weatherData": { 
+    		"type": "array",
+    		"items": {
+    			"$ref": "#/definitions/weatherData"
+    		}
+    	}
     }
   },
   
@@ -487,6 +802,206 @@
            	"additionalProperties": false
          	}
        	]
-    	}
+    	},
+    "+WeatherStation": {
+  		"allOf": [
+  			{ "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+  			{
+  				"properties": {
+  					"type": { "enum": ["+WeatherStation"] },
+  					"attributes": {
+  							"type": "object",
+  							"properties": {
+  								"stationName": { "type": "string" },
+  								"weatherData": {
+  									"type": "array",
+    								"items": {
+    									"$ref": "#/definitions/weatherData"
+    								}
+  								}
+  							}
+  					},
+  					"geometry" : { "$ref":"#/definitions/point" }
+  				},
+  				"required": ["type"],
+          "additionalProperties": false
+  			}
+  		]
+  	},
+  	"+Construction": {
+  		"type": "object",
+  		"properties": {
+  			"type": { "enum": ["+Construction"] },
+  			"geometry" : { 
+  				"type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "../geomprimitives.schema.json#/MultiPoint" 
+           }             
+  			},
+  			"attributes": {
+  				"type": "object",
+  				"properties": {
+  					"name": { "type": "string" },
+  					"description": { "type": "string" },
+  					"uValue": {
+  						"type": "object",
+             	"properties": {
+               	"value": { "type": "number" },
+               	"uom": { "type": "string" } 
+             	}
+  					},
+  					"opticalProperties": {
+  						"type": "object",
+  						"properties": {
+  						"emissivity": {
+  							"type": "array",
+  							"items": {
+  								"type": "object",
+  								"properties": {
+  									"fraction": {
+  										"type": "object",
+  										"properties": {
+  											"uom": {"type": "string"},
+  											"value": {"type": "number"}
+  										}
+  									},
+  									"surface": { "enum": ["inside", "outside"] }
+  								},
+  								"required": ["fraction", "surface"],
+          				"additionalProperties": false
+  							}
+  						},
+  						"reflectance": {
+  							"type": "array",
+  							"items": {
+  								"type": "object",
+  								"properties": {
+  									"fraction": {
+  										"type": "object",
+  										"properties": {
+  											"uom": {"type": "string"},
+  											"value": {"type": "number"}
+  										}
+  									},
+  									"surface": { "enum": ["inside", "outside"] },
+  									"wavelengthRange": { "enum": ["solar", "infrared", "visible", "total"] }
+  								},
+  								"required": ["fraction", "surface", "wavelengthRange"],
+          				"additionalProperties": false
+  							}
+  						},
+  						"transmittance": {
+  							"type": "array",
+  							"items": {
+  								"type": "object",
+  								"properties": {
+  									"fraction": {
+  										"type": "object",
+  										"properties": {
+  											"uom": {"type": "string"},
+  											"value": {"type": "number"}
+  										}
+  									},
+  									"wavelengthRange": { "enum": ["solar", "infrared", "visible", "total"] }	
+  								},
+  								"required": ["fraction", "wavelengthRange"],
+          				"additionalProperties": false
+  							}		
+  						},
+  						"glazingRatio": {
+  							"type": "object",
+  							"properties": {
+  								"uom": {"type": "string"},
+  								"value": {"type": "number"}
+  							},
+  							"required": ["uom", "value"],
+          			"additionalProperties": false
+  						}	
+  						}
+  					},
+  					"layer": {
+  						"type": "array",
+  						"items": {
+  							"type": "string"
+  						}
+  					},
+  					"serviceLife" : { "$ref":"#/definitions/serviceLife" }
+  				}
+  			}
+  		},
+  		"required": ["type"],
+      "additionalProperties": false
+  	},
+  	"+Layer": {
+  		"type": "object",
+  		"properties": {
+  			"type": {"enum": ["+Layer"] },
+  			"attributes": {
+  				"type": "object",
+  				"properties": {
+  					"name": { "type": "string" },
+  					"description": { "type": "string" },
+  					"layerComponent": {
+  						"type": "array",
+  						"items": {
+  							"type": "string"
+  						},
+  						"minItems": 1
+  					}
+  				},
+  				"additionalProperties": false
+  			}
+  		},
+  		"required": ["type"],
+      "additionalProperties": false
+  	},
+  	"+LayerComponent": {
+  		"type": "object",
+  		"properties": {
+  			"type": {"enum": ["+LayerComponent"] },
+  			"geometry" : { 
+  				"type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "../geomprimitives.schema.json#/MultiPoint" 
+           }             
+  			},
+  			"attributes": {
+  				"type": "object",
+  				"properties": {
+  					"name": { "type": "string" },
+  					"description": { "type": "string" },
+  					"areaFraction" : {
+  						"type": "object",
+  						"properties": {
+  							"value": { "type": "number" },
+                "uom": { "type": "string" } 
+  						}
+  					},
+  					"thickness": {
+  						"type": "object",
+  						"properties": {
+  							"value": { "type": "number" },
+                "uom": { "type": "string" } 
+  						}
+  					},
+  					"serviceLife": { "$ref":"#/definitions/serviceLife" },
+  					"material": {
+  						"type": "object",
+  						"oneOf": [
+  							{"$ref":"#/definitions/gas" },
+  							{"$ref":"#/definitions/solidMaterial" }
+  						]
+  					}
+  				},
+  				"required": ["material"],
+  				"additionalProperties": false
+  			}
+  		
+  		},
+  		"required": ["type"],
+      "additionalProperties": false
+  	}
   }
 }
