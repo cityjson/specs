@@ -32,6 +32,7 @@
       "description": "good to host the extension at a URI so that others can access it"
     },
     "description": { "type": "string" },
+    "definitions": {},
     
     "extraRootProperties":{
       "patternProperties": {
