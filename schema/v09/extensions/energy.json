@@ -122,7 +122,7 @@
         "required": [ "type", "location" ],
         "additionalProperties": false
       },
-     "timeSeries":{
+    "timeSeries":{
   		"type": "object",
   		"properties":{
   			"acquisitionMethod": { "enum": ["measurement","simulation","calibratedSimulation","estimation","unknown"] },
@@ -339,99 +339,8 @@
   			}
   		},
   		"additionalProperties": false
-  	},
-  	"gas": {
-  		"type": "object",
-  		"properties": {
-  			"type": {"enum": ["Gas"]},
-  			"name": { "type": "string" },
-  			"description": { "type": "string" },
-  			"isVentilated": { "type": "boolean" },
-  			"rValue": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"imageTexture": {
-  				"type": "object",
-  				"properties": {
-  					"url": { "type": "string", "format": "uri" },
-  					"repeatS": { "type": "boolean" },
-  					"repeatT": { "type": "boolean" }
-  				}
-  			}
-  		},
-  		"additionalProperties": false
-  	},
-  	"solidMaterial": {
-  		"type": "object",
-  		"properties": {
-  			"type": { "enum": ["SolidMaterial"]},
-  			"name": { "type": "string" },
-  			"description": { "type": "string" },
-  			"conductivity": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"density": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"permeance": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"porosity": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"specificHeat": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"embodiedCarbon": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"embodiedEnergy": {
-  				"type": "object",
-  					"properties": {
-  						"value": { "type": "number" },
-               "uom": { "type": "string" } 
-  					}
-  			},
-  			"imageTexture": {
-  				"type": "object",
-  				"properties": {
-  					"url": { "type": "string", "format": "uri" },
-  					"repeatS": { "type": "boolean" },
-  					"repeatT": { "type": "boolean" }
-  				}
-  			}
-  		},
-  		"additionalProperties": false
   	}
-  },
+  	},
 
   "extraRootProperties": {
       
@@ -493,14 +402,6 @@
           "additionalProperties": "false"
         }
       },
-      "+aggregatedBuildingConstruction": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "minItems":0,
-        "maxItems":1
-      },
       "+weatherData": { 
     		"type": "array",
     		"items": {
@@ -553,19 +454,7 @@
                 	"additionalProperties": false
               	},
               	"isCooled": { "type": "boolean"},
-              	"isHeated": { "type": "boolean"},
-              	"containedUsageZone": {
-                	"type": "array",
-                 	"items": {
-                 		"type": "string" 
-               		}
-             		},
-              	"interiorRoom": {
-               		"type": "array",
-               		"items": {
-                 		"type": "string" 
-               		}
-             		}            
+              	"isHeated": { "type": "boolean"}         
               	},
               	"additionalProperties": false
               },
@@ -632,16 +521,8 @@
                 },
                 "additionalProperties": false
               },
-              "refurbishmentMeasure": { "$ref":"#/definitions/refurbishmentMeasure" },
-              "construction": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "minItems":0,
-                "maxItems":1
-              }             
-        			},
+              "refurbishmentMeasure": { "$ref":"#/definitions/refurbishmentMeasure" }
+              },
         			"required": ["thermalBoundaryType"],
         			"additionalProperties": false
         		},
@@ -680,9 +561,9 @@
           		"type": "object",
           		"properties": {
               "usageZoneType": { "type": "string"},
-              "coolingSchedule": { "type": "string" },
-              "heatingSchedule": { "type": "string" },
-              "ventilationSchedule": { "type": "string" },
+              "coolingSchedule": { "$ref":"#/definitions/schedule" },
+              "heatingSchedule": { "$ref":"#/definitions/schedule" },
+              "ventilationSchedule": { "$ref":"#/definitions/schedule" },
               "usedFloors": {
                 "type": "array",
                 "items": {
@@ -692,26 +573,8 @@
               "floorArea": {
                 "$ref": "#/definitions/floorArea"
               },
-              "averageInternalGains": { "$ref":"#/definitions/heatExchange" },
-              "containedBuidingUnits": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "averageInternalGains": { "$ref":"#/definitions/heatExchange" }
               },
-              "eqquipedWithFacilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "occupants": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }             
-          		},
           		"required": ["usageZoneType"],
           		"additionalProperties": false
           	},
@@ -769,15 +632,7 @@
                   	"uom": { "type": "string" } 
                 	},
                 	"additionalProperties": false
-              	},
-              	"construction": {
-               		"type": "array",
-                	"items": {
-                  	"type": "string"
-                	},
-                	"minItems":0,
-                	"maxItems":1
-              	}                       
+              	}
               	},
               	"additionalProperties": false
               },
@@ -821,7 +676,15 @@
   								}
   							}
   					},
-  					"geometry" : { "$ref":"#/definitions/point" }
+  					"geometry" : { 
+  						"type": "array",
+  						"items": {
+  							"type": "object",
+  							"$ref":"../geomprimitives.schema.json#/MultiPoint" 
+  						},
+  						"minItems":0,
+              "maxItems":1
+  					}
   				},
   				"required": ["type"],
           "additionalProperties": false
@@ -832,13 +695,15 @@
   		"type": "object",
   		"properties": {
   			"type": { "enum": ["+Construction"] },
-  			"geometry" : { 
-  				"type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "../geomprimitives.schema.json#/MultiPoint" 
-           }             
-  			},
+  			"parent": {
+           "type": "string",
+            "description": "the ID of parent Building"
+         },
+        "children": {
+           "type": "array",
+            "description": "the IDs of the children",
+            "items": {"type": "string"}
+         },
   			"attributes": {
   				"type": "object",
   				"properties": {
@@ -920,18 +785,11 @@
   						}	
   						}
   					},
-  					"layer": {
-  						"type": "array",
-  						"items": {
-  							"type": "string"
-  						}
-  					},
   					"serviceLife" : { "$ref":"#/definitions/serviceLife" }
   				}
   			}
   		},
-  		"required": ["type"],
-      "additionalProperties": false
+  		"required": ["type"]
   	},
   	"+Layer": {
   		"type": "object",
@@ -941,32 +799,27 @@
   				"type": "object",
   				"properties": {
   					"name": { "type": "string" },
-  					"description": { "type": "string" },
-  					"layerComponent": {
-  						"type": "array",
-  						"items": {
-  							"type": "string"
-  						},
-  						"minItems": 1
-  					}
-  				},
+  					"description": { "type": "string" }
+  				 },
   				"additionalProperties": false
-  			}
+  			},
+  			"parent": {
+           "type": "string",
+            "description": "the ID of parent Building"
+         },
+        "children": {
+             "type": "array",
+             "description": "the IDs of the children",
+             "items": {"type": "string"}
+          }
+              
   		},
-  		"required": ["type"],
-      "additionalProperties": false
+  		"required": ["type"]
   	},
   	"+LayerComponent": {
   		"type": "object",
   		"properties": {
   			"type": {"enum": ["+LayerComponent"] },
-  			"geometry" : { 
-  				"type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "../geomprimitives.schema.json#/MultiPoint" 
-           }             
-  			},
   			"attributes": {
   				"type": "object",
   				"properties": {
@@ -986,22 +839,134 @@
                 "uom": { "type": "string" } 
   						}
   					},
-  					"serviceLife": { "$ref":"#/definitions/serviceLife" },
-  					"material": {
-  						"type": "object",
-  						"oneOf": [
-  							{"$ref":"#/definitions/gas" },
-  							{"$ref":"#/definitions/solidMaterial" }
-  						]
-  					}
+  					"serviceLife": { "$ref":"#/definitions/serviceLife" }
   				},
-  				"required": ["material"],
   				"additionalProperties": false
-  			}
-  		
+  			},
+  			"parent": {
+          "type": "string",
+           "description": "the ID of parent Building"
+         },
+        "children": {
+            "type": "array",
+            "description": "the IDs of the children",
+            "items": {"type": "string"},
+            "minItems": 0,
+            "maxItems": 1
+         }		
   		},
-  		"required": ["type"],
-      "additionalProperties": false
-  	}
+  		"required": ["type"]
+  	},
+  	"+Gas": {
+  		"type": "object",
+  		"properties": {
+  			"type": {"enum": ["+Gas"]},
+  			"attributes": {
+  				"type": "object",
+  				"properties": {
+  					"name": { "type": "string" },
+  					"description": { "type": "string" },
+  					"isVentilated": { "type": "boolean" },
+  					"rValue": {
+  						"type": "object",
+  						"properties": {
+  							"value": { "type": "number" },
+              	"uom": { "type": "string" } 
+  						}
+  					},
+  					"imageTexture": {
+  						"type": "object",
+  						"properties": {
+  							"url": { "type": "string", "format": "uri" },
+  							"repeatS": { "type": "boolean" },
+  							"repeatT": { "type": "boolean" }
+  						}
+  					}
+  			},
+  			"additionalProperties": false
+  		},
+  			"parent": {
+          "type": "string",
+           "description": "the ID of parent Building"
+       }
+  	 },
+  	"required": ["type"]
+  },
+    "+SolidMaterial": {
+  		"type": "object",
+  		"properties": {
+  			"type": { "enum": ["+SolidMaterial"]},
+  			"attributes": {
+  				"type": "object",
+  				"properties": {  			
+  					"name": { "type": "string" },
+  					"description": { "type": "string" },
+  					"conductivity": {
+  						"type": "object",
+  						"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  					"density": {
+  					"type": "object",
+  					"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  					"permeance": {
+  						"type": "object",
+  						"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  					"porosity": {
+  						"type": "object",
+  						"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  					"specificHeat": {
+  						"type": "object",
+  						"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  					"embodiedCarbon": {
+  						"type": "object",
+  						"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  					"embodiedEnergy": {
+  						"type": "object",
+  						"properties": {
+  						"value": { "type": "number" },
+               "uom": { "type": "string" } 
+  					}
+  			},
+  					"imageTexture": {
+  						"type": "object",
+  						"properties": {
+  							"url": { "type": "string", "format": "uri" },
+  							"repeatS": { "type": "boolean" },
+  							"repeatT": { "type": "boolean" }
+  				}
+  			}
+  		},
+  				"additionalProperties": false
+  			},
+  			"parent": {
+          "type": "string",
+           "description": "the ID of parent Building"
+         }
+  	},
+  	"required": ["type"]
   }
+ }
 }
