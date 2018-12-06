@@ -42,6 +42,7 @@
         "ThoroughfareName": "rue du Diable",
         "PostalCode": "H0H 0H0"
       },
+      "extra": "extra2",
       "children": ["2929", "myinst"],
       "geometry": [
       {
