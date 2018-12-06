@@ -1,6 +1,6 @@
 {
-  "type": "CityJSON extension",
-  "name": "EnergyExtension",
+  "type": "CityJSON_Extension",
+  "name": "Energy",
   "uri": "https://someurl.org/energy.json",
   "version": "0.1",
   "description": "CityJSON encoding for CityGML Energy ADE v1.0",
@@ -123,6 +123,7 @@
         "additionalProperties": false
       }
   },
+
   "extraRootProperties": {
       
   },
