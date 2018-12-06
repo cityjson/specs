@@ -184,18 +184,6 @@
           "additionalProperties": "false"
         }
       },
-      "+usageZone": {
-        "type": "array",
-        "items": {
-          "type": "string" 
-        }
-      },
-      "+thermalZone": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
       "+aggregatedBuildingConstruction": {
         "type": "array",
         "items": {
@@ -257,12 +245,6 @@
                  		"type": "string" 
                		}
              		},
-                "containedThermalBoundary": {
-               		"type": "array",
-               		"items": {
-                	 "type": "string" 
-               		}
-             		},
               	"interiorRoom": {
                		"type": "array",
                		"items": {
@@ -271,6 +253,15 @@
              		}            
               	},
               	"additionalProperties": false
+              },
+              "parent": {
+                "type": "string",
+                "description": "the ID of parent Building"
+              },
+              "children": {
+                "type": "array",
+                "description": "the IDs of the children",
+                "items": {"type": "string"}
               },
               "geometry": {
                 "type": "array",
@@ -327,12 +318,6 @@
                 "additionalProperties": false
               },
               "refurbishmentMeasure": { "$ref":"#/definitions/refurbishmentMeasure" },
-              "containedThermalOpening": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "construction": {
                 "type": "array",
                 "items": {
@@ -345,6 +330,15 @@
         			"required": ["thermalBoundaryType"],
         			"additionalProperties": false
         		},
+            "parent": {
+              "type": "string",
+              "description": "the ID of parent Building"
+            },
+            "children": {
+              "type": "array",
+              "description": "the IDs of the children",
+              "items": {"type": "string"}
+            },
         		"geometry": {
               "type": "array",
                 "items": {
@@ -406,6 +400,15 @@
           		"required": ["usageZoneType"],
           		"additionalProperties": false
           	},
+            "parent": {
+              "type": "string",
+              "description": "the ID of parent Building"
+            },
+            "children": {
+              "type": "array",
+              "description": "the IDs of the children",
+              "items": {"type": "string"}
+            },
           	"geometry": {
               "type": "array",
                 "items": {
@@ -462,6 +465,15 @@
               	}                       
               	},
               	"additionalProperties": false
+              },
+              "parent": {
+                "type": "string",
+                "description": "the ID of parent Building"
+              },
+              "children": {
+                "type": "array",
+                "description": "the IDs of the children",
+                "items": {"type": "string"}
               },
               "geometry": { 
                 "type": "array",

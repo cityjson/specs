@@ -8,38 +8,10 @@
   	"onebuilding": {
       "type": "Building",
       "attributes": {
-        "class": "potato",
         "function": "4",
-        "+buildingType": "Apartment Block",
-    		"+constructionWeight": "medium",
-    		"+isLandmarked": true,
-    		"+volume": [{
-      		"type": "grossVolume",
-      		"value": 608.91789367799,
-      		"uom": "m3"
-      	}],
-    		"+referencePoint": {
-      		"type": "Point",
-      		"location": 1
-    		},
-    		"+refurbishmentMeasure": [{
-      		"date": "2011-02-28T18:25:43Z",
-      		"level": "Advanced"
-    		}],
-    		"+floorArea": [{
-      		"type": "grossFloorArea",
-      		"value": 240,
-      		"uom": "m2"
-    		}],
-    		"+heightAboveGround": [{
-      		"heightReference": "bottomOfConstruction",
-      		"value": 5,
-      		"uom": "m"
-      	}],
-      	"+usageZone": ["uz01"],
-    		"+thermalZone": ["tz01"],
-    		"+aggregatedBuildingConstruction": []
+        "+buildingType": "Apartment Block"
       },
+      "children": ["uz01", "tz01"],
       "geometry": [{
         "type": "Solid",
         "lod": 1,
@@ -47,7 +19,7 @@
           [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
         ]
       }]  
-  },
+    },
   "tz01":{
     "type": "+ThermalZone",
    	"attributes": {
@@ -78,11 +50,10 @@
       	"uom": "m/s"
     	},
     	"isCooled": false,
-    	"isHeated": true,
-    	"containedUsageZone": ["uz01"],
-    	"containedThermalBoundary": ["tb1", "tb2", "tb3", "tb4", "tb5", "tb6", "tb7"],
-    	"interiorRoom": []   
+    	"isHeated": true
    	},
+    "parent": "onebuilding",
+    "children": ["uz01", "tb1", "tb2", "tb3", "tb4", "tb5", "tb6", "tb7"],
    	"geometry": [{
       "type": "Solid",
       "lod": 1,
@@ -111,10 +82,10 @@
     	"refurbishmentMeasure": [{
       	"date": "2011-02-28T18:25:43Z",
       	"level": "Advanced"
-      }],
-    	"containedThermalOpening": ["to1"],
-    	"construction": ["const1"]
+      }]
     },
+    "parent": "tz01",
+    "children": ["to1"],
     "geometry": [{
       "type": "MultiSurface",
       "lod": 1,
@@ -161,6 +132,7 @@
     	},
     	"construction": ["ct1"]
     },
+    "parent": "tb1",
     "geometry": [{
       "type": "MultiSurface",
       "lod": 1,
@@ -203,6 +175,7 @@
     	"eqquipedWithFacilities": ["fac1"] ,
     	"occupants": ["ocuup1"]
     },
+    "parent": "onebuilding",
   	"geometry": [{
       "type": "Solid",
       "lod": 1,
