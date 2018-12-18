@@ -272,45 +272,48 @@ The resulting files for the Noise Extension are available:
   - :download:`download noise_data.json <../example-datasets/extensions/noise_data.json>`
 
 
-Creating new City Objects
-*************************
+Adding new attributes to Buildings
+**********************************
 
 .. image:: _static/noise_building.png
    :width: 60%
 
-We first need to define, in a new CityJSON Extension file ``noise.json``, two new City Objects: ``"+NoiseBuilding"`` and ``"+NoiseBuildingPart"``.
-Then copy the schemas of ``"Building"`` and ``"BuildingPart"``, defined the in schemas of CityJSON, and extend these with new attributes.
-Notice that these reuse the attributes and properties of the ``_AbstractCityObject``, which has a bounding box, and some attributes common to all City Objects.
+We first need to define the new attributes and specify that they can be used for ``"Building"`` and ``"BuildingPart"``
 
 .. code-block:: js
 
-   "extraCityObjects": {
-    "+NoiseBuilding": {
-      "allOf": [
-        { "$ref": "../cityobjects.json#/_AbstractBuilding" },
-        {
-          "properties": {
-            "type": { "enum": ["+NoiseBuilding"] },
-            "attributes": {
-              "properties": {
-                "buildingReflection": {"type": "string"},
-                "buildingReflectionCorrection": {"type": "number"},
-                "buildingLDenMax": {"type": "number"},
-                "buildingLDenMin": {"type": "number"},
-                "buildingLNightMax": {"type": "number"},
-                "buildingLNightMin": {"type": "number"},
-                "buildingLDenEq": {"type": "number"},
-                "buildingLNightEq": {"type": "number"},
-                "buildingHabitants": {"type": "integer"},
-                "buildingImmissionPoints": {"type": "integer"},
-                "remark": {"type": "string"}
-              }
-            }
-          },
-          "required": ["type"]
-        }
-      ]
+  "definitions": {
+    "measure": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "number" },
+        "uom": { "type": "string" }
+      },
+      "required": [ "value", "uom" ],
+      "additionalProperties": "false"
     }
+  },
+  "extraAttributes": {
+    "Building": {
+      "+noise-buildingReflection": { "type": "string" },
+      "+noise-buildingReflectionCorrection": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenMax": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenMin": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenEq": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightMax": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightMin": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightEq": { "$ref": "#/definitions/measure" },
+      "+noise-buildingHabitants": { "type": "integer" },
+      "+noise-buildingAppartments": { "type": "integer" },
+      "+noise-buildingImmissionPoints": { 
+        "type": "array",
+        "items": { "type": "integer" } },
+      "+noise-remark": { "type": "string" }
+    },
+    "BuildingPart": {...}
+  }
+
+
 
 A CityJSON file containing this new City Object would look like this:
 
@@ -324,21 +327,19 @@ A CityJSON file containing this new City Object would look like this:
     },
     "CityObjects": {
       "1234": {
-        "type": "+NoiseBuilding",
+        "type": "Building",
         "attributes": {
           "roofType": "gable",
-          "buildingReflectionCorrection": 234,
-          "buildingLNightMax": 17.33
-        },
-        "geometry": [
-          {
-            "type": "Solid",
-            "lod": 2,
-            "boundaries": [
-              [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
-            ]
+          "+noise-buildingReflectionCorrection": {
+            "value": 4.123,
+            "uom": "dB"
+          },
+          "+noise-buildingLNightMax": {
+            "value": 43.123,
+            "uom": "dB"
           }
-        ]
+        },
+        "geometry": [...]
       }
     }
   }
@@ -350,32 +351,14 @@ Adding complex types for CityFurniture
 .. image:: _static/noise_cf.png
    :width: 80%
 
-As it can be seen in the UML diagram, extending ``"CityFurniture"`` is more challenging because not only new simple attributes need to be defined, but a ``"CityFurniture"`` object can contain several ``"NoiseCityFurnitureSegment"``, which have their own geometry (a 'gml:Curve'). 
+As it can be seen in the UML diagram, extending ``"CityFurniture"`` is more challenging because not only new simple attributes need to be defined, but a ``"NoiseCityFurnitureSegment"`` object, which has its own geometry (a 'gml:Curve'). 
 
 
 The steps to follow are thus:
 
-  1. Create 2 new City Objects: ``"+NoiseCityFurniture"`` and ``"+NoiseCityFurnitureSegment"``
-  2. ``"+NoiseCityFurniture"`` can be copied from ``"CityFurniture"``, and we need to add a new property ``"children"`` which contains a list of the IDs of the segments. This is similar to what is done for ``"BuildingParts"`` and ``"BuildingIntallations"``: each City Object has its own geometries, and they are linked together with this simple method.
-  3. ``"+NoiseCityFurnitureSegment"`` is a new City Object and it gets the attributes common to all City Objects, and its geometry is restricted to a ``"MultiLineString"``. It also gets one property ``"parent"`` which links to its parent ``"+NoiseCityFurniture"``.
-
-.. code-block:: js
-
-  "+NoiseCityFurniture": {
-    "allOf": [
-      { "$ref": "../cityobjects.json#/_AbstractCityObject"},
-      {
-        "properties": {
-          "type": { "enum": ["+NoiseCityFurniture"] },
-          "children": {
-            "type": "array",
-            "description": "the IDs of the +NoiseCityFurnitureSegment",
-            "items": {"type": "string"}
-          },
-          ...
-      }
-    ]
-  }
+  1. Create new City Object: ``"+NoiseCityFurnitureSegment"``
+  2. Since ``"CityFurniture"`` is allowed to have ``"children"`` (all City Objects), we can reuse this to link a given ``"CityFurniture"`` to its children ``"+NoiseCityFurnitureSegment"``.
+  3. ``"+NoiseCityFurnitureSegment"`` is a new City Object and it gets the attributes common to all City Objects, and its geometry is restricted to a ``"MultiLineString"``. It also gets one property ``"parent"`` which links to its parent ``"CityFurniture"``.
 
 .. code-block:: js
 
@@ -387,15 +370,15 @@ The steps to follow are thus:
           "type": { "enum": ["+NoiseCityFurnitureSegment"] },
           "attributes": {
             "properties": {
-              "reflection": {"type": "string"},
-              "reflectionCorrection": {"type": "number"},
-              "height": {"type": "number"},
-              "distance": {"type": "number"}
+              "reflection": { "type": "string" },
+              "reflectionCorrection": { "$ref": "#/definitions/measure" },
+              "height": { "$ref": "#/definitions/measure" },
+              "distance": { "$ref": "#/definitions/measure" }
             }
           },
           "parent": {
             "type": "string",
-            "description": "the ID of the children +NoiseCityFurniture"
+            "description": "the ID of the children CityFurniture"
           },
           "geometry": {
             "type": "array",
@@ -415,7 +398,7 @@ The steps to follow are thus:
 .. code-block:: js
 
   "a_noisy_bench": {
-    "type": "+NoiseCityFurniture",
+    "type": "CityFurniture",
     "geometry": [
       {
         "type": "Solid",
