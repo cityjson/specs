@@ -1,175 +1,200 @@
 {
   "type": "CityJSON_Extension",
   "name": "Noise",
-  "uri": "https://someurl.org/noise.json",
-  "version": "0.1",
-  "description": "Extension to model the noise, innit?",
-
-  "extraRootProperties": {
-
-    "+metadata2": {
+  "uri": "http://someurl.org/noise.json",
+  "version": "1.0",
+  "description": "Extension for Noise Immission Simulation",
+  
+  "definitions": {
+    "measure": {
       "type": "object",
       "properties": {
-        "un": { "type": "integer"},
-        "deux": { "type": "integer"},
-        "trois": { "type": "integer"}
+        "value": { "type": "number" },
+        "uom": { "type": "string" }
       },
-      "required": ["un", "deux", "trois"],
-      "additionalProperties": false
+      "required": [ "value", "uom" ],
+      "additionalProperties": "false"
+    },
+    
+    "train": {
+      "type": "object",
+      "properties": {
+        "trainType": { "type": "string" },
+        "trainTypeCorrection": { "$ref": "#/definitions/measure" },
+        "brakePortionDay": { "$ref": "#/definitions/measure" },
+        "brakePortionEvening": { "$ref": "#/definitions/measure" },
+        "brakePortionNight": { "$ref": "#/definitions/measure" },
+        "lengthDay": { "$ref": "#/definitions/measure" },
+        "lengthEvening": { "$ref": "#/definitions/measure" },
+        "lengthNight": { "$ref": "#/definitions/measure" },
+        "speedDay": { "$ref": "#/definitions/measure" },
+        "speedEvening": { "$ref": "#/definitions/measure" },
+        "speedNight": { "$ref": "#/definitions/measure" },
+        "additionalCorrectionTrain": { "$ref": "#/definitions/measure" }
+      },
+      "additionalProperties": "false"
     }
+  },
   
-  },
-
-   
   "extraAttributes": {
-    
     "Building": {
-      "+colour": {
-        "type": "object",
-        "properties": {
-          "rgba": {
-            "type": "array",
-            "items": {"type": "number"},
-            "minItems": 4,    
-            "maxItems": 4
-          },
-          "hex": {"type": "string"}
-        },
-        "additionalProperties": false
-      }
+      "+noise-buildingReflection": { "type": "string" },
+      "+noise-buildingReflectionCorrection": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenMax": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenMin": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenEq": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightMax": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightMin": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightEq": { "$ref": "#/definitions/measure" },
+      "+noise-buildingHabitants": { "type": "integer" },
+      "+noise-buildingAppartments": { "type": "integer" },
+      "+noise-buildingImmissionPoints": { 
+        "type": "array",
+        "items": { "type": "integer" } },
+      "+noise-remark": { "type": "string" }
+    },
+    "BuildingPart": {
+      "+noise-buildingReflection": { "type": "string" },
+      "+noise-buildingReflectionCorrection": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenMax": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenMin": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLDenEq": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightMax": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightMin": { "$ref": "#/definitions/measure" },
+      "+noise-buildingLNightEq": { "$ref": "#/definitions/measure" },
+      "+noise-buildingHabitants": { "type": "integer" },
+      "+noise-buildingAppartments": { "type": "integer" },
+      "+noise-buildingImmissionPoints": { 
+        "type": "array",
+        "items": { "type": "integer" } },
+      "+noise-remark": { "type": "string" }
     }
-    
   },
-
-
+  
   "extraCityObjects": {
-
-    "+NoiseBuilding": {
-      "allOf": [
-        { "$ref": "../cityobjects.schema.json#/_AbstractBuilding" },
-        {
-          "properties": {
-            "type": { "enum": ["+NoiseBuilding"] },
-            "attributes": {
-              "properties": {
-                "buildingReflection": {"type": "string"},
-                "buildingReflectionCorrection": {"type": "number"},
-                "buildingLDenMax": {"type": "number"},
-                "buildingLDenMin": {"type": "number"},
-                "buildingLNightMax": {"type": "number"},
-                "buildingLNightMin": {"type": "number"},
-                "buildingLDenEq": {"type": "number"},
-                "buildingLNightEq": {"type": "number"},
-                "buildingHabitants": {"type": "integer"},
-                "buildingImmissionPoints": {"type": "integer"},
-                "remark": {"type": "string"}
-              }
-            }
-          },
-          "required": ["type"]
-        }
-      ]
-    },
-
-
-   "+NoiseBuildingPart": {
-      "allOf": [
-        { "$ref": "../cityobjects.schema.json#/_AbstractBuilding" },
-        {
-          "properties": {
-            "type": { "enum": ["+NoiseBuildingPart"] },
-            "attributes": {
-              "properties": {
-                "buildingReflection": {"type": "string"},
-                "buildingReflectionCorrection": {"type": "number"},
-                "buildingLDenMax": {"type": "number"},
-                "buildingLDenMin": {"type": "number"},
-                "buildingLNightMax": {"type": "number"},
-                "buildingLNightMin": {"type": "number"},
-                "buildingLDenEq": {"type": "number"},
-                "buildingLNightEq": {"type": "number"},
-                "buildingHabitants": {"type": "integer"},
-                "buildingImmissionPoints": {"type": "integer"},
-                "remark": {"type": "string"}
-              }
-            },
-            "parent": {
-              "type": "string",
-              "description": "the ID of the parent +NoiseBuilding"
-            }
-          },
-          "required": ["type", "parent"]
-        }
-      ]
-    },
-
-
-    "+NoiseCityFurniture": {
-      "allOf": [
-        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject"},
-        {
-          "properties": {
-            "type": { "enum": ["+NoiseCityFurniture"] },
-            "children": {
-              "type": "array",
-              "description": "the IDs of the +NoiseCityFurnitureSegment",
-              "items": {"type": "string"}
-            },
-            "geometry": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  {"$ref": "../geomprimitives.schema.json#/MultiPoint"},
-                  {"$ref": "../geomprimitives.schema.json#/MultiLineString"},
-                  {"$ref": "../geomprimitives.schema.json#/Solid"},
-                  {"$ref": "../geomprimitives.schema.json#/MultiSolid"},
-                  {"$ref": "../geomprimitives.schema.json#/CompositeSolid"},
-                  {"$ref": "../geomprimitives.schema.json#/MultiSurface"},
-                  {"$ref": "../geomprimitives.schema.json#/CompositeSurface"},
-                  {"$ref": "../geomtemplates.schema.json#/GeometryInstance"}
-                ]
-              }
-            }        
-          },
-          "required": ["type", "geometry"]
-        }
-      ]
-    },
-
     "+NoiseCityFurnitureSegment": {
       "allOf": [
-        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject"},
+        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
         {
           "properties": {
-            "type": { "enum": ["+NoiseCityFurnitureSegment"] },
+            "type": { "enum": [ "+NoiseCityFurnitureSegment" ] },
             "attributes": {
+              "type": "object",
               "properties": {
-                "reflection": {"type": "string"},
-                "reflectionCorrection": {"type": "number"},
-                "height": {"type": "number"},
-                "distance": {"type": "number"}
+                "reflection": { "type": "string" },
+                "reflectionCorrection": { "$ref": "#/definitions/measure" },
+                "height": { "$ref": "#/definitions/measure" },
+                "distance": { "$ref": "#/definitions/measure" }
               }
             },
             "parent": {
               "type": "string",
-              "description": "the ID of the children +NoiseCityFurniture"
+              "description": "the ID of the parent CityFurniture"
             },
             "geometry": {
               "type": "array",
               "items": {
                 "oneOf": [
-                  {"$ref": "../geomprimitives.schema.json#/MultiLineString"}
+                  { "$ref": "../geomprimitives.schema.json#/MultiLineString" }
                 ]
               }
-            }        
+            }
           },
-          "required": ["type", "parent", "geometry"]
+          "required": [ "type", "parent", "geometry" ]
+        }
+      ]
+    },
+    
+    "+NoiseRoadSegment": {
+      "allOf": [
+        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        {
+          "properties": {
+            "type": { "enum": [ "+NoiseRoadSegment" ] },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "mDay": { "$ref": "#/definitions/measure" },
+                "mEvening": { "$ref": "#/definitions/measure" },
+                "mNight": { "$ref": "#/definitions/measure" },
+                "mDay16": { "$ref": "#/definitions/measure" },
+                "pDay": { "$ref": "#/definitions/measure" },
+                "pEvening": { "$ref": "#/definitions/measure" },
+                "pNight": { "$ref": "#/definitions/measure" },
+                "pDay16": { "$ref": "#/definitions/measure" },
+                "dtv": { "$ref": "#/definitions/measure" },
+                "speedDayPkw": { "$ref": "#/definitions/measure" },
+                "speedEveningPkw": { "$ref": "#/definitions/measure" },
+                "speedNightPkw": { "$ref": "#/definitions/measure" },
+                "speedDayLkw": { "$ref": "#/definitions/measure" },
+                "speedEveningLkw": { "$ref": "#/definitions/measure" },
+                "speedNightLkw": { "$ref": "#/definitions/measure" },              
+                "roadSurfaceMaterial": { "type": "string" },
+                "roadSurfaceCorrection": { "$ref": "#/definitions/measure" },
+                "distanceCarriageway": { "$ref": "#/definitions/measure" },
+                "distanceD": { "$ref": "#/definitions/measure" },
+                "bridge": { "type": "boolean" },
+                "tunnel": { "type": "boolean" },
+                "roadGradientPercent": { "$ref": "#/definitions/measure" },
+                "lineage": { "type": "string" }
+              }
+            },
+            "parent": {
+              "type": "string",
+              "description": "the ID of the parent Road"
+            },
+            "geometry": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "$ref": "../geomprimitives.schema.json#/MultiLineString" }
+                ]
+              }
+            }
+          },
+          "required": [ "type", "parent", "geometry" ]
+        }
+      ]
+    },
+    
+    "+NoiseRailwaySegment": {
+      "allOf": [
+        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        {
+          "properties": {
+            "type": { "enum": [ "+NoiseRailwaySegment" ] },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "railwaySurfaceMaterial": { "type": "string" },
+                "railwaySurfaceCorrection": { "$ref": "#/definitions/measure" },
+                "bridge": { "type": "boolean" },
+                "crossing": { "type": "boolean" },
+                "curveRadius": { "$ref": "#/definitions/measure" },
+                "additionalCorrectionSegment": { "$ref": "#/definitions/measure" }
+              }
+            },
+            "usedBy": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/train" }
+            },
+            "parent": {
+              "type": "string",
+              "description": "the ID of the parent CityFurniture"
+            },
+            "geometry": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "$ref": "../geomprimitives.schema.json#/MultiLineString" }
+                ]
+              }
+            }
+          },
+          "required": [ "type", "parent", "geometry" ]
         }
       ]
     }
-
   }
-
-
+  
 }
- 

@@ -1,13 +1,19 @@
 {
     "type": "CityJSON",
     "version": "0.9",
-    "extensions": { "Noise": "https://someurl.org/noise.json" },
+    "extensions": {"Noise": "https://someurl.org/noise.json"},
     "CityObjects": {
         "un": {
-            "type": "+NoiseBuilding",
+            "type": "Building",
             "attributes": {
-                "buildingReflectionCorrection": 234,
-                "buildingLNightMax": 17.33
+                "+noise-buildingReflectionCorrection": {
+                    "value": 4.123,
+                    "uom": "dB"
+                },
+                "+noise-buildingLNightMax": {
+                    "value": 43.123,
+                    "uom": "dB"
+                }
             },
             "geometry": [{
                 "type": "MultiSurface",
@@ -3820,7 +3826,7 @@
             }]
         },
         "deux": {
-            "type": "+NoiseBuilding",
+            "type": "Building",
             "geometry": [{
                 "type": "MultiSurface",
                 "boundaries": [
