@@ -229,8 +229,7 @@ In CityGML, each of the 3 classes can have a number of "TrafficArea" and "Auxili
 In CityJSON, these surfaces do not need to be defined again since the road surfaces become Semantic Surface Objects (with type ``"TrafficArea"`` or ``"AuxiliaryTrafficArea"``).
 That is, the surface representing a road should be split into sub-surfaces (therefore forming a ``"MultiSurface"``), and each of the sub-surfaces get a semantics attached to it.
 
-- The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` can be of types ``"MultiSurface"`` or ``"CompositeSurface"``.
-- The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` cannot be of ``"lod"`` 0, only 1 and above are allowed.
+- The geometry of a City Object of type ``"Road"``, ``"Railway"``, ``"TransportSquare"`` can be of types ``"MultiSurface"``, ``"CompositeSurface"`` or ``"MultiLineString"``.
 
 .. code-block:: js
 

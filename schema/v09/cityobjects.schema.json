@@ -427,7 +427,8 @@
             "items": {
               "oneOf": [
                 {"$ref": "geomprimitives.schema.json#/MultiSurface"},
-                {"$ref": "geomprimitives.schema.json#/CompositeSurface"}
+                {"$ref": "geomprimitives.schema.json#/CompositeSurface"},
+                {"$ref": "geomprimitives.schema.json#/MultiLineString"}
               ]
             }
           }

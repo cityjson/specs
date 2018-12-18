@@ -23,6 +23,7 @@ Changed
 - the Extensions are not schemas files anymore, but JSON files with a specific syntax. The idea is the same, but now creating Extensions is simpler.
 - Extensions now allow new attributes for already existing City Objects, ie it's possible to add an attribute "+myattribute" to a "Building" and document it in a schema. Before it was only possible if one created a new specific City Object.
 - Extensions now allow root properties to be added and documented.
+- Transportation module now has LoD0 with MultiLineString geometries.
 
 ----
 
