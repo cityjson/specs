@@ -6,7 +6,7 @@
   },
   "CityObjects": {
     "1234": {
-      "type": "+NoiseBuilding",
+      "type": "Building",
       "geometry": [
         {
           "type": "Solid",
@@ -19,8 +19,14 @@
       "attributes": {
         "roofType": "pointy",
         "class": "22",
-        "buildingReflectionCorrection": 234,
-        "buildingLNightMax": 17.33
+          "+noise-buildingReflectionCorrection": {
+            "value": 4.123,
+            "uom": "dB"
+          },
+          "+noise-buildingLNightMax": {
+            "value": 43.123,
+            "uom": "dB"
+          }
       }
     },
     "thesegment_1": {
@@ -35,7 +41,10 @@
         }      
       ],
       "attributes": {
-        "reflectionCorrection": 2.33
+        "reflectionCorrection": {
+          "value": 4.123,
+          "uom": "dB"
+        }
       },
       "parent": "a_noisy_bench"
     },    
@@ -51,12 +60,15 @@
         }      
       ],
       "attributes": {
-        "reflectionCorrection": 2.33
+        "reflectionCorrection": {
+          "value": 2.666,
+          "uom": "dB"
+        }
       },
       "parent": "a_noisy_bench"
     },    
     "a_noisy_bench": {
-      "type": "+NoiseCityFurniture",
+      "type": "CityFurniture",
       "geometry": [
         {
           "type": "Solid",
