@@ -96,16 +96,18 @@ A City Object is a JSON object for which the type member’s value is one of the
 
 There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. Both types are represented as a City Object in a CityJSON file.
 
-1. **1st-level**: These may have ``"children"`` (ie 2nd-level City Objects).
-2. **2nd-level**: a City Object that has one ``"parent"``.
+1. **1st-level**: City Objects that can "exist by themselves".
+2. **2nd-level**: City Objects that need to have a ``"parents"`` to exist.
+
+For example, a ``"BuildingInstallation"`` cannot be present in a dataset without being the ``"children"`` of a ``"Building"``, but a ``"Building"`` can be present by itself.
 
 A City Object:
 
 - must have one member with the name ``"geometry"``, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
 - may have one member with the name ``"attributes"``, whose value is an object with the different attributes allowed by CityGML. 
 - may have one member with the name ``"bbox"`` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: [minx, miny, minz, maxx, maxy, maxz]
-- of type 1st-level may have one member ``"children"``, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A parent City Object can have different City Objects children (a ``"Building"`` can have both as children ``"BuildingPart"`` and ``"BuildingInstallation"``)
-- of type 2nd-level must have one member ``"parent"``, which is the ID of its parent City Object  (of type string). It may also have one member ``"children"`` (for instance for a ``"BuildingPart"`` that contains a ``"BuildingInstallation"``), but if a City Object has a ``"parent"`` then it is considered to be of the 2nd-level type.
+- of type 1st-level may have one member ``"children"``, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a ``"Building"`` can have both as children ``"BuildingPart"`` and ``"BuildingInstallation"``.
+- of type 2nd-level must have one member ``"parents"``, which consists of an array of the IDs (of type string) of the 1st-level City Objects that are its parents. For the City Objects in the core module of CityJSON, this array will always be of size 1 (only one parent). New City Objects defined in :doc:`extensions` can have more than one parents. Notice that a 2nd-level City Object may also have one member ``"children"`` (for instance for a ``"BuildingPart"`` that contains a ``"BuildingInstallation"``).
 
 
 .. code-block:: js
@@ -123,12 +125,12 @@ A City Object:
     },
     "id-2": {
       "type": "BuildingPart", 
-      "parent": "id-1",
+      "parents": ["id-1"],
       ...
     },
     "id-3": {
       "type": "BuildingInstallation", 
-      "parent": "id-1",
+      "parents": ["id-1"],
       ...
     },
     "id-4": {
@@ -195,12 +197,12 @@ Building, BuildingPart, and BuildingInstallation
     },
     "id-56": {
       "type": "BuildingPart", 
-      "parent": "id-1",
+      "parents": ["id-1"],
       ...
     },
     "mybalcony": {
       "type": "BuildingInstallation", 
-      "parent": "id-1",
+      "parents": ["id-1"],
       ...
     }
   }
