@@ -78,6 +78,7 @@
         {
           "properties": {
             "type": { "enum": [ "+NoiseCityFurnitureSegment" ] },
+            "toplevel": {"type": "boolean"},
             "attributes": {
               "type": "object",
               "properties": {
@@ -87,9 +88,9 @@
                 "distance": { "$ref": "#/definitions/measure" }
               }
             },
-            "parent": {
-              "type": "string",
-              "description": "the ID of the parent CityFurniture"
+            "parents": {
+              "type": "array",
+              "items": {"type": "string"}
             },
             "geometry": {
               "type": "array",
@@ -100,7 +101,7 @@
               }
             }
           },
-          "required": [ "type", "parent", "geometry" ]
+          "required": [ "type", "toplevel", "parents", "geometry" ]
         }
       ]
     },
@@ -111,6 +112,7 @@
         {
           "properties": {
             "type": { "enum": [ "+NoiseRoadSegment" ] },
+            "toplevel": { "type": "boolean" },
             "attributes": {
               "type": "object",
               "properties": {
@@ -139,9 +141,9 @@
                 "lineage": { "type": "string" }
               }
             },
-            "parent": {
-              "type": "string",
-              "description": "the ID of the parent Road"
+            "parents": {
+              "type": "array",
+              "items": {"type": "string"}
             },
             "geometry": {
               "type": "array",
@@ -152,7 +154,7 @@
               }
             }
           },
-          "required": [ "type", "parent", "geometry" ]
+          "required": [ "type", "toplevel", "parents", "geometry" ]
         }
       ]
     },
@@ -163,6 +165,7 @@
         {
           "properties": {
             "type": { "enum": [ "+NoiseRailwaySegment" ] },
+            "toplevel": { "type": "boolean" },
             "attributes": {
               "type": "object",
               "properties": {
@@ -178,9 +181,9 @@
               "type": "array",
               "items": { "$ref": "#/definitions/train" }
             },
-            "parent": {
-              "type": "string",
-              "description": "the ID of the parent CityFurniture"
+            "parents": {
+              "type": "array",
+              "items": {"type": "string"}
             },
             "geometry": {
               "type": "array",
@@ -191,7 +194,7 @@
               }
             }
           },
-          "required": [ "type", "parent", "geometry" ]
+          "required": [ "type", "toplevel", "parents", "geometry" ]
         }
       ]
     }

@@ -187,6 +187,7 @@ Here's an example:
         {
           "properties": {
             "type": { "enum": ["+NoiseBuilding"] },
+            "toplevel": {"type": "boolean"},
             "attributes": {
               "properties": {
                 "buildingLDenMin": {"type": "number"}
@@ -202,6 +203,8 @@ Here's an example:
 Since all City Objects are documented in the schemas of CityJSON (in `cityobjects.json <https://github.com/tudelft3d/cityjson/tree/master/schema>`_), it is basically a matter of copying the parts needed in a new file and modifying its content.
 A new name for the City Object must be given and it must begin with ``+``.
   
+Because City Objects can be of different levels (1st-level ones can exist by themselves; 2nd-level ones need to have a parent), we need to explicitly state this by using the property ``"toplevel"``, which is a Boolean value.
+
 It should be observed that since JSON schemas do not allow inheritance, the only way to extend a City Object is to define an entirely new one (with a new name, eg ``"+NoiseBuilding"``).
 This is done by copying the schema of the parent City Object and extending it. 
 
@@ -212,10 +215,11 @@ This is done by copying the schema of the parent City Object and extending it.
 
     1. The name of a new City Object must begin with a ``+``, eg ``"+NoiseBuilding"``
     2. A new City Object must conform to the rules of CityJSON, ie it must contain a property ``"type"`` and one ``"geometry"``. If the object contains appearances, the same mechanism should be used so that the new City Objects can be processed without modification. 
-    3. All the geometries must be in the property ``"geometry"``, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files (eg `cjio <https://github.com/tudelft3d/cjio>`_ and `azul <https://github.com/tudelft3d/azul>`_) will be working without modifications. 
-    4. If a new City Object is contains other objects and requires different geometries (see below for an example), then a new City Object needs to be defined using the parent-children structure of CityJSON, as used by ``"Building"`` and ``"BuildingPart"``.
-    5. The reuse of types defined in CityJSON, eg ``"Solid"`` or semantic surfaces, is allowed.
-    6. To define a new semantic surface, simply add a ``+`` to its name, eg ``"+ThermalSurface"``.
+    3. A new City Object must also contain the property ``"toplevel"``, whose value is a Boolean (true = 1st-level; false = 2nd-level).
+    4. All the geometries must be in the property ``"geometry"``, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files (eg `cjio <https://github.com/tudelft3d/cjio>`_ and `azul <https://github.com/tudelft3d/azul>`_) will be working without modifications. 
+    5. If a new City Object is contains other objects and requires different geometries (see below for an example), then a new City Object needs to be defined using the parent-children structure of CityJSON, as used by ``"Building"`` and ``"BuildingPart"``.
+    6. The reuse of types defined in CityJSON, eg ``"Solid"`` or semantic surfaces, is allowed.
+    7. To define a new semantic surface, simply add a ``+`` to its name, eg ``"+ThermalSurface"``.
 
 
 3. Adding new properties at the root of a document
@@ -328,6 +332,7 @@ A CityJSON file containing this new City Object would look like this:
     "CityObjects": {
       "1234": {
         "type": "Building",
+        "toplevel": true,
         "attributes": {
           "roofType": "gable",
           "+noise-buildingReflectionCorrection": {
@@ -368,6 +373,7 @@ The steps to follow are thus:
       {
         "properties": {
           "type": { "enum": ["+NoiseCityFurnitureSegment"] },
+          "toplevel": { "type": "boolean" },
           "attributes": {
             "properties": {
               "reflection": { "type": "string" },
@@ -389,7 +395,7 @@ The steps to follow are thus:
             }
           }        
         },
-        "required": ["type", "parent", "geometry"]
+        "required": ["type", "toplevel", "parent", "geometry"]
       }
     ]
   }
@@ -402,6 +408,7 @@ The steps to follow are thus:
     "geometry": [
       {
         "type": "Solid",
+        "toplevel": true,
         "lod": 2,
         "boundaries": [
           [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
@@ -415,6 +422,7 @@ The steps to follow are thus:
     "geometry": [
       {
         "type": "MultiLineString",
+        "toplevel": false,
         "lod": 0,
         "boundaries": [
           [2, 3, 5], [77, 55, 212]

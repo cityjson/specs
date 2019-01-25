@@ -31,6 +31,7 @@
     },
     "thesegment_1": {
       "type": "+NoiseCityFurnitureSegment",
+      "toplevel": false,
       "geometry": [
         {
           "type": "MultiLineString",
@@ -46,10 +47,11 @@
           "uom": "dB"
         }
       },
-      "parent": "a_noisy_bench"
+      "parents": ["a_noisy_bench"]
     },    
     "thesegment_2": {
       "type": "+NoiseCityFurnitureSegment",
+      "toplevel": false,
       "geometry": [
         {
           "type": "MultiLineString",
@@ -65,7 +67,7 @@
           "uom": "dB"
         }
       },
-      "parent": "a_noisy_bench"
+      "parents": ["a_noisy_bench"]
     },    
     "a_noisy_bench": {
       "type": "CityFurniture",
