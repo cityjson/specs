@@ -23,56 +23,63 @@ Several cities around the world
 
 .. list-table:: 
    :header-rows: 1
-   :widths: 10 12 15 20 8
+   :widths: 10 15 12 12 8
    :stub-columns: 1
 
-   *  -  CityGML dataset
-      -  CityJSON+CityGML download
+   *  -  Original CityGML URL
       -  screenshot
-      -  details
+      -  download files
       -  textures
+      -  details
    *  -  `Den Haag <https://data.overheid.nl/data/dataset/ngr-3d-model-den-haag>`_
-      -  `DenHaag.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/DenHaag/DenHaag.zip>`_     
       -  .. image:: _static/dataset_denhaag.png
             :width: 100%      
+      -  `[JSON] <https://3d.bk.tudelft.nl/opendata/cityjson/v09/DenHaag_01.json>`_ 
+         `[GML] <https://3d.bk.tudelft.nl/opendata/cityjson/citygml/DenHaag_01.xml>`_   
+      -  none
       -  'Tile 01', Buildings (in LoD2) and Terrain are merged
-      -  no
    *  -  `Montréal <http://donnees.ville.montreal.qc.ca/dataset/maquette-numerique-batiments-citygml-lod2-avec-textures/resource/36047113-aa19-4462-854a-cdcd6281a5af>`_
-      -  `Montreal.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/Montreal/Montreal.zip>`_  
       -  .. image:: _static/dataset_montreal.png
             :width: 100%      
+      -  `[JSON] <https://3d.bk.tudelft.nl/opendata/cityjson/v09/VM05_2009.json>`_  
+         `[GML] <https://3d.bk.tudelft.nl/opendata/cityjson/citygml/VM05_2009.gml>`_  
+      -  none
       -  tile 'VM05'. Buildings in LoD2
-      -  no
    *  -  `New York <https://www1.nyc.gov/site/doitt/initiatives/3d-building.page>`_
-      -  `NewYork.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/NewYork/NewYork.zip>`_     
       -  .. image:: _static/dataset_newyork.png
             :width: 100%      
+      -  `[JSON] <https://3d.bk.tudelft.nl/opendata/cityjson/v09/DA13_3D_Buildings_Merged.json>`_     
+         `[GML] <https://3d.bk.tudelft.nl/opendata/citygml/DA13_3D_Buildings_Merged.gml>`_     
+      -  none
       -  tile 'DA13'. Buildings in LoD2
-      -  no
    *  -  `Rotterdam <http://rotterdamopendata.nl/dataset/rotterdam-3d-bestanden/resource/edacea54-76ce-41c7-a0cc-2ebe5750ac18>`_
-      -  `Rotterdam.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/Rotterdam/Rotterdam.zip>`_
       -  .. image:: _static/dataset_rotterdam.png
             :width: 100%      
+      -  `[JSON] <https://3d.bk.tudelft.nl/opendata/cityjson/v09/3-20-DELFSHAVEN.json>`_
+         `[GML] <https://3d.bk.tudelft.nl/opendata/citygml/3-20-DELFSHAVEN.xml>`_
+      -  `[ZIP] <https://3d.bk.tudelft.nl/opendata/citygml/3-20-DELFSHAVEN.zip>`_
       -  neighbourhood 'Delfshaven'. Buildings in LoD2
-      -  yes
    *  -  `Vienna <https://www.data.gv.at/katalog/dataset/86d88cae-ad97-4476-bae5-73488a12776d>`_
-      -  `Vienna.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/Vienna/Vienna.zip>`_     
       -  .. image:: _static/dataset_vienna.png
             :width: 100%      
+      -  `[JSON] <https://3d.bk.tudelft.nl/opendata/cityjson/v09/Vienna_102081.json>`_     
+         `[GML] <https://3d.bk.tudelft.nl/opendata/citygml/Vienna_102081.gml>`_     
+      -  none
       -  Buildings in LoD2
-      -  no
    *  -  `"GeoRes" <https://www.citygml.org/samplefiles/>`_
-      -  `GeoRes.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/GeoRes/GeoRes.zip>`_     
       -  .. image:: _static/dataset_geores.jpg
             :width: 100%
+      -  `[JSON] <https://3d.bk.tudelft.nl/opendata/cityjson/v09/geoRES_testdata_v1.0.0.json>`_     
+         `[GML] <https://3d.bk.tudelft.nl/opendata/citygml/geoRES_testdata_v1.0.0.xml>`_     
+      -  `[ZIP] <https://3d.bk.tudelft.nl/opendata/citygml/geoRES_testdata_v1.0.0.zip>`_
       -  CityGML demo. Buildings, Terrain, Vegetation, Water, LandUse. 
-      -  yes
    *  -  `"Railway" <https://www.citygml.org/samplefiles/>`_
-      -  `Railway.zip <https://3d.bk.tudelft.nl/opendata/cityjson/v08/Railway/Railway.zip>`_ 
       -  .. image:: _static/dataset_railway.jpg
             :width: 100%      
+      -  `[JSON] <https://3d.bk.tudelft.nl/opendata/cityjson/v09/LoD3_Railway.json>`_ 
+         `[GML] <https://3d.bk.tudelft.nl/opendata/citygml/LoD3_Railway.gml>`_ 
+      -  `[ZIP] <https://3d.bk.tudelft.nl/opendata/citygml/LoD3_Railway.zip>`_
       -  CityGML demo. Buildings, Railway, Terrain, Vegetation (with Implicit Geometries), Water, Tunnels
-      -  yes
 
 
 .. _compression_factors:
