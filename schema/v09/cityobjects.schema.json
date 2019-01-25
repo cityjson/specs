@@ -26,9 +26,14 @@
           "usage": {"type": "string"}
         }
       },
+      "parents": {
+        "type": "array",
+        "description": "the IDs of the parents",
+        "items": {"type": "string"}
+      },
       "children": {
         "type": "array",
-        "description": "the IDs of children (Extensions can use this)",
+        "description": "the IDs of children",
         "items": {"type": "string"}
       },
       "geographicalExtent": {
@@ -109,13 +114,9 @@
       { "$ref": "#/_AbstractBuilding" },
       {
         "properties": {
-          "type": { "enum": ["BuildingPart"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Building"
-          }
+          "type": { "enum": ["BuildingPart"] }
         },
-        "required": ["type", "parent"]
+        "required": ["type", "parents"]
       }
     ]
   },
@@ -127,10 +128,6 @@
       {
         "properties": {
           "type": { "enum": ["BuildingInstallation"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Building"
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -147,7 +144,7 @@
             }
           }
         },
-        "required": ["type", "geometry" , "parent"]
+        "required": ["type", "geometry" , "parents"]
       }
     ]
   },
@@ -232,13 +229,9 @@
       { "$ref": "#/_AbstractTunnel" },
       {
         "properties": {
-          "type": { "enum": ["TunnelPart"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Tunnel"
-          }
+          "type": { "enum": ["TunnelPart"] }
         },
-        "required": ["type", "parent"]
+        "required": ["type", "parents"]
       }
     ]
   },
@@ -250,10 +243,6 @@
       {
         "properties": {
           "type": { "enum": ["TunnelInstallation"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Tunnel"
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -270,7 +259,7 @@
             }
           }
         },
-        "required": ["type", "geometry" , "parent"]
+        "required": ["type", "geometry" , "parents"]
       }
     ]
   },
@@ -323,13 +312,9 @@
       { "$ref": "#/_AbstractBridge" },
       {
         "properties": {
-          "type": { "enum": ["BridgePart"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Building"
-          }
+          "type": { "enum": ["BridgePart"] }
         },
-        "required": ["type", "parent"]
+        "required": ["type", "parents"]
       }
     ]
   },
@@ -341,10 +326,6 @@
       {
         "properties": {
           "type": { "enum": ["BridgeInstallation"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Bridge"
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -361,7 +342,7 @@
             }
           }
         },
-        "required": ["type", "geometry" , "parent"]
+        "required": ["type", "geometry" , "parents"]
       }
     ]
   },    
@@ -373,10 +354,6 @@
       {
         "properties": {
           "type": { "enum": ["BridgeConstructionElement"] },
-          "parent": {
-            "type": "string",
-            "description": "the ID of the parent Bridge"
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -393,7 +370,7 @@
             }
           }
         },
-        "required": ["type", "geometry" , "parent"]
+        "required": ["type", "geometry" , "parents"]
       }
     ]
   }, 
