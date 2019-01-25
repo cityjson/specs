@@ -721,7 +721,7 @@ A Geometry object:
         }
       ],
       "values": [0, 0, null, 1, 2]
-    },
+    }
   }
 
 .. note::
