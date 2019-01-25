@@ -133,7 +133,7 @@
         "renovation": "2001/09/11",
         "yearOfConstruction": 2912
       },
-      "parent": "102636712",
+      "parents": ["102636712"],
       "geometry": [{
         "type": "Solid",
         "lod": 2,
@@ -144,7 +144,7 @@
     },
     "myinst": {
       "type": "BuildingInstallation", 
-      "parent": "102636712",
+      "parents": ["102636712"],
       "geometry": [{
         "type": "Solid",
         "lod": 2,
@@ -197,7 +197,7 @@
       "attributes": { 
         "function": "balcony"
       },
-      "parent": "itcanbeastringtoo",
+      "parents": ["itcanbeastringtoo"],
       "geometry": [{
         "type": "MultiSurface",
         "lod" : 2.2, 
