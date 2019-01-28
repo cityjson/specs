@@ -15,7 +15,7 @@
         "class": "potato",
         "function": "4",
         "+colour": {
-          "rgba": [1,2,3]
+          "rgba": [1,2,3, 4.0]
         },
         "+area-parcel": {
           "value": 332.0,
