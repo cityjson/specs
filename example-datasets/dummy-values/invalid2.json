@@ -1,13 +1,16 @@
 {
   "type": "CityJSON",
-  "version": "0.6",
+  "version": "0.9",
   "metadata": {
-    "crs": { 
-      "epsg": 7415
-    },
-    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-    "datasetTitle": "what is this dataset?",
-    "copyrights": "CC0"
+    "geographicalExtent": [
+        0.0,
+        0.0,
+        0.0,
+        771.0,
+        61.0,
+        51.0
+    ],
+    "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
   },
   "CityObjects": {
   	"102636712": {
@@ -17,96 +20,124 @@
         "roofType": "gable",
         "yearOfConstruction": 1904,
         "owner": "Elvis Presley",
-        "renovation": 1977
-      },
-      "address": {
-        "CountryName": "Canada",
-        "LocalityName": "Chibougamau",
-        "ThoroughfareNumber": "666",
-        "ThoroughfareName": "rue du Diable",
-        "PostalCode": "H0H 0H0"
+        "creationDate": "2018-11-14",
+        "hugo": "ledoux"
       },
       "geometry": [
       {
         "type": "Solid",
         "lod": 1.1,
         "boundaries": [
-          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
-        ],
-        "semantics": {
-          "surfaces" : [
-            {
-              "type": "RoofSurface",
-              "slope": 33.4
-            }, 
-            {
-              "type": "RoofSurface",
-              "slope": 66.6
-            },
-            {
-              "type": "WallSurface",
-              "paint": "blue" 
-            },
-            {
-              "type": "WallSurface",
-              "paint": "red" 
-            }
-          ],
-          "values": [
-            [0, 1, null, null, 2, 3]
-          ]
-        },
-        "material": {
-          "irradiation": { 
-            "values": [
-              [0, 0, null, null, 1, 1]
-            ] 
-          },
-          "irradiation-2": { 
-            "value": 2
-          }
-        }
+          [ [[0, 3, 2, 1],[0,1,2]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ] 
+        ]
+      }
+      ]
+    },
+    "2929": {
+      "type": "Building", 
+      "attributes": {
+        "renovation": "2001/09/11",
+        "yearOfConstruction": 2912
       },
-      {
+      "parents": ["102636712"],
+      "geometry": [{
         "type": "Solid",
-        "lod": 2.1,
+        "lod": 2,
         "boundaries": [
-          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ],
-          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ]          
-        ],
-        "texture": {
-          "winter-textures": {
-            "values": [
-              [ [[0, 10, 23, 22, 21]], [[null]], [[null]], [[0, 1, 2, 6, 5]], [[0, 2, 3, 7, 6]], [[0, 3, 0, 4, 7]] ],
-              [ [[null]], [[null]], [[0, 0, 1, 5, 4]], [[0, 1, 2, 6, 5]] ]                      
-            ]
-          },
-          "summer-textures": {
-            "values": [
-              [ [[1, 7, 3, 2, 1]], [[null]], [[null]], [[1, 1, 2, 6, 5]], [[1, 2, 3, 7, 6]], [[1, 3, 0, 4, 7]] ],
-              [ [[null]], [[null]], [[1, 0, 1, 5, 4]], [[1, 1, 2, 6, 5]] ]                      
-            ] 
-          }
-        }        
-      }        
-    ]
-    }    
+          [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
+        ]
+      }]
+    },
+    "2929": {
+      "type": "TINRelief", 
+      "geometry": [{
+        "type": "CompositeSurface",
+        "lod": 2,
+        "boundaries": [
+           [[0, 3, 2]], [[4, 5, 6]], [[0, 1, 5]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
+        ]
+      }]    
+    }
   },
   "vertices": [
     [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
     [1.0, 0.0, 0.0],
     [1.0, 1.0, 0.0],
     [0.0, 1.0, 0.0],
     [0.0, 0.0, 1.0],
     [1.0, 0.0, 1.0],
     [1.0, 1.0, 1.0],
+    [11.0, 11.0, 11.0],
+    [21.0, 21.0, 21.0],
+    [31.0, 31.0, 31.0],
+    [31.0, 41.0, 41.0],
+    [31.0, 51.0, 51.0],
+    [771.0, 61.0, 1.0],
     [0.0, 1.0, 1.0]
   ],
+  "something-else": {
+    "this": 1.0,
+    "that": "blablabla"
+  },
+  "geometry-templates": {
+    "templates": [
+      {
+        "type": "MultiSurface",
+        "lod": 2,
+        "boundaries": [ 
+           [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+        ]
+      },
+      {
+        "type": "MultiSurface",
+        "lod": 2,
+        "boundaries": [ 
+           [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+        ]
+      }
+    ],
+    "vertices-templates": [
+      [0.0, 0.5, 0.0],
+      [1.0, 0.0, 0.0],
+      [11.0, 0.0, 0.0],
+      [11.0, 10.0, 0.0],
+      [1.0, 12.0, 0.0],
+      [1.0, 40.0, 0.0],
+      [1.0, 1.0, 0.0],
+      [0.0, 1.0, 0.0]
+    ]
+  },
   "appearance": {
+    "default-theme-texture": "summer-textures",
+    "default-theme-material": "irradiation",
     "vertices-texture": [
       [0.0, 0.5],
       [1.0, 0.0],
       [1.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
+      [0.0, 1.0],
       [0.0, 1.0]
     ],
     "textures": [
@@ -117,21 +148,32 @@
       {
         "type": "JPG",
         "image": "myroof.jpg"
-      }      
+      },
+      {
+        "type": "JPG",
+        "image": "mymymy.jpg"
+      }     
     ],
     "materials": [
       {
-        "name": "mymaterial1",
+        "name": "irradiation-0-50",
         "ambientIntensity": 0.7500,
         "diffuseColor":  [0.9000, 0.1000, 0.7500],
         "specularColor": [0.9000, 0.1000, 0.7500],
         "transparency": 1.0
       },
       {
-        "name": "mymaterial2",
+        "name": "irradiation-51-80",
         "diffuseColor":  [0.9000, 0.1000, 0.7500],
         "shininess": 0.0,
         "transparency": 0.5,
+        "isSmooth": true      
+      },            
+      {
+        "name": "irradiation-81-100",
+        "diffuseColor":  [0.1900, 0.1100, 0.1750],
+        "shininess": 0.2,
+        "transparency": 0.9,
         "isSmooth": true      
       }            
     ]

@@ -1,10 +1,10 @@
 {
    "type":"CityJSON",
-   "version":"0.8",
+   "version":"0.9",
    "metadata":{
       "citymodelIdentifier":"81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
       "datasetTitle":"3D city model of Chibougamau, Canada",
-      "datasetReferenceDate":"2011-02-28",
+      "datasetReferenceDate":"2011-01-28",
       "geographicLocation":"Chibougamau, Canada",
       "datasetLanguage":"English",
       "datasetCharacterSet":"UTF-8",
@@ -94,8 +94,8 @@
          40
       ],
       "temporalExtent":{
-         "startDate":"2011-02-28T18:25:43",
-         "endDate":"2014-02-28"
+         "startDate":"1985-04-12T23:20:50.52Z",
+         "endDate":"1988-03-11T23:20:50.52Z"
       },
       "abstract":"3D city model with different city features",
       "specificUsage":"for environmental simulations",

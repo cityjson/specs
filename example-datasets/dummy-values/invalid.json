@@ -1,13 +1,16 @@
 {
   "type": "CityJSON",
-  "version": "0.6",
+  "version": "0.9",
   "metadata": {
-    "crs": { 
-      "epsg": 7415
-    },
-    "bbox": [ 84710, 446846, -5, 84757, 446944, 40 ],
-    "datasetTitle": "what is this dataset?",
-    "copyrights": "CC0"
+    "geographicalExtent": [
+        0.0,
+        0.0,
+        0.0,
+        771.0,
+        61.0,
+        51.0
+    ],
+    "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
   },
   "CityObjects": {
   	"102636712": {
@@ -26,7 +29,7 @@
         "ThoroughfareName": "rue du Diable",
         "PostalCode": "H0H 0H0"
       },
-      "Parts": ["2929", "RogerHouse"],
+      "children": ["2929", "RogerHouse"],
       "geometry": [
       {
         "type": "Solid",
@@ -47,20 +50,12 @@
     },
     "2929": {
       "type": "BuildingPart", 
+      "parents": ["102636712"],
       "geometry": [{
         "type": "Solid",
         "lod": 2.1,
         "boundaries": [
           [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
-        ],
-        "semantics": [
-          [
-            {"type": "RoofSurface"},
-            {"type": "RoofSurface"},
-            {"type": "RoofSurface"},
-            {"type": "WallSurface"},
-            {"type": "WallSurface"}
-          ]
         ]
       }]
     },    
@@ -78,7 +73,7 @@
       "attributes": { 
         "measuredHeight": 223
       },
-      "Installations": ["801", "802"],
+      "children": ["801", "802"],
       "geometry": [{
         "type": "MultiSurface",
         "lod": 2,
@@ -92,6 +87,7 @@
       "attributes": { 
         "function": "balcony"
       },
+      "parents": ["itcanbeastringtoo"],
       "geometry": [{
         "type": "MultiSurface",
         "lod" : 2.2, 
@@ -134,11 +130,6 @@
         "lod": 2,
         "boundaries": [
           [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]] ]
-        ],
-        "semantics": [ 
-          [
-          {"type":"WaterSurface"},  {"type":"WaterGroundSurface"},  {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}, {"type":"WaterGroundSurface"}
-          ]
         ]
       }]    
     }               
