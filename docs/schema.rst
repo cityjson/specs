@@ -5,26 +5,7 @@ Schema validation
 CityJSON schema download
 ------------------------
 
-version 0.9: 
-- `available on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema/v09/>`_
-
-version 0.8: 
-- `available on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema/v08/>`_
-
-version 0.6: 
-- :download:`download cityjson-v06.schema.zip <../schema/v06/cityjson-v06-schema.zip>`
-
-version 0.5: 
-- :download:`download cityjson-v05.schema.json <../schema/cityjson-v05.schema.json>`
-
-version 0.3: 
-- :download:`download cityjson-v03.schema.json <../schema/cityjson-v03.schema.json>`
-
-version 0.2: 
-- :download:`download cityjson-v02.schema.json <../schema/cityjson-v02.schema.json>`
-
-version 0.1:
-- :download:`download cityjson-v01.schema.json <../schema/cityjson-v01.schema.json>`
+`Download all schemas on GitHub <https://github.com/tudelft3d/cityjson/tree/master/schema/>`_
 
 
 Software to validate a file against the schema
@@ -41,5 +22,17 @@ The software `cjio <https://github.com/tudelft3d/cjio>`_ can validate a CityJSON
 
 To install you need Python 3 and just ``pip install cjio``, the schemas of versions 0.6+ are included with cjio.
 
-To validate a file: ``cjio myfile.json validate``
+To validate a file: 
+
+``cjio myfile.json validate``
+
+To validate against schemas stored locally:
+
+``cjio myfile.json validate --folder_schemas /home/elvis/cityjson/schema/v09/``
+
+
+Validation of an Extension
+--------------------------
+
+We provide a small Python program (:download:`download validate-extension.py <../software/validate-extension/validate-extension.py>`) that verifies that the Extensions are according to the JSON schemas for the Extension files (:download:`download extension.schema.json <../schema/v09/extensions/extension.schema.json>`)
 
