@@ -13,13 +13,13 @@ Changelog
 
 ----
 
-[0.9] - 2019-01-25
+[0.9] - 2019-01-28
 ------------------
 
 Changed
 *******
 
-- the ``"parent"`` property of City Objects is now named ``"parents": []`` and is an array. This is to allow new City Objects in Extensions to have more than one parent; for the core object this doesn't change anything (except that the property must be renamed and put an array; cjio upgrade_version takes care of this)
+- the ``"parent"`` property of City Objects is now named ``"parents": []``, and is an array. This is to allow new City Objects in Extensions to have more than one parent; for the core objects this doesn't change anything (except that the property must be renamed and put an array; cjio ``upgrade_version()`` takes care of this)
 - the schemas have been revamped. The content is the same, but there are now abstract objects and city objects reuse these. It's thus way easier to modify and update and understand the schemas
 - the Extensions are not schemas files anymore, but JSON files with a specific syntax. The idea is the same, but now creating Extensions is simpler.
 - Extensions now allow new attributes for already existing City Objects, ie it's possible to add an attribute "+myattribute" to a "Building" and document it in a schema. Before it was only possible if one created a new specific City Object.
