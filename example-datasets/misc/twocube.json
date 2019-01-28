@@ -1,6 +1,6 @@
 {
   "type": "CityJSON",
-  "version": "0.6",
+  "version": "0.9",
   "CityObjects": {
   	"onebuilding": {
       "type": "Building", 
