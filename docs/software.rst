@@ -7,7 +7,7 @@ CityJSON utilities
 
 To test CityJSON, we wrote some pieces of script and software.
 They demonstate how to read and write CityJSON with Python, Ruby, and C++.
-These are to use with cautious, and should be considered beta.
+These are to be used with a degree of caution, and should be considered beta.
 
 `demo software on GitHub <https://github.com/tudelft3d/cityjson/tree/master/software/>`_
 
