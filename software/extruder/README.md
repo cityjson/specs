@@ -7,7 +7,7 @@ The CityJSON file is created in pure Python.
 
 It should be noticed that:
 
-  - there is no need to "clean" the dataset while constructing it (eg to ensure that vertices are not duplicated) since [cjio](https://github.com/tudelft3d/cjio) has functions to clean automatically CityJSON files. Thus the idea is to first construct a CityJSON model, and then: `$ cjio mycitymodel.json remove_duplicate_vertices remove_orpha_vertices save mynewmodel.json`
+  - there is no need to "clean" the dataset while constructing it (eg to ensure that vertices are not duplicated) since [cjio](https://github.com/tudelft3d/cjio) has functions to clean automatically CityJSON files. Thus the idea is to first construct a CityJSON model, and then: `$ cjio mycitymodel.json remove_duplicate_vertices remove_orphan_vertices save mynewmodel.json`
   - to know if the result is syntactically valid: `$ cjio mynewmodel.json validate`
   - to know whether the geometries are valid solids according to ISO 19107, use [val3dity](https://github.com/tudelft3d/val3dity)
   
