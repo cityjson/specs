@@ -1,6 +1,7 @@
-#-- a simpler extruder to obtain CityJSON LoD1 Buildings from footprings
+
+#-- a simple "extruder" to obtain CityJSON LoD1 Buildings from footprints
 #-- Hugo Ledoux <h.ledoux@tudelft.nl>
-#-- 2019-02-27
+#-- 2019-02-28
 
 import fiona
 import shapely.geometry as sg
@@ -15,13 +16,15 @@ def main():
     lsgeom = [] #-- list of the geometries
     lsattributes = [] #-- list of the attributes
     for each in c:
-        lsgeom.append(sg.shape(each['geometry']))
+        lsgeom.append(sg.shape(each['geometry'])) #-- geom are casted to Fiona's 
         lsattributes.append(each['properties'])
     #-- extrude to CityJSON
     cm = output_citysjon(lsgeom, lsattributes)
+    #-- save the file to disk 'mycitymodel.json'
     json_str = json.dumps(cm, indent=2)
     fout = open("mycitymodel.json", "w")
     fout.write(json_str)
+    print("done.")
 
 
 def output_citysjon(lsgeom, lsattributes):
@@ -45,8 +48,7 @@ def output_citysjon(lsgeom, lsattributes):
         g = {} 
         g['type'] = 'Solid'
         g['lod'] = 1
-
-        allsurfaces = [] #-- list of surfaces forming the solid
+        allsurfaces = [] #-- list of surfaces forming the oshell of the solid
         #-- exterior ring of each footprint
         oring = list(footprint.exterior.coords)
         oring.pop() #-- remove last point since first==last
@@ -57,9 +59,6 @@ def output_citysjon(lsgeom, lsattributes):
         #-- interior rings of each footprint
         irings = []
         interiors = list(footprint.interiors)
-        # if len(interiors) > 0:
-        #     print (oring)
-        #     print (interiors[0])
         for each in interiors:
             iring = list(each.coords)
             iring.pop() #-- remove last point since first==last
@@ -71,11 +70,12 @@ def output_citysjon(lsgeom, lsattributes):
         #-- top-bottom surfaces
         extrude_roof_ground(oring, irings, lsattributes[i]['height'], False, allsurfaces, cm)
         extrude_roof_ground(oring, irings, 0, True, allsurfaces, cm)
-        #-- add the extruded geometry
+        #-- add the extruded geometry to the geometry
         g['boundaries'] = []
         g['boundaries'].append(allsurfaces)
+        #-- add the geom to the building 
         oneb['geometry'].append(g)
-        #-- insert the building as one city object
+        #-- insert the building as one new city object
         cm['CityObjects'][lsattributes[i]['gml_id']] = oneb
     return cm
 
@@ -103,7 +103,7 @@ def extrude_roof_ground(orng, irngs, height, reverse, allsurfaces, cm):
 
 
 def extrude_walls(ring, height, allsurfaces, cm):
-    #-- each edge become a wall
+    #-- each edge become a wall, ie a rectangle
     for (j, v) in enumerate(ring[:-1]):
         l = []
         cm['vertices'].append([ring[j][0],   ring[j][1],   0])
