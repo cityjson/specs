@@ -461,7 +461,7 @@ Tunnel, TunnelPart, and TunnelInstallation
     "Lærdalstunnelen": {
       "type": "Tunnel", 
       "attributes": { 
-        "yearOfConstruction": "2000",
+        "yearOfConstruction": 2000,
         "length": "24.5km"
       },
       "children": ["stoparea1"],
