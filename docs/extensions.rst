@@ -457,12 +457,12 @@ This assumes that the folder is structured as follows:
 
 .. code-block:: console
 
-|-- appearance.schema.json
-|-- cityjson.schema.json
-|-- cityobjects.schema.json
-|-- geomprimitives.schema.json
-|-- geomtemplates.schema.json
-|-- metadata.schema.json
-|-- /extensions
-    |-- noise.json
-    |-- other_extensions.json
+  |-- appearance.schema.json
+  |-- cityjson.schema.json
+  |-- cityobjects.schema.json
+  |-- geomprimitives.schema.json
+  |-- geomtemplates.schema.json
+  |-- metadata.schema.json
+  |-- /extensions
+      |-- noise.json
+      |-- other_extensions.json
