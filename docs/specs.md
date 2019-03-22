@@ -1,8 +1,6 @@
----
-title: CityJSON specifications
----
 
-> (version )
+CityJSON specifications (1.0.0)
+
 
 CityJSON Object
 ===============
@@ -50,7 +48,7 @@ data model.
 
 The minimal valid CityJSON object is thus:
 
-``` {.sourceCode .js}
+```javascript
 {
   "type": "CityJSON",
   "version": "0.9",
