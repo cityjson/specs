@@ -58,22 +58,22 @@ An "empty" CityJSON will look like this:
 
 A City Object is a JSON object for which the type member’s value is one of the following (of type string):
 
-  1st-level                      2nd-level
-  ------------------------------ -----------------------------------------------------------------------
-  `"Building"`                   `"BuildingPart"`, `"BuildingInstallation"`
-  `"Bridge"`                     `"BridgePart"`, `"BridgeInstallation"`, `"BridgeConstructionElement"`
-  `"CityObjectGroup"`            
-  `"CityFurniture"`              
-  `"GenericCityObject"`          
-  `"LandUse"`                    
-  `"PlantCover"`                 
-  `"Railway"`                    
-  `"Road"`                       
-  `"SolitaryVegetationObject"`   
-  `"TINRelief"`                  
-  `"TransportSquare"`            
-  `"Tunnel"`                     `"TunnelPart"`, `"TunnelInstallation"`
-  `"WaterBody"`                  
+| 1st-level | 2nd-level |
+| --------- | --------- |
+| `"Building"`                   | `"BuildingPart"`, `"BuildingInstallation"`|
+| `"Bridge"`                     | `"BridgePart"`, `"BridgeInstallation"`, `"BridgeConstructionElement"`|
+| `"CityObjectGroup"`            | |
+| `"CityFurniture"`              | |
+| `"GenericCityObject"`          | |
+| `"LandUse"`                    | |
+| `"PlantCover"`                 | |
+| `"Railway"`                    | |
+| `"Road"`                       | |
+| `"SolitaryVegetationObject"`   | |
+| `"TINRelief"`                  | |
+| `"TransportSquare"`            | |
+| `"Tunnel"`                     | `"TunnelPart"`, `"TunnelInstallation"`|
+| `"WaterBody"`                  | |
 
 There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. Both types are represented as a City Object in a CityJSON file.
 
