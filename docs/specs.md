@@ -1,7 +1,7 @@
 
 # CityJSON specifications 
 
-*version 1.0.0* 
+*version 1.0.0-draft* 
 (2019-03-22)
 
 
