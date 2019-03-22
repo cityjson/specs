@@ -1,5 +1,8 @@
 
-# CityJSON specifications (1.0.0)
+# CityJSON specifications 
+
+*version 1.0.0* 
+(2019-03-22)
 
 
 # CityJSON Object
