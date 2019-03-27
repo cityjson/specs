@@ -73,27 +73,78 @@ An "empty" CityJSON will look like this:
 While the order of the member values of a CityJSON should preferably be as above, not all JSON generators allow one to do this, thus the order is not prescribed.
 </div>
 
-# City Object types
 
+# City Object types
 
 A City Object is a JSON object for which the type member’s value is one of the following (of type string):
 
-| 1st-level | 2nd-level |
-| --------- | --------- |
-| `"Building"`                   | `"BuildingPart"`, `"BuildingInstallation"`                            |
-| `"Bridge"`                     | `"BridgePart"`, `"BridgeInstallation"`, `"BridgeConstructionElement"` |
-| `"CityObjectGroup"`            |                                                                       |
-| `"CityFurniture"`              |                                                                       |
-| `"GenericCityObject"`          |                                                                       |
-| `"LandUse"`                    |                                                                       |
-| `"PlantCover"`                 |                                                                       |
-| `"Railway"`                    |                                                                       |
-| `"Road"`                       |                                                                       |
-| `"SolitaryVegetationObject"`   |                                                                       |
-| `"TINRelief"`                  |                                                                       |
-| `"TransportSquare"`            |                                                                       |
-| `"Tunnel"`                     | `"TunnelPart"`, `"TunnelInstallation"`                                |
-| `"WaterBody"`                  |                                                                       |
+<table>
+  <thead>
+    <tr>
+      <th>1st-level</th>
+      <th>2nd-level</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>"Building"</code></td>
+      <td><code>"BuildingPart"</code>, <code>"BuildingInstallation"</code></td>
+    </tr>
+    <tr>
+      <td><code>"Bridge"</code></td>
+      <td><code>"BridgePart"</code>, <code>"BridgeInstallation"</code>, <code>"BridgeConstructionElement"</code></td>
+    </tr>
+    <tr>
+      <td><code>"CityObjectGroup"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"CityFurniture"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"GenericCityObject"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"LandUse"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"PlantCover"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"Railway"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"Road"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"SolitaryVegetationObject"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"TINRelief"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"TransportSquare"</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>"Tunnel"</code></td>
+      <td><code>"TunnelPart"</code>, <code>"TunnelInstallation"</code></td>
+    </tr>
+    <tr>
+      <td><code>"WaterBody"</code></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
 
 There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. Both types are represented as a City Object in a CityJSON file.
 
