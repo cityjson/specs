@@ -687,9 +687,6 @@ A Semantics Surface is a JSON object representing the semantics of a surface, an
 }
 ```
 
-
-### Values for Semantics
-
 `"Building"`, `"BuildingPart"`, and `"BuildingInstallation"` can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
 
   - `"RoofSurface"`
@@ -1143,7 +1140,6 @@ A Texture Object:
   }      
 ]
 ```
-
 
 ## Vertices-texture Object
 
