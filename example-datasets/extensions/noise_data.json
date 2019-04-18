@@ -1,8 +1,11 @@
 {
   "type": "CityJSON",
-  "version": "0.9",
+  "version": "1.0",
   "extensions": {
-    "Noise": "https://someurl.org/noise.json"
+    "Noise": {
+      "url" : "https://someurl.org/noise.json",
+      "version": "0.1"
+    }
   },
   "CityObjects": {
     "1234": {
