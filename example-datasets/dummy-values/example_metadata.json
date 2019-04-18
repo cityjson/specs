@@ -1,6 +1,6 @@
 {
    "type":"CityJSON",
-   "version":"0.9",
+   "version": "1.0",
    "metadata":{
       "citymodelIdentifier":"81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
       "datasetTitle":"3D city model of Chibougamau, Canada",
