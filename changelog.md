@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - binary encoding of JSON, with either [CBOR](http://cbor.io) or [BSON](http://bsonspec.org)
 
 
+## [1.0.0] - 2019-04-18
+### Changed
+- The `"extensions"` property now documents the version of the Extension that is used for this file; since an Extension will most likely be updated it should be possible to link to a specific version (X.Y).
+
 
 ## [0.9] - 2019-01-28
 ### Changed
@@ -90,10 +94,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - first beta release of CityJSON
 
 
-[0.9]: https://github.com/tudelft3d/cityjson/compare/0.8...0.9
-[0.8]: https://github.com/tudelft3d/cityjson/compare/0.6...0.8
-[0.6]: https://github.com/tudelft3d/cityjson/compare/0.5...0.6
-[0.5]: https://github.com/tudelft3d/cityjson/compare/0.3...0.5
-[0.3]: https://github.com/tudelft3d/cityjson/compare/0.2...0.3
-[0.2]: https://github.com/tudelft3d/cityjson/compare/0.1...0.2
-[0.1]: https://github.com/tudelft3d/cityjson/releases/0.1
+[1.0.0]: https://github.com/tudelft3d/cityjson/compare/0.9...1.0.0
+[0.9]:   https://github.com/tudelft3d/cityjson/compare/0.8...0.9
+[0.8]:   https://github.com/tudelft3d/cityjson/compare/0.6...0.8
+[0.6]:   https://github.com/tudelft3d/cityjson/compare/0.5...0.6
+[0.5]:   https://github.com/tudelft3d/cityjson/compare/0.3...0.5
+[0.3]:   https://github.com/tudelft3d/cityjson/compare/0.2...0.3
+[0.2]:   https://github.com/tudelft3d/cityjson/compare/0.1...0.2
+[0.1]:   https://github.com/tudelft3d/cityjson/releases/0.1
