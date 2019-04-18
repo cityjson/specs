@@ -55,7 +55,7 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 -   A CityJSON object is a JSON object.
 -   A CityJSON object must have the following 4 members:
     1.  one member with the name `"type"`, whose value must be `"CityJSON"`;
-    2.  one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used;
+    2.  one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while shemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and in theory the latest schema of that version is used.
     3.  one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one dataset/file).
     4.  one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format [Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) is basically reused.
 -   A CityJSON may have one member with the name `"extensions"`, used if there are Extensions used in the file, see the page extensions for all the details.
