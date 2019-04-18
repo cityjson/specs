@@ -19,7 +19,7 @@
     "type": { "enum": ["CityJSON_Extension"] },
     "name": { 
       "type": "string",
-      "pattern": "^\\w[a-zA-Z@#0-9.]*$",
+      "pattern": "^\\w[a-zA-Z@#0-9._]*$",
       "description": "no spaces allowed"
     },
     "version": { 
