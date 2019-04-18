@@ -1209,6 +1209,33 @@ The following 3 cases for extension are possible:
 </div>
 
 
+## Using an Extension in a CityJSON file
+
+An Extension should be given a name (eg "Noise") and the URL of the Extension file should be given, along with the version that is used for this file.
+It is expected that the Extension is publicly available at the URL, and can be downloaded.
+
+Several Extensions can be used in a single file, each one is indexed by its name; below we have 2 Extensions: one named "Noise" and one named "Solar_Potential".
+
+```javascript
+{
+  "type": "CityJSON",
+  "version": "1.0",
+  "extensions": {
+    "Noise": {
+      "url" : "https://someurl.org/noise.json",
+      "version": "1.0"
+    },
+    "Solar_Potential": {
+      "url" : "https://someurl.org/solar.json",
+      "version": "0.8"
+    }
+  },
+  "CityObjects": {},
+  "vertices": []
+}
+```
+
+
 ## The Extension file
 
 A CityJSON Extension is a JSON object, and it must have the following 7 members:
@@ -1415,7 +1442,7 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
 }
 ```
 
-Since all City Objects are documented in the schemas of CityJSON (in [cityobjects.json](https://github.com/tudelft3d/cityjson/tree/master/schema)), it is basically a matter of copying the parts needed in a new file and modifying its content. 
+Since all City Objects are documented in the schemas of CityJSON (in [cityobjects.json](https://github.com/tudelft3d/cityjson/tree/master/schemas)), it is basically a matter of copying the parts needed in a new file and modifying its content. 
 
 A new name for the City Object must be given and it must begin with `+`.
 
