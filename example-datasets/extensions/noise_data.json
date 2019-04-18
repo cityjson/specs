@@ -4,7 +4,7 @@
   "extensions": {
     "Noise": {
       "url" : "https://someurl.org/noise.json",
-      "version": "0.1"
+      "version": "1.0"
     }
   },
   "CityObjects": {
