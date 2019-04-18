@@ -8,7 +8,7 @@
     "type": { "enum": ["CityJSON"] },
     "version": { 
       "type": "string",
-      "pattern": "^(\\d\\.)(\\d+\\.)?(\\*|\\d+)$"
+      "pattern": "^(\\d\\.)(\\d)$"
     },
     "metadata": {
       "type": "object",
@@ -17,9 +17,18 @@
     "extensions": {
       "type": "object",
       "additionalProperties": { 
-        "type": "string",
-        "format": "uri-reference",
-        "description": "the string needs to be a URI"
+        "type": "object",
+        "properties": {
+          "url": { 
+            "type": "string",  
+            "format": "uri-reference"
+          },
+          "version": { 
+            "type": "string",
+            "pattern": "^(\\d\\.)(\\d)$"
+          }  
+        },
+        "required": ["url", "version"]
       }
     },
     "CityObjects": {
