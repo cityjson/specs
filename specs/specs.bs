@@ -1214,7 +1214,8 @@ The following 3 cases for extension are possible:
 An Extension should be given a name (eg "Noise") and the URL of the Extension file should be given, along with the version that is used for this file.
 It is expected that the Extension is publicly available at the URL, and can be downloaded.
 
-Several Extensions can be used in a single file, each one is indexed by its name; below we have 2 Extensions: one named "Noise" and one named "Solar_Potential".
+Several Extensions can be used in a single file, each one is indexed by its name in the ``"extensions"``JSON object.
+In the example below we have 2 Extensions: one named "Noise" and one named "Solar_Potential".
 
 ```javascript
 {
