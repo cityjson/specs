@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2019-04-18
 ### Changed
-- The `"extensions"` property now documents the version of the Extension that is used for this file; since an Extension will most likely be updated it should be possible to link to a specific version (X.Y).
+- [Semantic versioning](https://semver.org/) is from on now used, with MAJOR.MINOR.PATCH
+- The `"extensions"` property now documents the version of the Extension that is used for this file; since an Extension will most likely be updated it should be possible to link to a specific version (X.Y)
 
 
 ## [0.9] - 2019-01-28
