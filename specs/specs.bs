@@ -55,14 +55,14 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 -   A CityJSON object is a JSON object.
 -   A CityJSON object must have the following 4 members:
     1.  one member with the name `"type"`, whose value must be `"CityJSON"`;
-    2.  one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while shemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and in theory the latest schema of that version is used.
+    2.  one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
     3.  one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one dataset/file).
     4.  one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format [Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) is basically reused.
--   A CityJSON may have one member with the name `"extensions"`, used if there are Extensions used in the file, see the page extensions for all the details.
+-   A CityJSON may have one member with the name `"extensions"`, used if there are Extensions used in the file.
 -   A CityJSON may have one member with the name `"metadata"`, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
--   A CityJSON may have one member with the name `"transform"`, whose value must contain 2 JSON objects describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
+-   A CityJSON may have one member with the name `"transform"`, whose value if a JSON object describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
 -   A CityJSON may have one member with name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces.
--   A CityJSON may have one member with name `"geometry-templates"`, the value may contain JSON objects representing the templates that can be reused by different City Objects (usually for trees). This is the concept of "implicit geometries" in CityGML.
+-   A CityJSON may have one member with name `"geometry-templates"`, the value may contain JSON objects representing the templates that can be reused by different City Objects (usually for trees). This is equivalent to "implicit geometries" in CityGML.
 -   A CityJSON may have other members, and their value is not prescribed. Because these are not standard in CityJSON, they might be ignored by parsers.
 
 The minimal valid CityJSON object is thus:
