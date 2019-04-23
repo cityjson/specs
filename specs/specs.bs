@@ -259,7 +259,7 @@ The geometry of both `"Building"` and `"BuildingPart"` can only be represented w
 
 The geometry of a `"BuildingInstallation"` object can be represented with any of the Geometry Objects.
 
-A City Object of type `"Building"` or `"BuildingPart"` may have a member `"address"`, whose value is a JSON object describing the address. One location (a `"MultiPoint"`) can be given, to for instance locate the front door inside the building.
+A City Object of type `"Building"` or `"BuildingPart"` may have a member `"address"`, whose value is a JSON object describing the address. One location (a `"MultiPoint"`) can be given, for instance to position the front door inside the building.
 
 ```javascript
 "CityObjects": {
@@ -268,7 +268,7 @@ A City Object of type `"Building"` or `"BuildingPart"` may have a member `"addre
     "attributes": { 
       "roofType": "gable"
     },
-    "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
+    "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
     "children": ["id-56", "id-832", "mybalcony"]
   },
   "id-56": {
@@ -348,7 +348,7 @@ CityJSON does not define a specific Geometry Object for a TIN (triangulated irre
 ```javascript
 "myterrain01": {
   "type": "TINRelief", 
-  "bbox": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
+  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
   "geometry": [{
     "type": "CompositeSurface",
     "lod": 2,
