@@ -56,13 +56,13 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 -   A CityJSON object must have the following 4 members:
     1.  one member with the name `"type"`, whose value must be `"CityJSON"`;
     2.  one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
-    3.  one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one dataset/file).
+    3.  one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object).
     4.  one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format [Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) is basically reused.
 -   A CityJSON may have one member with the name `"extensions"`, used if there are Extensions used in the file.
--   A CityJSON may have one member with the name `"metadata"`, whose value may contain JSON objects describing the coordinate reference system used, the extent of the dataset, its creator, etc.
+-   A CityJSON may have one member with the name `"metadata"`, whose value may be a JSON object describing the coordinate reference system used, the extent of the dataset, its creator, etc.
 -   A CityJSON may have one member with the name `"transform"`, whose value if a JSON object describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
 -   A CityJSON may have one member with name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces.
--   A CityJSON may have one member with name `"geometry-templates"`, the value may contain JSON objects representing the templates that can be reused by different City Objects (usually for trees). This is equivalent to "implicit geometries" in CityGML.
+-   A CityJSON may have one member with name `"geometry-templates"`, the value is a JSON object containing the templates that can be reused by different City Objects (usually for trees). This is equivalent to the concept of "implicit geometries" in CityGML.
 -   A CityJSON may have other members, and their value is not prescribed. Because these are not standard in CityJSON, they might be ignored by parsers.
 
 The minimal valid CityJSON object is thus:
@@ -172,7 +172,7 @@ A City Object is a JSON object for which the type member’s value is one of the
 </table>
 
 
-There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. Both types are represented as a City Object in a CityJSON file.
+There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. Both types are represented as a City Object in a CityJSON Object.
 
 1.  **1st-level**: City Objects that can "exist by themselves".
 2.  **2nd-level**: City Objects that need to have a `"parents"` to exist.
@@ -183,14 +183,15 @@ A City Object:
 
 -   must have one member with the name `"geometry"`, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
 -   may have one member with the name `"attributes"`, whose value is an object with the different attributes allowed by CityGML.
--   may have one member with the name `"bbox"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: \[minx, miny, minz, maxx, maxy, maxz\]
--   may have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`.
+-   may have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
+-   may have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant.
 -   of type 2nd-level must have one member `"parents"`, which consists of an array of the IDs (of type string) of the City Objects that are its parents. For the City Objects in the core module of CityJSON, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parents. Notice that a 2nd-level City Object may also have one member `"children"` (for instance for a `"BuildingPart"` that contains a `"BuildingInstallation"`).
 
 ```javascript
 "CityObjects": {
   "id-1": {
-    "type": "Building", 
+    "type": "Building",
+    "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ], 
     "attributes": { 
       "measuredHeight": 22.3,
       "roofType": "gable",
@@ -586,7 +587,7 @@ A Geometry object is a JSON object for which the type member’s value is one of
 
 A Geometry object:
 
- - must have one member with the name `"lod"`, whose value is a number identifying the level-of-detail (LoD) of the geometry. This can be either an integer (following the CityGML standards), or a number following the [improved LoDs by TU Delft](https://www.citygml.org/ongoingdev/tudelft-lods/)
+ - must have one member with the name `"lod"`, whose value is a number identifying the level-of-detail (LoD) of the geometry. This can be either an integer (following the CityGML standards), or a number following the [improved LoDs by TU Delft](https://3d.bk.tudelft.nl/lod)
  - must have one member with the name `"boundaries"`, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers. An integer refers to the index in the `"vertices"` array of the CityJSON object, and it is 0-based (ie the first element in the array has the index "0", the second one "1").
  - may have one member `"semantics"`, whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is a string, and the values allowed are depended on the CityObject (see below).
  - may have one member `"material"`, whose value is a hierarchy of nested arrays (the depth depends on the Geometry object). The value of each entry is an integer referring to the material used (see below).
@@ -816,7 +817,7 @@ A Geometry object:
 
 # Metadata
 
-The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows. Many of the members in [ISO19115](https://www.iso.org/standard/53798.html) are used, and a few are added (eg `"presentLoDs"` `"thematicModels"`, because they are useful in 3D in a city modelling context). To see all the possible ones, look at the schema file [metadata.schema.json](https://github.com/tudelft3d/cityjson/tree/master/schema) of a given version.
+The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows. Many of the members in [ISO19115](https://www.iso.org/standard/53798.html) are used, and a few are added (eg `"presentLoDs"` `"thematicModels"`, because they are useful in 3D in a city modelling context). To see all the possible ones, look at the schema file [metadata.schema.json](https://3d.bk.tudelft.nl/schemas/cityjson/) of a given version.
 
 ```javascript
 "metadata": {
