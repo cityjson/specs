@@ -1,5 +1,5 @@
 
-# CityJSON: A compact and developer-friendly JSON-based encoding of the CityGML data model
+# CityJSON
 
 This repository is where the specifications and the schemas of CityJSON are kept.
 
