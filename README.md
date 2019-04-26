@@ -27,7 +27,7 @@ We believe that you should use CityJSON because:
 
 ## Contributing to the project 
 
-We invite anyone to contribute to the development and improvement of CityJSON, all discussions, issues, and developments are open to everyone on the [GitHub repository of CityJSON](https://github.com/tudelft3d/cityjson).
+We invite anyone to contribute to the development and improvement of CityJSON, all discussions, issues, and developments are open to everyone.
 
 
 ## If you use CityJSON in an academic context, please cite this preprint
