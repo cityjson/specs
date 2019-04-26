@@ -13,10 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - binary encoding of JSON, with either [CBOR](http://cbor.io) or [BSON](http://bsonspec.org)
 
 
-## [1.0.0] - 2019-04-18
+## [1.0.0] - 2019-04-26
 ### Changed
 - [Semantic versioning](https://semver.org/) is from on now used, with MAJOR.MINOR.PATCH
 - The `"extensions"` property now documents the version of the Extension that is used for this file; since an Extension will most likely be updated it should be possible to link to a specific version (X.Y)
+- new logo!
 
 
 ## [0.9] - 2019-01-28
