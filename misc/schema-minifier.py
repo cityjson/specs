@@ -1,0 +1,21 @@
+import os
+import sys
+import json
+import jsonschema
+import jsonref
+
+
+root_schema = os.path.abspath('../schemas/cityjson.schema.json')
+fins = open(root_schema)
+
+abs_path = os.path.abspath(os.path.dirname(root_schema))
+base_uri = 'file://{}/'.format(abs_path)
+
+js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
+
+# -- output stitched_schema
+# json_str = jsonref.dumps(js, indent=2)
+json_str = jsonref.dumps(js, separators=(',',':'))
+opath = os.path.abspath('../schemas/cityjson.min.schema.json')
+f = open(opath, "w")
+f.write(json_str)
