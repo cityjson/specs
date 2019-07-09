@@ -527,6 +527,7 @@ A Geometry object is a JSON object for which the type member’s value is one of
 5.  `"Solid"`
 6.  `"MultiSolid"`
 7.  `"CompositeSolid"`
+8.  `"GeometryInstance"` (this is another type, see [[#geometry-templates]])
 
 A Geometry object:
 
@@ -757,6 +758,67 @@ A Geometry object:
  }  
 ```
 
+## Geometry templates 
+
+CityGML's Implicit Geometries, better known in computer graphics as *templates*, are one method to compress files since the geometries (eg benches, lamp posts, and trees), need only be defined once. In CityJSON, they are implemented slightly different from in CityGML: they are defined separately in the file, and each template can be reused. (While in CityGML one reuses the geometry used for another City Object.)
+
+The Geometry Templates are defined as a JSON object that:
+
+  - must have one member with the name `"templates"`, whose value is an array of Geometry Objects.
+  - must have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that calculating the bounding box of a CityJSON file/dataset will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
+
+```javascript
+"geometry-templates": {
+  "templates": [
+    {
+      "type": "MultiSurface",
+      "lod": 2,
+      "boundaries": [ 
+         [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+      ]
+    },
+    {
+      "type": "MultiSurface",
+      "lod": 1,
+      "boundaries": [ 
+         [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+      ]
+    }
+  ],
+  "vertices-templates": [
+    [0.0, 0.5, 0.0],
+    ...
+    [1.0, 1.0, 0.0],
+    [0.0, 1.0, 0.0]
+  ]
+}
+```
+
+A given template can be used for a City Object instead of a Geometry Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
+
+  - must have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
+  - must have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the "referencePoint" in CityGML.)
+  - must have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
+
+```javascript
+{
+  "type": "SolitaryVegetationObject", 
+  "geometry": [
+    {
+      "type": "GeometryInstance",
+      "template": 0,
+      "boundaries": [372]
+      "transformationMatrix": [
+        2.0, 0.0, 0.0, 0.0,
+        0.0, 2.0, 0.0, 0.0,
+        0.0, 0.0, 2.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+      ]
+    }
+  ]
+}
+```
+
 
 
 # Metadata
@@ -897,67 +959,6 @@ If the CityJSON file does not have a `"transform"` member, then the values of th
 }
 ```
 
-
-# Geometry templates 
-
-CityGML's Implicit Geometries, better known in computer graphics as *templates*, are one method to compress files since the geometries (eg benches, lamp posts, and trees), need only be defined once. In CityJSON, they are implemented slightly different from in CityGML: they are defined separately in the file, and each template can be reused. (While in CityGML one reuses the geometry used for another City Object.)
-
-The Geometry Templates are defined as a JSON object that:
-
-  - must have one member with the name `"templates"`, whose value is an array of Geometry Objects.
-  - must have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that calculating the bounding box of a CityJSON file/dataset will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
-
-```javascript
-"geometry-templates": {
-  "templates": [
-    {
-      "type": "MultiSurface",
-      "lod": 2,
-      "boundaries": [ 
-         [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
-      ]
-    },
-    {
-      "type": "MultiSurface",
-      "lod": 1,
-      "boundaries": [ 
-         [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
-      ]
-    }
-  ],
-  "vertices-templates": [
-    [0.0, 0.5, 0.0],
-    ...
-    [1.0, 1.0, 0.0],
-    [0.0, 1.0, 0.0]
-  ]
-}
-```
-
-A given template can be used for a City Object instead of a Geometry Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
-
-  - must have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
-  - must have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the "referencePoint" in CityGML.)
-  - must have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
-
-```javascript
-{
-  "type": "SolitaryVegetationObject", 
-  "geometry": [
-    {
-      "type": "GeometryInstance",
-      "template": 0,
-      "boundaries": [372]
-      "transformationMatrix": [
-        2.0, 0.0, 0.0, 0.0,
-        0.0, 2.0, 0.0, 0.0,
-        0.0, 0.0, 2.0, 0.0,
-        0.0, 0.0, 0.0, 1.0
-      ]
-    }
-  ]
-}
-```
 
 
 # Appearance Object
