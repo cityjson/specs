@@ -527,7 +527,7 @@ A Geometry object is a JSON object for which the type member’s value is one of
 5.  `"Solid"`
 6.  `"MultiSolid"`
 7.  `"CompositeSolid"`
-8.  `"GeometryInstance"` (this is another type, see [[#geometry-templates]])
+8.  `"GeometryInstance"` (this is another type with different properties, see [[#geometry-templates]])
 
 A Geometry object:
 
