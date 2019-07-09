@@ -108,7 +108,7 @@ While the order of the member values of a CityJSON should preferably be as above
 
 A City Object is a JSON object for which the type member’s value is one of the following (of type string):
 
-<img src="co.svg" alt="City Objects 1st and 2nd levels"/>
+<img src="figs/co.svg" alt="City Objects 1st and 2nd levels"/>
 
 There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. 
 Both types are represented as a City Object in a CityJSON Object.
@@ -819,6 +819,34 @@ A given template can be used for a City Object instead of a Geometry Object. A n
 }
 ```
 
+# Transform Object 
+
+To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). To use compression, a CityJSON object may have one member `"transform"`, whose values are 2 mandatory JSON objects (`"scale"` and `"translate"`), both arrays with 3 values.
+
+The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
+
+If a CityJSON object has a member `"transform"`, then only the `"vertices"` at the root of the CityJSON object are affected, the vertices for the Geometric templates and textures are not.
+
+To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the `"vertices"` member and:
+
+```
+v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
+v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
+v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
+```
+
+If the CityJSON file does not have a `"transform"` member, then the values of the vertices must be read as-is.
+
+```javascript
+"transform": {
+    "scale": [0.01, 0.01, 0.01],
+    "translate": [4424648.79, 5482614.69, 310.19]
+}
+```
+
+## Help to calculate coordinates
+
+<img src="figs/realcoords.svg" alt=""/>
 
 
 # Metadata
@@ -933,32 +961,6 @@ It is possible to give the lineage of one or more city objects in the datasets. 
 
   It's also possible, for other attributes in a CityJSON file, to have a date with a time is a `"full-time"` (thus `"1985-04-12T23:20:50.52Z"` as a string).
 </div>
-
-
-# Transform Object 
-
-To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). To use compression, a CityJSON object may have one member `"transform"`, whose values are 2 mandatory JSON objects (`"scale"` and `"translate"`), both arrays with 3 values.
-
-The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
-
-If a CityJSON object has a member `"transform"`, then only the `"vertices"` at the root of the CityJSON object are affected, the vertices for the Geometric templates and textures are not.
-
-To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the `"vertices"` member and:
-
-```
-v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
-v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
-v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
-```
-
-If the CityJSON file does not have a `"transform"` member, then the values of the vertices must be read as-is.
-
-```javascript
-"transform": {
-    "scale": [0.01, 0.01, 0.01],
-    "translate": [4424648.79, 5482614.69, 310.19]
-}
-```
 
 
 
