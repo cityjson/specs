@@ -21,6 +21,10 @@ spec:html; type:element;
   text:link
 </pre>
 
+<pre class="metadata">
+Boilerplate: idl-index no, property-index no, references no, conformance no
+</pre>
+
 <!--
                               +----                                 ----+ 
                               |                                         | 
@@ -1408,4 +1412,4 @@ While one could define a new City Object and document it, if this new object doe
 6.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 7.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
 
-
+- - -
