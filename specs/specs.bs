@@ -286,6 +286,8 @@ The geometry of a City Object of type `"TINRelief"` can only be of type `"Compos
 
 CityJSON does not define a specific Geometry Object for a TIN (triangulated irregular network), it is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
 
+Notice that in practice any `"CompositeSurface"` is allowed for the terrain, and that arbitrary polygons could also be used (not just triangles).
+
 ```javascript
 "myterrain01": {
   "type": "TINRelief", 
