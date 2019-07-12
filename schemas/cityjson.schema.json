@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CityJSON v1.0.0",
+  "title": "CityJSON v1.0.1",
   "description": "CityJSON specifications v1.0.0",
   "type": "object",
 
