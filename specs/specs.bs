@@ -104,7 +104,7 @@ While the order of the member values of a CityJSON should preferably be as above
 </div>
 
 
-# City Object types
+# City Object 
 
 A City Object is a JSON object for which the type member’s value is one of the following (of type string):
 
@@ -843,10 +843,6 @@ If the CityJSON file does not have a `"transform"` member, then the values of th
     "translate": [4424648.79, 5482614.69, 310.19]
 }
 ```
-
-## Help to calculate coordinates
-
-<img src="figs/realcoords.svg" alt=""/>
 
 
 # Metadata
