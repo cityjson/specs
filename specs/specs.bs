@@ -1,10 +1,10 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.0.0
+Title: CityJSON Specifications 1.0.1
 Shortname: CityJSON
 Status: LS
 Level: 1
-URL: https://cityjson.org/specs/1.0.0/
-TR: https://cityjson.org/specs/latest/
+URL: https://cityjson.org/specs/1.0.1/
+TR: https://cityjson.org/specs/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
 Repository: tudelft3d/cityjson
 Abstract: CityJSON is a [JSON](https://json.org/)-based encoding for a subset of the [OGC CityGML data model](http://www.opengeospatial.org/standards/citygml) (version 2.0.0). It defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex (and thus rather frustrating to work with). CityJSON aims at being easy-to-use, both for reading datasets, and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
@@ -21,20 +21,24 @@ spec:html; type:element;
   text:link
 </pre>
 
+<pre class="metadata">
+Boilerplate: idl-index no, property-index no, references no, conformance no
+</pre>
+
 <!--
                               +----                                 ----+ 
                               |                                         | 
                               |                                         | 
-                              |                              +------+   | 
-                              |                              |      |   | 
-                              |    .-----.                   |      |   | 
-                              |   /       \                  |      |   | 
-                              |  (         )     +--+        |      |   | 
-                              |   `.     ,'    +-+--+-+      |      |   | 
-                              |     `+-+'    +-+------+-+    |      |   | 
-                              |      | |     |          |    |      |   | 
-                              |      | |     |          |    |      |   | 
-                              |      +-+     +----------+    +------+   | 
+                              |                +------+                 | 
+                              |                |      |                 | 
+                              |    .-----.     |      |                 | 
+                              |   /       \    |      |        ++         | 
+                              |  (         )   |      |       +--+      | 
+                              |   `.     ,'    |      |     +-+--+-+    | 
+                              |     `+-+'      |      |   +-+------+-+  | 
+                              |      | |       |      |   |          |  | 
+                              |      | |       |      |   |          |  | 
+                              |      +-+       +------+   +----------+  | 
                               |                                         | 
                               |                                         | 
                               +----                                 ----+ 
@@ -100,79 +104,14 @@ While the order of the member values of a CityJSON should preferably be as above
 </div>
 
 
-# City Object types
+# City Object 
 
 A City Object is a JSON object for which the type member’s value is one of the following (of type string):
 
-<table>
-  <thead>
-    <tr>
-      <th>1st-level</th>
-      <th>2nd-level</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>"Building"</code></td>
-      <td><code>"BuildingPart"</code>, <code>"BuildingInstallation"</code></td>
-    </tr>
-    <tr>
-      <td><code>"Bridge"</code></td>
-      <td><code>"BridgePart"</code>, <code>"BridgeInstallation"</code>, <code>"BridgeConstructionElement"</code></td>
-    </tr>
-    <tr>
-      <td><code>"CityObjectGroup"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"CityFurniture"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"GenericCityObject"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"LandUse"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"PlantCover"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"Railway"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"Road"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"SolitaryVegetationObject"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"TINRelief"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"TransportSquare"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code>"Tunnel"</code></td>
-      <td><code>"TunnelPart"</code>, <code>"TunnelInstallation"</code></td>
-    </tr>
-    <tr>
-      <td><code>"WaterBody"</code></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<img src="figs/co.svg" alt="City Objects 1st and 2nd levels"/>
 
-
-There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. Both types are represented as a City Object in a CityJSON Object.
+There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. 
+Both types are represented as a City Object in a CityJSON Object.
 
 1.  **1st-level**: City Objects that can "exist by themselves".
 2.  **2nd-level**: City Objects that need to have a `"parents"` to exist.
@@ -184,8 +123,8 @@ A City Object:
 -   must have one member with the name `"geometry"`, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
 -   may have one member with the name `"attributes"`, whose value is an object with the different attributes allowed by CityGML.
 -   may have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
--   may have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant.
--   of type 2nd-level must have one member `"parents"`, which consists of an array of the IDs (of type string) of the City Objects that are its parents. For the City Objects in the core module of CityJSON, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parents. Notice that a 2nd-level City Object may also have one member `"children"` (for instance for a `"BuildingPart"` that contains a `"BuildingInstallation"`).
+-   may have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant. 
+-   of type 2nd-level must have one member `"parents"`, which consists of an array of the IDs (of type string) of the City Objects that are its parents. For the City Objects in the core module of CityJSON, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parents. Notice that a 2nd-level City Object may also have one member `"children"`, and that the `"children"` array only references the City Objects that are one level below the the current one in the hierarchy. For instance a `"BuildingPart"` that contains a `"BuildingInstallation"`.
 
 ```javascript
 "CityObjects": {
@@ -203,11 +142,12 @@ A City Object:
   "id-2": {
     "type": "BuildingPart", 
     "parents": ["id-1"],
+    "children": ["id-3"],
     ...
   },
   "id-3": {
     "type": "BuildingInstallation", 
-    "parents": ["id-1"],
+    "parents": ["id-2"],
     ...
   },
   "id-4": {
@@ -345,6 +285,8 @@ The geometry of a City Object of type `"Road"`, `"Railway"`, `"TransportSquare"`
 The geometry of a City Object of type `"TINRelief"` can only be of type `"CompositeSurface"`.
 
 CityJSON does not define a specific Geometry Object for a TIN (triangulated irregular network), it is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
+
+Notice that in practice any `"CompositeSurface"` is allowed for the terrain, and that arbitrary polygons could also be used (not just triangles).
 
 ```javascript
 "myterrain01": {
@@ -585,6 +527,7 @@ A Geometry object is a JSON object for which the type member’s value is one of
 5.  `"Solid"`
 6.  `"MultiSolid"`
 7.  `"CompositeSolid"`
+8.  `"GeometryInstance"` (this is another type with different properties, see [[#geometry-templates]])
 
 A Geometry object:
 
@@ -815,6 +758,91 @@ A Geometry object:
  }  
 ```
 
+## Geometry templates 
+
+CityGML's Implicit Geometries, better known in computer graphics as *templates*, are one method to compress files since the geometries (eg benches, lamp posts, and trees), need only be defined once. In CityJSON, they are implemented slightly different from in CityGML: they are defined separately in the file, and each template can be reused. (While in CityGML one reuses the geometry used for another City Object.)
+
+The Geometry Templates are defined as a JSON object that:
+
+  - must have one member with the name `"templates"`, whose value is an array of Geometry Objects.
+  - must have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that calculating the bounding box of a CityJSON file/dataset will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
+
+```javascript
+"geometry-templates": {
+  "templates": [
+    {
+      "type": "MultiSurface",
+      "lod": 2,
+      "boundaries": [ 
+         [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+      ]
+    },
+    {
+      "type": "MultiSurface",
+      "lod": 1,
+      "boundaries": [ 
+         [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+      ]
+    }
+  ],
+  "vertices-templates": [
+    [0.0, 0.5, 0.0],
+    ...
+    [1.0, 1.0, 0.0],
+    [0.0, 1.0, 0.0]
+  ]
+}
+```
+
+A given template can be used for a City Object instead of a Geometry Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
+
+  - must have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
+  - must have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the "referencePoint" in CityGML.)
+  - must have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
+
+```javascript
+{
+  "type": "SolitaryVegetationObject", 
+  "geometry": [
+    {
+      "type": "GeometryInstance",
+      "template": 0,
+      "boundaries": [372]
+      "transformationMatrix": [
+        2.0, 0.0, 0.0, 0.0,
+        0.0, 2.0, 0.0, 0.0,
+        0.0, 0.0, 2.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+      ]
+    }
+  ]
+}
+```
+
+# Transform Object 
+
+To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). To use compression, a CityJSON object may have one member `"transform"`, whose values are 2 mandatory JSON objects (`"scale"` and `"translate"`), both arrays with 3 values.
+
+The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
+
+If a CityJSON object has a member `"transform"`, then only the `"vertices"` at the root of the CityJSON object are affected, the vertices for the Geometric templates and textures are not.
+
+To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the `"vertices"` member and:
+
+```
+v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
+v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
+v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
+```
+
+If the CityJSON file does not have a `"transform"` member, then the values of the vertices must be read as-is.
+
+```javascript
+"transform": {
+    "scale": [0.01, 0.01, 0.01],
+    "translate": [4424648.79, 5482614.69, 310.19]
+}
+```
 
 
 # Metadata
@@ -930,92 +958,6 @@ It is possible to give the lineage of one or more city objects in the datasets. 
   It's also possible, for other attributes in a CityJSON file, to have a date with a time is a `"full-time"` (thus `"1985-04-12T23:20:50.52Z"` as a string).
 </div>
 
-
-
-# Transform Object 
-
-To reduce the size of a file, it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). To use compression, a CityJSON object may have one member `"transform"`, whose values are 2 mandatory JSON objects (`"scale"` and `"translate"`), both arrays with 3 values.
-
-The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
-
-If a CityJSON object has a member `"transform"`, to obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the `"vertices"` member and:
-
-```
-v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
-v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
-v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
-```
-
-If the CityJSON file does not have a `"transform"` member, then the values of the vertices must be read as-is.
-
-```javascript
-"transform": {
-    "scale": [0.01, 0.01, 0.01],
-    "translate": [4424648.79, 5482614.69, 310.19]
-}
-```
-
-
-# Geometry templates 
-
-CityGML's Implicit Geometries, better known in computer graphics as *templates*, are one method to compress files since the geometries (eg benches, lamp posts, and trees), need only be defined once. In CityJSON, they are implemented slightly different from in CityGML: they are defined separately in the file, and each template can be reused. (While in CityGML one reuses the geometry used for another City Object.)
-
-The Geometry Templates are defined as a JSON object that:
-
-  - must have one member with the name `"templates"`, whose value is an array of Geometry Objects.
-  - must have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that calculating the bounding box of a CityJSON file/dataset will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
-
-```javascript
-"geometry-templates": {
-  "templates": [
-    {
-      "type": "MultiSurface",
-      "lod": 2,
-      "boundaries": [ 
-         [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
-      ]
-    },
-    {
-      "type": "MultiSurface",
-      "lod": 1,
-      "boundaries": [ 
-         [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
-      ]
-    }
-  ],
-  "vertices-templates": [
-    [0.0, 0.5, 0.0],
-    ...
-    [1.0, 1.0, 0.0],
-    [0.0, 1.0, 0.0]
-  ]
-}
-```
-
-A given template can be used for a City Object instead of a Geometry Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
-
-  - must have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
-  - must have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the "referencePoint" in CityGML.)
-  - must have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
-
-```javascript
-{
-  "type": "SolitaryVegetationObject", 
-  "geometry": [
-    {
-      "type": "GeometryInstance",
-      "template": 0,
-      "boundaries": [372]
-      "transformationMatrix": [
-        2.0, 0.0, 0.0, 0.0,
-        0.0, 2.0, 0.0, 0.0,
-        0.0, 0.0, 2.0, 0.0,
-        0.0, 0.0, 0.0, 1.0
-      ]
-    }
-  ]
-}
-```
 
 
 # Appearance Object
@@ -1472,4 +1414,4 @@ While one could define a new City Object and document it, if this new object doe
 6.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 7.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
 
-
+- - -
