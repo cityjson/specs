@@ -36,7 +36,7 @@
     
     "extraRootProperties":{
       "patternProperties": {
-        "(\\+)\\w+": {}
+        "(\\+|\\@)\\w+": {}
       },
       "additionalProperties": false
     },
