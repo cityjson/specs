@@ -514,7 +514,18 @@ The CityGML concept of *groups*, where City Objects are aggregated based on cert
 
 A City Object of type `"CityObjectGroup"` must have a member `"members"`, whose value is an array of the IDs of the City Objects that the group contains. Since a `"CityObjectGroup"` is also a City Object, it can be part of another group.
 
+```javascript
+"CityObjects": {
+  "my-neighbourhood": {
+    "type": "CityObjectGroup",
+    "members": ["building1", "building2", "building666"]
+  }
+}
+```
+
 As for other City Objects, a City Object of type `"CityObjectGroup"` may have a member `"geometry"`, although only one geometry is allowed in the array of geometries.
+The `"lod"` property is rather meaningless, but is used to enforce uniformity with all the other geometries.
+This geometry could for instance be used to represent the boundary of a neighbourhood in a city, and each building in it is listed in the group.
 
 ```javascript
 "CityObjects": {
