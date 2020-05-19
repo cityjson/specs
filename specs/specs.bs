@@ -788,7 +788,7 @@ CityGML's Implicit Geometries, better known in computer graphics as *templates*,
 The Geometry Templates are defined as a JSON object that:
 
   - must have one member with the name `"templates"`, whose value is an array of Geometry Objects.
-  - must have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that calculating the bounding box of a CityJSON file/dataset will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
+  - must have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that operations on the vertices (eg for CRS transformation, for [[#transform-object]], or calculating the bounding box of a dataset) will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
 
 ```javascript
 "geometry-templates": {
@@ -817,10 +817,10 @@ The Geometry Templates are defined as a JSON object that:
 }
 ```
 
-A given template can be used for a City Object instead of a Geometry Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
+A given template can be used as the geometry (or as one of the geometries) of a City Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
 
   - must have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
-  - must have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the "referencePoint" in CityGML.)
+  - must have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the reference point from which the transformations are applied, it is the "referencePoint" in CityGML.)
   - must have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
 
 ```javascript
