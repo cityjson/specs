@@ -55,6 +55,43 @@
             }
          }
       },
+      "presence":{
+         "type":"string",
+         "enum":[
+            "present",
+            "absent"
+         ]
+      },
+      "dates":{
+         "type":"object",
+         "properties":{
+            "date":{
+               "type":"string",
+               "format":"date"
+            },
+            "dateType":{
+               "type":"string",
+               "enum":[
+                  "creation",
+                  "publication",
+                  "revision",
+                  "expiry",
+                  "lastUpdate",
+                  "lastRevision",
+                  "nextUpdate",
+                  "unavailable",
+                  "inForce",
+                  "adopted",
+                  "deprecated",
+                  "superseded",
+                  "ValidityBegins",
+                  "validityExpires",
+                  "released",
+                  "distribution"
+               ]
+            }
+         }
+      },
       "thematicModels":{
         "type":"array",
         "items":{
@@ -185,8 +222,7 @@
             "type":"string"
          },
          "datasetReferenceDate":{
-            "type":"string",
-            "format":"date"
+            "$ref":"#/definitions/dates"
          },
          "geographicLocation":{
             "type":"string",
@@ -272,11 +308,10 @@
             "type":"string"
          },
          "metadataDateStamp":{
-            "type":"string",
-            "format":"date"
+            "$ref":"#/definitions/dates"
          },
          "metadataPointOfContact":{
-            "$ref":"#/definitions/contactDetails"
+            "$ref":"#/definitions/contactDetail"
          },
          "lineage":{
             "type":"array",
@@ -430,18 +465,53 @@
                "$ref":"#/definitions/thematicModels"
             },
             "textures":{
-               "type":"string",
-               "enum":[
-                  "present",
-                  "absent"
-               ]
+               "$ref":"#/definitions/presence"
             },
             "materials":{
-               "type":"string",
-               "enum":[
-                  "present",
-                  "absent"
-               ]
+               "$ref":"#/definitions/presence"
+            },
+            "templates":{
+               "$ref":"#/definitions/presence"
+            },
+            "geometry-templates":{
+               "$ref":"#/definitions/presence"
+            },
+            "transform":{
+               "$ref":"#/definitions/presence"
+            },
+            "extensions":{
+               "$ref":"#/definitions/presence"
+            },
+            "extensionsMetadata":{
+               "type":"array",
+               "items":{
+                  "type":"object",
+                   "properties":{
+                      "extensionName": {"type": "string"},
+                      "metadata":{
+                        "type":"object",
+                        "properties":{
+                            "version":{"type": "string"},
+                            "uri":{
+                              "type":"string",
+                              "format":"uri",
+                              "pattern":"^(https?|ftp)://"
+                           },
+                            "status":{"type": "string"},
+                            "authority":{
+                               "$ref":"#/definitions/contactDetails"
+                            },
+                            "summary": {"type": "string"},
+                            "documentation":{
+                              "type":"string",
+                              "format":"uri",
+                              "pattern":"^(https?|ftp)://"
+                           }
+                        },
+                        "additionalProperties":false
+                     }
+                  }
+               } 
             },
             "presentLoDs":{
                "$ref":"#/definitions/presentLoDs"
@@ -512,60 +582,16 @@
                   "GenericCityObject":{
                      "$ref":"#/definitions/featureData"
                   },
-                   "CityObjectGroup":{
-                     "type": "object",
-                      "properties": {
-                        "uniqueFeatureCount":{ "type":"integer" },
-                        "aggregateFeatureCount":{ "type":"integer" },
-                        "presentLoDs":{ "$ref":"#/definitions/presentLoDs" },
-                        "Building":{
-                              "$ref":"#/definitions/featureData",
-                              "BuildingParts":{ "type":"integer" },
-                              "BuildingInstallations":{ "type":"integer" }
-                            },
-                        "Bridge":{
-                            "$ref":"#/definitions/featureData",
-                            "BridgeParts":{ "type":"integer" },
-                            "BridgeInstallations":{ "type":"integer" },
-                            "BridgeConstructionElements":{ "type":"integer" }
-                          },
-                        "Tunnel":{
-                            "$ref":"#/definitions/featureData",
-                            "TunnelParts":{ "type":"number" },
-                            "TunnelInstallations":{ "type":"integer" }
-                          },
-                        "TINRelief":{
-                           "$ref":"#/definitions/featureData",
-                           "triangleCount":{ "type":"integer" } 
-                          },
-                        "Road":{
-                           "$ref":"#/definitions/featureData"
-                          },
-                        "Railway":{
-                           "$ref":"#/definitions/featureData"
-                          },
-                        "TransportSquare":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "WaterBody":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "PlantCover":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "SolitaryVegetationObject":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "LandUse":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "CityFurniture":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "GenericCityObject":{
-                            "$ref":"#/definitions/featureData"
-                         } 
-                      },
+                   "CityObjectGroups":{
+                     "type":"object",
+                     "properties":{
+                        "presence":{
+                           "$ref":"#/definitions/presence"
+                        },
+                        "count":{
+                           "type":"integer"
+                        }
+                     },
                       "additionalProperties":false
                   }
                 },
