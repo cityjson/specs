@@ -633,9 +633,9 @@ A CityJSON must have one member named `"vertices"`, whose value is an array of c
 ```
 
 
-## Semantic Surface Object
+## Semantics of geometric primitives
 
-A Semantics Surface is a JSON object representing the semantics of a surface, and may also represent other attributes of the surface (eg the slope of the roof or the solar potential). 
+A Semantic Object is a JSON object representing the semantics of a primitive of a geometry (e.g. a surface of a building). It may also represent other attributes of the primitive (e.g. the slope of the roof or the solar potential). For surfacic and volumetric geometries (e.g. `MultiSurface`, `Solid` and `MultiSolid`), a primitive is a surface. If a geometry is a `MultiPoint` or a `MultiLineString`, then the primitives are its respective sub-parts: points and linestrings. 
 
 A Semantic Object:
 
@@ -682,13 +682,17 @@ For Transportation (`"Road"`, `"Railway"`, `"TransportSquare"`):
   - `"AuxiliaryTrafficArea"`
 
 
-Because in one given City Object (say a `"Building"`) several surfaces can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Surfaces object has to be declared once, and each of the surfaces used to represent it points to it. This is achieved by first declaring all the Semantic Surfaces in an array, and then having an array where each surface links to Semantic Surfaces (position in the array).
+Because in one given City Object (say a `"Building"`) several primitives can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Object has to be declared once, and each of the primitives that are represented by it points to it. This is achieved by first declaring all the Semantic Objects in an array, and then having an array where each primitive links to Semantic Objects (position in the array).
 
 A Geometry object:
 
   - may have one member with the name `"semantics"`, whose values are two properties: `"surfaces"` and `"values"`. Both have to be present.
-  - the value of `"surfaces"` is an array of Semantic Surface Objects.
-  - the value of `"values"` is a hierarchy of arrays (the depth depends on the Geometry object; it is two less than the array `"boundaries"`) with integers. An integer refers to the index in the `"surfaces"` array of the same geometry, and it is 0-based. If one surface has no semantics, a value of `null` must be used.
+  - the value of `"surfaces"` is an array of Semantic Objects.
+  - the value of `"values"` is a hierarchy of arrays with integers. The depth depends on the Geometry object: for `MultiPoint` and `MultiLineString` this is a simple array of integers; for any other geometry type it is two less than the array `"boundaries"`. An integer refers to the index in the `"surfaces"` array of the same geometry, and it is 0-based. If one surface has no semantics, a value of `null` must be used.
+
+<div class="note">
+  **CAUTION:** For legacy reasons, we use `"surfaces"` to name the array of Semantic Object. Nevertheless, this property is used for points and linestrings of `MultiPoints` and `MultiLineStrings`, as well.
+</div>
 
 ```javascript
 {
