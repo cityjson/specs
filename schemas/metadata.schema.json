@@ -4,56 +4,12 @@
    "definitions":{
       "presentLoDs":{
          "type":"object",
-         "properties":{
-            "0.0":{
-               "type":"integer"
-            },
-            "0.1":{
-               "type":"integer"
-            },
-            "0.2":{
-               "type":"integer"
-            },
-            "0.3":{
-               "type":"integer"
-            },
-            "1.0":{
-               "type":"integer"
-            },
-            "1.1":{
-               "type":"integer"
-            },
-            "1.2":{
-               "type":"integer"
-            },
-            "1.3":{
-               "type":"integer"
-            },
-            "2.0":{
-               "type":"integer"
-            },
-            "2.1":{
-               "type":"integer"
-            },
-            "2.2":{
-               "type":"integer"
-            },
-            "2.3":{
-               "type":"integer"
-            },
-            "3.0":{
-               "type":"integer"
-            },
-            "3.1":{
-               "type":"integer"
-            },
-            "3.2":{
-               "type":"integer"
-            },
-            "3.3":{
-               "type":"integer"
+         "patternProperties": {
+            "^[0-9](\\.[0-9])?$": {
+               "type": "integer"
             }
-         }
+         },
+         "additionalProperties":false
       },
       "presence":{
          "type":"string",
