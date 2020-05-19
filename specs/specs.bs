@@ -157,6 +157,25 @@ A City Object:
 }
 ```
 
+A minimal valid City Object (`"Building"` in this case, but any 1st-level could apply) is:
+
+```javascript
+{
+  "type": "Building", 
+  "geometry": []
+}
+```
+
+And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but any 2nd-level could apply) is:
+
+```javascript
+{
+  "type": "BuildingPart", 
+  "parents": ["id-parent"],
+  "geometry": []
+}
+```
+
 ## Attributes
 
 The attributes prescribed by CityGML differ per City Object, and can be seen either in the [official CityGML documentation](https://portal.opengeospatial.org/files/?artifact_id=47842) or in the schemas of CityJSON. 
