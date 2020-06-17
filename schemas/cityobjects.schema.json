@@ -526,6 +526,7 @@
           "attributes": {
             "properties": {
               "species": {"type": "string"},
+              "height": {"type": "number"},
               "trunkDiameter": {"type": "number"},
               "crownDiameter": {"type": "number"}
             }
