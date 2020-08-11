@@ -964,25 +964,27 @@ It is possible to give the lineage of one or more city objects in the datasets. 
 
 ```javascript
 "lineage": [
-   {
-     "featureIDs": ["id-1", "id-2", "id-8235"],
-     "source": {
-       "description": "Source of Terrain Data",
-          "sourceSpatialResolution": "10 points/m2",
-          "sourceReferenceSystem": "urn:ogc:def:crs:EPSG::4326"
-     },
-     "processStep": {
-       "description" : "Processing of Terrain Data using 3dfier",
-       "processor": {
-         "contactName": "3D Geoinformation Group",
-     "phone": "+31-6666666666",
-       "address": "Delft University of Technology, the Netherlands",
-       "emailAddress": "3d.bk@tudelft.nl",
-       "contactType": "organization",
-       "website": "https://3d.bk.tudelft.nl"
-       }
-     }
-   }
+  {
+    "featureIDs": ["id-1", "id-2", "id-8235"],
+    "source": [
+      {
+        "description": "Source of Terrain Data",
+        "sourceSpatialResolution": "10 points/m2",
+        "sourceReferenceSystem": "urn:ogc:def:crs:EPSG::4326"
+      }
+    ],
+    "processStep": {
+      "description" : "Processing of Terrain Data using 3dfier",
+      "processor": {
+        "contactName": "3D Geoinformation Group",
+    "phone": "+31-6666666666",
+      "address": "Delft University of Technology, the Netherlands",
+      "emailAddress": "3d.bk@tudelft.nl",
+      "contactType": "organization",
+      "website": "https://3d.bk.tudelft.nl"
+      }
+    }
+  }
  ]
 ```
 
