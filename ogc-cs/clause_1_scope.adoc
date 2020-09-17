@@ -1,5 +1,4 @@
 == Scope
-[NOTE]
-====
-Insert Scope text here. Give the subject of the document and the aspects of that scope covered by the document.
-====
+
+CityJSON is a https://json.org/[JSON]-based encoding for a subset of the http://www.opengeospatial.org/standards/citygml[OGC CityGML data model] (version 2.0.0). It defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
+
