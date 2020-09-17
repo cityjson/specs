@@ -4,79 +4,72 @@
    "definitions":{
       "presentLoDs":{
          "type":"object",
+         "patternProperties":{
+            "^[0-9](\\.[0-9])?$":{
+               "type":"integer"
+            }
+         },
+         "additionalProperties":false
+      },
+      "presence":{
+         "type":"string",
+         "enum":[
+            "present",
+            "absent"
+         ]
+      },
+      "dates":{
+         "type":"object",
          "properties":{
-            "0.0":{
-               "type":"integer"
+            "date":{
+               "type":"string",
+               "format":"date"
             },
-            "0.1":{
-               "type":"integer"
-            },
-            "0.2":{
-               "type":"integer"
-            },
-            "0.3":{
-               "type":"integer"
-            },
-            "1.0":{
-               "type":"integer"
-            },
-            "1.1":{
-               "type":"integer"
-            },
-            "1.2":{
-               "type":"integer"
-            },
-            "1.3":{
-               "type":"integer"
-            },
-            "2.0":{
-               "type":"integer"
-            },
-            "2.1":{
-               "type":"integer"
-            },
-            "2.2":{
-               "type":"integer"
-            },
-            "2.3":{
-               "type":"integer"
-            },
-            "3.0":{
-               "type":"integer"
-            },
-            "3.1":{
-               "type":"integer"
-            },
-            "3.2":{
-               "type":"integer"
-            },
-            "3.3":{
-               "type":"integer"
+            "dateType":{
+               "type":"string",
+               "enum":[
+                  "creation",
+                  "publication",
+                  "revision",
+                  "expiry",
+                  "lastUpdate",
+                  "lastRevision",
+                  "nextUpdate",
+                  "unavailable",
+                  "inForce",
+                  "adopted",
+                  "deprecated",
+                  "superseded",
+                  "ValidityBegins",
+                  "validityExpires",
+                  "released",
+                  "distribution"
+               ]
             }
          }
       },
       "thematicModels":{
-        "type":"array",
-        "items":{
-          "type":"string",
-          "enum":[
-                  "Building",
-                  "Road",
-                  "Railway",
-                  "TransportSquare",
-                  "TINRelief",
-                  "WaterBody",
-                  "PlantCover",
-                  "SolitaryVegetationObject",
-                  "LandUse",
-                  "CityFurniture",
-                  "GenericCityObject",
-                  "Bridge",
-                  "Tunnel",
-                  "CityObjectGroup"
-                  ]
-              }
-          },
+         "type":"array",
+         "items":{
+            "type":"string",
+            "enum":[
+               "Building",
+               "Road",
+               "Railway",
+               "TransportSquare",
+               "TINRelief",
+               "WaterBody",
+               "PlantCover",
+               "SolitaryVegetationObject",
+               "LandUse",
+               "CityFurniture",
+               "GenericCityObject",
+               "Bridge",
+               "Tunnel",
+               "CityObjectGroup"
+            ]
+         }
+      },
       "contactDetails":{
          "type":"object",
          "properties":{
@@ -185,8 +178,7 @@
             "type":"string"
          },
          "datasetReferenceDate":{
-            "type":"string",
-            "format":"date"
+            "$ref":"#/definitions/dates"
          },
          "geographicLocation":{
             "type":"string",
@@ -272,8 +264,7 @@
             "type":"string"
          },
          "metadataDateStamp":{
-            "type":"string",
-            "format":"date"
+            "$ref":"#/definitions/dates"
          },
          "metadataPointOfContact":{
             "$ref":"#/definitions/contactDetails"
@@ -281,10 +272,14 @@
          "lineage":{
             "type":"array",
             "items":{
-              "type":"object",
+               "type":"object",
                "properties":{
-                  "statement": {"type": "string"},
-                  "scope": {"type": "string"},
+                  "statement":{
+                     "type":"string"
+                  },
+                  "scope":{
+                     "type":"string"
+                  },
                   "additionalDocumentation":{
                      "type":"string",
                      "format":"uri",
@@ -300,36 +295,46 @@
                      "$ref":"#/definitions/thematicModels"
                   },
                   "source":{
-                    "type": "array",
-                      "items":{
-                        "type": "object",
-                          "properties": {
-                            "description": {"type": "string"},
-                            "sourceSpatialResolution":{"type": "string"},
-                            "sourceReferenceSystem":{
-                               "type":"string",
-                               "pattern":"^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
-                              },
-                             "sourceCitation":{
-                               "type":"string",
-                                "format":"uri",
-                                "pattern":"^(https?|ftp)://"
-                               },
-                              "sourceMetadata":{
-                                "type":"string",
-                                "format":"uri",
-                                "pattern":"^(https?|ftp)://"
-                               },
-                                "scope":{"type": "string"}
+                     "type":"array",
+                     "items":{
+                        "type":"object",
+                        "properties":{
+                           "description":{
+                              "type":"string"
                            },
-                           "additionalProperties":false
-                       }
-                     },
+                           "sourceSpatialResolution":{
+                              "type":"string"
+                           },
+                           "sourceReferenceSystem":{
+                              "type":"string",
+                              "pattern":"^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
+                           },
+                           "sourceCitation":{
+                              "type":"string",
+                              "format":"uri",
+                              "pattern":"^(https?|ftp)://"
+                           },
+                           "sourceMetadata":{
+                              "type":"string",
+                              "format":"uri",
+                              "pattern":"^(https?|ftp)://"
+                           },
+                           "scope":{
+                              "type":"string"
+                           }
+                        },
+                        "additionalProperties":false
+                     }
+                  },
                   "processStep":{
-                    "type":"object",
-                    "properties":{
-                        "description":{"type": "string"} ,
-                        "rationale":{"type": "string"} ,
+                     "type":"object",
+                     "properties":{
+                        "description":{
+                           "type":"string"
+                        },
+                        "rationale":{
+                           "type":"string"
+                        },
                         "stepDateTime":{
                            "type":"string",
                            "format":"date-time"
@@ -342,237 +347,264 @@
                            "format":"uri",
                            "pattern":"^(https?|ftp)://"
                         },
-                        "scope": {"type": "string"}
+                        "scope":{
+                           "type":"string"
+                        }
                      },
                      "additionalProperties":false
                   }
-                }
-             } 
-          },
-         "geographicalExtent":{
-               "type":"array",
-               "items":{
-                  "type":"number"
-               },
-               "minItems":6,
-               "maxItems":6
-            },
-            "temporalExtent":{
-               "type":"object",
-               "properties":{
-                  "startDate":{
-                     "type":"string",
-                     "format":"date-time"
-                  },
-                  "endDate":{
-                     "type":"string",
-                     "format":"date-time"
-                  }
                }
+            }
+         },
+         "geographicalExtent":{
+            "type":"array",
+            "items":{
+               "type":"number"
             },
-            "abstract":{
+            "minItems":6,
+            "maxItems":6
+         },
+         "temporalExtent":{
+            "type":"object",
+            "properties":{
+               "startDate":{
+                  "type":"string",
+                  "format":"date-time"
+               },
+               "endDate":{
+                  "type":"string",
+                  "format":"date-time"
+               }
+            }
+         },
+         "abstract":{
+            "type":"string"
+         },
+         "specificUsage":{
+            "type":"string"
+         },
+         "keywords":{
+            "type":"array",
+            "items":{
                "type":"string"
-            },
-            "specificUsage":{
-               "type":"string"
-            },
-            "keywords":{
-               "type":"array",
-               "items":{
+            }
+         },
+         "constraints":{
+            "type":"object",
+            "properties":{
+               "legalConstraints":{
+                  "type":"string",
+                  "enum":[
+                     "copyright",
+                     "patent",
+                     "patentPending",
+                     "trademark",
+                     "licence",
+                     "intellectualPropertyRights",
+                     "restricted",
+                     "otherRestrictions",
+                     "unrestricted",
+                     "licenseUnrestricted",
+                     "licenseEndUser",
+                     "licenseDistributor",
+                     "private",
+                     "statutory",
+                     "confidential",
+                     "sensitiveButUnclassified",
+                     "in-confidence"
+                  ]
+               },
+               "securityConstraints":{
+                  "type":"string",
+                  "enum":[
+                     "unclassified",
+                     "restricted",
+                     "confidential",
+                     "secret",
+                     "topSecret",
+                     "sensitiveButUnclassified",
+                     "forOfficialUseOnly",
+                     "protected",
+                     "limitedDistribution"
+                  ]
+               },
+               "userNote":{
                   "type":"string"
                }
-            },
-            "constraints":{
-               "type":"object",
-               "properties":{
-                  "legalConstraints":{
-                     "type":"string",
-                     "enum":[
-                        "copyright",
-                        "patent",
-                        "patentPending",
-                        "trademark",
-                        "licence",
-                        "intellectualPropertyRights",
-                        "restricted",
-                        "otherRestrictions",
-                        "unrestricted",
-                        "licenseUnrestricted",
-                        "licenseEndUser",
-                        "licenseDistributor",
-                        "private",
-                        "statutory",
-                        "confidential",
-                        "sensitiveButUnclassified",
-                        "in-confidence"
-                     ]
-                  },
-                  "securityConstraints":{
-                     "type":"string",
-                     "enum":[
-                        "unclassified",
-                        "restricted",
-                        "confidential",
-                        "secret",
-                        "topSecret",
-                        "sensitiveButUnclassified",
-                        "forOfficialUseOnly",
-                        "protected",
-                        "limitedDistribution"
-                     ]
-                  },
-                  "userNote":{
+            }
+         },
+         "thematicModels":{
+            "$ref":"#/definitions/thematicModels"
+         },
+         "appearance":{
+            "type":"object",
+            "properties":{
+               "textures":{
+                  "$ref":"#/definitions/presence"
+               },
+               "materials":{
+                  "$ref":"#/definitions/presence"
+               },
+               "vertices-texture":{
+                  "$ref":"#/definitions/presence"
+               },
+               "themes-texture":{
+                  "type":"array",
+                  "items":{
                      "type":"string"
                   }
+               },
+               "themes-material":{
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               },
+               "default-theme-texture":{
+                  "$ref":"#/definitions/presence"
+               },
+               "default-theme-material":{
+                  "$ref":"#/definitions/presence"
                }
-            },
-            "thematicModels":{
-               "$ref":"#/definitions/thematicModels"
-            },
-            "textures":{
-               "type":"string",
-               "enum":[
-                  "present",
-                  "absent"
-               ]
-            },
-            "materials":{
-               "type":"string",
-               "enum":[
-                  "present",
-                  "absent"
-               ]
-            },
-            "presentLoDs":{
-               "$ref":"#/definitions/presentLoDs"
-            },
-            "cityfeatureMetadata":{
+            }
+         },
+         "templates":{
+            "$ref":"#/definitions/presence"
+         },
+         "geometry-templates":{
+            "$ref":"#/definitions/presence"
+         },
+         "transform":{
+            "$ref":"#/definitions/presence"
+         },
+         "extensions":{
+            "$ref":"#/definitions/presence"
+         },
+         "extensionsMetadata":{
+            "type":"array",
+            "items":{
                "type":"object",
                "properties":{
-                  "Building":{
-                     "$ref":"#/definitions/featureData",
-                     "BuildingParts":{
-                        "type":"integer"
+                  "extensionName":{
+                     "type":"string"
+                  },
+                  "metadata":{
+                     "type":"object",
+                     "properties":{
+                        "version":{
+                           "type":"string"
+                        },
+                        "url":{
+                           "type":"string",
+                           "format":"uri",
+                           "pattern":"^(https?|ftp)://"
+                        },
+                        "status":{
+                           "type":"string"
+                        },
+                        "authority":{
+                           "$ref":"#/definitions/contactDetails"
+                        },
+                        "summary":{
+                           "type":"string"
+                        },
+                        "documentation":{
+                           "type":"string",
+                           "format":"uri",
+                           "pattern":"^(https?|ftp)://"
+                        }
                      },
-                     "BuildingInstallations":{
-                        "type":"integer"
-                     }
-                  },
-                  "Bridge":{
-                     "$ref":"#/definitions/featureData",
-                     "BridgeParts":{
-                        "type":"integer"
-                     },
-                     "BridgeInstallations":{
-                        "type":"integer"
-                     },
-                     "BridgeConstructionElements":{
-                        "type":"integer"
-                     }
-                  },
-                  "Tunnel":{
-                     "$ref":"#/definitions/featureData",
-                     "TunnelParts":{
-                        "type":"number"
-                     },
-                     "TunnelInstallations":{
-                        "type":"integer"
-                     }
-                  },
-                  "TINRelief":{
-                     "$ref":"#/definitions/featureData",
-                     "triangleCount":{
-                        "type":"integer"
-                     }
-                  },
-                  "Road":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "Railway":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "TransportSquare":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "WaterBody":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "PlantCover":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "SolitaryVegetationObject":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "LandUse":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "CityFurniture":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                  "GenericCityObject":{
-                     "$ref":"#/definitions/featureData"
-                  },
-                   "CityObjectGroup":{
-                     "type": "object",
-                      "properties": {
-                        "uniqueFeatureCount":{ "type":"integer" },
-                        "aggregateFeatureCount":{ "type":"integer" },
-                        "presentLoDs":{ "$ref":"#/definitions/presentLoDs" },
-                        "Building":{
-                              "$ref":"#/definitions/featureData",
-                              "BuildingParts":{ "type":"integer" },
-                              "BuildingInstallations":{ "type":"integer" }
-                            },
-                        "Bridge":{
-                            "$ref":"#/definitions/featureData",
-                            "BridgeParts":{ "type":"integer" },
-                            "BridgeInstallations":{ "type":"integer" },
-                            "BridgeConstructionElements":{ "type":"integer" }
-                          },
-                        "Tunnel":{
-                            "$ref":"#/definitions/featureData",
-                            "TunnelParts":{ "type":"number" },
-                            "TunnelInstallations":{ "type":"integer" }
-                          },
-                        "TINRelief":{
-                           "$ref":"#/definitions/featureData",
-                           "triangleCount":{ "type":"integer" } 
-                          },
-                        "Road":{
-                           "$ref":"#/definitions/featureData"
-                          },
-                        "Railway":{
-                           "$ref":"#/definitions/featureData"
-                          },
-                        "TransportSquare":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "WaterBody":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "PlantCover":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "SolitaryVegetationObject":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "LandUse":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "CityFurniture":{
-                            "$ref":"#/definitions/featureData"
-                          },
-                        "GenericCityObject":{
-                            "$ref":"#/definitions/featureData"
-                         } 
-                      },
-                      "additionalProperties":false
+                     "additionalProperties":false
                   }
-                },
-               "additionalProperties" : false
+               }
             }
-        },
-        "additionalProperties":false
+         },
+         "presentLoDs":{
+            "$ref":"#/definitions/presentLoDs"
+         },
+         "cityfeatureMetadata":{
+            "type":"object",
+            "properties":{
+               "Building":{
+                  "$ref":"#/definitions/featureData",
+                  "BuildingParts":{
+                     "type":"integer"
+                  },
+                  "BuildingInstallations":{
+                     "type":"integer"
+                  }
+               },
+               "Bridge":{
+                  "$ref":"#/definitions/featureData",
+                  "BridgeParts":{
+                     "type":"integer"
+                  },
+                  "BridgeInstallations":{
+                     "type":"integer"
+                  },
+                  "BridgeConstructionElements":{
+                     "type":"integer"
+                  }
+               },
+               "Tunnel":{
+                  "$ref":"#/definitions/featureData",
+                  "TunnelParts":{
+                     "type":"number"
+                  },
+                  "TunnelInstallations":{
+                     "type":"integer"
+                  }
+               },
+               "TINRelief":{
+                  "$ref":"#/definitions/featureData",
+                  "triangleCount":{
+                     "type":"integer"
+                  }
+               },
+               "Road":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "Railway":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "TransportSquare":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "WaterBody":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "PlantCover":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "SolitaryVegetationObject":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "LandUse":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "CityFurniture":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "GenericCityObject":{
+                  "$ref":"#/definitions/featureData"
+               },
+               "CityObjectGroup":{
+                  "type":"object",
+                  "properties":{
+                     "presence":{
+                        "$ref":"#/definitions/presence"
+                     },
+                     "count":{
+                        "type":"integer"
+                     }
+                  },
+                  "additionalProperties":false
+               }
+            },
+            "additionalProperties":false
+         }
       },
       "additionalProperties":false
+   },
+   "additionalProperties":false
 }
