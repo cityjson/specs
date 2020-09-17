@@ -102,7 +102,7 @@ An "empty" CityJSON object will look like this:
 }
 ```
 
-<div class=note>
+<div class="note">
 While the order of the member values of a CityJSON should preferably be as above, not all JSON generators allow one to do this, thus the order is not prescribed.
 </div>
 
@@ -572,7 +572,7 @@ A Geometry object:
  - may have one member `"texture"`, whose value is a JSON Object, as defined below.
 
 
-<div class=note> 
+<div class="note"> 
   There is *no* Geometry Object for MultiGeometry. Instead, for the `"geometry"` member of a CityObject, the different geometries may be enumerated in the array (all with the same value for the member `"lod"`).
 </div>
 
@@ -608,7 +608,7 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
   - A `"Solid"` has an array of shells, the first array being the exterior shell of the solid, and the others the interior shells. Each shell has an array of surfaces, modelled in the exact same way as a MultiSurface/CompositeSurface.
   - A `"MultiSolid"`, or a `"CompositeSolid"`, has an array containing solids, each solid is modelled as above.
 
-<div class=note>
+<div class="note">
   JSON does not allow comments, the comments in the example below (C++ style: `//-- my comments`) are only to explain the cases, and should be removed.
 </div>  
 
@@ -760,7 +760,7 @@ A Geometry object:
 ```
 
 
-<div class=note>
+<div class="note">
   A `null` value is used to specify that a given surface has no semantics, but to avoid having arrays filled with `null`, it is also possible to specify `null` for a shell or a whole Solid in a MultiSolid, the `null` propagates to the nested arrays.
 </div>
 
@@ -859,7 +859,7 @@ A given template can be used as the geometry (or as one of the geometries) of a 
 }
 ```
 
-<div class=note>
+<div class="note">
   The CityJSON website has a [page to help developers to calculate coordinates](https://www.cityjson.org/help/dev/realcoords/) for Geometry Templates and other Geometry Objects.
 </div>
 
@@ -930,7 +930,7 @@ For instance, for the [Dutch national CRS in 3D](http://www.spatialreference.org
 
 Be aware that the CRS should be a three-dimensional one, ie the elevation/height values should be with respect to a specific datum.
 
-<div class=note> 
+<div class="note"> 
   Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
 </div>  
 
@@ -998,7 +998,7 @@ It is possible to give the lineage of one or more city objects in the datasets. 
  ]
 ```
 
-<div class=note> 
+<div class="note"> 
   JSON does not have a date type, and thus the representations defined by [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. A simple date is `"full-date"` (thus `"1977-07-11"` as a string), and should be used for the metadata above. 
 
   Other attributes in a CityJSON object can also have a date with a time, and such an attribute is specified as a `"full-time"`. For example `"1985-04-12T23:20:50.52Z"` (stored as a string).
