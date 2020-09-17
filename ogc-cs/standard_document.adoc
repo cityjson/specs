@@ -1,4 +1,4 @@
-:Title: OGC (add title text)
+:Title: CityJSON specifications
 :titletext: {Title}
 :doctype: book
 :encoding: utf-8
@@ -21,8 +21,8 @@
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
 |Internal reference number of this OGC(R) document:    YY-nnnrx
 |Version: n.n
-|Category: OGC(R) <Implementation / Abstract Specification / Best Practice>
-|Editor:   <Name(s) of Editor or Editors>
+|Category: OGC(R) Community Standard
+|Editor:   Hugo Ledoux
 |===
 
 [cols = "^", frame = "none"]
@@ -32,9 +32,8 @@
 
 [cols = "^", frame = "none", grid = "none"]
 |===
-|*Copyright notice*
-|Copyright (C) <year> Open Geospatial Consortium
-|To obtain additional rights of use, visit http://www.opengeospatial.org/legal/
+|*No Copyright*
+|CC0 1.0 Universal (CC0 1.0) Public Domain Dedication 
 |===
 
 [cols = "^", frame = "none"]
@@ -48,7 +47,7 @@ Recipients of this document are invited to submit, with their comments, notifica
 
 [width = "50%", grid = "none"]
 |===
-|Document type:   	OGC® <Standard/Abstract Specification/Best Practice>
+|Document type:   	OGC® Community Standard
 |Document subtype:   	if applicable
 |Document stage:   	Draft
 |Document language: 	English
@@ -87,15 +86,15 @@ include::clause_3_references.adoc[]
 
 include::clause_4_terms_and_definitions.adoc[]
 
-include::clause_5_conventions.adoc[]
+////include::clause_5_conventions.adoc[]
 
 include::specs.adoc[]
 
-include::clause_6_informative_text.adoc[]
+////include::clause_6_informative_text.adoc[]
 
-include::clause_7_normative_text.adoc[]
+////include::clause_7_normative_text.adoc[]
 
-include::clause_8_media_types.adoc[]
+////include::clause_8_media_types.adoc[]
 
 <<<
 ////
@@ -111,7 +110,7 @@ include::annex-n.adoc[]
 Revision History should be the last annex before the Bibliography
 Bibliography should be the last annex
 ////
-include::annex-history.adoc[]
+////include::annex-history.adoc[]
 
 <<<
-include::annex-bibliography.adoc[]
+////include::annex-bibliography.adoc[]
