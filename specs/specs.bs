@@ -859,6 +859,10 @@ A given template can be used as the geometry (or as one of the geometries) of a 
 }
 ```
 
+<div class=note>
+  The CityJSON website has a [page to help developers to calculate coordinates](https://www.cityjson.org/help/dev/realcoords/) for Geometry Templates and other Geometry Objects.
+</div>
+
 # Transform Object 
 
 To reduce the size of a CityJSON object (and thus the size of files), it is possible to represent the coordinates of the vertices with integer values, and store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). To use compression, a CityJSON object may have one member `"transform"`, whose values are 2 mandatory JSON objects (`"scale"` and `"translate"`), both arrays with 3 values.
