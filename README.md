@@ -3,7 +3,7 @@
 
 This repository is where the specifications and the schemas of CityJSON are kept.
 
-For all the details, see the official CityJSON website: [https://cityjson.org](https://cityjson.org)
+For all the details, see the official CityJSON website: [https://cityjson.org](https://cityjson.org).
 
 
 ## What is CityJSON?
@@ -12,7 +12,7 @@ CityJSON is a [JSON-based](http://json.org) encoding for a subset of the [OGC Ci
 
 The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex (and thus rather frustrating to work with). 
 CityJSON aims at being easy-to-use, both for reading datasets, and for creating them.
-It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built, and [several]({{ "/software/" | prepend: site.baseurl }}) have been created already.
+It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built, and [several software](https://www.cityjson.org/software/) have been created already.
 
 We believe that you should use CityJSON because: 
 
@@ -32,5 +32,5 @@ We invite anyone to contribute to the development and improvement of CityJSON, a
 
 ## If you use CityJSON in an academic context, please cite this preprint
 
-Ledoux H, Arroyo Ohori K, Kumar K, Dukai B, Labetski A, Vitalis S (2019). CityJSON: A compact and easy-to-use encoding of the CityGML data model. **Open Geospatial Data, Software and Standards**, 4:4 [<i class="fas fa-bookmark"></i>](http://dx.doi.org/10.1186/s40965-019-0064-0) [(DOI)](https://opengeospatialdata.springeropen.com/track/pdf/10.1186/s40965-019-0064-0)
+Ledoux H, Arroyo Ohori K, Kumar K, Dukai B, Labetski A, Vitalis S (2019). CityJSON: A compact and easy-to-use encoding of the CityGML data model. **Open Geospatial Data, Software and Standards**, 4:4 [(DOI)](http://dx.doi.org/10.1186/s40965-019-0064-0) [(PDF)](https://opengeospatialdata.springeropen.com/track/pdf/10.1186/s40965-019-0064-0)
 
