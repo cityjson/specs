@@ -1,4 +1,4 @@
-:Title: CityJSON specifications
+:Title: CityJSON Specifications 1.0.2
 :titletext: {Title}
 :doctype: book
 :encoding: utf-8
@@ -15,7 +15,7 @@
 |===
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
-|Submission Date: <yyyy-mm-dd>
+|Submission Date: <2020-05-01>
 |Approval Date:   <yyyy-mm-dd>
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
@@ -46,7 +46,7 @@ This document is an OGC Member endorsed international Community standard. This C
 [width = "50%", grid = "none"]
 |===
 |Document type:   	OGC® Community Standard
-|Document subtype:   	if applicable
+|Document subtype:   	
 |Document stage:   	Draft
 |Document language: 	English
 |===
@@ -87,8 +87,10 @@ add or remove annexes after "A" as necessary
 ////
 include::annex-a.adoc[]
 
+////
 <<<
 include::annex-n.adoc[]
+////
 
 <<<
 ////
@@ -97,5 +99,7 @@ Bibliography should be the last annex
 ////
 include::annex-history.adoc[]
 
+////
 <<<
 include::annex-bibliography.adoc[]
+////
