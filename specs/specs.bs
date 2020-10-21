@@ -1107,7 +1107,7 @@ A Material Object:
     4.  `"specularColor"`, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
     5.  `"shininess"`, whose value is a number between 0.0 and 1.0
     6.  `"transparency"`, whose value is a number between 0.0 and 1.0 (1.0 being completely transparent)
-    7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as "a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading)."
+    7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading)."
 
 ```javascript
 "materials": [
