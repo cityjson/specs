@@ -39,7 +39,7 @@ surfaces.
 * may have one member with the name `"geometry-templates"`, the value is
 a JSON object containing the templates that can be reused by different
 City Objects (usually for trees). This is equivalent to the concept of
-``implicit geometries'' in CityGML.
+"implicit geometries" in CityGML.
 * may have other members, and their value is not prescribed. Because
 these are not standard in CityJSON, they might be ignored by parsers.
 
@@ -55,7 +55,7 @@ The minimal valid CityJSON object is thus:
 }
 ----
 
-An ``empty'' CityJSON object will look like this:
+An "empty" CityJSON object will look like this:
 
 [source,js]
 ----
@@ -92,7 +92,7 @@ has been flattened out. Both types are represented as a City Object in a
 CityJSON Object.
 
 [arabic]
-. *1st-level*: City Objects that can ``exist by themselves''.
+. *1st-level*: City Objects that can "exist by themselves".
 . *2nd-level*: City Objects that need to have a `"parents"` to exist.
 
 For example, a `"BuildingInstallation"` cannot be present in a dataset
@@ -190,7 +190,7 @@ https://portal.opengeospatial.org/files/?artifact_id=47842[official
 CityGML documentation v2.0.0] or in the schemas of CityJSON.
 
 In CityJSON, any other attributes not prescribed by the CityGML data
-model can be added with a JSON key-value pair (``owner'' in the example
+model can be added with a JSON key-value pair ("owner" in the example
 above is one such attribute) in the `"attributes"` of a City Object.
 
 All the City Objects have the following 3 possible attributes:
@@ -288,13 +288,13 @@ the http://xml.coverpages.org/xnal.html[xAL address standard].
 === Transportation
 
 CityJSON uses 3 classes related to transportation (`"Road"`,
-`"Railway"`, `"TransportSquare"`) and omits the ``Track'' from CityGML
+`"Railway"`, `"TransportSquare"`) and omits the "Track" from CityGML
 because it simply can be a road with specific attributes.
 `"TransportSquare"` is used to model for instance parking lots and
 squares.
 
-In CityGML, each of the 3 classes can have a number of ``TrafficArea''
-and ``AuxiliaryTrafficArea'', which are defined as new surfaces. In
+In CityGML, each of the 3 classes can have a number of "TrafficArea"
+and "AuxiliaryTrafficArea", which are defined as new surfaces. In
 CityJSON, these surfaces do not need to be defined again since the road
 surfaces become Semantic Surface Objects (with type `"TrafficArea"` or
 `"AuxiliaryTrafficArea"`). That is, the surface representing a road
@@ -659,7 +659,7 @@ following the https://3d.bk.tudelft.nl/lod[improved LoDs by TU Delft]
 hierarchy of arrays (the depth depends on the Geometry object) with
 integers. An integer refers to the index in the `"vertices"` array of
 the CityJSON object, and it is 0-based (ie the first element in the
-array has the index ``0'', the second one ``1'', etc.).
+array has the index "0", the second one "1", etc.).
 * may have one member `"semantics"`, whose value is a JSON Object, as
 defined below.
 * may have one member `"material"`, whose value is a JSON Object, as
@@ -1004,7 +1004,7 @@ position of the template in the `"geometry-templates"` (0-indexing).
 array containing only one vertex index, which refers to one vertex in
 the `"vertices"` property of a CityJSON file. (This is the reference
 point from which the transformations are applied, it is the
-``referencePoint'' in CityGML.)
+"referencePoint" in CityGML.)
 * must have one member with the name `"transformationMatrix"`, whose
 value is a 4x4 matrix (thus 16 values in an array) defining the the
 rotation/translation/scaling of the template (as defined in the CityGML
@@ -1287,7 +1287,7 @@ are used to colour full objects, and repetition of materials is not
 necessary.
 
 In the following, the Solid has 4 surfaces, and there are 2 themes
-(``irradiation'' and ``irradiation-2''). These could represent, for
+("irradiation" and "irradiation-2"). These could represent, for
 instance, the different colours based on different scenarios of an solar
 irradiation analysis. Notice that the last surface gets no material (for
 both themes), thus `null` is used.
@@ -1329,7 +1329,7 @@ The depth of the array depends on the Geometry object, and is equal to
 the depth of the `"boundary"` array.
 
 In the following, the Solid has 4 surfaces, and there are 2 themes:
-``winter-textures'' and ``summer-textures'' could for instance represent
+"winter-textures" and "summer-textures" could for instance represent
 the textures during winter and summer.. Notice that the last 2 surfaces
 of the first theme gets no material, thus `null` is used.
 
@@ -1376,7 +1376,7 @@ and 1.0 (RGB colour)
 . `"transparency"`, whose value is a number between 0.0 and 1.0 (1.0
 being completely transparent)
 . `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as
-``a hint for normal interpolation. If this boolean flag is set to true,
+a hint for normal interpolation. If this boolean flag is set to true,
 vertex normals should be used for shading (Gouraud shading). Otherwise,
 normals should be constant for a surface patch (flat shading).''
 
@@ -1411,7 +1411,7 @@ normals should be constant for a surface patch (flat shading).''
 A Texture Object:
 
 * must have one member with the name `"type"`, whose value is a string
-with either ``PNG'' or ``JPG'' as value
+with either "PNG" or "JPG" as value
 * must have one member with the name `"image"`, whose value is a string
 with the name of the file. This file can be a URL (eg
 `"http://www.hugo.com/filename.jpg"`), a relative path (eg
@@ -1483,7 +1483,7 @@ The following 3 cases for extension are possible:
 [arabic]
 . Adding new complex attributes to existing City Objects
 . Adding new properties at the root of a document
-. Creating a new City Object, or ``extending'' one, and defining complex
+. Creating a new City Object, or "extending" one, and defining complex
 geometries
 
 [NOTE]
@@ -1504,20 +1504,20 @@ processed by standard CityJSON software, often no changes in the parsing
 code is required. This is achieved by enforcing a set of simple rules,
 as defined below, when adding new City Objects. If these are followed,
 then a CityJSON file containing Extensions will be seen as a
-``standard'' CityJSON file.
+"standard" CityJSON file.
 ====
 
 
 === Using an Extension in a CityJSON file
 
-An Extension should be given a name (eg ``Noise'') and the URL of the
+An Extension should be given a name (eg "Noise") and the URL of the
 Extension file should be given, along with the version that is used for
 this file. It is expected that the Extension is publicly available at
 the URL, and can be downloaded.
 
 Several Extensions can be used in a single file, each one is indexed by
 its name in the `"extensions"` JSON object. In the example below we have
-2 Extensions: one named ``Noise'' and one named ``Solar_Potential''.
+2 Extensions: one named "Noise" and one named "Solar_Potential".
 
 [source,javascript]
 ----
@@ -1610,14 +1610,14 @@ be:
 
 === Case 1: Adding new complex attributes to existing City Objects
 
-One of the philosophies of JSON is ``schema-less'', which means that one
+One of the philosophies of JSON is "schema-less", which means that one
 is allowed to define new properties for the JSON objects without
 documenting them in a JSON schema (watch out: this does _not_ mean that
 JSON cannot have schemas!). While this is in contrast to CityGML (and
 GML as a whole) where the schemas are central, the schemas of CityJSON
 (schema) are partly following that philosophy. That is, for a given City
-Object, the ``allowed'' properties/attributes are listed in the schema,
-but it is not an error to add new ones. The ``official validator'' of
+Object, the "allowed" properties/attributes are listed in the schema,
+but it is not an error to add new ones. The "official validator" of
 CityJSON (https://github.com/cityjson/cjio[cjio] with the option
 `--validate`) does more than simply validate a dataset against the
 schemas, and will return a _warning_ if an attribute is not in the
