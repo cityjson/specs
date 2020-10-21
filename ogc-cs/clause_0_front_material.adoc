@@ -2,26 +2,26 @@
 
 [big]*iii.   Source of the content for this OGC document*
 
-The majority of the content in this OGC document is a direct copy of the content contained at https://www.cityjson.org/specs/1.0.2/[https://www.cityjson.org/specs/1.0.2/]. 
-No normative changes have been made to the content. 
+The majority of the content in this OGC document is a direct copy of the content contained at https://www.cityjson.org/specs/1.0.2/[https://www.cityjson.org/specs/1.0.2/].
+No normative changes have been made to the content.
 
 
 [big]*iii.   Preface*
 
 
-Note that this document requires a good knowledge of the OGC City Geography Markup Language (CityGML) Encoding Standard (https://portal.opengeospatial.org/files/?artifact_id=47842[OGC document #12-019]), it reuses its terminology and follow the data model presented in it.
+Note that this document requires a good knowledge of the OGC City Geography Markup Language (CityGML) Encoding Standard (https://portal.opengeospatial.org/files/?artifact_id=47842[OGC document #12-019]), as this document reuses the terminology and follows the data model presented in CityGML.
 
 The differences between the CityJSON v1.0 implementation and the XML-based implementation are described https://www.cityjson.org/citygml-compatibility[in this webpage].
 
 [big]*i.     Abstract*
 
-CityJSON is a https://json.org/[JSON]-based encoding for a subset of the http://www.opengeospatial.org/standards/citygml[OGC CityGML data model] (version 2.0.0). It defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
+CityJSON is a https://json.org/[JSON]-based encoding for a subset of the http://www.opengeospatial.org/standards/citygml[OGC CityGML data model] (version 2.0.0). CityJSON defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
 
 [big]*ii.    Keywords*
 
 The following are keywords to be used by search engines and document catalogues.
 
-CityJSON, CityGML, 3D city models, 
+CityJSON, CityGML, 3D city models,
 
 [big]*iv.    Submitting organizations*
 
@@ -29,7 +29,7 @@ The following organizations submitted this Document to the Open Geospatial Conso
 
   1.  Geonovum
   2.  Delft University of Technology
-  3.  Kadaster International 
+  3.  Kadaster International
   4.  virtualcitySYSTEMS
   5.  National University of Singapore
   6.  Forum Virium Helsinki Oy
