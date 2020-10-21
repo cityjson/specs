@@ -1378,7 +1378,7 @@ being completely transparent)
 . `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as
 a hint for normal interpolation. If this boolean flag is set to true,
 vertex normals should be used for shading (Gouraud shading). Otherwise,
-normals should be constant for a surface patch (flat shading).''
+normals should be constant for a surface patch (flat shading).
 
 [source,json]
 ----
