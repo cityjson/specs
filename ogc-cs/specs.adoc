@@ -26,7 +26,7 @@ Objects. The indexing mechanism of the format
 https://en.wikipedia.org/wiki/Wavefront_.obj_file[Wavefront OBJ] is
 basically reused.
 * may have one member with the name `"extensions"`, which is used if
-there are Extensions ([[#extensions]]) used in the file.
+there are <<Extensions>> used in the file.
 * may have one member with the name `"metadata"`, whose value may be a
 JSON object describing the coordinate reference system used, the extent
 of the dataset, its creator, etc.
@@ -647,7 +647,7 @@ one of the following:
 . `"MultiSolid"`
 . `"CompositeSolid"`
 . `"GeometryInstance"` (this is another type with different properties,
-see [[#geometry-templates]])
+see <<Geometry templates>>)
 
 A Geometry object:
 
@@ -962,7 +962,7 @@ array of Geometry Objects.
 is an array of coordinates of each vertex of the templates (0-based
 indexing). The reason the vertices index are not global is to ensure
 that operations on the vertices (eg for CRS transformation, for
-[[#transform-object]], or calculating the bounding box of a dataset)
+<<Transform Object>>, or calculating the bounding box of a dataset)
 will not be affected by the templates (since they will often be defined
 locally, and translated/rotated/scaled to their final position).
 
