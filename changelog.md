@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - small fixes to facilitate life
 
 
+## [1.0.2] - 2020-11-06
+### Changed
+- small improvements in the specs document to make concepts clearer
+- schemas are the same, with some simplifications to make their maintenance easier
+- this is the version that will be the OGC release
+
+
 
 ## [1.0.1] - 2019-07-09
 ### Changed
