@@ -8,9 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## Unreleased - coming in the future
-- handling of very large files, eg for streaming (see <https://github.com/tudelft3d/cityjson/issues/6>)
-- binary encoding of JSON, with either [CBOR](http://cbor.io) or [BSON](http://bsonspec.org)
+## Unreleased - coming in v1.1
+- support for CityGML v3 (add `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, and Other Construction)
+- change CRS to 2 simple values: `authority:code` => EPSG:28992
+- change LoD to string (instead of float) 
+- expanded metadata to better align with ISO19115
+- small fixes to facilitate life
 
 
 
