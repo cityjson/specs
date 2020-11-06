@@ -267,7 +267,7 @@
             "$ref":"#/definitions/dates"
          },
          "metadataPointOfContact":{
-            "$ref":"#/definitions/contactDetails"
+            "$ref":"#/definitions/contactDetail"
          },
          "lineage":{
             "type":"array",
@@ -448,7 +448,7 @@
                         "type":"object",
                         "properties":{
                             "version":{"type": "string"},
-                            "url":{
+                            "uri":{
                               "type":"string",
                               "format":"uri",
                               "pattern":"^(https?|ftp)://"
@@ -538,7 +538,7 @@
                   "GenericCityObject":{
                      "$ref":"#/definitions/featureData"
                   },
-                   "CityObjectGroup":{
+                   "CityObjectGroups":{
                      "type":"object",
                      "properties":{
                         "presence":{
