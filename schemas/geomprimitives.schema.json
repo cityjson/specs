@@ -90,7 +90,7 @@
       },
       "lod": {
         "type": "string",
-        "pattern": "^(\\d\\.)(\\d)$"
+        "pattern": "^(\\d\\.)(\\d)$|^(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -225,7 +225,7 @@
       },
       "lod": {
         "type": "string",
-        "pattern": "^(\\d\\.)(\\d)$"
+        "pattern": "^(\\d\\.)(\\d)$|^(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -378,7 +378,7 @@
       },
       "lod": {
         "type": "string",
-        "pattern": "^(\\d\\.)(\\d)$"
+        "pattern": "^(\\d\\.)(\\d)$|^(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -531,7 +531,7 @@
       },
       "lod": {
         "type": "string",
-        "pattern": "^(\\d\\.)(\\d)$"
+        "pattern": "^(\\d\\.)(\\d)$|^(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -648,7 +648,7 @@
       },
       "lod": {
         "type": "string",
-        "pattern": "^(\\d\\.)(\\d)$"
+        "pattern": "^(\\d\\.)(\\d)$|^(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -765,7 +765,7 @@
       },
       "lod": {
         "type": "string",
-        "pattern": "^(\\d\\.)(\\d)$"
+        "pattern": "^(\\d\\.)(\\d)$|^(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -794,7 +794,7 @@
       },
       "lod": {
         "type": "string",
-        "pattern": "^(\\d\\.)(\\d)$"
+        "pattern": "^(\\d\\.)(\\d)$|^(\\d)$"
       },
       "boundaries": {
         "type": "array",
