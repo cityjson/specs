@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CityJSON geometric primitives schema v1.0.2",
+  "title": "CityJSON geometric primitives schema v1.1.0",
   "Semantics": {
     "type": "object",
     "properties": {
@@ -89,9 +89,8 @@
         ]
       },
       "lod": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 3.5
+        "type": "string",
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -225,9 +224,8 @@
         ]
       },
       "lod": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 3.5
+        "type": "string",
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -379,9 +377,8 @@
         ]
       },
       "lod": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 3.5
+        "type": "string",
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -533,9 +530,8 @@
         ]
       },
       "lod": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 3.5
+        "type": "string",
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -651,9 +647,8 @@
         ]
       },
       "lod": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 3.5
+        "type": "string",
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -769,9 +764,8 @@
         ]
       },
       "lod": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 3.5
+        "type": "string",
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "boundaries": {
         "type": "array",
@@ -799,9 +793,8 @@
         ]
       },
       "lod": {
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 3.5
+        "type": "string",
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "boundaries": {
         "type": "array",
