@@ -1,14 +1,14 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.0.2-beta.1
+Title: CityJSON Specifications 1.1.0-beta.1
 Shortname: CityJSON
 Status: LS
 Level: 1
-URL: https://cityjson.org/specs/1.0.2/
+URL: https://cityjson.org/specs/1.1.0/
 TR: https://cityjson.org/specs/
 Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
 Repository: cityjson/specs
-Abstract: CityJSON is a [JSON](https://json.org/)-based encoding for a subset of the [OGC CityGML data model](http://www.opengeospatial.org/standards/citygml) (version 2.0.0). It defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
+Abstract: CityJSON is a [JSON](https://json.org/)-based encoding for a subset of the [OGC CityGML data model](http://www.opengeospatial.org/standards/citygml) (version 3.0.0). It defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
 Markup Shorthands: css no, markdown yes
 Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 </pre>
@@ -60,14 +60,14 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 A CityJSON object: 
 
   - is a JSON object.
-  - must have the following 4 members:
+  - must have the following 5 members:
     1.  one member with the name `"type"`, whose value must be `"CityJSON"`;
     2.  one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
+    3. one member with the name `"transform"`, whose value if a JSON object describing how to *decompress* the coordinates. Transform is used to reduce the file size and to ensure that the vertices are stored with integers.
     3.  one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object).
-    4.  one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format [Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) is basically reused.
+    4.  one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format [Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) is basically reused.
   - may have one member with the name `"extensions"`, which is used if there are Extensions ([[#extensions]]) used in the file.
   - may have one member with the name `"metadata"`, whose value may be a JSON object describing the coordinate reference system used, the extent of the dataset, its creator, etc.
-  - may have one member with the name `"transform"`, whose value if a JSON object describing how to *decompress* the coordinates. Transform is used to reduce the file size only.
   - may have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces.
   - may have one member with the name `"geometry-templates"`, the value is a JSON object containing the templates that can be reused by different City Objects (usually for trees). This is equivalent to the concept of "implicit geometries" in CityGML.
   - may have other members, and their value is not prescribed. Because these are not standard in CityJSON, they might be ignored by parsers.
@@ -78,6 +78,10 @@ The minimal valid CityJSON object is thus:
 {
   "type": "CityJSON",
   "version": "1.0",
+  "transform": {
+    "scale": [],
+    "translate": []
+  },
   "CityObjects": {},
   "vertices": []
 }
@@ -90,11 +94,11 @@ An "empty" CityJSON object will look like this:
   "type": "CityJSON",
   "version": "1.0",
   "extensions": {},
-  "metadata": {},
   "transform": {
     "scale": [],
     "translate": []
   },
+  "metadata": {},
   "CityObjects": {},
   "vertices": [],
   "appearance": {},
