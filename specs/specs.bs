@@ -568,7 +568,7 @@ A Geometry object is a JSON object for which the type member’s value is one of
 8.  `"GeometryInstance"` (this is another type with different properties, see [[#geometry-templates]])
 
 A Geometry object:
-one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used.
+
  - must have one member with the name `"lod"`, whose value must be a string with the LoD identifying the level-of-detail (LoD) of the geometry. This can be either a single digit (following the CityGML standards), or "X.Y"-formatted if the [improved LoDs by TU Delft](https://3d.bk.tudelft.nl/lod) are used.
  - must have one member with the name `"boundaries"`, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers. An integer refers to the index in the `"vertices"` array of the CityJSON object, and it is 0-based (ie the first element in the array has the index "0", the second one "1", etc.).
  - may have one member `"semantics"`, whose value is a JSON Object, as defined below.
