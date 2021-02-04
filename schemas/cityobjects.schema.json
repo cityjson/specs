@@ -63,7 +63,14 @@
           "attributes": {
             "properties": {
               "conditionOfConstruction": {
-                "type": "string"
+                "enum": [
+                  "declined",
+                  "demolished",
+                  "functional",
+                  "projected",
+                  "ruin",
+                  "underConstruction"
+                ]
               },
               "dateOfConstruction": {
                 "type": "string"
