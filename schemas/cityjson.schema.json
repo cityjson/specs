@@ -45,6 +45,9 @@
             "$ref": "cityobjects.schema.json#/CityObjectGroup"
           },
           {
+            "$ref": "cityobjects.schema.json#/OtherConstruction"
+          },
+          {
             "$ref": "cityobjects.schema.json#/Building"
           },
           {

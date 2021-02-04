@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CityJSON City Objects schema v1.0.2",
+  "title": "CityJSON City Objects schema v1.1.0",
   "ExtensionObject": {
     "type": "object",
     "properties": {
@@ -18,14 +18,6 @@
       "attributes": {
         "type": "object",
         "properties": {
-          "creationDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "terminationDate": {
-            "type": "string",
-            "format": "date"
-          },
           "class": {
             "type": "string"
           },
@@ -61,6 +53,66 @@
       }
     }
   },
+  "_AbstractConstruction": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "attributes": {
+            "properties": {
+              "conditionOfConstruction": {
+                "type": "string"
+              },
+              "dateOfConstruction": {
+                "type": "string"
+              },
+              "dateOfDemolition": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "OtherConstruction": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractConstruction"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "OtherConstruction"
+            ]
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "geometry"
+        ]
+      }
+    ]
+  },  
   "_AbstractBuilding": {
     "allOf": [
       {
