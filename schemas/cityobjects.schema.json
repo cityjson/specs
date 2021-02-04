@@ -123,7 +123,7 @@
   "_AbstractBuilding": {
     "allOf": [
       {
-        "$ref": "#/_AbstractCityObject"
+        "$ref": "#/_AbstractConstruction"
       },
       {
         "properties": {
@@ -285,6 +285,82 @@
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "geometry",
+          "parents"
+        ]
+      }
+    ]
+  },
+  "BuildingFurniture": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractBuilding"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "BuildingFurniture"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "parents"
+        ]
+      }
+    ]
+  },
+  "BuildingRoom": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "BuildingRoom"
+            ]
+          },
+          "attributes": {
+            "properties": {
+              "roomHeight": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": { "type": "number" },
+                    "status": { "type": "string" },
+                    "highReference": { "type": "string" },
+                    "lowReference": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 }
               ]
             }

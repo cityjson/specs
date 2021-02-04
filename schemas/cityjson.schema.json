@@ -55,6 +55,12 @@
           },
           {
             "$ref": "cityobjects.schema.json#/BuildingInstallation"
+          },          
+          {
+            "$ref": "cityobjects.schema.json#/BuildingFurniture"
+          },
+          {
+            "$ref": "cityobjects.schema.json#/BuildingRoom"
           },
           {
             "$ref": "cityobjects.schema.json#/Road"
