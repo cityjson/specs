@@ -1400,7 +1400,13 @@ And a CityJSON file would look like this:
 ```javascript
 {
   "type": "CityJSON",
-  "version": "0.9",
+  "version": "1.0",
+  "extensions": {
+    "MyExtension": {
+      "url" : "https://someurl.org/myextension.json",
+      "version": "1.0"
+    }
+  },
   "CityObjects": {...},
   "vertices": [...],
   "+census": {
