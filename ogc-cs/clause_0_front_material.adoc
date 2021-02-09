@@ -38,7 +38,7 @@ The following organizations submitted this Document to the Open Geospatial Conso
 
 [big]*v.     Submitters*
 
-All questions regarding this submission should be directed to the editor or the submitters:
+All questions regarding this submission should be directed to the editors or the submitters:
 
-Hugo Ledoux, Delft University of Technology
-Linda van den Brink, Geonovum
+  - Hugo Ledoux, Delft University of Technology
+  - Linda van den Brink, Geonovum
