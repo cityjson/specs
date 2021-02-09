@@ -1,6 +1,38 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CityJSON City Objects schema v1.1.0",
+  "definitions": {
+    "Elevation": {
+      "type": "object",
+      "properties": {
+        "elevationValue": { "type": "number" },
+        "elevationReference": {
+          "enum": [
+            "above ground envelope",
+            "bottom of construction",
+            "entrance point",
+            "general eave",
+            "general ground",
+            "general roof",
+            "general roof edge",
+            "highest eave",
+            "highest point",
+            "highest roof edge",
+            "highestground point",
+            "lowest eave",
+            "lowest floor above ground",
+            "lowest ground point",
+            "lowest roof edge",
+            "top of construction"
+          ]
+        }
+      },
+      "required": [
+        "elevationValue",
+        "elevationReference"
+      ]
+    }
+  },
   "ExtensionObject": {
     "type": "object",
     "properties": {
@@ -374,6 +406,108 @@
       }
     ]
   },
+  "BuildingUnit": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "BuildingUnit"
+            ]
+          },
+          "attributes": {
+            "properties": {
+              "elevation": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Elevation"
+                }
+              },
+              "sortKey": "number"
+            }
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "geometry",
+          "parents"
+        ]
+      }
+    ]
+  },  
+  "BuildingStorey": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "BuildingStorey"
+            ]
+          },
+          "attributes": {
+            "properties": {
+              "elevation": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Elevation"
+                }
+              },
+              "sortKey": "number"
+            }
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "geometry",
+          "parents"
+        ]
+      }
+    ]
+  },  
   "CityObjectGroup": {
     "allOf": [
       {

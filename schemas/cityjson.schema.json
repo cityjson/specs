@@ -63,6 +63,12 @@
             "$ref": "cityobjects.schema.json#/BuildingRoom"
           },
           {
+            "$ref": "cityobjects.schema.json#/BuildingUnit"
+          },          
+          {
+            "$ref": "cityobjects.schema.json#/BuildingStorey"
+          },             
+          {
             "$ref": "cityobjects.schema.json#/Road"
           },
           {
