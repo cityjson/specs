@@ -333,7 +333,7 @@
   "BuildingFurniture": {
     "allOf": [
       {
-        "$ref": "#/_AbstractBuilding"
+        "$ref": "#/_AbstractCityObject"
       },
       {
         "properties": {
