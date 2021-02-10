@@ -307,7 +307,7 @@ As is the case in CityGML, the address information is specified using the [xAL a
   "attributes": {
     "usage": "living room"
   },
-  "parents": "id-1",
+  "parents": ["id-1"],
   "geometry": [{
     "type": "Solid",
     "lod": "2.1",
@@ -440,7 +440,7 @@ The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"
 The geometry of a City Object of type `"PlantCover"` can be of type `"MultiSurface"` or `"MultiSolid"`.
 
 ```javascript
-"plants": {
+"myplants": {
   "type": "PlantCover", 
   "attributes": { 
     "averageHeight": 11.05
@@ -485,7 +485,7 @@ The geometry of a City Object of type `"SolitaryVegetationObject"` can be any of
 The geometry of a City Object of type `"CityFurniture"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
 
 ```javascript
-"stop": {
+"mystopsign": {
   "type": "CityFurniture", 
   "attributes": { 
     "function": "bus stop"
