@@ -161,11 +161,23 @@
         "properties": {
           "attributes": {
             "properties": {
-              "measuredHeight": {
-                "type": "number"
-              },
               "roofType": {
-                "type": "string"
+                "enum": [
+                  "flat roof",
+                  "monopitch roof",
+                  "dual pent roof",
+                  "gabled roof",
+                  "hipped roof",
+                  "half-hipped roof",
+                  "mansard roof",
+                  "pavilion roof",
+                  "cone roof",
+                  "copula roof",
+                  "sawtooth roof ",
+                  "arch roof",
+                  "pyramidal broach roof",
+                  "combination of roof forms"
+                ]
               },
               "storeysAboveGround": {
                 "type": "integer"
@@ -184,12 +196,6 @@
                 "items": {
                   "type": "number"
                 }
-              },
-              "yearOfConstruction": {
-                "type": "integer"
-              },
-              "yearOfDemolition": {
-                "type": "integer"
               }
             }
           },
