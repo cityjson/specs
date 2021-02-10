@@ -135,7 +135,7 @@ contains a `"BuildingInstallation"`.
     "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ], 
     "attributes": { 
       "measuredHeight": 22.3,
-      "roofType": "gable",
+      "roofType": "gable roof",
       "owner": "Elvis Presley"
     },
     "children": ["id-2"],
@@ -253,7 +253,7 @@ the http://xml.coverpages.org/xnal.html[xAL address standard].
   "id-1": {
     "type": "Building", 
     "attributes": { 
-      "roofType": "gable"
+      "roofType": "gable roof"
     },
     "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
     "children": ["id-56", "id-832", "mybalcony"]
@@ -281,7 +281,7 @@ the http://xml.coverpages.org/xnal.html[xAL address standard].
     "ThoroughfareNumber": "1",
     "ThoroughfareName": "rue de la Patate",
     "PostalCode": "H0H 0H0"
-  },
+  }
 }
 ----
 
