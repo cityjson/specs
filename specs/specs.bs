@@ -261,8 +261,13 @@ Eight City Objects are related to buildings:
   - `"BuildingRoom"`
   - `"BuildingUnit"`
 
+<!--- TODO: Can BuildingPart have BuildingParts? -->
+
 The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRoom"`, 
   and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
+
+All of the eight, except `"Building"`, must have a `"parents"`.
+The installations, furnitures, and subdivisions can have as parents either a `"Building"` or a a `"BuildingPart"`.
 
 The geometry of `"BuildingInstallation"`, `"BuildingConstructiveElement"`, or  `"BuildingFurniture"` objects can be represented with any of the Geometry Objects.
 
