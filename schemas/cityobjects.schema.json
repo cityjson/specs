@@ -866,25 +866,21 @@
     ]
   },  
 
-
-  "_AbstractBridge": {
+  "Bridge": {
     "allOf": [
       {
-        "$ref": "#/_AbstractCityObject"
+        "$ref": "#/_AbstractConstruction"
       },
       {
         "properties": {
+          "type": {
+            "enum": [
+              "Bridge"
+            ]
+          },
           "attributes": {
             "properties": {
-              "yearOfConstruction": {
-                "type": "integer"
-              },
-              "yearOfDemolition": {
-                "type": "integer"
-              },
-              "isMovable": {
-                "type": "boolean"
-              }
+              "isMovable": { "type": "boolean" }
             }
           },
           "geometry": {
@@ -895,7 +891,13 @@
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {               
                   "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {               
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
@@ -905,34 +907,16 @@
           }
         },
         "required": [
+          "type",
           "geometry"
         ]
       }
     ]
-  },
-  "Bridge": {
-    "allOf": [
-      {
-        "$ref": "#/_AbstractBridge"
-      },
-      {
-        "properties": {
-          "type": {
-            "enum": [
-              "Bridge"
-            ]
-          }
-        },
-        "required": [
-          "type"
-        ]
-      }
-    ]
-  },
+  },  
   "BridgePart": {
     "allOf": [
       {
-        "$ref": "#/_AbstractBridge"
+        "$ref": "#/_AbstractConstruction"
       },
       {
         "properties": {
@@ -940,10 +924,33 @@
             "enum": [
               "BridgePart"
             ]
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {               
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {               
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                }
+              ]
+            }
           }
         },
         "required": [
           "type",
+          "geometry",
           "parents"
         ]
       }
@@ -1001,7 +1008,7 @@
       }
     ]
   },
-  "BridgeConstructionElement": {
+  "BridgeConstructiveElement": {
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1010,7 +1017,7 @@
         "properties": {
           "type": {
             "enum": [
-              "BridgeConstructionElement"
+              "BridgeConstructiveElement"
             ]
           },
           "geometry": {
@@ -1053,6 +1060,111 @@
       }
     ]
   },
+  "BridgeRoom": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "BridgeRoom"
+            ]
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "geometry",
+          "parents"
+        ]
+      }
+    ]
+  },  
+  "BridgeFurniture": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "BridgeFurniture"
+            ]
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "geometry",
+          "parents"
+        ]
+      }
+    ]
+  },  
+
   "_AbstractTransportationComplex": {
     "allOf": [
       {

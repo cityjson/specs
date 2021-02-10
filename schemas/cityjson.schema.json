@@ -108,8 +108,14 @@
             "$ref": "cityobjects.schema.json#/BridgeInstallation"
           },
           {
-            "$ref": "cityobjects.schema.json#/BridgeConstructionElement"
+            "$ref": "cityobjects.schema.json#/BridgeConstructiveElement"
           },
+          {
+            "$ref": "cityobjects.schema.json#/BridgeRoom"
+          },
+          {
+            "$ref": "cityobjects.schema.json#/BridgeFurniture"
+          },                    
           {
             "$ref": "cityobjects.schema.json#/Tunnel"
           },
