@@ -117,8 +117,17 @@
             "$ref": "cityobjects.schema.json#/TunnelPart"
           },
           {
+            "$ref": "cityobjects.schema.json#/TunnelConstructiveElement"
+          },          
+          {
             "$ref": "cityobjects.schema.json#/TunnelInstallation"
+          },          
+          {
+            "$ref": "cityobjects.schema.json#/TunnelFurniture"
           },
+          {
+            "$ref": "cityobjects.schema.json#/TunnelHollowSpace"
+          },          
           {
             "$ref": "cityobjects.schema.json#/ExtensionObject"
           }
