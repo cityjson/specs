@@ -548,6 +548,34 @@ The geometry of a `"TunnelInstallation"` object can be represented with any of t
 ```
 
 
+## OtherConstruction
+
+<!--- TODO: https://docs.geostandaarden.nl/imgeo/catalogus/bgt/#typeoverigbouwwerk -->
+<!--- TODO: check for the codelist of OtherConstruction -->
+
+This is used for constructions that are not buildings, bridges, or tunnels.
+For instance for permanent water tanks or electricity pylons.
+
+
+```javascript
+"mypylon": {
+  "type": "OtherConstruction", 
+  "attributes": { 
+    "class": "pylon",
+    "conditionOfConstruction": "underConstruction"
+  },
+  "geometry": [{
+    "type": "MultiSurface",
+    "lod": "2.1",
+    "boundaries": [
+       [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], ...
+    ]
+  }] 
+}
+```
+
+
+
 ## CityObjectGroup
 
 The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood for instance), is possible in CityJSON. As in CityGML, the group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
