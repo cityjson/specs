@@ -77,7 +77,7 @@ The minimal valid CityJSON object is thus:
 ```javascript
 {
   "type": "CityJSON",
-  "version": "1.0",
+  "version": "1.1",
   "transform": {
     "scale": [],
     "translate": []
@@ -92,7 +92,7 @@ An "empty" CityJSON object will look like this:
 ```js
 {
   "type": "CityJSON",
-  "version": "1.0",
+  "version": "1.1",
   "extensions": {},
   "transform": {
     "scale": [],
@@ -122,6 +122,8 @@ Both types are represented as a City Object in a CityJSON Object.
 
 1.  **1st-level**: City Objects that can "exist by themselves".
 2.  **2nd-level**: City Objects that need to have a `"parents"` to exist.
+
+<!--- TODO: update the figure of COs -->
 
 For example, a `"BuildingInstallation"` cannot be present in a dataset without being the `"children"` of a `"Building"`, but a `"Building"` can be present by itself.
 
@@ -219,22 +221,34 @@ While CityGML does not prescribe the values for these, the Annex C of the [offic
 
 ## Building
 
-Three City Objects are related to buildings: `"Building"`, `"BuildingPart"`, and `"BuildingInstallation"`.
+Eight City Objects are related to buildings: 
 
-The geometry of both `"Building"` and `"BuildingPart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
+  - `"Building"` 
+  - `"BuildingPart"` 
+  - `"BuildingInstallation"`
+  - `"BuildingConstructiveElement"`
+  - `"BuildingFurniture"`
+  - `"BuildingStorey"` 
+  - `"BuildingRoom"`
+  - `"BuildingUnit"`
 
-The geometry of a `"BuildingInstallation"` object can be represented with any of the Geometry Objects.
+The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRoom"`, 
+  and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
 
-A City Object of type `"Building"` or `"BuildingPart"` may have a member `"address"`, whose value is a JSON object describing the address. One location (a `"MultiPoint"`) can be given, for instance to position the front door inside the building.
+The geometry of `"BuildingInstallation"`, `"BuildingConstructiveElement"`, or  `"BuildingFurniture"` objects can be represented with any of the Geometry Objects.
+
+A City Object of type `"Building"` or `"BuildingPart"` may have a member `"address"`, whose value is a JSON object describing the address. 
+One location (a `"MultiPoint"`) can be given, for instance to position the front door inside the building.
 
 As is the case in CityGML, the address information is specified using the [xAL address standard](http://xml.coverpages.org/xnal.html).
+<!--- TODO: keep address or flatten? -->
 
 ```javascript
 "CityObjects": {
   "id-1": {
     "type": "Building", 
     "attributes": { 
-      "roofType": "gable"
+      "roofType": "gabled roof"
     },
     "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
     "children": ["id-56", "id-832", "mybalcony"]
@@ -249,7 +263,25 @@ As is the case in CityGML, the address information is specified using the [xAL a
     "parents": ["id-1"],
     ...
   }
+  ...
 }
+```
+
+```javascript
+"myroom": {
+  "type": "BuildingRoom", 
+  "attributes": {
+    "usage": "living room"
+  },
+  "parents": "id-1",
+  "geometry": [{
+    "type": "Solid",
+    "lod": 2,
+    "boundaries": [
+      [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], ... ]
+    ]
+  }]    
+}               
 ```
 
 ```javascript
@@ -261,7 +293,7 @@ As is the case in CityGML, the address information is specified using the [xAL a
     "ThoroughfareNumber": "1",
     "ThoroughfareName": "rue de la Patate",
     "PostalCode": "H0H 0H0"
-  },
+  }
 }
 ```
 
@@ -1218,7 +1250,7 @@ In the example below we have 2 Extensions: one named "Noise" and one named "Sola
 ```javascript
 {
   "type": "CityJSON",
-  "version": "1.0",
+  "version": "1.1",
   "extensions": {
     "Noise": {
       "url" : "https://someurl.org/noise.json",
