@@ -219,6 +219,7 @@ And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but an
 The attributes prescribed by CityGML differ per City Object, and can be seen either in the [official CityGML documentation v2.0.0](https://portal.opengeospatial.org/files/?artifact_id=47842) or in the schemas of CityJSON. 
 
 In CityJSON, any other attributes not prescribed by the CityGML data model can be added with a JSON key-value pair ("owner" in the example above is one such attribute) in the `"attributes"` of a City Object.
+This replaces and greatly simplifies the Generics module of CityGML.
 
 All the City Objects have the following 3 possible attributes:
 
@@ -261,7 +262,8 @@ Eight City Objects are related to buildings:
   - `"BuildingRoom"`
   - `"BuildingUnit"`
 
-<!--- TODO: Can BuildingPart have BuildingParts? -->
+<!--- TODO: Can BuildingPart have BuildingParts? I guess yes, no way to prevent -->
+<!-- this in the schema... perhaps in cjio -->
 
 The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRoom"`, 
   and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
@@ -1329,7 +1331,7 @@ A CityJSON Extension is a JSON object, and it must have the following 7 members:
   "type": "CityJSON_Extension",
   "name": "Noise",
   "uri": "https://someurl.org/noise.json",
-  "version": "0.1",
+  "version": "0.5",
   "description": "Extension to model the noise"
   "extraRootProperties": {},     
   "extraAttributes": {},
