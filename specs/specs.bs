@@ -503,12 +503,19 @@ The geometry of a City Object of type `"CityFurniture"` can be any of the follow
 
 ## GenericCityObject
 
+<!-- TODO: v3 has no GenericCityObject, just Generics package. And one can inherit, so better -->
+<!-- to leave the v2 class I reckon. Generic attributes are dealt with with JSON property  -->
+<!-- having a string that are allowed -->
+
+This object should be used for objects that are not covered explicitly by any of the CityGML classes.
+
 The geometry of a City Object of type `"GenericCityObject"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
 
 ```javascript
 "whatisthat": {
   "type": "GenericCityObject", 
   "attributes": { 
+    "class": "a big bucket of water",
     "usage": "it's not clear"
   },
   "geometry": [{
