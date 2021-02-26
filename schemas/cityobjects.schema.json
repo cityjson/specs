@@ -526,6 +526,20 @@
               "CityObjectGroup"
             ]
           },
+          "groupType": {
+            "enum": [
+              "road section",
+              "intersection",
+              "neighbourhood",
+              "district",
+              "ward",
+              "borough",
+              "county",
+              "postal district",
+              "electoral district",
+              "other"
+            ]
+          },
           "members": {
             "type": "array",
             "description": "the IDs of the CityObjects members of that group",
@@ -533,35 +547,18 @@
               "type": "string"
             }
           },
-          "geometry": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
-                }
-              ]
-            },
-            "minItems": 0,
-            "maxItems": 1
+          "spatialBoundaries": {
+            "oneOf": [
+              {
+                "$ref": "geomprimitives.schema.json#/Solid"
+              },
+              {
+                "$ref": "geomprimitives.schema.json#/MultiSolid"
+              },
+              {
+                "$ref": "geomprimitives.schema.json#/CompositeSolid"
+              }
+            ]
           }
         },
         "required": [
