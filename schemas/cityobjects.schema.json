@@ -1216,11 +1216,11 @@
       {
         "properties": {
           "attributes": {
-            "trafficDirectionValue": {
+            "trafficDirection": {
               "type": {
                 "enum": [
-                  "One-way",
-                  "Two-way"
+                  "one-way",
+                  "two-way"
                 ]
               }
             }
