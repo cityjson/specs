@@ -1176,6 +1176,12 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "clearanceSpace": {
+                "type": "number"
+              },
+              "clearanceSpaceUnit": {
+                "type": "string"
               }
             }
           },
@@ -1202,10 +1208,31 @@
       }
     ]
   },
+  "_AbstractTransporationWay": {
+    "allOf": [
+      {
+        "properties": {
+          "attributes": {
+            "trafficDirection": {
+              "type": {
+                "enum": [
+                  "one-way",
+                  "two-way"
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
   "Road": {
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
+      },
+      {
+        "$ref": "#/_AbstractTransporationWay"
       },
       {
         "properties": {
@@ -1250,6 +1277,28 @@
           "type": {
             "enum": [
               "TransportSquare"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      }
+    ]
+  },
+  "Waterway": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractTransportationComplex"
+      },
+      {
+        "$ref": "#/_AbstractTransporationWay"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "Waterway"
             ]
           }
         },
