@@ -313,11 +313,19 @@ As is the case in CityGML, the address information is specified using the [xAL a
 
 ## Transportation
 
-CityJSON uses 3 classes related to transportation (`"Road"`, `"Railway"`, `"TransportSquare"`) and omits the "Track" from CityGML because it simply can be a road with specific attributes. `"TransportSquare"` is used to model for instance parking lots and squares.
+Six City Objects are related to transportation: 
 
-In CityGML, each of the 3 classes can have a number of "TrafficArea" and "AuxiliaryTrafficArea", which are defined as new surfaces. In CityJSON, these surfaces do not need to be defined again since the road surfaces become Semantic Surface Objects (with type `"TrafficArea"` or `"AuxiliaryTrafficArea"`). That is, the surface representing a road should be split into sub-surfaces (therefore forming a `"MultiSurface"` or a `"CompositeSurface"`), and each of the sub-surfaces has semantics.
+  - `"Road"`
+  - `"Railway"`
+  - `"Waterway"`
+  - `"TransportSquare"` (to model for instance parking lots and squares)
+  - `"TransportationSection"`
+  - `"TransportationIntersection"`
 
-The geometry of a City Object of type `"Road"`, `"Railway"`, `"TransportSquare"` can be of types `"MultiSurface"`, `"CompositeSurface"` or `"MultiLineString"`.
+Observe that the "Track" class from CityGML is omitted because it simply can be a road with specific attributes. 
+
+Similarly, the CityGML classes "TrafficArea", "AuxiliaryTrafficArea", "Marking", and "Hole" are implemented as semantic surface (see [[#semantics-of-geometric-primitives]]).
+That is, the surface representing a road should be split into sub-surfaces (therefore forming a `"MultiSurface"` or a `"CompositeSurface"`), and each of the sub-surfaces has semantics.
 
 ```javascript
 "ma_rue": {
