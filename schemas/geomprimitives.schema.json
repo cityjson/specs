@@ -73,6 +73,16 @@
             ]
           },
           {
+            "enum": [
+              "TransportationHole"
+            ]
+          },
+          {
+            "enum": [
+              "TransportationMarking"
+            ]
+          },
+          {
             "type": "string",
             "pattern": "(\\+)\\w+"
           }
