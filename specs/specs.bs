@@ -243,10 +243,10 @@ Eight City Objects are related to buildings:
 <!-- this in the schema... perhaps in cjio -->
 
 The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRoom"`, 
-  and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
+and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
 
-All of the eight, except `"Building"`, must have a `"parents"`.
-The installations, furnitures, and subdivisions can have as parents either a `"Building"` or a a `"BuildingPart"`.
+All of the eight, except `"Building"`, must have a `"parents"` property.
+The installations, furnitures, and subdivisions can have as parents either a `"Building"` or a `"BuildingPart"`.
 
 The geometry of `"BuildingInstallation"`, `"BuildingConstructiveElement"`, or  `"BuildingFurniture"` objects can be represented with any of the Geometry Objects.
 
@@ -289,7 +289,7 @@ As is the case in CityGML, the address information is specified using the [xAL a
   "parents": ["id-1"],
   "geometry": [{
     "type": "Solid",
-    "lod": "2.1",
+    "lod": "2",
     "boundaries": [
       [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], ... ]
     ]
