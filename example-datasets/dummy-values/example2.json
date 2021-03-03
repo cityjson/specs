@@ -92,7 +92,9 @@
       "attributes": {
         "usage": "leisure",
         "function": "leisure",
-        "trafficDirection": "one-way"
+        "trafficDirection": "one-way",
+        "clearanceSpace": 2.23,
+        "clearanceSpaceUnit": "meter"
       },
       "children": ["oneroadsegment"]
     },
