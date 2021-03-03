@@ -1278,7 +1278,7 @@ A Appearance Object may have one member named `"vertices-texture"`, whose value 
 CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate the data model, schemas should be seen as basically validating the syntax of a JSON document.
 
 A CityJSON *Extension* is a JSON file that allows us to document how the core data model of CityJSON may be extended, and to validate CityJSON files.
-This is conceptually akin to the *Application Domain Extensions* (ADEs) in CityGML; see Section 10.13 of the [official CityGML documentation](https://portal.opengeospatial.org/files/?artifact_id=47842).
+This is conceptually akin to the *Application Domain Extensions* (ADEs) in CityGML.
 
 The following 3 cases for extension are possible:
 
