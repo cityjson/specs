@@ -60,17 +60,16 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 A CityJSON object: 
 
   - is a JSON object.
-  - must have the following 5 members:
-    1.  one member with the name `"type"`, whose value must be `"CityJSON"`;
-    2.  one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
-    3. one member with the name `"transform"`, whose value if a JSON object describing how to *decompress* the coordinates of the geometries; see [[#transform-object]] for more details.
-    3.  one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object).
-    4.  one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. The indexing mechanism of the format [Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) is basically reused.
-  - may have one member with the name `"extensions"`, which is used if there are Extensions ([[#extensions]]) used in the file.
-  - may have one member with the name `"metadata"`, whose value may be a JSON object describing the coordinate reference system used, the extent of the dataset, its creator, etc.
-  - may have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces.
-  - may have one member with the name `"geometry-templates"`, the value is a JSON object containing the templates that can be reused by different City Objects (usually for trees). This is equivalent to the concept of "implicit geometries" in CityGML.
-  - may have other members, and their value is not prescribed. Because these are not standard in CityJSON, they might be ignored by parsers.
+  - **must** have one member with the name `"type"`, whose value must be `"CityJSON"`;
+  - **must** have one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
+  - **must** have one member with the name `"transform"`, whose value if a JSON object describing how to *decompress* the coordinates of the geometries. See [[#transform-object]] for details.
+  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). See [[#city-object]] for details.
+  - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. 
+  - **may** have one member with the name `"metadata"`, whose value may be a JSON object describing the coordinate reference system used, the extent of the dataset, its creator, etc. See [[#metadata]] for details.
+  - **may** have one member with the name `"extensions"`, which is used if there are Extensions used in the file. See [[#extensions]] for details.
+  - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
+  - **may** have one member with the name `"geometry-templates"`, the value is a JSON object containing the templates that can be reused by different City Objects (usually for trees). This is equivalent to the concept of "implicit geometries" in CityGML. See [[#geometry-templates]] for details.
+  - **may** have other members, and their value is not prescribed. Because these are not standard in CityJSON, they might be ignored by parsers.
 
 The minimal valid CityJSON object is thus:
 
@@ -111,35 +110,6 @@ While the order of the member values of a CityJSON should preferably be as above
 </div>
 
 
-## Transform Object 
-
-To reduce the size of a CityJSON object (and thus the size of files) and to ensure that only a fixed number of digits are stored for the coordinates of the geometries, the coordinates of the vertices of the geometries are represented integer values.
-We therefore need to store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). 
-
-A CityJSON object must therefore have one member `"transform"`, whose values are 2 mandatory JSON objects (`"scale"` and `"translate"`), both arrays with 3 values.
-
-The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
-
-It should be noticed that only the `"vertices"` at the root of the CityJSON object are affected by the transformation, the vertices for the Geometric templates and textures are not.
-
-To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the `"vertices"` member and:
-
-```
-v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
-v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
-v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
-```
-
-The following `"transform"` means that 2 important digits are kept (thus millimetre level if meters are the units of the CRS), and the translate usually mean that the is the minimum values of the axis-aligned bounding box (but does not need to).
-
-```javascript
-"transform": {
-    "scale": [0.001, 0.001, 0.001],
-    "translate": [442464.879, 5482614.692, 310.19]
-}
-```
-
-
 # City Object 
 
 A City Object is a JSON object for which the type member’s value is one of the following (of type string):
@@ -158,11 +128,15 @@ For example, a `"BuildingInstallation"` cannot be present in a dataset without b
 
 A City Object:
 
--   must have one member with the name `"geometry"`, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
--   may have one member with the name `"attributes"`, whose value is an object with the different attributes allowed by CityGML.
--   may have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
--   may have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant. 
--   of type 2nd-level must have one member `"parents"`, which consists of an array of the IDs (of type string) of the City Objects that are its parents. For the City Objects in the core module of CityJSON, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parents. Notice that a 2nd-level City Object may also have one member `"children"`, and that the `"children"` array only references the City Objects that are one level below the the current one in the hierarchy. For instance a `"BuildingPart"` that contains a `"BuildingInstallation"`.
+  - may have one member with the name `"geometry"`, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have be of different LoDs.
+  - may have one member with the name `"attributes"`, whose value is an object with the different attributes allowed by CityGML.
+  - may have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
+  - may have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant. 
+
+A City Object of type 2nd-level:
+
+  - must have one member `"parents"`, which consists of an array of the IDs (of type string) of the City Objects that are its parents. For the City Objects in the core module of CityJSON, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parents. 
+  - may have one member `"children"`, and that the `"children"` array only references the City Objects that are one level below the the current one in the hierarchy. For instance a `"BuildingPart"` that contains a `"BuildingInstallation"`.
 
 ```javascript
 "CityObjects": {
@@ -971,6 +945,33 @@ A given template can be used as the geometry (or as one of the geometries) of a 
 </div>
 
 
+# Transform Object 
+
+To reduce the size of a CityJSON object (and thus the size of files) and to ensure that only a fixed number of digits are stored for the coordinates of the geometries, the coordinates of the vertices of the geometries are represented integer values.
+We therefore need to store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). 
+
+A CityJSON object must therefore have one member `"transform"`, whose values are 2 mandatory JSON objects (`"scale"` and `"translate"`), both arrays with 3 values.
+
+The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
+
+It should be noticed that only the `"vertices"` at the root of the CityJSON object are affected by the transformation, the vertices for the Geometric templates and textures are not.
+
+To obtain the real position of a given vertex *v*, we must take the 3 values *vi* listed in the `"vertices"` member and:
+
+```
+v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
+v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
+v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
+```
+
+The following `"transform"` means that 2 important digits are kept (thus millimetre level if meters are the units of the CRS), and the translate usually mean that the is the minimum values of the axis-aligned bounding box (but does not need to).
+
+```javascript
+"transform": {
+    "scale": [0.001, 0.001, 0.001],
+    "translate": [442464.879, 5482614.692, 310.19]
+}
+```
 # Metadata
 
 The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows. 
