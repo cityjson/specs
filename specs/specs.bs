@@ -571,7 +571,7 @@ The geometry of a `"TunnelInstallation"` object can be represented with any of t
 <!--- TODO: check for the codelist of OtherConstruction -->
 
 This is used for constructions that are not buildings, bridges, or tunnels.
-For instance for permanent water tanks or electricity pylons.
+For instance for permanent water tanks, windmills, or electricity pylons.
 
 
 ```javascript
@@ -595,32 +595,41 @@ For instance for permanent water tanks or electricity pylons.
 
 ## CityObjectGroup
 
-The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood for instance), is possible in CityJSON. As in CityGML, the group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
+The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood in a city for instance), is possible in CityJSON. 
+The group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
 
-A City Object of type `"CityObjectGroup"` must have a member `"members"`, whose value is an array of the IDs of the City Objects that the group contains. Since a `"CityObjectGroup"` is also a City Object, it can be part of another group.
+Since a `"CityObjectGroup"` is also a City Object, it can be part of another group.
+
+A City Object of type `"CityObjectGroup"`:
+
+  - **must** have a member `"children"`, whose value is an array of the IDs of the City Objects that the group contains. As for other City Objects, the City Objects must have the ID of the group in `"parents"`. 
+  - **may** have a member `"children_roles"`, whose value is an array of strings describing the role of each City Object in the group; it must be of the same length as that of `"children"`.
+  - **may** have a member `"attributes"`.
+  - **may** have a member `"geometry"`, although only one geometry is allowed in the array of geometries. Notice that the `"lod"` property is rather meaningless, but is used to enforce uniformity with all the other geometries.
+
 
 ```javascript
 "CityObjects": {
   "my-neighbourhood": {
     "type": "CityObjectGroup",
-    "members": ["building1", "building2", "building666"]
+    "children": ["building1", "building2", "building666"]
   }
 }
 ```
 
-As for other City Objects, a City Object of type `"CityObjectGroup"` may have a member `"geometry"`, although only one geometry is allowed in the array of geometries.
-The `"lod"` property is rather meaningless, but is used to enforce uniformity with all the other geometries.
-This geometry could for instance be used to represent the boundary of a neighbourhood in a city, and each building in it is listed in the group.
-
 ```javascript
 "CityObjects": {
   "my-neighbourhood": {
     "type": "CityObjectGroup",
-    "members": ["building1", "building2"],
+    "attributes": {
+      "function": "Chibougamau Sud"
+    },
+    "children": ["building1", "building666"],
+    "children_roles": ["residential building", "voting location"],
     "geometry": [{
       "type": "MultiSurface",
       "lod": "2",
-      "boundaries": [ [[2, 4, 5]] ]
+      "boundaries": [ [[2, 41, 5, 77]] ]
     }]
   }
 }
@@ -646,11 +655,11 @@ A Geometry object is a JSON object for which the type member’s value is one of
 
 A Geometry object:
 
- - must have one member with the name `"lod"`, whose value must be a string with the LoD identifying the level-of-detail (LoD) of the geometry. This can be either a single digit (following the CityGML standards), or "X.Y"-formatted if the [improved LoDs by TU Delft](https://3d.bk.tudelft.nl/lod) are used.
- - must have one member with the name `"boundaries"`, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers. An integer refers to the index in the `"vertices"` array of the CityJSON object, and it is 0-based (ie the first element in the array has the index "0", the second one "1", etc.).
- - may have one member `"semantics"`, whose value is a JSON Object, as defined below.
- - may have one member `"material"`, whose value is a JSON Object, as defined below.
- - may have one member `"texture"`, whose value is a JSON Object, as defined below.
+ - **must** have one member with the name `"lod"`, whose value must be a string with the LoD identifying the level-of-detail (LoD) of the geometry. This can be either a single digit (following the CityGML standards), or "X.Y"-formatted if the [improved LoDs by TU Delft](https://3d.bk.tudelft.nl/lod) are used.
+ - **must** have one member with the name `"boundaries"`, whose value is a hierarchy of arrays (the depth depends on the Geometry object) with integers. An integer refers to the index in the `"vertices"` array of the CityJSON object, and it is 0-based (ie the first element in the array has the index "0", the second one "1", etc.).
+ - **may** have one member `"semantics"`, whose value is a JSON Object, as defined below.
+ - **may** have one member `"material"`, whose value is a JSON Object, as defined below.
+ - **may** have one member `"texture"`, whose value is a JSON Object, as defined below.
 
 
 <div class="note"> 
@@ -663,7 +672,7 @@ A Geometry object:
 
 A CityJSON must have one member named `"vertices"`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used to represent the Geometric Objects.
 
-  - one vertex must be an array with exactly 3 values, representing the *(x,y,z)* location of the vertex.
+  - one vertex **must** be an array with exactly 3 values, representing the *(x,y,z)* location of the vertex.
   - the array of vertices may be empty.
   - vertices may be repeated
 
@@ -752,14 +761,14 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
 
 ## Semantics of geometric primitives
 
-A Semantic Object is a JSON object representing the semantics of a primitive of a geometry (e.g. a surface of a building). It may also represent other attributes of the primitive (e.g. the slope of the roof or the solar potential). For surfacic and volumetric geometries (e.g. `MultiSurface`, `Solid` and `MultiSolid`), a primitive is a surface. If a geometry is a `MultiPoint` or a `MultiLineString`, then the primitives are its respective sub-parts: points and linestrings. 
+A Semantic Object is a JSON object representing the semantics of a primitive of a geometry (e.g. a surface of a building). It may also represent other attributes of the primitive (e.g. the slope of the roof or the solar potential). For surface and volumetric geometries (e.g. `MultiSurface`, `Solid` and `MultiSolid`), a primitive is a surface. If a geometry is a `MultiPoint` or a `MultiLineString`, then the primitives are its respective sub-parts: points and linestrings. 
 
 A Semantic Object:
 
-  - must have one member with the name `"type"`, whose value is one of the allowed value. These depend on the City Object, see below.
-  - may have an attribute `"parent"`, whose value is an integer pointing to another Semantic Object of the same geometry (index of it, 0-based). This is used to explicitly represent to which wall or roof a window or door belongs to; there can be only one parent.
-  - may have an attribute `"children"`, whose value is an array of integers pointing to other Semantic Objects of the same geometry (index of it, 0-based). This is used to explicitly represent the openings (windows and doors) of walls and roofs.
-  - may have other attributes in the form of a JSON key-value pair, where the value must not be a JSON object (but a string/number/integer/boolean).
+  - **must** have one member with the name `"type"`, whose value is one of the allowed value. These depend on the City Object, see below.
+  - **may** have an attribute `"parent"`, whose value is an integer pointing to another Semantic Object of the same geometry (index of it, 0-based). This is used to explicitly represent to which wall or roof a window or door belongs to; there can be only one parent.
+  - **may** have an attribute `"children"`, whose value is an array of integers pointing to other Semantic Objects of the same geometry (index of it, 0-based). This is used to explicitly represent the openings (windows and doors) of walls and roofs.
+  - **may** have other attributes in the form of a JSON key-value pair, where the value must not be a JSON object (but a string/number/integer/boolean).
 
 ```javascript
 {
@@ -803,7 +812,10 @@ Because in one given City Object (say a `"Building"`) several primitives can hav
 
 A Geometry object:
 
-  - may have one member with the name `"semantics"`, whose values are two properties: `"surfaces"` and `"values"`. Both have to be present.
+  - **may** have one member with the name `"semantics"`, whose values are two properties: `"surfaces"` and `"values"`. Both **must** be present.
+
+Also: 
+
   - the value of `"surfaces"` is an array of Semantic Objects.
   - the value of `"values"` is a hierarchy of arrays with integers. The depth depends on the Geometry object: for `MultiPoint` and `MultiLineString` this is a simple array of integers; for any other geometry type it is two less than the array `"boundaries"`. An integer refers to the index in the `"surfaces"` array of the same geometry, and it is 0-based. If one surface has no semantics, a value of `null` must be used.
 
@@ -839,12 +851,6 @@ A Geometry object:
   }
 }
 ```
-
-
-<div class="note">
-  A `null` value is used to specify that a given surface has no semantics, but to avoid having arrays filled with `null`, it is also possible to specify `null` for a shell or a whole Solid in a MultiSolid, the `null` propagates to the nested arrays.
-</div>
-
 
 ```javascript
 {
@@ -885,8 +891,8 @@ CityGML's Implicit Geometries, better known in computer graphics as *templates*,
 
 The Geometry Templates are defined as a JSON object that:
 
-  - must have one member with the name `"templates"`, whose value is an array of Geometry Objects.
-  - must have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that operations on the vertices (eg for CRS transformation, for [[#transform-object]], or calculating the bounding box of a dataset) will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
+  - **must** have one member with the name `"templates"`, whose value is an array of Geometry Objects.
+  - **must** have one member with the name `"vertices-templates"`, whose value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices index are not global is to ensure that operations on the vertices (eg for CRS transformation, for [[#transform-object]], or calculating the bounding box of a dataset) will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
 
 ```javascript
 "geometry-templates": {
@@ -917,9 +923,9 @@ The Geometry Templates are defined as a JSON object that:
 
 A given template can be used as the geometry (or as one of the geometries) of a City Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
 
-  - must have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
-  - must have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the reference point from which the transformations are applied, it is the "referencePoint" in CityGML.)
-  - must have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
+  - **must** have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
+  - **must** have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the reference point from which the transformations are applied, it is the "referencePoint" in CityGML.)
+  - **must** have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
 
 ```javascript
 {
@@ -941,7 +947,7 @@ A given template can be used as the geometry (or as one of the geometries) of a 
 ```
 
 <div class="note">
-  The CityJSON website has a [page to help developers to calculate coordinates](https://www.cityjson.org/help/dev/realcoords/) for Geometry Templates and other Geometry Objects.
+  The CityJSON website has a [page to help developers to calculate coordinates](https://www.cityjson.org/dev/realcoords/) for Geometry Templates and other Geometry Objects.
 </div>
 
 
@@ -972,6 +978,7 @@ The following `"transform"` means that 2 important digits are kept (thus millime
     "translate": [442464.879, 5482614.692, 310.19]
 }
 ```
+
 # Metadata
 
 The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows. 
@@ -990,7 +997,7 @@ To see all the possible ones, look at the schema file [metadata.schema.json](htt
     "phone": "+31-6666666666",
     "address": "Delft University of Technology, the Netherlands",
     "emailAddress": "elvis@tudelft.nl",
-    "contactType": "organization",
+    "contactType": "organisation",
     "website": "https://3d.bk.tudelft.nl"
   },
   "metadataStandard": "ISO 19115 - Geographic Information - Metadata",
@@ -1100,12 +1107,12 @@ The material is represented with the [X3D](http://www.web3d.org/documents/specif
 
 An Appearance Object is a JSON object that
 
-  - may have one member with the name `"materials"`, whose value is an array of Material Objects.
-  - may have one member with the name `"textures"`, whose value is an array of Texture Objects.
-  - may have both `"materials"` and `"textures"`.
-  - may have one member with the name `"vertex-texture"`, whose value is an array of coordinates of each so-called UV vertex of the city model.
-  - may have one member with the name `"default-theme-texture"`, whose value is the name of the default theme for the appearance (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
-  - may have one member with the name `"default-theme-material"`, whose value is the name of the default theme for the material (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
+  - **may** have one member with the name `"materials"`, whose value is an array of Material Objects.
+  - **may** have one member with the name `"textures"`, whose value is an array of Texture Objects.
+  - **may** have both `"materials"` and `"textures"`.
+  - **may** have one member with the name `"vertex-texture"`, whose value is an array of coordinates of each so-called UV vertex of the city model.
+  - **may** have one member with the name `"default-theme-texture"`, whose value is the name of the default theme for the appearance (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
+  - **may** have one member with the name `"default-theme-material"`, whose value is the name of the default theme for the material (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
 
 ```javascript
 "appearance": {
