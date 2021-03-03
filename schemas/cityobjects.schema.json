@@ -1203,8 +1203,8 @@
       {
         "properties": {
           "attributes": {
-            "trafficDirection": {
-              "type": {
+            "properties": {
+              "trafficDirection": {
                 "enum": [
                   "one-way",
                   "two-way"
