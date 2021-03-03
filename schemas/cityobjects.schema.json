@@ -526,13 +526,13 @@
               "CityObjectGroup"
             ]
           },
-          "members": {
+          "children_roles": {
             "type": "array",
-            "description": "the IDs of the CityObjects members of that group",
+            "description": "the role of each of the CityObjects members of that group",
             "items": {
               "type": "string"
             }
-          },
+          }, 
           "geometry": {
             "type": "array",
             "items": {
@@ -566,7 +566,7 @@
         },
         "required": [
           "type",
-          "members"
+          "children"
         ]
       }
     ]
