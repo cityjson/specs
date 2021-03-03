@@ -128,6 +128,16 @@
               "OtherConstruction"
             ]
           },
+          "attributes": {
+            "properties": {
+              "class": {
+                "enum": [
+                  "overkapping",
+                  "open loods"
+                ]
+              }
+            }
+          },
           "geometry": {
             "type": "array",
             "items": {
