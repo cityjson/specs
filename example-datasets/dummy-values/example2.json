@@ -1,6 +1,6 @@
 {
   "type": "CityJSON",
-  "version": "1.0",
+  "version": "1.1",
   "metadata": {
     "geographicalExtent": [
       0.0,
@@ -14,6 +14,11 @@
     "fileIdentifier": "a.json"
   },
   "CityObjects": {
+    "gr": {
+      "type": "CityObjectGroup",
+      "children": ["LondonTower", "oneroom"],
+      "children-roles": ["LondonTower", "oneroom2"]
+    },
     "LondonTower": {
       "type": "Building",
       "attributes": {
@@ -24,6 +29,7 @@
       },
       "hugo": "ledoux",
       "children": ["oneroom"],
+      "parents": ["gr"],
       "geometry": [
         {
           "type": "MultiSurface",
@@ -81,6 +87,24 @@
         }
       ]
     },
+    "oneroad": {
+      "type": "Road",
+      "attributes": {
+        "usage": "leisure",
+        "function": "leisure",
+        "trafficDirection": "one-way"
+      },
+      "children": ["oneroadsegment"]
+    },
+    "oneroadsegment": {
+      "type": "TransportationSection",
+      "attributes": {
+        "usage": "leisure",
+        "function": "leisure",
+        "trafficDirection": "one-way"
+      },
+      "parents": ["oneroad"]
+    },
     "oneroom": {
       "type": "BuildingRoom",
       "attributes": {
@@ -95,7 +119,7 @@
         ],
         "function": "leisure"
       },
-      "parents": ["LondonTower"],
+      "parents": ["LondonTower", "gr"],
       "geometry": [
         {
           "type": "MultiSurface",
@@ -287,6 +311,7 @@
     "oc1": {
       "type": "OtherConstruction",
       "attributes": {
+        "class": "overkapping",
         "usage": "leisure",
         "conditionOfConstruction": "demolished",
         "function": "leisure"
