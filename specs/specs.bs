@@ -1130,7 +1130,7 @@ An Appearance Object is a JSON object that
 
 ## Geometry Object having material(s)
 
-Each surface in a Geometry Object can have one or more materials assigned to it. To store the material of a surface, a Geometry Object may have a member `"material"`, the value of this member is a collection of key-value pairs, where the key is the *theme* of the material, and the value is one JSON object that must contain either:
+Each surface in a Geometry Object can have one or more materials assigned to it. To store the material of a surface, a Geometry Object may have a member `"material"`, the value of this member is a collection of key-value pairs, where the key is the *theme* of the material, and the value is one JSON object that **must** contain either:
 
   - one member `"values"`, whose value is a hierarchy of arrays with integers. Each integer refers to the position (0-based) in the `"materials"` member of the `"appearance"` member of the CityJSON object. If a surface has no material, then `null` should be used in the array. The depth of the array depends on the Geometry object, and is equal to the depth of the `"boundary"` array minus 2, because each surface (`[[]]`) gets one material.
   - one member `"value"`, whose value is one integer referring to the position (0-based) in the `"materials"` member of the `"appearance"` member of the CityJSON object. This is used because often the materials are used to colour full objects, and repetition of materials is not necessary.
@@ -1191,8 +1191,8 @@ In the following, the Solid has 4 surfaces, and there are 2 themes: "winter-text
 
 A Material Object:
 
-  - must have one member with the name `"name"`, whose value is a string identifying the material.
-  - may have the following members (their meaning is explained [there](http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material)):
+  - **must** have one member with the name `"name"`, whose value is a string identifying the material.
+  - **may** have the following members (their meaning is explained [there](http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material)):
 
     1.  `"ambientIntensity"`, whose value is a number between 0.0 and 1.0
     2.  `"diffuseColor"`, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
@@ -1232,11 +1232,11 @@ A Material Object:
 
 A Texture Object:
 
-  - must have one member with the name `"type"`, whose value is a string with either "PNG" or "JPG" as value
-  - must have one member with the name `"image"`, whose value is a string with the name of the file. This file can be a URL (eg `"http://www.hugo.com/filename.jpg"`), a relative path (eg `"appearances/myroof.jpg"`), or an absolute path (eg `"/home/elvis/mycityjson/appearances/myroof.jpg"`).
-  - may have one member with the name `"wrapMode"`, whose value can be any of the following: `"none"`, `"wrap"`, `"mirror"`, `"clamp"`, or `"border"`.
-  - may have one member with the name `"textureType"`, whose value can be any of the following: `"unknown"`, `"specific"`, or `"typical"`.
-  - may have one member with the name `"borderColor"`, whose value is an array with 4 numbers between 0.0 and 1.0 (RGBA colour).
+  - **must** have one member with the name `"type"`, whose value is a string with either "PNG" or "JPG" as value
+  - **must** have one member with the name `"image"`, whose value is a string with the name of the file. This file can be a URL (eg `"http://www.hugo.com/filename.jpg"`), a relative path (eg `"appearances/myroof.jpg"`), or an absolute path (eg `"/home/elvis/mycityjson/appearances/myroof.jpg"`).
+  - **may** have one member with the name `"wrapMode"`, whose value can be any of the following: `"none"`, `"wrap"`, `"mirror"`, `"clamp"`, or `"border"`.
+  - **may** have one member with the name `"textureType"`, whose value can be any of the following: `"unknown"`, `"specific"`, or `"typical"`.
+  - **may** have one member with the name `"borderColor"`, whose value is an array with 4 numbers between 0.0 and 1.0 (RGBA colour).
 
 ```javascript
 "textures": [
@@ -1311,7 +1311,7 @@ In the example below we have 2 Extensions: one named "Noise" and one named "Sola
   "extensions": {
     "Noise": {
       "url" : "https://someurl.org/noise.json",
-      "version": "1.0"
+      "version": "2.0"
     },
     "Solar_Potential": {
       "url" : "https://someurl.org/solar.json",
@@ -1326,7 +1326,7 @@ In the example below we have 2 Extensions: one named "Noise" and one named "Sola
 
 ## The Extension file
 
-A CityJSON Extension is a JSON object, and it must have the following 7 members:
+A CityJSON Extension is a JSON object, and it **must** have the following 7 members:
 
   1.  one member with the name `"type"`, whose value must be `"CityJSON_Extension"`;
   2.  one member with the name `"name"`, whose value must be a string identifying the extension;
@@ -1493,7 +1493,7 @@ And a CityJSON file would look like this:
 ```javascript
 {
   "type": "CityJSON",
-  "version": "0.9",
+  "version": "1.1",
   "CityObjects": {...},
   "vertices": [...],
   "+census": {
