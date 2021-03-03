@@ -1567,7 +1567,6 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
       {
         "properties": {
           "type": { "enum": ["+NoiseBuilding"] },
-          "toplevel": {"type": "boolean"},
           "attributes": {
             "properties": {
               "buildingLDenMin": {"type": "number"}
@@ -1581,11 +1580,32 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
 }
 ```
 
+```javascript
+"extraCityObjects": {
+  "+NoiseBuildingPart": {
+    "allOf": [
+      { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+      {
+        "properties": {
+          "type": { "enum": ["+NoiseBuildingPart"] },
+          "attributes": {
+            "properties": {
+              "buildingLDenMin": {"type": "number"}
+            }
+          }
+        },
+        "required": ["type", "parents"]
+      }
+    ]
+  }
+}
+```
+
 Since all City Objects are documented in the schemas of CityJSON (in [cityobjects.json](https://github.com/cityjson/specs/tree/master/schemas)), it is basically a matter of copying the parts needed in a new file and modifying its content. 
 
 A new name for the City Object must be given and it must begin with a `"+"`.
 
-Because City Objects can be of different levels (1st-level ones can exist by themselves; 2nd-level ones need to have a parent), we need to explicitly state this by using the property `"toplevel"`, which is a Boolean value.
+Because City Objects can be of different levels (1st-level ones can exist by themselves; 2nd-level ones need to have a parent), we need to explicitly define that `"parents"` is mandatory for 2nd-level objects.
 
 Please note that since JSON schemas do not allow inheritance, the only way to extend a City Object is to define an entirely new one (with a new name, eg `"+NoiseBuilding"`). 
 This is done by copying the schema of the parent City Object and extending it.
@@ -1598,10 +1618,9 @@ While one could define a new City Object and document it, if this new object doe
 
 1.  The name of a new City Object must begin with a `"+"`, eg `"+NoiseBuilding"`.
 2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"` and one `"geometry"`. If the object contains appearances, the same mechanism should be used so that the new City Objects can be processed without modification.
-3.  A new City Object must contain the property `"toplevel"`, whose value is a Boolean (true = 1st-level; false = 2nd-level).
-4.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
-5.  If a new City Object contains other objects and requires different geometries, then a new City Object needs to be defined using the parent-children structure of CityJSON, as used by `"Building"` and `"BuildingPart"`.
-6.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
-7.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
+3.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
+4.  If a new City Object contains other objects and requires different geometries, then a new City Object needs to be defined using the parent-children structure of CityJSON, as used by `"Building"` and `"BuildingPart"`.
+5.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
+6.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
 
 - - -
