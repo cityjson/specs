@@ -1298,6 +1298,52 @@
       }
     ]
   },
+  "TransportationSection": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractTransportationComplex"
+      },
+      {
+        "$ref": "#/_AbstractTransporationWay"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "TransportationSection"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "parents"
+        ]
+      }
+    ]
+  },  
+  "TransportationIntersection": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractTransportationComplex"
+      },
+      {
+        "$ref": "#/_AbstractTransporationWay"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "TransportationIntersection"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "parents"
+        ]
+      }
+    ]
+  },  
   "TINRelief": {
     "allOf": [
       {
