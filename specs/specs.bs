@@ -580,11 +580,19 @@ One location (a `"MultiPoint"`) can be given, for instance to locate the front d
 
 ## Tunnel
 
-Three City Objects are related to tunnels: `"Tunnel"`, `"TunnelPart"`, and `"TunnelInstallation"`.
+Six City Objects are related to tunnels: 
+
+  - `"Tunnel"` 
+  - `"TunnelPart"`
+  - `"TunnelInstallation"`
+  - `"TunnelConstructiveElement"`
+  - `"TunnelHollowSpace"`
+  - `"TunnelFurniture"`
+
 
 The geometry of both `"Tunnel"` and `"TunnelPart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
 
-The geometry of a `"TunnelInstallation"` object can be represented with any of the Geometry Objects.
+The geometry of the other four objects can be represented with any of the Geometry Objects.
 
 ```javascript
 "CityObjects": {
