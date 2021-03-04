@@ -587,6 +587,7 @@ Observe that the "Section", "Intersection", and "Track" classes from CityGML are
   "parents": ["ma_rue"],
   "geometry": [...],
 }
+```
 
 
 Similarly, the CityGML classes "TrafficArea", "AuxiliaryTrafficArea", "Marking", and "Hole" are implemented as semantic surface (see [[#semantics-of-geometric-primitives]]).
