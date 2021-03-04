@@ -1387,7 +1387,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 7 memb
 {
   "type": "CityJSON_Extension",
   "name": "Noise",
-  "uri": "https://someurl.org/noise.json",
+  "uri": "https://someurl.org/noise.ext.json",
   "version": "0.5",
   "description": "Extension to model the noise"
   "extraRootProperties": {},     
@@ -1397,7 +1397,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 7 memb
 ```
 
 A CityJSON Extension object must be in a standalone file and it must be located in a folder `/extensions` in the folder where the CityJSON schemas are located. 
-For a new extension `noise.json` the following structure would result:
+For a new extension `noise.ext.json` the following structure would result:
 
 ```console
 |-- appearance.schema.json
@@ -1407,7 +1407,7 @@ For a new extension `noise.json` the following structure would result:
 |-- geomtemplates.schema.json
 |-- metadata.schema.json
 |-- /extensions
-    |-- noise.json
+    |-- noise.ext.json
 ```
 
 This also means that if an element of the Extension reuses or references structures defined in the schemas of CityJSON, then the relative path `../` must be used. 
@@ -1540,6 +1540,12 @@ And a CityJSON file would look like this:
 {
   "type": "CityJSON",
   "version": "1.1",
+  "extensions": {
+    "Census": {
+      "url": "https://someurl.org/census.ext.json",
+      "version": "0.7"
+    }
+  },
   "CityObjects": {...},
   "vertices": [...],
   "+census": {
@@ -1596,7 +1602,7 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
 }
 ```
 
-Since all City Objects are documented in the schemas of CityJSON (in [cityobjects.json](https://github.com/cityjson/specs/tree/master/schemas)), it is basically a matter of copying the parts needed in a new file and modifying its content. 
+Since all City Objects are documented in the schemas of CityJSON (in [cityobjects.schema.json](https://github.com/cityjson/specs/tree/master/schemas)), it is basically a matter of copying the parts needed in a new file and modifying its content. 
 
 A new name for the City Object must be given and it must begin with a `"+"`.
 
