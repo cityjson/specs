@@ -9,11 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## Unreleased - coming in v1.1
-- support for CityGML v3 (add `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, and Other Construction)
-- change CRS to 2 simple values: `authority:code` => EPSG:28992
-- change LoD to string (instead of float) 
+- add support for CityGML v3.0.0: 
+  - add interior of Buildings/Tunnels/Bridges classes, eg `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, `BridgeRoom` 
+  - add `OtherConstruction`
+  - updated Transportation classes to be compliant
+- change the property "lod" of geometries from number to string 
 - expanded metadata to better align with ISO19115
-- small fixes to facilitate life
+- CityJSON files are always compressed, that is their vertices are integers and the "transform" property is mandatory
+- City Objects do not have to have a "geometry" anymore
+- `CityObjectGroup` has the role added as a property, to define what the role of each object in the group is
+
 
 
 ## [1.0.2] - 2020-11-06
