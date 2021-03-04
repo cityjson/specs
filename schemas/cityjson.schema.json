@@ -78,12 +78,6 @@
             "$ref": "cityobjects.schema.json#/Waterway"
           },
           {
-            "$ref": "cityobjects.schema.json#/TransportationSection"
-          },          
-          {
-            "$ref": "cityobjects.schema.json#/TransportationIntersection"
-          },          
-          {
             "$ref": "cityobjects.schema.json#/TransportSquare"
           },          
           {

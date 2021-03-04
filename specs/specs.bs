@@ -313,16 +313,35 @@ As is the case in CityGML, the address information is specified using the [xAL a
 
 ## Transportation
 
-Six City Objects are related to transportation: 
+Four City Objects are related to transportation: 
 
   - `"Road"`
   - `"Railway"`
   - `"Waterway"`
   - `"TransportSquare"` (to model for instance parking lots and squares)
-  - `"TransportationSection"`
-  - `"TransportationIntersection"`
 
-Observe that the "Track" class from CityGML is omitted because it simply can be a road with specific attributes. 
+Observe that the "Section", "Intersection", and "Track" classes from CityGML are omitted because they simply can be handled with specific attributes. 
+
+```javascript
+"ma_rue": {
+  "type": "Road", 
+  "attributes": {
+    "class": "one-way",
+    "clearanceSpace": 2.23,
+    "clearanceSpaceUnit": "meter"
+  },
+  "children": ["sect1", "sect2"],
+  "geometry": [...]
+}
+"sect1": {
+  "type": "Road", 
+  "attributes": {
+    "class": "section"
+  },
+  "parents": ["ma_rue"],
+  "geometry": [...],
+}
+
 
 Similarly, the CityGML classes "TrafficArea", "AuxiliaryTrafficArea", "Marking", and "Hole" are implemented as semantic surface (see [[#semantics-of-geometric-primitives]]).
 That is, the surface representing a road should be split into sub-surfaces (therefore forming a `"MultiSurface"` or a `"CompositeSurface"`), and each of the sub-surfaces has semantics.
@@ -356,29 +375,6 @@ That is, the surface representing a road should be split into sub-surfaces (ther
     ],
     "values": [0, 1, null, 2]
   }
-}
-```
-
-```javascript
-"ma_rue": {
-  "type": "Road", 
-  "attributes": {
-    "trafficDirection": "one-way",
-    "clearanceSpace": 2.23,
-    "clearanceSpaceUnit": "meter"
-  },
-  "children": ["sec1", "sec2"]
-}
-"sec1": {
-  "type": "TransportationSection", 
-  "parents": ["ma_rue"],
-  "geometry": [{
-    "type": "MultiLineString",
-    "lod": "1",
-    "boundaries": [
-       [2, 3, 5], [77, 55, 212]
-    ]
-  }],
 }
 ```
 
