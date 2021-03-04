@@ -189,7 +189,7 @@ And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but an
 }
 ```
 
-## Attributes
+## Attributes for all City Objects
 
 The attributes prescribed by CityGML differ per City Object, and can be seen either in the [official CityGML documentation v2.0.0](https://portal.opengeospatial.org/files/?artifact_id=47842) or in the schemas of CityJSON. 
 
@@ -221,6 +221,45 @@ While CityGML does not prescribe the values for these, the Annex C of the [offic
       "class": "1010"
     },
     "geometry": [{...}]
+  }
+}
+```
+
+
+## Bridge
+
+Six City Objects are related to bridges: 
+
+ - `"Bridge"` 
+ - `"BridgePart"` 
+ - `"BridgeInstallation"` 
+ - `"BridgeConstructionElement"`
+ - `"BridgeRoom"`
+ - `"BridgeFurniture"`
+
+
+The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
+The geometry of the four other objects can be represented with any of the Geometry Objects.
+
+A City Object of type `"Bridge"` or `"BridgePart"` may have a member `"address"`, whose value is a JSON object describing the address. 
+One location (a `"MultiPoint"`) can be given, for instance to locate the front door inside the building.
+
+```javascript
+"CityObjects": {
+  "LondonTower": {
+    "type": "Bridge", 
+    "address": {
+      "CountryName": "UK",
+      "LocalityName": "London"
+    },
+    "children": ["Bext1", "Bext2", "Inst-2017-11-14"],
+    "geometry": [{
+      "type": "MultiSurface",
+      "lod": "2",
+      "boundaries": [
+        [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+      ]
+    }]    
   }
 }
 ```
@@ -310,6 +349,213 @@ As is the case in CityGML, the address information is specified using the [xAL a
 }
 ```
 
+## CityFurniture
+
+The geometry of a City Object of type `"CityFurniture"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
+
+```javascript
+"mystopsign": {
+  "type": "CityFurniture", 
+  "attributes": { 
+    "function": "bus stop"
+  },
+  "geometry": [{
+    "type": "MultiSurface",
+    "lod": "2",
+    "boundaries": [
+      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+    ]
+  }]
+}
+```
+
+
+## CityObjectGroup
+
+The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood in a city for instance), is possible in CityJSON. 
+The group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
+
+Since a `"CityObjectGroup"` is also a City Object, it can be part of another group.
+
+A City Object of type `"CityObjectGroup"`:
+
+  - **must** have a member `"children"`, whose value is an array of the IDs of the City Objects that the group contains. As for other City Objects, the City Objects must have the ID of the group in `"parents"`. 
+  - **may** have a member `"children_roles"`, whose value is an array of strings describing the role of each City Object in the group; it must be of the same length as that of `"children"`.
+  - **may** have a member `"attributes"`.
+  - **may** have a member `"geometry"`, although only one geometry is allowed in the array of geometries. Notice that the `"lod"` property is rather meaningless, but is used to enforce uniformity with all the other geometries.
+
+
+```javascript
+"CityObjects": {
+  "my-neighbourhood": {
+    "type": "CityObjectGroup",
+    "children": ["building1", "building2", "building666"]
+  }
+}
+```
+
+```javascript
+"CityObjects": {
+  "my-neighbourhood": {
+    "type": "CityObjectGroup",
+    "attributes": {
+      "function": "Chibougamau Sud"
+    },
+    "children": ["building1", "building666"],
+    "children_roles": ["residential building", "voting location"],
+    "geometry": [{
+      "type": "MultiSurface",
+      "lod": "2",
+      "boundaries": [ [[2, 41, 5, 77]] ]
+    }]
+  }
+}
+```
+
+
+## GenericCityObject
+
+<!-- TODO: v3 has no GenericCityObject, just Generics package. And one can inherit, so better -->
+<!-- to leave the v2 class I reckon. Generic attributes are dealt with with JSON property  -->
+<!-- having a string that are allowed -->
+
+This object should be used for objects that are not covered explicitly by any of the CityGML classes.
+
+The geometry of a City Object of type `"GenericCityObject"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
+
+```javascript
+"whatisthat": {
+  "type": "GenericCityObject", 
+  "attributes": { 
+    "class": "a big bucket of water",
+    "usage": "it's not clear"
+  },
+  "geometry": [{
+    "type": "CompositeSurface",
+    "lod": "1",
+    "boundaries": [
+      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+    ]
+  }]
+}
+```
+
+
+
+## LandUse
+
+The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"` or `"CompositeSurface"`.
+
+```javascript
+"oneparcel": {
+  "type": "LandUse", 
+  "geometry": [{
+    "type": "MultiSurface",
+    "lod": "1",
+    "boundaries": [
+      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+    ]
+  }]    
+}
+```
+
+
+## OtherConstruction
+
+<!--- TODO: https://docs.geostandaarden.nl/imgeo/catalogus/bgt/#typeoverigbouwwerk -->
+<!--- TODO: check for the codelist of OtherConstruction -->
+<!--- TODO: https://github.com/opengeospatial/CityGML-3.0/blob/master/Archive/WP%2009%20Resources/Codelists/OtherConstruction_function.txt -->
+
+This is used for constructions that are not buildings, bridges, or tunnels.
+For instance for permanent water tanks, windmills, or electricity pylons.
+
+
+```javascript
+"mypylon": {
+  "type": "OtherConstruction", 
+  "attributes": { 
+    "class": "pylon",
+    "conditionOfConstruction": "underConstruction"
+  },
+  "geometry": [{
+    "type": "MultiSurface",
+    "lod": "2",
+    "boundaries": [
+       [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], ...
+    ]
+  }] 
+}
+```
+
+
+## PlantCover
+
+The geometry of a City Object of type `"PlantCover"` can be of type `"MultiSurface"` or `"MultiSolid"`.
+
+```javascript
+"myplants": {
+  "type": "PlantCover", 
+  "attributes": { 
+    "averageHeight": 11.05
+  },
+  "geometry": [{
+    "type": "MultiSolid",
+    "lod": "2",
+    "boundaries": [
+      [
+        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[10, 13, 22, 31]] ]
+      ],
+      [
+        [ [[5, 34, 31, 12]], [[44, 54, 62, 74]], [[10, 111, 445, 222]], [[111, 123, 922, 66]] ]
+      ]  
+    ]
+  }]    
+}
+```
+
+
+## SolitaryVegetationObject
+
+The geometry of a City Object of type `"SolitaryVegetationObject"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
+
+```javascript
+"onebigtree": {
+  "type": "SolitaryVegetationObject", 
+  "attributes": { 
+    "trunkDiameter": 5.3,
+    "crownDiameter": 11.0
+  },
+  "geometry": [{
+    "type": "MultiPoint",
+    "lod": "1",
+    "boundaries": [1]
+  }]
+}
+```
+
+
+## TINRelief
+
+The geometry of a City Object of type `"TINRelief"` can only be of type `"CompositeSurface"`.
+
+CityJSON does not define a specific Geometry Object for a TIN (triangulated irregular network), it is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
+
+Notice that in practice any `"CompositeSurface"` is allowed for encoding a terrain, and that arbitrary polygons could also be used (not just triangles).
+
+```javascript
+"myterrain01": {
+  "type": "TINRelief", 
+  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
+  "geometry": [{
+    "type": "CompositeSurface",
+    "lod": "1",
+    "boundaries": [
+       [[0, 3, 2]], [[4, 5, 6]], [[0, 1, 5]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
+    ]
+  }]    
+}
+```
+
 
 ## Transportation
 
@@ -378,202 +624,6 @@ That is, the surface representing a road should be split into sub-surfaces (ther
 }
 ```
 
-
-## TINRelief
-
-The geometry of a City Object of type `"TINRelief"` can only be of type `"CompositeSurface"`.
-
-CityJSON does not define a specific Geometry Object for a TIN (triangulated irregular network), it is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
-
-Notice that in practice any `"CompositeSurface"` is allowed for encoding a terrain, and that arbitrary polygons could also be used (not just triangles).
-
-```javascript
-"myterrain01": {
-  "type": "TINRelief", 
-  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
-  "geometry": [{
-    "type": "CompositeSurface",
-    "lod": "1",
-    "boundaries": [
-       [[0, 3, 2]], [[4, 5, 6]], [[0, 1, 5]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
-    ]
-  }]    
-}
-```
-
-
-## WaterBody
-
-The geometry of a City Object of type `"WaterBody"` can be of types: `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
-
-```javascript
-"mygreatlake": {
-  "type": "WaterBody", 
-  "attributes": {
-    "usage": "leisure",
-  },
-  "geometry": [{
-    "type": "Solid",
-    "lod": "2",
-    "boundaries": [
-      [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]] ]
-    ]
-  }]    
-}               
-```
-
-
-## LandUse
-
-The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"` or `"CompositeSurface"`.
-
-```javascript
-"oneparcel": {
-  "type": "LandUse", 
-  "geometry": [{
-    "type": "MultiSurface",
-    "lod": "1",
-    "boundaries": [
-      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
-    ]
-  }]    
-}
-```
-
-
-## PlantCover
-
-The geometry of a City Object of type `"PlantCover"` can be of type `"MultiSurface"` or `"MultiSolid"`.
-
-```javascript
-"myplants": {
-  "type": "PlantCover", 
-  "attributes": { 
-    "averageHeight": 11.05
-  },
-  "geometry": [{
-    "type": "MultiSolid",
-    "lod": "2",
-    "boundaries": [
-      [
-        [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[10, 13, 22, 31]] ]
-      ],
-      [
-        [ [[5, 34, 31, 12]], [[44, 54, 62, 74]], [[10, 111, 445, 222]], [[111, 123, 922, 66]] ]
-      ]  
-    ]
-  }]    
-}
-```
-
-## SolitaryVegetationObject
-
-The geometry of a City Object of type `"SolitaryVegetationObject"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
-
-```javascript
-"onebigtree": {
-  "type": "SolitaryVegetationObject", 
-  "attributes": { 
-    "trunkDiameter": 5.3,
-    "crownDiameter": 11.0
-  },
-  "geometry": [{
-    "type": "MultiPoint",
-    "lod": "1",
-    "boundaries": [1]
-  }]
-}
-```
-
-
-## CityFurniture
-
-The geometry of a City Object of type `"CityFurniture"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
-
-```javascript
-"mystopsign": {
-  "type": "CityFurniture", 
-  "attributes": { 
-    "function": "bus stop"
-  },
-  "geometry": [{
-    "type": "MultiSurface",
-    "lod": "2",
-    "boundaries": [
-      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
-    ]
-  }]
-}
-```
-
-
-## GenericCityObject
-
-<!-- TODO: v3 has no GenericCityObject, just Generics package. And one can inherit, so better -->
-<!-- to leave the v2 class I reckon. Generic attributes are dealt with with JSON property  -->
-<!-- having a string that are allowed -->
-
-This object should be used for objects that are not covered explicitly by any of the CityGML classes.
-
-The geometry of a City Object of type `"GenericCityObject"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
-
-```javascript
-"whatisthat": {
-  "type": "GenericCityObject", 
-  "attributes": { 
-    "class": "a big bucket of water",
-    "usage": "it's not clear"
-  },
-  "geometry": [{
-    "type": "CompositeSurface",
-    "lod": "1",
-    "boundaries": [
-      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
-    ]
-  }]
-}
-```
-
-
-## Bridge
-
-Six City Objects are related to bridges: 
-
- - `"Bridge"` 
- - `"BridgePart"` 
- - `"BridgeInstallation"` 
- - `"BridgeConstructionElement"`
- - `"BridgeRoom"`
- - `"BridgeFurniture"`
-
-
-The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
-The geometry of the four other objects can be represented with any of the Geometry Objects.
-
-A City Object of type `"Bridge"` or `"BridgePart"` may have a member `"address"`, whose value is a JSON object describing the address. 
-One location (a `"MultiPoint"`) can be given, for instance to locate the front door inside the building.
-
-```javascript
-"CityObjects": {
-  "LondonTower": {
-    "type": "Bridge", 
-    "address": {
-      "CountryName": "UK",
-      "LocalityName": "London"
-    },
-    "children": ["Bext1", "Bext2", "Inst-2017-11-14"],
-    "geometry": [{
-      "type": "MultiSurface",
-      "lod": "2",
-      "boundaries": [
-        [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
-      ]
-    }]    
-  }
-}
-```
-
-
 ## Tunnel
 
 Six City Objects are related to tunnels: 
@@ -584,7 +634,6 @@ Six City Objects are related to tunnels:
   - `"TunnelConstructiveElement"`
   - `"TunnelHollowSpace"`
   - `"TunnelFurniture"`
-
 
 The geometry of both `"Tunnel"` and `"TunnelPart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
 
@@ -611,77 +660,26 @@ The geometry of the other four objects can be represented with any of the Geomet
 ```
 
 
-## OtherConstruction
 
-<!--- TODO: https://docs.geostandaarden.nl/imgeo/catalogus/bgt/#typeoverigbouwwerk -->
-<!--- TODO: check for the codelist of OtherConstruction -->
-<!--- TODO: https://github.com/opengeospatial/CityGML-3.0/blob/master/Archive/WP%2009%20Resources/Codelists/OtherConstruction_function.txt -->
+## WaterBody
 
-This is used for constructions that are not buildings, bridges, or tunnels.
-For instance for permanent water tanks, windmills, or electricity pylons.
-
+The geometry of a City Object of type `"WaterBody"` can be of types: `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
 
 ```javascript
-"mypylon": {
-  "type": "OtherConstruction", 
-  "attributes": { 
-    "class": "pylon",
-    "conditionOfConstruction": "underConstruction"
+"mygreatlake": {
+  "type": "WaterBody", 
+  "attributes": {
+    "usage": "leisure",
   },
   "geometry": [{
-    "type": "MultiSurface",
+    "type": "Solid",
     "lod": "2",
     "boundaries": [
-       [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], ...
+      [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]] ]
     ]
-  }] 
-}
+  }]    
+}               
 ```
-
-
-
-## CityObjectGroup
-
-The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood in a city for instance), is possible in CityJSON. 
-The group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
-
-Since a `"CityObjectGroup"` is also a City Object, it can be part of another group.
-
-A City Object of type `"CityObjectGroup"`:
-
-  - **must** have a member `"children"`, whose value is an array of the IDs of the City Objects that the group contains. As for other City Objects, the City Objects must have the ID of the group in `"parents"`. 
-  - **may** have a member `"children_roles"`, whose value is an array of strings describing the role of each City Object in the group; it must be of the same length as that of `"children"`.
-  - **may** have a member `"attributes"`.
-  - **may** have a member `"geometry"`, although only one geometry is allowed in the array of geometries. Notice that the `"lod"` property is rather meaningless, but is used to enforce uniformity with all the other geometries.
-
-
-```javascript
-"CityObjects": {
-  "my-neighbourhood": {
-    "type": "CityObjectGroup",
-    "children": ["building1", "building2", "building666"]
-  }
-}
-```
-
-```javascript
-"CityObjects": {
-  "my-neighbourhood": {
-    "type": "CityObjectGroup",
-    "attributes": {
-      "function": "Chibougamau Sud"
-    },
-    "children": ["building1", "building666"],
-    "children_roles": ["residential building", "voting location"],
-    "geometry": [{
-      "type": "MultiSurface",
-      "lod": "2",
-      "boundaries": [ [[2, 41, 5, 77]] ]
-    }]
-  }
-}
-```
-
 
 # Geometry Objects
 
