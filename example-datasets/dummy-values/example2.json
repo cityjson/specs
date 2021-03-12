@@ -19,6 +19,9 @@
       "children": ["LondonTower", "oneroom"],
       "children-roles": ["LondonTower", "oneroom2"]
     },
+    "LondonTower2": {
+      "type": "Building"
+    },
     "LondonTower": {
       "type": "Building",
       "attributes": {
