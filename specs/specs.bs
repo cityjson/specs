@@ -1701,4 +1701,9 @@ While one could define a new City Object and document it, if this new object doe
 5.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 6.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
 
+
+# JSON Schemas
+
+The [JSON schemas](https://json-schema.org/) of the specifications are publicly available at [https://3d.bk.tudelft.nl/schemas/cityjson/](https://3d.bk.tudelft.nl/schemas/cityjson/).
+
 - - -
