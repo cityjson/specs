@@ -1319,6 +1319,61 @@ A Appearance Object may have one member named `"vertices-texture"`, whose value 
 ```
 
 
+# Handling large files 
+
+Because CityJSON aims at being easy-to-use and developers friendly, it is advised to keep the size of CityJSON files small. 
+Files of several gigabytes are bad practice, and should be avoided since users will have great difficulties visualising and manipulating them.
+
+## Decomposing an area into parts/tiles
+
+One solution is to subdivide a dataset into tiles or regions, and ensure that each part has a reasonable size.
+Each part becomes a CityJSON file.
+
+
+## Streaming CityJSON with "CityJSONFeature"
+
+Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in a [JSON Lines text](https://jsonlines.org) (also called newline-delimited JSON).
+This is a format to store several JSON objects in a single file, and allows the processing of each object one at a time.
+
+A CityJSON Feature:
+
+  - is a JSON object.
+  - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`;
+  - **must** have one member with the name `"id"`, whose value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent;
+  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). All the children of the `"CityJSONFeature"` must be listed.
+  - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects for the JSON object (warning: the vertices are local to the JSON object).
+  - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
+  - **must not** have other members.
+    
+The following root property of a City Object are not allowed:
+
+  - `"transform"` 
+  - `"version"` 
+  - `"metadata"` 
+  - `"geometry-templates"`, these should be resolved/dereferenced
+  - `"extensions"` not present: in the metadata or collection
+
+These property may be accessible, for instance as a JSON object in a JSON Lines text stream.
+
+```json
+{
+  "type": "CityJSONFeature",
+  "id": "myid", 
+  "CityObjects": {},
+  "vertices": [],
+  "appearance": {}
+}
+```
+
+An example of a JSON Lines text
+```json
+{"type": "CityJSON","version": "1.1","transform":{...},"metadata":{...}}
+{"type": "CityJSONFeature", "id": "a", "CityObjects":{...},"vertices":[...]} 
+{"type": "CityJSONFeature", "id": "b", "CityObjects":{...},"vertices":[...]} 
+{"type": "CityJSONFeature", "id": "c", "CityObjects":{...},"vertices":[...]} 
+```
+
+
 # Extensions 
 
 CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate the data model, schemas should be seen as basically validating the syntax of a JSON document.
