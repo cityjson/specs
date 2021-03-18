@@ -201,9 +201,8 @@ All the City Objects have the following 3 possible attributes:
   2. `"function"`
   3. `"usage"`
 
-<!--- TODO: codelist? check the schemas -->
 
-While CityGML does not prescribe the values for these, the Annex C of the [official CityGML documentation v2.0.0](https://portal.opengeospatial.org/files/?artifact_id=47842) provides code lists that can be used. In CityJSON, as can be seen in the schemas, the values should be a string, thus either the name of the values should be used, or the code as a string:
+Each of the City Object can potentially have specific attributes defined in the CityGML data model, these seen in the schemas ([[#json-schemas]]).
 
 ```javascript
 "CityObjects": {
