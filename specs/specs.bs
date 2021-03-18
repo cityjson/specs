@@ -1332,7 +1332,7 @@ Each part becomes a CityJSON file.
 
 ## Streaming CityJSON with "CityJSONFeature"
 
-Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in a [JSON Lines text](https://jsonlines.org) (also called newline-delimited JSON).
+Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in a [JSON Lines text](https://jsonlines.org) (also called [Newline Delimited JSON](http://ndjson.org)).
 This is a format to store several JSON objects in a single file, and allows the processing of each object one at a time.
 
 A CityJSON Feature:
