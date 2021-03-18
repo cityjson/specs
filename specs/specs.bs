@@ -1384,7 +1384,8 @@ The following root property of a City Object are not allowed:
   - `"geometry-templates"`, these should be resolved/dereferenced
   - `"extensions"` not present: in the metadata or collection
 
-These property may be accessible for instance as a JSON object in a JSON Lines text stream, as in the following example:
+These property may be accessible for instance as a JSON object (the first one) in a [JSON Lines text](https://jsonlines.org/) stream, as in the following example.
+Howewer, CityJSON does not prescribe the format that should be used in practice.
 
 ```json
 {"type": "CityJSON","version": "1.1","transform":{...},"metadata":{...}}
