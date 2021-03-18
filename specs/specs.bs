@@ -123,8 +123,6 @@ Both types are represented as a City Object in a CityJSON Object.
 1.  **1st-level**: City Objects that can "exist by themselves".
 2.  **2nd-level**: City Objects that need to have a `"parents"` to exist.
 
-<!--- TODO: update the figure of COs -->
-
 For example, a `"BuildingInstallation"` cannot be present in a dataset without being the `"children"` of a `"Building"`, but a `"Building"` can be present by itself.
 
 A City Object:
@@ -1340,7 +1338,8 @@ A CityJSON Feature:
   - is a JSON object.
   - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`;
   - **must** have one member with the name `"id"`, whose value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent;
-  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). All the children of the `"CityJSONFeature"` must be listed.
+  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). All the children of the `"CityJSONFeature"` must be listed. 
+  <!-- TODO: how deep? -->
   - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects for the JSON object (warning: the vertices are local to the JSON object).
   - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
   - **must not** have other members.
