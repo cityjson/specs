@@ -111,7 +111,7 @@ While the order of the member values of a CityJSON should preferably be as above
 </div>
 
 
-# City Object 
+# The different City Objects 
 
 A City Object is a JSON object for which the type member’s value is one of the following (of type string):
 
