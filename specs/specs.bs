@@ -1345,16 +1345,6 @@ A CityJSON Feature:
   - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
   - **must not** have other members.
     
-The following root property of a City Object are not allowed:
-
-  - `"transform"` 
-  - `"version"` 
-  - `"metadata"` 
-  - `"geometry-templates"`, these should be resolved/dereferenced
-  - `"extensions"` not present: in the metadata or collection
-
-These property may be accessible, for instance as a JSON object in a JSON Lines text stream.
-
 ```json
 {
   "type": "CityJSONFeature",
@@ -1365,7 +1355,37 @@ These property may be accessible, for instance as a JSON object in a JSON Lines 
 }
 ```
 
-An example of a JSON Lines text
+```json
+{
+  "type": "CityJSONFeature",
+  "id": "id-1", 
+  "CityObjects": {
+    "id-1": {
+      "type": "Building", 
+      "attributes": { 
+        "roofType": "gabled roof"
+      },
+      "children": ["mybalcony"]
+    },
+    "id-56": {
+      "type": "BuildingInstallation", 
+      "parents": ["id-1"]
+    }
+  },
+  "vertices": [...]
+}
+```
+
+The following root property of a City Object are not allowed:
+
+  - `"transform"` 
+  - `"version"` 
+  - `"metadata"` 
+  - `"geometry-templates"`, these should be resolved/dereferenced
+  - `"extensions"` not present: in the metadata or collection
+
+These property may be accessible for instance as a JSON object in a JSON Lines text stream, as in the following example:
+
 ```json
 {"type": "CityJSON","version": "1.1","transform":{...},"metadata":{...}}
 {"type": "CityJSONFeature", "id": "a", "CityObjects":{...},"vertices":[...]} 
