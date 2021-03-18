@@ -1367,7 +1367,7 @@ A CityJSON Feature:
       },
       "children": ["mybalcony"]
     },
-    "id-56": {
+    "mybalcony": {
       "type": "BuildingInstallation", 
       "parents": ["id-1"]
     }
