@@ -1365,11 +1365,13 @@ A CityJSON Feature:
       "attributes": { 
         "roofType": "gabled roof"
       },
-      "children": ["mybalcony"]
+      "children": ["mybalcony"],
+      "geometry": [...]
     },
     "mybalcony": {
       "type": "BuildingInstallation", 
-      "parents": ["id-1"]
+      "parents": ["id-1"],
+      "geometry": [...]
     }
   },
   "vertices": [...]
