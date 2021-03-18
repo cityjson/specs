@@ -52,7 +52,6 @@ Boilerplate: idl-index no, property-index no, references no, conformance no
 -->                                                    
                                                     
 <!--- TODO: myfile.city.json -->
-<!--- TODO: find the schema there: https://3d.bk.tudelft.nl -->
 
 # CityJSON Object
 
@@ -188,6 +187,8 @@ And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but an
 ```
 
 ## Attributes for all City Objects
+
+<!-- TODO: remove the link to CityGML v2 for the attributes -->
 
 The attributes prescribed by CityGML differ per City Object, and can be seen either in the [official CityGML documentation v2.0.0](https://portal.opengeospatial.org/files/?artifact_id=47842) or in the schemas of CityJSON. 
 
