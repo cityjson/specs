@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.1.0-beta.1
+Title: CityJSON Specifications 1.1.0-beta.2
 Shortname: CityJSON
 Status: LS
 Level: none
@@ -1332,12 +1332,15 @@ One solution is to subdivide a dataset into tiles or regions, and ensure that ea
 Each part becomes a CityJSON file.
 
 
-## Text sequences and streaming
+## Text sequences and streaming with CityJSONFeature
 
 Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in a [JSON Lines text](https://jsonlines.org) (also called [Newline Delimited JSON](http://ndjson.org)).
 This is a format to store several JSON objects in a single file, and allows the processing of each object one at a time.
 
-A CityJSON Feature:
+A CityJSON Feature Object allows us to store one feature, for instance a `"Building"` with eventually its children `"BuildingPart"` and/or `"BuildingInstallation"`.
+Unlike a CityJSON Object, all the vertices and appearances of the object are *local*.
+
+A CityJSON Feature Object:
 
   - is a JSON object.
   - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`;
@@ -1389,7 +1392,7 @@ The following root property of a City Object are not allowed:
   - `"geometry-templates"`, these should be resolved/dereferenced
   - `"extensions"` not present: in the metadata or collection
 
-These property may be accessible for instance as a JSON object (the first one) in a [JSON Lines text](https://jsonlines.org/) stream, as in the following example.
+These property may be accessible for instance as a JSON object (the first one) in a [JSON Lines text](https://jsonlines.org/) stream, as in the following example:
 
 ```json
 {"type": "CityJSON","version": "1.1","transform":{...},"metadata":{...}}
@@ -1398,7 +1401,7 @@ These property may be accessible for instance as a JSON object (the first one) i
 {"type": "CityJSONFeature", "id": "c", "CityObjects":{...},"vertices":[...]} 
 ```
 
-Howewer, to define several JSON in a given file, CityJSON does not prescribe the format or standard that should be used in practice, it only defines how `"CityJSON"` and `"CityJSONFeature"` objects should be defined.
+However, it should be noticed that CityJSON does not prescribe the format or standard that should be used to store several JSON objects in a given file, it only defines how `"CityJSON"` and `"CityJSONFeature"` objects should be defined.
 
 
 # Extensions 
