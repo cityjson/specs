@@ -9,23 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## Unreleased - coming in v1.1
-- add support for CityGML v3.0.0: 
+- add support for (upcoming) CityGML v3.0.0: 
   - add interior of Buildings/Tunnels/Bridges classes, eg `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, `BridgeRoom` 
   - add `OtherConstruction`
   - updated Transportation classes to be compliant
 - change the property "lod" of geometries from number to string 
 - expanded metadata to better align with ISO19115
 - CityJSON files are always compressed, that is their vertices are integers and the "transform" property is mandatory
-- City Objects do not have to have a "geometry" anymore
+- City Objects do not have to have a "geometry" property anymore
 - `CityObjectGroup` has the role added as a property, to define what the role of each object in the group is
+- `CityJSONFeature` is defined, which can be used for streaming and handling large files
 
 
 
-## [1.0.2] - 2020-11-06
+## [1.0.2] - XX
 ### Changed
+- this is the version that will be the OGC release (community standard)
 - small improvements in the specs document to make concepts clearer
 - schemas are the same, with some simplifications to make their maintenance easier
-- this is the version that will be the OGC release
 
 
 
