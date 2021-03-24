@@ -102,8 +102,9 @@
       "children": ["oneroadsegment"]
     },
     "oneroadsegment": {
-      "type": "TransportationSection",
+      "type": "Road",
       "attributes": {
+        "class": "section",
         "usage": "leisure",
         "function": "leisure",
         "trafficDirection": "one-way"
