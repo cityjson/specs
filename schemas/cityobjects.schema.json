@@ -1554,55 +1554,5 @@
         ]
       }
     ]
-  },
-  "GenericCityObject": {
-    "allOf": [
-      {
-        "$ref": "#/_AbstractCityObject"
-      },
-      {
-        "properties": {
-          "type": {
-            "enum": [
-              "GenericCityObject"
-            ]
-          },
-          "geometry": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
-                },
-                {
-                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
-                }
-              ]
-            }
-          }
-        },
-        "required": [
-          "type"
-        ]
-      }
-    ]
   }
 }
