@@ -1285,7 +1285,7 @@ An example would be to reuse the Solid type would be:
 ## Case 1: Adding new complex attributes to existing City Objects
 
 One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON cannot have schemas!). 
-While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON (schema) are partly following that philosophy. 
+While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are partly following that philosophy. 
 That is, for a given City Object, the "allowed" properties/attributes are listed in the schema, but it is not an error to add new ones. 
 The "official validator" of CityJSON ([cjio](https://github.com/cityjson/cjio) with the option `--validate`) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered as invalid in CityJSON.
 
