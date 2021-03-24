@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CityJSON files are always compressed, that is their vertices are integers and the "transform" property is mandatory
 - City Objects do not have to have a "geometry" property anymore
 - `CityObjectGroup` has the role added as a property, to define what the role of each object in the group is
+- `GenericCityObject` has been removed, Extensions should be used instead
 - `CityJSONFeature` is defined, which can be used for streaming and handling large files
 
 
