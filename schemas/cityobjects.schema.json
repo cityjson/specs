@@ -436,7 +436,7 @@
                   "$ref": "#/definitions/Elevation"
                 }
               },
-              "sortKey": "number"
+              "sortKey": { "type": "number" }
             }
           },
           "geometry": {
@@ -486,7 +486,7 @@
                   "$ref": "#/definitions/Elevation"
                 }
               },
-              "sortKey": "number"
+              "sortKey": { "type": "number" }
             }
           },
           "geometry": {
