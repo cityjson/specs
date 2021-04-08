@@ -1680,4 +1680,11 @@ While one could define a new City Object and document it, if this new object doe
 6.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
 
 
+# CityGML v3.0 conformance
+
+CityJSON v1.1 is conformant with the CityGML v3.0 data model, although not all extensions have been implemented.
+
+The details of which modules are supported, and where the so-called *null mapping* are applied, are available at [https://www.cityjson.org/citygml3conformance/](https://www.cityjson.org/citygml3conformance/)
+
+
 - - -
