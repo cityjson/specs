@@ -51,7 +51,6 @@ Boilerplate: idl-index no, property-index no, references no, conformance no
                       |___/                          
 -->                                                    
                                                     
-<!--- TODO: myfile.city.json -->
 
 # CityJSON Schemas
 
