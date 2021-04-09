@@ -1,0 +1,1 @@
+https://jsonschemalint.com to test with the minified schemas, also includes a JSON linter
