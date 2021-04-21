@@ -1,6 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "CityJSON Extension specifications v1.0.0",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CityJSON Extension specifications v1.0",
   "type": "object",
 
   "definitions": {
@@ -36,7 +36,7 @@
     
     "extraRootProperties":{
       "patternProperties": {
-        "(\\+)\\w+": {}
+        "(\\+|\\@)\\w+": {}
       },
       "additionalProperties": false
     },

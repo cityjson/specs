@@ -1,37 +1,93 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CityJSON geometric primitives schema v1.0.1",
-
+  "title": "CityJSON geometric primitives schema v1.0.2",
   "Semantics": {
     "type": "object",
     "properties": {
-      "type": { 
-        "type": "string",  
+      "type": {
+        "type": "string",
         "oneOf": [
-          { "enum": ["RoofSurface"] }, 
-          { "enum": ["GroundSurface"] }, 
-          { "enum": ["WallSurface"] }, 
-          { "enum": ["ClosureSurface"] }, 
-          { "enum": ["OuterCeilingSurface"] }, 
-          { "enum": ["OuterFloorSurface"] }, 
-          { "enum": ["Window"] }, 
-          { "enum": ["Door"] }, 
-          { "enum": ["WaterSurface"] }, 
-          { "enum": ["WaterGroundSurface"] }, 
-          { "enum": ["WaterClosureSurface"] },
-          { "enum": ["TrafficArea"] },
-          { "enum": ["AuxiliaryTrafficArea"] },
-          { "type": "string", "pattern": "(\\+)\\w+"}
+          {
+            "enum": [
+              "RoofSurface"
+            ]
+          },
+          {
+            "enum": [
+              "GroundSurface"
+            ]
+          },
+          {
+            "enum": [
+              "WallSurface"
+            ]
+          },
+          {
+            "enum": [
+              "ClosureSurface"
+            ]
+          },
+          {
+            "enum": [
+              "OuterCeilingSurface"
+            ]
+          },
+          {
+            "enum": [
+              "OuterFloorSurface"
+            ]
+          },
+          {
+            "enum": [
+              "Window"
+            ]
+          },
+          {
+            "enum": [
+              "Door"
+            ]
+          },
+          {
+            "enum": [
+              "WaterSurface"
+            ]
+          },
+          {
+            "enum": [
+              "WaterGroundSurface"
+            ]
+          },
+          {
+            "enum": [
+              "WaterClosureSurface"
+            ]
+          },
+          {
+            "enum": [
+              "TrafficArea"
+            ]
+          },
+          {
+            "enum": [
+              "AuxiliaryTrafficArea"
+            ]
+          },
+          {
+            "type": "string",
+            "pattern": "(\\+)\\w+"
+          }
         ]
       }
     }
   },
-
-
   "Solid": {
     "type": "object",
     "properties": {
-      "type": { "enum": ["Solid"] },
+      "type": {
+        "enum": [
+          "Solid"
+        ]
+      },
       "lod": {
         "type": "number",
         "minimum": 0.0,
@@ -45,7 +101,9 @@
             "type": "array",
             "items": {
               "type": "array",
-              "items": { "type": "integer" }
+              "items": {
+                "type": "integer"
+              }
             }
           }
         }
@@ -55,19 +113,33 @@
         "properties": {
           "surfaces": {
             "type": "array",
-            "items": { "$ref": "#/Semantics" }
+            "items": {
+              "$ref": "#/Semantics"
+            }
           },
           "values": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
-                "type": ["integer", "null"]
+                "type": [
+                  "integer",
+                  "null"
+                ]
               }
             }
           }
         },
-        "required": ["surfaces", "values"]
+        "required": [
+          "surfaces",
+          "values"
+        ]
       },
       "material": {
         "type": "object",
@@ -75,17 +147,38 @@
           "type": "object",
           "properties": {
             "values": {
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
-                "type": ["array", "null"],
-                "items": {"type": ["integer", "null"]}
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
               }
             },
-            "value": { "type": "integer" }
+            "value": {
+              "type": "integer"
+            }
           },
           "oneOf": [
-            { "required": ["value"]  },
-            { "required": ["values"] }
+            {
+              "required": [
+                "value"
+              ]
+            },
+            {
+              "required": [
+                "values"
+              ]
+            }
           ]
         }
       },
@@ -95,14 +188,19 @@
           "type": "object",
           "properties": {
             "values": {
-            "type": "array",
+              "type": "array",
               "items": {
                 "type": "array",
                 "items": {
                   "type": "array",
                   "items": {
                     "type": "array",
-                    "items": { "type": ["integer", "null"] }
+                    "items": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    }
                   }
                 }
               }
@@ -111,14 +209,21 @@
         }
       }
     },
-    "required": ["type", "lod", "boundaries"],
+    "required": [
+      "type",
+      "lod",
+      "boundaries"
+    ],
     "additionalProperties": false
   },
-
   "MultiSolid": {
     "type": "object",
     "properties": {
-      "type": { "enum": ["MultiSolid"] },
+      "type": {
+        "enum": [
+          "MultiSolid"
+        ]
+      },
       "lod": {
         "type": "number",
         "minimum": 0.0,
@@ -134,7 +239,9 @@
               "type": "array",
               "items": {
                 "type": "array",
-                "items": {"type": "integer"}
+                "items": {
+                  "type": "integer"
+                }
               }
             }
           }
@@ -145,22 +252,39 @@
         "properties": {
           "surfaces": {
             "type": "array",
-            "items": { "$ref": "#/Semantics" }
+            "items": {
+              "$ref": "#/Semantics"
+            }
           },
           "values": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
-                "type": ["array", "null"],
+                "type": [
+                  "array",
+                  "null"
+                ],
                 "items": {
-                  "type": ["integer", "null"]
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 }
               }
             }
           }
         },
-        "required": ["surfaces", "values"]
+        "required": [
+          "surfaces",
+          "values"
+        ]
       },
       "material": {
         "type": "object",
@@ -168,20 +292,44 @@
           "type": "object",
           "properties": {
             "values": {
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
-                "type": ["array", "null"],
+                "type": [
+                  "array",
+                  "null"
+                ],
                 "items": {
-                  "type": ["array", "null"],
-                  "items": { "type": ["integer", "null"] }
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
                 }
               }
             },
-            "value": { "type": "integer" }
+            "value": {
+              "type": "integer"
+            }
           },
           "oneOf": [
-            { "required": ["value"]  },
-            { "required": ["values"] }
+            {
+              "required": [
+                "value"
+              ]
+            },
+            {
+              "required": [
+                "values"
+              ]
+            }
           ]
         }
       },
@@ -191,34 +339,45 @@
           "type": "object",
           "properties": {
             "values": {
-            "type": "array",
+              "type": "array",
               "items": {
                 "type": "array",
                 "items": {
                   "type": "array",
                   "items": {
                     "type": "array",
-                    "items": { 
+                    "items": {
                       "type": "array",
-                      "items": { "type": ["integer", "null"] }
+                      "items": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      }
                     }
                   }
                 }
               }
             }
           }
-        }                
+        }
       }
     },
-    "required": ["type", "lod", "boundaries"],
+    "required": [
+      "type",
+      "lod",
+      "boundaries"
+    ],
     "additionalProperties": false
   },
-
-
   "CompositeSolid": {
     "type": "object",
     "properties": {
-      "type": { "enum": ["CompositeSolid"] },
+      "type": {
+        "enum": [
+          "CompositeSolid"
+        ]
+      },
       "lod": {
         "type": "number",
         "minimum": 0.0,
@@ -234,7 +393,9 @@
               "type": "array",
               "items": {
                 "type": "array",
-                "items": {"type": "integer"}
+                "items": {
+                  "type": "integer"
+                }
               }
             }
           }
@@ -245,22 +406,39 @@
         "properties": {
           "surfaces": {
             "type": "array",
-            "items": { "$ref": "#/Semantics" }
+            "items": {
+              "$ref": "#/Semantics"
+            }
           },
           "values": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
-                "type": ["array", "null"],
+                "type": [
+                  "array",
+                  "null"
+                ],
                 "items": {
-                  "type": ["integer", "null"]
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 }
               }
             }
           }
         },
-        "required": ["surfaces", "values"]
+        "required": [
+          "surfaces",
+          "values"
+        ]
       },
       "material": {
         "type": "object",
@@ -268,22 +446,46 @@
           "type": "object",
           "properties": {
             "values": {
-              "type": ["array", "null"],
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
-                "type": ["array", "null"],
+                "type": [
+                  "array",
+                  "null"
+                ],
                 "items": {
-                  "type": ["array", "null"],
-                  "items": { "type": ["integer", "null"] }
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
                 }
               }
             },
-            "value": { "type": "integer" }
+            "value": {
+              "type": "integer"
+            }
           },
           "oneOf": [
-            { "required": ["value"]  },
-            { "required": ["values"] }
+            {
+              "required": [
+                "value"
+              ]
+            },
+            {
+              "required": [
+                "values"
+              ]
+            }
           ]
-        }          
+        }
       },
       "texture": {
         "type": "object",
@@ -291,34 +493,45 @@
           "type": "object",
           "properties": {
             "values": {
-            "type": "array",
+              "type": "array",
               "items": {
                 "type": "array",
                 "items": {
                   "type": "array",
                   "items": {
                     "type": "array",
-                    "items": { 
+                    "items": {
                       "type": "array",
-                      "items": { "type": ["integer", "null"] }
+                      "items": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      }
                     }
                   }
                 }
               }
             }
           }
-        }                
+        }
       }
-    },        
-    "required": ["type", "lod", "boundaries"],
+    },
+    "required": [
+      "type",
+      "lod",
+      "boundaries"
+    ],
     "additionalProperties": false
   },
-
-
   "MultiSurface": {
     "type": "object",
     "properties": {
-      "type": { "enum": ["MultiSurface"] },
+      "type": {
+        "enum": [
+          "MultiSurface"
+        ]
+      },
       "lod": {
         "type": "number",
         "minimum": 0.0,
@@ -330,7 +543,9 @@
           "type": "array",
           "items": {
             "type": "array",
-              "items": { "type": "integer" }
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -339,16 +554,27 @@
         "properties": {
           "surfaces": {
             "type": "array",
-            "items": { "$ref": "#/Semantics" }
+            "items": {
+              "$ref": "#/Semantics"
+            }
           },
           "values": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
-              "type": ["integer", "null"]
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         },
-        "required": ["surfaces", "values"]
+        "required": [
+          "surfaces",
+          "values"
+        ]
       },
       "material": {
         "type": "object",
@@ -356,14 +582,32 @@
           "type": "object",
           "properties": {
             "values": {
-              "type": ["array", "null"],
-              "items": { "type": ["integer", "null"] }
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
             },
-            "value": { "type": "integer" }
+            "value": {
+              "type": "integer"
+            }
           },
           "oneOf": [
-            { "required": ["value"]  },
-            { "required": ["values"] }
+            {
+              "required": [
+                "value"
+              ]
+            },
+            {
+              "required": [
+                "values"
+              ]
+            }
           ]
         }
       },
@@ -373,28 +617,39 @@
           "type": "object",
           "properties": {
             "values": {
-            "type": "array",
+              "type": "array",
               "items": {
                 "type": "array",
                 "items": {
                   "type": "array",
-                  "items": { "type": ["integer", "null"] }
+                  "items": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
                 }
               }
             }
           }
         }
       }
-    },       
-    "required": ["type", "lod", "boundaries"],
+    },
+    "required": [
+      "type",
+      "lod",
+      "boundaries"
+    ],
     "additionalProperties": false
   },
-
-
   "CompositeSurface": {
     "type": "object",
     "properties": {
-      "type": { "enum": ["CompositeSurface"] },
+      "type": {
+        "enum": [
+          "CompositeSurface"
+        ]
+      },
       "lod": {
         "type": "number",
         "minimum": 0.0,
@@ -406,7 +661,9 @@
           "type": "array",
           "items": {
             "type": "array",
-              "items": { "type": "integer" }
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -415,16 +672,27 @@
         "properties": {
           "surfaces": {
             "type": "array",
-            "items": { "$ref": "#/Semantics" }
+            "items": {
+              "$ref": "#/Semantics"
+            }
           },
           "values": {
-            "type": ["array", "null"],
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
-              "type": ["integer", "null"]
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         },
-        "required": ["surfaces", "values"]
+        "required": [
+          "surfaces",
+          "values"
+        ]
       },
       "material": {
         "type": "object",
@@ -432,17 +700,31 @@
           "type": "object",
           "properties": {
             "values": {
-              "type": ["array", "null"],
-              "items": { "type": ["integer", "null"] }
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
             },
-            "value": { "type": "integer" }
+            "value": {
+              "type": "integer"
+            }
           },
           "oneOf": [
             {
-              "required": ["value"]
+              "required": [
+                "value"
+              ]
             },
             {
-              "required": ["values"]
+              "required": [
+                "values"
+              ]
             }
           ]
         }
@@ -453,28 +735,39 @@
           "type": "object",
           "properties": {
             "values": {
-            "type": "array",
+              "type": "array",
               "items": {
                 "type": "array",
                 "items": {
                   "type": "array",
-                  "items": { "type": ["integer", "null"] }
+                  "items": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
                 }
               }
             }
           }
         }
-      }        
-    },        
-    "required": ["type", "lod", "boundaries"],
+      }
+    },
+    "required": [
+      "type",
+      "lod",
+      "boundaries"
+    ],
     "additionalProperties": false
   },
-
-
   "MultiLineString": {
     "type": "object",
     "properties": {
-      "type": { "enum": ["MultiLineString"] },
+      "type": {
+        "enum": [
+          "MultiLineString"
+        ]
+      },
       "lod": {
         "type": "number",
         "minimum": 0.0,
@@ -484,31 +777,44 @@
         "type": "array",
         "items": {
           "type": "array",
-          "items": {"type": "integer"}
+          "items": {
+            "type": "integer"
+          }
         }
       }
-    },        
-    "required": ["type", "lod", "boundaries"],
+    },
+    "required": [
+      "type",
+      "lod",
+      "boundaries"
+    ],
     "additionalProperties": false
   },
-
-
   "MultiPoint": {
     "type": "object",
     "properties": {
-      "type": { "enum": ["MultiPoint"] },
+      "type": {
+        "enum": [
+          "MultiPoint"
+        ]
+      },
       "lod": {
         "type": "number",
         "minimum": 0.0,
         "maximum": 3.5
       },
       "boundaries": {
-         "type": "array",
-         "items": {"type": "integer"}
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
       }
     },
-    "required": ["type", "lod", "boundaries"],
+    "required": [
+      "type",
+      "lod",
+      "boundaries"
+    ],
     "additionalProperties": false
   }
-
 }
