@@ -1,5 +1,4 @@
 
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -16,11 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - small fixes to facilitate life
 
 
-## [1.0.2] - 2021-04-08
+## [1.0.2] - 2021-04-21
 ### Changed
 - small improvements in the specs document to make concepts clearer
-- schemas are the same, with some simplifications to make their maintenance easier
-
+- schemas are the same, with some simplifications to make their maintenance easier in the future
 
 
 ## [1.0.1] - 2019-07-09
@@ -113,6 +111,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - first beta release of CityJSON
 
 
+[1.0.2]: https://github.com/tudelft3d/cityjson/compare/1.0.1...1.0.2
+[1.0.1]: https://github.com/tudelft3d/cityjson/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/tudelft3d/cityjson/compare/0.9...1.0.0
 [0.9]:   https://github.com/tudelft3d/cityjson/compare/0.8...0.9
 [0.8]:   https://github.com/tudelft3d/cityjson/compare/0.6...0.8
