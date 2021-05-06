@@ -63,7 +63,7 @@ A CityJSON object represents one 3D city model of a given area, this model may c
 A CityJSON object: 
 
   - is a JSON object.
-  - **must** have one member with the name `"type"`, whose value must be `"CityJSON"`; <!-- why semicolon? -->
+  - **must** have one member with the name `"type"`, whose value must be `"CityJSON"`.
   - **must** have one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
   - **must** have one member with the name `"transform"`, whose value is a JSON object describing how to *decompress* the coordinates of the geometries. See [[#transform-object]] for details.
   - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). See [[#the-different-city-objects]] for details.
@@ -1314,8 +1314,8 @@ Unlike a CityJSON Object, all the vertices and appearances of the object are *lo
 A CityJSON Feature Object:
 
   - is a JSON object.
-  - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`; <!-- semicolon? -->
-  - **must** have one member with the name `"id"`, whose value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent; <!-- semicolon? -->
+  - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`.
+  - **must** have one member with the name `"id"`, whose value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent.
   - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). All the children of the `"CityJSONFeature"` must be listed. 
   <!-- TODO: how deep? -->
   - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects for the JSON object (warning: the vertices are local to the JSON object).
