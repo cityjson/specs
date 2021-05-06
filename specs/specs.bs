@@ -132,7 +132,7 @@ A City Object:
   - **may** have one member with the name `"geometry"`, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have to be of different LoDs.
   - **may** have one member with the name `"attributes"`, whose value is an object with the different attributes allowed by CityGML.
   - **may** have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
-  - **may** have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant. 
+  - **may** have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. Only the direct children of the City Object are listed, not the grand-children. Also, a City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant. 
 
 A City Object of type 2nd-level:
 
@@ -1316,8 +1316,7 @@ A CityJSON Feature Object:
   - is a JSON object.
   - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`.
   - **must** have one member with the name `"id"`, whose value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent.
-  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). All the children of the `"CityJSONFeature"` must be listed. 
-  <!-- TODO: how deep? -->
+  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object), and all the children of the `"CityJSONFeature"` (only those one level below the current one) must be listed.
   - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects for the JSON object (warning: the vertices are local to the JSON object).
   - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
   - **must not** have other members.
