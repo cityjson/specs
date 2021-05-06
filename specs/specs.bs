@@ -434,20 +434,26 @@ The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"
 
 ## OtherConstruction
 
-<!--- TODO: https://docs.geostandaarden.nl/imgeo/catalogus/bgt/#typeoverigbouwwerk -->
-<!--- TODO: check for the codelist of OtherConstruction -->
-<!--- TODO: https://github.com/opengeospatial/CityGML-3.0/blob/master/Archive/WP%2009%20Resources/Codelists/OtherConstruction_function.txt -->
-<!--- TODO: add some text for OtherConstruction -->
+<!--- https://docs.geostandaarden.nl/imgeo/catalogus/bgt/#typeoverigbouwwerk -->
+<!--- https://github.com/opengeospatial/CityGML-3.0/blob/master/Archive/WP%2009%20Resources/Codelists/OtherConstruction_function.txt -->
 
 This is used for constructions that are not buildings, bridges, or tunnels.
-For instance for permanent water tanks, windmills, or electricity pylons.
+Examples are:
+  
+  - electricity pylon
+  - fence
+  - permanent water tank
+  - pontoon
+  - railway platform
+  - shed
+  - windmill
 
 
 ```javascript
 "mypylon": {
   "type": "OtherConstruction", 
   "attributes": { 
-    "class": "pylon",
+    "class": "windmill",
     "conditionOfConstruction": "underConstruction"
   },
   "geometry": [{
