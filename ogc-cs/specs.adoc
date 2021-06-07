@@ -824,7 +824,7 @@ string/number/integer/boolean).
 ----
 
 `"Building"`, `"BuildingPart"`, and `"BuildingInstallation"` can have
-the following semantics for (LoD0 to LoD3; LoD4 is omitted):
+the following semantics (for LoD0 to LoD3; LoD4 is omitted):
 
 * `"RoofSurface"`
 * `"GroundSurface"`
