@@ -1665,6 +1665,7 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
 }
 ```
 
+<!-- TODO: switch master to main and thus change the URLs -->
 Since all City Objects are documented in the schemas of CityJSON (in [cityobjects.schema.json](https://github.com/cityjson/specs/tree/master/schemas)), it is basically a matter of copying the parts needed in a new file and modifying its content. 
 
 A new name for the City Object must be given and it must begin with a `"+"`.
