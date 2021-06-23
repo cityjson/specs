@@ -54,7 +54,7 @@ Boilerplate: idl-index no, property-index no, references no, conformance no
 
 # CityJSON Schemas
 
-The [JSON schemas](https://json-schema.org/) of the specifications are publicly available at [https://3d.bk.tudelft.nl/schemas/cityjson/](https://cityjson.org/schemas/).
+The [JSON schemas](https://json-schema.org/) of the specifications are publicly available at [https://cityjson.org/schemas/](https://cityjson.org/schemas/).
 
 # CityJSON Object
 
