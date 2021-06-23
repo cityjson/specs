@@ -1303,9 +1303,10 @@ A Appearance Object may have one member named `"vertices-texture"`, whose value 
 Because CityJSON aims at being easy-to-use and developers friendly, it is advised to keep the size of CityJSON files small. 
 Files of several gigabytes are bad practice, and should be avoided since users will have great difficulties visualising and manipulating them.
 
+
 ## Decomposing an area into parts/tiles
 
-One solution is to subdivide a dataset into tiles or regions, and ensure that each part has a reasonable size.
+One solution to handle a large dataset is to subdivide it into tiles or regions, and ensure that each part has a reasonable size.
 Each part becomes a CityJSON file.
 
 
@@ -1322,7 +1323,7 @@ A CityJSON Feature Object:
   - is a JSON object.
   - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`.
   - **must** have one member with the name `"id"`, whose value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent.
-  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object), and all the children of the `"CityJSONFeature"` (only those one level below the current one) must be listed.
+  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSONFeature Object), and all the children of the `"CityJSONFeature"` (only those one level below the current one) must be listed.
   - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects for the JSON object (warning: the vertices are local to the JSON object).
   - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
   - **must not** have other members.
@@ -1360,15 +1361,15 @@ A CityJSON Feature Object:
 }
 ```
 
-The following root property of a City Object are not allowed:
+The following root property of a CityJSON Object are not allowed in a CityJSONFeature Object:
 
   - `"transform"` 
   - `"version"` 
   - `"metadata"` 
-  - `"geometry-templates"`, these should be resolved/dereferenced
-  - `"extensions"` not present: in the metadata or collection
+  - `"geometry-templates"`: these should be resolved/dereferenced
+  - `"extensions"`: these should be in the metadata or collection
 
-These property may be accessible for instance as a JSON object (the first one) in a [JSON Lines text](https://jsonlines.org/) stream, as in the following example:
+These properties may be accessible, for instance as a JSON object (the first one) in a [JSON Lines text](https://jsonlines.org/) stream, as in the following example:
 
 ```json
 {"type": "CityJSON","version": "1.1","transform":{...},"metadata":{...}}
@@ -1394,11 +1395,12 @@ The following 3 cases for extension are possible:
   3.  Creating a new City Object, or "extending" one, and defining complex geometries
 
 <div class="note">
-  While Extensions are less flexible than CityGML ADEs (inheritance and namespaces are for instance not supported, and less customisation is possible), it should be noted that the flexibility of ADEs comes at a price: the software processing an extended CityGML file will not necessarily know what structure to expect. 
+  While Extensions are less flexible than CityGML ADEs (inheritance and namespaces are for instance not supported, and less customisation is possible), it should be noted that the flexibility of ADEs comes at a price: the software processing an extended CityGML file will not necessarily know what structure to expect.
+
   There is ongoing work to use the ADE schemas to automatically do this, but this currently is not supported by most software. Viewers might not be affected by ADEs because the geometries are usually not changed by an ADE. However, software parsing the XML to extract attributes and features might not work directly (and thus specific code would need to be written).
 
   CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the parsing code is required. 
-  This is achieved by enforcing a set of simple rules, as defined below, when adding new City Objects. 
+  This is achieved by enforcing a set of 6 simple rules (see [[#rules-to-follow-to-define-new-city-objects]]) when adding new City Objects. 
   If these are followed, then a CityJSON file containing Extensions will be seen as a "standard" CityJSON file.
 </div>
 
@@ -1408,8 +1410,8 @@ The following 3 cases for extension are possible:
 An Extension should be given a name (eg "Noise") and the URL of the Extension file should be given, along with the version that is used for this file.
 It is expected that the Extension is publicly available at the URL, and can be downloaded.
 
-Several Extensions can be used in a single file, each one is indexed by its name in the `"extensions"` JSON object.
-In the example below we have 2 Extensions: one named "Noise" and one named "Solar_Potential".
+Several Extensions can be used in a single CityJSON Object, each one is indexed by its name in the `"extensions"` JSON object.
+In the example below we have two Extensions: one named "Noise" and one named "Solar_Potential".
 
 ```javascript
 {
@@ -1457,8 +1459,8 @@ A CityJSON Extension is a JSON object, and it **must** have the following 7 memb
 }
 ```
 
-A CityJSON Extension object must be in a standalone file and it must be located in a folder `/extensions` in the folder where the CityJSON schemas are located. 
-For a new extension `noise.ext.json` the following structure would result:
+A CityJSON Extension object must be in a separate standalone file, and it must be located in a folder `/extensions` in the folder where the CityJSON schemas are located. 
+For a new extension `noise.ext.json` the following structure would thus be used:
 
 ```console
 |-- appearance.schema.json
@@ -1471,7 +1473,7 @@ For a new extension `noise.ext.json` the following structure would result:
     |-- noise.ext.json
 ```
 
-This also means that if an element of the Extension reuses or references structures defined in the schemas of CityJSON, then the relative path `../` must be used. 
+This also means that if an element of the Extension reuses, or references, structures and objects defined in the schemas of CityJSON, then the relative path `../` must be used. 
 An example would be to reuse the Solid type would be:
 
 ```javascript
@@ -1487,7 +1489,7 @@ An example would be to reuse the Solid type would be:
 One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON cannot have schemas!). 
 While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are partly following that philosophy. 
 That is, for a given City Object, the "allowed" properties/attributes are listed in the schema, but it is not an error to add new ones. 
-The "official validator" of CityJSON ([cjio](https://github.com/cityjson/cjio) with the option `--validate`) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered as invalid in CityJSON.
+The "official validator" of CityJSON ([cjio](https://github.com/cityjson/cjio) with the operator `validate`) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered as invalid in CityJSON.
 
 In brief, if one wants to simply add a new attribute to a given `"Building"`, say to document its colour (`"colour": "red"`), the easiest way is just to add a property to the City Object (notice that `"storeysAboveGround"` is an allowed attributes to buildings):
 
@@ -1533,8 +1535,8 @@ Another example would be to store the area of the parcel of a building, and also
 }
 ```
 
-For these 2 cases, the CityJSON Extension object would look like the snippet below.
-Notice that `"extraAttributes"` may have several properties (the types of the City Objects are the possibilities) and then each of these have as properties the new attributes (there can be several). 
+For these two cases, the CityJSON Extension object would look like the snippet below.
+Notice that `"extraAttributes"` may have several properties (the types of the City Objects are the possibilities) and then each of these has as properties the new attributes (there can be several). 
 
 An extra attribute must start with a `"+"`; notice that it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different extensions have the same name. 
 
@@ -1617,7 +1619,7 @@ And a CityJSON file would look like this:
 ```
 
 
-## Case 3: Creating/extending new City Objects
+## Case 3: Creating and/or extending new City Objects
 
 The creation of a new City Object is done by defining it in the CityJSON Extension object in the `"extraCityObjects"` property:
 
