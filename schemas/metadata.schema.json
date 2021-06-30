@@ -495,69 +495,6 @@
               },
               "presentLoDs": {
                 "$ref": "#/definitions/presentLoDs"
-              },
-              "Building": {
-                "$ref": "#/definitions/featureData",
-                "BuildingParts": {
-                  "type": "integer"
-                },
-                "BuildingInstallations": {
-                  "type": "integer"
-                }
-              },
-              "Bridge": {
-                "$ref": "#/definitions/featureData",
-                "BridgeParts": {
-                  "type": "integer"
-                },
-                "BridgeInstallations": {
-                  "type": "integer"
-                },
-                "BridgeConstructionElements": {
-                  "type": "integer"
-                }
-              },
-              "Tunnel": {
-                "$ref": "#/definitions/featureData",
-                "TunnelParts": {
-                  "type": "number"
-                },
-                "TunnelInstallations": {
-                  "type": "integer"
-                }
-              },
-              "TINRelief": {
-                "$ref": "#/definitions/featureData",
-                "triangleCount": {
-                  "type": "integer"
-                }
-              },
-              "Road": {
-                "$ref": "#/definitions/featureData"
-              },
-              "Railway": {
-                "$ref": "#/definitions/featureData"
-              },
-              "TransportSquare": {
-                "$ref": "#/definitions/featureData"
-              },
-              "WaterBody": {
-                "$ref": "#/definitions/featureData"
-              },
-              "PlantCover": {
-                "$ref": "#/definitions/featureData"
-              },
-              "SolitaryVegetationObject": {
-                "$ref": "#/definitions/featureData"
-              },
-              "LandUse": {
-                "$ref": "#/definitions/featureData"
-              },
-              "CityFurniture": {
-                "$ref": "#/definitions/featureData"
-              },
-              "GenericCityObject": {
-                "$ref": "#/definitions/featureData"
               }
             },
             "additionalProperties": false
