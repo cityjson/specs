@@ -14,25 +14,10 @@
     "thematicModels": {
       "type": "array",
       "items": {
-        "type": "string",
-        "enum": [
-          "Building",
-          "Road",
-          "Railway",
-          "TransportSquare",
-          "TINRelief",
-          "WaterBody",
-          "PlantCover",
-          "SolitaryVegetationObject",
-          "LandUse",
-          "CityFurniture",
-          "GenericCityObject",
-          "Bridge",
-          "Tunnel",
-          "CityObjectGroup"
-        ]
+        "type": "string"
       }
     },
+
     "contactDetails": {
       "type": "object",
       "properties": {
@@ -127,15 +112,15 @@
         "presentLoDs": {
           "$ref": "#/definitions/presentLoDs"
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "metadata": {
     "type": "object",
     "properties": {
       "citymodelIdentifier": {
-        "type": "string",
-        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        "type": "string"
       },
       "datasetTitle": {
         "type": "string"
@@ -185,7 +170,7 @@
       },
       "distributionFormatVersion": {
         "type": "string",
-        "pattern": "\\d.\\d"
+        "pattern": "^(\\d\\.)(\\d)$"
       },
       "spatialRepresentationType": {
         "type": "string",
@@ -218,8 +203,7 @@
         "type": "string"
       },
       "metadataStandardVersion": {
-        "type": "string",
-        "pattern": "\\d.\\d"
+        "type": "string"
       },
       "metadataLanguage": {
         "type": "string"
@@ -420,153 +404,10 @@
       },
       "cityfeatureMetadata": {
         "type": "object",
-        "properties": {
-          "Building": {
-            "$ref": "#/definitions/featureData",
-            "BuildingParts": {
-              "type": "integer"
-            },
-            "BuildingInstallations": {
-              "type": "integer"
-            }
-          },
-          "Bridge": {
-            "$ref": "#/definitions/featureData",
-            "BridgeParts": {
-              "type": "integer"
-            },
-            "BridgeInstallations": {
-              "type": "integer"
-            },
-            "BridgeConstructionElements": {
-              "type": "integer"
-            }
-          },
-          "Tunnel": {
-            "$ref": "#/definitions/featureData",
-            "TunnelParts": {
-              "type": "number"
-            },
-            "TunnelInstallations": {
-              "type": "integer"
-            }
-          },
-          "TINRelief": {
-            "$ref": "#/definitions/featureData",
-            "triangleCount": {
-              "type": "integer"
-            }
-          },
-          "Road": {
-            "$ref": "#/definitions/featureData"
-          },
-          "Railway": {
-            "$ref": "#/definitions/featureData"
-          },
-          "TransportSquare": {
-            "$ref": "#/definitions/featureData"
-          },
-          "WaterBody": {
-            "$ref": "#/definitions/featureData"
-          },
-          "PlantCover": {
-            "$ref": "#/definitions/featureData"
-          },
-          "SolitaryVegetationObject": {
-            "$ref": "#/definitions/featureData"
-          },
-          "LandUse": {
-            "$ref": "#/definitions/featureData"
-          },
-          "CityFurniture": {
-            "$ref": "#/definitions/featureData"
-          },
-          "GenericCityObject": {
-            "$ref": "#/definitions/featureData"
-          },
-          "CityObjectGroup": {
-            "type": "object",
-            "properties": {
-              "uniqueFeatureCount": {
-                "type": "integer"
-              },
-              "aggregateFeatureCount": {
-                "type": "integer"
-              },
-              "presentLoDs": {
-                "$ref": "#/definitions/presentLoDs"
-              },
-              "Building": {
-                "$ref": "#/definitions/featureData",
-                "BuildingParts": {
-                  "type": "integer"
-                },
-                "BuildingInstallations": {
-                  "type": "integer"
-                }
-              },
-              "Bridge": {
-                "$ref": "#/definitions/featureData",
-                "BridgeParts": {
-                  "type": "integer"
-                },
-                "BridgeInstallations": {
-                  "type": "integer"
-                },
-                "BridgeConstructionElements": {
-                  "type": "integer"
-                }
-              },
-              "Tunnel": {
-                "$ref": "#/definitions/featureData",
-                "TunnelParts": {
-                  "type": "number"
-                },
-                "TunnelInstallations": {
-                  "type": "integer"
-                }
-              },
-              "TINRelief": {
-                "$ref": "#/definitions/featureData",
-                "triangleCount": {
-                  "type": "integer"
-                }
-              },
-              "Road": {
-                "$ref": "#/definitions/featureData"
-              },
-              "Railway": {
-                "$ref": "#/definitions/featureData"
-              },
-              "TransportSquare": {
-                "$ref": "#/definitions/featureData"
-              },
-              "WaterBody": {
-                "$ref": "#/definitions/featureData"
-              },
-              "PlantCover": {
-                "$ref": "#/definitions/featureData"
-              },
-              "SolitaryVegetationObject": {
-                "$ref": "#/definitions/featureData"
-              },
-              "LandUse": {
-                "$ref": "#/definitions/featureData"
-              },
-              "CityFurniture": {
-                "$ref": "#/definitions/featureData"
-              },
-              "GenericCityObject": {
-                "$ref": "#/definitions/featureData"
-              }
-            },
-            "additionalProperties": false
-          }
-        },
-        "additionalProperties": false
+        "additionalProperties": {
+          "$ref": "#/definitions/featureData"
+        }
       }
-    },
-    "additionalProperties": false
-  },
-  "additionalProperties": false
+    }
+  }
 }
