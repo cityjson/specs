@@ -1012,13 +1012,14 @@ The following `"transform"` means that 2 important digits are kept (thus millime
 The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows. 
 Many of the members in [ISO19115](https://www.iso.org/standard/53798.html) are used, and a few are added because they are useful in 3D in a city modelling context (eg `"presentLoDs"` and `"thematicModels"`). 
 To see all the possible ones, look at the schema file [metadata.schema.json](https://3d.bk.tudelft.nl/schemas/cityjson/) of a given version.
+<!-- TODO: update the link to the schemas -->
 
 ```json
 "metadata": {
   "datasetTitle": "3D city model of Chibougamau, Canada",
   "datasetReferenceDate": "1977-02-28",
   "geographicLocation": "Chibougamau, Québec, Canada",
-  "referenceSystem": "urn:ogc:def:crs:EPSG::2355",
+  "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355",
   "geographicalExtent": [ 84710, 346846, 5, 84757, 346944, 40 ],
   "datasetPointOfContact": {
     "contactName": "3D Geoinformation Group",
@@ -1036,13 +1037,19 @@ To see all the possible ones, look at the schema file [metadata.schema.json](htt
 
 ## CRS 
 
-The coordinate reference system (CRS) may be given as a string. [OGC CRS URNs](http://www.opengeospatial.org/ogcna/) such as `"urn:ogc:def:crs:EPSG::7415"` are favoured over the legacy ones such as `"EPSG:7415"`:
+The coordinate reference system (CRS) may be given as a URL, formatted this way according to the [OGC Name Type Specification](https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names): 
 
-For instance, for the [Dutch national CRS in 3D](http://www.spatialreference.org/ref/epsg/7415/):
+```
+http://www.opengis.net/def/crs/{authority}/{version}/{code}
+```
+
+where `{authority}` designates the authority responsible for the definition of this CRS (usually "EPSG" or "OGC"), and where `{version}` designates the specific version of the CRS ("0" (zero) is used if there is no version).
+
+For instance, for the Dutch national CRS in 3D:
 
 ```json
 "metadata": {
-  "referenceSystem": "urn:ogc:def:crs:EPSG::7415"
+  "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/7415"
 }
 ```
 
