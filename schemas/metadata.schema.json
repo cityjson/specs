@@ -186,7 +186,7 @@
       },
       "referenceSystem": {
         "type": "string",
-        "pattern": "^urn:ogc:def:crs:EPSG::[0-9]{4,5}$"
+        "pattern": "^(http|https)://www.opengis.net/def/crs/"
       },
       "onlineResource": {
         "type": "string",
