@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CityObjectGroup` has the role added as a property, to define what the role of each object in the group is
 - `GenericCityObject` has been removed, Extensions should be used instead
 - `CityJSONFeature` is defined, which can be used for streaming and handling large files
+- CRS now use the OGC Name Type Specification (https://docs.opengeospatial.org/pol/09-048r5.html)
 
 
 
