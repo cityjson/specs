@@ -2,7 +2,7 @@
 
 [big]*iii.   Source of the content for this OGC document*
 
-The majority of the content in this OGC document is a direct copy of the content contained at https://www.cityjson.org/specs/1.0.2/[https://www.cityjson.org/specs/1.0.2/].
+The majority of the content in this OGC document is a direct copy of the content contained at https://www.cityjson.org/specs/1.0.3/[https://www.cityjson.org/specs/1.0.3/].
 No normative changes have been made to the content.
 
 
