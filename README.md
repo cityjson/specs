@@ -19,7 +19,7 @@ We believe that you should use CityJSON because:
   2. you can in one-click convert CityGML files to CityJSON files, and vice versa, with the open-source tool [citygml-tools](https://github.com/citygml4j/citygml-tools)
   3. files are on average [6X more compact](https://github.com/cityjson/specs/wiki/Compression-factor-for-a-few-open-CityGML-datasets) than their CityGML equivalent
   4. there is a [web-viewer](https://ninja.cityjson.org) where you can drag-and-drop a file
-  5. you can easily manipulate files with [cjio](https://github.com/tudelft3d/cjio), you can for instance merge files, remove/filter objects, change the CRS, manage the textures, etc.
+  5. you can easily manipulate files with [cjio](https://github.com/cityjson/cjio), you can for instance merge files, remove/filter objects, change the CRS, manage the textures, etc.
   6. you can *easily* define Extensions to the core model 
   7. its development is [open on GitHub](https://github.com/cityjson/specs/issues/), it is supported by a vibrant community, and everyone is welcome to contribute
 
