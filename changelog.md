@@ -11,9 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - support for CityGML v3 (add `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, and Other Construction)
 - change CRS to 2 simple values: `authority:code` => EPSG:28992
 - change LoD to string (instead of float) 
-- expanded metadata to better align with ISO19115
 - small fixes to facilitate life
 
+
+## [1.0.3] - 2021-07-06
+### Changed
+- fixed bugs in metadata.schema.json that made files with Extensions not having valid "metadata" (if certain properties were used)
+- (specification text stays exactly the same)
 
 ## [1.0.2] - 2021-04-21
 ### Changed
@@ -111,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - first beta release of CityJSON
 
 
+[1.0.3]: https://github.com/tudelft3d/cityjson/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/tudelft3d/cityjson/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/tudelft3d/cityjson/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/tudelft3d/cityjson/compare/0.9...1.0.0
