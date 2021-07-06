@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CityJSON appearance schema v1.0.2",
+  "title": "CityJSON appearance schema v1.0.3",
   "Material": {
     "type": "object",
     "properties": {
