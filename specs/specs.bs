@@ -1009,33 +1009,64 @@ The following `"transform"` means that 2 important digits are kept (thus millime
 
 # Metadata
 
-The metadata related to the 3D city model may be stored in a JSON object that may have different members, as follows. 
-Many of the members in [ISO19115](https://www.iso.org/standard/53798.html) are used, and a few are added because they are useful in 3D in a city modelling context (eg `"presentLoDs"` and `"thematicModels"`). 
-To see all the possible ones, look at the schema file [metadata.schema.json](https://3d.bk.tudelft.nl/schemas/cityjson/) of a given version.
-<!-- TODO: update the link to the schemas -->
+The core of CityJSON supports the following six properties, those are compliant with [ISO19115](https://www.iso.org/standard/53798.html).
+
+If the storage of other ISO19115-compliant attributes (point of contact for the datasets, the lineage, etc.) or of some related to 3D city models (statistics about the present LoDs, the presence of textures/materials, etc.) is wanted, then the [MetadataExtended Extension](https://github.com/cityjson/metadata-extended) can be used.
 
 ```json
 "metadata": {
-  "datasetTitle": "3D city model of Chibougamau, Canada",
+  "citymodelIdentifier": "eaeceeaa-3f66-429a-b81d-bbc6140b8c1c",
+  "datasetTitle": "Buildings in LoD2.3 of Chibougamau, Québec",
   "datasetReferenceDate": "1977-02-28",
-  "geographicLocation": "Chibougamau, Québec, Canada",
-  "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355",
   "geographicalExtent": [ 84710, 346846, 5, 84757, 346944, 40 ],
-  "datasetPointOfContact": {
-    "contactName": "3D Geoinformation Group",
-    "phone": "+31-6666666666",
-    "address": "Delft University of Technology, the Netherlands",
-    "emailAddress": "elvis@tudelft.nl",
-    "contactType": "organisation",
-    "website": "https://3d.bk.tudelft.nl"
-  },
-  "metadataStandard": "ISO 19115 - Geographic Information - Metadata",
-  "metadataStandardVersion": "ISO 19115:2014(E)"
+  "geographicLocation": "Chibougamau, Québec, Canada",
+  "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355"
+}
+```
+
+## citymodelIdentifier
+
+A (ideally) unique identifier for the dataset.
+It is recommend to use [universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) (but not necessary).
+
+
+## datasetTitle
+
+The title/name of the dataset, what it contains.
+
+
+## datasetReferenceDate
+
+The date where the dataset was compiled, without the time of the day, only a `"full-date"` in [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. 
+
+<div class="note"> 
+  JSON does not have a date type, and thus the representations defined by [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. A simple date is `"full-date"` (thus `"1977-07-11"` as a string), and should be used for the metadata above. 
+
+  Other attributes in a CityJSON object can also have a date with a time, and such an attribute is specified as a `"full-time"`. For example `"1985-04-12T23:20:50.52Z"` (stored as a string).
+</div>
+
+## geographicalExtent (bbox) 
+
+While this can be extracted from the dataset itself, it is useful to store it. It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
+
+```json
+"metadata": {
+  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
+}
+```
+
+## geographicLocation
+
+The name of an area or a city.
+
+```json
+"metadata": {
+  "geographicLocation": "Delft, the Netherlands"
 }
 ```
 
 
-## CRS 
+## referenceSystem (CRS) 
 
 The coordinate reference system (CRS) may be given as a URL, formatted this way according to the [OGC Name Type Specification](https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names): 
 
@@ -1060,74 +1091,8 @@ Be aware that the CRS should be a three-dimensional one, ie the elevation/height
 </div>  
 
 
-## Geographic Extent (bbox) 
-
-While this can be extracted from the dataset itself, it is useful to store it. It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
-
-```json
-"metadata": {
-  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
-}
-```
 
 
-## Geographic location 
-
-The name of an area or a city.
-
-```json
-"metadata": {
-  "geographicLocation": "Chibougamau, Québec, Canada"
-}
-```
-
-
-## Topic Category
-
-A one-word category, the possible values are enumerated in the Table B.3.30 of the [ISO19115-1:2014 document](https://www.iso.org/standard/53798.html)
-
-```json
-"metadata": {
-  "datasetTopicCategory": "planningCadastre"
-}
-```
-
-
-## Lineage 
-
-It is possible to give the lineage of one or more city objects in the datasets. This allows us to document how certain city objects were reconstructed; if many were with the same method then their IDs should simply be listed in `"featureID"`.
-
-```json
-"lineage": [
-  {
-    "featureIDs": ["id-1", "id-2", "id-8235"],
-    "source": [
-      {
-        "description": "Source of Terrain Data",
-        "sourceSpatialResolution": "10 points/m2",
-        "sourceReferenceSystem": "urn:ogc:def:crs:EPSG::4326"
-      }
-    ],
-    "processStep": {
-      "description" : "Processing of Terrain Data using 3dfier",
-      "processor": {
-        "contactName": "3D Geoinformation Group",
-    "phone": "+31-6666666666",
-      "address": "Delft University of Technology, the Netherlands",
-      "emailAddress": "3d.bk@tudelft.nl",
-      "contactType": "organization",
-      "website": "https://3d.bk.tudelft.nl"
-      }
-    }
-  }
- ]
-```
-
-<div class="note"> 
-  JSON does not have a date type, and thus the representations defined by [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. A simple date is `"full-date"` (thus `"1977-07-11"` as a string), and should be used for the metadata above. 
-
-  Other attributes in a CityJSON object can also have a date with a time, and such an attribute is specified as a `"full-time"`. For example `"1985-04-12T23:20:50.52Z"` (stored as a string).
-</div>
 
 
 
