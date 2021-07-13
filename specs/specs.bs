@@ -1011,14 +1011,15 @@ The following `"transform"` means that 2 important digits are kept (thus millime
 
 The core of CityJSON supports the following six properties, those are compliant with [ISO19115](https://www.iso.org/standard/53798.html).
 
-If the storage of other ISO19115-compliant attributes (point of contact for the datasets, the lineage, etc.) or of some related to 3D city models (statistics about the present LoDs, the presence of textures/materials, etc.) is wanted, then the [MetadataExtended Extension](https://github.com/cityjson/metadata-extended) can be used.
+The storage of other ISO19115-compliant attributes and/or of statistics related to 3D city models can be done with the [MetadataExtended CityJSON Extension](https://github.com/cityjson/metadata-extended).
+Examples of extra attributes/properties that can be stored: point of contact for the dataset, lineage, statistics about the present LoDs, the presence of textures/materials, etc. 
 
 ```json
 "metadata": {
   "citymodelIdentifier": "eaeceeaa-3f66-429a-b81d-bbc6140b8c1c",
   "datasetTitle": "Buildings in LoD2.3 of Chibougamau, Québec",
   "datasetReferenceDate": "1977-02-28",
-  "geographicalExtent": [ 84710, 346846, 5, 84757, 346944, 40 ],
+  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
   "geographicLocation": "Chibougamau, Québec, Canada",
   "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355"
 }
@@ -1026,18 +1027,34 @@ If the storage of other ISO19115-compliant attributes (point of contact for the 
 
 ## citymodelIdentifier
 
-A (ideally) unique identifier for the dataset.
-It is recommend to use [universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) (but not necessary).
+A unique identifier for the dataset.
+It is recommend to use [universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier), but it is not necessary.
 
+```json
+"metadata": {
+  "citymodelIdentifier": "44574905-d2d2-4f40-8e96-d39e1ae45f70"
+}
+```
 
 ## datasetTitle
 
 The title/name of the dataset, what it contains.
 
+```json
+"metadata": {
+  "datasetTitle": "tile 5910 of the 3dbag.nl datasets (v21.03.1)"
+}
+```
 
 ## datasetReferenceDate
 
 The date where the dataset was compiled, without the time of the day, only a `"full-date"` in [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. 
+
+```json
+"metadata": {
+  "datasetReferenceDate": "1977-02-28"
+}
+```
 
 <div class="note"> 
   JSON does not have a date type, and thus the representations defined by [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. A simple date is `"full-date"` (thus `"1977-07-11"` as a string), and should be used for the metadata above. 
@@ -1045,9 +1062,12 @@ The date where the dataset was compiled, without the time of the day, only a `"f
   Other attributes in a CityJSON object can also have a date with a time, and such an attribute is specified as a `"full-time"`. For example `"1985-04-12T23:20:50.52Z"` (stored as a string).
 </div>
 
+
 ## geographicalExtent (bbox) 
 
-While this can be extracted from the dataset itself, it is useful to store it. It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
+While this can be extracted from the dataset itself, it is often useful to store it. 
+It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`.
+Notice that these are in the real coordinates of the dataset (based on [[#referencesystem-crs]]) and not after the coordinates have been compressed with the `"transform"` property ([[#transform-object]]).
 
 ```json
 "metadata": {
