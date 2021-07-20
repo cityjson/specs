@@ -1,13 +1,10 @@
 {
    "type":"CityJSON",
-   "version":"1.0",
+   "version": "1.0",
    "metadata":{
       "citymodelIdentifier":"81d4fae1-7dec-11d0-a765-00a0c91e6bf6",
       "datasetTitle":"3D city model of Chibougamau, Canada",
-      "datasetReferenceDate":{
-         "date":"2011-01-28",
-         "dateType":"publication"
-      },
+      "datasetReferenceDate":"2011-01-28",
       "geographicLocation":"Chibougamau, Canada",
       "datasetLanguage":"English",
       "datasetCharacterSet":"UTF-8",
@@ -29,10 +26,7 @@
       "metadataStandardVersion":"ISO 19115:2014(E)",
       "metadataLanguage":"English",
       "metadataCharacterSet":"UTF-8",
-      "metadataDateStamp":{
-         "date":"2011-02-28",
-         "dateType":"lastRevision"
-      },
+      "metadataDateStamp":"2011-02-28",
       "metadataPointOfContact":{
          "contactName":"3D Geoinformation Group",
          "phone":"+31-6666666666",
@@ -46,18 +40,16 @@
             "featureIDs":[
                "myterrain01"
             ],
-            "source":[
-               {
-                  "description":"Source of some Terrain data",
-                  "sourceSpatialResolution":"10 points/m2",
-                  "sourceReferenceSystem":"urn:ogc:def:crs:EPSG::4326"
-               },
-               {
-                  "description":"Source of other Terrain data",
-                  "sourceSpatialResolution":"10 points/m2",
-                  "sourceReferenceSystem":"urn:ogc:def:crs:EPSG::4326"
-               }
-            ],
+            "source":[{
+               "description":"Source of some Terrain data",
+               "sourceSpatialResolution":"10 points/m2",
+               "sourceReferenceSystem":"urn:ogc:def:crs:EPSG::4326"
+            },
+            {
+               "description":"Source of other Terrain data",
+               "sourceSpatialResolution":"10 points/m2",
+               "sourceReferenceSystem":"urn:ogc:def:crs:EPSG::4326"
+            }],
             "processStep":{
                "description":"Processing of Terrain data using 3dfier",
                "processor":{
@@ -75,13 +67,11 @@
                "Building",
                "Road"
             ],
-            "source":[
-               {
-                  "description":"Source of all Building and Road data",
-                  "sourceSpatialResolution":"10 points/m2",
-                  "sourceReferenceSystem":"urn:ogc:def:crs:EPSG::4326"
-               }
-            ],
+            "source":[{
+               "description":"Source of all Building and Road data",
+               "sourceSpatialResolution":"10 points/m2",
+               "sourceReferenceSystem":"urn:ogc:def:crs:EPSG::4326"
+            }],
             "processStep":{
                "description":"Generated Building and Road data by extruding from 2D shapefile",
                "processor":{
@@ -134,45 +124,8 @@
          "Tunnel",
          "CityObjectGroup"
       ],
-      "appearance":{
-         "textures":"present",
-         "materials":"present",
-         "vertices-texture":"present",
-         "themes-texture":[
-            "theme-t-one",
-            "theme-t-two"
-         ],
-         "themes-material":[
-            "theme-m-one",
-            "theme-m-two"
-         ],
-         "default-theme-texture":"absent",
-         "default-theme-material":"absent"
-      },
-      "templates":"present",
-      "geometry-templates":"present",
-      "transform":"present",
-      "extensions":"present",
-      "extensionsMetadata":[
-         {
-            "extensionName":"Linear Cell Complex",
-            "metadata":{
-               "version":"0.2",
-               "url":"https://github.com/tudelft3d/cityjson-lcc-extension/blob/master/linearcellcomplex.json",
-               "status":"maintained",
-               "authority":{
-                  "contactName":"3D Geoinformation Group",
-                  "phone":"+31-6666666666",
-                  "address":"Delft University of Technology, the Netherlands",
-                  "emailAddress":"3d.bk@tudelft.nl",
-                  "contactType":"organization",
-                  "website":"https://3d.bk.tudelft.nl"
-               },
-               "summary":"An extension that allows topological information of a city model to be stored as a Combinatorial Map based Linear Cell Complex",
-               "documentation":"https://www.mdpi.com/2220-9964/8/8/347"
-            }
-         }
-      ],
+      "textures":"present",
+      "materials":"present",
       "presentLoDs":{
          "1.0":1,
          "2.0":3,
@@ -291,8 +244,32 @@
             "TunnelInstallations":2
          },
          "CityObjectGroup":{
-            "presence":"present",
-            "count":4
+            "uniqueFeatureCount":45,
+            "aggregateFeatureCount":55,
+            "presentLoDs":{
+               "1.0":40,
+               "2.0":15
+            },
+            "Tunnel":{
+            "uniqueFeatureCount":5,
+            "aggregateFeatureCount":5,
+            "presentLoDs":{
+               "2.0":5
+            },
+            "TunnelParts":4,
+            "TunnelIstallations":2
+           },
+           "Bridge":{
+            "uniqueFeatureCount":40,
+            "aggregateFeatureCount":50,
+            "presentLoDs":{
+               "1.0":40,
+               "2.0":10
+            },
+            "BridgeParts":5,
+            "BridgeInstallations":3,
+            "BridgeConstructionElements":2
+           }
          }
       }
    },

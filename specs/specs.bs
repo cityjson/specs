@@ -1,9 +1,9 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.0.2-beta.1
+Title: CityJSON Specifications 1.0.3
 Shortname: CityJSON
 Status: LS
 Level: 1
-URL: https://cityjson.org/specs/1.0.2/
+URL: https://cityjson.org/specs/1.0.3/
 TR: https://cityjson.org/specs/
 Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
@@ -230,7 +230,7 @@ As is the case in CityGML, the address information is specified using the [xAL a
   "id-1": {
     "type": "Building", 
     "attributes": { 
-      "roofType": "gable"
+      "roofType": "gable roof"
     },
     "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
     "children": ["id-56", "id-832", "mybalcony"]
@@ -257,7 +257,7 @@ As is the case in CityGML, the address information is specified using the [xAL a
     "ThoroughfareNumber": "1",
     "ThoroughfareName": "rue de la Patate",
     "PostalCode": "H0H 0H0"
-  },
+  }
 }
 ```
 
@@ -695,7 +695,7 @@ A Semantic Object:
 }
 ```
 
-`"Building"`, `"BuildingPart"`, and `"BuildingInstallation"` can have the following semantics for (LoD0 to LoD3; LoD4 is omitted):
+`"Building"`, `"BuildingPart"`, and `"BuildingInstallation"` can have the following semantics (for LoD0 to LoD3; LoD4 is omitted):
 
   - `"RoofSurface"`
   - `"GroundSurface"`
@@ -987,15 +987,15 @@ It is possible to give the lineage of one or more city objects in the datasets. 
       "description" : "Processing of Terrain Data using 3dfier",
       "processor": {
         "contactName": "3D Geoinformation Group",
-    "phone": "+31-6666666666",
-      "address": "Delft University of Technology, the Netherlands",
-      "emailAddress": "3d.bk@tudelft.nl",
-      "contactType": "organization",
-      "website": "https://3d.bk.tudelft.nl"
+        "phone": "+31-6666666666",
+        "address": "Delft University of Technology, the Netherlands",
+        "emailAddress": "3d.bk@tudelft.nl",
+        "contactType": "organization",
+        "website": "https://3d.bk.tudelft.nl"
       }
     }
   }
- ]
+]
 ```
 
 <div class="note"> 
@@ -1107,7 +1107,7 @@ A Material Object:
     4.  `"specularColor"`, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
     5.  `"shininess"`, whose value is a number between 0.0 and 1.0
     6.  `"transparency"`, whose value is a number between 0.0 and 1.0 (1.0 being completely transparent)
-    7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as "a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading)."
+    7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading).
 
 ```javascript
 "materials": [
@@ -1285,7 +1285,7 @@ An example would be to reuse the Solid type would be:
 ## Case 1: Adding new complex attributes to existing City Objects
 
 One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON cannot have schemas!). 
-While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON (schema) are partly following that philosophy. 
+While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are partly following that philosophy. 
 That is, for a given City Object, the "allowed" properties/attributes are listed in the schema, but it is not an error to add new ones. 
 The "official validator" of CityJSON ([cjio](https://github.com/cityjson/cjio) with the option `--validate`) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered as invalid in CityJSON.
 
@@ -1400,7 +1400,13 @@ And a CityJSON file would look like this:
 ```javascript
 {
   "type": "CityJSON",
-  "version": "0.9",
+  "version": "1.0",
+  "extensions": {
+    "MyExtension": {
+      "url" : "https://someurl.org/myextension.json",
+      "version": "1.0"
+    }
+  },
   "CityObjects": {...},
   "vertices": [...],
   "+census": {
