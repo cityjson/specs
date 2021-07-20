@@ -16,10 +16,10 @@
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
 |Submission Date: 2020-08-03
-|Approval Date:   <yyyy-mm-dd>
+|Approval Date:   2021-05-31
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
-|Internal reference number of this OGC(R) document:    20-072r1
+|Internal reference number of this OGC(R) document:    20-072r2
 |Version: 1.0
 |Category: OGC(R) Community Standard
 |Editor:   Hugo Ledoux
@@ -47,7 +47,7 @@ This document is an OGC Member endorsed international Community standard. This C
 |===
 |Document type:   	OGC® Community Standard
 |Document subtype:   
-|Document stage:   	Draft
+|Document stage:   	Approved
 |Document language: 	English
 |===
 
