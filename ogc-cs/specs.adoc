@@ -135,7 +135,7 @@ contains a `"BuildingInstallation"`.
     "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ], 
     "attributes": { 
       "measuredHeight": 22.3,
-      "roofType": "gable",
+      "roofType": "gable roof",
       "owner": "Elvis Presley"
     },
     "children": ["id-2"],
@@ -253,7 +253,7 @@ the http://xml.coverpages.org/xnal.html[xAL address standard].
   "id-1": {
     "type": "Building", 
     "attributes": { 
-      "roofType": "gable"
+      "roofType": "gable roof"
     },
     "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
     "children": ["id-56", "id-832", "mybalcony"]
@@ -281,7 +281,7 @@ the http://xml.coverpages.org/xnal.html[xAL address standard].
     "ThoroughfareNumber": "1",
     "ThoroughfareName": "rue de la Patate",
     "PostalCode": "H0H 0H0"
-  },
+  }
 }
 ----
 
@@ -824,7 +824,7 @@ string/number/integer/boolean).
 ----
 
 `"Building"`, `"BuildingPart"`, and `"BuildingInstallation"` can have
-the following semantics for (LoD0 to LoD3; LoD4 is omitted):
+the following semantics (for LoD0 to LoD3; LoD4 is omitted):
 
 * `"RoofSurface"`
 * `"GroundSurface"`
@@ -1754,7 +1754,13 @@ And a CityJSON file would look like this:
 ----
 {
   "type": "CityJSON",
-  "version": "0.9",
+  "version": "1.0",
+  "extensions": {
+    "MyExtension": {
+      "url" : "https://someurl.org/myextension.json",
+      "version": "1.0"
+    }
+  },
   "CityObjects": {...},
   "vertices": [...],
   "+census": {

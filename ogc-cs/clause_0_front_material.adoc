@@ -2,7 +2,7 @@
 
 [big]*iii.   Source of the content for this OGC document*
 
-The majority of the content in this OGC document is a direct copy of the content contained at https://www.cityjson.org/specs/1.0.2/[https://www.cityjson.org/specs/1.0.2/].
+The majority of the content in this OGC document is a direct copy of the content contained at https://www.cityjson.org/specs/1.0.3/[https://www.cityjson.org/specs/1.0.3/].
 No normative changes have been made to the content.
 
 
@@ -11,11 +11,19 @@ No normative changes have been made to the content.
 
 Note that this document requires a good knowledge of the OGC City Geography Markup Language (CityGML) Encoding Standard (https://portal.opengeospatial.org/files/?artifact_id=47842[OGC document #12-019]), as this document reuses the terminology and follows the data model presented in CityGML.
 
-The differences between the CityJSON v1.0 implementation and the XML-based implementation are described https://www.cityjson.org/citygml-compatibility[in this webpage].
+CityJSON v1.0 implements most of the CityGML v2.0.0 data model, and all the CityGML modules have been mapped to CityJSON objects.
+However, for the sake of simplicity and efficiency, some modules and features have been omitted and/or simplified.
+The differences in the structure of the modules were made to improve the usability of CityJSON in practice, all decisions were made so that developers can easily manipulate files.
 
-[big]*i.     Abstract*
+CityJSON v1.0 is thus conformant to a subset of CityGML v2.0.0, and the main features that are not supported are:
 
-CityJSON is a https://json.org/[JSON]-based encoding for a subset of the http://www.opengeospatial.org/standards/citygml[OGC CityGML data model] (version 2.0.0). CityJSON defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built.
+  1. Interior of buildings and bridges are not allowed (LoD4);
+  2. `ExternalReferences`, that is all features should be in the same file;
+  3. Several CRSs in the same datasets;
+  4. Identifiers for low-level geometries.
+  5. ADEs have been replaced by _Extensions_ and have been simplified;
+
+The exhaustive list of the differences between the CityJSON v1.0 implementation and CityGML v2.0.0 is available https://www.cityjson.org/citygml-compatibility[in this webpage].
 
 [big]*ii.    Keywords*
 
@@ -38,7 +46,7 @@ The following organizations submitted this Document to the Open Geospatial Conso
 
 [big]*v.     Submitters*
 
-All questions regarding this submission should be directed to the editor or the submitters:
+All questions regarding this submission should be directed to the editors or the submitters:
 
-Hugo Ledoux, Delft University of Technology
-Linda van den Brink, Geonovum
+  - Hugo Ledoux, Delft University of Technology
+  - Linda van den Brink, Geonovum
