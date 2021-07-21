@@ -13,10 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - add interior of Buildings/Tunnels/Bridges classes, eg `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, `BridgeRoom` 
   - add `OtherConstruction`
   - updated Transportation classes to be compliant
-- change the property "lod" of geometries from number to string 
-- expanded metadata to better align with ISO19115
-- CityJSON files are always compressed, that is their vertices are integers and the "transform" property is mandatory
-- City Objects do not have to have a "geometry" property anymore
+- change the property `"lod"` of geometries from number to string 
+- core metadata is smaller, extended/advanced metadata are now in the MetadataExtended Extension: https://github.com/cityjson/metadata-extended
+- CityJSON files are always compressed, that is their vertices are integers and the `"transform"` property is mandatory
+- City Objects do not have to have a `"geometry"` property anymore
 - `CityObjectGroup` has the role added as a property, to define what the role of each object in the group is
 - `GenericCityObject` has been removed, Extensions should be used instead
 - `CityJSONFeature` is defined, which can be used for streaming and handling large files
