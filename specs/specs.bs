@@ -1253,7 +1253,7 @@ A Material Object:
 A Texture Object:
 
   - **must** have one member with the name `"type"`, whose value is a string with either "PNG" or "JPG" as value
-  - **must** have one member with the name `"image"`, whose value is a string with the name of the file. This file can be a URL (eg `"http://www.hugo.com/filename.jpg"`), a relative path (eg `"appearances/myroof.jpg"`), or an absolute path (eg `"/home/elvis/mycityjson/appearances/myroof.jpg"`).
+  - **must** have one member with the name `"image"`, whose value is a string with the name of the file. This file can be a URL (eg `"http://www.someurl.org/filename.jpg"`), a relative path (eg `"appearances/myroof.jpg"`), or an absolute path (eg `"/home/elvis/mycityjson/appearances/myroof.jpg"`).
   - **may** have one member with the name `"wrapMode"`, whose value can be any of the following: `"none"`, `"wrap"`, `"mirror"`, `"clamp"`, or `"border"`.
   - **may** have one member with the name `"textureType"`, whose value can be any of the following: `"unknown"`, `"specific"`, or `"typical"`.
   - **may** have one member with the name `"borderColor"`, whose value is an array with 4 numbers between 0.0 and 1.0 (RGBA colour).
@@ -1262,7 +1262,7 @@ A Texture Object:
 "textures": [
   {
     "type": "PNG",
-    "image": "http://www.hugo.com/filename.jpg"
+    "image": "http://www.someurl.org/filename.jpg"
   },
   {
     "type": "JPG",
