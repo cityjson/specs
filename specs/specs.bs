@@ -838,6 +838,13 @@ For Transportation (`"Road"`, `"Railway"`, `"TransportSquare"`):
   - `"TransportationHole"`
 
 
+It is possible to define and use other semantics, but these have to start with a `+`, inline with the rules defined in the [[#extensions]].
+
+```json
+{
+  "type": "+WallSurface_Inner",
+}
+```
 
 Because in one given City Object (say a `"Building"`) several primitives can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Object has to be declared once, and each of the primitives that are represented by it points to it. This is achieved by first declaring all the Semantic Objects in an array, and then having an array where each primitive links to Semantic Objects (position in the array).
 
@@ -873,7 +880,7 @@ Also:
         "slope": 66.6
       },
       {
-        "type": "Door",
+        "type": "+PatioDoor",
         "parent": 0,
         "colour": "blue"
       }
