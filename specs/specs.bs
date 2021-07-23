@@ -786,7 +786,10 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
 
 ## Semantics of geometric primitives
 
-A Semantic Object is a JSON object representing the semantics of a primitive of a geometry (e.g. a surface of a building). It may also represent other attributes of the primitive (e.g. the slope of the roof or the solar potential). For surface and volumetric geometries (e.g. `MultiSurface`, `Solid` and `MultiSolid`), a primitive is a surface. If a geometry is a `MultiPoint` or a `MultiLineString`, then the primitives are its respective sub-parts: points and linestrings. 
+A Semantic Object is a JSON object representing the semantics of a primitive of a geometry (e.g. a surface of a building). 
+It may also represent other attributes of the primitive (e.g. the slope of the roof, or the solar potential). 
+For surface and volumetric geometries (e.g. `MultiSurface`, `Solid` and `MultiSolid`), a primitive is a surface. 
+If a geometry is a `MultiPoint` or a `MultiLineString`, then the primitives are its respective sub-parts: points and linestrings. 
 
 A Semantic Object:
 
