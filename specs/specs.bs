@@ -1024,10 +1024,18 @@ The core of CityJSON supports the following six properties, these are compliant 
 ```json
 "metadata": {
   "citymodelIdentifier": "eaeceeaa-3f66-429a-b81d-bbc6140b8c1c",
-  "datasetTitle": "Buildings in LoD2.3 of Chibougamau, Québec",
+  "datasetPointOfContact": {
+    "contactName": "3D geoinformation group, Delft University of Technology",
+    "contactType": "organization",
+    "role": "owner",
+    "phone": "+31-6666666666",
+    "emailAddress": "3dgeoinfo-bk@tudelft.nl",
+    "website": "https://3d.bk.tudelft.nl",
+    "address": "Julianalaan 134, Delft 2628BL, the Netherlands"
+  },
   "datasetReferenceDate": "1977-02-28",
+  "datasetTitle": "Buildings in LoD2.3 of Chibougamau, Québec",
   "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
-  "geographicLocation": "Chibougamau, Québec, Canada",
   "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355"
 }
 ```
@@ -1049,13 +1057,28 @@ It is recommend to use [universally unique identifier](https://en.wikipedia.org/
 }
 ```
 
-## datasetTitle
+## datasetPointOfContact
 
-The title/name of the dataset, what it contains.
+The point of contact for the dataset.
+It is a JSON object that
+
+  - **must** have one member with the name `"contactName"`, whose value is the name of the contact
+  - **must** have one member with the name `"emailAddress"`, whose value is a string with the email
+  - **may** have one member with the name `"role"`, whose value describes the role that contact person/organisation has, it is one of the following: `"resourceProvider"`, `"custodian"`, `"owner"`, `"user"`, `"distributor"`, `"originator"`, `"pointOfContact"`, `"principalInvestigator"`, `"processor"`, `"publisher"`, `"author"`, `"sponsor"`, `"co-author"`, `"collaborator"`, `"editor"`, `"mediator"`, `"rightsHolder"`, `"contributor"`, `"funder"`, `"stakeholder"`
+  - **may** have one member with the name `"website"`, whose value is the URL of point of contact.
+  - **may** have one member with the name `"contactType"`, whose value is a string which is either `"individual"` or `"organization"`. For an `"organization"`, the `"website"` can also be given.
+  - **may** have one member with the name `"address"`, whose value is a string with the full address
+  - **may** have one member with the name `"phone"`, whose value is a string with the phone number
+  - **may** have one member with the name `"organization"`, whose value is the name of the organisation, to be used if the `"contactName"` is the name of a person
 
 ```json
-"metadata": {
-  "datasetTitle": "tile 5910 of the 3dbag.nl datasets (v21.03.1)"
+"datasetPointOfContact": {
+  "contactName": "Justin Trudeau",
+  "emailAddress": "justin.trudeau@parl.gc.ca",
+  "phone": "+1-613-992-4211",
+  "address": "24 Sussex Drive, Ottawa, Canada",
+  "contactType": "individual",
+  "role": "pointOfContact"
 }
 ```
 
@@ -1122,11 +1145,6 @@ Be aware that the CRS should be a three-dimensional one, ie the elevation/height
 <div class="note"> 
   Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
 </div>  
-
-
-
-
-
 
 
 # Appearance Object

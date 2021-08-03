@@ -1,19 +1,85 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CityJSON metadata schema v1.1.0",
-  
+
+  "definitions": {  
+    "contactDetails": {
+      "type": "object",
+      "properties": {
+        "contactName": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string",
+          "format": "email"
+        },
+        "contactType": {
+          "type": "string",
+          "enum": [ "individual", "organization" ]
+        },
+        "role": {
+          "type": "string",
+          "description": "from ISO 19115 codelist",
+          "enum": [
+            "resourceProvider",
+            "custodian",
+            "owner",
+            "user",
+            "distributor",
+            "originator",
+            "pointOfContact",
+            "principalInvestigator",
+            "processor",
+            "publisher",
+            "author",
+            "sponsor",
+            "co-author",
+            "collaborator",
+            "editor",
+            "mediator",
+            "rightsHolder",
+            "contributor",
+            "funder",
+            "stakeholder"
+          ]
+        },
+        "organization": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^(https?)://"
+        }
+      },
+      "required": [
+            "contactName",
+            "emailAddress"
+      ],
+      "additionalProperties": false
+    }
+  },
   "metadata": {
     "type": "object",
     "properties": {
       "citymodelIdentifier": {
         "type": "string"
       },
-      "datasetTitle": {
-        "type": "string"
+      "datasetPointOfContact": {
+        "$ref": "#/definitions/contactDetails"
       },
       "datasetReferenceDate": {
         "type": "string",
         "format": "date"
+      },
+      "datasetTitle": {
+        "type": "string"
       },
       "geographicalExtent": {
         "type": "array",
@@ -22,10 +88,6 @@
         },
         "minItems": 6,
         "maxItems": 6
-      },
-      "geographicLocation": {
-        "type": "string",
-        "description": "the name of the area for instance"
       },
       "referenceSystem": {
         "type": "string",
