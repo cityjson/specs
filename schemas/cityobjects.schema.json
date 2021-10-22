@@ -868,6 +868,17 @@
               "isMovable": { "type": "boolean" }
             }
           },
+          "address": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                }
+              }
+            }
+          },
           "geometry": {
             "type": "array",
             "items": {
@@ -908,6 +919,17 @@
             "enum": [
               "BridgePart"
             ]
+          },
+          "address": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                }
+              }
+            }
           },
           "geometry": {
             "type": "array",
