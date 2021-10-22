@@ -1411,21 +1411,23 @@ However, it should be noticed that CityJSON does not prescribe the format or sta
 
 # Extensions 
 
-CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate the data model, schemas should be seen as basically validating the syntax of a JSON document.
+CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate the data model, schemas are one way to validate the syntax of a JSON document.
 
 A CityJSON *Extension* is a JSON file that allows us to document how the core data model of CityJSON may be extended, and to validate CityJSON files.
-This is conceptually akin to the *Application Domain Extensions* (ADEs) in CityGML.
+This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
 
-The following 3 cases for extension are possible:
+A CityJSON Extension can extend the core data model by three ways:
 
-  1.  Adding new complex attributes to existing City Objects
+  1.  Adding new complex attributes to the City Objects of the core
   2.  Adding new properties at the root of a document
   3.  Creating a new City Object, or "extending" one, and defining complex geometries
 
 <div class="note">
   While Extensions are less flexible than CityGML ADEs (inheritance and namespaces are for instance not supported, and less customisation is possible), it should be noted that the flexibility of ADEs comes at a price: the software processing an extended CityGML file will not necessarily know what structure to expect.
 
-  There is ongoing work to use the ADE schemas to automatically do this, but this currently is not supported by most software. Viewers might not be affected by ADEs because the geometries are usually not changed by an ADE. However, software parsing the XML to extract attributes and features might not work directly (and thus specific code would need to be written).
+  There is ongoing work to use the ADE schemas to automatically do this, but this currently is not supported by most software. 
+  Viewers might not be affected by ADEs because the geometries are usually not changed by an ADE (although they can!). 
+  However, software parsing the XML to extract attributes and features might not work directly (and thus specific code would need to be written).
 
   CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the parsing code is required. 
   This is achieved by enforcing a set of 6 simple rules (see [[#rules-to-follow-to-define-new-city-objects]]) when adding new City Objects. 
@@ -1463,23 +1465,25 @@ In the example below we have two Extensions: one named "Noise" and one named "So
 
 ## The Extension file
 
-A CityJSON Extension is a JSON object, and it **must** have the following 7 members:
+A CityJSON Extension is a JSON object, and it **must** have the following 8 members:
 
-  1.  one member with the name `"type"`, whose value must be `"CityJSON_Extension"`;
-  2.  one member with the name `"name"`, whose value must be a string identifying the extension;
-  3.  one member with the name `"uri"`, whose value must be a string with the URI of the location of the schema where the JSON object is located;
-  4.  one member with the name `"version"`, whose value must be a string identifying the version of the Extension;
-  5.  one member with the name `"extraRootProperties"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
-  6.  one member with the name `"extraAttributes"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
-  7.  one member with the name `"extraCityObjects"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
+  1.  one member with the name `"type"`, whose value must be `"CityJSONExtension"`;
+  1.  one member with the name `"name"`, whose value must be a string identifying the extension;
+  1.  one member with the name `"uri"`, whose value must be a string with the URI of the location of the schema where the JSON object is located;
+  1.  one member with the name `"version"`, whose value must be a string identifying the version of the Extension;
+  1.  one member with the name `"versionCityJSON"`, whose value must be a string (X.Y) identifying the version of CityJSON that uses the Extension;
+  1.  one member with the name `"extraRootProperties"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
+  1.  one member with the name `"extraAttributes"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
+  1.  one member with the name `"extraCityObjects"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
 
 
 ```json
 {
-  "type": "CityJSON_Extension",
+  "type": "CityJSONExtension",
   "name": "Noise",
   "uri": "https://someurl.org/noise.ext.json",
   "version": "0.5",
+  "versionCityJSON": "1.1",
   "description": "Extension to model the noise",
   "extraRootProperties": {},     
   "extraAttributes": {},
@@ -1487,39 +1491,26 @@ A CityJSON Extension is a JSON object, and it **must** have the following 7 memb
 }
 ```
 
-A CityJSON Extension object must be in a separate standalone file, and it must be located in a folder `/extensions` in the folder where the CityJSON schemas are located. 
-For a new extension `noise.ext.json` the following structure would thus be used:
-
-```console
-|-- appearance.schema.json
-|-- cityjson.schema.json
-|-- cityobjects.schema.json
-|-- geomprimitives.schema.json
-|-- geomtemplates.schema.json
-|-- metadata.schema.json
-|-- /extensions
-    |-- noise.ext.json
-```
-
-This also means that if an element of the Extension reuses, or references, structures and objects defined in the schemas of CityJSON, then the relative path `../` must be used. 
-An example would be to reuse the Solid type would be:
+<div class="note">
+If an element of the Extension reuses, or references, structures and objects defined in the schemas of CityJSON, then we can assume that the Extension is in the same folder as the schemas.
+An example would be to reuse the Solid type:
 
 ```json
 "items": {
   "oneOf": [
-    {"$ref": "../geomprimitives.json#/Solid"}
+    {"$ref": "geomprimitives.json#/Solid"}
   ]
 }
 ```
+</div>
 
 ## Case 1: Adding new complex attributes to existing City Objects
 
-One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON cannot have schemas!). 
+One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON does not have schemas!). 
 While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are partly following that philosophy. 
 That is, for a given City Object, the "allowed" properties/attributes are listed in the schema, but it is not an error to add new ones. 
-The "official validator" of CityJSON ([cjio](https://github.com/cityjson/cjio) with the operator `validate`) does more than simply validate a dataset against the schemas, and will return a *warning* if an attribute is not in the schema, but it is not considered as invalid in CityJSON.
 
-In brief, if one wants to simply add a new attribute to a given `"Building"`, say to document its colour (`"colour": "red"`), the easiest way is just to add a property to the City Object (notice that `"storeysAboveGround"` is an allowed attributes to buildings):
+If one wants to simply add a new attribute to a given `"Building"`, say to document its colour (`"colour": "red"`), the easiest way is just to add a new property to the City Object attributes:
 
 ```json
 {
@@ -1566,7 +1557,7 @@ Another example would be to store the area of the parcel of a building, and also
 For these two cases, the CityJSON Extension object would look like the snippet below.
 Notice that `"extraAttributes"` may have several properties (the types of the City Objects are the possibilities) and then each of these has as properties the new attributes (there can be several). 
 
-An extra attribute must start with a `"+"`; notice that it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different extensions have the same name. 
+An extra attribute must start with a `"+"`; it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different extensions have the same name. 
 
 The value of the property is a JSON schema, this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
 
@@ -1655,7 +1646,7 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
 "extraCityObjects": {
   "+NoiseBuilding": {
     "allOf": [
-      { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+      { "$ref": "cityobjects.json#/_AbstractBuilding" },
       {
         "properties": {
           "type": { "enum": ["+NoiseBuilding"] },
@@ -1676,7 +1667,7 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
 "extraCityObjects": {
   "+NoiseBuildingPart": {
     "allOf": [
-      { "$ref": "../cityobjects.json#/_AbstractBuilding" },
+      { "$ref": "cityobjects.json#/_AbstractBuilding" },
       {
         "properties": {
           "type": { "enum": ["+NoiseBuildingPart"] },
@@ -1693,8 +1684,7 @@ The creation of a new City Object is done by defining it in the CityJSON Extensi
 }
 ```
 
-<!-- TODO: switch master to main and thus change the URLs -->
-Since all City Objects are documented in the schemas of CityJSON (in [cityobjects.schema.json](https://github.com/cityjson/specs/tree/master/schemas)), it is basically a matter of copying the parts needed in a new file and modifying its content. 
+Since all City Objects are documented in the [schemas of CityJSON](https://www.cityjson.org/schemas/) (in `cityobjects.schema.json`), it is basically a matter of copying the parts needed in a new file and modifying its content. 
 
 A new name for the City Object must be given and it must begin with a `"+"`.
 
@@ -1712,7 +1702,7 @@ While one could define a new City Object and document it, if this new object doe
 1.  The name of a new City Object must begin with a `"+"`, eg `"+NoiseBuilding"`.
 2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"` and one `"geometry"`. If the object contains appearances, the same mechanism should be used so that the new City Objects can be processed without modification.
 3.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
-4.  If a new City Object contains other objects and requires different geometries, then a new City Object needs to be defined using the parent-children structure of CityJSON, as used by `"Building"` and `"BuildingPart"`.
+4.  If a new City Object contains other objects and requires different geometries, then a new City Object needs to be defined using the parents-children structure of CityJSON, as used by `"Building"` and `"BuildingPart"`.
 5.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 6.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
 
