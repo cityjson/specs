@@ -240,17 +240,19 @@ Six City Objects are related to bridges:
 The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
 The geometry of the four other objects can be represented with any of the Geometry Objects.
 
-A City Object of type `"Bridge"` or `"BridgePart"` may have a member `"address"`, whose value is a JSON object describing the address. 
-One location (a `"MultiPoint"`) can be given, for instance to locate the front door inside the building.
+A City Object of type `"Bridge"` or `"BridgePart"` may have a member `"address"`, whose value is an array of JSON objects listing the potentially several addresses of that bridge . 
+The properties of an address JSON object are free, to accommodate the different ways addresses are described in different countries.
 
 ```json
 "CityObjects": {
   "LondonTower": {
     "type": "Bridge", 
-    "address": {
-      "City": "London",
-      "Country": "UK"
-    },
+    "address": [
+      {
+        "City": "London",
+        "Country": "UK"
+      }
+    ],
     "children": ["Bext1", "Bext2", "Inst-2017-11-14"],
     "geometry": [{
       "type": "MultiSurface",
