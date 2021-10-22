@@ -250,8 +250,8 @@ One location (a `"MultiPoint"`) can be given, for instance to locate the front d
   "LondonTower": {
     "type": "Bridge", 
     "address": {
-      "CountryName": "UK",
-      "LocalityName": "London"
+      "City": "London",
+      "Country": "UK"
     },
     "children": ["Bext1", "Bext2", "Inst-2017-11-14"],
     "geometry": [{
@@ -290,11 +290,10 @@ The installations, furnitures, and subdivisions can have as parents either a `"B
 
 The geometry of `"BuildingInstallation"`, `"BuildingConstructiveElement"`, or  `"BuildingFurniture"` objects can be represented with any of the Geometry Objects.
 
-A City Object of type `"Building"` or `"BuildingPart"` may have a member `"address"`, whose value is a JSON object describing the address. 
-One location (a `"MultiPoint"`) can be given, for instance to position the front door inside the building.
+A City Object of type `"Building"`, `"BuildingPart"` or `"BuildingUnit"` may have a member `"address"`, whose value is an array of JSON objects listing the potentially several addresses of that building (an apartment building could contain several for instance). 
+The properties of an address JSON object are free, to accommodate the different ways addresses are described in different countries.
+If a location is necessary (eg to locate the position of the front door) then a property `"location"` should be used, and it should contain a `"MultiPoint"`.
 
-As is the case in CityGML, the address information is specified using the [xAL address standard](http://xml.coverpages.org/xnal.html).
-<!--- TODO: keep address or flatten? -->
 
 ```json
 "CityObjects": {
@@ -340,13 +339,20 @@ As is the case in CityGML, the address information is specified using the [xAL a
 ```json
 {
   "type": "Building", 
-  "address": {
-    "CountryName": "Canada",
-    "LocalityName": "Chibougamau",
-    "ThoroughfareNumber": "1",
-    "ThoroughfareName": "rue de la Patate",
-    "PostalCode": "H0H 0H0"
-  }
+  "address": [
+    {
+      "Country": "Canada",
+      "Locality": "Chibougamau",
+      "ThoroughfareNumber": "1",
+      "ThoroughfareName": "rue de la Patate",
+      "Postcode": "H0H 0H0",
+      "location": {
+        "type": "MultiPoint",
+        "lod": "1",
+        "boundaries": [231]
+      }
+    }
+  ]
 }
 ```
 

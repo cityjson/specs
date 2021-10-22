@@ -210,25 +210,13 @@
             }
           },
           "address": {
-            "type": "object",
-            "properties": {
-              "CountryName": {
-                "type": "string"
-              },
-              "LocalityName": {
-                "type": "string"
-              },
-              "ThoroughfareNumber": {
-                "type": "string"
-              },
-              "ThoroughfareName": {
-                "type": "string"
-              },
-              "PostalCode": {
-                "type": "string"
-              },
-              "location": {
-                "$ref": "geomprimitives.schema.json#/MultiPoint"
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                }
               }
             }
           },
