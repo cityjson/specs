@@ -1115,17 +1115,6 @@ Notice that these are in the real coordinates of the dataset (based on [[#refere
 }
 ```
 
-## geographicLocation
-
-The name of an area or a city.
-
-```json
-"metadata": {
-  "geographicLocation": "Delft, the Netherlands"
-}
-```
-
-
 ## referenceSystem (CRS) 
 
 The coordinate reference system (CRS) may be given as a URL, formatted this way according to the [OGC Name Type Specification](https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names): 
