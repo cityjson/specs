@@ -1027,8 +1027,8 @@ The core of CityJSON supports the following six properties, these are compliant 
 
 ```json
 "metadata": {
-  "citymodelIdentifier": "eaeceeaa-3f66-429a-b81d-bbc6140b8c1c",
-  "datasetPointOfContact": {
+  "identifier": "eaeceeaa-3f66-429a-b81d-bbc6140b8c1c",
+  "pointOfContact": {
     "contactName": "3D geoinformation group, Delft University of Technology",
     "contactType": "organization",
     "role": "owner",
@@ -1037,9 +1037,9 @@ The core of CityJSON supports the following six properties, these are compliant 
     "website": "https://3d.bk.tudelft.nl",
     "address": "Julianalaan 134, Delft 2628BL, the Netherlands"
   },
-  "datasetReferenceDate": "1977-02-28",
-  "datasetTitle": "Buildings in LoD2.3 of Chibougamau, Québec",
-  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
+  "referenceDate": "1977-02-28",
+  "title": "Buildings in LoD2.3 of Chibougamau, Québec",
+  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
   "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355"
 }
 ```
@@ -1050,18 +1050,18 @@ The core of CityJSON supports the following six properties, these are compliant 
 </div>
 
 
-## citymodelIdentifier
+## identifier
 
 A unique identifier for the dataset.
 It is recommend to use [universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier), but it is not necessary.
 
 ```json
 "metadata": {
-  "citymodelIdentifier": "44574905-d2d2-4f40-8e96-d39e1ae45f70"
+  "identifier": "44574905-d2d2-4f40-8e96-d39e1ae45f70"
 }
 ```
 
-## datasetPointOfContact
+## pointOfContact
 
 The point of contact for the dataset.
 It is a JSON object that
@@ -1076,7 +1076,7 @@ It is a JSON object that
   - **may** have one member with the name `"organization"`, whose value is the name of the organisation, to be used if the `"contactName"` is the name of a person
 
 ```json
-"datasetPointOfContact": {
+"pointOfContact": {
   "contactName": "Justin Trudeau",
   "emailAddress": "justin.trudeau@parl.gc.ca",
   "phone": "+1-613-992-4211",
@@ -1086,13 +1086,13 @@ It is a JSON object that
 }
 ```
 
-## datasetReferenceDate
+## referenceDate
 
 The date where the dataset was compiled, without the time of the day, only a `"full-date"` in [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. 
 
 ```json
 "metadata": {
-  "datasetReferenceDate": "1977-02-28"
+  "referenceDate": "1977-02-28"
 }
 ```
 
@@ -1103,7 +1103,7 @@ The date where the dataset was compiled, without the time of the day, only a `"f
 </div>
 
 
-## geographicalExtent (bbox) 
+## geographicExtent (bbox) 
 
 While this can be extracted from the dataset itself, it is often useful to store it. 
 It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`.
@@ -1111,7 +1111,7 @@ Notice that these are in the real coordinates of the dataset (based on [[#refere
 
 ```json
 "metadata": {
-  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
+  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
 }
 ```
 
