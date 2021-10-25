@@ -46,13 +46,7 @@
       }
     },
     "required": [
-      "name", 
-      "ambientIntensity", 
-      "diffuseColor", 
-      "emissiveColor", 
-      "specularColor", 
-      "shininess", 
-      "transparency"
+      "name"
     ],
     "additionalProperties": false
   },

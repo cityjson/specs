@@ -1235,7 +1235,7 @@ In the following, the Solid has 4 surfaces, and there are 2 themes: "winter-text
 A Material Object:
 
   - **must** have one member with the name `"name"`, whose value is a string identifying the material.
-  - **must** have the following six members (their meaning is explained [there](http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material)):
+  - **may** have the following members (their meaning is explained [there](http://www.web3d.org/documents/specifications/19775-1/V3.2/Part01/components/shape.html#Material)):
 
     1.  `"ambientIntensity"`, whose value is a number between 0.0 and 1.0
     2.  `"diffuseColor"`, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
@@ -1243,8 +1243,7 @@ A Material Object:
     4.  `"specularColor"`, whose value is an array with 3 numbers between 0.0 and 1.0 (RGB colour)
     5.  `"shininess"`, whose value is a number between 0.0 and 1.0
     6.  `"transparency"`, whose value is a number between 0.0 and 1.0 (1.0 being completely transparent)
-
-  - **may** have one member with the name `"isSmooth"`, whose value is a Boolean value. It is defined in CityGML as a hint for normal interpolation. If this boolean flag is set to `true`, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading).
+    7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading).
 
 ```json
 "materials": [
