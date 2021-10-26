@@ -1253,6 +1253,14 @@ A Material Object:
     6.  `"transparency"`, whose value is a number between 0.0 and 1.0 (1.0 being completely transparent)
     7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading).
 
+<div class="advisement">
+    If only "name" is defined for the Material Object, then it is up to the application
+    that reads the CityJSON file to attach a material definition to the "name", which
+    might not always be possible.
+    Therefore, it is advised to define as many from the optional members as needed for
+    fully displaying the material.
+</div>
+
 ```json
 "materials": [
   {
