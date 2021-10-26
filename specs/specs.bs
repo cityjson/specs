@@ -1255,8 +1255,8 @@ A Material Object:
 
 <div class="advisement">
     If only "name" is defined for the Material Object, then it is up to the application
-    that reads the CityJSON file to attach a material definition to the "name", which
-    might not always be possible.
+    that reads the CityJSON file to attach a material definition to the "name".
+    This might not always be possible.
     Therefore, it is advised to define as many from the optional members as needed for
     fully displaying the material.
 </div>
