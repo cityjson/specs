@@ -1029,6 +1029,7 @@ The core of CityJSON supports the following six properties, these are compliant 
 
 ```json
 "metadata": {
+  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
   "identifier": "eaeceeaa-3f66-429a-b81d-bbc6140b8c1c",
   "pointOfContact": {
     "contactName": "3D geoinformation group, Delft University of Technology",
@@ -1040,9 +1041,8 @@ The core of CityJSON supports the following six properties, these are compliant 
     "address": "Julianalaan 134, Delft 2628BL, the Netherlands"
   },
   "referenceDate": "1977-02-28",
-  "title": "Buildings in LoD2.3 of Chibougamau, Québec",
-  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
-  "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355"
+  "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355",
+  "title": "Buildings in LoD2.3 of Chibougamau, Québec"
 }
 ```
 
@@ -1051,6 +1051,17 @@ The core of CityJSON supports the following six properties, these are compliant 
   Examples of extra attributes/properties that can be stored: point of contact for the dataset, lineage, statistics about the present LoDs, the presence of textures/materials, etc. 
 </div>
 
+## geographicExtent (bbox) 
+
+While this can be extracted from the dataset itself, it is often useful to store it. 
+It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`.
+Notice that these are in the real coordinates of the dataset (based on [[#referencesystem-crs]]) and not after the coordinates have been compressed with the `"transform"` property ([[#transform-object]]).
+
+```json
+"metadata": {
+  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
+}
+```
 
 ## identifier
 
@@ -1105,17 +1116,7 @@ The date where the dataset was compiled, without the time of the day, only a `"f
 </div>
 
 
-## geographicExtent (bbox) 
 
-While this can be extracted from the dataset itself, it is often useful to store it. 
-It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`.
-Notice that these are in the real coordinates of the dataset (based on [[#referencesystem-crs]]) and not after the coordinates have been compressed with the `"transform"` property ([[#transform-object]]).
-
-```json
-"metadata": {
-  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
-}
-```
 
 ## referenceSystem (CRS) 
 
@@ -1141,6 +1142,16 @@ Be aware that the CRS should be a three-dimensional one, ie the elevation/height
   Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different from the other walls used to represent the building), in CityJSON all the city objects need to be in the same CRS.
 </div>  
 
+
+## title
+
+A string describing the dataset.
+
+```json
+"metadata": {
+  "title": "3D city model of Chibougamau, Canada"
+}
+```
 
 # Appearance Object
 
