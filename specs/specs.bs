@@ -89,7 +89,7 @@ The minimal valid CityJSON object is thus:
 }
 ```
 
-An "empty" CityJSON object will look like this:
+An "empty" but complete CityJSON object will look like this:
 
 ```json
 {
