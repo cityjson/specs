@@ -16,7 +16,7 @@ WaterBody
 Bridge
 BridgePart
 BridgeInstallation
-BridgeConstructionElement
+BridgeConstructiveElement
 BridgeRoom
 BridgeFurniture
 

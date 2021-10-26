@@ -232,7 +232,7 @@ Six City Objects are related to bridges:
  - `"Bridge"` 
  - `"BridgePart"` 
  - `"BridgeInstallation"` 
- - `"BridgeConstructionElement"`
+ - `"BridgeConstructiveElement"`
  - `"BridgeRoom"`
  - `"BridgeFurniture"`
 
