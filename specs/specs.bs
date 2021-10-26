@@ -196,7 +196,7 @@ The attributes prescribed by CityGML differ per City Object, and can be seen eit
 In CityJSON, any other attributes not prescribed by the CityGML data model can be added with a JSON key-value pair ("owner" in the example above is one such attribute) in the `"attributes"` of a City Object.
 This replaces and greatly simplifies the Generics module of CityGML.
 
-All the City Objects have the following 3 possible attributes:
+The following 3 attributes are common to all City Object types (but they are still optional):
 
   1. `"class"`
   2. `"function"`
