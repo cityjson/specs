@@ -1027,6 +1027,10 @@ The following `"transform"` means that 2 important digits are kept (thus millime
 }
 ```
 
+<div class="advisement">
+    See [this](https://www.cityjson.org/dev/realcoords/) tutorial for further explanation on how to transform the vertices in order to obtain the original coordinates.
+</div>
+
 # Metadata
 
 The core of CityJSON supports the following six properties, these are compliant with the international standard [ISO19115](https://www.iso.org/standard/53798.html).
