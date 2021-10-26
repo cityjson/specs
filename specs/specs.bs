@@ -1335,7 +1335,7 @@ An Appearance Object may have one member named `"vertices-texture"`, whose value
 # Handling large files 
 
 Because CityJSON aims at being easy-to-use and developers friendly, it is advised to keep the size of CityJSON files small. 
-Files of several gigabytes are bad practice, and should be avoided since users will have great difficulties visualising and manipulating them.
+Files of several hundreds of megabytes are bad practice, and should be avoided since users will have great difficulties visualising and manipulating them.
 
 
 ## Decomposing an area into parts/tiles
