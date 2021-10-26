@@ -789,6 +789,10 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
 }
 ```
 
+<div class="advisement">
+    See [this](https://www.cityjson.org/dev/geom-arrays/) tutorial for further explanation on the depth of arrays of geometric primitives.
+</div>
+
 
 ## Semantics of geometric primitives
 
