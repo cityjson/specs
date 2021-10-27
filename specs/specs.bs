@@ -89,7 +89,7 @@ The minimal valid CityJSON object is thus:
 }
 ```
 
-An "empty" CityJSON object will look like this:
+An "empty" but complete CityJSON object will look like this:
 
 ```json
 {
@@ -196,7 +196,7 @@ The attributes prescribed by CityGML differ per City Object, and can be seen eit
 In CityJSON, any other attributes not prescribed by the CityGML data model can be added with a JSON key-value pair ("owner" in the example above is one such attribute) in the `"attributes"` of a City Object.
 This replaces and greatly simplifies the Generics module of CityGML.
 
-All the City Objects have the following 3 possible attributes:
+The following 3 attributes are common to all City Object types (but they are still optional):
 
   1. `"class"`
   2. `"function"`
@@ -789,6 +789,10 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
 }
 ```
 
+<div class="advisement">
+    See [this](https://www.cityjson.org/dev/geom-arrays/) tutorial for further explanation on the depth of arrays of geometric primitives.
+</div>
+
 
 ## Semantics of geometric primitives
 
@@ -854,9 +858,9 @@ It is possible to define and use other semantics, but these have to start with a
 
 Because in one given City Object (say a `"Building"`) several primitives can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Object has to be declared once, and each of the primitives that are represented by it points to it. This is achieved by first declaring all the Semantic Objects in an array, and then having an array where each primitive links to Semantic Objects (position in the array).
 
-A Geometry object:
+If a Geometry object has semantics, then the Geometry object:
 
-  - **may** have one member with the name `"semantics"`, whose values are two properties: `"surfaces"` and `"values"`. Both **must** be present.
+  - **must** have one member with the name `"semantics"`, whose values are two properties: `"surfaces"` and `"values"`. Both **must** be present.
 
 Also: 
 
@@ -1022,6 +1026,10 @@ The following `"transform"` means that 2 important digits are kept (thus millime
     "translate": [442464.879, 5482614.692, 310.19]
 }
 ```
+
+<div class="advisement">
+    See [this](https://www.cityjson.org/dev/realcoords/) tutorial for further explanation on how to transform the vertices in order to obtain the original coordinates.
+</div>
 
 # Metadata
 
@@ -1256,6 +1264,14 @@ A Material Object:
     6.  `"transparency"`, whose value is a number between 0.0 and 1.0 (1.0 being completely transparent)
     7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading).
 
+<div class="advisement">
+    If only "name" is defined for the Material Object, then it is up to the application
+    that reads the CityJSON file to attach a material definition to the "name".
+    This might not always be possible.
+    Therefore, it is advised to define as many from the optional members as needed for
+    fully displaying the material.
+</div>
+
 ```json
 "materials": [
   {
@@ -1310,7 +1326,7 @@ A Texture Object:
 
 ## Vertices-texture Object
 
-A Appearance Object may have one member named `"vertices-texture"`, whose value is an array of the *(u,v)* coordinates of the vertices used for texturing surfaces. Their position in this array (0-based) is used by the `"texture"` member of the Geometry Objects.
+An Appearance Object may have one member named `"vertices-texture"`, whose value is an array of the *(u,v)* coordinates of the vertices used for texturing surfaces. Their position in this array (0-based) is used by the `"texture"` member of the Geometry Objects.
 
   - the array of vertices may be empty.
   - one vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates.
@@ -1330,7 +1346,7 @@ A Appearance Object may have one member named `"vertices-texture"`, whose value 
 # Handling large files 
 
 Because CityJSON aims at being easy-to-use and developers friendly, it is advised to keep the size of CityJSON files small. 
-Files of several gigabytes are bad practice, and should be avoided since users will have great difficulties visualising and manipulating them.
+Files of several hundreds of megabytes are bad practice, and should be avoided since users will have great difficulties visualising and manipulating them.
 
 
 ## Decomposing an area into parts/tiles
