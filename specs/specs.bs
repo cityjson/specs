@@ -130,7 +130,7 @@ For example, a `"BuildingInstallation"` cannot be present in a dataset without b
 A City Object:
 
   - **may** have one member with the name `"geometry"`, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have to be of different LoDs.
-  - **may** have one member with the name `"attributes"`, whose value is an object with the different attributes allowed by CityGML.
+  - **may** have one member with the name `"attributes"`, whose value is an object where the attributes of the City Object are listed.
   - **may** have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
   - **may** have one member `"children"`, which consists of an array of the IDs (of type string) of the 2nd-level City Objects that are part of the City Object. Only the direct children of the City Object are listed, not the grand-children. Also, a City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant. 
 
@@ -191,33 +191,24 @@ And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but an
 
 ## Attributes for all City Objects
 
-The attributes prescribed by CityGML differ per City Object, and can be seen either in the [official CityGML documentation v3.0.0](https://docs.ogc.org/is/20-010/20-010.html) or in the schemas of CityJSON. 
+The attributes of a given City Object are not prescribed (unlike in CityGML).
+This means that the `"attributes"` is a JSON object and its content is a JSON key-value pair ("owner" in the example above is one such attribute).
 
-In CityJSON, any other attributes not prescribed by the CityGML data model can be added with a JSON key-value pair ("owner" in the example above is one such attribute) in the `"attributes"` of a City Object.
-This replaces and greatly simplifies the Generics module of CityGML.
-
-The following 3 attributes are common to all City Object types (but they are still optional):
-
-  1. `"class"`
-  2. `"function"`
-  3. `"usage"`
-
-
-Each of the City Objects can potentially have specific attributes defined in the CityGML data model, these seen in the schemas ([[#cityjson-schemas]]).
 
 ```json
 "CityObjects": {
   "id-1": {
     "type": "LandUse", 
     "attributes": { 
-      "function": "Industry and Business"
+      "function": "Industry and Business",
+      "area": "120m^2"
     },
     "geometry": [{...}]
   },
   "id-2": {
     "type": "WaterBody", 
     "attributes": { 
-      "class": "1010"
+      "name": "Lake Black"
     },
     "geometry": [{...}]
   }
@@ -411,7 +402,7 @@ A City Object of type `"CityObjectGroup"`:
   "my-neighbourhood": {
     "type": "CityObjectGroup",
     "attributes": {
-      "function": "Chibougamau Sud"
+      "location": "Chibougamau Sud"
     },
     "children": ["building1", "building666"],
     "children_roles": ["residential building", "voting location"],
@@ -1537,10 +1528,9 @@ An example would be to reuse the Solid type:
 ## Case 1: Adding new complex attributes to existing City Objects
 
 One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON does not have schemas!). 
-While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are partly following that philosophy. 
-That is, for a given City Object, the "allowed" properties/attributes are listed in the schema, but it is not an error to add new ones. 
+While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are (partly) following that philosophy. 
 
-If one wants to simply add a new attribute to a given `"Building"`, say to document its colour (`"colour": "red"`), the easiest way is just to add a new property to the City Object attributes:
+If one wants to document the colour of a given `"Building"` (`"colour": "red"`), the easiest way is just to add a new property to the City Object attributes:
 
 ```json
 {
