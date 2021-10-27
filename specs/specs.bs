@@ -789,8 +789,8 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
 }
 ```
 
-<div class="advisement">
-    See [this](https://www.cityjson.org/dev/geom-arrays/) tutorial for further explanation on the depth of arrays of geometric primitives.
+<div class="note">
+    See [this tutorial](https://www.cityjson.org/dev/geom-arrays/) for further explanation on the depth of arrays of Geometry objects.
 </div>
 
 
@@ -995,7 +995,7 @@ A given template can be used as the geometry (or as one of the geometries) of a 
 ```
 
 <div class="note">
-  The CityJSON website has a [page to help developers to calculate coordinates](https://www.cityjson.org/dev/realcoords/) for Geometry Templates and other Geometry Objects.
+  The CityJSON website has a [page to help developers calculate coordinates](https://www.cityjson.org/dev/realcoords/) for Geometry Templates and other Geometry Objects.
 </div>
 
 
@@ -1027,9 +1027,6 @@ The following `"transform"` means that 2 important digits are kept (thus millime
 }
 ```
 
-<div class="advisement">
-    See [this](https://www.cityjson.org/dev/realcoords/) tutorial for further explanation on how to transform the vertices in order to obtain the original coordinates.
-</div>
 
 # Metadata
 
@@ -1264,12 +1261,10 @@ A Material Object:
     6.  `"transparency"`, whose value is a number between 0.0 and 1.0 (1.0 being completely transparent)
     7.  `"isSmooth"`, whose value is a Boolean value, is defined in CityGML as a hint for normal interpolation. If this boolean flag is set to true, vertex normals should be used for shading (Gouraud shading). Otherwise, normals should be constant for a surface patch (flat shading).
 
-<div class="advisement">
-    If only "name" is defined for the Material Object, then it is up to the application
-    that reads the CityJSON file to attach a material definition to the "name".
-    This might not always be possible.
-    Therefore, it is advised to define as many from the optional members as needed for
-    fully displaying the material.
+<div class="note">
+  If only `"name"` is defined for the Material Object, then it is up to the application that reads the CityJSON file to attach a material definition to the `"name"`. 
+  This might not always be possible.
+  Therefore, it is advised to define as many from the optional members as needed for fully displaying the material.
 </div>
 
 ```json
