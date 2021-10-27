@@ -1511,10 +1511,10 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
 {
   "type": "CityJSONExtension",
   "name": "Noise",
+  "description": "Extension to model the noise",
   "uri": "https://someurl.org/noise.ext.json",
   "version": "0.5",
   "versionCityJSON": "1.1",
-  "description": "Extension to model the noise",
   "extraRootProperties": {},     
   "extraAttributes": {},
   "extraCityObjects": {}
@@ -1522,7 +1522,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
 ```
 
 <div class="note">
-If an element of the Extension reuses, or references, structures and objects defined in the schemas of CityJSON, then we can assume that the Extension is in the same folder as the schemas.
+If an element of the Extension reuses, or references, structures and/or objects defined in the schemas of CityJSON, then we can assume that the Extension is in the same folder as the schemas.
 An example would be to reuse the Solid type:
 
 ```json
