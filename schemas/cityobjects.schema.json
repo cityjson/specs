@@ -2,38 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://www.cityjson.org/schemas/1.1.0/cityobjects.schema.json",
   "title": "CityJSON City Objects schema v1.1.0",
-  "definitions": {
-    "Elevation": {
-      "type": "object",
-      "properties": {
-        "elevationValue": { "type": "number" },
-        "elevationReference": {
-          "enum": [
-            "above ground envelope",
-            "bottom of construction",
-            "entrance point",
-            "general eave",
-            "general ground",
-            "general roof",
-            "general roof edge",
-            "highest eave",
-            "highest point",
-            "highest roof edge",
-            "highestground point",
-            "lowest eave",
-            "lowest floor above ground",
-            "lowest ground point",
-            "lowest roof edge",
-            "top of construction"
-          ]
-        }
-      },
-      "required": [
-        "elevationValue",
-        "elevationReference"
-      ]
-    }
-  },
+  
   "ExtensionObject": {
     "type": "object",
     "properties": {
@@ -48,19 +17,8 @@
   },
   "_AbstractCityObject": {
     "properties": {
-      "attributes": {
-        "type": "object",
-        "properties": {
-          "class": {
-            "type": "string"
-          },
-          "function": {
-            "type": "string"
-          },
-          "usage": {
-            "type": "string"
-          }
-        }
+      "attributes": { 
+        "type": "object" 
       },
       "parents": {
         "type": "array",
@@ -86,41 +44,10 @@
       }
     }
   },
-  "_AbstractConstruction": {
-    "allOf": [
-      {
-        "$ref": "#/_AbstractCityObject"
-      },
-      {
-        "properties": {
-          "attributes": {
-            "properties": {
-              "conditionOfConstruction": {
-                "enum": [
-                  "declined",
-                  "demolished",
-                  "functional",
-                  "projected",
-                  "ruin",
-                  "underConstruction"
-                ]
-              },
-              "dateOfConstruction": {
-                "type": "string"
-              },
-              "dateOfDemolition": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    ]
-  },
   "OtherConstruction": {
     "allOf": [
       {
-        "$ref": "#/_AbstractConstruction"
+        "$ref": "#/_AbstractCityObject"
       },
       {
         "properties": {
@@ -128,16 +55,6 @@
             "enum": [
               "OtherConstruction"
             ]
-          },
-          "attributes": {
-            "properties": {
-              "class": {
-                "enum": [
-                  "overkapping",
-                  "open loods"
-                ]
-              }
-            }
           },
           "geometry": {
             "type": "array",
@@ -165,50 +82,10 @@
   "_AbstractBuilding": {
     "allOf": [
       {
-        "$ref": "#/_AbstractConstruction"
+        "$ref": "#/_AbstractCityObject"
       },
       {
         "properties": {
-          "attributes": {
-            "properties": {
-              "roofType": {
-                "enum": [
-                  "flat roof",
-                  "monopitch roof",
-                  "dual pent roof",
-                  "gabled roof",
-                  "hipped roof",
-                  "half-hipped roof",
-                  "mansard roof",
-                  "pavilion roof",
-                  "cone roof",
-                  "copula roof",
-                  "sawtooth roof ",
-                  "arch roof",
-                  "pyramidal broach roof",
-                  "combination of roof forms"
-                ]
-              },
-              "storeysAboveGround": {
-                "type": "integer"
-              },
-              "storeysBelowGround": {
-                "type": "integer"
-              },
-              "storeyHeightsAboveGround": {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                }
-              },
-              "storeyHeightsBelowGround": {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                }
-              }
-            }
-          },
           "address": {
             "type": "array",
             "items": {
@@ -362,22 +239,6 @@
               "BuildingRoom"
             ]
           },
-          "attributes": {
-            "properties": {
-              "roomHeight": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "value": { "type": "number" },
-                    "status": { "type": "string" },
-                    "highReference": { "type": "string" },
-                    "lowReference": { "type": "string" }
-                  }
-                }
-              }
-            }
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -417,17 +278,6 @@
               "BuildingUnit"
             ]
           },
-          "attributes": {
-            "properties": {
-              "elevation": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/Elevation"
-                }
-              },
-              "sortKey": { "type": "number" }
-            }
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -466,17 +316,6 @@
             "enum": [
               "BuildingStorey"
             ]
-          },
-          "attributes": {
-            "properties": {
-              "elevation": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/Elevation"
-                }
-              },
-              "sortKey": { "type": "number" }
-            }
           },
           "geometry": {
             "type": "array",
@@ -566,7 +405,7 @@
   "Tunnel": {
     "allOf": [
       {
-        "$ref": "#/_AbstractConstruction"
+        "$ref": "#/_AbstractCityObject"
       },
       {
         "properties": {
@@ -607,7 +446,7 @@
   "TunnelPart": {
     "allOf": [
       {
-        "$ref": "#/_AbstractConstruction"
+        "$ref": "#/_AbstractCityObject"
       },
       {
         "properties": {
@@ -854,7 +693,7 @@
   "Bridge": {
     "allOf": [
       {
-        "$ref": "#/_AbstractConstruction"
+        "$ref": "#/_AbstractCityObject"
       },
       {
         "properties": {
@@ -862,11 +701,6 @@
             "enum": [
               "Bridge"
             ]
-          },
-          "attributes": {
-            "properties": {
-              "isMovable": { "type": "boolean" }
-            }
           },
           "address": {
             "type": "array",
@@ -911,7 +745,7 @@
   "BridgePart": {
     "allOf": [
       {
-        "$ref": "#/_AbstractConstruction"
+        "$ref": "#/_AbstractCityObject"
       },
       {
         "properties": {
@@ -1173,22 +1007,6 @@
       },
       {
         "properties": {
-          "attributes": {
-            "properties": {
-              "surfaceMaterial": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "clearanceSpace": {
-                "type": "number"
-              },
-              "clearanceSpaceUnit": {
-                "type": "string"
-              }
-            }
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -1391,13 +1209,6 @@
               "PlantCover"
             ]
           },
-          "attributes": {
-            "properties": {
-              "averageHeight": {
-                "type": "number"
-              }
-            }
-          },
           "geometry": {
             "type": "array",
             "items": {
@@ -1429,22 +1240,6 @@
             "enum": [
               "SolitaryVegetationObject"
             ]
-          },
-          "attributes": {
-            "properties": {
-              "species": {
-                "type": "string"
-              },
-              "height": {
-                "type": "number"
-              },
-              "trunkDiameter": {
-                "type": "number"
-              },
-              "crownDiameter": {
-                "type": "number"
-              }
-            }
           },
           "geometry": {
             "type": "array",
