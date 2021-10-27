@@ -258,7 +258,12 @@ The properties of an address JSON object are free, to accommodate the different 
       "type": "MultiSurface",
       "lod": "2",
       "boundaries": [
-        [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]], [[2, 3, 7, 6]], [[3, 0, 4, 7]]
+        [[0, 3, 2, 1]], 
+        [[4, 5, 6, 7]], 
+        [[0, 1, 5, 4]], 
+        [[1, 2, 6, 5]], 
+        [[2, 3, 7, 6]], 
+        [[3, 0, 4, 7]]
       ]
     }]    
   }
@@ -491,7 +496,7 @@ The geometry of a City Object of type `"PlantCover"` can be of type `"MultiSurfa
         [ [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[10, 13, 22, 31]] ]
       ],
       [
-        [ [[5, 34, 31, 12]], [[44, 54, 62, 74]], [[10, 111, 445, 222]], [[111, 123, 922, 66]] ]
+        [ [[5, 34, 31, 12]], [[44, 54, 62, 74]], [[111, 123, 922, 66]] ]
       ]  
     ]
   }]    
@@ -535,7 +540,7 @@ Notice that in practice any `"CompositeSurface"` is allowed for encoding a terra
     "type": "CompositeSurface",
     "lod": "1",
     "boundaries": [
-       [[0, 3, 2]], [[4, 5, 6]], [[0, 1, 5]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
+       [[0, 3, 2]], [[4, 5, 6]], [[1, 2, 6]], [[2, 3, 7]], [[3, 0, 4]]
     ]
   }]    
 }
@@ -767,8 +772,10 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
   "type": "Solid",
   "lod": "2",
   "boundaries": [
-    [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ], //-- exterior shell
-    [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ] //-- interior shell
+    //-- exterior shell
+    [ [[0, 3, 2, 1, 22]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[1, 2, 6, 5]] ], 
+    //-- interior shell
+    [ [[240, 243, 124]], [[244, 246, 724]], [[34, 414, 45]], [[111, 246, 5]] ] 
   ]
 }
 ```
@@ -876,7 +883,11 @@ Also:
   "type": "MultiSurface",
   "lod": "2",
   "boundaries": [
-    [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]], [[0, 2, 3, 8]], [[10, 12, 23, 48]]
+    [[0, 3, 2, 1]], 
+    [[4, 5, 6, 7]], 
+    [[0, 1, 5, 4]], 
+    [[0, 2, 3, 8]], 
+    [[10, 12, 23, 48]]
   ],
   "semantics": {
     "surfaces" : [
@@ -1240,7 +1251,12 @@ In the following, the Solid has 4 surfaces, and there are 2 themes: "winter-text
     },
     "summer-textures": {
       "values": [
-        [ [[1, 10, 23, 22, 21]], [[1, 1, 2, 6, 5]], [[1, 66, 12, 64, 5]], [[2, 99, 21, 16, 25]] ]                  
+        [ 
+          [[1, 10, 23, 22, 21]], 
+          [[1, 1, 2, 6, 5]], 
+          [[1, 66, 12, 64, 5]], 
+          [[2, 99, 21, 16, 25]] 
+        ]                  
       ]      
     }
   }     
