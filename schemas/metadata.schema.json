@@ -82,7 +82,7 @@
       "title": {
         "type": "string"
       },
-      "geographicExtent": {
+      "geographicalExtent": {
         "type": "array",
         "items": {
           "type": "number"

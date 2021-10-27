@@ -1038,7 +1038,7 @@ The core of CityJSON supports the following six properties, these are compliant 
 
 ```json
 "metadata": {
-  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
+  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ],
   "identifier": "eaeceeaa-3f66-429a-b81d-bbc6140b8c1c",
   "pointOfContact": {
     "contactName": "3D geoinformation group, Delft University of Technology",
@@ -1060,7 +1060,7 @@ The core of CityJSON supports the following six properties, these are compliant 
   Examples of extra attributes/properties that can be stored: point of contact for the dataset, lineage, statistics about the present LoDs, the presence of textures/materials, etc. 
 </div>
 
-## geographicExtent (bbox) 
+## geographicalExtent (bbox) 
 
 While this can be extracted from the dataset itself, it is often useful to store it. 
 It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`.
@@ -1068,7 +1068,7 @@ Notice that these are in the real coordinates of the dataset (based on [[#refere
 
 ```json
 "metadata": {
-  "geographicExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
+  "geographicalExtent": [ 84710.1, 446846.0, -5.3, 84757.1, 446944.0, 40.9 ]
 }
 ```
 
