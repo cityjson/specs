@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.1.0-beta.3
+Title: CityJSON Specifications 1.1.0-beta.4
 Shortname: CityJSON
 Status: LS
 Level: none
@@ -52,10 +52,6 @@ Boilerplate: idl-index no, property-index no, references no, conformance no
                       |___/                          
 -->                                                    
                                                     
-
-# CityJSON Schemas
-
-The [JSON schemas](https://json-schema.org/) of the specifications are publicly available at [https://cityjson.org/schemas/](https://cityjson.org/schemas/).
 
 # CityJSON Object
 
@@ -1726,6 +1722,11 @@ While one could define a new City Object and document it, if this new object doe
 4.  If a new City Object contains other objects and requires different geometries, then a new City Object needs to be defined using the parents-children structure of CityJSON, as used by `"Building"` and `"BuildingPart"`.
 5.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 6.  To define a new semantic surface, a `+` must be prepended to its name, eg `"+ThermalSurface"`.
+
+
+# CityJSON Schemas
+
+The [JSON schemas](https://json-schema.org/) of the specifications are publicly available at [https://cityjson.org/schemas/](https://cityjson.org/schemas/).
 
 
 # CityGML v3.0 conformance
