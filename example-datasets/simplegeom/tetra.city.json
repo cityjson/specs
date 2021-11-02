@@ -1,0 +1,97 @@
+{
+    "CityObjects":
+    {
+        "id-1":
+        {
+            "geometry":
+            [
+                {
+                    "boundaries":
+                    [
+                        [
+                            [
+                                [
+                                    0,
+                                    1,
+                                    2
+                                ]
+                            ],
+                            [
+                                [
+                                    0,
+                                    2,
+                                    3
+                                ]
+                            ],
+                            [
+                                [
+                                    2,
+                                    1,
+                                    3
+                                ]
+                            ],
+                            [
+                                [
+                                    0,
+                                    3,
+                                    1
+                                ]
+                            ]
+                        ]
+                    ],
+                    "lod": "1",
+                    "type": "Solid"
+                }
+            ],
+            "type": "+GenericCityObject"
+        }
+    },
+    "type": "CityJSON",
+    "version": "1.1",
+    "vertices":
+    [
+        [
+            0,
+            0,
+            0
+        ],
+        [
+            1000,
+            1000,
+            0
+        ],
+        [
+            1000,
+            0,
+            0
+        ],
+        [
+            1000,
+            0,
+            1000
+        ]
+    ],
+    "transform":
+    {
+        "scale":
+        [
+            0.001,
+            0.001,
+            0.001
+        ],
+        "translate":
+        [
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    "extensions":
+    {
+        "Generic":
+        {
+            "url": "https://cityjson.org/extensions/download/generic.ext.json",
+            "version": "1.0"
+        }
+    }
+}
