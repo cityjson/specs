@@ -1,9 +1,10 @@
 {
-  "type": "CityJSON_Extension",
+  "type": "CityJSONExtension",
   "name": "Noise",
-  "uri": "http://someurl.org/noise.ext.json",
-  "version": "1.0.0",
-  "description": "Extension for Noise Emmission Simulation",
+  "uri": "https://www.cityjson.org/tutorials/files/noise.ext.json",
+  "version": "1.1.0",
+  "versionCityJSON": "1.1",
+  "description": "Extension for Noise Emission Simulation",
   
   "definitions": {
     "measure": {
@@ -13,7 +14,7 @@
         "uom": { "type": "string" }
       },
       "required": [ "value", "uom" ],
-      "additionalProperties": "false"
+      "additionalProperties": false
     },
     
     "train": {
@@ -32,10 +33,12 @@
         "speedNight": { "$ref": "#/definitions/measure" },
         "additionalCorrectionTrain": { "$ref": "#/definitions/measure" }
       },
-      "additionalProperties": "false"
+      "additionalProperties": false
     }
   },
   
+  "extraRootProperties": {},
+
   "extraAttributes": {
     "Building": {
       "+noise-buildingReflection": { "type": "string" },
@@ -74,7 +77,7 @@
   "extraCityObjects": {
     "+NoiseCityFurnitureSegment": {
       "allOf": [
-        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        { "$ref": "cityobjects.schema.json#/_AbstractCityObject" },
         {
           "properties": {
             "type": { "enum": [ "+NoiseCityFurnitureSegment" ] },
@@ -95,7 +98,7 @@
               "type": "array",
               "items": {
                 "oneOf": [
-                  { "$ref": "../geomprimitives.schema.json#/MultiLineString" }
+                  { "$ref": "geomprimitives.schema.json#/MultiLineString" }
                 ]
               }
             }
@@ -107,7 +110,7 @@
     
     "+NoiseRoadSegment": {
       "allOf": [
-        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        { "$ref": "cityobjects.schema.json#/_AbstractCityObject" },
         {
           "properties": {
             "type": { "enum": [ "+NoiseRoadSegment" ] },
@@ -147,7 +150,7 @@
               "type": "array",
               "items": {
                 "oneOf": [
-                  { "$ref": "../geomprimitives.schema.json#/MultiLineString" }
+                  { "$ref": "geomprimitives.schema.json#/MultiLineString" }
                 ]
               }
             }
@@ -159,7 +162,7 @@
     
     "+NoiseRailwaySegment": {
       "allOf": [
-        { "$ref": "../cityobjects.schema.json#/_AbstractCityObject" },
+        { "$ref": "cityobjects.schema.json#/_AbstractCityObject" },
         {
           "properties": {
             "type": { "enum": [ "+NoiseRailwaySegment" ] },
@@ -186,7 +189,7 @@
               "type": "array",
               "items": {
                 "oneOf": [
-                  { "$ref": "../geomprimitives.schema.json#/MultiLineString" }
+                  { "$ref": "geomprimitives.schema.json#/MultiLineString" }
                 ]
               }
             }
