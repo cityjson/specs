@@ -52,11 +52,12 @@
       "type": "object",
       "properties": {
         "Bridge": { "$ref": "#/definitions/Plus" },
-        "BridgeConstructionElement": { "$ref": "#/definitions/Plus" },
+        "BridgeConstructiveElement": { "$ref": "#/definitions/Plus" },
         "BridgeInstallation": { "$ref": "#/definitions/Plus" },
         "BridgePart": { "$ref": "#/definitions/Plus" },
         "BridgeRoom": { "$ref": "#/definitions/Plus" },
         "Building": { "$ref": "#/definitions/Plus" },
+        "BuildingPart": { "$ref": "#/definitions/Plus" },
         "BuildingConstructiveElement": { "$ref": "#/definitions/Plus" },
         "BuildingFurniture": { "$ref": "#/definitions/Plus" },
         "BuildingInstallation": { "$ref": "#/definitions/Plus" },
