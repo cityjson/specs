@@ -171,8 +171,7 @@ A minimal valid City Object (`"Building"` in this case, but any 1st-level could 
 
 ```json
 {
-  "type": "Building", 
-  "geometry": []
+  "type": "Building"
 }
 ```
 
@@ -181,8 +180,7 @@ And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but an
 ```json
 {
   "type": "BuildingPart", 
-  "parents": ["id-parent"],
-  "geometry": []
+  "parents": ["id-parent"]
 }
 ```
 
