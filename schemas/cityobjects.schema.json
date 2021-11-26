@@ -1027,7 +1027,7 @@
       }
     ]
   },
-  "_AbstractTransporationWay": {
+  "_AbstractTransportationWay": {
     "allOf": [
       {
         "properties": {
@@ -1051,7 +1051,7 @@
         "$ref": "#/_AbstractTransportationComplex"
       },
       {
-        "$ref": "#/_AbstractTransporationWay"
+        "$ref": "#/_AbstractTransportationWay"
       },
       {
         "properties": {
@@ -1111,7 +1111,7 @@
         "$ref": "#/_AbstractTransportationComplex"
       },
       {
-        "$ref": "#/_AbstractTransporationWay"
+        "$ref": "#/_AbstractTransportationWay"
       },
       {
         "properties": {
