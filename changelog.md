@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## Unreleased - coming in v1.1
-- add support for (upcoming) CityGML v3.0.0: 
+- add support for CityGML v3.0.0: 
   - add interior of Buildings/Tunnels/Bridges classes, eg `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, `BridgeRoom` 
   - add `OtherConstruction`
   - updated Transportation classes to be compliant
@@ -23,13 +23,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CRS now use the OGC Name Type Specification (https://docs.opengeospatial.org/pol/09-048r5.html)
 
 
-
-## [1.0.2] - XX
+## [1.0.3] - 2021-07-06
 ### Changed
-- this is the version that will be the OGC release (community standard)
-- small improvements in the specs document to make concepts clearer
-- schemas are the same, with some simplifications to make their maintenance easier
+- fixed bugs in metadata.schema.json that made files with Extensions not having valid "metadata" (if certain properties were used)
+- (specification text stays exactly the same)
 
+
+## [1.0.2] - 2021-04-21
+### Changed
+- small improvements in the specs document to make concepts clearer
+- schemas are the same, with some simplifications to make their maintenance easier in the future
 
 
 ## [1.0.1] - 2019-07-09
@@ -122,6 +125,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - first beta release of CityJSON
 
 
+[1.0.3]: https://github.com/tudelft3d/cityjson/compare/1.0.2...1.0.3
+[1.0.2]: https://github.com/tudelft3d/cityjson/compare/1.0.1...1.0.2
 [1.0.0]: https://github.com/tudelft3d/cityjson/compare/0.9...1.0.0
 [0.9]:   https://github.com/tudelft3d/cityjson/compare/0.8...0.9
 [0.8]:   https://github.com/tudelft3d/cityjson/compare/0.6...0.8
