@@ -1715,7 +1715,7 @@ The challenge when creating Extensions to the core model is that we do not want 
 While one could define a new City Object and document it, if this new object does not follow the rules below then it will mean that new specific software needs to be built for it---this would go against the fundamental ideas behind CityJSON.
 
 1.  The name of a new City Object must begin with a `"+"`, eg `"+NoiseBuilding"`.
-2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"` and one `"geometry"`. If the object contains appearances, the same mechanism should be used so that the new City Objects can be processed without modification.
+2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"`. If the object contains appearances, the same mechanism should be used so that the new City Objects can be processed without modification.
 3.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
 4.  If a new City Object contains other objects and requires different geometries, then a new City Object needs to be defined using the parents-children structure of CityJSON, as used by `"Building"` and `"BuildingPart"`.
 5.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
