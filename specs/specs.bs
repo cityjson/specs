@@ -112,20 +112,20 @@ While the order of the member values of a CityJSON should preferably be as above
 
 # The different City Objects 
 
-A City Object is a JSON object for which the type member’s value is one of the following (of type string):
-
 <img src="figs/co.svg" alt="City Objects 1st and 2nd levels"/>
 
-There are 2 kinds of City Objects, this is because the schema of CityGML has been flattened out. 
-Both types are represented as a City Object in a CityJSON Object.
+<div class="note">
+There are 2 kinds of City Objects: 
+  1.  **1st-level**: City Objects that can "exist by themselves".
+  2.  **2nd-level**: City Objects that need to have a `"parents"` to exist.
 
-1.  **1st-level**: City Objects that can "exist by themselves".
-2.  **2nd-level**: City Objects that need to have a `"parents"` to exist.
-
+This is because the schema of CityGML has been flattened out. 
 For example, a `"BuildingInstallation"` cannot be present in a dataset without being the `"children"` of a `"Building"`, but a `"Building"` can be present by itself.
+</div>
 
 A City Object:
 
+  - **must** have one member `"type"`, its value is one of the possibilities in the figure above (of type string). If an Extension is used, then the type can be any string starting with a `"+"`, as explained in [[#extensions]].
   - **may** have one member with the name `"geometry"`, whose value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have to be of different LoDs.
   - **may** have one member with the name `"attributes"`, whose value is an object where the attributes of the City Object are listed.
   - **may** have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object), whose value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
