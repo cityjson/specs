@@ -8,21 +8,11 @@ For all the details, see the official CityJSON website: [https://cityjson.org](h
 
 ## What is CityJSON?
 
-CityJSON is a [JSON-based](http://json.org) encoding for a subset of the [OGC CityGML](http://www.opengeospatial.org/standards/citygml) data model (version 2.0.0), which is an open standardised data model and exchange format (in [GML](http://www.opengeospatial.org/standards/gml)) to store digital 3D models of cities and landscapes. 
+CityJSON is a [JSON-based](http://json.org) encoding for a subset of the [OGC CityGML](http://www.opengeospatial.org/standards/citygml) data model (version 3.0.0), which is an open standardised data model and exchange format (in [GML](http://www.opengeospatial.org/standards/gml)) to store digital 3D models of cities and landscapes. 
 
 The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex (and thus rather frustrating to work with). 
 CityJSON aims at being easy-to-use, both for reading datasets, and for creating them.
 It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built, and [several software](https://www.cityjson.org/software/) have been created already.
-
-We believe that you should use CityJSON because: 
-
-  1. its simplicity means that it is already supported by several software
-  2. you can in one-click convert CityGML files to CityJSON files, and vice versa, with the open-source tool [citygml-tools](https://github.com/citygml4j/citygml-tools)
-  3. files are on average [6X more compact](https://github.com/cityjson/specs/wiki/Compression-factor-for-a-few-open-CityGML-datasets) than their CityGML equivalent
-  4. there is a [web-viewer](https://ninja.cityjson.org/) where you can drag-and-drop a file
-  5. you can easily manipulate files with [cjio](https://github.com/cityjson/cjio), you can for instance merge files, remove/filter objects, change the CRS, manage the textures, etc.
-  6. you can *easily* define Extensions to the core model (akin to ADEs) 
-  7. its development is [open on GitHub](https://github.com/cityjson/specs/issues/), it is supported by a vibrant community, and everyone is welcome to contribute
 
 
 ## Contributing to the project 
