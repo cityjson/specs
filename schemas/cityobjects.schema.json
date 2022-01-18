@@ -61,13 +61,28 @@
             "items": {
               "oneOf": [
                 {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                },
+                {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                },
+                {
+                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
                 }
               ]
             }
@@ -103,6 +118,9 @@
               "oneOf": [
                 {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/Solid"
@@ -179,19 +197,70 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
                   "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "parents"
+        ]
+      }
+    ]
+  },
+  "BuildingConstructiveElement": {
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "type": {
+            "enum": [
+              "BuildingConstructiveElement"
+            ]
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -218,6 +287,37 @@
             "enum": [
               "BuildingFurniture"
             ]
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                },
+                {
+                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
+                }
+              ]
+            }
           }
         },
         "required": [
@@ -244,16 +344,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                },
-                {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
             }
@@ -283,16 +383,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                },
-                {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
             }
@@ -322,16 +422,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                },
-                {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
             }
@@ -374,19 +474,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 }
               ]
             }
@@ -424,9 +524,6 @@
                 },
                 {               
                   "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {               
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
@@ -466,9 +563,6 @@
                 {               
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
-                {               
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
-                },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
@@ -506,19 +600,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -557,19 +651,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -602,28 +696,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                },
-                {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
                 {
-                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
             }
@@ -659,19 +741,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -725,9 +807,6 @@
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {               
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
-                },
-                {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
@@ -777,9 +856,6 @@
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {               
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
-                },
-                {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
@@ -816,19 +892,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -867,19 +943,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -912,28 +988,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                },
-                {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
                 {
-                  "$ref": "geomtemplates.schema.json#/GeometryInstance"
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
             }
@@ -969,19 +1033,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -1010,13 +1074,13 @@
             "items": {
               "oneOf": [
                 {
+                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                },
+                {
                   "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
                 }
               ]
             }
@@ -1188,10 +1252,19 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 }
               ]
             }
@@ -1226,19 +1299,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -1308,19 +1381,19 @@
                   "$ref": "geomprimitives.schema.json#/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
