@@ -277,7 +277,7 @@ The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRo
 and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
 
 All of the eight, except `"Building"`, must have a `"parents"` property.
-The installations, furnitures, and subdivisions can have as parents either a `"Building"` or a `"BuildingPart"`.
+The installations, furnitures, and subdivisions can have as parents a `"Building"`, a `"BuildingPart"`, or a `"BuildingRoom"`.
 
 The geometry of `"BuildingInstallation"`, `"BuildingConstructiveElement"`, or  `"BuildingFurniture"` objects can be represented with any of the Geometry Objects.
 
