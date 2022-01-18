@@ -816,7 +816,7 @@ A Semantic Object:
 }
 ```
 
-`"Building"`, `"BuildingPart"`, and `"BuildingInstallation"` can have the following semantics:
+`"Building"`, `"BuildingPart"`, `"BuildingRoom"`, `"BuildingStorey"`, `"BuildingUnit"`, and `"BuildingInstallation"` can have the following semantics:
 
   - `"RoofSurface"`
   - `"GroundSurface"`
@@ -826,6 +826,9 @@ A Semantic Object:
   - `"OuterFloorSurface"`
   - `"Window"`
   - `"Door"`
+  - `"InteriorWallSurface"`
+  - `"CeilingSurface"`
+  - `"FloorSurface"`
 
 For `"WaterBody"`:
 

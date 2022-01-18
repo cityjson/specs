@@ -50,6 +50,21 @@
           },
           {
             "enum": [
+              "InteriorWallSurface"
+            ]
+          },
+          {
+            "enum": [
+              "CeilingSurface"
+            ]
+          },
+          {
+            "enum": [
+              "FloorSurface"
+            ]
+          },                              
+          {
+            "enum": [
               "WaterSurface"
             ]
           },
