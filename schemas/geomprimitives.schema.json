@@ -801,7 +801,34 @@
             "type": "integer"
           }
         }
-      }
+      },
+      "semantics": {
+        "type": "object",
+        "properties": {
+          "surfaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/Semantics"
+            }
+          },
+          "values": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "required": [
+          "surfaces",
+          "values"
+        ]
+      }      
     },
     "required": [
       "type",
@@ -827,7 +854,34 @@
         "items": {
           "type": "integer"
         }
-      }
+      },
+      "semantics": {
+        "type": "object",
+        "properties": {
+          "surfaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/Semantics"
+            }
+          },
+          "values": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          }
+        },
+        "required": [
+          "surfaces",
+          "values"
+        ]
+      }      
     },
     "required": [
       "type",
