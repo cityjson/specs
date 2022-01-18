@@ -1025,31 +1025,10 @@
       }
     ]
   },
-  "_AbstractTransportationWay": {
-    "allOf": [
-      {
-        "properties": {
-          "attributes": {
-            "properties": {
-              "trafficDirection": {
-                "enum": [
-                  "one-way",
-                  "two-way"
-                ]
-              }
-            }
-          }
-        }
-      }
-    ]
-  },
   "Road": {
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
-      },
-      {
-        "$ref": "#/_AbstractTransportationWay"
       },
       {
         "properties": {
@@ -1107,9 +1086,6 @@
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
-      },
-      {
-        "$ref": "#/_AbstractTransportationWay"
       },
       {
         "properties": {

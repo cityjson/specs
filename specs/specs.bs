@@ -548,7 +548,7 @@ Observe that the "Section", "Intersection", and "Track" classes from CityGML are
 "ma_rue": {
   "type": "Road", 
   "attributes": {
-    "class": "one-way",
+    "class": "backwards",
     "clearanceSpace": 2.23,
     "clearanceSpaceUnit": "meter"
   },
