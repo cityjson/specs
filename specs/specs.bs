@@ -380,7 +380,7 @@ A City Object of type `"CityObjectGroup"`:
   - **must** have a member `"children"`, whose value is an array of the IDs of the City Objects that the group contains. As for other City Objects, the City Objects must have the ID of the group in `"parents"`. 
   - **may** have a member `"children_roles"`, whose value is an array of strings describing the role of each City Object in the group; it must be of the same length as that of `"children"`.
   - **may** have a member `"attributes"`.
-  - **may** have a member `"geometry"`, although only one geometry is allowed in the array of geometries. Notice that the `"lod"` property is rather meaningless, but is used to enforce uniformity with all the other geometries.
+  - **may** have a member `"geometry"`. Notice that the `"lod"` property is rather meaningless, but is used to enforce uniformity with all the other geometries.
 
 
 ```json

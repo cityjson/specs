@@ -389,9 +389,7 @@
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 }
               ]
-            },
-            "minItems": 0,
-            "maxItems": 1
+            }
           }
         },
         "required": [
