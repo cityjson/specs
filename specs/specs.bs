@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.1.0
+Title: CityJSON Specifications 1.1.1-beta.1
 Shortname: CityJSON
 Status: LS
 Level: none
