@@ -360,7 +360,7 @@
             "type": "array",
             "description": "the role of each of the CityObjects members of that group",
             "items": {
-              "type": "string"
+              "type": ["string", "null"]
             }
           }, 
           "geometry": {
