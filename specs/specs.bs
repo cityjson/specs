@@ -223,7 +223,7 @@ Six City Objects are related to bridges:
  - `"BridgeFurniture"`
 
 
-The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
+The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`, (4) `"CompositeSurface"`.
 The geometry of the four other objects can be represented with any of the Geometry Objects.
 
 A City Object of type `"Bridge"` or `"BridgePart"` may have a member `"address"`, whose value is an array of JSON objects listing the potentially several addresses of that bridge . 
@@ -274,7 +274,7 @@ Eight City Objects are related to buildings:
 <!-- this in the schema... perhaps in cjio -->
 
 The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRoom"`, 
-and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
+and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`, (4) `"CompositeSurface"`.
 
 All of the eight, except `"Building"`, must have a `"parents"` property.
 The installations, furnitures, and subdivisions can have as parents a `"Building"`, a `"BuildingPart"`, or a `"BuildingRoom"`.
@@ -349,7 +349,7 @@ If a location is necessary (eg to locate the position of the front door) then a 
 
 ## CityFurniture
 
-The geometry of a City Object of type `"CityFurniture"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
+The geometry of a City Object of type `"CityFurniture"` can be any Geometry Object.
 
 ```json
 "mystopsign": {
@@ -445,6 +445,7 @@ Examples are:
   - shed
   - windmill
 
+The geometry of a City Object of type `"OtherConstruction"` can be any Geometry Object.
 
 ```json
 "mypylon": {
@@ -466,7 +467,7 @@ Examples are:
 
 ## PlantCover
 
-The geometry of a City Object of type `"PlantCover"` can be of type `"MultiSurface"` or `"MultiSolid"`.
+The geometry of a City Object of type `"PlantCover"` can be of type: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSolid"`, (4) `"MultiSurface"`, (5) `"CompositeSurface"`.
 
 ```json
 "myplants": {
@@ -492,7 +493,7 @@ The geometry of a City Object of type `"PlantCover"` can be of type `"MultiSurfa
 
 ## SolitaryVegetationObject
 
-The geometry of a City Object of type `"SolitaryVegetationObject"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
+The geometry of a City Object of type `"SolitaryVegetationObject"` can be any Geometry Object.
 
 ```json
 "onebigtree": {
@@ -612,7 +613,7 @@ Six City Objects are related to tunnels:
   - `"TunnelHollowSpace"`
   - `"TunnelFurniture"`
 
-The geometry of both `"Tunnel"` and `"TunnelPart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`.
+The geometry of both `"Tunnel"` and `"TunnelPart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`, (4) `"CompositeSurface"`.
 
 The geometry of the other four objects can be represented with any of the Geometry Objects.
 
