@@ -378,6 +378,17 @@
               "BuildingUnit"
             ]
           },
+          "address": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                }
+              }
+            }
+          },          
           "geometry": {
             "type": "array",
             "items": {
