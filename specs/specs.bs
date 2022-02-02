@@ -849,7 +849,7 @@ It is possible to define and use other semantics, but these have to start with a
 
 ```json
 {
-  "type": "+WallSurface_Inner"
+  "type": "+SupportingWall"
 }
 ```
 
