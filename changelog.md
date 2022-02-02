@@ -8,18 +8,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.1.1] - 2022-02-02
+Minor changes to the schemas for omissions/errors.
+### Changed
+- added Semantic types for interior surfaces
+- the restrictions for the geometry types for different City Objects are harmonised
+- MultiPoint and MultiLineString can have semantics (it was in the text but not in the schema)
+- "trafficDirection" is not an enum anymore, any value can be used
+- added "address" property for BuildingUnit in the schema (was already described in the text)
+- the property "children_roles" of "CityObjectGroup" can have NULL values if not used
+
 ## [1.1.0] - 2021-12-01
+### Added
 - add support for CityGML v3.0.0: 
   - add interior of Buildings/Tunnels/Bridges classes, eg `BuildingStorey`, `BuildingUnit`, `BuildingRoom`, `BridgeRoom` 
   - add `OtherConstruction`
   - updated Transportation classes to be compliant
+- `CityJSONFeature` is defined, which can be used for streaming and handling large files
+### Removed
+- `GenericCityObject` has been removed, Extensions should be used instead
+### Changed
 - change the property `"lod"` of geometries from number to string 
 - core metadata is smaller, extended/advanced metadata are now in the MetadataExtended Extension: https://github.com/cityjson/metadata-extended
 - CityJSON files are always compressed, that is their vertices are integers and the `"transform"` property is mandatory
 - City Objects do not have to have a `"geometry"` property anymore
 - `CityObjectGroup` has the role added as a property, to define what the role of each object in the group is
-- `GenericCityObject` has been removed, Extensions should be used instead
-- `CityJSONFeature` is defined, which can be used for streaming and handling large files
 - CRS now use the OGC Name Type Specification (https://docs.opengeospatial.org/pol/09-048r5.html)
 
 
@@ -125,6 +138,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - first beta release of CityJSON
 
 
+[1.1.1]: https://github.com/tudelft3d/cityjson/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/tudelft3d/cityjson/compare/1.0.3...1.1.0
 [1.0.3]: https://github.com/tudelft3d/cityjson/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/tudelft3d/cityjson/compare/1.0.1...1.0.2
