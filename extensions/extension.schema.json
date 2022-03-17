@@ -53,6 +53,7 @@
       "properties": {
         "Bridge": { "$ref": "#/definitions/Plus" },
         "BridgeConstructiveElement": { "$ref": "#/definitions/Plus" },
+        "BridgeFurniture": { "$ref": "#/definitions/Plus" },
         "BridgeInstallation": { "$ref": "#/definitions/Plus" },
         "BridgePart": { "$ref": "#/definitions/Plus" },
         "BridgeRoom": { "$ref": "#/definitions/Plus" },
@@ -76,11 +77,12 @@
         "TransportSquare": { "$ref": "#/definitions/Plus" },
         "Tunnel": { "$ref": "#/definitions/Plus" },
         "TunnelConstructiveElement": { "$ref": "#/definitions/Plus" },
-        "TunnelFurnite": { "$ref": "#/definitions/Plus" },
+        "TunnelFurniture": { "$ref": "#/definitions/Plus" },
         "TunnelHollowSpace": { "$ref": "#/definitions/Plus" },
         "TunnelInstallation": { "$ref": "#/definitions/Plus" },
         "TunnelPart": { "$ref": "#/definitions/Plus" },
-        "WaterBody": { "$ref": "#/definitions/Plus" }
+        "WaterBody": { "$ref": "#/definitions/Plus" },
+        "Waterway": { "$ref": "#/definitions/Plus" }
       },
       "additionalProperties": false
     },
