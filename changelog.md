@@ -10,11 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.1] - 2022-02-02
 Minor changes to the schemas for omissions/errors, harmonised the specs text slightly.
+### Removed
+- `trafficDirection` attribute has been removed (https://github.com/cityjson/specs/issues/107)
 ### Changed
 - added Semantic types for interior surfaces: "FloorSurface", "InteriorWallSurface", and "CeilingSurface".
 - the restrictions for the geometry types for different City Objects are harmonised
 - MultiPoint and MultiLineString can have semantics (it was in the text but not in the schema)
-- "trafficDirection" is not an enum anymore, any value can be used
 - added "address" property for BuildingUnit in the schema (was already described in the text)
 - the property "children_roles" of "CityObjectGroup" can have NULL values if not used
 - the specs text now is correct for the appearance: `"vertices-texture"` and not `"vertex-texture"`
