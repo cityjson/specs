@@ -972,11 +972,12 @@ The Geometry Templates are defined as a JSON object that:
 }
 ```
 
-A given template can be used as the geometry (or as one of the geometries) of a City Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
+A given template can be used as the geometry (or as one of the geometries) of a City Object. 
+A new JSON object of type `"GeometryInstance"` is defined, and it:
 
   - **must** have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
   - **must** have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the reference point from which the transformations are applied, it is the "referencePoint" in CityGML.)
-  - **must** have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
+  - **must** have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the rotation/translation/scaling of the template. Note that these 16 values are ordered row-by-row, as the example below shows.
 
 ```json
 {
@@ -998,7 +999,7 @@ A given template can be used as the geometry (or as one of the geometries) of a 
 ```
 
 <div class="note">
-  The CityJSON website has a [page to help developers calculate coordinates](https://www.cityjson.org/dev/realcoords/) for Geometry Templates and other Geometry Objects.
+  The CityJSON website has a [page to help developers with Geometry Templates](https://www.cityjson.org/dev/geom-templates/), about how matrices work (for instance, in the example above a scaling of 2.0 would be applied), and about the transformations to apply to obtain world coordinates.
 </div>
 
 
