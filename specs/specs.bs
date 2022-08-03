@@ -999,7 +999,7 @@ A new JSON object of type `"GeometryInstance"` is defined, and it:
 ```
 
 <div class="note">
-  The CityJSON website has a [page to help developers with Geometry Templates](https://www.cityjson.org/dev/geom-templates/), about how matrices work (for instance, in the example above a scaling of 2.0 would be applied), and about the transformations to apply to obtain world coordinates.
+  The CityJSON website has a [page to help developers with Geometry Templates](https://www.cityjson.org/dev/geom-templates/), it contains simple examples, explains which transformations to apply to obtain world coordinates, and explains how matrices work (for instance, in the example above, a scaling of 2.0 is applied).
 </div>
 
 
