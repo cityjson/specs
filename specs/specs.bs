@@ -213,6 +213,10 @@ This means that the `"attributes"` is a JSON object and its content is a JSON ke
 
 ## Bridge
 
+<div class="assertion">
+See the CityGML v3.0.0 [Bridge module](https://docs.ogc.org/is/20-010/20-010.html#toc44) for more details.
+</div>
+
 Six City Objects are related to bridges: 
 
  - `"Bridge"` 
@@ -258,6 +262,11 @@ The properties of an address JSON object are free, to accommodate the different 
 
 
 ## Building
+
+
+<div class="assertion">
+See the CityGML v3.0.0 [Building module](https://docs.ogc.org/is/20-010/20-010.html#toc45) for more details.
+</div>
 
 Eight City Objects are related to buildings: 
 
@@ -349,6 +358,10 @@ If a location is necessary (eg to locate the position of the front door) then a 
 
 ## CityFurniture
 
+<div class="assertion">
+See the CityGML v3.0.0 [CityFurniture module](https://docs.ogc.org/is/20-010/20-010.html#toc32) for more details.
+</div>
+
 The geometry of a City Object of type `"CityFurniture"` can be any Geometry Object.
 
 ```json
@@ -369,6 +382,10 @@ The geometry of a City Object of type `"CityFurniture"` can be any Geometry Obje
 
 
 ## CityObjectGroup
+
+<div class="assertion">
+See the CityGML v3.0.0 [CityObjectGroup module](https://docs.ogc.org/is/20-010/20-010.html#toc33) for more details.
+</div>
 
 The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood in a city for instance), is possible in CityJSON. 
 The group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
@@ -413,6 +430,10 @@ A City Object of type `"CityObjectGroup"`:
 
 ## LandUse
 
+<div class="assertion">
+See the CityGML v3.0.0 [LandUse module](https://docs.ogc.org/is/20-010/20-010.html#toc36) for more details.
+</div>
+
 The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"` or `"CompositeSurface"`.
 
 ```json
@@ -430,6 +451,10 @@ The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"
 
 
 ## OtherConstruction
+
+<div class="assertion">
+See the CityGML v3.0.0 [Construction module](https://docs.ogc.org/is/20-010/20-010.html#toc43) for more details (OtherConstruction is one class).
+</div>
 
 <!--- https://docs.geostandaarden.nl/imgeo/catalogus/bgt/#typeoverigbouwwerk -->
 <!--- https://github.com/opengeospatial/CityGML-3.0/blob/master/Archive/WP%2009%20Resources/Codelists/OtherConstruction_function.txt -->
@@ -467,6 +492,10 @@ The geometry of a City Object of type `"OtherConstruction"` can be any Geometry 
 
 ## PlantCover
 
+<div class="assertion">
+See the CityGML v3.0.0 [Vegetation module](https://docs.ogc.org/is/20-010/20-010.html#toc40) for more details (PlantCover is one class).
+</div>
+
 The geometry of a City Object of type `"PlantCover"` can be of type: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSolid"`, (4) `"MultiSurface"`, (5) `"CompositeSurface"`.
 
 ```json
@@ -493,6 +522,10 @@ The geometry of a City Object of type `"PlantCover"` can be of type: (1) `"Solid
 
 ## SolitaryVegetationObject
 
+<div class="assertion">
+See the CityGML v3.0.0 [Vegetation module](https://docs.ogc.org/is/20-010/20-010.html#toc40) for more details (SolitaryVegetationObject is one class).
+</div>
+
 The geometry of a City Object of type `"SolitaryVegetationObject"` can be any Geometry Object.
 
 ```json
@@ -512,6 +545,10 @@ The geometry of a City Object of type `"SolitaryVegetationObject"` can be any Ge
 
 
 ## TINRelief
+
+<div class="assertion">
+See the CityGML v3.0.0 [Relief module](https://docs.ogc.org/is/20-010/20-010.html#toc38) for more details (TINRelief is one class).
+</div>
 
 The geometry of a City Object of type `"TINRelief"` can only be of type `"CompositeSurface"`.
 
@@ -535,6 +572,10 @@ Notice that in practice any `"CompositeSurface"` is allowed for encoding a terra
 
 
 ## Transportation
+
+<div class="assertion">
+See the CityGML v3.0.0 [Transportation module](https://docs.ogc.org/is/20-010/20-010.html#toc39) for more details.
+</div>
 
 Four City Objects are related to transportation: 
 
@@ -604,6 +645,10 @@ That is, the surface representing a road should be split into sub-surfaces (ther
 
 ## Tunnel
 
+<div class="assertion">
+See the CityGML v3.0.0 [Tunnel module](https://docs.ogc.org/is/20-010/20-010.html#toc46) for more details.
+</div>
+
 Six City Objects are related to tunnels: 
 
   - `"Tunnel"` 
@@ -640,6 +685,10 @@ The geometry of the other four objects can be represented with any of the Geomet
 
 
 ## WaterBody
+
+<div class="assertion">
+See the CityGML v3.0.0 [WaterBody module](https://docs.ogc.org/is/20-010/20-010.html#toc42) for more details.
+</div>
 
 The geometry of a City Object of type `"WaterBody"` can be of types: `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
 
