@@ -78,8 +78,8 @@ The minimal valid CityJSON object is thus:
   "type": "CityJSON",
   "version": "1.1",
   "transform": {
-    "scale": [0.0, 0.0, 0.0],
-    "translate": [1.0, 1.0, 1.0]
+    "scale": [1.0, 1.0, 1.0],
+    "translate": [0.0, 0.0, 0.0]
   },
   "CityObjects": {},
   "vertices": []
@@ -94,8 +94,8 @@ An "empty" but complete CityJSON object will look like this:
   "version": "1.1",
   "extensions": {},
   "transform": {
-    "scale": [0.0, 0.0, 0.0],
-    "translate": [1.0, 1.0, 1.0]
+    "scale": [1.0, 1.0, 1.0],
+    "translate": [0.0, 0.0, 0.0]
   },
   "metadata": {},
   "CityObjects": {},
