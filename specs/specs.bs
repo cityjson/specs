@@ -10,6 +10,7 @@ Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
 Editor: Balázs Dukai, 3DGI, https://3dgi.nl
 Repository: cityjson/specs
 Abstract: CityJSON is a data exchange format for digital 3D models of cities and landscapes. It aims at being easy-to-use, both for reading datasets and for creating them. CityJSON was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. It is also an encoding for a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html), based on [JSON](https://json.org/) instead of GML, leading to 6-7x smaller files and simple structures compared to GML.
+Abstract: CityJSON is a data exchange format for digital 3D models of cities and landscapes. It aims at being easy-to-use (for reading, processing, and creating datasets), and it was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. The [JSON](https://json.org/)-based encoding of CityJSON is conformant with a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html). Using JSON instead of GML allows us to compress files by a factor 6 and at the same time simplify greatly the structure of the files.
 Markup Shorthands: css no, markdown yes
 Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 </pre>
