@@ -1634,7 +1634,7 @@ An extra attribute must start with a `"+"`; it is good practice to prepend the a
 
 The value of the property is a JSON schema, this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
 Thus, the keywords of the property values are defined by the JSON Schema specification.
-For instance, `"additionalProperties"` is a JSON-schema keyword stating that one is not allowed to add properties to this json object, beyond the ones defined in the schema (e.g. `"value", "uom"`).
+For instance, `"additionalProperties"` is a JSON-schema keyword stating that one is not allowed to add properties to this json object, beyond the ones defined in the schema (eg `"value", "uom"`).
 
 ```json
 "extraAttributes": {
