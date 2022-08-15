@@ -1483,12 +1483,12 @@ However, it should be noticed that CityJSON does not prescribe the format or sta
 
 # Extensions 
 
-CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate the data model, schemas are one way to validate the syntax of a JSON document.
+CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model. Schemas offer a way to validate the syntax of a JSON document.
 
-A CityJSON *Extension* is a JSON file that allows us to document how the core data model of CityJSON may be extended, and to validate CityJSON files.
+A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and is also used for validating the CityJSON files.
 This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
 
-A CityJSON Extension can extend the core data model by three ways:
+A CityJSON Extension can extend the core data model in three ways:
 
   1.  Adding new complex attributes to the City Objects of the core
   2.  Adding new properties at the root of a document
