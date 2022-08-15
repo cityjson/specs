@@ -9,7 +9,8 @@ Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
 Editor: Balázs Dukai, 3DGI, https://3dgi.nl
 Repository: cityjson/specs
-Abstract: CityJSON is a [JSON](https://json.org/)-based encoding for a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html). It defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. 
+Abstract: CityJSON is a data exchange format for digital 3D models of cities and landscapes. It aims at being easy-to-use, both for reading datasets and for creating them. CityJSON was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. It is also an encoding for a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html), based on [JSON](https://json.org/) instead of GML, leading to 6-7x smaller files and simple structures compared to GML.
+Abstract: CityJSON is a data exchange format for digital 3D models of cities and landscapes. It aims at being easy-to-use (for reading, processing, and creating datasets), and it was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. The [JSON](https://json.org/)-based encoding of CityJSON is conformant with a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html). Using JSON instead of GML allows us to compress files by a factor 6 and at the same time simplify greatly the structure of the files.
 Markup Shorthands: css no, markdown yes
 Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 </pre>
@@ -1483,12 +1484,13 @@ However, it should be noticed that CityJSON does not prescribe the format or sta
 
 # Extensions 
 
-CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate the data model, schemas are one way to validate the syntax of a JSON document.
+CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model, including its Extensions. Schemas offer a way to validate the syntax of a JSON document.
+Therefore, for writing more complex Extensions, a basic familiarity with [JSON Schemas](http://json-schema.org/) is advised.
 
-A CityJSON *Extension* is a JSON file that allows us to document how the core data model of CityJSON may be extended, and to validate CityJSON files.
+A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and is also used for validating the CityJSON files.
 This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
 
-A CityJSON Extension can extend the core data model by three ways:
+A CityJSON Extension can extend the core data model in three ways:
 
   1.  Adding new complex attributes to the City Objects of the core
   2.  Adding new properties at the root of a document
@@ -1631,6 +1633,8 @@ Notice that `"extraAttributes"` may have several properties (the types of the Ci
 An extra attribute must start with a `"+"`; it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different extensions have the same name. 
 
 The value of the property is a JSON schema, this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
+Thus, the keywords of the property values are defined by the JSON Schema specification.
+For instance, `"additionalProperties"` is a JSON-schema keyword stating that one is not allowed to add properties to this JSON object, beyond the ones defined in the schema (eg `"value", "uom"`).
 
 ```json
 "extraAttributes": {
