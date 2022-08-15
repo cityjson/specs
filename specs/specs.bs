@@ -62,9 +62,9 @@ A CityJSON object:
   - is a JSON object.
   - **must** have one member with the name `"type"`, whose value must be `"CityJSON"`.
   - **must** have one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
-  - **must** have one member with the name `"transform"`, whose value is a JSON object describing how to *decompress* the coordinates of the geometries. See [[#transform-object]] for details.
+  - **must** have one member with the name `"transform"`, whose value is a JSON object describing how to *decompress* the integer coordinates of the geometries to obtain real-world coordinates. See [[#transform-object]] for details.
   - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). See [[#the-different-city-objects]] for details.
-  - **must** have one member with the name `"vertices"`, whose value is an array of values for each vertex of the city model (stored with integers, before the transformation is applied ([[#transform-object]])). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. 
+  - **must** have one member with the name `"vertices"`, whose value is an array representing the coordinates of each vertex of the city model. See [[#coordinates-of-the-vertices]]. 
   - **may** have one member with the name `"metadata"`, whose value may be a JSON object describing the coordinate reference system used, the extent of the dataset, its creator, etc. See [[#metadata]] for details.
   - **may** have one member with the name `"extensions"`, which is used if there are Extensions used in the file. See [[#extensions]] for details.
   - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
@@ -740,14 +740,14 @@ A Geometry object:
 
 
 
-## The coordinates of the vertices
+## Coordinates of the vertices
 
-A CityJSON must have one member named `"vertices"`, whose value is an array of values representing the coordinates of each vertex of the city model. 
-Their position in this array (0-based) is used to represent the Geometry Objects.
+A CityJSON must have one member named `"vertices"`, whose value is an array of array of integers representing the coordinates of each vertex of the city model. 
+The position of a vertex in this array (0-based) is used to represent the Geometry Objects.
 
-  - one vertex **must** be an array with exactly 3 integer, representing the *(x,y,z)* location of the vertex before they are being transformed to their real coordinates (with [[#transform-object]])
+  - one vertex **must** be an array with exactly 3 integers, representing the *(x,y,z)* location of the vertex before it is transformed to its real-world coordinates (with [[#transform-object]]).
   - the array of vertices may be empty.
-  - vertices may be repeated
+  - vertices may be repeated.
 
 ```json
 "vertices": [
