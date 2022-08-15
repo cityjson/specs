@@ -1483,7 +1483,8 @@ However, it should be noticed that CityJSON does not prescribe the format or sta
 
 # Extensions 
 
-CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model. Schemas offer a way to validate the syntax of a JSON document.
+CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model, including its Extensions. Schemas offer a way to validate the syntax of a JSON document.
+Therefore, for writing more complex Extensions, a basic familiarity with [JSON Schemas](http://json-schema.org/) is advised.
 
 A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and is also used for validating the CityJSON files.
 This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
@@ -1631,6 +1632,8 @@ Notice that `"extraAttributes"` may have several properties (the types of the Ci
 An extra attribute must start with a `"+"`; it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different extensions have the same name. 
 
 The value of the property is a JSON schema, this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
+Thus, the keywords of the property values are defined by the JSON Schema specification.
+For instance, `"additionalProperties"` is a JSON-schema keyword stating that one is not allowed to add properties to this json object, beyond the ones defined in the schema (e.g. `"value", "uom"`).
 
 ```json
 "extraAttributes": {
