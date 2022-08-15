@@ -766,7 +766,7 @@ The position of a vertex in this array (0-based) is used to represent the Geomet
 The depth of the hierarchy of arrays depends on the Geometry object, and is as follows.
 
   - A `"MultiPoint"` has an array with the indices of the vertices; this array can be empty.
-  - A `"MultiLineString"` has an array of arrays, each containing the indices of a LineString
+  - A `"MultiLineString"` has an array of arrays, each containing the indices of a LineString.
   - A `"MultiSurface"`, or a `"CompositeSurface"`, has an array containing surfaces, each surface is modelled by an array of array, the first array being the exterior boundary of the surface, and the others the interior boundaries.
   - A `"Solid"` has an array of shells, the first array being the exterior shell of the solid, and the others the interior shells. Each shell has an array of surfaces, modelled in the exact same way as a MultiSurface/CompositeSurface.
   - A `"MultiSolid"`, or a `"CompositeSolid"`, has an array containing solids, each solid is modelled as above.
