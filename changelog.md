@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.1.2] - 2022-08-16
+Minor changes to the schemas for errors, improved the text of the specs so that it's easier for everyone to read and understand.
+### Changed
+- fixed the typo in the schema: `"TunnelFurniture"`
+- added the missing CityGML v3 types in the schemas: `"BridgeFurniture"` and `"Waterway"` and `"BuildingConstructiveElement"`
+- added a link in the specs text to the official CityGML v3 specs for definitions of each of the City Objects
+- improved and added a few sentences in the specs to make them clearer
+
+
 ## [1.1.1] - 2022-02-02
 Minor changes to the schemas for omissions/errors, harmonised the specs text slightly.
 ### Changed
@@ -139,6 +148,7 @@ Minor changes to the schemas for omissions/errors, harmonised the specs text sli
 - first beta release of CityJSON
 
 
+[1.1.2]: https://github.com/tudelft3d/cityjson/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/tudelft3d/cityjson/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/tudelft3d/cityjson/compare/1.0.3...1.1.0
 [1.0.3]: https://github.com/tudelft3d/cityjson/compare/1.0.2...1.0.3
