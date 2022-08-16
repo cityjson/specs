@@ -23,7 +23,7 @@ It was designed with programmers in mind, so that tools and APIs supporting it c
 We invite anyone to contribute to the development and improvement of CityJSON, all discussions, issues, and developments are open to everyone.
 
 
-## If you use CityJSON in an academic context, please cite this preprint
+## If you use CityJSON in an academic context, please cite this article
 
 Ledoux H, Arroyo Ohori K, Kumar K, Dukai B, Labetski A, Vitalis S (2019). CityJSON: A compact and easy-to-use encoding of the CityGML data model. **Open Geospatial Data, Software and Standards**, 4:4 [(DOI)](http://dx.doi.org/10.1186/s40965-019-0064-0) [(PDF)](https://opengeospatialdata.springeropen.com/track/pdf/10.1186/s40965-019-0064-0)
 
