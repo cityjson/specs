@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.1.1
+Title: CityJSON Specifications 1.1.2b1
 Shortname: CityJSON
 Status: LS
 Level: none
@@ -7,9 +7,9 @@ URL: https://cityjson.org/specs/1.1.1/
 TR: https://cityjson.org/specs/
 Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
-Editor: Balázs Dukai, 3DGI, https://www.balazsdukai.me/
+Editor: Balázs Dukai, 3DGI, https://3dgi.nl
 Repository: cityjson/specs
-Abstract: CityJSON is a [JSON](https://json.org/)-based encoding for a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html). It defines how to store digital 3D models of cities and landscapes. The aim of CityJSON is to offer an alternative to the GML encoding of CityGML, which can be verbose and complex to read and manipulate. CityJSON aims at being easy-to-use, both for reading datasets and for creating them. It was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. 
+Abstract: CityJSON is a data exchange format for digital 3D models of cities and landscapes. It aims at being easy-to-use (for reading, processing, and creating datasets), and it was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. The [JSON](https://json.org/)-based encoding of CityJSON is conformant with a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html). Using JSON instead of GML allows us to compress files by a factor 6 and at the same time to simplify greatly the structure of the files.
 Markup Shorthands: css no, markdown yes
 Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 </pre>
@@ -62,9 +62,9 @@ A CityJSON object:
   - is a JSON object.
   - **must** have one member with the name `"type"`, whose value must be `"CityJSON"`.
   - **must** have one member with the name `"version"`, whose value must be a string with the version (X.Y) of CityJSON used. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
-  - **must** have one member with the name `"transform"`, whose value is a JSON object describing how to *decompress* the coordinates of the geometries. See [[#transform-object]] for details.
+  - **must** have one member with the name `"transform"`, whose value is a JSON object describing how to *decompress* the integer coordinates of the geometries to obtain real-world coordinates. See [[#transform-object]] for details.
   - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). See [[#the-different-city-objects]] for details.
-  - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the city model (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometric Objects. 
+  - **must** have one member with the name `"vertices"`, whose value is an array representing the coordinates of each vertex of the city model. See [[#coordinates-of-the-vertices]]. 
   - **may** have one member with the name `"metadata"`, whose value may be a JSON object describing the coordinate reference system used, the extent of the dataset, its creator, etc. See [[#metadata]] for details.
   - **may** have one member with the name `"extensions"`, which is used if there are Extensions used in the file. See [[#extensions]] for details.
   - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
@@ -78,8 +78,8 @@ The minimal valid CityJSON object is thus:
   "type": "CityJSON",
   "version": "1.1",
   "transform": {
-    "scale": [0.0, 0.0, 0.0],
-    "translate": [1.0, 1.0, 1.0]
+    "scale": [1.0, 1.0, 1.0],
+    "translate": [0.0, 0.0, 0.0]
   },
   "CityObjects": {},
   "vertices": []
@@ -94,8 +94,8 @@ An "empty" but complete CityJSON object will look like this:
   "version": "1.1",
   "extensions": {},
   "transform": {
-    "scale": [0.0, 0.0, 0.0],
-    "translate": [1.0, 1.0, 1.0]
+    "scale": [1.0, 1.0, 1.0],
+    "translate": [0.0, 0.0, 0.0]
   },
   "metadata": {},
   "CityObjects": {},
@@ -213,6 +213,10 @@ This means that the `"attributes"` is a JSON object and its content is a JSON ke
 
 ## Bridge
 
+<div class="assertion">
+See the CityGML v3.0.0 [Bridge module](https://docs.ogc.org/is/20-010/20-010.html#toc44) for more details.
+</div>
+
 Six City Objects are related to bridges: 
 
  - `"Bridge"` 
@@ -258,6 +262,11 @@ The properties of an address JSON object are free, to accommodate the different 
 
 
 ## Building
+
+
+<div class="assertion">
+See the CityGML v3.0.0 [Building module](https://docs.ogc.org/is/20-010/20-010.html#toc45) for more details.
+</div>
 
 Eight City Objects are related to buildings: 
 
@@ -349,6 +358,10 @@ If a location is necessary (eg to locate the position of the front door) then a 
 
 ## CityFurniture
 
+<div class="assertion">
+See the CityGML v3.0.0 [CityFurniture module](https://docs.ogc.org/is/20-010/20-010.html#toc32) for more details.
+</div>
+
 The geometry of a City Object of type `"CityFurniture"` can be any Geometry Object.
 
 ```json
@@ -369,6 +382,10 @@ The geometry of a City Object of type `"CityFurniture"` can be any Geometry Obje
 
 
 ## CityObjectGroup
+
+<div class="assertion">
+See the CityGML v3.0.0 [CityObjectGroup module](https://docs.ogc.org/is/20-010/20-010.html#toc33) for more details.
+</div>
 
 The CityGML concept of *groups*, where City Objects are aggregated based on certain criteria (think of a neighbourhood in a city for instance), is possible in CityJSON. 
 The group is a City Object, and it can contain, if needed, a geometry (the polygon representing the neighbourhood for instance).
@@ -413,6 +430,10 @@ A City Object of type `"CityObjectGroup"`:
 
 ## LandUse
 
+<div class="assertion">
+See the CityGML v3.0.0 [LandUse module](https://docs.ogc.org/is/20-010/20-010.html#toc36) for more details.
+</div>
+
 The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"` or `"CompositeSurface"`.
 
 ```json
@@ -430,6 +451,10 @@ The geometry of a City Object of type `"LandUse"` can be of type `"MultiSurface"
 
 
 ## OtherConstruction
+
+<div class="assertion">
+See the CityGML v3.0.0 [Construction module](https://docs.ogc.org/is/20-010/20-010.html#toc43) for more details (OtherConstruction is one class).
+</div>
 
 <!--- https://docs.geostandaarden.nl/imgeo/catalogus/bgt/#typeoverigbouwwerk -->
 <!--- https://github.com/opengeospatial/CityGML-3.0/blob/master/Archive/WP%2009%20Resources/Codelists/OtherConstruction_function.txt -->
@@ -467,6 +492,10 @@ The geometry of a City Object of type `"OtherConstruction"` can be any Geometry 
 
 ## PlantCover
 
+<div class="assertion">
+See the CityGML v3.0.0 [Vegetation module](https://docs.ogc.org/is/20-010/20-010.html#toc40) for more details (PlantCover is one class).
+</div>
+
 The geometry of a City Object of type `"PlantCover"` can be of type: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSolid"`, (4) `"MultiSurface"`, (5) `"CompositeSurface"`.
 
 ```json
@@ -493,6 +522,10 @@ The geometry of a City Object of type `"PlantCover"` can be of type: (1) `"Solid
 
 ## SolitaryVegetationObject
 
+<div class="assertion">
+See the CityGML v3.0.0 [Vegetation module](https://docs.ogc.org/is/20-010/20-010.html#toc40) for more details (SolitaryVegetationObject is one class).
+</div>
+
 The geometry of a City Object of type `"SolitaryVegetationObject"` can be any Geometry Object.
 
 ```json
@@ -512,6 +545,10 @@ The geometry of a City Object of type `"SolitaryVegetationObject"` can be any Ge
 
 
 ## TINRelief
+
+<div class="assertion">
+See the CityGML v3.0.0 [Relief module](https://docs.ogc.org/is/20-010/20-010.html#toc38) for more details (TINRelief is one class).
+</div>
 
 The geometry of a City Object of type `"TINRelief"` can only be of type `"CompositeSurface"`.
 
@@ -535,6 +572,10 @@ Notice that in practice any `"CompositeSurface"` is allowed for encoding a terra
 
 
 ## Transportation
+
+<div class="assertion">
+See the CityGML v3.0.0 [Transportation module](https://docs.ogc.org/is/20-010/20-010.html#toc39) for more details.
+</div>
 
 Four City Objects are related to transportation: 
 
@@ -604,6 +645,10 @@ That is, the surface representing a road should be split into sub-surfaces (ther
 
 ## Tunnel
 
+<div class="assertion">
+See the CityGML v3.0.0 [Tunnel module](https://docs.ogc.org/is/20-010/20-010.html#toc46) for more details.
+</div>
+
 Six City Objects are related to tunnels: 
 
   - `"Tunnel"` 
@@ -640,6 +685,10 @@ The geometry of the other four objects can be represented with any of the Geomet
 
 
 ## WaterBody
+
+<div class="assertion">
+See the CityGML v3.0.0 [WaterBody module](https://docs.ogc.org/is/20-010/20-010.html#toc42) for more details.
+</div>
 
 The geometry of a City Object of type `"WaterBody"` can be of types: `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
 
@@ -691,22 +740,23 @@ A Geometry object:
 
 
 
-## The coordinates of the vertices
+## Coordinates of the vertices
 
-A CityJSON must have one member named `"vertices"`, whose value is an array of coordinates of each vertex of the city model. Their position in this array (0-based) is used to represent the Geometry Objects.
+A CityJSON must have one member named `"vertices"`, whose value is an array of array of integers representing the coordinates of each vertex of the city model. 
+The position of a vertex in this array (0-based) is used to represent the `"boundaries"` of  Geometry Objects.
 
-  - one vertex **must** be an array with exactly 3 values, representing the *(x,y,z)* location of the vertex.
+  - one vertex **must** be an array with exactly 3 integers, representing the *(x,y,z)* location of the vertex before it is transformed to its real-world coordinates (with [[#transform-object]]).
   - the array of vertices may be empty.
-  - vertices may be repeated
+  - vertices may be repeated.
 
 ```json
 "vertices": [
-  [0.0, 0.0, 0.0],
-  [1.0, 0.0, 0.0],
-  [0.0, 0.0, 0.0],
+  [102, 103, 1],
+  [11, 910, 43],
+  [25, 744, 22],
   ...
-  [1.0, 0.0, 0.0],
-  [8523.134, 487625.134, 2.03]
+  [23, 88, 5],
+  [8523, 487, 22]
 ]
 ```
 
@@ -716,7 +766,7 @@ A CityJSON must have one member named `"vertices"`, whose value is an array of c
 The depth of the hierarchy of arrays depends on the Geometry object, and is as follows.
 
   - A `"MultiPoint"` has an array with the indices of the vertices; this array can be empty.
-  - A `"MultiLineString"` has an array of arrays, each containing the indices of a LineString
+  - A `"MultiLineString"` has an array of arrays, each containing the indices of a LineString.
   - A `"MultiSurface"`, or a `"CompositeSurface"`, has an array containing surfaces, each surface is modelled by an array of array, the first array being the exterior boundary of the surface, and the others the interior boundaries.
   - A `"Solid"` has an array of shells, the first array being the exterior shell of the solid, and the others the interior shells. Each shell has an array of surfaces, modelled in the exact same way as a MultiSurface/CompositeSurface.
   - A `"MultiSolid"`, or a `"CompositeSolid"`, has an array containing solids, each solid is modelled as above.
@@ -972,11 +1022,12 @@ The Geometry Templates are defined as a JSON object that:
 }
 ```
 
-A given template can be used as the geometry (or as one of the geometries) of a City Object. A new JSON object of type `"GeometryInstance"` is defined, and it:
+A given template can be used as the geometry (or as one of the geometries) of a City Object. 
+A new JSON object of type `"GeometryInstance"` is defined, and it:
 
   - **must** have one member with the name `"template"`, whose value is the position of the template in the `"geometry-templates"` (0-indexing).
   - **must** have one member with the name `"boundaries"`, whose value is an array containing only one vertex index, which refers to one vertex in the `"vertices"` property of a CityJSON file. (This is the reference point from which the transformations are applied, it is the "referencePoint" in CityGML.)
-  - **must** have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the the rotation/translation/scaling of the template (as defined in the CityGML 2.0.0 documentation).
+  - **must** have one member with the name `"transformationMatrix"`, whose value is a 4x4 matrix (thus 16 values in an array) defining the rotation/translation/scaling of the template. Note that these 16 values are ordered row-by-row, as the example below shows.
 
 ```json
 {
@@ -998,7 +1049,7 @@ A given template can be used as the geometry (or as one of the geometries) of a 
 ```
 
 <div class="note">
-  The CityJSON website has a [page to help developers calculate coordinates](https://www.cityjson.org/dev/realcoords/) for Geometry Templates and other Geometry Objects.
+  The CityJSON website has a [page to help developers with Geometry Templates](https://www.cityjson.org/dev/geom-templates/), it contains simple examples, explains which transformations to apply to obtain world coordinates, and explains how matrices work (for instance, in the example above, a scaling of 2.0 is applied).
 </div>
 
 
@@ -1329,7 +1380,8 @@ A Texture Object:
 
 ## Vertices-texture Object
 
-An Appearance Object may have one member named `"vertices-texture"`, whose value is an array of the *(u,v)* coordinates of the vertices used for texturing surfaces. Their position in this array (0-based) is used by the `"texture"` member of the Geometry Objects.
+An Appearance Object may have one member named `"vertices-texture"`, whose value is an array of the *(u,v)* coordinates of the vertices used for texturing surfaces. 
+Their position in this array (0-based) is used by the `"texture"` member of the Geometry Objects.
 
   - the array of vertices may be empty.
   - one vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates.
@@ -1431,12 +1483,13 @@ However, it should be noticed that CityJSON does not prescribe the format or sta
 
 # Extensions 
 
-CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate the data model, schemas are one way to validate the syntax of a JSON document.
+CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model, including its Extensions. Schemas offer a way to validate the syntax of a JSON document.
+Therefore, for writing more complex Extensions, a basic familiarity with [JSON Schemas](http://json-schema.org/) is advised.
 
-A CityJSON *Extension* is a JSON file that allows us to document how the core data model of CityJSON may be extended, and to validate CityJSON files.
+A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and is also used for validating the CityJSON files.
 This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
 
-A CityJSON Extension can extend the core data model by three ways:
+A CityJSON Extension can extend the core data model in three ways:
 
   1.  Adding new complex attributes to the City Objects of the core
   2.  Adding new properties at the root of a document
@@ -1579,6 +1632,8 @@ Notice that `"extraAttributes"` may have several properties (the types of the Ci
 An extra attribute must start with a `"+"`; it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different extensions have the same name. 
 
 The value of the property is a JSON schema, this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
+Thus, the keywords of the property values are defined by the JSON Schema specification.
+For instance, `"additionalProperties"` is a JSON-schema keyword stating that one is not allowed to add properties to this JSON object, beyond the ones defined in the schema (eg `"value", "uom"`).
 
 ```json
 "extraAttributes": {
