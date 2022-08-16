@@ -1,7 +1,7 @@
 
 # CityJSON
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/cityjson/specs?label=version&style=for-the-badge) [![GitHub license](https://img.shields.io/github/license/cityjson/specs?style=for-the-badge)](https://github.com/cityjson/specs/blob/main/LICENSE)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/cityjson/specs?label=version&style=for-the-badge)](https://github.com/cityjson/specs/releases/latest/) [![GitHub license](https://img.shields.io/github/license/cityjson/specs?style=for-the-badge)](https://github.com/cityjson/specs/blob/main/LICENSE)
 
 
 This repository is where the specifications and the schemas of CityJSON are kept.
