@@ -1160,7 +1160,7 @@ It is a JSON object that
 
 ## referenceDate
 
-The date where the dataset was compiled, without the time of the day, only a `"full-date"` in [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. 
+The date when the dataset was compiled, without the time of the day, only a `"full-date"` in [RFC 3339, Section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) should be used. 
 
 ```json
 "metadata": {
