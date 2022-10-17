@@ -978,7 +978,7 @@ Also:
          [0, 1, 1, null]
        ],
        [ //-- 2nd Solid get all null values
-         [null, null, 1]
+         [null, null, null]
        ]
      ]
    }
