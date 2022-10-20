@@ -95,7 +95,18 @@
     }
 
   },
-  
-  "required": ["type", "name", "version", "versionCityJSON", "uri", "extraRootProperties", "extraAttributes",  "extraCityObjects"]
+  "anyOf": [
+    {
+      "required": [
+        "url"
+      ]
+    },
+    {
+      "required": [
+        "uri"
+      ]
+    }
+  ], 
+  "required": ["type", "name", "version", "versionCityJSON", "extraRootProperties", "extraAttributes",  "extraCityObjects"]
 }
 

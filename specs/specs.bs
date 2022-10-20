@@ -1543,7 +1543,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
 
   1.  one member with the name `"type"`, whose value must be `"CityJSONExtension"`;
   1.  one member with the name `"name"`, whose value must be a string identifying the extension;
-  1.  one member with the name `"uri"`, whose value must be a string with the URI of the location of the schema where the JSON object is located;
+  1.  one member with the name `"url"`, whose value must be a string with the HTTP URL of the location of the schema where the JSON object is located;
   1.  one member with the name `"version"`, whose value must be a string identifying the version of the Extension;
   1.  one member with the name `"versionCityJSON"`, whose value must be a string (X.Y) identifying the version of CityJSON that uses the Extension;
   1.  one member with the name `"extraRootProperties"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
@@ -1556,7 +1556,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
   "type": "CityJSONExtension",
   "name": "Noise",
   "description": "Extension to model the noise",
-  "uri": "https://someurl.org/noise.ext.json",
+  "url": "https://someurl.org/noise.ext.json",
   "version": "0.5",
   "versionCityJSON": "1.1",
   "extraRootProperties": {},     
