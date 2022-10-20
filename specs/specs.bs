@@ -1523,11 +1523,11 @@ In the example below we have two Extensions: one named "Noise" and one named "So
   "version": "1.1",
   "extensions": {
     "Noise": {
-      "url" : "https://someurl.org/noise.json",
+      "uri" : "https://someurl.org/noise.json",
       "version": "2.0"
     },
     "Solar_Potential": {
-      "url" : "https://someurl.org/solar.json",
+      "uri" : "https://someurl.org/solar.json",
       "version": "0.8"
     }
   },
