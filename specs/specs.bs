@@ -1470,17 +1470,24 @@ The following root property of a CityJSON Object are not allowed in a CityJSONFe
   - `"geometry-templates"`: these should be resolved/dereferenced
   - `"extensions"`: these should be in the metadata or collection
 
-These properties may be accessible, for instance as a JSON object (the first one) in a [JSON Lines text](https://jsonlines.org/) stream, as in the following example:
+Note that a CityJSON Feature Object does not contain all the information that is required for parsing the feature.
+Most commonly, the tranformation properties (the Transform Object) and CRS need to be known by the client in order to correctly georeference the City Objects.
+These properties may be known by the client upfront, or they may be accessible in a CityJSON Object, which is sent as the first object in a [JSON Lines text](https://jsonlines.org/) stream, or in other ways not described here.
+
+In case the properties are stored in a CityJSON Object, this object needs to be a valid CityJSON Object.
+This implies that the CityJSON object must contain all the required properties, including `"CityObjects"` and `"vertices"`, even though they are empty, because this information is stored in the subsequent CityJSON Features.
+
+Below is an example of a CityJSONFeature stream (or a JSON Lines text file), with a CityJSON Object storing the metadata and transformation properties:
 
 ```json
-{"type": "CityJSON","version": "1.1","transform":{...},"metadata":{...}}
-{"type": "CityJSONFeature", "id": "a", "CityObjects":{...},"vertices":[...]} 
-{"type": "CityJSONFeature", "id": "b", "CityObjects":{...},"vertices":[...]} 
-{"type": "CityJSONFeature", "id": "c", "CityObjects":{...},"vertices":[...]} 
+{"type":"CityJSON","version":"1.1","transform":{...},"CityObjects":{},"metadata":{...},"vertices":[]}
+{"type":"CityJSONFeature","id":"a","CityObjects":{...},"vertices":[...]} 
+{"type":"CityJSONFeature","id":"b","CityObjects":{...},"vertices":[...]} 
+{"type":"CityJSONFeature","id":"c","CityObjects":{...},"vertices":[...]} 
 ```
-
-However, it should be noticed that CityJSON does not prescribe the format or standard that should be used to store several JSON objects in a given file, it only defines how `"CityJSON"` and `"CityJSONFeature"` objects should be defined.
-
+<div class="note">
+CityJSON does not prescribe the format or standard that should be used to store several JSON objects in a given file, it only defines how `"CityJSON"` and `"CityJSONFeature"` objects should be defined.
+</div>
 
 # Extensions 
 
