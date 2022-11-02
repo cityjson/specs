@@ -166,6 +166,7 @@
   },
   "required": [
     "type",
+    "id",
     "CityObjects",
     "vertices"
   ],
