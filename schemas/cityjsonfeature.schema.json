@@ -23,6 +23,9 @@
           },
           {
             "$ref": "cityobjects.schema.json#/Building"
+          },          
+          {
+            "$ref": "cityobjects.schema.json#/BuildingConstructiveElement"
           },
           {
             "$ref": "cityobjects.schema.json#/BuildingPart"
