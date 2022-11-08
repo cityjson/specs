@@ -71,6 +71,11 @@ A CityJSON object:
   - **may** have one member with the name `"geometry-templates"`, the value is a JSON object containing the templates that can be reused by different City Objects (usually for trees). This is equivalent to the concept of "implicit geometries" in CityGML. See [[#geometry-templates]] for details.
   - **may** have other members, and their value is not prescribed. Because these are not standard in CityJSON, they might be ignored by parsers.
 
+
+<div class="note">
+**Suggested convention:** A file containing one CityJSON object may have the extension `'.city.json'`
+</div>
+
 The minimal valid CityJSON object is thus:
 
 ```json
@@ -1491,9 +1496,14 @@ Below is an example of a CityJSONFeature stream (or a JSON Lines text file), wit
 {"type":"CityJSONFeature","id":"b","CityObjects":{...},"vertices":[...]} 
 {"type":"CityJSONFeature","id":"c","CityObjects":{...},"vertices":[...]} 
 ```
+
 <div class="note">
-CityJSON does not prescribe the format or standard that should be used to store several JSON objects in a given file, it only defines how `"CityJSON"` and `"CityJSONFeature"` objects should be defined.
+**Suggested convention:** `"CityJSON"` and `"CityJSONFeature"` objects may be stored in a file with the extension `'.city.jsonl'`
 </div>
+<div class="note">
+Observe that CityJSON does not prescribe the format or standard that should be used to store several JSON objects in a given file, it only defines how `"CityJSON"` and `"CityJSONFeature"` objects should be defined.
+</div>
+
 
 # Extensions 
 
