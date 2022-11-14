@@ -33,10 +33,10 @@
       "pattern": "^(\\d\\.)(\\d)$"
     },
 
-    "uri": { 
+    "url": {
       "type": "string",
       "format": "uri-reference",
-      "description": "good to host the extension at a URI so that others can access it"
+      "description": "good to host the extension at a URL so that others can access it"
     },
 
     "description": { "type": "string" },
