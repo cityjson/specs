@@ -1551,7 +1551,9 @@ If one wants to document the parcel area in square-meters for a `"Building"` (`"
 }
 ```
 
-An *Extension* is mostly used for requiring certain properties, attributes or City Object types in CityJSON documents, therefore creating an "extended" CityJSON schema, usually specific to a certain application domain.
+However, a regular attribute (without the "+" prefix) cannot be made mandatory in the core CityJSON schema. Only an Extension can create a mandatory attribute (see below).
+
+Therefore, an *Extension* is mostly used for requiring certain properties, attributes or City Object types in CityJSON documents, therefore creating an "extended" CityJSON schema, usually specific to a certain application domain.
 An *Extension* makes sense it if is expected that different data producers an consumers in the target domain need to exchange data, or an additional City Object or Semantic type is required for accurately modeling the data.
 
 ## Using an Extension in a CityJSON file
@@ -1623,9 +1625,56 @@ An example would be to reuse the Solid type:
 ```
 </div>
 
-## Case 1: Adding new complex attributes to existing City Objects
+## Case 1: Adding new properties at the root of a document
 
-It is also possible to add, and document in a schema, complex attributes, for example if we wanted to have the colour of the buildings as a RGBA value (red-green-blue-alpha):
+It is allowed to add a new property at the root of a CityJSON file, but if one wants to document it in a schema, then this property must start with a `"+"`.
+Imagine we wanted to store some census data for a given neighbourhood for which we have a CityJSON file, then we could define the extra root property `"+census"` as follows:
+
+```json
+"extraRootProperties": {
+  "+census": {
+    "type": "object",
+    "properties": {
+      "percent_men": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 100.0
+      },
+      "percent_women": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 100.0
+      }
+    }
+  }
+}
+```
+
+And a CityJSON file would look like this:
+
+```json
+{
+  "type": "CityJSON",
+  "version": "1.1",
+  "extensions": {
+    "Census": {
+      "url": "https://someurl.org/census.ext.json",
+      "version": "0.7"
+    }
+  },
+  "CityObjects": {...},
+  "vertices": [...],
+  "+census": {
+    "percent_men": 49.5,
+    "percent_women": 51.5
+  }
+}
+```
+
+
+## Case 2: Defining attributes on existing City Objects
+
+It is also possible to add, and document in a schema, specific attributes, for example if we wanted to have the colour of the buildings as a RGBA value (red-green-blue-alpha):
 
 ```json
 {
@@ -1693,54 +1742,6 @@ For instance, `"additionalProperties"` is a JSON-schema keyword stating that one
   } 
 }
 ```
-
-
-## Case 2: Adding new properties at the root of a document
-
-It is allowed to add a new property at the root of a CityJSON file, but if one wants to document it in a schema, then this property must start with a `"+"`. 
-Imagine we wanted to store some census data for a given neighbourhood for which we have a CityJSON file, then we could define the extra root property `"+census"` as follows:
-
-```json
-"extraRootProperties": {
-  "+census": {
-    "type": "object",
-    "properties": {
-      "percent_men": { 
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 100.0
-      },
-      "percent_women": { 
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 100.0
-      }
-    }
-  }
-}
-```
-
-And a CityJSON file would look like this:
-
-```json
-{
-  "type": "CityJSON",
-  "version": "1.1",
-  "extensions": {
-    "Census": {
-      "url": "https://someurl.org/census.ext.json",
-      "version": "0.7"
-    }
-  },
-  "CityObjects": {...},
-  "vertices": [...],
-  "+census": {
-    "percent_men": 49.5,
-    "percent_women": 51.5
-  }
-}
-```
-
 
 ## Case 3: Creating and/or extending new City Objects
 
