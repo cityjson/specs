@@ -193,6 +193,7 @@ And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but an
 
 The attributes of a given City Object are not prescribed (unlike in CityGML).
 This means that the `"attributes"` is a JSON object and its content is a JSON key-value pair ("owner" in the example above is one such attribute).
+Note that any valid JSON value (inlcuding array and object) is a valid attribute value.
 
 
 ```json
