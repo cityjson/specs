@@ -1744,7 +1744,17 @@ For instance, `"additionalProperties"` is a JSON-schema keyword stating that one
 }
 ```
 
-## Case 3: Creating and/or extending new City Objects
+## Case 3: Defining a new Semantic Object
+
+To define a new semantic surface (besides the ones prescribed, see [[#semantics-of-geometric-primitives]]), a `"+"` must be prepended to its name, eg `"+ThermalSurface"`.
+
+```json
+{
+  "type": "+ThermalSurface"
+}
+```
+
+## Case 4: Creating and/or extending new City Objects
 
 The creation of a new City Object is done by defining it in the CityJSON Extension object in the `"extraCityObjects"` property:
 
