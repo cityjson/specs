@@ -1813,14 +1813,14 @@ This is done by copying the schema of the parent City Object and extending it.
 ##  Rules to follow to define new City Objects
 
 The challenge when creating Extensions to the core model is that we do not want to break the software packages (viewers, spatial analysis, etc) that already read and process CityJSON files. 
-While one could define a new City Object and document it, if this new object does not follow the rules below then it will mean that new specific software needs to be built for it---this would go against the fundamental ideas behind CityJSON.
+While one could define a new City Object and document it, if this new object does not follow the rules below then it will mean that, new specific software needs to be built for it---this would go against the fundamental ideas behind CityJSON.
 
 1.  The name of a new City Object must begin with a `"+"`, eg `"+NoiseBuilding"`.
-2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"`. If the object contains appearances, the same mechanism should be used so that the new City Objects can be processed without modification.
-3.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
-4.  Existing City Objects cannot be extended and have new types as children, eg it is not allowed to add a new City Object ”+Balcony” to a ”Building”. Instead, a new type, eg ”+FancyBuilding” should be created, which can have a "+Balcony" as a potential children.
-5.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
-6.  To define a new semantic surface (besides the ones prescribed, see [[#semantics-of-geometric-primitives]]), a `"+"` must be prepended to its name, eg `"+ThermalSurface"`.
+2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"`.
+3.  Existing City Objects cannot be extended and have new types as children, eg it is not allowed to add a new City Object ”+Balcony” to a ”Building”. Instead, a new type, eg ”+FancyBuilding” should be created, which can have a "+Balcony" as a potential children.
+4.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property.
+5.  The Geometry object's boundary must be one of the seven types described in [[#arrays-to-represent-boundaries]]. Similarly, the geometry appearances and templates must follow the core specification. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
+6.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 
 
 # CityJSON Schemas
