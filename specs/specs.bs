@@ -1532,6 +1532,27 @@ A CityJSON Extension can extend the core data model in four ways:
   If these are followed, then a CityJSON file containing Extensions will be seen as a "standard" CityJSON file.
 </div>
 
+One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON does not have schemas!).
+While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are (partly) following that philosophy.
+
+If one wants to document the parcel area in square-meters for a `"Building"` (`"area-parcel": {"value": 437, "uom": "m2"}`), the easiest way is just to add a new property to the City Object attributes:
+
+```json
+{
+  "type": "Building",
+  "attributes": {
+    "storeysAboveGround": 2,
+    "area-parcel": {
+      "value": 437,
+      "uom": "m2"
+    }
+  },
+  "geometry": [...]
+}
+```
+
+An *Extension* is mostly used for requiring certain properties, attributes or City Object types in CityJSON documents, therefore creating an "extended" CityJSON schema, usually specific to a certain application domain.
+An *Extension* makes sense it if is expected that different data producers an consumers in the target domain need to exchange data, or an additional City Object or Semantic type is required for accurately modeling the data.
 
 ## Using an Extension in a CityJSON file
 
@@ -1603,22 +1624,6 @@ An example would be to reuse the Solid type:
 </div>
 
 ## Case 1: Adding new complex attributes to existing City Objects
-
-One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON does not have schemas!). 
-While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are (partly) following that philosophy. 
-
-If one wants to document the colour of a given `"Building"` (`"colour": "red"`), the easiest way is just to add a new property to the City Object attributes:
-
-```json
-{
-  "type": "Building", 
-  "attributes": { 
-    "storeysAboveGround": 2,
-    "colour": "red"
-  },
-  "geometry": [...]
-}
-```
 
 It is also possible to add, and document in a schema, complex attributes, for example if we wanted to have the colour of the buildings as a RGBA value (red-green-blue-alpha):
 
