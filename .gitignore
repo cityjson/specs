@@ -27,3 +27,5 @@ libthirdparty.a
 /example-datasets/dummy-values/out.obj
 /example-datasets/dummy-values/out.json
 /specs/specs.html
+# local temporary files, notes etc.
+/tmp/

@@ -193,6 +193,7 @@ And a minimal 2nd-level valid City Object (`"BuildingPart"` in this case, but an
 
 The attributes of a given City Object are not prescribed (unlike in CityGML).
 This means that the `"attributes"` is a JSON object and its content is a JSON key-value pair ("owner" in the example above is one such attribute).
+Note that any valid JSON value (including an array and/or object) is a valid attribute value.
 
 
 ```json
@@ -1507,17 +1508,18 @@ Observe that CityJSON does not prescribe the format or standard that should be u
 
 # Extensions 
 
-CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model, including its Extensions. Schemas offer a way to validate the syntax of a JSON document.
+CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model, including its Extensions. Schemas offer a way to validate the syntax of a JSON document, and thus the possibility to require certain JSON members.
 Therefore, for writing more complex Extensions, a basic familiarity with [JSON Schemas](http://json-schema.org/) is advised.
 
 A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and is also used for validating the CityJSON files.
 This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
 
-A CityJSON Extension can extend the core data model in three ways:
+A CityJSON Extension can extend the core data model in four ways:
 
-  1.  Adding new complex attributes to the City Objects of the core
-  2.  Adding new properties at the root of a document
-  3.  Creating a new City Object, or "extending" one, and defining complex geometries
+  1.  Defining new properties at the root of a document
+  2.  Defining attributes on existing City Objects
+  3.  Defining a new Semantic Object
+  4.  Defining a new City Object, or "extending" one of the existing City Objects
 
 <div class="note">
   While Extensions are less flexible than CityGML ADEs (inheritance and namespaces are for instance not supported, and less customisation is possible), it should be noted that the flexibility of ADEs comes at a price: the software processing an extended CityGML file will not necessarily know what structure to expect.
@@ -1530,6 +1532,31 @@ A CityJSON Extension can extend the core data model in three ways:
   This is achieved by enforcing a set of 6 simple rules (see [[#rules-to-follow-to-define-new-city-objects]]) when adding new City Objects. 
   If these are followed, then a CityJSON file containing Extensions will be seen as a "standard" CityJSON file.
 </div>
+
+One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON does not have schemas!).
+While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are (partly) following that philosophy.
+
+If one wants to document the parcel area in square-meters for a `"Building"` (`"area-parcel": {"value": 437, "uom": "m2"}`), the easiest way is just to add a new property to the City Object attributes:
+
+```json
+{
+  "type": "Building",
+  "attributes": {
+    "storeysAboveGround": 2,
+    "area-parcel": {
+      "value": 437,
+      "uom": "m2"
+    }
+  },
+  "geometry": [...]
+}
+```
+
+However, a regular attribute (without the `"+"` prefix) cannot be made mandatory in the core CityJSON schema. 
+Only with an Extension can an attribute be made mandatory (see [[#case-2-defining-attributes-on-existing-city-objects]]).
+
+Therefore, an *Extension* is used for making mandatory certain properties, attributes, or City Object types in CityJSON objects.
+An *Extension* makes sense if it is expected that different data producers and consumers in the target domain need to exchange data, or if an additional City Object or Semantic type is required for accurately modelling the data.
 
 
 ## Using an Extension in a CityJSON file
@@ -1601,25 +1628,56 @@ An example would be to reuse the Solid type:
 ```
 </div>
 
-## Case 1: Adding new complex attributes to existing City Objects
+## Case 1: Adding new properties at the root of a document
 
-One of the philosophies of JSON is "schema-less", which means that one is allowed to define new properties for the JSON objects without documenting them in a JSON schema (watch out: this does *not* mean that JSON does not have schemas!). 
-While this is in contrast to CityGML (and GML as a whole) where the schemas are central, the schemas of CityJSON are (partly) following that philosophy. 
-
-If one wants to document the colour of a given `"Building"` (`"colour": "red"`), the easiest way is just to add a new property to the City Object attributes:
+It is allowed to add a new property at the root of a CityJSON file, but if one wants to document it in a schema, then this property must start with a `"+"`.
+Imagine we wanted to store some census data for a given neighbourhood for which we have a CityJSON file, then we could define the extra root property `"+census"` as follows:
 
 ```json
-{
-  "type": "Building", 
-  "attributes": { 
-    "storeysAboveGround": 2,
-    "colour": "red"
-  },
-  "geometry": [...]
+"extraRootProperties": {
+  "+census": {
+    "type": "object",
+    "properties": {
+      "percent_men": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 100.0
+      },
+      "percent_women": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 100.0
+      }
+    }
+  }
 }
 ```
 
-It is also possible to add, and document in a schema, complex attributes, for example if we wanted to have the colour of the buildings as a RGBA value (red-green-blue-alpha):
+And a CityJSON file would look like this:
+
+```json
+{
+  "type": "CityJSON",
+  "version": "1.1",
+  "extensions": {
+    "Census": {
+      "url": "https://someurl.org/census.ext.json",
+      "version": "0.7"
+    }
+  },
+  "CityObjects": {...},
+  "vertices": [...],
+  "+census": {
+    "percent_men": 49.5,
+    "percent_women": 51.5
+  }
+}
+```
+
+
+## Case 2: Defining attributes on existing City Objects
+
+It is also possible to add, and document in a schema, specific attributes, for example if we wanted to have the colour of the buildings as a RGBA value (red-green-blue-alpha):
 
 ```json
 {
@@ -1653,7 +1711,7 @@ Another example would be to store the area of the parcel of a building, and also
 For these two cases, the CityJSON Extension object would look like the snippet below.
 Notice that `"extraAttributes"` may have several properties (the types of the City Objects are the possibilities) and then each of these has as properties the new attributes (there can be several). 
 
-An extra attribute must start with a `"+"`; it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different extensions have the same name. 
+An extra attribute must start with a `"+"`; it is good practice to prepend the attribute with the name of the Extension, to avoid that 2 attributes from 2 different Extensions have the same name. 
 
 The value of the property is a JSON schema, this schema can reference and reuse JSON objects already defined in the CityJSON schemas.
 Thus, the keywords of the property values are defined by the JSON Schema specification.
@@ -1688,55 +1746,17 @@ For instance, `"additionalProperties"` is a JSON-schema keyword stating that one
 }
 ```
 
+## Case 3: Defining a new Semantic Object
 
-## Case 2: Adding new properties at the root of a document
-
-It is allowed to add a new property at the root of a CityJSON file, but if one wants to document it in a schema, then this property must start with a `"+"`. 
-Imagine we wanted to store some census data for a given neighbourhood for which we have a CityJSON file, then we could define the extra root property `"+census"` as follows:
-
-```json
-"extraRootProperties": {
-  "+census": {
-    "type": "object",
-    "properties": {
-      "percent_men": { 
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 100.0
-      },
-      "percent_women": { 
-        "type": "number",
-        "minimum": 0.0,
-        "maximum": 100.0
-      }
-    }
-  }
-}
-```
-
-And a CityJSON file would look like this:
+To define a new semantic surface (besides the ones prescribed, see [[#semantics-of-geometric-primitives]]), a `"+"` must be prepended to its name, eg `"+ThermalSurface"`.
 
 ```json
 {
-  "type": "CityJSON",
-  "version": "1.1",
-  "extensions": {
-    "Census": {
-      "url": "https://someurl.org/census.ext.json",
-      "version": "0.7"
-    }
-  },
-  "CityObjects": {...},
-  "vertices": [...],
-  "+census": {
-    "percent_men": 49.5,
-    "percent_women": 51.5
-  }
+  "type": "+ThermalSurface"
 }
 ```
 
-
-## Case 3: Creating and/or extending new City Objects
+## Case 4: Creating and/or extending new City Objects
 
 The creation of a new City Object is done by defining it in the CityJSON Extension object in the `"extraCityObjects"` property:
 
@@ -1795,14 +1815,14 @@ This is done by copying the schema of the parent City Object and extending it.
 ##  Rules to follow to define new City Objects
 
 The challenge when creating Extensions to the core model is that we do not want to break the software packages (viewers, spatial analysis, etc) that already read and process CityJSON files. 
-While one could define a new City Object and document it, if this new object does not follow the rules below then it will mean that new specific software needs to be built for it---this would go against the fundamental ideas behind CityJSON.
+While one could define a new City Object and document it, if this new object does not follow the rules below then it will mean that new specific software needs to be built for it (and this would go against the fundamental ideas behind CityJSON).
 
 1.  The name of a new City Object must begin with a `"+"`, eg `"+NoiseBuilding"`.
-2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"`. If the object contains appearances, the same mechanism should be used so that the new City Objects can be processed without modification.
-3.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
-4.  If a new City Object contains other objects and requires different geometries, then a new City Object needs to be defined using the parents-children structure of CityJSON, as used by `"Building"` and `"BuildingPart"`.
-5.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
-6.  To define a new semantic surface (besides the ones prescribed, see [[#semantics-of-geometric-primitives]]), a `"+"` must be prepended to its name, eg `"+ThermalSurface"`.
+2.  A new City Object must conform to the rules of CityJSON, ie it must contain a property `"type"`.
+3.  Existing City Objects cannot be extended and have new types as children, eg it is not allowed to add a new City Object `"+Balcony"` to a `"Building"`. Instead, a new type, eg `"+FancyBuilding"`, should be created and it can have a `"+Balcony"` as a potential children.
+4.  All the geometries must be in the property `"geometry"`, and cannot be located somewhere else deep in a hierarchy of a new property.
+5.  The Geometry object's boundary must be one of the eight types described in [[#geometry-objects]]. Similarly, the geometry appearances and templates must follow the core specification. This ensures that all the code written to process, manipulate, and view CityJSON files will be working without modifications.
+6.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 
 
 # CityJSON Schemas
