@@ -404,7 +404,7 @@ Since a `"CityObjectGroup"` is also a City Object, it can be part of another gro
 A City Object of type `"CityObjectGroup"`:
 
   - **must** have a member `"children"`. The value is an array of the IDs of the City Objects that the group contains. As for other City Objects, the City Objects must have the ID of the group in `"parents"`.
-  - **may** have a member `"children_roles"`, whose value is an array of strings describing the role of each City Object in the group; This member must be of the same length as that of `"children"`.
+  - **may** have a member `"children_roles"`, whose value is an array of strings describing the role of each City Object in the group. This member must be of the same length as that of `"children"`.
   - **may** have a member `"attributes"`.
   - **may** have a member `"geometry"`. Notice that since the `"CityObjectGroup"` is a container of different City Objects, the concept of Level of Detail does not apply to it. Nevertheless, the `"lod"` property is still used for enforcing uniformity with all the other geometries.
 
@@ -561,7 +561,7 @@ See the CityGML v3.0.0 [Relief module](https://docs.ogc.org/is/20-010/20-010.htm
 
 The geometry of a City Object of type `"TINRelief"` can only be of type `"CompositeSurface"`.
 
-CityJSON does not define a specific Geometry Object for a TIN (Triangulated Irregular Network), and is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
+CityJSON does not define a specific Geometry Object for a TIN (triangulated irregular network), and is simply a CompositeSurface for which every surface is a triangle (thus a polygon having 3 vertices, and no interior ring).
 
 Notice that in practice any `"CompositeSurface"` is allowed for encoding a terrain, and that arbitrary polygons could also be used (not just triangles).
 
@@ -851,7 +851,7 @@ The depth of the hierarchy of arrays depends on the Geometry object, and is as f
 ## Semantics of geometric primitives
 
 A Semantic Object is a JSON object representing the semantics of a primitive of a geometry (e.g. a surface of a building). 
-The Semantic Object may also represent other attributes of the primitive (e.g. the slope of the roof, or the solar potential).
+A Semantic Object may also represent other attributes of the primitive (e.g. the slope of the roof, or the solar potential).
 For surface and volumetric geometries (e.g. `MultiSurface`, `Solid` and `MultiSolid`), a primitive is a surface. 
 If a geometry is a `MultiPoint` or a `MultiLineString`, then the primitives are its respective sub-parts: points and linestrings. 
 
@@ -913,7 +913,7 @@ It is possible to define and use other semantics, but these have to start with a
 }
 ```
 
-Because in given City Object (say a `"Building"`) several primitives can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Object must be declared once, and each of the primitives that are represented by it points to it. This is achieved by first declaring all the Semantic Objects in an array, and then having an array where each primitive links to Semantic Objects (position in the array).
+Because in a given City Object (say a `"Building"`) several primitives can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Object must be declared once, and each of the primitives that are represented by it points to it. This is achieved by first declaring all the Semantic Objects in an array, and then having an array where each primitive links to Semantic Objects (position in the array).
 
 If a Geometry object has semantics, then the Geometry object:
 
