@@ -206,14 +206,18 @@ Note that any valid JSON value (including an array and/or object) is a valid att
     "type": "LandUse", 
     "attributes": { 
       "function": "Industry and Business",
-      "area": "120m^2"
+      "area-parcel": {
+        "value": 437,
+        "uom": "m2"
+      },
     },
     "geometry": [{...}]
   },
   "id-2": {
     "type": "WaterBody", 
     "attributes": { 
-      "name": "Lake Black"
+      "name": "Lake Black",
+      "some-list": ["a", "b", "c"]
     },
     "geometry": [{...}]
   }
