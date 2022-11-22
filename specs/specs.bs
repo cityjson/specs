@@ -1430,17 +1430,17 @@ Each part becomes a CityJSON file.
 Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in a [JSON Lines text](https://jsonlines.org) (also called [Newline Delimited JSON](http://ndjson.org)).
 This is a format to store several JSON objects in a single file, and allows the processing of each object one at a time.
 
-A CityJSON Feature Object allows us to store one feature, for instance a `"Building"` with eventually its children `"BuildingPart"` and/or `"BuildingInstallation"`.
+A CityJSON Feature Object allows storage of one feature, for instance a `"Building"` with eventually its children `"BuildingPart"` and/or `"BuildingInstallation"`.
 Unlike a CityJSON Object, all the vertices and appearances of the object are *local*.
 
 A CityJSON Feature Object:
 
   - is a JSON object.
-  - **must** have one member with the name `"type"`, whose value must be `"CityJSONFeature"`.
-  - **must** have one member with the name `"id"`, whose value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent.
+  - **must** have one member with the name `"type"`. The value must be `"CityJSONFeature"`.
+  - **must** have one member with the name `"id"`. The value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent.
   - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one `"CityJSONFeature"`), and all the children of the `"CityJSONFeature"` must be included (and the children of the children (recursively), if there are any).
-  - **must** have one member with the name `"vertices"`, whose value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometry Objects for the JSON object (warning: the vertices are local to the JSON object).
-  - **may** have one member with the name `"appearance"`, the value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
+  - **must** have one member with the name `"vertices"`. The value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometry Objects for the JSON object (warning: the vertices are local to the JSON object).
+  - **may** have one member with the name `"appearance"`. The value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
   - **must not** have other members.
     
 ```json
@@ -1569,7 +1569,7 @@ An *Extension* makes sense if it is expected that different data producers and c
 
 ## Using an Extension in a CityJSON file
 
-An Extension should be given a name (eg "Noise") and the URL of the Extension file should be given, along with the version that is used for this file.
+An Extension should be given a name (eg "Noise") and the URL of the Extension file should be defined, including the version of the Extension that is used for this file.
 It is expected that the Extension is publicly available at the URL, and can be downloaded.
 
 Several Extensions can be used in a single CityJSON Object, each one is indexed by its name in the `"extensions"` JSON object.
@@ -1599,14 +1599,14 @@ In the example below we have two Extensions: one named "Noise" and one named "So
 
 A CityJSON Extension is a JSON object, and it **must** have the following 8 members:
 
-  1.  one member with the name `"type"`, whose value must be `"CityJSONExtension"`;
-  1.  one member with the name `"name"`, whose value must be a string identifying the extension;
-  1.  one member with the name `"url"`, whose value must be a string with the HTTP URL of the location of the schema where the JSON object is located;
-  1.  one member with the name `"version"`, whose value must be a string identifying the version of the Extension;
-  1.  one member with the name `"versionCityJSON"`, whose value must be a string (X.Y) identifying the version of CityJSON that uses the Extension;
-  1.  one member with the name `"extraRootProperties"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
-  1.  one member with the name `"extraAttributes"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
-  1.  one member with the name `"extraCityObjects"`, whose value must be a JSON object; its content is part of a JSON schema (explained below), or an empty object;
+  1.  one member with the name `"type"`. The value must be `"CityJSONExtension"`.
+  1.  one member with the name `"name"`. The value must be a string identifying the extension.
+  1.  one member with the name `"url"`. The value must be a string with the HTTP URL of the location of the schema where the JSON object is located.
+  1.  one member with the name `"version"`. The value must be a string identifying the version of the Extension.
+  1.  one member with the name `"versionCityJSON"`. The value must be a string (X.Y) identifying the version of CityJSON that uses the Extension.
+  1.  one member with the name `"extraRootProperties"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
+  1.  one member with the name `"extraAttributes"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
+  1.  one member with the name `"extraCityObjects"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
 
 
 ```json
@@ -1624,7 +1624,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
 ```
 
 <div class="note">
-If an element of the Extension reuses, or references, structures and/or objects defined in the schemas of CityJSON, then we can assume that the Extension is in the same folder as the schemas.
+If an element of the Extension reuses, or references, structures and/or objects defined in the schemas of CityJSON, then assume that the Extension is in the same folder as the schemas.
 An example would be to reuse the Solid type:
 
 ```json
