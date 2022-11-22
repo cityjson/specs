@@ -1563,7 +1563,7 @@ If one wants to document the parcel area in square-meters for a `"Building"` (`"
 However, a regular attribute (without the `"+"` prefix) cannot be made mandatory in the core CityJSON schema. 
 Only with an Extension can an attribute be made mandatory (see [[#case-2-defining-attributes-on-existing-city-objects]]).
 
-Therefore, an *Extension* is used for making mandatory certain properties, attributes, or City Object types in CityJSON objects.
+Therefore, an *Extension* is used for enforcing certain properties, attributes, or City Object types in CityJSON objects.
 An *Extension* makes sense if it is expected that different data producers and consumers in the target domain need to exchange data, or if an additional City Object or Semantic type is required for accurately modelling the data.
 
 
