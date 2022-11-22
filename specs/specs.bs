@@ -61,7 +61,7 @@ A CityJSON object:
 
   - is a JSON object.
   - **must** have one member with the name `"type"`. The value must be `"CityJSON"`.
-  - **must** have one member with the name `"version"`. The value must be a string with the version (X.Y) of CityJSON used for the document. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
+  - **must** have one member with the name `"version"`. The value must be a string with the version (X.Y) of the CityJSON object. Observe that while schemas can have a version with patch version (X.Y.Z), a CityJSON object points only to the minor version (X.Y), and for validation the latest schema of that minor version should be used.
   - **must** have one member with the name `"transform"`. The value is a JSON object describing how to *decompress* the integer coordinates of the geometries to obtain real-world coordinates. See [[#transform-object]] for details.
   - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one CityJSON Object). See [[#the-different-city-objects]] for details.
   - **must** have one member with the name `"vertices"`. The value is an array representing the coordinates of each vertex of the city model. See [[#coordinates-of-the-vertices]].
