@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-import jsonref
+import jsonref #-- works with json v0.2
 
 #----------------------------
 # cityjson.schema.json
