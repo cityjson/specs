@@ -8,16 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [1.1.3] - 2022-11-XX
+## [1.1.3] - 2022-11-25
 ### Changed
-- CityJSONFeatures now do not have to dereference the GeometryTemplates, those can be in the "1st line"/metadata. Dereferencing is still totally acceptable.
-- `CityJSONFeature`: now clear that all children (recursively) of a feature should be bundled with its parent
+- CityJSONFeatures now do not have to dereference the GeometryTemplates, those can be in the "1st line"/metadata. Dereferencing is still allowed. cjio passes the GeometryTemplates in the 1st-line now. 
+- `CityJSONFeature`: now clear that all children (recursively) of a feature should be bundled with its parent.
 - improved the text of the specifications at several places, and fixed sentences that were not precise enough.
-- change the `"uri"` to `"url"` for the Extensions, and now the schemas can have either of these. Going forward we prefer URL.
-- restructured the text for the Extensions, now a 4th case is added: "Defining a new Semantic Object". It was always there but not listed as a case. Now fixed.
+- change the `"uri"` to `"url"` for the Extensions, and now the schemas can have either of these. Going forward `"url"` is the preferred way.
+- restructured the text for the Extensions, now a 4th use-case is added: "Defining a new Semantic Object". It was always there but not listed as a case. Now fixed.
 ### Added
 - `"BuildingConstructiveElement"` was missing from the schemas as a CO, now added.
-- 2 suggested conventions: file extensions `.city.json` and `.city.jsonl`
+- added 2 suggested conventions in the specs: file extensions `.city.json` and `.city.jsonl`
+
 
 ## [1.1.2] - 2022-08-16
 Minor changes to the schemas for errors, improved the text of the specs so that it's easier for everyone to read and understand.
