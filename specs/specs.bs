@@ -1427,7 +1427,6 @@ Their position in this array (0-based) is used by the `"texture"` member of the 
 
   - the array of vertices may be empty.
   - one vertex must be an array with exactly 2 values, representing the *(u,v)* coordinates.
-  - The value of *u* and *v* must be between 0.0 and 1.0.
   - vertices may be repeated
 
 ```json
