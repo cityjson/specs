@@ -94,6 +94,9 @@
             "$ref": "cityobjects.schema.json#/ExtensionObject"
           },
           {
+            "$ref": "cityobjects.schema.json#/GenericCityObject"
+          },
+          {
             "$ref": "cityobjects.schema.json#/LandUse"
           },
           {

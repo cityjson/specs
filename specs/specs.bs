@@ -442,6 +442,33 @@ A City Object of type `"CityObjectGroup"`:
 ```
 
 
+## GenericCityObject
+
+<div class="assertion">
+While the CityGML v3.0.0 [Generics module](https://docs.ogc.org/is/20-010/20-010.html#toc35) has different classes for each [space type](https://docs.ogc.org/is/20-010/20-010.html#toc24), CityJSON has only one class to cover all 3 space types.
+</div>
+
+This object should be used for objects that are not covered explicitly by any of the CityGML classes.
+
+The geometry of a City Object of type `"GenericCityObject"` can be any of the following: `"MultiPoint"`, `"MultiLineString"`, `"MultiSurface"`, `"CompositeSurface"`, `"Solid"`, or `"CompositeSolid"`.
+
+```javascript
+"whatisthat": {
+  "type": "GenericCityObject", 
+  "attributes": { 
+    "class": "a big bucket of water",
+    "usage": "it's not clear"
+  },
+  "geometry": [{
+    "type": "CompositeSurface",
+    "lod": "1",
+    "boundaries": [
+      [[0, 3, 2, 1]], [[4, 5, 6, 7]], [[0, 1, 5, 4]]
+    ]
+  }]
+}
+```
+
 ## LandUse
 
 <div class="assertion">
