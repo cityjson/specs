@@ -1514,7 +1514,7 @@ The following root property of a CityJSON Object are not allowed in a CityJSONFe
   - `"transform"` 
   - `"version"` 
   - `"metadata"` 
-  - `"geometry-templates"`: these should be resolved/dereferenced
+  - `"geometry-templates"`: these should either be resolved/dereferenced, or put in the metadata or collection
   - `"extensions"`: these should be in the metadata or collection
 
 Note that a CityJSON Feature Object does not contain all the information that is required for parsing the feature.
@@ -1524,10 +1524,10 @@ These properties may be known by the client upfront, or they may be accessible i
 In case the properties are stored in a CityJSON Object, this object needs to be a valid CityJSON Object.
 This implies that the CityJSON object must contain all the required properties, including `"CityObjects"` and `"vertices"`, even though they are empty, because this information is stored in the subsequent CityJSON Features.
 
-Below is an example of a CityJSONFeature stream (or a JSON Lines text file), with a CityJSON Object storing the metadata and transformation properties:
+Below is an example of a CityJSONFeature stream (or a JSON Lines text file), with a CityJSON Object storing the metadata and transformation properties, as well as geometry templates:
 
 ```json
-{"type":"CityJSON","version":"1.1","transform":{...},"CityObjects":{},"metadata":{...},"vertices":[]}
+{"type":"CityJSON","version":"1.1","transform":{...},"CityObjects":{},"metadata":{...},"vertices":[], "geometry-templates":{...}}
 {"type":"CityJSONFeature","id":"a","CityObjects":{...},"vertices":[...]} 
 {"type":"CityJSONFeature","id":"b","CityObjects":{...},"vertices":[...]} 
 {"type":"CityJSONFeature","id":"c","CityObjects":{...},"vertices":[...]} 
