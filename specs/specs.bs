@@ -1,9 +1,9 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 1.1.3
+Title: CityJSON Specifications 2.0.0-beta1
 Shortname: CityJSON
 Status: LS
 Level: none
-URL: https://cityjson.org/specs/1.1.3/
+URL: https://cityjson.org/specs/2.0.0/
 TR: https://cityjson.org/specs/
 Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
@@ -81,7 +81,7 @@ The minimal valid CityJSON object is:
 ```json
 {
   "type": "CityJSON",
-  "version": "1.1",
+  "version": "2.0",
   "transform": {
     "scale": [1.0, 1.0, 1.0],
     "translate": [0.0, 0.0, 0.0]
@@ -96,7 +96,7 @@ An "empty" but complete CityJSON object will look like this:
 ```json
 {
   "type": "CityJSON",
-  "version": "1.1",
+  "version": "2.0",
   "extensions": {},
   "transform": {
     "scale": [1.0, 1.0, 1.0],
@@ -1578,7 +1578,7 @@ In the example below we have two Extensions: one named "Noise" and one named "So
 ```json
 {
   "type": "CityJSON",
-  "version": "1.1",
+  "version": "2.0",
   "extensions": {
     "Noise": {
       "url" : "https://someurl.org/noise.json",
@@ -1666,7 +1666,7 @@ And a CityJSON file would look like this:
 ```json
 {
   "type": "CityJSON",
-  "version": "1.1",
+  "version": "2.0",
   "extensions": {
     "Census": {
       "url": "https://someurl.org/census.ext.json",
