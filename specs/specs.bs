@@ -889,7 +889,7 @@ If a geometry is a `MultiPoint` or a `MultiLineString`, then the primitives are 
 
 A Semantic Object:
 
-  - **must** have one member with the name `"type"`. The value is one of the allowed value. These depend on the City Object (see below).
+  - **must** have one member with the name `"type"`. The value is one of the allowed values. These depend on the City Object (see below).
   - **may** have an attribute `"parent"`. The value is an integer pointing to another Semantic Object of the same geometry (index of it, 0-based). This is used to explicitly represent to which wall or roof a window or door belongs to; there can be only one parent.
   - **may** have an attribute `"children"`. The value is an array of integers pointing to other Semantic Objects of the same geometry (index of it, 0-based). This is used to explicitly represent the openings (windows and doors) of walls and roofs.
   - **may** have other attributes in the form of a JSON key-value pair, where the value must not be a JSON object (but a string/number/integer/boolean).
