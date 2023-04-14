@@ -1519,7 +1519,7 @@ The following root property of a CityJSON Object are not allowed in a CityJSONFe
 
 Note that a CityJSON Feature Object does not contain all the information that is required for parsing the feature.
 Most commonly, the transformation properties (the Transform Object) and CRS need to be known by the client in order to correctly georeference the City Objects.
-These properties may be known by the client upfront, or they may be accessible in a CityJSON Object, which is sent as the first object in a [JSON Lines text](https://jsonlines.org/) stream, or in other ways not described here (for instance a RESTful API often have a mecanism to retrieve metadata).
+These properties may be known by the client upfront, or they may be accessible in a CityJSON Object, which is sent as the first object in a [JSON Lines text](https://jsonlines.org/) stream, or in other ways not described here (for instance RESTful APIs often have a mechanism to retrieve metadata).
 
 In case the properties are stored in a CityJSON Object, this object needs to be a valid CityJSON Object.
 This implies that the CityJSON object must contain all the required properties, including `"CityObjects"` and `"vertices"`, even though they are empty, because this information is stored in the subsequent CityJSON Features.
