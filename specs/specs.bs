@@ -300,7 +300,7 @@ The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRo
 and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`, (4) `"CompositeSurface"`.
 
 All eight City Objects, except `"Building"`, must have a `"parents"` property.
-The installations, furnitures, and subdivisions can have as parents a `"Building"`, a `"BuildingPart"`, or a `"BuildingRoom"`.
+The installations, furniture, and subdivisions can have as parents a `"Building"`, a `"BuildingPart"`, or a `"BuildingRoom"`.
 
 The geometry of `"BuildingInstallation"`, `"BuildingConstructiveElement"`, or  `"BuildingFurniture"` objects can be represented with any of the Geometry Objects.
 
@@ -1456,15 +1456,15 @@ Each part becomes a CityJSON file.
 Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in a [JSON Lines text](https://jsonlines.org) (also called [Newline Delimited JSON](http://ndjson.org)).
 This is a format to store several JSON objects in a single file, and allows the processing of each object one at a time.
 
-A CityJSON Feature Object allows storage of one feature, for instance a `"Building"` with eventually its children `"BuildingPart"` and/or `"BuildingInstallation"`.
+A CityJSON Feature Object allows the storage of a single feature, for instance a `"Building"` together with its children (of type `"BuildingPart"` and/or `"BuildingInstallation"`).
 Unlike a CityJSON Object, all the vertices and appearances of the object are *local*.
 
 A CityJSON Feature Object:
 
   - is a JSON object.
   - **must** have one member with the name `"type"`. The value must be `"CityJSONFeature"`.
-  - **must** have one member with the name `"id"`. The value must be a string representing the identifier of the City Object Feature, this is used to clearly identify which of the CityObjects is the parent.
-  - **must** have one member with the name `"CityObjects"`. The value of this member is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one `"CityJSONFeature"`), and all the children of the `"CityJSONFeature"` must be included (and the children of the children (recursively), if there are any).
+  - **must** have one member with the name `"id"`. The value must be a string representing the identifier of the City Object Feature. This is used to clearly identify which of the CityObjects is the parent.
+  - **must** have one member with the name `"CityObjects"`. The value is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one `"CityJSONFeature"`), and all the children of the `"CityJSONFeature"` must be included (and the children of the children (recursively), if there are any).
   - **must** have one member with the name `"vertices"`. The value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometry Objects for the JSON object (warning: the vertices are local to the JSON object).
   - **may** have one member with the name `"appearance"`. The value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
   - **must not** have other members.
@@ -1508,13 +1508,13 @@ A CityJSON Feature Object:
 }
 ```
 
-The following root property of a CityJSON Object are not allowed in a CityJSONFeature Object:
+The following root properties of a CityJSON Object are not allowed in a CityJSONFeature Object:
 
   - `"transform"` 
   - `"version"` 
   - `"metadata"` 
-  - `"geometry-templates"`: these should either be resolved/dereferenced, or put in the metadata or collection
-  - `"extensions"`: these should be in the metadata or collection
+  - `"geometry-templates"`: these should either be resolved/dereferenced, or they should be placed in the metadata or collection
+  - `"extensions"`: these should be placed in the metadata or collection
 
 Note that a CityJSON Feature Object does not contain all the information that is required for parsing the feature.
 Most commonly, the transformation properties (the Transform Object) and CRS need to be known by the client in order to correctly georeference the City Objects.
@@ -1545,7 +1545,7 @@ Observe that CityJSON does not prescribe the format or standard that should be u
 CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate its data model, including its Extensions. Schemas offer a way to validate the syntax of a JSON document, and thus the possibility to require certain JSON members.
 Therefore, for writing more complex Extensions, a basic familiarity with [JSON Schemas](http://json-schema.org/) is advised.
 
-A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and is also used for validating the CityJSON files.
+A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and it is also used for validating the CityJSON files.
 This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
 
 A CityJSON Extension can extend the core data model in four ways:
@@ -1558,11 +1558,11 @@ A CityJSON Extension can extend the core data model in four ways:
 <div class="note">
   While Extensions are less flexible than CityGML ADEs (inheritance and namespaces are for instance not supported, and less customisation is possible), it should be noted that the flexibility of ADEs comes at a price: the software processing an extended CityGML file will not necessarily know what structure to expect.
 
-  There is ongoing work to use the ADE schemas to automatically do this, but this currently is not supported by most software. 
+  There is ongoing work on using the ADE schemas to automatically do this, but this is currently not supported by most software. 
   Viewers might not be affected by ADEs because the geometries are usually not changed by an ADE (although they can!). 
   However, software parsing the XML to extract attributes and features might not work directly (and thus specific code would need to be written).
 
-  CityJSON Extensions are designed such that they can be read and processed by standard CityJSON software, often no changes in the parsing code is required. 
+  CityJSON Extensions should be designed in such a way that they can be read and processed by standard CityJSON software, without demanding changes in the parsing code. 
   This is achieved by enforcing a set of 6 simple rules (see [[#rules-to-follow-to-define-new-city-objects]]) when adding new City Objects. 
   If these are followed, then a CityJSON file containing Extensions will be seen as a "standard" CityJSON file.
 </div>
