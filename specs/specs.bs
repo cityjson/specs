@@ -1508,7 +1508,7 @@ A CityJSON Feature Object:
 }
 ```
 
-The following root properties of a CityJSON Object are not allowed in a CityJSONFeature Object:
+The following root members of a CityJSON Object are not allowed in a CityJSONFeature Object:
 
   - `"transform"` 
   - `"version"` 
