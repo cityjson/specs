@@ -355,11 +355,11 @@ If a location is necessary (eg to locate the position of the front door) then a 
   "type": "Building", 
   "address": [
     {
-      "Country": "Canada",
-      "Locality": "Chibougamau",
-      "ThoroughfareNumber": "1",
-      "ThoroughfareName": "rue de la Patate",
-      "Postcode": "H0H 0H0",
+      "country": "Canada",
+      "locality": "Chibougamau",
+      "thoroughfareNumber": "1",
+      "thoroughfareName": "rue de la Patate",
+      "postcode": "H0H 0H0",
       "location": {
         "type": "MultiPoint",
         "lod": "1",
