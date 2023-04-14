@@ -1724,7 +1724,7 @@ And a CityJSON file would look like this:
 ```
 
 
-## Case 2: Defining attributes on existing City Objects
+## Case 2: Defining attributes for existing City Objects
 
 It is also possible to add, and document in a schema, specific attributes, for example if we wanted to have the colour of the buildings as a RGBA value (red-green-blue-alpha):
 
