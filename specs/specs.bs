@@ -1562,7 +1562,7 @@ A CityJSON Extension can extend the core data model in four ways:
   Viewers might not be affected by ADEs because the geometries are usually not changed by an ADE (although they can!). 
   However, software parsing the XML to extract attributes and features might not work directly (and thus specific code would need to be written).
 
-  CityJSON Extensions should be designed in such a way that they can be read and processed by standard CityJSON software, without demanding changes in the parsing code. 
+  CityJSON Extensions are designed in a way that they can be read and processed by standard CityJSON software, often without requiring any changes in the parsing code. 
   This is achieved by enforcing a set of 6 simple rules (see [[#rules-to-follow-to-define-new-city-objects]]) when adding new City Objects. 
   If these are followed, then a CityJSON file containing Extensions will be seen as a "standard" CityJSON file.
 </div>
