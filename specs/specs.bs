@@ -1643,9 +1643,10 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
   1.  one member with the name `"url"`. The value must be a string with the HTTP URL of the location of the schema where the JSON object is located.
   1.  one member with the name `"version"`. The value must be a string identifying the version of the Extension.
   1.  one member with the name `"versionCityJSON"`. The value must be a string (X.Y) identifying the version of CityJSON that uses the Extension.
-  1.  one member with the name `"extraRootProperties"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
   1.  one member with the name `"extraAttributes"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
   1.  one member with the name `"extraCityObjects"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
+  1.  one member with the name `"extraRootProperties"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
+  1.  one member with the name `"extraSemanticSurfaces"`. The value must be a JSON object. Its content is part of a JSON schema (explained below), or an empty object.
 
 
 ```json
@@ -1656,9 +1657,10 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
   "url": "https://someurl.org/noise.ext.json",
   "version": "0.5",
   "versionCityJSON": "1.1",
-  "extraRootProperties": {},     
   "extraAttributes": {},
-  "extraCityObjects": {}
+  "extraCityObjects": {},
+  "extraRootProperties": {},     
+  "extraSemanticSurfaces": {},     
 }
 ```
 
@@ -1795,11 +1797,21 @@ For instance, `"additionalProperties"` is a JSON-schema keyword stating that one
 
 ## Case 3: Defining a new Semantic Object
 
-To define a new semantic surface (besides the ones prescribed, see [[#semantics-of-geometric-primitives]]), a `"+"` must be prepended to its name, eg `"+ThermalSurface"`.
+It is possible to define a new Semantic Object (besides the ones prescribed, see [[#semantics-of-geometric-primitives]]), and document it in the Extension.
+
+New Semantic Objects must have a `"+"` as their first character, and other attributes/properties can be defined.
 
 ```json
-{
-  "type": "+ThermalSurface"
+"extraSemanticSurfaces": {
+  "+ThermalSurface": {
+    "type": "object",
+    "properties": {
+      "type": { "enum": [ "+ThermalSurface" ] },
+      "azimuth": {"type": "number"}
+    },
+    "required": [ "type", "azimuth" ],
+    "additionalProperties": false
+  } 
 }
 ```
 
