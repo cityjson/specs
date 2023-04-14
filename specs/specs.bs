@@ -1421,7 +1421,7 @@ A Texture Object:
 
 ## Vertices-texture Object
 
-An Appearance Object may have a member with the name `"vertices-texture"`. 
+An Appearance Object may have one member with the name `"vertices-texture"`. 
 Its value is an array of the *(u,v)* coordinates of the vertices used for texturing surfaces.
 Their position in this array (0-based) is used by the `"texture"` member of the Geometry Objects.
 
