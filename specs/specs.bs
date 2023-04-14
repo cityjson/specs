@@ -125,12 +125,12 @@ There are 2 kinds of City Objects:
   2.  **2nd-level**: City Objects that need to have a `"parents"` to exist.
 
 This is because the schema of CityGML has been flattened.
-For example, a `"BuildingInstallation"` cannot be present in a dataset without being the `"children"` of a `"Building"`, but a `"Building"` can be present by itself.
+For example, `"BuildingInstallation"` instances cannot be present in a dataset without being `"children"` of a `"Building"`, but a `"Building"` can be present by itself.
 </div>
 
 A City Object:
 
-  - **must** have one member `"type"`. The value is one of the possibilities in the figure above (of type string). If an Extension is used, then the type can be any string starting with a `"+"`, as explained in [[#extensions]].
+  - **must** have one member with the name `"type"`. The value is one of the possibilities in the figure above (of type string). If an Extension is used, then the type can be any string starting with a `"+"`, as explained in [[#extensions]].
   - **may** have one member with the name `"geometry"`. The value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have to be of different LoDs.
   - **may** have one member with the name `"attributes"`. The value is an object where the attributes of the City Object are listed.
   - **may** have one member with the name `"geographicalExtent"` (the axis-aligned bounding box of the City Object). The value is an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`
@@ -138,8 +138,8 @@ A City Object:
 
 A City Object of type 2nd-level:
 
-  - **must** have one member `"parents"`. The value is an array of the IDs (of type string) of the City Objects that are its parents. For the City Objects in the CityJSON core module, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parents.
-  - **may** have one member `"children"`, and the `"children"` array only references the City Objects that are one level below the current one in the hierarchy. For instance a `"BuildingPart"` that contains a `"BuildingInstallation"`.
+  - **must** have one member `"parents"`. The value is an array with the IDs (of type string) of the City Object's parents. For the City Objects in the CityJSON core module, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parent.
+  - **may** have one member `"children"`. The value is an array with the IDs (of type string) of the City Object's children. The array references only the City Objects that are one level below the current one in the hierarchy. For instance, the `"children"` array for the object "id-1" below links to a `"BuildingPart"` but not to the `"BuildingInstallation"` which is a child of the `"BuildingPart"`.
 
 ```json
 "CityObjects": {
