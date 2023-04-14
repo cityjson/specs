@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://www.cityjson.org/schemas/1.1.3/cityjson.schema.json",
-  "title": "CityJSON v1.1.3",
-  "description": "CityJSON specifications v1.1.3",
+  "$id": "https://www.cityjson.org/schemas/2.0.0/cityjson.schema.json",
+  "title": "CityJSON v2.0.0",
+  "description": "CityJSON specifications v2.0.0",
   "type": "object",
   "properties": {
     "type": {
