@@ -253,8 +253,8 @@ The properties of an address JSON object are free, to accommodate the different 
     "type": "Bridge", 
     "address": [
       {
-        "City": "London",
-        "Country": "UK"
+        "city": "London",
+        "country": "UK"
       }
     ],
     "children": ["Bext1", "Bext2", "Inst-2017-11-14"],
