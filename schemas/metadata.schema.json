@@ -14,7 +14,7 @@
           "type": "string"
         },
         "address": {
-          "type": "string"
+          "type": "object"
         },
         "emailAddress": {
           "type": "string",

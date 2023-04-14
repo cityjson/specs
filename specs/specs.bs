@@ -1139,7 +1139,13 @@ The core of CityJSON supports the following six properties, these are compliant 
     "phone": "+31-6666666666",
     "emailAddress": "3dgeoinfo-bk@tudelft.nl",
     "website": "https://3d.bk.tudelft.nl",
-    "address": "Julianalaan 134, Delft 2628BL, the Netherlands"
+    "address": {
+      "thoroughfareNumber": "134",
+      "thoroughfareName": "Julianalaan",
+      "locality": "Delft",
+      "postcode": "2628BL",
+      "country": "the Netherlands"
+    }
   },
   "referenceDate": "1977-02-28",
   "referenceSystem": "https://www.opengis.net/def/crs/EPSG/0/2355",
@@ -1185,7 +1191,7 @@ This is a JSON object that
   - **may** have one member with the name `"role"`. The value describes the role that contact person/organisation has, it is one of the following: `"resourceProvider"`, `"custodian"`, `"owner"`, `"user"`, `"distributor"`, `"originator"`, `"pointOfContact"`, `"principalInvestigator"`, `"processor"`, `"publisher"`, `"author"`, `"sponsor"`, `"co-author"`, `"collaborator"`, `"editor"`, `"mediator"`, `"rightsHolder"`, `"contributor"`, `"funder"`, `"stakeholder"`.
   - **may** have one member with the name `"website"`. The value is the URL of point of contact.
   - **may** have one member with the name `"contactType"`. The value is a string which is either `"individual"` or `"organization"`. For an `"organization"`, the `"website"` can also be given.
-  - **may** have one member with the name `"address"`. The value is a string with the full address.
+  - **may** have one member with the name `"address"`. The value is a JSON object and any properties can be used, to accommodate the different ways addresses are structured in different countries.
   - **may** have one member with the name `"phone"`. The value is a string with the phone number.
   - **may** have one member with the name `"organization"`. The value is the name of the organisation, to be used if the `"contactName"` is the name of a person.
 
@@ -1194,7 +1200,13 @@ This is a JSON object that
   "contactName": "Justin Trudeau",
   "emailAddress": "justin.trudeau@parl.gc.ca",
   "phone": "+1-613-992-4211",
-  "address": "24 Sussex Drive, Ottawa, Canada",
+  "address": {
+    "thoroughfareNumber": "24",
+    "thoroughfareName": "Sussez Drive",
+    "postcode": "H0H 0H0",
+    "locality": "Ottawa",
+    "country": "Canada"
+  },    
   "contactType": "individual",
   "role": "pointOfContact"
 }
