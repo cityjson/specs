@@ -1544,7 +1544,7 @@ This implies that the CityJSON object must contain all the required properties, 
 Below is an example of a CityJSONFeature stream (or a JSON Lines text file), with a CityJSON Object storing the metadata and transformation properties, as well as geometry templates:
 
 ```json
-{"type":"CityJSON","version":"1.1","transform":{...},"CityObjects":{},"metadata":{...},"vertices":[], "geometry-templates":{...}}
+{"type":"CityJSON","version":"2.0","transform":{...},"CityObjects":{},"metadata":{...},"vertices":[], "geometry-templates":{...}}
 {"type":"CityJSONFeature","id":"a","CityObjects":{...},"vertices":[...]} 
 {"type":"CityJSONFeature","id":"b","CityObjects":{...},"vertices":[...]} 
 {"type":"CityJSONFeature","id":"c","CityObjects":{...},"vertices":[...]} 
