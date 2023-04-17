@@ -1896,7 +1896,7 @@ The [JSON schemas](https://json-schema.org/) of the specifications are publicly 
 
 # CityGML v3.0 conformance
 
-CityJSON v1.1 is conformant with the [CityGML v3.0 data model](https://docs.ogc.org/is/20-010/20-010.html), although not all extension modules have been implemented.
+CityJSON v2.0 is conformant with the [CityGML v3.0 data model](https://docs.ogc.org/is/20-010/20-010.html), although not all extension modules have been implemented.
 
 The details of which modules are supported (and where the so-called *null mapping* are applied, see [CityGML Modularization](https://docs.ogc.org/is/20-010/20-010.html#toc21)), are available at [https://www.cityjson.org/conformance/v30/](https://www.cityjson.org/conformance/v30/)
 
