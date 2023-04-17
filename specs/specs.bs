@@ -244,6 +244,9 @@ Six City Objects are related to bridges:
 The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`, (4) `"CompositeSurface"`.
 The geometry of the four other objects can be represented with any of the Geometry Objects.
 
+All six City Objects, except `"Bridge"`, must have a `"parents"` property.
+The installations and furnitures can have as parents a `"Bridge"`, a `"BridgePart"`, or a `"BridgeRoom"`.
+
 A City Object of type `"Bridge"` or `"BridgePart"` may have a member `"address"`, whose value is an array of JSON objects listing the potentially several addresses of that bridge . 
 The properties of an address JSON object are free, to accommodate the different ways addresses are structured in different countries.
 
@@ -700,6 +703,9 @@ Six City Objects are related to tunnels:
   - `"TunnelFurniture"`
 
 The geometry of both `"Tunnel"` and `"TunnelPart"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`, (4) `"CompositeSurface"`.
+
+All six City Objects, except `"Tunnel"`, must have a `"parents"` property.
+`"TunnelInstallation"`, `"TunnelConstructiveElement"`, `"TunnelHollowSpace"`, and `"TunnelFurniture"` can have as parents a `"Tunnel"` or a `"TunnelPart"`.
 
 The geometry of the other four objects can be represented with any of the Geometry Objects.
 
