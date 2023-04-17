@@ -3,7 +3,7 @@ Title: CityJSON Specifications 2.0.0-beta1
 Shortname: CityJSON
 Status: LS
 Level: none
-URL: https://cityjson.org/specs/2.0.0/
+URL: https://cityjson.org/specs/2.0.0-beta1/
 TR: https://cityjson.org/specs/
 Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
