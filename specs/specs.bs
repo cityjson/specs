@@ -1661,7 +1661,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
   "description": "Extension to model the noise",
   "url": "https://someurl.org/noise.ext.json",
   "version": "0.5",
-  "versionCityJSON": "1.1",
+  "versionCityJSON": "2.0",
   "extraAttributes": {},
   "extraCityObjects": {},
   "extraRootProperties": {},     
