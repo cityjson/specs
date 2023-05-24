@@ -245,10 +245,10 @@ The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with 
 The geometry of the four other objects can be represented with any of the Geometry Objects.
 
 All six City Objects, except `"Bridge"`, must have a `"parents"` property.
-The installations and furnitures can have as parents a `"Bridge"`, a `"BridgePart"`, or a `"BridgeRoom"`.
+The installations and furnitures can have as parent a `"Bridge"`, a `"BridgePart"`, or a `"BridgeRoom"`.
 
-A City Object of type `"Bridge"` or `"BridgePart"` may have a member `"address"`, whose value is an array of JSON objects listing the potentially several addresses of that bridge . 
-The properties of an address JSON object are free, to accommodate the different ways addresses are structured in different countries.
+A City Object of type `"Bridge"` or `"BridgePart"` may have a member with the name `"address"`, whose value is an array of JSON objects listing the potentially multiple addresses of that bridge. 
+The properties of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
 
 ```json
 "CityObjects": {
@@ -301,14 +301,14 @@ Eight City Objects are related to buildings:
 
 The geometry of `"Building"`, `"BuildingPart"`, `"BuildingStorey"`, `"BuildingRoom"`, 
 and `"BuildingUnit"` can only be represented with these Geometry Objects: (1) `"Solid"`, (2) `"CompositeSolid"`, (3) `"MultiSurface"`, (4) `"CompositeSurface"`.
-
-All eight City Objects, except `"Building"`, must have a `"parents"` property.
-The installations, furniture, and subdivisions can have as parents a `"Building"`, a `"BuildingPart"`, or a `"BuildingRoom"`.
-
 The geometry of `"BuildingInstallation"`, `"BuildingConstructiveElement"`, or  `"BuildingFurniture"` objects can be represented with any of the Geometry Objects.
 
-A City Object of type `"Building"`, `"BuildingPart"` or `"BuildingUnit"` may have a member `"address"`, consisting of an array of JSON objects listing one or more addresses of that building (an apartment building could contain several for instance).
-The properties of an address JSON object are free format, to accommodate the different ways addresses are described in different countries.
+All eight City Objects, except `"Building"`, must have a `"parents"` property.
+The installations, furniture, and subdivisions can have as parent a `"Building"`, a `"BuildingPart"`, or a `"BuildingRoom"`.
+
+A City Object of type `"Building"`, `"BuildingPart"` or `"BuildingUnit"` may have a member with the name `"address"`, whose value is an array of JSON objects listing one or more addresses of that building (an apartment building for instance).
+The properties of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
+
 If a location is necessary (eg to locate the position of the front door) then a property `"location"` should be used, and it should contain a `"MultiPoint"` geometry.
 
 
