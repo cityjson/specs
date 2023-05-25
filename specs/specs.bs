@@ -1040,7 +1040,7 @@ By contrast, in CityGML, the geometry used for a given City Object is reused by 
 The Geometry Templates are defined as a JSON object that:
 
   - **must** have one member with the name `"templates"`. The value is an array of Geometry Objects.
-  - **must** have one member with the name `"vertices-templates"`. The value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices indices are not global is to ensure that operations on the vertices (eg for CRS transformation, for [[#transform-object]], or calculating the bounding box of a dataset) will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
+  - **must** have one member with the name `"vertices-templates"`. The value is an array of coordinates of each vertex of the templates (0-based indexing). The reason the vertices' indices are not global is to ensure that operations on the vertices (eg for CRS transformation, for [[#transform-object]], or calculating the bounding box of a dataset) will not be affected by the templates (since they will often be defined locally, and translated/rotated/scaled to their final position).
 
 Observe that the geometry of a template can have semantic surfaces, and that appearances can be assigned to it.
 
