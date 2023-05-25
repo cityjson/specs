@@ -121,14 +121,14 @@ While the order of the CityJSON member values should preferably be as above, not
 
 <div class="note">
 There are 2 kinds of City Objects: 
-  1.  **1st-level**: City Objects that can "exist by themselves".
-  2.  **2nd-level**: City Objects that need to have a `"parents"` member to exist.
+  1.  **1st-level**: City Objects that can "exist by themselves" and cannot have a parent.
+  2.  **2nd-level**: City Objects that need to have a parent to exist.
 
 This is because the schema of CityGML has been flattened.
 For example, `"BuildingInstallation"` instances cannot be present in a dataset without being `"children"` of a `"Building"`, but a `"Building"` can be present by itself.
 </div>
 
-A City Object (1st and 2nd-level):
+A City Object (1st or 2nd-level):
 
   - **must** have one member with the name `"type"`. The value is one of the possibilities in the figure above (of type string). If an Extension is used, then the type can be any string starting with a `"+"`, as explained in [[#extensions]].
   - **may** have one member with the name `"geometry"`. The value is an array containing 0 or more Geometry Objects. More than one Geometry Object is used to represent several different levels-of-detail (LoDs) for the same object. However, the different Geometry Objects of a given City Object do not have to be of different LoDs.
@@ -136,7 +136,7 @@ A City Object (1st and 2nd-level):
   - **may** have one member with the name `"geographicalExtent"`. The value is an array with 6 float values, which represent the axis-aligned bounding box of the City Object: `[minx, miny, minz, maxx, maxy, maxz]`.
   - **may** have one member with the name `"children"`. The value is an array of the IDs (of type string) of the City Object's children. The array references only the City Object's direct children (2nd-level) but not the grandchildren. For instance, the `"children"` array for the object "id-1" below links to a `"BuildingPart"` ("id-2") but not to the `"BuildingInstallation"` ("id-") which is a child of the `"BuildingPart"`. A City Object can have different types of City Objects as children, eg a `"Building"` can have both as children `"BuildingPart"` and `"BuildingInstallation"`. The order of the children in the array is not relevant.
 
-A City Object of type 2nd-level:
+Additionally, a 2nd-level City Object:
 
   - **must** have one member with the name `"parents"`. The value is an array with the IDs (of type string) of the City Object's parents. For the City Objects in the CityJSON core module, this array will always be of size 1 (only one parent). New City Objects defined in extensions can have more than one parent.
 
@@ -244,7 +244,7 @@ The geometry of both `"Bridge"` and `"BridgePart"` can only be represented with 
 The geometry of the four other objects can be represented with any Geometry Object.
 
 All six City Objects, except `"Bridge"`, must have a `"parents"` member.
-The installations and furnitures can have as parent a `"Bridge"`, a `"BridgePart"`, or a `"BridgeRoom"`.
+The installations and furniture can have as parent a `"Bridge"`, a `"BridgePart"`, or a `"BridgeRoom"`.
 
 A City Object of type `"Bridge"` or `"BridgePart"` may have a member with the name `"address"`, whose value is an array of JSON objects listing one or more addresses of that bridge.
 The properties of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
@@ -419,7 +419,7 @@ A City Object of type `"CityObjectGroup"`:
 "CityObjects": {
   "my-neighbourhood": {
     "type": "CityObjectGroup",
-    "children": ["building1", "building2", "building2"]
+    "children": ["building1", "building2", "building3"]
   }
 }
 ```
@@ -431,7 +431,7 @@ A City Object of type `"CityObjectGroup"`:
     "attributes": {
       "location": "Chibougamau Sud"
     },
-    "children": ["building1", "building2"],
+    "children": ["building1", "building3"],
     "children_roles": ["residential building", "voting location"],
     "geometry": [{
       "type": "MultiSurface",
@@ -1119,6 +1119,17 @@ A new JSON object of type `"GeometryInstance"` is defined, and it:
 To reduce the size of a CityJSON object (and thus the size of files) and to ensure that only a fixed number of digits is stored for the coordinates of the geometries, the coordinates of the vertices of the geometries are represented with integer values.
 We therefore need to store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). 
 
+In the example below, the `"scale"` member indicates that 2 important digits are kept (thus millimetre level if meters are the units of the CRS).
+The values of the `"translate"` member usually matches with the minimum values of the axis-aligned bounding box (but does not need to).
+
+
+```json
+"transform": {
+    "scale": [0.001, 0.001, 0.001],
+    "translate": [442464.879, 5482614.692, 310.19]
+}
+```
+
 A CityJSON object must therefore have one member `"transform"`, whose values are 2 mandatory JSON objects, `"scale"` and `"translate"`, both arrays with 3 values.
 
 The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
@@ -1132,17 +1143,6 @@ v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
 v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
 v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
 ```
-In the example below, the `"scale"` member indicates that 2 important digits are kept (thus millimetre level if meters are the units of the CRS).
-The values of the `"translate"` member usually matches with the minimum values of the axis-aligned bounding box (but does not need to).
-
-
-```json
-"transform": {
-    "scale": [0.001, 0.001, 0.001],
-    "translate": [442464.879, 5482614.692, 310.19]
-}
-```
-
 
 # Metadata
 
