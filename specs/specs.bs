@@ -419,7 +419,7 @@ A City Object of type `"CityObjectGroup"`:
 "CityObjects": {
   "my-neighbourhood": {
     "type": "CityObjectGroup",
-    "children": ["building1", "building2", "building666"]
+    "children": ["building1", "building2", "building2"]
   }
 }
 ```
@@ -431,7 +431,7 @@ A City Object of type `"CityObjectGroup"`:
     "attributes": {
       "location": "Chibougamau Sud"
     },
-    "children": ["building1", "building666"],
+    "children": ["building1", "building2"],
     "children_roles": ["residential building", "voting location"],
     "geometry": [{
       "type": "MultiSurface",
@@ -660,7 +660,7 @@ That is, the surface representing a road should be split into sub-surfaces (ther
     "type": "MultiSurface",
     "lod": "2",
     "boundaries": [
-       [[0, 3, 2, 1, 4]], [[4, 5, 6, 666, 12]], [[0, 1, 5]], [[20, 21, 75]]
+       [[0, 3, 2, 1, 4]], [[4, 5, 6, 9, 12]], [[0, 1, 5]], [[20, 21, 75]]
     ]
   }],
   "semantics": {
