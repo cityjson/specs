@@ -1182,7 +1182,7 @@ The core of CityJSON supports the following six properties, which are compliant 
 
 While the geographical extent can be computed from the dataset itself, it is often useful to store it.
 It may be stored as an array with 6 values: `[minx, miny, minz, maxx, maxy, maxz]`.
-Notice that these values are in the real coordinate system of the dataset (based on [[#referencesystem-crs]]) and have not been compressed with the `"transform"` member ([[#transform-object]]) as the `"vertices"` have been.
+Notice that these values are in the real-world coordinate system of the dataset (based on [[#referencesystem-crs]]) and have not been compressed with the `"transform"` member ([[#transform-object]]) as the `"vertices"` have been.
 
 ```json
 "metadata": {
