@@ -950,7 +950,7 @@ It is possible to define and use other semantics, but these have to start with a
 }
 ```
 
-Because in a given City Object (say a `"Building"`) several primitives can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to model the same surface), a Semantic Object must be declared once, and each of the primitives that are represented by it should point to it. This is achieved by first declaring all the Semantic Objects in an array, and then having an array where each primitive links to a Semantic Object (position in the array).
+Because in a given City Object (say a `"Building"`) several primitives can have the same semantics (think of a complex building that has been triangulated, there can be dozens of triangles used to represent one planar surface), a Semantic Object can be declared once, and each of the primitives that are represented by it should point to it. This is achieved by first declaring all the Semantic Objects in an array, and then having an array where each primitive links to a Semantic Object (position in the array).
 
 If a Geometry object has semantics, then the Geometry object:
 
