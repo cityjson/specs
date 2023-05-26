@@ -1344,7 +1344,7 @@ In the following examples, the Solid has 4 surfaces, and there are 2 themes ("ir
 
 ## Geometry Object having texture(s)
 
-To store the texture(s) of a surface, a Geometry Object may have a member with the name `"texture"`. Its value is a collection of key-value pairs, where the key is the *theme* of the textures, and the value is one JSON object that must contain one member `"values"`, which is a hierarchy of arrays with integers. For each ring of each surface, the first value refers to the position (0-based) in the `"textures"` member of the `"appearance"` member of the CityJSON object. The other indices refer to the UV positions of the corresponding vertices (as listed in the `"boundaries"` member of the geometry). Each array representing a ring therefore has one more value than that to store its vertices.
+To store the texture(s) of a surface, a Geometry Object may have a member with the name `"texture"`. Its value is a collection of key-value pairs, where the key is the *theme* of the textures, and the value is one JSON object that must contain one member `"values"`, which is a hierarchy of arrays with integers. For each ring of each surface, the first value refers to the position (0-based) in the `"textures"` member of the `"appearance"` member of the CityJSON object. The other indices refer to the UV positions of the corresponding vertices (as listed in the `"boundaries"` member of the geometry). Therefore, each array representing a ring has one more value than the number of vertices in the ring.
 
 The depth of the array depends on the Geometry object, and is equal to the depth of the `"boundary"` array.
 
