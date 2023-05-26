@@ -305,7 +305,7 @@ All eight City Objects, except `"Building"`, must have a `"parents"` member.
 The `"BuildingInstallation"`, `"BuildingConstructiveElement"`, `"BuildingFurniture"`, `"BuildingStorey"` can have as parent a `"Building"`, a `"BuildingPart"`, or a `"BuildingRoom"`.
 
 A City Object of type `"Building"`, `"BuildingPart"` or `"BuildingUnit"` may have a member with the name `"address"`, whose value is an array of JSON objects listing one or more addresses of that building (an apartment building for instance).
-The properties of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
+The members of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
 
 If a location is necessary (eg to locate the position of the front door) then a member with the name `"location"` should be used, and it should contain a `"MultiPoint"` geometry.
 
