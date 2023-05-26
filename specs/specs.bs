@@ -758,7 +758,7 @@ The geometry of a City Object of type `"WaterBody"` can only be represented with
 CityJSON defines the following 3D geometric primitives, all of which are embedded in 3D space (and therefore their vertices have *(x, y, z)* coordinates). 
 Similarly to the indexing mechanism of the format [Wavefront OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file), the geometry object does not store the locations of its vertices, but points instead to a vertex in a list (member `"vertices"` in the CityJSON Object).
 
-As is the case in CityGML, only linear and planar primitives are allowed - no curves or parametric surfaces can be represented.
+As is the case in CityGML, only linear and planar primitives are allowed; no curves or parametric surfaces can be represented.
 
 A Geometry object is a JSON object for which the type member’s value is one of the following:
 
