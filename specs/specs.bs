@@ -195,7 +195,6 @@ The above example is for a `"BuildingPart"`, but any 2nd-level City Object can b
 ## Attributes for all City Objects
 
 The attributes for a given City Object must be stored in the `"attributes"` member and, unlike CityGML, they are not prescribed.
-This means that the `"attributes"` member is a JSON object and its content is a JSON key-value pair ("owner" in the example above is one such attribute).
 Note that any valid JSON value (including an array and/or object) is a valid attribute value.
 
 
@@ -248,6 +247,7 @@ The installations and furniture can have as parent a `"Bridge"`, a `"BridgePart"
 
 A City Object of type `"Bridge"` or `"BridgePart"` may have a member with the name `"address"`, whose value is an array of JSON objects listing one or more addresses of that bridge.
 The properties of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
+If a location is necessary then a member with the name `"location"` can be added to the `"address"` member, and it should contain a `"MultiPoint"` geometry.
 
 ```json
 "CityObjects": {
@@ -306,8 +306,8 @@ The `"BuildingInstallation"`, `"BuildingConstructiveElement"`, `"BuildingFurnitu
 
 A City Object of type `"Building"`, `"BuildingPart"` or `"BuildingUnit"` may have a member with the name `"address"`, whose value is an array of JSON objects listing one or more addresses of that building (an apartment building for instance).
 The members of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
+If a location is necessary (eg to locate the position of the front door) then a member with the name `"location"` can be added to the `"address"` member, and it should contain a `"MultiPoint"` geometry.
 
-If a location is necessary (eg to locate the position of the front door) then a member with the name `"location"` should be used, and it should contain a `"MultiPoint"` geometry.
 
 
 ```json
