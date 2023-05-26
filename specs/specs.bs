@@ -1119,7 +1119,7 @@ A new JSON object of type `"GeometryInstance"` is defined, and it:
 To reduce the size of a CityJSON object (and thus the size of files) and to ensure that only a fixed number of digits is stored for the coordinates of the geometries, the coordinates of the vertices of the geometries are represented with integer values.
 We therefore need to store the scale factor and the translation needed to obtain the original coordinates (stored with floats/doubles). 
 
-In the example below, the `"scale"` member indicates that 2 important digits are kept (thus millimetre level if meters are the units of the CRS).
+In the example below, the `"scale"` member indicates that 3 important digits are kept (thus millimetre level if meters are the units of the CRS).
 The values of the `"translate"` member usually matches with the minimum values of the axis-aligned bounding box (but does not need to).
 
 
