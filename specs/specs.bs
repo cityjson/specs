@@ -377,7 +377,7 @@ If a location is necessary (eg to locate the position of the front door) then a 
 See the CityGML v3.0.0 [CityFurniture module](https://docs.ogc.org/is/20-010/20-010.html#toc32) for more details.
 </div>
 
-The geometry of a City Object of type `"CityFurniture"` can represented with any Geometry Object.
+The geometry of a City Object of type `"CityFurniture"` can be represented with any Geometry Object.
 
 ```json
 "mystopsign": {
