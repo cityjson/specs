@@ -194,7 +194,7 @@ The above example is for a `"BuildingPart"`, but any 2nd-level City Object can b
 
 ## Attributes for all City Objects
 
-The attributes for a given City Object are not prescribed (unlike in CityGML).
+The attributes for a given City Object must be stored in the `"attributes"` member and, unlike CityGML, they are not prescribed.
 This means that the `"attributes"` member is a JSON object and its content is a JSON key-value pair ("owner" in the example above is one such attribute).
 Note that any valid JSON value (including an array and/or object) is a valid attribute value.
 
