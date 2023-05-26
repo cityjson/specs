@@ -1033,7 +1033,7 @@ Also:
 
 ## Geometry templates 
 
-CityGML's "ImplicitGeometries", better known in computer graphics as *templates*, are one method of compressing files since the geometries (such as benches, lamp posts, and trees) need be defined only once. 
+CityGML's "ImplicitGeometries", better known in computer graphics as *templates*, are one method of compressing files since the geometries (such as benches, lamp posts, and trees) need to be defined only once. 
 In CityJSON, they are implemented differently from what is specified in CityGML: they are defined separately in the file, and each template can be reused. 
 By contrast, in CityGML, the geometry used for a given City Object is reused by other City Objects, there is thus no central location where all templates are stored.
 
