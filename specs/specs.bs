@@ -1,9 +1,9 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 2.0.0-beta1
+Title: CityJSON Specifications 2.0.0-beta2
 Shortname: CityJSON
 Status: LS
 Level: none
-URL: https://cityjson.org/specs/2.0.0-beta1/
+URL: https://cityjson.org/specs/2.0.0-beta2/
 TR: https://cityjson.org/specs/
 Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
@@ -1903,7 +1903,7 @@ While one could define a new City Object and document it, if this new object doe
 6.  The reuse of types defined in CityJSON, eg `"Solid"` or semantic surfaces, is allowed.
 
 
-# CityJSON Schemas
+# CityJSON schemas
 
 The [JSON schemas](https://json-schema.org/) of the specifications are publicly available at [https://cityjson.org/schemas/](https://cityjson.org/schemas/).
 
