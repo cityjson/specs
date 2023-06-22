@@ -9,7 +9,7 @@ Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
 Editor: Balázs Dukai, 3DGI, https://3dgi.nl
 Repository: cityjson/specs
-Abstract: CityJSON is a data exchange format for digital 3D models of cities and landscapes. It aims at being easy-to-use (for reading, processing, and creating datasets), and it was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. The [JSON](https://json.org/)-based encoding of CityJSON is conformant with a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html). Using JSON instead of GML allows us to compress files by a factor 6 and at the same time to simplify greatly the structure of the files.
+Abstract: CityJSON is a data exchange format for digital 3D models of cities and landscapes. It aims at being easy-to-use (for reading, processing, and creating datasets), and it was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. The [JSON](https://json.org/)-based encoding of CityJSON implements a subset of the [OGC CityGML data model (version 3.0)](https://docs.ogc.org/is/20-010/20-010.html) and includes a JSON-specific extension mechanism. Using JSON instead of GML allows us to compress files by a factor 6 and at the same time to simplify greatly the structure of the files.
 Markup Shorthands: css no, markdown yes
 Ignored Terms: h1, h2, h3, h4, h5, h6, xmp
 </pre>
@@ -1578,7 +1578,7 @@ CityJSON uses [JSON Schemas](http://json-schema.org/) to document and validate i
 Therefore, for writing more complex Extensions, a basic familiarity with [JSON Schemas](http://json-schema.org/) is advised.
 
 A CityJSON *Extension* is a JSON file that documents how the core data model of CityJSON is extended, and it is also used for validating the CityJSON files.
-This is conceptually akin to the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
+This is conceptually akin to, but not conformant with, the [Application Domain Extensions (ADEs)](https://docs.ogc.org/is/20-010/20-010.html#toc66) in CityGML.
 
 A CityJSON Extension can extend the core data model in four ways:
 
@@ -1908,11 +1908,12 @@ While one could define a new City Object and document it, if this new object doe
 The [JSON schemas](https://json-schema.org/) of the specifications are publicly available at [https://cityjson.org/schemas/](https://cityjson.org/schemas/).
 
 
-# CityGML v3.0 conformance
+# CityGML v3.0 implementation details
 
-CityJSON v2.0 is conformant with the [CityGML v3.0 data model](https://docs.ogc.org/is/20-010/20-010.html), although not all extension modules have been implemented.
+CityJSON v2.0 is a partial implementation of the [CityGML v3.0 data model](https://docs.ogc.org/is/20-010/20-010.html), although not all extension modules have been implemented. 
+CityJSON v2.0 consistently implements actions #1, #2, and #3 of the profiling mechanism specified in [Section 2.1 of the CityGML v3.0 Conceptual Model](https://docs.ogc.org/is/20-010/20-010.html#toc10).
 
-The details of which modules are supported (and where the so-called *null mapping* are applied, see [CityGML Modularization](https://docs.ogc.org/is/20-010/20-010.html#toc21)), are available at [https://www.cityjson.org/conformance/v30/](https://www.cityjson.org/conformance/v30/)
+The details of which modules are supported are available at [https://www.cityjson.org/citygml/v30/](https://www.cityjson.org/citygml/v30/).
 
 
 - - -
