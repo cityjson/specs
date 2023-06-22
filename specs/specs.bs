@@ -246,7 +246,7 @@ All the above City Objects, except `"Bridge"`, must have a `"parents"` member.
 The installations and furniture can have as parent a `"Bridge"`, a `"BridgePart"`, or a `"BridgeRoom"`.
 
 A City Object of type `"Bridge"` or `"BridgePart"` may have a member with the name `"address"`, whose value is an array of JSON objects listing one or more addresses of that bridge.
-The properties of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
+The members of an address JSON object are not prescribed, to accommodate the different ways addresses are structured in different countries.
 If a location is necessary then a member with the name `"location"` can be added to the `"address"` member, and it should contain a `"MultiPoint"` geometry.
 
 ```json
