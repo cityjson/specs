@@ -5,6 +5,7 @@
 
 
 This repository is where the specifications and the schemas of CityJSON are kept.
+All previous versions are kept in tags in the commits.
 
 For all the details, see the official CityJSON website: [https://cityjson.org](https://cityjson.org).
 
