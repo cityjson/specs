@@ -37,7 +37,7 @@ surfaces. See [[#appearance-object]] for details.
 * *may* have one member with the name `"geometry-templates"`, the value
 is a JSON object containing the templates that can be reused by
 different City Objects (usually for trees). This is equivalent to the
-concept of ``implicit geometries'' in CityGML. See
+concept of `implicit geometries` in CityGML. See
 [[#geometry-templates]] for details.
 * *may* have other members, and their value is not prescribed. Because
 these are not standard members in CityJSON, they might be ignored by
@@ -65,7 +65,7 @@ The minimal valid CityJSON object is:
 }
 ----
 
-An ``empty'' but complete CityJSON object will look like this:
+An "empty" but complete CityJSON object will look like this:
 
 [source,json]
 ----
@@ -96,9 +96,10 @@ prescribed.
 
 [NOTE]
 ====
-There are 2 kinds of City Objects: 1. *1st-level*: City Objects that can
-``exist by themselves'' and cannot have a parent. 2. *2nd-level*: City
-Objects that need to have a parent to exist.
+There are 2 kinds of City Objects:
+
+  1. *1st-level*: City Objects that can "exist by themselves" and cannot have a parent.
+  2. *2nd-level*: City Objects that need to have a parent to exist.
 
 This is because the schema of CityGML has been flattened. For example,
 `"BuildingInstallation"` instances cannot be present in a dataset
@@ -126,9 +127,9 @@ bounding box of the City Object: `[minx, miny, minz, maxx, maxy, maxz]`.
 array of the IDs (of type string) of the City Object’s children. The
 array references only the City Object’s direct children (2nd-level) but
 not the grandchildren. For instance, the `"children"` array for the
-object ``id-1'' below links to a `"BuildingPart"` (``id-2'') but not to
-the `"BuildingInstallation"` (``id-3'') which is a child of the
-`"BuildingPart"`. A City Object can have different types of City Objects
+object `id-1` below links to a `"BuildingPart"` (`id-2`) but not to
+the `"BuildingInstallation"` (`id-3`) which is a child of the
+`"BuildigPart"`. A City Object can have different types of City Objects
 as children, eg a `"Building"` can have both as children
 `"BuildingPart"` and `"BuildingInstallation"`. The order of the children
 in the array is not relevant.
@@ -683,7 +684,7 @@ Four City Objects are related to transportation:
 * `"Waterway"`
 * `"TransportSquare"` (to model for instance parking lots and squares)
 
-Observe that the ``Section'', ``Intersection'', and ``Track'' classes
+Observe that the `Section`, `Intersection`, and `Track` classes
 from CityGML are omitted because they can be easily specified using
 specific attributes.
 
@@ -709,8 +710,8 @@ specific attributes.
 }
 ----
 
-Similarly, the CityGML classes ``TrafficArea'',
-``AuxiliaryTrafficArea'', ``Marking'', and ``Hole'' are implemented as
+Similarly, the CityGML classes `TrafficArea`,
+`AuxiliaryTrafficArea`, `Marking`, and `Hole` are implemented as
 semantic surfaces (see [[#semantics-of-geometric-primitives]]). That is,
 the surface representing a road should be split into sub-surfaces
 (therefore forming a `"MultiSurface"` or a `"CompositeSurface"`) in
@@ -858,13 +859,13 @@ string with one of the 8 allowed Geometry types, as defined above.
 * *must* have one member with the name `"lod"`. The value must be a
 string with the LoD identifying the level-of-detail (LoD) of the
 geometry. This can be either a single digit (following the CityGML
-standards), or ``X.Y''-formatted if the
+standards), or `X.Y`-formatted if the
 https://3d.bk.tudelft.nl/lod[improved LoDs by TU Delft] are used.
 * *must* have one member with the name `"boundaries"`. The value is a
 hierarchy of arrays (the depth depends on the Geometry object) with
 integers. Each integer refers to an index in the `"vertices"` array of
 the CityJSON object, and it is 0-based (ie the first element in the
-array has the index ``0'', the second one ``1'', etc.).
+array has the index `0`, the second one `1`, etc.).
 * *may* have one member with the name `"semantics"`. The value is a JSON
 Object, as defined below.
 * *may* have one member with the name `"material"`. The value is a JSON
@@ -997,7 +998,7 @@ removed.
 [NOTE]
 ====
 ....
-See [this tutorial](https://www.cityjson.org/dev/geom-arrays/) for further explanation on the depth of arrays of Geometry objects.
+See https://www.cityjson.org/dev/geom-arrays/[this tutorial] for further explanation on the depth of arrays of Geometry objects.
 ....
 ====
 
@@ -1186,7 +1187,7 @@ Objects. Nevertheless, this member is used for points and linestrings of
 
 === Geometry templates
 
-CityGML’s ``ImplicitGeometries'', better known in computer graphics as
+CityGML’s `ImplicitGeometries`, better known in computer graphics as
 _templates_, are one method of compressing files since the geometries
 (such as benches, lamp posts, and trees) need to be defined only once.
 In CityJSON, they are implemented differently from what is specified in
@@ -1259,7 +1260,7 @@ position of the template in the `"geometry-templates"` (0-indexing).
 * *must* have one member with the name `"boundaries"`, whose value is an
 array containing only one vertex index, which refers to one vertex in
 the `"vertices"` member of a CityJSON file. (This is the reference point
-from which the transformations are applied, it is the ``referencePoint''
+from which the transformations are applied, it is the `referencePoint
 in CityGML.)
 * *must* have one member with the name `"transformationMatrix"`, whose
 value is a 4x4 matrix (thus 16 values in an array) defining the
@@ -1288,9 +1289,7 @@ are ordered row-by-row, as the example below shows.
 
 [NOTE]
 ====
-The CityJSON website has a
-https://www.cityjson.org/dev/geom-templates/[page to help developers
-with Geometry Templates], it contains simple examples, explains which
+The CityJSON website has a https://www.cityjson.org/dev/geom-templates/[page to help developers with Geometry Templates], it contains simple examples, explains which
 transformations to apply to obtain world coordinates, and explains how
 matrices work (for instance, in the example above, a scaling of 2.0 is
 applied).
@@ -1322,10 +1321,7 @@ A CityJSON object must therefore have one member `"transform"`, whose
 values are 2 mandatory JSON objects, `"scale"` and `"translate"`, both
 arrays with 3 values.
 
-The
-https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms[scheme
-of TopoJSON (called quantization)] is reused, and here we simply add a
-third coordinate because our vertices are embedded in 3D space.
+The https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms[scheme of TopoJSON (called quantization)] is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
 
 It should be noticed that only the `"vertices"` at the root of the
 CityJSON object are affected by the transformation, the vertices for the
@@ -1376,8 +1372,7 @@ https://www.iso.org/standard/53798.html[ISO19115].
 ====
 The storage of additional ISO19115-compliant metadata attributes and/or
 of statistics related to 3D city models can be done with the
-https://github.com/cityjson/metadata-extended[MetadataExtended
-Extension]. Examples of extra attributes/properties that can be stored:
+https://github.com/cityjson/metadata-extended[MetadataExtended Extension]. Examples of extra attributes/properties that can be stored:
 point of contact for the dataset, lineage, statistics about the present
 LoDs, the presence of textures/materials, etc.
 ====
@@ -1401,9 +1396,7 @@ been.
 
 === identifier
 
-A unique identifier for the dataset. It is recommended to use a
-https://en.wikipedia.org/wiki/Universally_unique_identifier[universally
-unique identifier], but it is not obligatory.
+A unique identifier for the dataset. It is recommended to use a https://en.wikipedia.org/wiki/Universally_unique_identifier[universally unique identifier], but it is not obligatory.
 
 [source,json]
 ----
@@ -1463,8 +1456,7 @@ of a person.
 
 The date when the dataset was compiled, without the time of the day,
 only a `"full-date"` as defined in
-https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339&#44; Section
-5.6] should be used.
+https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339; Section 5.6] should be used.
 
 [source,json]
 ----
@@ -1476,9 +1468,7 @@ https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339&#44; Section
 [NOTE]
 ====
 JSON does not have a date type, and thus the representations defined by
-https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339&#44; Section
-5.6] should be used. A simple date is `"full-date"` (thus `"1977-07-11"`
-as a string), and should be used for the metadata above.
+https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339; Section 5.6] should be used. A simple date is `"full-date"` (thus `"1977-07-11"` as a string), and should be used for the metadata above.
 
 Other attributes in a CityJSON object can also have a date with a time,
 and such an attribute is specified as a `"full-time"`. For example
@@ -1488,17 +1478,15 @@ and such an attribute is specified as a `"full-time"`. For example
 === referenceSystem (CRS)
 
 The coordinate reference system (CRS) is given as a URL formatted
-according to the
-https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names[OGC
-Name Type Specification]:
+according to the https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names[OGC Name Type Specification]:
 
 ....
 http://www.opengis.net/def/crs/{authority}/{version}/{code}
 ....
 
 where `{authority}` designates the authority responsible for the
-definition of this CRS (usually ``EPSG'' or ``OGC''), and where
-`{version}` designates the specific version of the CRS (``0'' (zero) is
+definition of this CRS (usually `EPSG` or `OGC`), and where
+`{version}` designates the specific version of the CRS (`0` (zero) is
 used if there is no version).
 
 For instance, the Dutch national CRS in 3D:
@@ -1601,7 +1589,7 @@ are used to colour full objects, and repetition of materials is not
 necessary.
 
 In the following example, the Solid has 4 surfaces, and there are 2
-themes (``irradiation'' and ``irradiation-2''). These could represent,
+themes (`irradiation` and `irradiation-2`). These could represent,
 for instance, the different colours based on different scenarios of an
 solar irradiation analysis. Notice that the last surface gets no
 material (for both themes), thus `null` is used.
@@ -1643,7 +1631,7 @@ The depth of the array depends on the Geometry object, and is equal to
 the depth of the `"boundary"` array.
 
 In the following example, the Solid has 4 surfaces, and there are 2
-themes: ``winter-textures'' and ``summer-textures'' could for instance
+themes: `winter-textures` and `summer-textures` could for instance
 represent the textures during winter and summer.. Notice that the last 2
 surfaces of the first theme gets no material, thus the value `null` is
 used.
@@ -1740,7 +1728,7 @@ needed for fully displaying the material.
 A Texture Object:
 
 * *must* have one member with the name `"type"`. The value is a string
-with either ``PNG'' or ``JPG'' as value.
+with either `PNG` or `JPG` as value.
 * *must* have one member with the name `"image"`. The value is a string
 with the name of the file. This file can be a URL (eg
 `"http://www.someurl.org/filename.jpg"`), a relative path (eg
@@ -1944,14 +1932,12 @@ CityJSON uses http://json-schema.org/[JSON Schemas] to document and
 validate its data model, including its Extensions. Schemas offer a way
 to validate the syntax of a JSON document, and thus the possibility to
 require certain JSON members. Therefore, for writing more complex
-Extensions, a basic familiarity with http://json-schema.org/[JSON
-Schemas] is advised.
+Extensions, a basic familiarity with http://json-schema.org/[JSON Schemas] is advised.
 
 A CityJSON _Extension_ is a JSON file that documents how the core data
 model of CityJSON is extended, and it is also used for validating the
 CityJSON files. This is conceptually akin to, but not conformant with,
-the https://docs.ogc.org/is/20-010/20-010.html#toc66[Application Domain
-Extensions (ADEs)] in CityGML.
+the https://docs.ogc.org/is/20-010/20-010.html[Application Domain Extensions (ADEs)] in CityGML.
 
 A CityJSON Extension can extend the core data model in four ways:
 
@@ -1959,7 +1945,7 @@ A CityJSON Extension can extend the core data model in four ways:
 . Defining new properties at the root of a document
 . Defining attributes on existing City Objects
 . Defining a new Semantic Object
-. Defining a new City Object, or ``extending'' one of the existing City
+. Defining a new City Object, or `extending` one of the existing City
 Objects
 
 [NOTE]
@@ -1982,10 +1968,10 @@ processed by standard CityJSON software, often without requiring any
 changes in the parsing code. This is achieved by enforcing a set of 6
 simple rules (see [[#rules-to-follow-to-define-new-city-objects]]) when
 adding new City Objects. If these are followed, then a CityJSON file
-containing Extensions will be seen as a ``standard'' CityJSON file.
+containing Extensions will be seen as a `standard` CityJSON file.
 ====
 
-One of the philosophies of JSON is being ``schema-less'', which means
+One of the philosophies of JSON is being `schema-less`, which means
 that one is allowed to define new properties for the JSON objects
 without documenting them in a JSON schema (watch out: this does _not_
 mean that JSON does not have schemas!). While this is in contrast to
@@ -2025,15 +2011,15 @@ modelling the data.
 
 === Using an Extension in a CityJSON file
 
-An Extension should be given a name (eg ``Noise'') and the URL of the
+An Extension should be given a name (eg `Noise`) and the URL of the
 Extension file should be defined, including the version of the Extension
 that is used for this file. It is expected that the Extension is
 publicly available at the URL, and can be downloaded.
 
 Several Extensions can be used in a single CityJSON Object, each one is
 indexed by its name in the `"extensions"` JSON object. In the example
-below we have two Extensions: one named ``Noise'' and one named
-``Solar_Potential''.
+below we have two Extensions: one named `Noise` and one named
+`Solar_Potential`.
 
 [source,json]
 ----
@@ -2379,17 +2365,5 @@ surfaces, is allowed.
 The https://json-schema.org/[JSON schemas] of the specifications are
 publicly available at https://cityjson.org/schemas/.
 
-== CityGML v3.0 implementation details
 
-CityJSON v2.0 is a partial implementation of the
-https://docs.ogc.org/is/20-010/20-010.html[CityGML v3.0 data model],
-although not all extension modules have been implemented. CityJSON v2.0
-consistently implements actions #1, #2, and #3 of the profiling
-mechanism specified in
-https://docs.ogc.org/is/20-010/20-010.html#toc10[Section 2.1 of the
-CityGML v3.0 Conceptual Model].
 
-The details of which modules are supported are available at
-https://www.cityjson.org/citygml/v30/.
-
-'''''
