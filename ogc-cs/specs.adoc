@@ -94,6 +94,9 @@ prescribed.
 
 == The different City Objects
 
+
+image::../specs/figs/co.png[]
+
 [NOTE]
 ====
 There are 2 kinds of City Objects:
