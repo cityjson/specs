@@ -1,29 +1,27 @@
-= OGC (add title text)
-:doctype: standard
+= CityJSON Community Standard
+:doctype: community-standard
 :encoding: utf-8
 :lang: en
 :status: approved
 :committee: technical
 :draft: 3.0
-:external-id: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
-:docnumber: YY-999
-:received-date: 2029-03-30
-:issued-date: 2029-03-30
-:published-date: 2029-03-30
-:fullname: Editor One
-:fullname_2: Editor Two
-:docsubtype: Interface
-:keywords: ogcdoc, OGC document, API, openapi, html
-:submitting-organizations: Organization One; Organization Two
+:external-id: http://www.opengis.net/doc/CS/covjson/1.0
+:docnumber: 20-072r5
+:received-date: 2021-12-09
+:issued-date: 2022-12-12
+:published-date: YYYY-MM-DD
+:fullname: Hugo Ledoux
+:fullname_2: Balázs Dukai
+:toclevels: 3
+:htmltoclevels: 3
+:keywords: ogcdoc, OGC document, JSON, CityJSON, CityGML, 3D city models
+:submitting-organizations: Geonovum; Delft University of Technology; Kadaster International; virtualcitySYSTEMS; National University of Singapore; Forum Virium Helsinki Oy; Ordnance Survey
 :mn-document-class: ogc
-:mn-output-extensions: xml,html,doc,pdf
+:mn-output-extensions: html,pdf
 :local-cache-only:
 :data-uri-image:
 :pdf-uri: ./document.pdf
-:xml-uri: ./document.xml
-:doc-uri: ./document.doc
-:edition: 1.0
-
+:edition: 2.0.0
 ////
 Make sure to complete each included document
 ////
@@ -39,9 +37,9 @@ include::sections/clause_4_terms_and_definitions.adoc[]
 
 include::sections/clause_5_conventions.adoc[]
 
-include::sections/clause_6_informative_text.adoc[]
+include::specs.adoc[]
 
-include::sections/clause_7_normative_text.adoc[]
+//include::sections/clause_7_normative_text.adoc[]
 
 include::sections/clause_8_media_types.adoc[]
 
@@ -58,4 +56,4 @@ Bibliography should be the last annex
 ////
 include::sections/annex-history.adoc[]
 
-include::sections/annex-bibliography.adoc[]
+// include::sections/annex-bibliography.adoc[]

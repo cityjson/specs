@@ -1,9 +1,11 @@
 .Preface
 
-[NOTE]
-====
-Insert Preface Text here. Give OGC specific commentary: describe the technical content, reason for document, history of the document and precursors, and plans for future work.
-====
+Note that this document requires a good knowledge of the https://docs.ogc.org/is/20-010/20-010.html[OGC City Geography Markup Language (CityGML) Encoding Standard], as this document reuses the terminology and follows the data model presented in CityGML.
+
+CityJSON v2.0 partially implements the https://docs.ogc.org/is/20-010/20-010.html[CityGML v3.0 data model] and includes a JSON-specific extension mechanism (akin to CityGML ADEs).
+
+The exhaustive list of the differences between the CityJSON v2.0 implementation and CityGML v3.0.0 is available https://www.cityjson.org/citygml/v30/[in this webpage].
+
 
 ////
 *OGC Declaration*
@@ -13,24 +15,12 @@ Attention is drawn to the possibility that some of the elements of this document
 
 Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
 
-////
-NOTE: Uncomment ISO section if necessary
-
-*ISO Declaration*
-
-ISO (the International Organization for Standardization) is a worldwide federation of national standards bodies (ISO member bodies). The work of preparing International Standards is normally carried out through ISO technical committees. Each member body interested in a subject for which a technical committee has been established has the right to be represented on that committee. International organizations, governmental and non-governmental, in liaison with ISO, also take part in the work. ISO collaborates closely with the International Electrotechnical Commission (IEC) on all matters of electrotechnical standardization.
-
-International Standards are drafted in accordance with the rules given in the ISO/IEC Directives, Part 2.
-
-The main task of technical committees is to prepare International Standards. Draft International Standards adopted by the technical committees are circulated to the member bodies for voting. Publication as an International Standard requires approval by at least 75 % of the member bodies casting a vote.
-
-Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. ISO shall not be held responsible for identifying any or all such patent rights.
-////
 
 [abstract]
 == Abstract
 
-<Insert Abstract Text here>
+CityJSON is a data exchange format for digital 3D models of cities and landscapes.
+It aims at being easy-to-use (for reading, processing, and creating datasets), and it was designed with programmers in mind, so that tools and APIs supporting it can be quickly built. The https://json.org[JSON]-based encoding of CityJSON implements a subset of the https://docs.ogc.org/is/20-010/20-010.html[OGC CityGML data model (version 3.0)] and includes a JSON-specific extension mechanism. Using JSON instead of GML allows us to compress files by a factor 6 and at the same time to simplify greatly the structure of the files.
 
 == Keywords
 
@@ -46,6 +36,8 @@ Attention is drawn to the possibility that some of the elements of this document
 Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
 ====
 
+
+
 == Security considerations
 
 //If no security considerations have been made for this Standard, use the following text.
@@ -58,6 +50,13 @@ If security considerations have been made for this Standard, follow the examples
 Independent of any authentication type VRRP includes a mechanism (setting TTL=255, checking on receipt) that protects against VRRP packets being injected from another remote network. This limits most vulnerabilities to local attacks.
 NOTE: The security measures discussed in the following sections only provide various kinds of authentication. No confidentiality is provided at all. This should be explicitly described as outside the scope....”
 ////
+
+[source]
+[[source_of_this_document]]
+== Source of this document
+
+The majority of the content in this OGC document is a direct copy of the content contained at https://www.cityjson.org/specs/2.0.0/. No normative changes have been made to the content.
+
 
 == Submitting organizations
 
