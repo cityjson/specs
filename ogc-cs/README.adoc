@@ -1,3 +1,12 @@
+
+
+to compile to a html file:
+
+1. install metanorma
+2. `metanorma --type ogc --extensions html document.adoc`
+
+
+
 = Standard template in Metanorma
 
 == Content
