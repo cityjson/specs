@@ -16,29 +16,25 @@ points only to the minor version (X.Y), and for validation the latest
 schema of that minor version should be used.
 * *must* have one member with the name `"transform"`. The value is a
 JSON object describing how to _decompress_ the integer coordinates of
-the geometries to obtain real-world coordinates. See
-[[#transform-object]] for details.
+the geometries to obtain real-world coordinates. See <<Transform Object>> for details.
 * *must* have one member with the name `"CityObjects"`. The value of
 this member is a collection of key-value pairs, where the key is the ID
 of the object, and the value is one City Object. The ID of a City Object
-should be unique (within one CityJSON Object). See
-[[#the-different-city-objects]] for details.
+should be unique (within one CityJSON Object). See <<The different City Objects>> for details.
 * *must* have one member with the name `"vertices"`. The value is an
-array representing the coordinates of each vertex of the city model. See
-[[#coordinates-of-the-vertices]].
+array representing the coordinates of each vertex of the city model. See <<Coordinates of the vertices>>.
 * *may* have one member with the name `"metadata"`. The value may be a
 JSON object describing the coordinate reference system used, the extent
-of the dataset, its creator, etc. See [[#metadata]] for details.
+of the dataset, its creator, etc. See <<Metadata>> for details.
 * *may* have one member with the name `"extensions"`, which is used if
-there are Extensions used in the file. See [[#extensions]] for details.
+there are Extensions used in the file. See <<Extensions>> for details.
 * *may* have one member with the name `"appearance"`. The value may
 contain JSON objects representing the textures and/or materials of
-surfaces. See [[#appearance-object]] for details.
+surfaces. See <<Appearance Object>> for details.
 * *may* have one member with the name `"geometry-templates"`, the value
 is a JSON object containing the templates that can be reused by
 different City Objects (usually for trees). This is equivalent to the
-concept of `implicit geometries` in CityGML. See
-[[#geometry-templates]] for details.
+concept of `implicit geometries` in CityGML. See <<Geometry templates>> for details.
 * *may* have other members, and their value is not prescribed. Because
 these are not standard members in CityJSON, they might be ignored by
 parsers.
@@ -115,7 +111,7 @@ A City Object (1st or 2nd-level):
 * *must* have one member with the name `"type"`. The value is one of the
 possibilities in the figure above (of type string). If an Extension is
 used, then the type can be any string starting with a `"+"`, as
-explained in [[#extensions]].
+explained in the section about Extensions (<<Extensions>>).
 * *may* have one member with the name `"geometry"`. The value is an
 array containing 0 or more Geometry Objects. More than one Geometry
 Object is used to represent several different levels-of-detail (LoDs)
@@ -715,7 +711,7 @@ specific attributes.
 
 Similarly, the CityGML classes `TrafficArea`,
 `AuxiliaryTrafficArea`, `Marking`, and `Hole` are implemented as
-semantic surfaces (see [[#semantics-of-geometric-primitives]]). That is,
+semantic surfaces (see <<Semantics of geometric primitives>>). That is,
 the surface representing a road should be split into sub-surfaces
 (therefore forming a `"MultiSurface"` or a `"CompositeSurface"`) in
 which each of the sub-surfaces has semantics.
@@ -852,8 +848,7 @@ one of the following:
 . `"Solid"`
 . `"MultiSolid"`
 . `"CompositeSolid"`
-. `"GeometryInstance"` (this is another type with different properties,
-see [[#geometry-templates]])
+. `"GeometryInstance"` (this is another type with different properties, see <<Geometry templates>>)
 
 A Geometry object:
 
@@ -893,7 +888,7 @@ vertex of the city model. The position of a vertex in this array
 
 * one vertex *must* be an array with exactly 3 integers, representing
 the _(x,y,z)_ location of the vertex before it is transformed to its
-real-world coordinates (with the [[#transform-object]]).
+real-world coordinates (with the <<Transform Object>>).
 * the array of vertices may be empty.
 * vertices may be repeated.
 
@@ -1000,9 +995,7 @@ removed.
 
 [NOTE]
 ====
-....
 See https://www.cityjson.org/dev/geom-arrays/[this tutorial] for further explanation on the depth of arrays of Geometry objects.
-....
 ====
 
 === Semantics of geometric primitives
@@ -1078,8 +1071,7 @@ For Transportation (`"Road"`, `"Railway"`, `"TransportSquare"`):
 * `"TransportationHole"`
 
 It is possible to define and use other semantics, but these have to
-start with a `"+"`, inline with the rules defined in the
-[[#extensions]].
+start with a `"+"`, inline with the rules defined in the section about Extensions (<<Extensions>>).
 
 [source,json]
 ----
@@ -1207,7 +1199,7 @@ array of Geometry Objects.
 is an array of coordinates of each vertex of the templates (0-based
 indexing). The reason the vertices’ indices are not global is to ensure
 that operations on the vertices (eg for CRS transformation, for
-[[#transform-object]], or calculating the bounding box of a dataset)
+<<Transform Object>>, or calculating the bounding box of a dataset)
 will not be affected by the templates (since they will often be defined
 locally, and translated/rotated/scaled to their final position).
 
@@ -1333,11 +1325,12 @@ Geometric templates and textures are not.
 We can obtain the real coordinates of a given vertex _v_, from the _vi_
 values listed in the `"vertices"` member as follows:
 
-....
+[source]
+----
 v[0] = (vi[0] * ["transform"]["scale"][0]) + ["transform"]["translate"][0]
 v[1] = (vi[1] * ["transform"]["scale"][1]) + ["transform"]["translate"][1]
 v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
-....
+----
 
 == Metadata
 
@@ -1386,8 +1379,8 @@ While the geographical extent can be computed from the dataset itself,
 it is often useful to store it. It may be stored as an array with 6
 values: `[minx, miny, minz, maxx, maxy, maxz]`. Notice that these values
 are in the real-world coordinate system of the dataset (based on
-[[#referencesystem-crs]]) and have not been compressed with the
-`"transform"` member ([[#transform-object]]) as the `"vertices"` have
+<<referenceSystem (CRS)>>]) and have not been compressed with the
+`"transform"` member (<<Transform Object>>) as the `"vertices"` have
 been.
 
 [source,json]
@@ -1483,9 +1476,10 @@ and such an attribute is specified as a `"full-time"`. For example
 The coordinate reference system (CRS) is given as a URL formatted
 according to the https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names[OGC Name Type Specification]:
 
-....
+[source]
+----
 http://www.opengis.net/def/crs/{authority}/{version}/{code}
-....
+----
 
 where `{authority}` designates the authority responsible for the
 definition of this CRS (usually `EPSG` or `OGC`), and where
@@ -1733,10 +1727,7 @@ A Texture Object:
 * *must* have one member with the name `"type"`. The value is a string
 with either `PNG` or `JPG` as value.
 * *must* have one member with the name `"image"`. The value is a string
-with the name of the file. This file can be a URL (eg
-`"http://www.someurl.org/filename.jpg"`), a relative path (eg
-`"appearances/myroof.jpg"`), or an absolute path (eg
-`"/home/elvis/mycityjson/appearances/myroof.jpg"`).
+with the name of the file. This file can be a URL (eg `"http://www.someurl.org/filename.jpg[]"`), a relative path (eg `"appearances/myroof.jpg"`), or an absolute path (eg `"/home/elvis/mycityjson/appearances/myroof.jpg"`).
 * *may* have one member with the name `"wrapMode"`. The value can be any
 of the following: `"none"`, `"wrap"`, `"mirror"`, `"clamp"`, or
 `"border"`.
@@ -1833,7 +1824,7 @@ as an index to be referenced by the Geometry Objects for the JSON object
 (warning: the vertices are local to the JSON object).
 * *may* have one member with the name `"appearance"`. The value may
 contain JSON objects representing the textures and/or materials of
-surfaces. See [[#appearance-object]] for details.
+surfaces. See <<Appearance object>> for details.
 * *must not* have other members.
 
 [source,json]
@@ -1969,7 +1960,7 @@ would need to be written).
 CityJSON Extensions are designed in a way that they can be read and
 processed by standard CityJSON software, often without requiring any
 changes in the parsing code. This is achieved by enforcing a set of 6
-simple rules (see [[#rules-to-follow-to-define-new-city-objects]]) when
+simple rules (see <<Rules to follow to define new City Objects>>) when
 adding new City Objects. If these are followed, then a CityJSON file
 containing Extensions will be seen as a `standard` CityJSON file.
 ====
@@ -2003,7 +1994,7 @@ way is just to add a new member to the City Object attributes:
 However, a regular attribute (without the `"+"` prefix) cannot be made
 mandatory in the core CityJSON schema. Only with an Extension can an
 attribute be made mandatory (see
-[[#case-2-defining-attributes-on-existing-city-objects]]).
+<<Case 2: Defining attributes on existing City Objects>>).
 
 Therefore, an _Extension_ is used for enforcing certain properties,
 attributes, or City Object types in CityJSON objects. An _Extension_
@@ -2246,7 +2237,7 @@ object, beyond the ones defined in the schema (eg `"value", "uom"`).
 === Case 3: Defining a new Semantic Object
 
 It is possible to define a new Semantic Object (besides the ones
-prescribed, see [[#semantics-of-geometric-primitives]]), and document it
+prescribed, see <<Semantics of geometric primitives>>), and document it
 in the Extension.
 
 New Semantic Objects must have a `"+"` as their first character, and
@@ -2356,7 +2347,7 @@ created and it can have a `"+Balcony"` as a potential child.
 . All the geometries must be in the member `"geometry"`, and cannot be
 located somewhere else deep in a hierarchy of a new member.
 . The Geometry object’s boundary must be one of the eight types
-described in [[#geometry-objects]]. Similarly, the geometry appearances
+described in <<Geometry Objects>>. Similarly, the geometry appearances
 and templates must follow the core specification. This ensures that all
 the code written to process, manipulate, and view CityJSON files will be
 working without modifications.
