@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.0] - 2023-09-25
+- this version is basically v1.1 with small fixes (see below) and an improved/clearer text
+- the version 2.0 was required by the OGC to be officially approved
+### Changed
+- `GenericCityObject` is back as a City Object in the data model, because it makes life easy for everyone
+- it is now possible to define extra Semantic Surfaces in Extensions (with `"extraSemanticSurfaces"`)
+- `"metadata/pointOfContact"` is now a JSON object, like other addresses for Buildings/Bridges
+- the text of the specs has been improved and harmonised (there were some inconsistencies, for instance with addresses for City Objects and metadata)
+- the values of *u* and *v* for textures are allowed to be outside [0.0, 1.0] to allow repeated patterns.
+
+
 ## [1.1.3] - 2022-11-25
 ### Changed
 - CityJSONFeatures now do not have to dereference the GeometryTemplates, those can be in the "1st line"/metadata. Dereferencing is still allowed. cjio passes the GeometryTemplates in the 1st-line now. 
@@ -161,6 +172,7 @@ Minor changes to the schemas for omissions/errors, harmonised the specs text sli
 - first beta release of CityJSON
 
 
+[2.0.0]: https://github.com/tudelft3d/cityjson/compare/1.1.3...2.0.0
 [1.1.3]: https://github.com/tudelft3d/cityjson/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/tudelft3d/cityjson/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/tudelft3d/cityjson/compare/1.1.0...1.1.1
