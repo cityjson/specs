@@ -2,7 +2,5 @@
 
 Conformance with this OGC Community Standard shall be checked using the JSON schema files, which are available at https://www.cityjson.org/schemas/.
 
-The one Standardization Target for this OGC Community Standard is the format of CoverageJSON.
-
 In order to conform to this OGC Community Standard, a software implementation shall implement any CityJSON object as a valid JSON object that conforms to the CityJSON schema.
 
