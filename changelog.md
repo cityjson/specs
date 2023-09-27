@@ -10,10 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2023-09-25
 - this version is basically v1.1 with small fixes (see below) and an improved/clearer text
-- the version 2.0 was required by the OGC to be officially approved
+- the major version change to 2.0 was required by the OGC to be officially approved
 ### Changed
-- `GenericCityObject` is back as a City Object in the data model, because it makes life easy for everyone
-- it is now possible to define extra Semantic Surfaces in Extensions (with `"extraSemanticSurfaces"`)
+- `GenericCityObject` is back as a City Object in the data model, because it makes life easy for everyone and it is there in the v3.0 data model (albeit those are specific to the [SPACES](https://docs.ogc.org/is/20-010/20-010.html#toc24), which are not implemented in CityJSON)
+- it is now possible to define extra Semantic Surfaces in Extensions (with `"extraSemanticSurfaces"`), which is a mandatory property of the schema
 - `"metadata/pointOfContact"` is now a JSON object, like other addresses for Buildings/Bridges
 - the text of the specs has been improved and harmonised (there were some inconsistencies, for instance with addresses for City Objects and metadata)
 - the values of *u* and *v* for textures are allowed to be outside [0.0, 1.0] to allow repeated patterns.
