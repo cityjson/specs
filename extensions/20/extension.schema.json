@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "CityJSON Extension specifications v1.1",
+  "title": "CityJSON Extension specifications v2.0",
   "type": "object",
 
   "definitions": {
@@ -67,6 +67,7 @@
         "BuildingUnit": { "$ref": "#/definitions/Plus" },
         "CityFurniture": { "$ref": "#/definitions/Plus" },
         "CityObjectGroup": { "$ref": "#/definitions/Plus" },
+        "GenericCityObject": { "$ref": "#/definitions/Plus" },
         "LandUse": { "$ref": "#/definitions/Plus" },
         "OtherConstruction": { "$ref": "#/definitions/Plus" },
         "PlantCover": { "$ref": "#/definitions/Plus" },
@@ -92,6 +93,13 @@
         "(\\+)([A-Z])\\w+": {}
       },
       "additionalProperties": false
+    },
+
+    "extraSemanticSurfaces": {
+      "patternProperties": {
+        "(\\+)([A-Z])\\w+": {}
+      },
+      "additionalProperties": false
     }
 
   },
@@ -107,6 +115,6 @@
       ]
     }
   ], 
-  "required": ["type", "name", "version", "versionCityJSON", "extraRootProperties", "extraAttributes",  "extraCityObjects"]
+  "required": ["type", "name", "version", "versionCityJSON", "extraAttributes", "extraCityObjects", "extraRootProperties", "extraSemanticSurfaces"]
 }
 

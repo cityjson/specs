@@ -1,0 +1,87 @@
+{
+  "type": "CityJSONExtension",
+  "name": "ManyCases",
+  "uri": "http://someurl.org/manycases.ext.json",
+  "version": "1.0.0",
+  "versionCityJSON": "1.1",
+  "description": "Extension to test the validator",
+
+  "definitions": {
+    "measure": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "number" },
+        "uom": { "type": "string" }
+      },
+      "required": [ "value", "uom" ],
+      "additionalProperties": false
+    }
+  },
+  
+  "extraCityObjects": {
+    "+GenericCityObject": {
+      "allOf": [
+        { "$ref": "cityobjects.schema.json#/_AbstractCityObject" },
+        {
+          "properties": {
+            "type": { "enum": [ "+GenericCityObject" ] },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "my-attribute": { "type": "string" },
+                "measured": { "$ref": "#/definitions/measure" }  
+              }
+            },
+            "geometry": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "$ref": "geomprimitives.schema.json#/Solid" },
+                  { "$ref": "geomprimitives.schema.json#/MultiSurface" }
+                ]
+              }
+            }
+          },
+          "required": [ "type", "geometry" ]
+        }
+      ]
+    }
+  },
+
+  "extraRootProperties": {
+    "+census": {
+      "type": "object",
+      "properties": {
+        "percent_men": { 
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "percent_women": { 
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        }
+      }
+    }
+  },
+
+  "extraAttributes": {
+    "Building": {
+      "+colour": {
+        "type": "object",
+        "properties": {
+          "rgba": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 4,    
+            "maxItems": 4
+          }
+        },
+        "required": ["rgba"],
+        "additionalProperties": false
+      }    
+    } 
+  }
+  
+}

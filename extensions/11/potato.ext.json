@@ -1,0 +1,88 @@
+{
+  "type": "CityJSONExtension",
+  "name": "Potato",
+  "uri": "https://www.cityjson.org/potato.ext.json",
+  "version": "1.1.0",
+  "versionCityJSON": "1.1",
+  "description": "Extension for Potatoes",
+  
+  "definitions": {
+    "measure": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "number" },
+        "uom": { "type": "string" }
+      },
+      "required": [ "value", "uom" ],
+      "additionalProperties": false
+    },
+    
+    "train": {
+      "type": "object",
+      "properties": {
+        "trainType": { "type": "string" },
+        "trainTypeCorrection": { "$ref": "#/definitions/measure" },
+        "brakePortionDay": { "$ref": "#/definitions/measure" },
+        "brakePortionEvening": { "$ref": "#/definitions/measure" },
+        "brakePortionNight": { "$ref": "#/definitions/measure" },
+        "lengthDay": { "$ref": "#/definitions/measure" },
+        "lengthEvening": { "$ref": "#/definitions/measure" },
+        "lengthNight": { "$ref": "#/definitions/measure" },
+        "speedDay": { "$ref": "#/definitions/measure" },
+        "speedEvening": { "$ref": "#/definitions/measure" },
+        "speedNight": { "$ref": "#/definitions/measure" },
+        "additionalCorrectionTrain": { "$ref": "#/definitions/measure" }
+      },
+      "additionalProperties": false
+    }
+  },
+  
+  "extraRootProperties": {},
+  "extraAttributes": {},
+
+  "extraCityObjects": {
+    "_AbstractPotato": {
+      "properties": {
+        "attributes": { 
+          "type": "object" 
+        },
+        "colours": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+
+    "+Potato": {
+      "allOf": [
+        { "$ref": "#/extraCityObjects/_AbstractPotato" },
+        {
+          "properties": {
+            "type": { "enum": [ "+Potato" ] },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "reflection": { "type": "string" },
+                "reflectionCorrection": { "$ref": "#/definitions/measure" },
+                "height": { "$ref": "#/definitions/measure" },
+                "distance": { "$ref": "#/definitions/measure" }
+              }
+            },
+            "geometry": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  { "$ref": "geomprimitives.schema.json#/Solid" }
+                ]
+              }
+            }
+          },
+          "required": [ "type", "geometry" ]
+        }
+      ]
+    }
+
+  }  
+}
