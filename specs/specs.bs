@@ -1,9 +1,9 @@
 <pre class='metadata'>
-Title: CityJSON Specifications 2.0.0-beta2
+Title: CityJSON Specifications 2.0.0
 Shortname: CityJSON
 Status: LS
 Level: none
-URL: https://cityjson.org/specs/2.0.0-beta2/
+URL: https://cityjson.org/specs/2.0.0/
 TR: https://cityjson.org/specs/
 Previous Version: https://cityjson.org/specs/overview/
 Editor: Hugo Ledoux, TU Delft, https://3d.bk.tudelft.nl/hledoux
