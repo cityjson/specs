@@ -881,7 +881,7 @@ enumerated in the array (all with the same value for the member
 
 === Coordinates of the vertices
 
-A CityJSON Object must have one member named `"vertices"`. The value is
+A CityJSON Object *must* have one member named `"vertices"`. The value is
 an array of arrays of 3 integers representing the coordinates of each
 vertex of the city model. The position of a vertex in this array
 (0-based) is used to represent the `"boundaries"` of Geometry Objects.
@@ -889,8 +889,8 @@ vertex of the city model. The position of a vertex in this array
 * one vertex *must* be an array with exactly 3 integers, representing
 the _(x,y,z)_ location of the vertex before it is transformed to its
 real-world coordinates (with the <<Transform Object>>).
-* the array of vertices may be empty.
-* vertices may be repeated.
+* the array of vertices *may* be empty.
+* vertices *may* be repeated.
 
 [source,json]
 ----
