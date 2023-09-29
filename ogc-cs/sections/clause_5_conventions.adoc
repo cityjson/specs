@@ -1,3 +1,6 @@
 == Conventions
 
-No conventions are specified in this document.
+*Suggested Convention 1:* A file containing one `"CityJSON"` object *may* have the extension `'.city.json'`
+
+*Suggested Convention 2:* `"CityJSON"` and `"CityJSONFeature"` objects may be stored in a file with the extension `'.city.jsonl'`
+
