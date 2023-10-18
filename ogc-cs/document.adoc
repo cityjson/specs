@@ -7,8 +7,8 @@
 :draft: 3.0
 :external-id: http://www.opengis.net/doc/CS/covjson/1.0
 :docnumber: 20-072r5
-:received-date: 2021-12-09
-:issued-date: 2022-12-12
+:received-date: 2023-04-13
+:issued-date: 2023-09-01
 :published-date: YYYY-MM-DD
 :fullname: Hugo Ledoux
 :fullname_2: Balázs Dukai
