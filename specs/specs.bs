@@ -1348,7 +1348,7 @@ To store the texture(s) of a surface, a Geometry Object may have a member with t
 
 The depth of the array depends on the Geometry object, and is equal to the depth of the `"boundary"` array.
 
-In the following example, the Solid has 4 surfaces, and there are 2 themes: "winter-textures" and "summer-textures" could for instance represent the textures during winter and summer.. Notice that the last 2 surfaces of the first theme gets no material, thus the value `null` is used.
+In the following example, the Solid has 4 surfaces, and there are 2 themes: "winter-textures" and "summer-textures" could for instance represent the textures during winter and summer. Notice that the last 2 surfaces of the first theme gets no texture, thus the value `null` is used.
 
 ```json
 {
