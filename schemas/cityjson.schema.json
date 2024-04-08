@@ -11,8 +11,10 @@
       ]
     },
     "version": {
-      "type": "string",
-      "pattern": "^(\\d\\.)(\\d)$"
+      "type": {
+        "enum": [
+          "2.0"
+      ]
     },
     "metadata": {
       "type": "object",
