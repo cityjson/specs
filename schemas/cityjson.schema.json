@@ -11,9 +11,8 @@
       ]
     },
     "version": {
-      "type": {
-        "enum": [
-          "2.0"
+      "enum": [
+        "2.0"
       ]
     },
     "metadata": {
