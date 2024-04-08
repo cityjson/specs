@@ -131,10 +131,14 @@
               "type": "array",
               "items": {
                 "type": "integer"
-              }
-            }
-          }
-        }
+              },
+              "minItems": 1
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "minItems": 1
       },
       "semantics": {
         "type": "object",
@@ -268,11 +272,16 @@
                 "type": "array",
                 "items": {
                   "type": "integer"
-                }
-              }
-            }
-          }
-        }
+                },
+                "minItems": 1
+              },
+              "minItems": 1
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "minItems": 1
       },
       "semantics": {
         "type": "object",
@@ -421,11 +430,16 @@
                 "type": "array",
                 "items": {
                   "type": "integer"
-                }
-              }
-            }
-          }
-        }
+                },
+                "minItems": 1
+              },
+              "minItems": 1
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "minItems": 1
       },
       "semantics": {
         "type": "object",
@@ -570,9 +584,12 @@
             "type": "array",
             "items": {
               "type": "integer"
-            }
-          }
-        }
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "minItems": 1
       },
       "semantics": {
         "type": "object",
@@ -687,9 +704,12 @@
             "type": "array",
             "items": {
               "type": "integer"
-            }
-          }
-        }
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "minItems": 1
       },
       "semantics": {
         "type": "object",
@@ -802,8 +822,10 @@
           "type": "array",
           "items": {
             "type": "integer"
-          }
-        }
+          },
+          "minItems": 1
+        },
+        "minItems": 1
       },
       "semantics": {
         "type": "object",
@@ -856,7 +878,8 @@
         "type": "array",
         "items": {
           "type": "integer"
-        }
+        },
+        "minItems": 1
       },
       "semantics": {
         "type": "object",
