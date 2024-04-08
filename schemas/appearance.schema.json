@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://www.cityjson.org/schemas/2.0.0/appearance.schema.json",
-  "title": "CityJSON appearance schema v2.0.0",
+  "$id": "https://www.cityjson.org/schemas/2.0.1/appearance.schema.json",
+  "title": "CityJSON appearance schema v2.0.1",
   "Material": {
     "type": "object",
     "properties": {
