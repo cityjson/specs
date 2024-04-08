@@ -62,8 +62,7 @@
       "required": [
             "contactName",
             "emailAddress"
-      ],
-      "additionalProperties": false
+      ]
     }
   },
   "metadata": {
@@ -94,7 +93,6 @@
         "type": "string",
         "pattern": "^(http|https)://www.opengis.net/def/crs/"
       }
-    },
-    "additionalProperties": false
+    }
   }
 }
