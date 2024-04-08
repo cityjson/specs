@@ -2,10 +2,10 @@ import os
 import sys
 import json
 
-import jsonref #-- works with json v0.2
+import jsonref #-- works *only* with json v0.2
 import importlib.metadata 
 if importlib.metadata.version('jsonref') != '0.2':
-    print("ERROR: you need jsonref v0.2")
+    print("ERROR: you need jsonref v0.2: 'pip install jsonref==0.2'")
     sys.exit()
 
 
