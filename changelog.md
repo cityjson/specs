@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.1] - 2024-04-11
+### Changed
+- "metadata" allows additional non-listed properties (than the 6 by ISO). For more structured metadata it is advised to make use of the metadata-extended Extension
+- the schemas now enforce "type" for Semantic Surface 
+- schemas now verify that "boundaries" having an empty list is an error
+- the "lod" for geometries are now restrained to those of CityGML and the extended-LoD by TUDelft (as the specifications already mentioned, but the schemas allowed anything X.Y)
+- fix 3 typos in the specifications
+
+
 ## [2.0.0] - 2023-09-27
 - this version is basically v1.1 with small fixes (see below) and an improved/clearer text
 - the major version change to 2.0 was required by the OGC to be officially approved
@@ -172,6 +181,7 @@ Minor changes to the schemas for omissions/errors, harmonised the specs text sli
 - first beta release of CityJSON
 
 
+[2.0.1]: https://github.com/tudelft3d/cityjson/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/tudelft3d/cityjson/compare/1.1.3...2.0.0
 [1.1.3]: https://github.com/tudelft3d/cityjson/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/tudelft3d/cityjson/compare/1.1.1...1.1.2
