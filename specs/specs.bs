@@ -1301,7 +1301,7 @@ An Appearance Object is a JSON object that
   - **may** have one member with the name `"textures"`, whose value is an array of Texture Objects.
   - **may** have one member with the name `"vertices-texture"`, whose value is an array of coordinates of each so-called UV vertex of the city model.
   - **may** have one member with the name `"default-theme-texture"`, whose value is the name of the default theme for the appearance (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
-  - **may** have one member with the name `"default-theme-material"`, whose value is the name of the default theme for the material (a string). This can be used if geometries have more than one textures, so that a viewer displays the default one.
+  - **may** have one member with the name `"default-theme-material"`, whose value is the name of the default theme for the material (a string). This can be used if geometries have more than one materials, so that a viewer displays the default one.
 
 ```json
 "appearance": {
