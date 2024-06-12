@@ -90,8 +90,20 @@
         "maxItems": 6
       },
       "referenceSystem": {
-        "type": "string",
-        "pattern": "^(http|https)://www.opengis.net/def/crs/"
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^(http|https)://www.opengis.net/def/crs/"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^\\[[a-zA-Z]+:[a-zA-Z0-9]+\\]$"
+            },
+            "minItems": 1
+          }
+        ]
       }
     }
   }
