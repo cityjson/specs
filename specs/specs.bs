@@ -106,7 +106,10 @@ An "empty" but complete CityJSON object will look like this:
   "CityObjects": {},
   "vertices": [],
   "appearance": {},
-  "geometry-templates": {}
+  "geometry-templates": {
+    "templates": [],
+    "vertices-templates": []
+  }
 }
 ```
 
