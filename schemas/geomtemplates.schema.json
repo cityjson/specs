@@ -3,6 +3,7 @@
   "$id": "https://www.cityjson.org/schemas/2.0.1/geomtemplates.schema.json",
   "title": "CityJSON geometry templates schema v2.0.1",
   "GeometryInstance": {
+    "title": "GeometryInstance",
     "type": "object",
     "properties": {
       "type": {

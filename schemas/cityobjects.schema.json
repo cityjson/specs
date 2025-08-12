@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://www.cityjson.org/schemas/2.0.1/cityobjects.schema.json",
   "title": "CityJSON City Objects schema v2.0.1",
-  
   "ExtensionObject": {
+    "title": "ExtensionObject",
     "type": "object",
     "properties": {
       "type": {
@@ -16,9 +16,10 @@
     ]
   },
   "_AbstractCityObject": {
+    "title": "_AbstractCityObject",
     "properties": {
-      "attributes": { 
-        "type": "object" 
+      "attributes": {
+        "type": "object"
       },
       "parents": {
         "type": "array",
@@ -50,6 +51,7 @@
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "OtherConstruction",
         "properties": {
           "type": {
             "enum": [
@@ -93,13 +95,14 @@
         ]
       }
     ]
-  },  
+  },
   "_AbstractBuilding": {
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "_AbstractBuilding",
         "properties": {
           "address": {
             "type": "array",
@@ -141,6 +144,7 @@
         "$ref": "#/_AbstractBuilding"
       },
       {
+        "title": "Building",
         "properties": {
           "type": {
             "enum": [
@@ -160,6 +164,7 @@
         "$ref": "#/_AbstractBuilding"
       },
       {
+        "title": "BuildingPart",
         "properties": {
           "type": {
             "enum": [
@@ -180,6 +185,7 @@
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingInstallation",
         "properties": {
           "type": {
             "enum": [
@@ -231,6 +237,7 @@
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingConstructiveElement",
         "properties": {
           "type": {
             "enum": [
@@ -282,6 +289,7 @@
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingFurniture",
         "properties": {
           "type": {
             "enum": [
@@ -333,6 +341,7 @@
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingRoom",
         "properties": {
           "type": {
             "enum": [
@@ -367,6 +376,7 @@
     ]
   },
   "BuildingUnit": {
+    "title": "BuildingUnit",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -388,7 +398,7 @@
                 }
               }
             }
-          },          
+          },
           "geometry": {
             "type": "array",
             "items": {
@@ -415,8 +425,9 @@
         ]
       }
     ]
-  },  
+  },
   "BuildingStorey": {
+    "title": "BuildingStorey",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -454,8 +465,9 @@
         ]
       }
     ]
-  },  
+  },
   "CityObjectGroup": {
+    "title": "CityObjectGroup",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -471,9 +483,12 @@
             "type": "array",
             "description": "the role of each of the CityObjects members of that group",
             "items": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          }, 
+          },
           "geometry": {
             "type": "array",
             "items": {
@@ -511,6 +526,7 @@
     ]
   },
   "GenericCityObject": {
+    "title": "GenericCityObject",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -561,6 +577,7 @@
     ]
   },
   "Tunnel": {
+    "title": "Tunnel",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -582,7 +599,7 @@
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
-                {               
+                {
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
@@ -597,8 +614,9 @@
         ]
       }
     ]
-  },  
+  },
   "TunnelPart": {
+    "title": "TunnelPart",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -620,7 +638,7 @@
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
-                {               
+                {
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
                 {
@@ -638,11 +656,13 @@
     ]
   },
   "TunnelInstallation": {
+    "title": "TunnelInstallation",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelInstallation",
         "properties": {
           "type": {
             "enum": [
@@ -689,11 +709,13 @@
     ]
   },
   "TunnelConstructiveElement": {
+    "title": "TunnelConstructiveElement",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelConstructiveElement",
         "properties": {
           "type": {
             "enum": [
@@ -745,6 +767,7 @@
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelHollowSpace",
         "properties": {
           "type": {
             "enum": [
@@ -777,13 +800,15 @@
         ]
       }
     ]
-  },  
+  },
   "TunnelFurniture": {
+    "title": "TunnelFurniture",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelFurniture",
         "properties": {
           "type": {
             "enum": [
@@ -828,9 +853,9 @@
         ]
       }
     ]
-  },  
-
+  },
   "Bridge": {
+    "title": "Bridge",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -863,10 +888,10 @@
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
-                {               
+                {
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
-                {               
+                {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
@@ -878,8 +903,9 @@
         ]
       }
     ]
-  },  
+  },
   "BridgePart": {
+    "title": "BridgePart",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -912,10 +938,10 @@
                 {
                   "$ref": "geomprimitives.schema.json#/CompositeSurface"
                 },
-                {               
+                {
                   "$ref": "geomprimitives.schema.json#/Solid"
                 },
-                {               
+                {
                   "$ref": "geomprimitives.schema.json#/CompositeSolid"
                 }
               ]
@@ -930,6 +956,7 @@
     ]
   },
   "BridgeInstallation": {
+    "title": "BridgeInstallation",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -981,6 +1008,7 @@
     ]
   },
   "BridgeConstructiveElement": {
+    "title": "BridgeConstructiveElement",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1032,6 +1060,7 @@
     ]
   },
   "BridgeRoom": {
+    "title": "BridgeRoom",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1069,8 +1098,9 @@
         ]
       }
     ]
-  },  
+  },
   "BridgeFurniture": {
+    "title": "BridgeFurniture",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1120,9 +1150,9 @@
         ]
       }
     ]
-  },  
-
+  },
   "_AbstractTransportationComplex": {
+    "title": "_AbstractTransportationComplex",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1150,6 +1180,7 @@
     ]
   },
   "Road": {
+    "title": "Road",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1169,6 +1200,7 @@
     ]
   },
   "Railway": {
+    "title": "Railway",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1188,6 +1220,7 @@
     ]
   },
   "TransportSquare": {
+    "title": "TransportSquare",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1207,6 +1240,7 @@
     ]
   },
   "Waterway": {
+    "title": "Waterway",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1226,6 +1260,7 @@
     ]
   },
   "TINRelief": {
+    "title": "TINRelief",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1255,6 +1290,7 @@
     ]
   },
   "WaterBody": {
+    "title": "WaterBody",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1296,6 +1332,7 @@
     ]
   },
   "PlantCover": {
+    "title": "PlantCover",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1337,6 +1374,7 @@
     ]
   },
   "SolitaryVegetationObject": {
+    "title": "SolitaryVegetationObject",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1387,6 +1425,7 @@
     ]
   },
   "LandUse": {
+    "title": "LandUse",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1419,6 +1458,7 @@
     ]
   },
   "CityFurniture": {
+    "title": "CityFurniture",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"

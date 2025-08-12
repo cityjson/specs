@@ -3,6 +3,7 @@
   "$id": "https://www.cityjson.org/schemas/2.0.1/geomprimitives.schema.json",
   "title": "CityJSON geometric primitives schema v2.0.1",
   "Semantics": {
+    "title": "Semantics",
     "type": "object",
     "properties": {
       "type": {
@@ -110,6 +111,7 @@
     ]
   },
   "Lods": {
+      "title": "Lods",
       "enum": [
         "0",   "1",   "2",   "3", 
         "0.0", "0.1", "0.2", "0.3", 
@@ -119,6 +121,7 @@
       ]
   },
   "Solid": {
+    "title": "Solid",
     "type": "object",
     "properties": {
       "type": {
@@ -257,6 +260,7 @@
     "additionalProperties": false
   },
   "MultiSolid": {
+    "title": "MultiSolid",
     "type": "object",
     "properties": {
       "type": {
@@ -414,6 +418,7 @@
     "additionalProperties": false
   },
   "CompositeSolid": {
+    "title": "CompositeSolid",
     "type": "object",
     "properties": {
       "type": {
@@ -571,6 +576,7 @@
     "additionalProperties": false
   },
   "MultiSurface": {
+    "title": "MultiSurface",
     "type": "object",
     "properties": {
       "type": {
@@ -690,6 +696,7 @@
     "additionalProperties": false
   },
   "CompositeSurface": {
+    "title": "CompositeSurface",
     "type": "object",
     "properties": {
       "type": {
@@ -809,6 +816,7 @@
     "additionalProperties": false
   },
   "MultiLineString": {
+    "title": "MultiLineString",
     "type": "object",
     "properties": {
       "type": {
@@ -866,6 +874,7 @@
     "additionalProperties": false
   },
   "MultiPoint": {
+    "title": "MultiPoint",
     "type": "object",
     "properties": {
       "type": {

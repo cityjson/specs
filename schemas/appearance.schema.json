@@ -3,6 +3,7 @@
   "$id": "https://www.cityjson.org/schemas/2.0.1/appearance.schema.json",
   "title": "CityJSON appearance schema v2.0.1",
   "Material": {
+    "title": "Material",
     "type": "object",
     "properties": {
       "name": {
@@ -51,6 +52,7 @@
     "additionalProperties": false
   },
   "Texture": {
+    "title": "Texture",
     "type": "object",
     "properties": {
       "type": {

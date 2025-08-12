@@ -5,6 +5,7 @@
 
   "definitions": {  
     "contactDetails": {
+      "title": "ContactDetails",
       "type": "object",
       "properties": {
         "contactName": {
@@ -66,6 +67,7 @@
     }
   },
   "metadata": {
+    "title": "Metadata",
     "type": "object",
     "properties": {
       "identifier": {
