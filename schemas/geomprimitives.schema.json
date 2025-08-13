@@ -8,158 +8,71 @@
     "properties": {
       "type": {
         "type": "string",
-        "oneOf": [
+        "anyOf": [
           {
             "enum": [
-              "RoofSurface"
-            ]
-          },
-          {
-            "enum": [
-              "GroundSurface"
-            ]
-          },
-          {
-            "enum": [
-              "WallSurface"
-            ]
-          },
-          {
-            "enum": [
-              "ClosureSurface"
-            ]
-          },
-          {
-            "enum": [
-              "OuterCeilingSurface"
-            ]
-          },
-          {
-            "enum": [
-              "OuterFloorSurface"
-            ]
-          },
-          {
-            "enum": [
-              "Window"
-            ]
-          },
-          {
-            "enum": [
-              "Door"
-            ]
-          },
-          {
-            "enum": [
-              "InteriorWallSurface"
-            ]
-          },
-          {
-            "enum": [
-              "CeilingSurface"
-            ]
-          },
-          {
-            "enum": [
-              "FloorSurface"
-            ]
-          },                              
-          {
-            "enum": [
-              "WaterSurface"
-            ]
-          },
-          {
-            "enum": [
-              "WaterGroundSurface"
-            ]
-          },
-          {
-            "enum": [
-              "WaterClosureSurface"
-            ]
-          },
-          {
-            "enum": [
-              "TrafficArea"
-            ]
-          },
-          {
-            "enum": [
-              "AuxiliaryTrafficArea"
-            ]
-          },
-          {
-            "enum": [
-              "TransportationHole"
-            ]
-          },
-          {
-            "enum": [
+              "RoofSurface",
+              "GroundSurface",
+              "WallSurface",
+              "ClosureSurface",
+              "OuterCeilingSurface",
+              "OuterFloorSurface",
+              "Window",
+              "Door",
+              "InteriorWallSurface",
+              "CeilingSurface",
+              "FloorSurface",
+              "WaterSurface",
+              "WaterGroundSurface",
+              "WaterClosureSurface",
+              "TrafficArea",
+              "AuxiliaryTrafficArea",
+              "TransportationHole",
               "TransportationMarking"
             ]
           },
           {
             "type": "string",
-            "pattern": "(\\+)\\w+"
+            "pattern": "^\\+\\w+$"
           }
         ]
       }
     },
-    "required": [ 
+    "required": [
       "type"
     ]
   },
   "Lods": {
-      "title": "Lods",
-      "enum": [
-        "0",   "1",   "2",   "3", 
-        "0.0", "0.1", "0.2", "0.3", 
-        "1.0", "1.1", "1.2", "1.3", 
-        "2.0", "2.1", "2.2", "2.3", 
-        "3.0", "3.1", "3.2", "3.3"
-      ]
+    "title": "Lods",
+    "enum": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "0.0",
+      "0.1",
+      "0.2",
+      "0.3",
+      "1.0",
+      "1.1",
+      "1.2",
+      "1.3",
+      "2.0",
+      "2.1",
+      "2.2",
+      "2.3",
+      "3.0",
+      "3.1",
+      "3.2",
+      "3.3"
+    ]
   },
-  "Solid": {
-    "title": "Solid",
-    "type": "object",
-    "properties": {
-      "type": {
-        "enum": [
-          "Solid"
-        ]
-      },
-      "lod": {
-        "$ref": "#/Lods" 
-      },
-      "boundaries": {
-        "type": "array",
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              },
-              "minItems": 1
-            },
-            "minItems": 1
-          },
-          "minItems": 1
-        },
-        "minItems": 1
-      },
-      "semantics": {
+  "$defs": {
+    "material": {
+      "type": "object",
+      "additionalProperties": {
         "type": "object",
         "properties": {
-          "surfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/Semantics"
-            }
-          },
           "values": {
             "type": [
               "array",
@@ -177,18 +90,54 @@
                 ]
               }
             }
+          },
+          "value": {
+            "type": "integer"
           }
         },
-        "required": [
-          "surfaces",
-          "values"
+        "oneOf": [
+          {
+            "required": [
+              "value"
+            ]
+          },
+          {
+            "required": [
+              "values"
+            ]
+          }
         ]
-      },
-      "material": {
-        "type": "object",
-        "additionalProperties": {
+      }
+    },
+    "MultiPoint": {
+      "title": "MultiPoint",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "MultiPoint"
+          ]
+        },
+        "lod": {
+          "$ref": "#/Lods"
+        },
+        "boundaries": {
+          "title": "MultiPointBoundaries",
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1
+        },
+        "semantics": {
           "type": "object",
           "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/Semantics"
+              }
+            },
             "values": {
               "type": [
                 "array",
@@ -196,43 +145,149 @@
               ],
               "items": {
                 "type": [
-                  "array",
+                  "integer",
                   "null"
-                ],
-                "items": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
+                ]
               }
-            },
-            "value": {
-              "type": "integer"
             }
           },
-          "oneOf": [
-            {
-              "required": [
-                "value"
-              ]
-            },
-            {
-              "required": [
-                "values"
-              ]
-            }
+          "required": [
+            "surfaces",
+            "values"
           ]
         }
       },
-      "texture": {
-        "type": "object",
-        "additionalProperties": {
+      "required": [
+        "type",
+        "lod",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    },
+    "MultiLineString": {
+      "title": "MultiLineString",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "MultiLineString"
+          ]
+        },
+        "lod": {
+          "$ref": "#/Lods"
+        },
+        "boundaries": {
+          "title": "MultiLineStringBoundaries",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "semantics": {
           "type": "object",
           "properties": {
-            "values": {
+            "surfaces": {
               "type": "array",
               "items": {
+                "$ref": "#/Semantics"
+              }
+            },
+            "values": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "surfaces",
+            "values"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "lod",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    },
+    "MultiSurface": {
+      "title": "MultiSurface",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "MultiSurface"
+          ]
+        },
+        "lod": {
+          "$ref": "#/Lods"
+        },
+        "boundaries": {
+          "title": "MultiSurfaceBoundaries",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 1
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "semantics": {
+          "type": "object",
+          "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/Semantics"
+              }
+            },
+            "values": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "surfaces",
+            "values"
+          ]
+        },
+        "material": {
+          "$ref": "#/$defs/material"
+        },
+        "texture": {
+          "title": "MultiSurfaceTexture",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
                 "type": "array",
                 "items": {
                   "type": "array",
@@ -250,30 +305,118 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "type",
+        "lod",
+        "boundaries"
+      ],
+      "additionalProperties": false
     },
-    "required": [
-      "type",
-      "lod",
-      "boundaries"
-    ],
-    "additionalProperties": false
-  },
-  "MultiSolid": {
-    "title": "MultiSolid",
-    "type": "object",
-    "properties": {
-      "type": {
-        "enum": [
-          "MultiSolid"
-        ]
+    "CompositeSurface": {
+      "title": "CompositeSurface",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "CompositeSurface"
+          ]
+        },
+        "lod": {
+          "$ref": "#/Lods"
+        },
+        "boundaries": {
+          "title": "CompositeSurfaceBoundaries",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 1
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "semantics": {
+          "type": "object",
+          "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/Semantics"
+              }
+            },
+            "values": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "surfaces",
+            "values"
+          ]
+        },
+        "material": {
+          "$ref": "#/$defs/material"
+        },
+        "texture": {
+          "title": "CompositeSurfaceTexture",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
-      "lod": {
-        "$ref": "#/Lods" 
-      },
-      "boundaries": {
-        "type": "array",
-        "items": {
+      "required": [
+        "type",
+        "lod",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    },
+    "Solid": {
+      "title": "Solid",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Solid"
+          ]
+        },
+        "lod": {
+          "$ref": "#/Lods"
+        },
+        "boundaries": {
+          "title": "SolidBoundaries",
           "type": "array",
           "items": {
             "type": "array",
@@ -292,23 +435,16 @@
           },
           "minItems": 1
         },
-        "minItems": 1
-      },
-      "semantics": {
-        "type": "object",
-        "properties": {
-          "surfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/Semantics"
-            }
-          },
-          "values": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "items": {
+        "semantics": {
+          "type": "object",
+          "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/Semantics"
+              }
+            },
+            "values": {
               "type": [
                 "array",
                 "null"
@@ -326,18 +462,95 @@
                 }
               }
             }
-          }
+          },
+          "required": [
+            "surfaces",
+            "values"
+          ]
         },
-        "required": [
-          "surfaces",
-          "values"
-        ]
+        "material": {
+          "$ref": "#/$defs/material"
+        },
+        "texture": {
+          "title": "SolidTexture",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
-      "material": {
-        "type": "object",
-        "additionalProperties": {
+      "required": [
+        "type",
+        "lod",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    },
+    "CompositeSolid": {
+      "title": "CompositeSolid",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "CompositeSolid"
+          ]
+        },
+        "lod": {
+          "$ref": "#/Lods"
+        },
+        "boundaries": {
+          "title": "CompositeSolidBoundaries",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 1
+                },
+                "minItems": 1
+              },
+              "minItems": 1
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "semantics": {
           "type": "object",
           "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/Semantics"
+              }
+            },
             "values": {
               "type": [
                 "array",
@@ -361,33 +574,23 @@
                   }
                 }
               }
-            },
-            "value": {
-              "type": "integer"
             }
           },
-          "oneOf": [
-            {
-              "required": [
-                "value"
-              ]
-            },
-            {
-              "required": [
-                "values"
-              ]
-            }
+          "required": [
+            "surfaces",
+            "values"
           ]
-        }
-      },
-      "texture": {
-        "type": "object",
-        "additionalProperties": {
+        },
+        "material": {
+          "$ref": "#/$defs/material"
+        },
+        "texture": {
+          "title": "CompositeSolidTexture",
           "type": "object",
-          "properties": {
-            "values": {
-              "type": "array",
-              "items": {
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
                 "type": "array",
                 "items": {
                   "type": "array",
@@ -396,10 +599,13 @@
                     "items": {
                       "type": "array",
                       "items": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
+                        "type": "array",
+                        "items": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        }
                       }
                     }
                   }
@@ -408,30 +614,28 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "type",
+        "lod",
+        "boundaries"
+      ],
+      "additionalProperties": false
     },
-    "required": [
-      "type",
-      "lod",
-      "boundaries"
-    ],
-    "additionalProperties": false
-  },
-  "CompositeSolid": {
-    "title": "CompositeSolid",
-    "type": "object",
-    "properties": {
-      "type": {
-        "enum": [
-          "CompositeSolid"
-        ]
-      },
-      "lod": {
-        "$ref": "#/Lods" 
-      },
-      "boundaries": {
-        "type": "array",
-        "items": {
+    "MultiSolid": {
+      "title": "MultiSolid",
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "MultiSolid"
+          ]
+        },
+        "lod": {
+          "$ref": "#/Lods"
+        },
+        "boundaries": {
+          "title": "MultiSolidBoundaries",
           "type": "array",
           "items": {
             "type": "array",
@@ -440,7 +644,11 @@
               "items": {
                 "type": "array",
                 "items": {
-                  "type": "integer"
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 1
                 },
                 "minItems": 1
               },
@@ -450,52 +658,15 @@
           },
           "minItems": 1
         },
-        "minItems": 1
-      },
-      "semantics": {
-        "type": "object",
-        "properties": {
-          "surfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/Semantics"
-            }
-          },
-          "values": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "items": {
-              "type": [
-                "array",
-                "null"
-              ],
-              "items": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "required": [
-          "surfaces",
-          "values"
-        ]
-      },
-      "material": {
-        "type": "object",
-        "additionalProperties": {
+        "semantics": {
           "type": "object",
           "properties": {
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/Semantics"
+              }
+            },
             "values": {
               "type": [
                 "array",
@@ -519,33 +690,23 @@
                   }
                 }
               }
-            },
-            "value": {
-              "type": "integer"
             }
           },
-          "oneOf": [
-            {
-              "required": [
-                "value"
-              ]
-            },
-            {
-              "required": [
-                "values"
-              ]
-            }
+          "required": [
+            "surfaces",
+            "values"
           ]
-        }
-      },
-      "texture": {
-        "type": "object",
-        "additionalProperties": {
+        },
+        "material": {
+          "$ref": "#/$defs/material"
+        },
+        "texture": {
+          "title": "MultiSolidTexture",
           "type": "object",
-          "properties": {
-            "values": {
-              "type": "array",
-              "items": {
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "values": {
                 "type": "array",
                 "items": {
                   "type": "array",
@@ -554,10 +715,13 @@
                     "items": {
                       "type": "array",
                       "items": {
-                        "type": [
-                          "integer",
-                          "null"
-                        ]
+                        "type": "array",
+                        "items": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        }
                       }
                     }
                   }
@@ -566,365 +730,13 @@
             }
           }
         }
-      }
-    },
-    "required": [
-      "type",
-      "lod",
-      "boundaries"
-    ],
-    "additionalProperties": false
-  },
-  "MultiSurface": {
-    "title": "MultiSurface",
-    "type": "object",
-    "properties": {
-      "type": {
-        "enum": [
-          "MultiSurface"
-        ]
       },
-      "lod": {
-        "$ref": "#/Lods" 
-      },
-      "boundaries": {
-        "type": "array",
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            },
-            "minItems": 1
-          },
-          "minItems": 1
-        },
-        "minItems": 1
-      },
-      "semantics": {
-        "type": "object",
-        "properties": {
-          "surfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/Semantics"
-            }
-          },
-          "values": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "items": {
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          }
-        },
-        "required": [
-          "surfaces",
-          "values"
-        ]
-      },
-      "material": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "values": {
-              "type": [
-                "array",
-                "null"
-              ],
-              "items": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              }
-            },
-            "value": {
-              "type": "integer"
-            }
-          },
-          "oneOf": [
-            {
-              "required": [
-                "value"
-              ]
-            },
-            {
-              "required": [
-                "values"
-              ]
-            }
-          ]
-        }
-      },
-      "texture": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "values": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "required": [
-      "type",
-      "lod",
-      "boundaries"
-    ],
-    "additionalProperties": false
-  },
-  "CompositeSurface": {
-    "title": "CompositeSurface",
-    "type": "object",
-    "properties": {
-      "type": {
-        "enum": [
-          "CompositeSurface"
-        ]
-      },
-      "lod": {
-        "$ref": "#/Lods" 
-      },
-      "boundaries": {
-        "type": "array",
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            },
-            "minItems": 1
-          },
-          "minItems": 1
-        },
-        "minItems": 1
-      },
-      "semantics": {
-        "type": "object",
-        "properties": {
-          "surfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/Semantics"
-            }
-          },
-          "values": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "items": {
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          }
-        },
-        "required": [
-          "surfaces",
-          "values"
-        ]
-      },
-      "material": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "values": {
-              "type": [
-                "array",
-                "null"
-              ],
-              "items": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              }
-            },
-            "value": {
-              "type": "integer"
-            }
-          },
-          "oneOf": [
-            {
-              "required": [
-                "value"
-              ]
-            },
-            {
-              "required": [
-                "values"
-              ]
-            }
-          ]
-        }
-      },
-      "texture": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "values": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "required": [
-      "type",
-      "lod",
-      "boundaries"
-    ],
-    "additionalProperties": false
-  },
-  "MultiLineString": {
-    "title": "MultiLineString",
-    "type": "object",
-    "properties": {
-      "type": {
-        "enum": [
-          "MultiLineString"
-        ]
-      },
-      "lod": {
-        "$ref": "#/Lods" 
-      },
-      "boundaries": {
-        "type": "array",
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          },
-          "minItems": 1
-        },
-        "minItems": 1
-      },
-      "semantics": {
-        "type": "object",
-        "properties": {
-          "surfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/Semantics"
-            }
-          },
-          "values": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "items": {
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          }
-        },
-        "required": [
-          "surfaces",
-          "values"
-        ]
-      }      
-    },
-    "required": [
-      "type",
-      "lod",
-      "boundaries"
-    ],
-    "additionalProperties": false
-  },
-  "MultiPoint": {
-    "title": "MultiPoint",
-    "type": "object",
-    "properties": {
-      "type": {
-        "enum": [
-          "MultiPoint"
-        ]
-      },
-      "lod": {
-        "$ref": "#/Lods" 
-      },
-      "boundaries": {
-        "type": "array",
-        "items": {
-          "type": "integer"
-        },
-        "minItems": 1
-      },
-      "semantics": {
-        "type": "object",
-        "properties": {
-          "surfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/Semantics"
-            }
-          },
-          "values": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "items": {
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
-          }
-        },
-        "required": [
-          "surfaces",
-          "values"
-        ]
-      }      
-    },
-    "required": [
-      "type",
-      "lod",
-      "boundaries"
-    ],
-    "additionalProperties": false
+      "required": [
+        "type",
+        "lod",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    }
   }
 }
