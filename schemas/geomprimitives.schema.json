@@ -2,73 +2,74 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://www.cityjson.org/schemas/2.0.1/geomprimitives.schema.json",
   "title": "CityJSON geometric primitives schema v2.0.1",
-  "Semantics": {
-    "title": "Semantics",
-    "type": "object",
-    "properties": {
-      "type": {
-        "type": "string",
-        "anyOf": [
-          {
-            "enum": [
-              "RoofSurface",
-              "GroundSurface",
-              "WallSurface",
-              "ClosureSurface",
-              "OuterCeilingSurface",
-              "OuterFloorSurface",
-              "Window",
-              "Door",
-              "InteriorWallSurface",
-              "CeilingSurface",
-              "FloorSurface",
-              "WaterSurface",
-              "WaterGroundSurface",
-              "WaterClosureSurface",
-              "TrafficArea",
-              "AuxiliaryTrafficArea",
-              "TransportationHole",
-              "TransportationMarking"
-            ]
-          },
-          {
-            "type": "string",
-            "pattern": "^\\+\\w+$"
-          }
-        ]
-      }
-    },
-    "required": [
-      "type"
-    ]
-  },
-  "Lods": {
-    "title": "Lods",
-    "enum": [
-      "0",
-      "1",
-      "2",
-      "3",
-      "0.0",
-      "0.1",
-      "0.2",
-      "0.3",
-      "1.0",
-      "1.1",
-      "1.2",
-      "1.3",
-      "2.0",
-      "2.1",
-      "2.2",
-      "2.3",
-      "3.0",
-      "3.1",
-      "3.2",
-      "3.3"
-    ]
-  },
   "$defs": {
-    "material": {
+    "Semantics": {
+      "title": "Semantics",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "anyOf": [
+            {
+              "enum": [
+                "RoofSurface",
+                "GroundSurface",
+                "WallSurface",
+                "ClosureSurface",
+                "OuterCeilingSurface",
+                "OuterFloorSurface",
+                "Window",
+                "Door",
+                "InteriorWallSurface",
+                "CeilingSurface",
+                "FloorSurface",
+                "WaterSurface",
+                "WaterGroundSurface",
+                "WaterClosureSurface",
+                "TrafficArea",
+                "AuxiliaryTrafficArea",
+                "TransportationHole",
+                "TransportationMarking"
+              ]
+            },
+            {
+              "type": "string",
+              "pattern": "^\\+\\w+$"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Lods": {
+      "title": "Lods",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "0.0",
+        "0.1",
+        "0.2",
+        "0.3",
+        "1.0",
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.0",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.0",
+        "3.1",
+        "3.2",
+        "3.3"
+      ]
+    },
+    "Material": {
+      "title": "Material",
       "type": "object",
       "additionalProperties": {
         "type": "object",
@@ -119,7 +120,7 @@
           ]
         },
         "lod": {
-          "$ref": "#/Lods"
+          "$ref": "#/$defs/Lods"
         },
         "boundaries": {
           "title": "MultiPointBoundaries",
@@ -130,12 +131,13 @@
           "minItems": 1
         },
         "semantics": {
+          "title": "MultiPointSemantics",
           "type": "object",
           "properties": {
             "surfaces": {
               "type": "array",
               "items": {
-                "$ref": "#/Semantics"
+                "$ref": "#/$defs/Semantics"
               }
             },
             "values": {
@@ -174,7 +176,7 @@
           ]
         },
         "lod": {
-          "$ref": "#/Lods"
+          "$ref": "#/$defs/Lods"
         },
         "boundaries": {
           "title": "MultiLineStringBoundaries",
@@ -189,12 +191,13 @@
           "minItems": 1
         },
         "semantics": {
+          "title": "MultiLineStringSemantics",
           "type": "object",
           "properties": {
             "surfaces": {
               "type": "array",
               "items": {
-                "$ref": "#/Semantics"
+                "$ref": "#/$defs/Semantics"
               }
             },
             "values": {
@@ -233,7 +236,7 @@
           ]
         },
         "lod": {
-          "$ref": "#/Lods"
+          "$ref": "#/$defs/Lods"
         },
         "boundaries": {
           "title": "MultiSurfaceBoundaries",
@@ -252,12 +255,13 @@
           "minItems": 1
         },
         "semantics": {
+          "title": "MultiSurfaceSemantics",
           "type": "object",
           "properties": {
             "surfaces": {
               "type": "array",
               "items": {
-                "$ref": "#/Semantics"
+                "$ref": "#/$defs/Semantics"
               }
             },
             "values": {
@@ -279,7 +283,8 @@
           ]
         },
         "material": {
-          "$ref": "#/$defs/material"
+          "title": "MultiSurfaceMaterial",
+          "$ref": "#/$defs/Material"
         },
         "texture": {
           "title": "MultiSurfaceTexture",
@@ -323,7 +328,7 @@
           ]
         },
         "lod": {
-          "$ref": "#/Lods"
+          "$ref": "#/$defs/Lods"
         },
         "boundaries": {
           "title": "CompositeSurfaceBoundaries",
@@ -342,12 +347,13 @@
           "minItems": 1
         },
         "semantics": {
+          "title": "CompositeSurfaceSemantics",
           "type": "object",
           "properties": {
             "surfaces": {
               "type": "array",
               "items": {
-                "$ref": "#/Semantics"
+                "$ref": "#/$defs/Semantics"
               }
             },
             "values": {
@@ -369,7 +375,8 @@
           ]
         },
         "material": {
-          "$ref": "#/$defs/material"
+          "title": "CompositeSurfaceMaterial",
+          "$ref": "#/$defs/Material"
         },
         "texture": {
           "title": "CompositeSurfaceTexture",
@@ -413,7 +420,7 @@
           ]
         },
         "lod": {
-          "$ref": "#/Lods"
+          "$ref": "#/$defs/Lods"
         },
         "boundaries": {
           "title": "SolidBoundaries",
@@ -436,12 +443,13 @@
           "minItems": 1
         },
         "semantics": {
+          "title": "SolidSemantics",
           "type": "object",
           "properties": {
             "surfaces": {
               "type": "array",
               "items": {
-                "$ref": "#/Semantics"
+                "$ref": "#/$defs/Semantics"
               }
             },
             "values": {
@@ -469,7 +477,8 @@
           ]
         },
         "material": {
-          "$ref": "#/$defs/material"
+          "title": "SolidMaterial",
+          "$ref": "#/$defs/Material"
         },
         "texture": {
           "title": "SolidTexture",
@@ -516,7 +525,7 @@
           ]
         },
         "lod": {
-          "$ref": "#/Lods"
+          "$ref": "#/$defs/Lods"
         },
         "boundaries": {
           "title": "CompositeSolidBoundaries",
@@ -543,12 +552,13 @@
           "minItems": 1
         },
         "semantics": {
+          "title": "CompositeSolidSemantics",
           "type": "object",
           "properties": {
             "surfaces": {
               "type": "array",
               "items": {
-                "$ref": "#/Semantics"
+                "$ref": "#/$defs/Semantics"
               }
             },
             "values": {
@@ -582,7 +592,8 @@
           ]
         },
         "material": {
-          "$ref": "#/$defs/material"
+          "title": "CompositeSolidMaterial",
+          "$ref": "#/$defs/Material"
         },
         "texture": {
           "title": "CompositeSolidTexture",
@@ -632,7 +643,7 @@
           ]
         },
         "lod": {
-          "$ref": "#/Lods"
+          "$ref": "#/$defs/Lods"
         },
         "boundaries": {
           "title": "MultiSolidBoundaries",
@@ -659,12 +670,13 @@
           "minItems": 1
         },
         "semantics": {
+          "title": "MultiSolidSemantics",
           "type": "object",
           "properties": {
             "surfaces": {
               "type": "array",
               "items": {
-                "$ref": "#/Semantics"
+                "$ref": "#/$defs/Semantics"
               }
             },
             "values": {
@@ -698,7 +710,8 @@
           ]
         },
         "material": {
-          "$ref": "#/$defs/material"
+          "title": "MultiSolidMaterial",
+          "$ref": "#/$defs/Material"
         },
         "texture": {
           "title": "MultiSolidTexture",
