@@ -115,9 +115,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "MultiPoint"
-          ]
+          "const": "MultiPoint"
         },
         "lod": {
           "$ref": "#/$defs/Lods"
@@ -171,9 +169,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "MultiLineString"
-          ]
+          "const": "MultiLineString"
         },
         "lod": {
           "$ref": "#/$defs/Lods"
@@ -231,9 +227,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "MultiSurface"
-          ]
+          "const": "MultiSurface"
         },
         "lod": {
           "$ref": "#/$defs/Lods"
@@ -323,9 +317,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "CompositeSurface"
-          ]
+          "const": "CompositeSurface"
         },
         "lod": {
           "$ref": "#/$defs/Lods"
@@ -415,9 +407,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "Solid"
-          ]
+          "const": "Solid"
         },
         "lod": {
           "$ref": "#/$defs/Lods"
@@ -520,9 +510,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "CompositeSolid"
-          ]
+          "const": "CompositeSolid"
         },
         "lod": {
           "$ref": "#/$defs/Lods"
@@ -638,9 +626,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "enum": [
-            "MultiSolid"
-          ]
+          "const": "MultiSolid"
         },
         "lod": {
           "$ref": "#/$defs/Lods"
