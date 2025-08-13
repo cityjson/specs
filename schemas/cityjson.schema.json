@@ -1,19 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://www.cityjson.org/schemas/2.0.1/cityjson.schema.json",
-  "title": "CityJSON v2.0.1",
+  "title": "CityJSON",
   "description": "CityJSON specifications v2.0.1",
   "type": "object",
   "properties": {
     "type": {
-      "enum": [
-        "CityJSON"
-      ]
+      "const": "CityJSON"
     },
     "version": {
-      "enum": [
-        "2.0"
-      ]
+      "const": "2.0"
     },
     "metadata": {
       "type": "object",
@@ -41,6 +37,7 @@
     },
     "CityObjects": {
       "type": "object",
+      "title": "CityObjects",
       "additionalProperties": {
         "oneOf": [
           {
@@ -228,25 +225,25 @@
           "items": {
             "oneOf": [
               {
-                "$ref": "geomprimitives.schema.json#/MultiPoint"
+                "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
               },
               {
-                "$ref": "geomprimitives.schema.json#/MultiLineString"
+                "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
               },
               {
-                "$ref": "geomprimitives.schema.json#/Solid"
+                "$ref": "geomprimitives.schema.json#/$defs/Solid"
               },
               {
-                "$ref": "geomprimitives.schema.json#/MultiSolid"
+                "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
               },
               {
-                "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
               },
               {
-                "$ref": "geomprimitives.schema.json#/MultiSurface"
+                "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
               },
               {
-                "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
               }
             ]
           }

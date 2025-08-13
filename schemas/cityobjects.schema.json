@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://www.cityjson.org/schemas/2.0.1/cityobjects.schema.json",
   "title": "CityJSON City Objects schema v2.0.1",
-  
   "ExtensionObject": {
+    "title": "ExtensionObject",
     "type": "object",
     "properties": {
       "type": {
@@ -16,9 +16,10 @@
     ]
   },
   "_AbstractCityObject": {
+    "title": "_AbstractCityObject",
     "properties": {
-      "attributes": { 
-        "type": "object" 
+      "attributes": {
+        "type": "object"
       },
       "parents": {
         "type": "array",
@@ -45,41 +46,41 @@
     }
   },
   "OtherConstruction": {
+    "title": "OtherConstruction",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "OtherConstruction",
         "properties": {
           "type": {
-            "enum": [
-              "OtherConstruction"
-            ]
+            "const": "OtherConstruction"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -93,13 +94,14 @@
         ]
       }
     ]
-  },  
+  },
   "_AbstractBuilding": {
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "_AbstractBuilding",
         "properties": {
           "address": {
             "type": "array",
@@ -107,7 +109,7 @@
               "type": "object",
               "properties": {
                 "location": {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 }
               }
             }
@@ -117,16 +119,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -136,16 +138,16 @@
     ]
   },
   "Building": {
+    "title": "Building",
     "allOf": [
       {
         "$ref": "#/_AbstractBuilding"
       },
       {
+        "title": "Building",
         "properties": {
           "type": {
-            "enum": [
-              "Building"
-            ]
+            "const": "Building"
           }
         },
         "required": [
@@ -155,16 +157,16 @@
     ]
   },
   "BuildingPart": {
+    "title": "BuildingPart",
     "allOf": [
       {
         "$ref": "#/_AbstractBuilding"
       },
       {
+        "title": "BuildingPart",
         "properties": {
           "type": {
-            "enum": [
-              "BuildingPart"
-            ]
+            "const": "BuildingPart"
           }
         },
         "required": [
@@ -175,41 +177,41 @@
     ]
   },
   "BuildingInstallation": {
+    "title": "BuildingInstallation",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingInstallation",
         "properties": {
           "type": {
-            "enum": [
-              "BuildingInstallation"
-            ]
+            "const": "BuildingInstallation"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -226,41 +228,41 @@
     ]
   },
   "BuildingConstructiveElement": {
+    "title": "BuildingConstructiveElement",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingConstructiveElement",
         "properties": {
           "type": {
-            "enum": [
-              "BuildingConstructiveElement"
-            ]
+            "const": "BuildingConstructiveElement"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -277,41 +279,41 @@
     ]
   },
   "BuildingFurniture": {
+    "title": "BuildingFurniture",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingFurniture",
         "properties": {
           "type": {
-            "enum": [
-              "BuildingFurniture"
-            ]
+            "const": "BuildingFurniture"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -328,32 +330,32 @@
     ]
   },
   "BuildingRoom": {
+    "title": "BuildingRoom",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingRoom",
         "properties": {
           "type": {
-            "enum": [
-              "BuildingRoom"
-            ]
+            "const": "BuildingRoom"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -367,16 +369,16 @@
     ]
   },
   "BuildingUnit": {
+    "title": "BuildingUnit",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "BuildingUnit",
         "properties": {
           "type": {
-            "enum": [
-              "BuildingUnit"
-            ]
+            "const": "BuildingUnit"
           },
           "address": {
             "type": "array",
@@ -384,65 +386,26 @@
               "type": "object",
               "properties": {
                 "location": {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 }
               }
             }
-          },          
-          "geometry": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/Solid"
-                },
-                {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
-                }
-              ]
-            }
-          }
-        },
-        "required": [
-          "type",
-          "parents"
-        ]
-      }
-    ]
-  },  
-  "BuildingStorey": {
-    "allOf": [
-      {
-        "$ref": "#/_AbstractCityObject"
-      },
-      {
-        "properties": {
-          "type": {
-            "enum": [
-              "BuildingStorey"
-            ]
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -454,8 +417,9 @@
         ]
       }
     ]
-  },  
-  "CityObjectGroup": {
+  },
+  "BuildingStorey": {
+    "title": "BuildingStorey",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -463,41 +427,80 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "CityObjectGroup"
-            ]
+            "const": "BuildingStorey"
+          },
+          "geometry": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "type",
+          "parents"
+        ]
+      }
+    ]
+  },
+  "CityObjectGroup": {
+    "title": "CityObjectGroup",
+    "allOf": [
+      {
+        "$ref": "#/_AbstractCityObject"
+      },
+      {
+        "properties": {
+          "type": {
+            "const": "CityObjectGroup"
           },
           "children_roles": {
             "type": "array",
             "description": "the role of each of the CityObjects members of that group",
             "items": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             }
-          }, 
+          },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 }
               ]
             }
@@ -511,6 +514,7 @@
     ]
   },
   "GenericCityObject": {
+    "title": "GenericCityObject",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -518,34 +522,32 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "GenericCityObject"
-            ]
+            "const": "GenericCityObject"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -561,6 +563,7 @@
     ]
   },
   "Tunnel": {
+    "title": "Tunnel",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -568,25 +571,23 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Tunnel"
-            ]
+            "const": "Tunnel"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
-                },
-                {               
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -597,8 +598,9 @@
         ]
       }
     ]
-  },  
+  },
   "TunnelPart": {
+    "title": "TunnelPart",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -606,25 +608,23 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TunnelPart"
-            ]
+            "const": "TunnelPart"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
-                },
-                {               
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
+                },
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -638,41 +638,41 @@
     ]
   },
   "TunnelInstallation": {
+    "title": "TunnelInstallation",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelInstallation",
         "properties": {
           "type": {
-            "enum": [
-              "TunnelInstallation"
-            ]
+            "const": "TunnelInstallation"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -689,41 +689,41 @@
     ]
   },
   "TunnelConstructiveElement": {
+    "title": "TunnelConstructiveElement",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelConstructiveElement",
         "properties": {
           "type": {
-            "enum": [
-              "TunnelConstructiveElement"
-            ]
+            "const": "TunnelConstructiveElement"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -740,32 +740,32 @@
     ]
   },
   "TunnelHollowSpace": {
+    "title": "TunnelHollowSpace",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelHollowSpace",
         "properties": {
           "type": {
-            "enum": [
-              "TunnelHollowSpace"
-            ]
+            "const": "TunnelHollowSpace"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -777,43 +777,43 @@
         ]
       }
     ]
-  },  
+  },
   "TunnelFurniture": {
+    "title": "TunnelFurniture",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
       },
       {
+        "title": "TunnelFurniture",
         "properties": {
           "type": {
-            "enum": [
-              "TunnelFurniture"
-            ]
+            "const": "TunnelFurniture"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -828,9 +828,9 @@
         ]
       }
     ]
-  },  
-
+  },
   "Bridge": {
+    "title": "Bridge",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -838,9 +838,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Bridge"
-            ]
+            "const": "Bridge"
           },
           "address": {
             "type": "array",
@@ -848,7 +846,7 @@
               "type": "object",
               "properties": {
                 "location": {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 }
               }
             }
@@ -858,16 +856,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
-                {               
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
-                {               
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -878,8 +876,9 @@
         ]
       }
     ]
-  },  
+  },
   "BridgePart": {
+    "title": "BridgePart",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -887,9 +886,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgePart"
-            ]
+            "const": "BridgePart"
           },
           "address": {
             "type": "array",
@@ -897,7 +894,7 @@
               "type": "object",
               "properties": {
                 "location": {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 }
               }
             }
@@ -907,16 +904,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
-                {               
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
-                {               
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                {
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -930,6 +927,7 @@
     ]
   },
   "BridgeInstallation": {
+    "title": "BridgeInstallation",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -937,34 +935,32 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeInstallation"
-            ]
+            "const": "BridgeInstallation"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -981,6 +977,7 @@
     ]
   },
   "BridgeConstructiveElement": {
+    "title": "BridgeConstructiveElement",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -988,34 +985,32 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeConstructiveElement"
-            ]
+            "const": "BridgeConstructiveElement"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -1032,6 +1027,7 @@
     ]
   },
   "BridgeRoom": {
+    "title": "BridgeRoom",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1039,25 +1035,23 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeRoom"
-            ]
+            "const": "BridgeRoom"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -1069,8 +1063,9 @@
         ]
       }
     ]
-  },  
+  },
   "BridgeFurniture": {
+    "title": "BridgeFurniture",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1078,34 +1073,32 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeFurniture"
-            ]
+            "const": "BridgeFurniture"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -1120,9 +1113,9 @@
         ]
       }
     ]
-  },  
-
+  },
   "_AbstractTransportationComplex": {
+    "title": "_AbstractTransportationComplex",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1134,13 +1127,13 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 }
               ]
             }
@@ -1150,6 +1143,7 @@
     ]
   },
   "Road": {
+    "title": "Road",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1157,9 +1151,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Road"
-            ]
+            "const": "Road"
           }
         },
         "required": [
@@ -1169,6 +1161,7 @@
     ]
   },
   "Railway": {
+    "title": "Railway",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1176,9 +1169,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Railway"
-            ]
+            "const": "Railway"
           }
         },
         "required": [
@@ -1188,6 +1179,7 @@
     ]
   },
   "TransportSquare": {
+    "title": "TransportSquare",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1195,9 +1187,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TransportSquare"
-            ]
+            "const": "TransportSquare"
           }
         },
         "required": [
@@ -1207,6 +1197,7 @@
     ]
   },
   "Waterway": {
+    "title": "Waterway",
     "allOf": [
       {
         "$ref": "#/_AbstractTransportationComplex"
@@ -1214,9 +1205,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Waterway"
-            ]
+            "const": "Waterway"
           }
         },
         "required": [
@@ -1226,6 +1215,7 @@
     ]
   },
   "TINRelief": {
+    "title": "TINRelief",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1233,16 +1223,14 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TINRelief"
-            ]
+            "const": "TINRelief"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 }
               ]
             }
@@ -1255,6 +1243,7 @@
     ]
   },
   "WaterBody": {
+    "title": "WaterBody",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1262,28 +1251,26 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "WaterBody"
-            ]
+            "const": "WaterBody"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 }
               ]
             }
@@ -1296,6 +1283,7 @@
     ]
   },
   "PlantCover": {
+    "title": "PlantCover",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1303,28 +1291,26 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "PlantCover"
-            ]
+            "const": "PlantCover"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 }
               ]
             }
@@ -1337,6 +1323,7 @@
     ]
   },
   "SolitaryVegetationObject": {
+    "title": "SolitaryVegetationObject",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1344,34 +1331,32 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "SolitaryVegetationObject"
-            ]
+            "const": "SolitaryVegetationObject"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"
@@ -1387,6 +1372,7 @@
     ]
   },
   "LandUse": {
+    "title": "LandUse",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1394,19 +1380,17 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "LandUse"
-            ]
+            "const": "LandUse"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 }
               ]
             }
@@ -1419,6 +1403,7 @@
     ]
   },
   "CityFurniture": {
+    "title": "CityFurniture",
     "allOf": [
       {
         "$ref": "#/_AbstractCityObject"
@@ -1426,34 +1411,32 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "CityFurniture"
-            ]
+            "const": "CityFurniture"
           },
           "geometry": {
             "type": "array",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiPoint"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiPoint"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiLineString"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiLineString"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSurface"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSurface"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/Solid"
+                  "$ref": "geomprimitives.schema.json#/$defs/Solid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/CompositeSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/CompositeSolid"
                 },
                 {
-                  "$ref": "geomprimitives.schema.json#/MultiSolid"
+                  "$ref": "geomprimitives.schema.json#/$defs/MultiSolid"
                 },
                 {
                   "$ref": "geomtemplates.schema.json#/GeometryInstance"

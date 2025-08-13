@@ -1,16 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CityJSONFeature v2.0.1",
-  "$id": "https://www.cityjson.org/schemas/2.0.1/cityjsonfeature.schema.json",  
+  "$id": "https://www.cityjson.org/schemas/2.0.1/cityjsonfeature.schema.json",
   "description": "CityJSONFeature schema v2.0.1",
   "type": "object",
   "properties": {
     "type": {
-      "enum": [
-        "CityJSONFeature"
-      ]
+      "const": "CityJSONFeature"
     },
-    "id": { "type": "string" },
+    "id": {
+      "type": "string"
+    },
     "CityObjects": {
       "type": "object",
       "additionalProperties": {
@@ -68,7 +68,7 @@
           },
           {
             "$ref": "cityobjects.schema.json#/GenericCityObject"
-          },          
+          },
           {
             "$ref": "cityobjects.schema.json#/LandUse"
           },
