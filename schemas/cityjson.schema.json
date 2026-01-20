@@ -30,12 +30,11 @@
           },
           "version": {
             "type": "string",
-            "pattern": "^(\\d+\\.)(\\d+)$"
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:\\.(0|[1-9]\\d*))?$"
           }
         },
         "required": [
-          "url",
-          "version"
+          "url"
         ]
       }
     },

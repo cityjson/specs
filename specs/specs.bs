@@ -1643,12 +1643,11 @@ In the example below we have two Extensions: one named "Noise" and one named "So
   "version": "2.0",
   "extensions": {
     "Noise": {
-      "url" : "https://someurl.org/noise.json",
-      "version": "2.0"
+      "url" : "https://cityjson.github.io/extensions/noise/0.9.0/schema.ext.json"
     },
     "Solar_Potential": {
       "url" : "https://someurl.org/solar.json",
-      "version": "0.8"
+      "version": "0.8.1"
     }
   },
   "CityObjects": {},
@@ -1678,7 +1677,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
   "name": "Noise",
   "description": "Extension to model the noise",
   "url": "https://someurl.org/noise.ext.json",
-  "version": "0.5",
+  "version": "0.5.1",
   "versionCityJSON": "2.0",
   "extraAttributes": {},
   "extraCityObjects": {},
@@ -1734,7 +1733,7 @@ And a CityJSON file would look like this:
   "extensions": {
     "Census": {
       "url": "https://someurl.org/census.ext.json",
-      "version": "0.7"
+      "version": "0.7.2"
     }
   },
   "CityObjects": {...},
