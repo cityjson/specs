@@ -1,59 +1,69 @@
-import os
-import sys
 import json
+from pathlib import Path
+from urllib.request import urlopen
 
-import jsonref #-- works *only* with json v0.2
-import importlib.metadata 
-if importlib.metadata.version('jsonref') != '0.2':
-    print("ERROR: you need jsonref v0.2: 'pip install jsonref==0.2'")
-    sys.exit()
+import jsonref  # works with jsonref >= 1.1.0
+
+
+def unproxy(obj):
+    """Recursively convert jsonref proxy objects to plain Python objects."""
+    if isinstance(obj, jsonref.JsonRef):
+        # Dereference the proxy and recurse
+        return unproxy(obj.__subject__)
+    elif isinstance(obj, dict):
+        return {k: unproxy(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [unproxy(item) for item in obj]
+    else:
+        return obj
+
+
+def load_schema_with_refs(schema_path: Path) -> dict:
+    """Load a JSON schema and resolve all $ref references."""
+    base_uri = schema_path.parent.as_uri() + "/"
+
+    def loader(uri):
+        """Custom loader for file:// URIs."""
+        if uri.startswith("file://"):
+            with urlopen(uri) as f:
+                return json.load(f)
+        # For relative refs, jsonref handles them with base_uri
+        with open(uri) as f:
+            return json.load(f)
+
+    with open(schema_path) as f:
+        schema = jsonref.load(f, base_uri=base_uri, loader=loader)
+
+    # Convert proxy objects to plain dicts
+    return unproxy(schema)
 
 
 #----------------------------
 # cityjson.schema.json
 #----------------------------
-root_schema = os.path.abspath('../schemas/cityjson.schema.json')
-fins = open(root_schema)
+root_schema = Path(__file__).parent.parent / "schemas" / "cityjson.schema.json"
 
-abs_path = os.path.abspath(os.path.dirname(root_schema))
-base_uri = 'file://{}/'.format(abs_path)
+js = load_schema_with_refs(root_schema)
 
-js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
+# -- output stitched_schema (for debugging)
+temp_path = Path(__file__).parent / "temp.json"
+with open(temp_path, "w") as f:
+    json.dump(js, f, indent=2)
 
-# -- output stitched_schema
-json_str = jsonref.dumps(js, indent=2)
-# json_str = jsonref.dumps(js, separators=(',',':')) #-- this doesn't work: WTF
-opath = os.path.abspath('temp.json')
-f = open(opath, "w")
-f.write(json_str)
-
-f2 = open('./temp.json')
-j2 = json.loads(f2.read())
-json_str2 = json.dumps(j2, separators=(',',':'))
-f = open("../schemas/cityjson.min.schema.json", "w")
-f.write(json_str2)
+# -- output minified schema
+min_path = Path(__file__).parent.parent / "schemas" / "cityjson.min.schema.json"
+with open(min_path, "w") as f:
+    json.dump(js, f, separators=(",", ":"))
 
 
 #----------------------------
 # cityjsonfeature.schema.json
 #----------------------------
-root_schema = os.path.abspath('../schemas/cityjsonfeature.schema.json')
-fins = open(root_schema)
+root_schema_feature = Path(__file__).parent.parent / "schemas" / "cityjsonfeature.schema.json"
 
-abs_path = os.path.abspath(os.path.dirname(root_schema))
-base_uri = 'file://{}/'.format(abs_path)
+js_feature = load_schema_with_refs(root_schema_feature)
 
-js = jsonref.loads(fins.read(), jsonschema=True, base_uri=base_uri)
-
-# -- output stitched_schema
-json_str = jsonref.dumps(js, indent=2)
-# json_str = jsonref.dumps(js, separators=(',',':')) #-- this doesn't work: WTF
-opath = os.path.abspath('temp.json')
-f = open(opath, "w")
-f.write(json_str)
-
-f2 = open('./temp.json')
-j2 = json.loads(f2.read())
-json_str2 = json.dumps(j2, separators=(',',':'))
-f = open("../schemas/cityjsonfeature.min.schema.json", "w")
-f.write(json_str2)
+# -- output minified schema
+min_path_feature = Path(__file__).parent.parent / "schemas" / "cityjsonfeature.min.schema.json"
+with open(min_path_feature, "w") as f:
+    json.dump(js_feature, f, separators=(",", ":"))
