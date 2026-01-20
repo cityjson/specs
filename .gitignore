@@ -29,3 +29,5 @@ libthirdparty.a
 /specs/specs.html
 # local temporary files, notes etc.
 /tmp/
+specs/temp.html
+misc/temp.json
