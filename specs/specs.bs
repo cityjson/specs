@@ -1689,7 +1689,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
 <div class="note">
   Simple Extension files (`.ext.json`) can be built with a GUI at [https://www.cityjson.org/extensions/builder/](https://www.cityjson.org/extensions/builder/).
 
-  Extensions are best hosted on the [Official CityJSON registry on GitHub](https://github.com/cityjson/extensions) (but do not have to, as long as they are publicly accessible).
+  Extensions are best hosted on the [official CityJSON Extensions registry on GitHub](https://github.com/cityjson/extensions) (but do not have to, as long as they are publicly accessible).
 </div>
 
 <div class="note">
