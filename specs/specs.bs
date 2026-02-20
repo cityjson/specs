@@ -1642,11 +1642,11 @@ In the example below we have two Extensions: one named "Noise" and one named "So
   "type": "CityJSON",
   "version": "2.0",
   "extensions": {
-    "Noise": {
-      "url" : "https://cityjson.github.io/extensions/noise/0.9.0/schema.ext.json"
+    "noise": {
+      "url" : "https://cityjson.github.io/extensions/noise/2.0.0/noise.ext.json"
     },
-    "Solar_Potential": {
-      "url" : "https://someurl.org/solar.json",
+    "solar-potential": {
+      "url" : "https://someurl.org/solar-potential.ext.json",
       "version": "0.8.1"
     }
   },
@@ -1674,9 +1674,9 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
 ```json
 {
   "type": "CityJSONExtension",
-  "name": "Noise",
+  "name": "noise",
   "description": "Extension to model the noise",
-  "url": "https://someurl.org/noise.ext.json",
+  "url": "https://cityjson.github.io/extensions/noise/2.0.0/noise.ext.json",
   "version": "0.5.1",
   "versionCityJSON": "2.0",
   "extraAttributes": {},
@@ -1688,6 +1688,8 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
 
 <div class="note">
   Simple Extension files (`schema.ext.json`) can be built with a GUI at [https://www.cityjson.org/extensions/builder/](https://www.cityjson.org/extensions/builder/).
+
+  Extensions are best hosted on the [Official CityJSON registry on GitHub](https://github.com/cityjson/extensions) (but do not have to, as long as they are publicly accessible).
 </div>
 
 <div class="note">
@@ -1735,7 +1737,7 @@ And a CityJSON file would look like this:
   "type": "CityJSON",
   "version": "2.0",
   "extensions": {
-    "Census": {
+    "census": {
       "url": "https://someurl.org/census.ext.json",
       "version": "0.7.2"
     }
