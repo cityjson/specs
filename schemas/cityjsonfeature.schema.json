@@ -174,4 +174,13 @@
     "vertices"
   ],
   "additionalProperties": false
-}
+}  "not": {
+    "anyOf": [
+      { "required": ["transform"] },
+      { "required": ["version"] },
+      { "required": ["metadata"] },
+      { "required": ["geometry-templates"] },
+      { "required": ["extensions"] }
+    ]
+  },
+  "additionalProperties": true

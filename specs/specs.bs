@@ -1503,7 +1503,7 @@ A CityJSON Feature Object:
   - **must** have one member with the name `"CityObjects"`. The value is a collection of key-value pairs, where the key is the ID of the object, and the value is one City Object. The ID of a City Object should be unique (within one `"CityJSONFeature"`), and all the children of the `"CityJSONFeature"` must be included (and the children of the children (recursively), if there are any).
   - **must** have one member with the name `"vertices"`. The value is an array of coordinates of each vertex of the current City Object Feature (stored with integers). Their position in this array (0-based) is used as an index to be referenced by the Geometry Objects for the JSON object (warning: the vertices are local to the JSON object).
   - **may** have one member with the name `"appearance"`. The value may contain JSON objects representing the textures and/or materials of surfaces. See [[#appearance-object]] for details.
-  - **must not** have other members.
+  - **may** have other members.
     
 ```json
 {
