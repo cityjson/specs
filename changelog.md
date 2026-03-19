@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.2] - 2026-XX-XX
+### Changed
+- Allow `CityJSONFeature` to have extra properties, useful for OGCAPI-Features
+- For Extensions, the version can be X.Y.Z; it was stupidly only X.Y and I don't know why
+- Replace all `"enum"` with one value by `"const"` in the schemas (it's the same, just better for some languages)
+
+
 ## [2.0.1] - 2024-04-11
 ### Changed
 - "metadata" allows additional non-listed properties (than the 6 by ISO). For more structured metadata it is advised to make use of the metadata-extended Extension
