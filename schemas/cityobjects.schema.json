@@ -52,9 +52,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "OtherConstruction"
-            ]
+            "const": "OtherConstruction"
           },
           "geometry": {
             "type": "array",
@@ -143,9 +141,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Building"
-            ]
+            "const": "Building"
           }
         },
         "required": [
@@ -162,9 +158,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BuildingPart"
-            ]
+            "const": "BuildingPart"
           }
         },
         "required": [
@@ -182,9 +176,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BuildingInstallation"
-            ]
+            "const": "BuildingInstallation"
           },
           "geometry": {
             "type": "array",
@@ -233,9 +225,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BuildingConstructiveElement"
-            ]
+            "const": "BuildingConstructiveElement"
           },
           "geometry": {
             "type": "array",
@@ -284,9 +274,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BuildingFurniture"
-            ]
+            "const": "BuildingFurniture"
           },
           "geometry": {
             "type": "array",
@@ -335,9 +323,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BuildingRoom"
-            ]
+            "const": "BuildingRoom"
           },
           "geometry": {
             "type": "array",
@@ -374,9 +360,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BuildingUnit"
-            ]
+            "const": "BuildingUnit"
           },
           "address": {
             "type": "array",
@@ -424,9 +408,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BuildingStorey"
-            ]
+            "const": "BuildingStorey"
           },
           "geometry": {
             "type": "array",
@@ -463,9 +445,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "CityObjectGroup"
-            ]
+            "const": "CityObjectGroup"
           },
           "children_roles": {
             "type": "array",
@@ -518,9 +498,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "GenericCityObject"
-            ]
+            "const": "GenericCityObject"
           },
           "geometry": {
             "type": "array",
@@ -568,9 +546,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Tunnel"
-            ]
+            "const": "Tunnel"
           },
           "geometry": {
             "type": "array",
@@ -606,9 +582,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TunnelPart"
-            ]
+            "const": "TunnelPart"
           },
           "geometry": {
             "type": "array",
@@ -645,9 +619,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TunnelInstallation"
-            ]
+            "const": "TunnelInstallation"
           },
           "geometry": {
             "type": "array",
@@ -696,9 +668,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TunnelConstructiveElement"
-            ]
+            "const": "TunnelConstructiveElement"
           },
           "geometry": {
             "type": "array",
@@ -747,9 +717,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TunnelHollowSpace"
-            ]
+            "const": "TunnelHollowSpace"
           },
           "geometry": {
             "type": "array",
@@ -786,9 +754,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TunnelFurniture"
-            ]
+            "const": "TunnelFurniture"
           },
           "geometry": {
             "type": "array",
@@ -838,9 +804,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Bridge"
-            ]
+            "const": "Bridge"
           },
           "address": {
             "type": "array",
@@ -887,9 +851,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgePart"
-            ]
+            "const": "BridgePart"
           },
           "address": {
             "type": "array",
@@ -937,9 +899,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeInstallation"
-            ]
+            "const": "BridgeInstallation"
           },
           "geometry": {
             "type": "array",
@@ -988,9 +948,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeConstructiveElement"
-            ]
+            "const": "BridgeConstructiveElement"
           },
           "geometry": {
             "type": "array",
@@ -1039,9 +997,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeRoom"
-            ]
+            "const": "BridgeRoom"
           },
           "geometry": {
             "type": "array",
@@ -1078,9 +1034,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "BridgeFurniture"
-            ]
+            "const": "BridgeFurniture"
           },
           "geometry": {
             "type": "array",
@@ -1157,9 +1111,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Road"
-            ]
+            "const": "Road"
           }
         },
         "required": [
@@ -1176,9 +1128,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Railway"
-            ]
+            "const": "Railway"
           }
         },
         "required": [
@@ -1195,9 +1145,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TransportSquare"
-            ]
+            "const": "TransportSquare"
           }
         },
         "required": [
@@ -1214,9 +1162,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "Waterway"
-            ]
+            "const": "Waterway"
           }
         },
         "required": [
@@ -1233,9 +1179,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "TINRelief"
-            ]
+            "const": "TINRelief"
           },
           "geometry": {
             "type": "array",
@@ -1262,9 +1206,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "WaterBody"
-            ]
+            "const": "WaterBody"
           },
           "geometry": {
             "type": "array",
@@ -1303,9 +1245,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "PlantCover"
-            ]
+            "const": "PlantCover"
           },
           "geometry": {
             "type": "array",
@@ -1344,9 +1284,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "SolitaryVegetationObject"
-            ]
+            "const": "SolitaryVegetationObject"
           },
           "geometry": {
             "type": "array",
@@ -1394,9 +1332,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "LandUse"
-            ]
+            "const": "LandUse"
           },
           "geometry": {
             "type": "array",
@@ -1426,9 +1362,7 @@
       {
         "properties": {
           "type": {
-            "enum": [
-              "CityFurniture"
-            ]
+            "const": "CityFurniture"
           },
           "geometry": {
             "type": "array",

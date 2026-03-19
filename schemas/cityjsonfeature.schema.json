@@ -6,9 +6,7 @@
   "type": "object",
   "properties": {
     "type": {
-      "enum": [
-        "CityJSONFeature"
-      ]
+      "const": "CityJSONFeature"
     },
     "id": { "type": "string" },
     "CityObjects": {

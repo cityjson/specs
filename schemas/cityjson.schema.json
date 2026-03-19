@@ -6,14 +6,10 @@
   "type": "object",
   "properties": {
     "type": {
-      "enum": [
-        "CityJSON"
-      ]
+      "const": "CityJSON"
     },
     "version": {
-      "enum": [
-        "2.0"
-      ]
+      "const": "2.0"
     },
     "metadata": {
       "type": "object",

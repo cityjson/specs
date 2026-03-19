@@ -9,94 +9,58 @@
         "type": "string",
         "oneOf": [
           {
-            "enum": [
-              "RoofSurface"
-            ]
+            "const": "RoofSurface"
           },
           {
-            "enum": [
-              "GroundSurface"
-            ]
+            "const": "GroundSurface"
           },
           {
-            "enum": [
-              "WallSurface"
-            ]
+            "const": "WallSurface"
           },
           {
-            "enum": [
-              "ClosureSurface"
-            ]
+            "const": "ClosureSurface"
           },
           {
-            "enum": [
-              "OuterCeilingSurface"
-            ]
+            "const": "OuterCeilingSurface"
           },
           {
-            "enum": [
-              "OuterFloorSurface"
-            ]
+            "const": "OuterFloorSurface"
           },
           {
-            "enum": [
-              "Window"
-            ]
+            "const": "Window"
           },
           {
-            "enum": [
-              "Door"
-            ]
+            "const": "Door"
           },
           {
-            "enum": [
-              "InteriorWallSurface"
-            ]
+            "const": "InteriorWallSurface"
           },
           {
-            "enum": [
-              "CeilingSurface"
-            ]
+            "const": "CeilingSurface"
           },
           {
-            "enum": [
-              "FloorSurface"
-            ]
+            "const": "FloorSurface"
           },                              
           {
-            "enum": [
-              "WaterSurface"
-            ]
+            "const": "WaterSurface"
           },
           {
-            "enum": [
-              "WaterGroundSurface"
-            ]
+            "const": "WaterGroundSurface"
           },
           {
-            "enum": [
-              "WaterClosureSurface"
-            ]
+            "const": "WaterClosureSurface"
           },
           {
-            "enum": [
-              "TrafficArea"
-            ]
+            "const": "TrafficArea"
           },
           {
-            "enum": [
-              "AuxiliaryTrafficArea"
-            ]
+            "const": "AuxiliaryTrafficArea"
           },
           {
-            "enum": [
-              "TransportationHole"
-            ]
+            "const": "TransportationHole"
           },
           {
-            "enum": [
-              "TransportationMarking"
-            ]
+            "const": "TransportationMarking"
           },
           {
             "type": "string",
@@ -122,9 +86,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "Solid"
-        ]
+        "const": "Solid"
       },
       "lod": {
         "$ref": "#/Lods" 
@@ -260,9 +222,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "MultiSolid"
-        ]
+        "const": "MultiSolid"
       },
       "lod": {
         "$ref": "#/Lods" 
@@ -417,9 +377,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "CompositeSolid"
-        ]
+        "const": "CompositeSolid"
       },
       "lod": {
         "$ref": "#/Lods" 
@@ -574,9 +532,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "MultiSurface"
-        ]
+        "const": "MultiSurface"
       },
       "lod": {
         "$ref": "#/Lods" 
@@ -693,9 +649,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "CompositeSurface"
-        ]
+        "const": "CompositeSurface"
       },
       "lod": {
         "$ref": "#/Lods" 
@@ -812,9 +766,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "MultiLineString"
-        ]
+        "const": "MultiLineString"
       },
       "lod": {
         "$ref": "#/Lods" 
@@ -869,9 +821,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "MultiPoint"
-        ]
+        "const": "MultiPoint"
       },
       "lod": {
         "$ref": "#/Lods" 

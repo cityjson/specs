@@ -6,9 +6,7 @@
     "type": "object",
     "properties": {
       "type": {
-        "enum": [
-          "GeometryInstance"
-        ]
+        "const": "GeometryInstance"
       },
       "template": {
         "type": "integer"
