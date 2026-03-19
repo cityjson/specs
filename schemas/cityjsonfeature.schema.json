@@ -173,8 +173,7 @@
     "CityObjects",
     "vertices"
   ],
-  "additionalProperties": false
-}  "not": {
+  "not": {
     "anyOf": [
       { "required": ["transform"] },
       { "required": ["version"] },
@@ -184,3 +183,4 @@
     ]
   },
   "additionalProperties": true
+}
