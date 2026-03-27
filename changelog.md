@@ -8,11 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [2.0.2] - 2026-XX-XX
+## [2.0.2] - 2026-03-27
 ### Changed
-- Allow `CityJSONFeature` to have extra properties, useful for OGCAPI-Features
-- For Extensions, the version can be X.Y.Z; it was stupidly only X.Y and I don't know why
+- Allow `CityJSONFeature` to have extra properties, useful for OGCAPI-Features (`"links"` is now allowed)
 - Replace all `"enum"` with one value by `"const"` in the schemas (it's the same, just better for some languages)
+- Small improvements to the specifications text
+- For Extensions, the version can be X.Y.Z; it was stupidly only X.Y and we don't know why. Now fixed.
+- Pointing to the new CityJSON Extensions Registry in the specifications text (<https://github.com/cityjson/extensions>)
 
 
 ## [2.0.1] - 2024-04-11
@@ -188,6 +190,7 @@ Minor changes to the schemas for omissions/errors, harmonised the specs text sli
 - first beta release of CityJSON
 
 
+[2.0.2]: https://github.com/tudelft3d/cityjson/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/tudelft3d/cityjson/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/tudelft3d/cityjson/compare/1.1.3...2.0.0
 [1.1.3]: https://github.com/tudelft3d/cityjson/compare/1.1.2...1.1.3
