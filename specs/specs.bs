@@ -106,7 +106,10 @@ An "empty" but complete CityJSON object will look like this:
   "CityObjects": {},
   "vertices": [],
   "appearance": {},
-  "geometry-templates": {}
+  "geometry-templates": {
+    "templates": [],
+    "vertices-templates": []
+  }
 }
 ```
 
@@ -1147,6 +1150,7 @@ v[2] = (vi[2] * ["transform"]["scale"][2]) + ["transform"]["translate"][2]
 # Metadata
 
 The core of CityJSON supports the following six properties, which are compliant with the international standard [ISO19115](https://www.iso.org/standard/53798.html).
+All six main Metadata properties are optional.
 
 ```json
 "metadata": {
