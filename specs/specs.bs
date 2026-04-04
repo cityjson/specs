@@ -626,6 +626,8 @@ Four City Objects are related to transportation:
   - `"Waterway"`
   - `"TransportSquare"` (to model for instance parking lots and squares)
 
+The geometry of a City Object of the transportation types (`"Road"`, `"Railway"`, `"Waterway"`, `"TransportSquare"`) can only be represented with these Geometry Objects: (1) `"MultiLineString"`, (2) `"MultiSurface"`, (3) `"CompositeSurface"`.
+
 Observe that the "Section", "Intersection", and "Track" classes from CityGML are omitted because they can be easily specified using specific attributes.
 
 ```json
