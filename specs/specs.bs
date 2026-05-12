@@ -207,8 +207,8 @@ Note that any valid JSON value (including an array and/or object) is a valid att
       "area-parcel": {
         "value": 437,
         "uom": "m2"
-      },
-    },
+      }
+    }
     "geometry": [{...}]
   },
   "id-2": {
@@ -741,7 +741,7 @@ The geometry of a City Object of type `"WaterBody"` can only be represented with
 "mygreatlake": {
   "type": "WaterBody", 
   "attributes": {
-    "usage": "leisure",
+    "usage": "leisure"
   },
   "geometry": [{
     "type": "Solid",
@@ -962,7 +962,7 @@ Also:
   - the value of `"values"` is a hierarchy of arrays with integers. The depth depends on the Geometry object: for `MultiPoint` and `MultiLineString` this is a simple array of integers; for any other geometry type it is two less than the array `"boundaries"`. An integer refers to the index in the `"surfaces"` array of the same geometry, and it is 0-based. If one surface has no semantics, a value of `null` must be used.
 
 <div class="note">
-  For legacy reasons, we use `"surfaces"` to name the array of Semantic Objects. Nevertheless, this member is used for points and linestrings of `MultiPoints` and `MultiLineStrings`, as well.
+  For legacy reasons, we use `"surfaces"` to name the array of Semantic Objects. Nevertheless, this member is used for points and linestrings of `MultiPoint` and `MultiLineString`, as well.
 </div>
 
 ```json
@@ -1056,10 +1056,10 @@ Observe that the geometry of a template can have semantic surfaces, and that app
       "semantics": {
         "surfaces" : [
           {
-            "type": "+Skylight",
+            "type": "+Skylight"
           },
           {
-            "type": "+PatioDoor",
+            "type": "+PatioDoor"
           }
         ],
         "values": [0, 0, 1]
@@ -1134,7 +1134,7 @@ A CityJSON object must therefore have one member `"transform"`, whose values are
 
 The [scheme of TopoJSON (called quantization)](https://github.com/topojson/topojson-specification/blob/master/README.md#212-transforms) is reused, and here we simply add a third coordinate because our vertices are embedded in 3D space.
 
-It should be noticed that only the `"vertices"` at the root of the CityJSON object are affected by the transformation, the vertices for the Geometric templates and textures are not.
+It should be noticed that only the `"vertices"` at the root of the CityJSON object are affected by the transformation, the vertices for the Geometry templates and textures are not.
 
 We can obtain the real coordinates of a given vertex *v*, from the *vi* values listed in the `"vertices"` member as follows:
 
@@ -1213,7 +1213,7 @@ This is a JSON object that
   - **may** have one member with the name `"contactType"`. The value is a string which is either `"individual"` or `"organization"`. For an `"organization"`, the `"website"` can also be given.
   - **may** have one member with the name `"address"`. The value is a JSON object and any properties can be used, to accommodate the different ways addresses are structured in different countries.
   - **may** have one member with the name `"phone"`. The value is a string with the phone number.
-  - **may** have one member with the name `"organization"`. The value is the name of the organisation, to be used if the `"contactName"` is the name of a person.
+  - **may** have one member with the name `"organization"`. The value is the name of the organization, to be used if the `"contactName"` is the name of a person.
 
 ```json
 "pointOfContact": {
@@ -1222,7 +1222,7 @@ This is a JSON object that
   "phone": "+1-613-992-4211",
   "address": {
     "thoroughfareNumber": "24",
-    "thoroughfareName": "Sussez Drive",
+    "thoroughfareName": "Sussex Drive",
     "postcode": "H0H 0H0",
     "locality": "Ottawa",
     "country": "Canada"
@@ -1256,7 +1256,7 @@ The date when the dataset was compiled, without the time of the day, only a `"fu
 The coordinate reference system (CRS) is given as a URL formatted according to the [OGC Name Type Specification](https://docs.opengeospatial.org/pol/09-048r5.html#_production_rule_for_specification_element_names): 
 
 ```
-http://www.opengis.net/def/crs/{authority}/{version}/{code}
+https://www.opengis.net/def/crs/{authority}/{version}/{code}
 ```
 
 where `{authority}` designates the authority responsible for the definition of this CRS (usually "EPSG" or "OGC"), and where `{version}` designates the specific version of the CRS ("0" (zero) is used if there is no version).
@@ -1272,7 +1272,7 @@ For instance, the Dutch national CRS in 3D:
 Be aware that the CRS should be a three-dimensional one, ie the elevation/height values should be with respect to a specific datum.
 
 <div class="note"> 
-  Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different CRS from the other walls in the same the building), in CityJSON all the city objects need to be in the same CRS.
+  Unlike in (City)GML where each object can have a different CRS (eg a wall of a building could theoretically have a different CRS from the other walls in the same the building), in CityJSON all the City Objects need to be in the same CRS.
 </div>  
 
 
@@ -1322,7 +1322,7 @@ An Appearance Object is a JSON object that
 
 Each surface in a Geometry Object can have one or more materials assigned to it. To store the material of a surface, a Geometry Object may have a member `"material"`. The value of this member is a collection of key-value pairs, where the key is the *theme* of the material, and the value is one JSON object that **must** contain either:
 
-  - one member `"values"`. The value is a hierarchy of arrays with integers. Each integer refers to the position (0-based) in the `"materials"` member of the `"appearance"` member of the CityJSON object. If a surface has no material, then `null` should be used in the array. The depth of the array depends on the Geometry object, and is equal to the depth of the `"boundary"` array minus 2, because each surface (`[[]]`) gets one material.
+  - one member `"values"`. The value is a hierarchy of arrays with integers. Each integer refers to the position (0-based) in the `"materials"` member of the `"appearance"` member of the CityJSON object. If a surface has no material, then `null` should be used in the array. The depth of the array depends on the Geometry object, and is equal to the depth of the `"boundaries"` array minus 2, because each surface (`[[]]`) gets one material.
   - one member `"value"`. The value is one integer referring to the position (0-based) in the `"materials"` member of the `"appearance"` member of the CityJSON object. This is used because often the materials are used to colour full objects, and repetition of materials is not necessary.
 
 In the following example, the Solid has 4 surfaces, and there are 2 themes ("irradiation" and "irradiation-2"). These could represent, for instance, the different colours based on different scenarios of an solar irradiation analysis. Notice that the last surface gets no material (for both themes), thus `null` is used.
@@ -1350,7 +1350,7 @@ In the following example, the Solid has 4 surfaces, and there are 2 themes ("irr
 
 To store the texture(s) of a surface, a Geometry Object may have a member with the name `"texture"`. Its value is a collection of key-value pairs, where the key is the *theme* of the textures, and the value is one JSON object that must contain one member `"values"`, which is a hierarchy of arrays with integers. For each ring of each surface, the first value refers to the position (0-based) in the `"textures"` member of the `"appearance"` member of the CityJSON object. The other indices refer to the UV positions of the corresponding vertices (as listed in the `"boundaries"` member of the geometry). Therefore, each array representing a ring has one more value than the number of vertices in the ring.
 
-The depth of the array depends on the Geometry object, and is equal to the depth of the `"boundary"` array.
+The depth of the array depends on the Geometry object, and is equal to the depth of the `"boundaries"` array.
 
 In the following example, the Solid has 4 surfaces, and there are 2 themes: "winter-textures" and "summer-textures" could for instance represent the textures during winter and summer. Notice that the last 2 surfaces of the first theme gets no texture, thus the value `null` is used.
 
@@ -1442,7 +1442,7 @@ A Texture Object:
 ```json
 "textures": [
   {
-    "type": "PNG",
+    "type": "JPG",
     "image": "http://www.someurl.org/filename.jpg"
   },
   {
@@ -1489,7 +1489,7 @@ Each part becomes a CityJSON file.
 
 ## Text sequences and streaming with CityJSONFeature
 
-Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in a [JSON Text Sequences](https://datatracker.ietf.org/doc/html/rfc7464) (one example being [JSON Lines](https://jsonlines.org)).
+Another solution is to decompose a CityJSON object into its *features* (the City Objects), create several JSON objects, and store them in [JSON Text Sequences](https://datatracker.ietf.org/doc/html/rfc7464) (one example being [JSON Lines](https://jsonlines.org)).
 This is a format to store several JSON objects in a single file, and allows the processing of each object one at a time.
 
 A CityJSON Feature Object allows the storage of a single feature, for instance a `"Building"` together with its children (of type `"BuildingPart"` and/or `"BuildingInstallation"`).
@@ -1659,7 +1659,7 @@ In the example below we have two Extensions: one named "Noise" and one named "So
 
 ## The Extension file
 
-A CityJSON Extension is a JSON object, and it **must** have the following 8 members:
+A CityJSON Extension is a JSON object, and it **must** have the following 9 members:
 
   1.  one member with the name `"type"`. The value must be `"CityJSONExtension"`.
   1.  one member with the name `"name"`. The value must be a string identifying the extension.
@@ -1683,7 +1683,7 @@ A CityJSON Extension is a JSON object, and it **must** have the following 8 memb
   "extraAttributes": {},
   "extraCityObjects": {},
   "extraRootProperties": {},     
-  "extraSemanticSurfaces": {},     
+  "extraSemanticSurfaces": {}     
 }
 ```
 
